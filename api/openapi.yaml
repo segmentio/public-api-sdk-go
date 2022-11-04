@@ -23356,6 +23356,76 @@ components:
       - sourceId
       title: CreateDestinationV1Input
       type: object
+    EchoAlphaInput:
+      description: "EchoAlphaInput and EchoAlphaOutput are needed by unit tests in\
+        \ the generated Go code.\n\nIf you change these, make sure `make clients`\
+        \ works locally, and generates the Go client correctly.\nEcho request with\
+        \ options."
+      properties: {}
+      title: EchoAlphaInput
+      type: object
+    EchoAlphaOutput:
+      description: Echo response.
+      example:
+        headers:
+          key: ""
+        method: get
+        message: message
+      properties:
+        method:
+          description: "The HTTP method used for this round-trip.\n\nCurrently, this\
+            \ endpoint supports only `get` and `post` methods."
+          enum:
+          - get
+          - post
+          title: method
+          type: string
+        message:
+          description: The string passed in the `message` input field.
+          title: message
+          type: string
+        headers:
+          additionalProperties: true
+          description: The request's HTTP headers.
+          title: headers
+          type: object
+      required:
+      - headers
+      - message
+      - method
+      title: EchoAlphaOutput
+      type: object
+    EchoV1Input:
+      description: Echo request with options.
+      properties: {}
+      title: EchoV1Input
+      type: object
+    EchoV1Output:
+      description: Echo response.
+      properties:
+        method:
+          description: "The HTTP method used for this round-trip.\n\nCurrently, this\
+            \ endpoint supports only `get` and `post` methods."
+          enum:
+          - get
+          - post
+          title: method
+          type: string
+        message:
+          description: The string passed in the `message` input field.
+          title: message
+          type: string
+        headers:
+          additionalProperties: true
+          description: The request's HTTP headers.
+          title: headers
+          type: object
+      required:
+      - headers
+      - message
+      - method
+      title: EchoV1Output
+      type: object
     DestinationMetadataV1:
       description: "Represents a Destination within Segment.\n\nA Destination is a\
         \ target for Segment to forward data to, and represents a tool or storage\
@@ -23958,76 +24028,6 @@ components:
       - name
       - trigger
       title: DestinationMetadataSubscriptionPresetV1
-      type: object
-    EchoAlphaInput:
-      description: "EchoAlphaInput and EchoAlphaOutput are needed by unit tests in\
-        \ the generated Go code.\n\nIf you change these, make sure `make clients`\
-        \ works locally, and generates the Go client correctly.\nEcho request with\
-        \ options."
-      properties: {}
-      title: EchoAlphaInput
-      type: object
-    EchoAlphaOutput:
-      description: Echo response.
-      example:
-        headers:
-          key: ""
-        method: get
-        message: message
-      properties:
-        method:
-          description: "The HTTP method used for this round-trip.\n\nCurrently, this\
-            \ endpoint supports only `get` and `post` methods."
-          enum:
-          - get
-          - post
-          title: method
-          type: string
-        message:
-          description: The string passed in the `message` input field.
-          title: message
-          type: string
-        headers:
-          additionalProperties: true
-          description: The request's HTTP headers.
-          title: headers
-          type: object
-      required:
-      - headers
-      - message
-      - method
-      title: EchoAlphaOutput
-      type: object
-    EchoV1Input:
-      description: Echo request with options.
-      properties: {}
-      title: EchoV1Input
-      type: object
-    EchoV1Output:
-      description: Echo response.
-      properties:
-        method:
-          description: "The HTTP method used for this round-trip.\n\nCurrently, this\
-            \ endpoint supports only `get` and `post` methods."
-          enum:
-          - get
-          - post
-          title: method
-          type: string
-        message:
-          description: The string passed in the `message` input field.
-          title: message
-          type: string
-        headers:
-          additionalProperties: true
-          description: The request's HTTP headers.
-          title: headers
-          type: object
-      required:
-      - headers
-      - message
-      - method
-      title: EchoV1Output
       type: object
     GenerateUploadURLForEdgeFunctionsAlphaInput:
       description: Input for GenerateSignedUrl.
