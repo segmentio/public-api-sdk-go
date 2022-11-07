@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 33.0.2
 Contact: friends@segment.com
 */
 
@@ -15,8 +15,8 @@ import (
 	"encoding/json"
 )
 
-// AllowedLabelBeta Defines a label that you may apply to resources within a Workspace.
-type AllowedLabelBeta struct {
+// AllowedLabelV1 Defines a label that you may apply to resources within a Workspace.
+type AllowedLabelV1 struct {
 	// The key identifier for this label.
 	Key string `json:"key"`
 	// The value of this label.
@@ -25,27 +25,27 @@ type AllowedLabelBeta struct {
 	Description *string `json:"description,omitempty"`
 }
 
-// NewAllowedLabelBeta instantiates a new AllowedLabelBeta object
+// NewAllowedLabelV1 instantiates a new AllowedLabelV1 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAllowedLabelBeta(key string, value string) *AllowedLabelBeta {
-	this := AllowedLabelBeta{}
+func NewAllowedLabelV1(key string, value string) *AllowedLabelV1 {
+	this := AllowedLabelV1{}
 	this.Key = key
 	this.Value = value
 	return &this
 }
 
-// NewAllowedLabelBetaWithDefaults instantiates a new AllowedLabelBeta object
+// NewAllowedLabelV1WithDefaults instantiates a new AllowedLabelV1 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAllowedLabelBetaWithDefaults() *AllowedLabelBeta {
-	this := AllowedLabelBeta{}
+func NewAllowedLabelV1WithDefaults() *AllowedLabelV1 {
+	this := AllowedLabelV1{}
 	return &this
 }
 
 // GetKey returns the Key field value
-func (o *AllowedLabelBeta) GetKey() string {
+func (o *AllowedLabelV1) GetKey() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -56,7 +56,7 @@ func (o *AllowedLabelBeta) GetKey() string {
 
 // GetKeyOk returns a tuple with the Key field value
 // and a boolean to check if the value has been set.
-func (o *AllowedLabelBeta) GetKeyOk() (*string, bool) {
+func (o *AllowedLabelV1) GetKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,12 +64,12 @@ func (o *AllowedLabelBeta) GetKeyOk() (*string, bool) {
 }
 
 // SetKey sets field value
-func (o *AllowedLabelBeta) SetKey(v string) {
+func (o *AllowedLabelV1) SetKey(v string) {
 	o.Key = v
 }
 
 // GetValue returns the Value field value
-func (o *AllowedLabelBeta) GetValue() string {
+func (o *AllowedLabelV1) GetValue() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -80,7 +80,7 @@ func (o *AllowedLabelBeta) GetValue() string {
 
 // GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
-func (o *AllowedLabelBeta) GetValueOk() (*string, bool) {
+func (o *AllowedLabelV1) GetValueOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,12 +88,12 @@ func (o *AllowedLabelBeta) GetValueOk() (*string, bool) {
 }
 
 // SetValue sets field value
-func (o *AllowedLabelBeta) SetValue(v string) {
+func (o *AllowedLabelV1) SetValue(v string) {
 	o.Value = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *AllowedLabelBeta) GetDescription() string {
+func (o *AllowedLabelV1) GetDescription() string {
 	if o == nil || o.Description == nil {
 		var ret string
 		return ret
@@ -103,7 +103,7 @@ func (o *AllowedLabelBeta) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AllowedLabelBeta) GetDescriptionOk() (*string, bool) {
+func (o *AllowedLabelV1) GetDescriptionOk() (*string, bool) {
 	if o == nil || o.Description == nil {
 		return nil, false
 	}
@@ -111,7 +111,7 @@ func (o *AllowedLabelBeta) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *AllowedLabelBeta) HasDescription() bool {
+func (o *AllowedLabelV1) HasDescription() bool {
 	if o != nil && o.Description != nil {
 		return true
 	}
@@ -120,11 +120,11 @@ func (o *AllowedLabelBeta) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *AllowedLabelBeta) SetDescription(v string) {
+func (o *AllowedLabelV1) SetDescription(v string) {
 	o.Description = &v
 }
 
-func (o AllowedLabelBeta) MarshalJSON() ([]byte, error) {
+func (o AllowedLabelV1) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["key"] = o.Key
@@ -138,38 +138,38 @@ func (o AllowedLabelBeta) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableAllowedLabelBeta struct {
-	value *AllowedLabelBeta
+type NullableAllowedLabelV1 struct {
+	value *AllowedLabelV1
 	isSet bool
 }
 
-func (v NullableAllowedLabelBeta) Get() *AllowedLabelBeta {
+func (v NullableAllowedLabelV1) Get() *AllowedLabelV1 {
 	return v.value
 }
 
-func (v *NullableAllowedLabelBeta) Set(val *AllowedLabelBeta) {
+func (v *NullableAllowedLabelV1) Set(val *AllowedLabelV1) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAllowedLabelBeta) IsSet() bool {
+func (v NullableAllowedLabelV1) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAllowedLabelBeta) Unset() {
+func (v *NullableAllowedLabelV1) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAllowedLabelBeta(val *AllowedLabelBeta) *NullableAllowedLabelBeta {
-	return &NullableAllowedLabelBeta{value: val, isSet: true}
+func NewNullableAllowedLabelV1(val *AllowedLabelV1) *NullableAllowedLabelV1 {
+	return &NullableAllowedLabelV1{value: val, isSet: true}
 }
 
-func (v NullableAllowedLabelBeta) MarshalJSON() ([]byte, error) {
+func (v NullableAllowedLabelV1) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAllowedLabelBeta) UnmarshalJSON(src []byte) error {
+func (v *NullableAllowedLabelV1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

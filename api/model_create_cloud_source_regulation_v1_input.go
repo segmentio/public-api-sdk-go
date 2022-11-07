@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 33.0.2
 Contact: friends@segment.com
 */
 
@@ -20,9 +20,9 @@ type CreateCloudSourceRegulationV1Input struct {
 	// The regulation type to create.
 	RegulationType string `json:"regulationType"`
 	// The subject type. Must be `objectId` for Cloud Sources.
-	SubjectType *string `json:"subjectType,omitempty"`
+	SubjectType string `json:"subjectType"`
 	// The user or object ids of the subjects to regulate.  Config API note: equal to `parent` but allows an array.
-	SubjectIds []string `json:"subjectIds,omitempty"`
+	SubjectIds []string `json:"subjectIds"`
 	// The Cloud Source collection to regulate.
 	Collection string `json:"collection"`
 }
@@ -31,9 +31,11 @@ type CreateCloudSourceRegulationV1Input struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateCloudSourceRegulationV1Input(regulationType string, collection string) *CreateCloudSourceRegulationV1Input {
+func NewCreateCloudSourceRegulationV1Input(regulationType string, subjectType string, subjectIds []string, collection string) *CreateCloudSourceRegulationV1Input {
 	this := CreateCloudSourceRegulationV1Input{}
 	this.RegulationType = regulationType
+	this.SubjectType = subjectType
+	this.SubjectIds = subjectIds
 	this.Collection = collection
 	return &this
 }
@@ -70,66 +72,50 @@ func (o *CreateCloudSourceRegulationV1Input) SetRegulationType(v string) {
 	o.RegulationType = v
 }
 
-// GetSubjectType returns the SubjectType field value if set, zero value otherwise.
+// GetSubjectType returns the SubjectType field value
 func (o *CreateCloudSourceRegulationV1Input) GetSubjectType() string {
-	if o == nil || o.SubjectType == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.SubjectType
+
+	return o.SubjectType
 }
 
-// GetSubjectTypeOk returns a tuple with the SubjectType field value if set, nil otherwise
+// GetSubjectTypeOk returns a tuple with the SubjectType field value
 // and a boolean to check if the value has been set.
 func (o *CreateCloudSourceRegulationV1Input) GetSubjectTypeOk() (*string, bool) {
-	if o == nil || o.SubjectType == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SubjectType, true
+	return &o.SubjectType, true
 }
 
-// HasSubjectType returns a boolean if a field has been set.
-func (o *CreateCloudSourceRegulationV1Input) HasSubjectType() bool {
-	if o != nil && o.SubjectType != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSubjectType gets a reference to the given string and assigns it to the SubjectType field.
+// SetSubjectType sets field value
 func (o *CreateCloudSourceRegulationV1Input) SetSubjectType(v string) {
-	o.SubjectType = &v
+	o.SubjectType = v
 }
 
-// GetSubjectIds returns the SubjectIds field value if set, zero value otherwise.
+// GetSubjectIds returns the SubjectIds field value
 func (o *CreateCloudSourceRegulationV1Input) GetSubjectIds() []string {
-	if o == nil || o.SubjectIds == nil {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.SubjectIds
 }
 
-// GetSubjectIdsOk returns a tuple with the SubjectIds field value if set, nil otherwise
+// GetSubjectIdsOk returns a tuple with the SubjectIds field value
 // and a boolean to check if the value has been set.
 func (o *CreateCloudSourceRegulationV1Input) GetSubjectIdsOk() ([]string, bool) {
-	if o == nil || o.SubjectIds == nil {
+	if o == nil {
 		return nil, false
 	}
 	return o.SubjectIds, true
 }
 
-// HasSubjectIds returns a boolean if a field has been set.
-func (o *CreateCloudSourceRegulationV1Input) HasSubjectIds() bool {
-	if o != nil && o.SubjectIds != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSubjectIds gets a reference to the given []string and assigns it to the SubjectIds field.
+// SetSubjectIds sets field value
 func (o *CreateCloudSourceRegulationV1Input) SetSubjectIds(v []string) {
 	o.SubjectIds = v
 }
@@ -163,10 +149,10 @@ func (o CreateCloudSourceRegulationV1Input) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["regulationType"] = o.RegulationType
 	}
-	if o.SubjectType != nil {
+	if true {
 		toSerialize["subjectType"] = o.SubjectType
 	}
-	if o.SubjectIds != nil {
+	if true {
 		toSerialize["subjectIds"] = o.SubjectIds
 	}
 	if true {

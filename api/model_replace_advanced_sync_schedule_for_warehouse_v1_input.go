@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 33.0.2
 Contact: friends@segment.com
 */
 
@@ -18,7 +18,7 @@ import (
 // ReplaceAdvancedSyncScheduleForWarehouseV1Input Replaces the advanced sync schedule for a Warehouse.
 type ReplaceAdvancedSyncScheduleForWarehouseV1Input struct {
 	// Enable to turn on an advanced sync schedule for the Warehouse.
-	Enabled *bool `json:"enabled,omitempty"`
+	Enabled bool `json:"enabled"`
 	Schedule *Schedule1 `json:"schedule,omitempty"`
 }
 
@@ -26,8 +26,9 @@ type ReplaceAdvancedSyncScheduleForWarehouseV1Input struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReplaceAdvancedSyncScheduleForWarehouseV1Input() *ReplaceAdvancedSyncScheduleForWarehouseV1Input {
+func NewReplaceAdvancedSyncScheduleForWarehouseV1Input(enabled bool) *ReplaceAdvancedSyncScheduleForWarehouseV1Input {
 	this := ReplaceAdvancedSyncScheduleForWarehouseV1Input{}
+	this.Enabled = enabled
 	return &this
 }
 
@@ -39,36 +40,28 @@ func NewReplaceAdvancedSyncScheduleForWarehouseV1InputWithDefaults() *ReplaceAdv
 	return &this
 }
 
-// GetEnabled returns the Enabled field value if set, zero value otherwise.
+// GetEnabled returns the Enabled field value
 func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Input) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Enabled
+
+	return o.Enabled
 }
 
-// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
+// GetEnabledOk returns a tuple with the Enabled field value
 // and a boolean to check if the value has been set.
 func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Input) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Enabled, true
+	return &o.Enabled, true
 }
 
-// HasEnabled returns a boolean if a field has been set.
-func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Input) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
+// SetEnabled sets field value
 func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Input) SetEnabled(v bool) {
-	o.Enabled = &v
+	o.Enabled = v
 }
 
 // GetSchedule returns the Schedule field value if set, zero value otherwise.
@@ -105,7 +98,7 @@ func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Input) SetSchedule(v Schedule1
 
 func (o ReplaceAdvancedSyncScheduleForWarehouseV1Input) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Enabled != nil {
+	if true {
 		toSerialize["enabled"] = o.Enabled
 	}
 	if o.Schedule != nil {

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 33.0.2
 Contact: friends@segment.com
 */
 
@@ -18,15 +18,16 @@ import (
 // AddPermissionsToUserGroupV1Input Adds a list of permissions to a user group.
 type AddPermissionsToUserGroupV1Input struct {
 	// The permissions to add.
-	Permissions []PermissionInputV1 `json:"permissions,omitempty"`
+	Permissions []PermissionInputV1 `json:"permissions"`
 }
 
 // NewAddPermissionsToUserGroupV1Input instantiates a new AddPermissionsToUserGroupV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAddPermissionsToUserGroupV1Input() *AddPermissionsToUserGroupV1Input {
+func NewAddPermissionsToUserGroupV1Input(permissions []PermissionInputV1) *AddPermissionsToUserGroupV1Input {
 	this := AddPermissionsToUserGroupV1Input{}
+	this.Permissions = permissions
 	return &this
 }
 
@@ -38,41 +39,33 @@ func NewAddPermissionsToUserGroupV1InputWithDefaults() *AddPermissionsToUserGrou
 	return &this
 }
 
-// GetPermissions returns the Permissions field value if set, zero value otherwise.
+// GetPermissions returns the Permissions field value
 func (o *AddPermissionsToUserGroupV1Input) GetPermissions() []PermissionInputV1 {
-	if o == nil || o.Permissions == nil {
+	if o == nil {
 		var ret []PermissionInputV1
 		return ret
 	}
+
 	return o.Permissions
 }
 
-// GetPermissionsOk returns a tuple with the Permissions field value if set, nil otherwise
+// GetPermissionsOk returns a tuple with the Permissions field value
 // and a boolean to check if the value has been set.
 func (o *AddPermissionsToUserGroupV1Input) GetPermissionsOk() ([]PermissionInputV1, bool) {
-	if o == nil || o.Permissions == nil {
+	if o == nil {
 		return nil, false
 	}
 	return o.Permissions, true
 }
 
-// HasPermissions returns a boolean if a field has been set.
-func (o *AddPermissionsToUserGroupV1Input) HasPermissions() bool {
-	if o != nil && o.Permissions != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPermissions gets a reference to the given []PermissionInputV1 and assigns it to the Permissions field.
+// SetPermissions sets field value
 func (o *AddPermissionsToUserGroupV1Input) SetPermissions(v []PermissionInputV1) {
 	o.Permissions = v
 }
 
 func (o AddPermissionsToUserGroupV1Input) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Permissions != nil {
+	if true {
 		toSerialize["permissions"] = o.Permissions
 	}
 	return json.Marshal(toSerialize)

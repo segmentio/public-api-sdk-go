@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 33.0.2
 Contact: friends@segment.com
 */
 
@@ -17,14 +17,14 @@ import (
 
 // UpdateSourceV1Output Returns the updated Source.
 type UpdateSourceV1Output struct {
-	Source Source6 `json:"source"`
+	Source Source3 `json:"source"`
 }
 
 // NewUpdateSourceV1Output instantiates a new UpdateSourceV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateSourceV1Output(source Source6) *UpdateSourceV1Output {
+func NewUpdateSourceV1Output(source Source3) *UpdateSourceV1Output {
 	this := UpdateSourceV1Output{}
 	this.Source = source
 	return &this
@@ -39,9 +39,9 @@ func NewUpdateSourceV1OutputWithDefaults() *UpdateSourceV1Output {
 }
 
 // GetSource returns the Source field value
-func (o *UpdateSourceV1Output) GetSource() Source6 {
+func (o *UpdateSourceV1Output) GetSource() Source3 {
 	if o == nil {
-		var ret Source6
+		var ret Source3
 		return ret
 	}
 
@@ -50,7 +50,7 @@ func (o *UpdateSourceV1Output) GetSource() Source6 {
 
 // GetSourceOk returns a tuple with the Source field value
 // and a boolean to check if the value has been set.
-func (o *UpdateSourceV1Output) GetSourceOk() (*Source6, bool) {
+func (o *UpdateSourceV1Output) GetSourceOk() (*Source3, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -58,7 +58,7 @@ func (o *UpdateSourceV1Output) GetSourceOk() (*Source6, bool) {
 }
 
 // SetSource sets field value
-func (o *UpdateSourceV1Output) SetSource(v Source6) {
+func (o *UpdateSourceV1Output) SetSource(v Source3) {
 	o.Source = v
 }
 

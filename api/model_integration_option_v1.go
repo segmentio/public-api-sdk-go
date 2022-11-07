@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 33.0.2
 Contact: friends@segment.com
 */
 
@@ -15,8 +15,8 @@ import (
 	"encoding/json"
 )
 
-// IntegrationOptionBeta Describes an Integration option field required to set up a Segment Integration such as Sources, Destinations, or warehouses.
-type IntegrationOptionBeta struct {
+// IntegrationOptionV1 Describes an Integration option field required to set up a Segment Integration such as Sources, Destinations, or warehouses.
+type IntegrationOptionV1 struct {
 	// The name identifying this option in the context of a Segment Integration.
 	Name string `json:"name"`
 	// Defines the type for this option in the schema. Types are most commonly strings, but may also represent other primitive types, such as booleans, and numbers, as well as complex types, such as objects and arrays.
@@ -31,28 +31,28 @@ type IntegrationOptionBeta struct {
 	Label *string `json:"label,omitempty"`
 }
 
-// NewIntegrationOptionBeta instantiates a new IntegrationOptionBeta object
+// NewIntegrationOptionV1 instantiates a new IntegrationOptionV1 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationOptionBeta(name string, type_ string, required bool) *IntegrationOptionBeta {
-	this := IntegrationOptionBeta{}
+func NewIntegrationOptionV1(name string, type_ string, required bool) *IntegrationOptionV1 {
+	this := IntegrationOptionV1{}
 	this.Name = name
 	this.Type = type_
 	this.Required = required
 	return &this
 }
 
-// NewIntegrationOptionBetaWithDefaults instantiates a new IntegrationOptionBeta object
+// NewIntegrationOptionV1WithDefaults instantiates a new IntegrationOptionV1 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewIntegrationOptionBetaWithDefaults() *IntegrationOptionBeta {
-	this := IntegrationOptionBeta{}
+func NewIntegrationOptionV1WithDefaults() *IntegrationOptionV1 {
+	this := IntegrationOptionV1{}
 	return &this
 }
 
 // GetName returns the Name field value
-func (o *IntegrationOptionBeta) GetName() string {
+func (o *IntegrationOptionV1) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -63,7 +63,7 @@ func (o *IntegrationOptionBeta) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *IntegrationOptionBeta) GetNameOk() (*string, bool) {
+func (o *IntegrationOptionV1) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -71,12 +71,12 @@ func (o *IntegrationOptionBeta) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *IntegrationOptionBeta) SetName(v string) {
+func (o *IntegrationOptionV1) SetName(v string) {
 	o.Name = v
 }
 
 // GetType returns the Type field value
-func (o *IntegrationOptionBeta) GetType() string {
+func (o *IntegrationOptionV1) GetType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -87,7 +87,7 @@ func (o *IntegrationOptionBeta) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *IntegrationOptionBeta) GetTypeOk() (*string, bool) {
+func (o *IntegrationOptionV1) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -95,12 +95,12 @@ func (o *IntegrationOptionBeta) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *IntegrationOptionBeta) SetType(v string) {
+func (o *IntegrationOptionV1) SetType(v string) {
 	o.Type = v
 }
 
 // GetRequired returns the Required field value
-func (o *IntegrationOptionBeta) GetRequired() bool {
+func (o *IntegrationOptionV1) GetRequired() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -111,7 +111,7 @@ func (o *IntegrationOptionBeta) GetRequired() bool {
 
 // GetRequiredOk returns a tuple with the Required field value
 // and a boolean to check if the value has been set.
-func (o *IntegrationOptionBeta) GetRequiredOk() (*bool, bool) {
+func (o *IntegrationOptionV1) GetRequiredOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -119,12 +119,12 @@ func (o *IntegrationOptionBeta) GetRequiredOk() (*bool, bool) {
 }
 
 // SetRequired sets field value
-func (o *IntegrationOptionBeta) SetRequired(v bool) {
+func (o *IntegrationOptionV1) SetRequired(v bool) {
 	o.Required = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *IntegrationOptionBeta) GetDescription() string {
+func (o *IntegrationOptionV1) GetDescription() string {
 	if o == nil || o.Description == nil {
 		var ret string
 		return ret
@@ -134,7 +134,7 @@ func (o *IntegrationOptionBeta) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IntegrationOptionBeta) GetDescriptionOk() (*string, bool) {
+func (o *IntegrationOptionV1) GetDescriptionOk() (*string, bool) {
 	if o == nil || o.Description == nil {
 		return nil, false
 	}
@@ -142,7 +142,7 @@ func (o *IntegrationOptionBeta) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *IntegrationOptionBeta) HasDescription() bool {
+func (o *IntegrationOptionV1) HasDescription() bool {
 	if o != nil && o.Description != nil {
 		return true
 	}
@@ -151,12 +151,12 @@ func (o *IntegrationOptionBeta) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *IntegrationOptionBeta) SetDescription(v string) {
+func (o *IntegrationOptionV1) SetDescription(v string) {
 	o.Description = &v
 }
 
 // GetDefaultValue returns the DefaultValue field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IntegrationOptionBeta) GetDefaultValue() interface{} {
+func (o *IntegrationOptionV1) GetDefaultValue() interface{} {
 	if o == nil {
 		var ret interface{}
 		return ret
@@ -167,7 +167,7 @@ func (o *IntegrationOptionBeta) GetDefaultValue() interface{} {
 // GetDefaultValueOk returns a tuple with the DefaultValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IntegrationOptionBeta) GetDefaultValueOk() (*interface{}, bool) {
+func (o *IntegrationOptionV1) GetDefaultValueOk() (*interface{}, bool) {
 	if o == nil || o.DefaultValue == nil {
 		return nil, false
 	}
@@ -175,7 +175,7 @@ func (o *IntegrationOptionBeta) GetDefaultValueOk() (*interface{}, bool) {
 }
 
 // HasDefaultValue returns a boolean if a field has been set.
-func (o *IntegrationOptionBeta) HasDefaultValue() bool {
+func (o *IntegrationOptionV1) HasDefaultValue() bool {
 	if o != nil && o.DefaultValue != nil {
 		return true
 	}
@@ -184,12 +184,12 @@ func (o *IntegrationOptionBeta) HasDefaultValue() bool {
 }
 
 // SetDefaultValue gets a reference to the given interface{} and assigns it to the DefaultValue field.
-func (o *IntegrationOptionBeta) SetDefaultValue(v interface{}) {
+func (o *IntegrationOptionV1) SetDefaultValue(v interface{}) {
 	o.DefaultValue = v
 }
 
 // GetLabel returns the Label field value if set, zero value otherwise.
-func (o *IntegrationOptionBeta) GetLabel() string {
+func (o *IntegrationOptionV1) GetLabel() string {
 	if o == nil || o.Label == nil {
 		var ret string
 		return ret
@@ -199,7 +199,7 @@ func (o *IntegrationOptionBeta) GetLabel() string {
 
 // GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IntegrationOptionBeta) GetLabelOk() (*string, bool) {
+func (o *IntegrationOptionV1) GetLabelOk() (*string, bool) {
 	if o == nil || o.Label == nil {
 		return nil, false
 	}
@@ -207,7 +207,7 @@ func (o *IntegrationOptionBeta) GetLabelOk() (*string, bool) {
 }
 
 // HasLabel returns a boolean if a field has been set.
-func (o *IntegrationOptionBeta) HasLabel() bool {
+func (o *IntegrationOptionV1) HasLabel() bool {
 	if o != nil && o.Label != nil {
 		return true
 	}
@@ -216,11 +216,11 @@ func (o *IntegrationOptionBeta) HasLabel() bool {
 }
 
 // SetLabel gets a reference to the given string and assigns it to the Label field.
-func (o *IntegrationOptionBeta) SetLabel(v string) {
+func (o *IntegrationOptionV1) SetLabel(v string) {
 	o.Label = &v
 }
 
-func (o IntegrationOptionBeta) MarshalJSON() ([]byte, error) {
+func (o IntegrationOptionV1) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["name"] = o.Name
@@ -243,38 +243,38 @@ func (o IntegrationOptionBeta) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableIntegrationOptionBeta struct {
-	value *IntegrationOptionBeta
+type NullableIntegrationOptionV1 struct {
+	value *IntegrationOptionV1
 	isSet bool
 }
 
-func (v NullableIntegrationOptionBeta) Get() *IntegrationOptionBeta {
+func (v NullableIntegrationOptionV1) Get() *IntegrationOptionV1 {
 	return v.value
 }
 
-func (v *NullableIntegrationOptionBeta) Set(val *IntegrationOptionBeta) {
+func (v *NullableIntegrationOptionV1) Set(val *IntegrationOptionV1) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableIntegrationOptionBeta) IsSet() bool {
+func (v NullableIntegrationOptionV1) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableIntegrationOptionBeta) Unset() {
+func (v *NullableIntegrationOptionV1) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableIntegrationOptionBeta(val *IntegrationOptionBeta) *NullableIntegrationOptionBeta {
-	return &NullableIntegrationOptionBeta{value: val, isSet: true}
+func NewNullableIntegrationOptionV1(val *IntegrationOptionV1) *NullableIntegrationOptionV1 {
+	return &NullableIntegrationOptionV1{value: val, isSet: true}
 }
 
-func (v NullableIntegrationOptionBeta) MarshalJSON() ([]byte, error) {
+func (v NullableIntegrationOptionV1) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableIntegrationOptionBeta) UnmarshalJSON(src []byte) error {
+func (v *NullableIntegrationOptionV1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

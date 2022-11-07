@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 33.0.2
 Contact: friends@segment.com
 */
 
@@ -42,7 +42,7 @@ var (
 	xmlCheck  = regexp.MustCompile(`(?i:(?:application|text)/xml)`)
 )
 
-// APIClient manages communication with the Segment Public API API v32.0.2
+// APIClient manages communication with the Segment Public API API v33.0.2
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -62,8 +62,6 @@ type APIClient struct {
 
 	DestinationsApi *DestinationsApiService
 
-	EdgeFunctionsApi *EdgeFunctionsApiService
-
 	EventsApi *EventsApiService
 
 	FunctionsApi *FunctionsApiService
@@ -82,13 +80,9 @@ type APIClient struct {
 
 	SourcesApi *SourcesApiService
 
-	SpacesApi *SpacesApiService
-
 	TestingApi *TestingApiService
 
 	TrackingPlansApi *TrackingPlansApiService
-
-	TransformationsApi *TransformationsApiService
 
 	WarehousesApi *WarehousesApiService
 
@@ -117,7 +111,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.DeletionAndSuppressionApi = (*DeletionAndSuppressionApiService)(&c.common)
 	c.DestinationFiltersApi = (*DestinationFiltersApiService)(&c.common)
 	c.DestinationsApi = (*DestinationsApiService)(&c.common)
-	c.EdgeFunctionsApi = (*EdgeFunctionsApiService)(&c.common)
 	c.EventsApi = (*EventsApiService)(&c.common)
 	c.FunctionsApi = (*FunctionsApiService)(&c.common)
 	c.IAMGroupsApi = (*IAMGroupsApiService)(&c.common)
@@ -127,10 +120,8 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.MonthlyTrackedUsersApi = (*MonthlyTrackedUsersApiService)(&c.common)
 	c.SelectiveSyncApi = (*SelectiveSyncApiService)(&c.common)
 	c.SourcesApi = (*SourcesApiService)(&c.common)
-	c.SpacesApi = (*SpacesApiService)(&c.common)
 	c.TestingApi = (*TestingApiService)(&c.common)
 	c.TrackingPlansApi = (*TrackingPlansApiService)(&c.common)
-	c.TransformationsApi = (*TransformationsApiService)(&c.common)
 	c.WarehousesApi = (*WarehousesApiService)(&c.common)
 	c.WorkspacesApi = (*WorkspacesApiService)(&c.common)
 

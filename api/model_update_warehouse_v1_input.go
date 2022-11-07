@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 33.0.2
 Contact: friends@segment.com
 */
 
@@ -22,15 +22,16 @@ type UpdateWarehouseV1Input struct {
 	// Enable to allow this Warehouse to receive data.
 	Enabled *bool `json:"enabled,omitempty"`
 	// A key-value object that contains instance-specific settings for a Warehouse.  Different kinds of Warehouses require different settings. The required and optional settings for a Warehouse are described in the `options` object of the associated Warehouse metadata.  You can find the full list of Warehouse metadata and related settings information in the `/catalog/warehouses` endpoint.
-	Settings *ModelMap `json:"settings,omitempty"`
+	Settings ModelMap `json:"settings"`
 }
 
 // NewUpdateWarehouseV1Input instantiates a new UpdateWarehouseV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateWarehouseV1Input() *UpdateWarehouseV1Input {
+func NewUpdateWarehouseV1Input(settings ModelMap) *UpdateWarehouseV1Input {
 	this := UpdateWarehouseV1Input{}
+	this.Settings = settings
 	return &this
 }
 
@@ -116,36 +117,28 @@ func (o *UpdateWarehouseV1Input) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetSettings returns the Settings field value if set, zero value otherwise.
+// GetSettings returns the Settings field value
 func (o *UpdateWarehouseV1Input) GetSettings() ModelMap {
-	if o == nil || o.Settings == nil {
+	if o == nil {
 		var ret ModelMap
 		return ret
 	}
-	return *o.Settings
+
+	return o.Settings
 }
 
-// GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
+// GetSettingsOk returns a tuple with the Settings field value
 // and a boolean to check if the value has been set.
 func (o *UpdateWarehouseV1Input) GetSettingsOk() (*ModelMap, bool) {
-	if o == nil || o.Settings == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Settings, true
+	return &o.Settings, true
 }
 
-// HasSettings returns a boolean if a field has been set.
-func (o *UpdateWarehouseV1Input) HasSettings() bool {
-	if o != nil && o.Settings != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSettings gets a reference to the given ModelMap and assigns it to the Settings field.
+// SetSettings sets field value
 func (o *UpdateWarehouseV1Input) SetSettings(v ModelMap) {
-	o.Settings = &v
+	o.Settings = v
 }
 
 func (o UpdateWarehouseV1Input) MarshalJSON() ([]byte, error) {
@@ -156,7 +149,7 @@ func (o UpdateWarehouseV1Input) MarshalJSON() ([]byte, error) {
 	if o.Enabled != nil {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if o.Settings != nil {
+	if true {
 		toSerialize["settings"] = o.Settings
 	}
 	return json.Marshal(toSerialize)

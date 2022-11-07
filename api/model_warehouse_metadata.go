@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 33.0.2
 Contact: friends@segment.com
 */
 
@@ -27,14 +27,14 @@ type WarehouseMetadata struct {
 	Description string `json:"description"`
 	Logos Logos2 `json:"logos"`
 	// The Integration options for this object.
-	Options []IntegrationOptionBeta `json:"options"`
+	Options []IntegrationOptionV1 `json:"options"`
 }
 
 // NewWarehouseMetadata instantiates a new WarehouseMetadata object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWarehouseMetadata(id string, name string, slug string, description string, logos Logos2, options []IntegrationOptionBeta) *WarehouseMetadata {
+func NewWarehouseMetadata(id string, name string, slug string, description string, logos Logos2, options []IntegrationOptionV1) *WarehouseMetadata {
 	this := WarehouseMetadata{}
 	this.Id = id
 	this.Name = name
@@ -174,9 +174,9 @@ func (o *WarehouseMetadata) SetLogos(v Logos2) {
 }
 
 // GetOptions returns the Options field value
-func (o *WarehouseMetadata) GetOptions() []IntegrationOptionBeta {
+func (o *WarehouseMetadata) GetOptions() []IntegrationOptionV1 {
 	if o == nil {
-		var ret []IntegrationOptionBeta
+		var ret []IntegrationOptionV1
 		return ret
 	}
 
@@ -185,7 +185,7 @@ func (o *WarehouseMetadata) GetOptions() []IntegrationOptionBeta {
 
 // GetOptionsOk returns a tuple with the Options field value
 // and a boolean to check if the value has been set.
-func (o *WarehouseMetadata) GetOptionsOk() ([]IntegrationOptionBeta, bool) {
+func (o *WarehouseMetadata) GetOptionsOk() ([]IntegrationOptionV1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -193,7 +193,7 @@ func (o *WarehouseMetadata) GetOptionsOk() ([]IntegrationOptionBeta, bool) {
 }
 
 // SetOptions sets field value
-func (o *WarehouseMetadata) SetOptions(v []IntegrationOptionBeta) {
+func (o *WarehouseMetadata) SetOptions(v []IntegrationOptionV1) {
 	o.Options = v
 }
 

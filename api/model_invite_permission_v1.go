@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 33.0.2
 Contact: friends@segment.com
 */
 
@@ -22,7 +22,7 @@ type InvitePermissionV1 struct {
 	// The resources to grant the invited users access to.
 	Resources []ResourceV1 `json:"resources,omitempty"`
 	// The labels that determine which resources to grant users access to.
-	Labels []AllowedLabelBeta `json:"labels,omitempty"`
+	Labels []AllowedLabelV1 `json:"labels,omitempty"`
 }
 
 // NewInvitePermissionV1 instantiates a new InvitePermissionV1 object
@@ -100,9 +100,9 @@ func (o *InvitePermissionV1) SetResources(v []ResourceV1) {
 }
 
 // GetLabels returns the Labels field value if set, zero value otherwise.
-func (o *InvitePermissionV1) GetLabels() []AllowedLabelBeta {
+func (o *InvitePermissionV1) GetLabels() []AllowedLabelV1 {
 	if o == nil || o.Labels == nil {
-		var ret []AllowedLabelBeta
+		var ret []AllowedLabelV1
 		return ret
 	}
 	return o.Labels
@@ -110,7 +110,7 @@ func (o *InvitePermissionV1) GetLabels() []AllowedLabelBeta {
 
 // GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *InvitePermissionV1) GetLabelsOk() ([]AllowedLabelBeta, bool) {
+func (o *InvitePermissionV1) GetLabelsOk() ([]AllowedLabelV1, bool) {
 	if o == nil || o.Labels == nil {
 		return nil, false
 	}
@@ -126,8 +126,8 @@ func (o *InvitePermissionV1) HasLabels() bool {
 	return false
 }
 
-// SetLabels gets a reference to the given []AllowedLabelBeta and assigns it to the Labels field.
-func (o *InvitePermissionV1) SetLabels(v []AllowedLabelBeta) {
+// SetLabels gets a reference to the given []AllowedLabelV1 and assigns it to the Labels field.
+func (o *InvitePermissionV1) SetLabels(v []AllowedLabelV1) {
 	o.Labels = v
 }
 

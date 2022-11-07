@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 33.0.2
 Contact: friends@segment.com
 */
 
@@ -27,7 +27,7 @@ type Metadata struct {
 	Slug string `json:"slug"`
 	Logos Logos `json:"logos"`
 	// Options configured for the Destination.
-	Options []IntegrationOptionBeta `json:"options"`
+	Options []IntegrationOptionV1 `json:"options"`
 	// Support status of the Destination.
 	Status string `json:"status"`
 	// A list of names previously used by the Destination.
@@ -55,7 +55,7 @@ type Metadata struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetadata(id string, name string, description string, slug string, logos Logos, options []IntegrationOptionBeta, status string, previousNames []string, categories []string, website string, components []DestinationMetadataComponentV1, supportedFeatures SupportedFeatures, supportedMethods SupportedMethods, supportedPlatforms SupportedPlatforms, actions []DestinationMetadataActionV1, presets []DestinationMetadataSubscriptionPresetV1) *Metadata {
+func NewMetadata(id string, name string, description string, slug string, logos Logos, options []IntegrationOptionV1, status string, previousNames []string, categories []string, website string, components []DestinationMetadataComponentV1, supportedFeatures SupportedFeatures, supportedMethods SupportedMethods, supportedPlatforms SupportedPlatforms, actions []DestinationMetadataActionV1, presets []DestinationMetadataSubscriptionPresetV1) *Metadata {
 	this := Metadata{}
 	this.Id = id
 	this.Name = name
@@ -205,9 +205,9 @@ func (o *Metadata) SetLogos(v Logos) {
 }
 
 // GetOptions returns the Options field value
-func (o *Metadata) GetOptions() []IntegrationOptionBeta {
+func (o *Metadata) GetOptions() []IntegrationOptionV1 {
 	if o == nil {
-		var ret []IntegrationOptionBeta
+		var ret []IntegrationOptionV1
 		return ret
 	}
 
@@ -216,7 +216,7 @@ func (o *Metadata) GetOptions() []IntegrationOptionBeta {
 
 // GetOptionsOk returns a tuple with the Options field value
 // and a boolean to check if the value has been set.
-func (o *Metadata) GetOptionsOk() ([]IntegrationOptionBeta, bool) {
+func (o *Metadata) GetOptionsOk() ([]IntegrationOptionV1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -224,7 +224,7 @@ func (o *Metadata) GetOptionsOk() ([]IntegrationOptionBeta, bool) {
 }
 
 // SetOptions sets field value
-func (o *Metadata) SetOptions(v []IntegrationOptionBeta) {
+func (o *Metadata) SetOptions(v []IntegrationOptionV1) {
 	o.Options = v
 }
 

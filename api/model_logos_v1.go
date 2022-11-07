@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 33.0.2
 Contact: friends@segment.com
 */
 
@@ -15,8 +15,8 @@ import (
 	"encoding/json"
 )
 
-// LogosBeta Represents a logo.
-type LogosBeta struct {
+// LogosV1 Represents a logo.
+type LogosV1 struct {
 	// The default URL for this logo.
 	Default string `json:"default"`
 	// The logo mark.
@@ -25,26 +25,26 @@ type LogosBeta struct {
 	Alt NullableString `json:"alt,omitempty"`
 }
 
-// NewLogosBeta instantiates a new LogosBeta object
+// NewLogosV1 instantiates a new LogosV1 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogosBeta(default_ string) *LogosBeta {
-	this := LogosBeta{}
+func NewLogosV1(default_ string) *LogosV1 {
+	this := LogosV1{}
 	this.Default = default_
 	return &this
 }
 
-// NewLogosBetaWithDefaults instantiates a new LogosBeta object
+// NewLogosV1WithDefaults instantiates a new LogosV1 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewLogosBetaWithDefaults() *LogosBeta {
-	this := LogosBeta{}
+func NewLogosV1WithDefaults() *LogosV1 {
+	this := LogosV1{}
 	return &this
 }
 
 // GetDefault returns the Default field value
-func (o *LogosBeta) GetDefault() string {
+func (o *LogosV1) GetDefault() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -55,7 +55,7 @@ func (o *LogosBeta) GetDefault() string {
 
 // GetDefaultOk returns a tuple with the Default field value
 // and a boolean to check if the value has been set.
-func (o *LogosBeta) GetDefaultOk() (*string, bool) {
+func (o *LogosV1) GetDefaultOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -63,12 +63,12 @@ func (o *LogosBeta) GetDefaultOk() (*string, bool) {
 }
 
 // SetDefault sets field value
-func (o *LogosBeta) SetDefault(v string) {
+func (o *LogosV1) SetDefault(v string) {
 	o.Default = v
 }
 
 // GetMark returns the Mark field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *LogosBeta) GetMark() string {
+func (o *LogosV1) GetMark() string {
 	if o == nil || o.Mark.Get() == nil {
 		var ret string
 		return ret
@@ -79,7 +79,7 @@ func (o *LogosBeta) GetMark() string {
 // GetMarkOk returns a tuple with the Mark field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LogosBeta) GetMarkOk() (*string, bool) {
+func (o *LogosV1) GetMarkOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -87,7 +87,7 @@ func (o *LogosBeta) GetMarkOk() (*string, bool) {
 }
 
 // HasMark returns a boolean if a field has been set.
-func (o *LogosBeta) HasMark() bool {
+func (o *LogosV1) HasMark() bool {
 	if o != nil && o.Mark.IsSet() {
 		return true
 	}
@@ -96,21 +96,21 @@ func (o *LogosBeta) HasMark() bool {
 }
 
 // SetMark gets a reference to the given NullableString and assigns it to the Mark field.
-func (o *LogosBeta) SetMark(v string) {
+func (o *LogosV1) SetMark(v string) {
 	o.Mark.Set(&v)
 }
 // SetMarkNil sets the value for Mark to be an explicit nil
-func (o *LogosBeta) SetMarkNil() {
+func (o *LogosV1) SetMarkNil() {
 	o.Mark.Set(nil)
 }
 
 // UnsetMark ensures that no value is present for Mark, not even an explicit nil
-func (o *LogosBeta) UnsetMark() {
+func (o *LogosV1) UnsetMark() {
 	o.Mark.Unset()
 }
 
 // GetAlt returns the Alt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *LogosBeta) GetAlt() string {
+func (o *LogosV1) GetAlt() string {
 	if o == nil || o.Alt.Get() == nil {
 		var ret string
 		return ret
@@ -121,7 +121,7 @@ func (o *LogosBeta) GetAlt() string {
 // GetAltOk returns a tuple with the Alt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LogosBeta) GetAltOk() (*string, bool) {
+func (o *LogosV1) GetAltOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -129,7 +129,7 @@ func (o *LogosBeta) GetAltOk() (*string, bool) {
 }
 
 // HasAlt returns a boolean if a field has been set.
-func (o *LogosBeta) HasAlt() bool {
+func (o *LogosV1) HasAlt() bool {
 	if o != nil && o.Alt.IsSet() {
 		return true
 	}
@@ -138,20 +138,20 @@ func (o *LogosBeta) HasAlt() bool {
 }
 
 // SetAlt gets a reference to the given NullableString and assigns it to the Alt field.
-func (o *LogosBeta) SetAlt(v string) {
+func (o *LogosV1) SetAlt(v string) {
 	o.Alt.Set(&v)
 }
 // SetAltNil sets the value for Alt to be an explicit nil
-func (o *LogosBeta) SetAltNil() {
+func (o *LogosV1) SetAltNil() {
 	o.Alt.Set(nil)
 }
 
 // UnsetAlt ensures that no value is present for Alt, not even an explicit nil
-func (o *LogosBeta) UnsetAlt() {
+func (o *LogosV1) UnsetAlt() {
 	o.Alt.Unset()
 }
 
-func (o LogosBeta) MarshalJSON() ([]byte, error) {
+func (o LogosV1) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["default"] = o.Default
@@ -165,38 +165,38 @@ func (o LogosBeta) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableLogosBeta struct {
-	value *LogosBeta
+type NullableLogosV1 struct {
+	value *LogosV1
 	isSet bool
 }
 
-func (v NullableLogosBeta) Get() *LogosBeta {
+func (v NullableLogosV1) Get() *LogosV1 {
 	return v.value
 }
 
-func (v *NullableLogosBeta) Set(val *LogosBeta) {
+func (v *NullableLogosV1) Set(val *LogosV1) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableLogosBeta) IsSet() bool {
+func (v NullableLogosV1) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableLogosBeta) Unset() {
+func (v *NullableLogosV1) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableLogosBeta(val *LogosBeta) *NullableLogosBeta {
-	return &NullableLogosBeta{value: val, isSet: true}
+func NewNullableLogosV1(val *LogosV1) *NullableLogosV1 {
+	return &NullableLogosV1{value: val, isSet: true}
 }
 
-func (v NullableLogosBeta) MarshalJSON() ([]byte, error) {
+func (v NullableLogosV1) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableLogosBeta) UnmarshalJSON(src []byte) error {
+func (v *NullableLogosV1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

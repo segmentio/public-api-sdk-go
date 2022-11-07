@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 33.0.2
 Contact: friends@segment.com
 */
 
@@ -18,15 +18,16 @@ import (
 // AddUsersToUserGroupV1Input Adds a list of users and invites to a user group.
 type AddUsersToUserGroupV1Input struct {
 	// The email addresses of the users and invites to add.
-	Emails []string `json:"emails,omitempty"`
+	Emails []string `json:"emails"`
 }
 
 // NewAddUsersToUserGroupV1Input instantiates a new AddUsersToUserGroupV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAddUsersToUserGroupV1Input() *AddUsersToUserGroupV1Input {
+func NewAddUsersToUserGroupV1Input(emails []string) *AddUsersToUserGroupV1Input {
 	this := AddUsersToUserGroupV1Input{}
+	this.Emails = emails
 	return &this
 }
 
@@ -38,41 +39,33 @@ func NewAddUsersToUserGroupV1InputWithDefaults() *AddUsersToUserGroupV1Input {
 	return &this
 }
 
-// GetEmails returns the Emails field value if set, zero value otherwise.
+// GetEmails returns the Emails field value
 func (o *AddUsersToUserGroupV1Input) GetEmails() []string {
-	if o == nil || o.Emails == nil {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.Emails
 }
 
-// GetEmailsOk returns a tuple with the Emails field value if set, nil otherwise
+// GetEmailsOk returns a tuple with the Emails field value
 // and a boolean to check if the value has been set.
 func (o *AddUsersToUserGroupV1Input) GetEmailsOk() ([]string, bool) {
-	if o == nil || o.Emails == nil {
+	if o == nil {
 		return nil, false
 	}
 	return o.Emails, true
 }
 
-// HasEmails returns a boolean if a field has been set.
-func (o *AddUsersToUserGroupV1Input) HasEmails() bool {
-	if o != nil && o.Emails != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEmails gets a reference to the given []string and assigns it to the Emails field.
+// SetEmails sets field value
 func (o *AddUsersToUserGroupV1Input) SetEmails(v []string) {
 	o.Emails = v
 }
 
 func (o AddUsersToUserGroupV1Input) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Emails != nil {
+	if true {
 		toSerialize["emails"] = o.Emails
 	}
 	return json.Marshal(toSerialize)

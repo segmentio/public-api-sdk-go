@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 33.0.2
 Contact: friends@segment.com
 */
 
@@ -27,7 +27,7 @@ type SourceMetadata struct {
 	Description string `json:"description"`
 	Logos Logos1 `json:"logos"`
 	// Options for this Source.
-	Options []IntegrationOptionBeta `json:"options"`
+	Options []IntegrationOptionV1 `json:"options"`
 	// A list of categories this Source belongs to.
 	Categories []string `json:"categories"`
 	// True if this is a Cloud Event Source.
@@ -38,7 +38,7 @@ type SourceMetadata struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSourceMetadata(id string, name string, slug string, description string, logos Logos1, options []IntegrationOptionBeta, categories []string, isCloudEventSource bool) *SourceMetadata {
+func NewSourceMetadata(id string, name string, slug string, description string, logos Logos1, options []IntegrationOptionV1, categories []string, isCloudEventSource bool) *SourceMetadata {
 	this := SourceMetadata{}
 	this.Id = id
 	this.Name = name
@@ -180,9 +180,9 @@ func (o *SourceMetadata) SetLogos(v Logos1) {
 }
 
 // GetOptions returns the Options field value
-func (o *SourceMetadata) GetOptions() []IntegrationOptionBeta {
+func (o *SourceMetadata) GetOptions() []IntegrationOptionV1 {
 	if o == nil {
-		var ret []IntegrationOptionBeta
+		var ret []IntegrationOptionV1
 		return ret
 	}
 
@@ -191,7 +191,7 @@ func (o *SourceMetadata) GetOptions() []IntegrationOptionBeta {
 
 // GetOptionsOk returns a tuple with the Options field value
 // and a boolean to check if the value has been set.
-func (o *SourceMetadata) GetOptionsOk() ([]IntegrationOptionBeta, bool) {
+func (o *SourceMetadata) GetOptionsOk() ([]IntegrationOptionV1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -199,7 +199,7 @@ func (o *SourceMetadata) GetOptionsOk() ([]IntegrationOptionBeta, bool) {
 }
 
 // SetOptions sets field value
-func (o *SourceMetadata) SetOptions(v []IntegrationOptionBeta) {
+func (o *SourceMetadata) SetOptions(v []IntegrationOptionV1) {
 	o.Options = v
 }
 
