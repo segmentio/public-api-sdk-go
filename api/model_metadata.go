@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 32.0.1
 Contact: friends@segment.com
 */
 
@@ -45,10 +45,6 @@ type Metadata struct {
 	Actions []DestinationMetadataActionV1 `json:"actions"`
 	// Predefined Destination subscriptions that can optionally be applied when connecting a new instance of the Destination.
 	Presets []DestinationMetadataSubscriptionPresetV1 `json:"presets"`
-	// Contact info for Integration Owners.
-	Contacts []Contact `json:"contacts,omitempty"`
-	// Partner Owned flag.
-	PartnerOwned *bool `json:"partnerOwned,omitempty"`
 }
 
 // NewMetadata instantiates a new Metadata object
@@ -468,70 +464,6 @@ func (o *Metadata) SetPresets(v []DestinationMetadataSubscriptionPresetV1) {
 	o.Presets = v
 }
 
-// GetContacts returns the Contacts field value if set, zero value otherwise.
-func (o *Metadata) GetContacts() []Contact {
-	if o == nil || o.Contacts == nil {
-		var ret []Contact
-		return ret
-	}
-	return o.Contacts
-}
-
-// GetContactsOk returns a tuple with the Contacts field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Metadata) GetContactsOk() ([]Contact, bool) {
-	if o == nil || o.Contacts == nil {
-		return nil, false
-	}
-	return o.Contacts, true
-}
-
-// HasContacts returns a boolean if a field has been set.
-func (o *Metadata) HasContacts() bool {
-	if o != nil && o.Contacts != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetContacts gets a reference to the given []Contact and assigns it to the Contacts field.
-func (o *Metadata) SetContacts(v []Contact) {
-	o.Contacts = v
-}
-
-// GetPartnerOwned returns the PartnerOwned field value if set, zero value otherwise.
-func (o *Metadata) GetPartnerOwned() bool {
-	if o == nil || o.PartnerOwned == nil {
-		var ret bool
-		return ret
-	}
-	return *o.PartnerOwned
-}
-
-// GetPartnerOwnedOk returns a tuple with the PartnerOwned field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Metadata) GetPartnerOwnedOk() (*bool, bool) {
-	if o == nil || o.PartnerOwned == nil {
-		return nil, false
-	}
-	return o.PartnerOwned, true
-}
-
-// HasPartnerOwned returns a boolean if a field has been set.
-func (o *Metadata) HasPartnerOwned() bool {
-	if o != nil && o.PartnerOwned != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPartnerOwned gets a reference to the given bool and assigns it to the PartnerOwned field.
-func (o *Metadata) SetPartnerOwned(v bool) {
-	o.PartnerOwned = &v
-}
-
 func (o Metadata) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -581,12 +513,6 @@ func (o Metadata) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["presets"] = o.Presets
-	}
-	if o.Contacts != nil {
-		toSerialize["contacts"] = o.Contacts
-	}
-	if o.PartnerOwned != nil {
-		toSerialize["partnerOwned"] = o.PartnerOwned
 	}
 	return json.Marshal(toSerialize)
 }
