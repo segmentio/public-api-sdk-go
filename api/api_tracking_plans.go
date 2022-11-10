@@ -88,7 +88,7 @@ func (a *TrackingPlansApiService) AddSourceToTrackingPlanExecute(r ApiAddSourceT
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -97,7 +97,7 @@ func (a *TrackingPlansApiService) AddSourceToTrackingPlanExecute(r ApiAddSourceT
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -229,7 +229,7 @@ func (a *TrackingPlansApiService) CreateTrackingPlanExecute(r ApiCreateTrackingP
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -238,7 +238,7 @@ func (a *TrackingPlansApiService) CreateTrackingPlanExecute(r ApiCreateTrackingP
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -374,7 +374,7 @@ func (a *TrackingPlansApiService) DeleteTrackingPlanExecute(r ApiDeleteTrackingP
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -508,7 +508,7 @@ func (a *TrackingPlansApiService) GetTrackingPlanExecute(r ApiGetTrackingPlanReq
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -588,7 +588,7 @@ type ApiListRulesFromTrackingPlanRequest struct {
 	pagination *PaginationInput
 }
 
-// Pagination options.  This parameter exists in alpha.
+// Pagination options.  This parameter exists in v1.
 func (r ApiListRulesFromTrackingPlanRequest) Pagination(pagination PaginationInput) ApiListRulesFromTrackingPlanRequest {
 	r.pagination = &pagination
 	return r
@@ -656,7 +656,7 @@ func (a *TrackingPlansApiService) ListRulesFromTrackingPlanExecute(r ApiListRule
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -736,7 +736,7 @@ type ApiListSourcesFromTrackingPlanRequest struct {
 	pagination *PaginationInput
 }
 
-// Pagination options.  This parameter exists in alpha.
+// Pagination options.  This parameter exists in v1.
 func (r ApiListSourcesFromTrackingPlanRequest) Pagination(pagination PaginationInput) ApiListSourcesFromTrackingPlanRequest {
 	r.pagination = &pagination
 	return r
@@ -806,7 +806,7 @@ func (a *TrackingPlansApiService) ListSourcesFromTrackingPlanExecute(r ApiListSo
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -886,13 +886,13 @@ type ApiListTrackingPlansRequest struct {
 	type_ *string
 }
 
-// Pagination options.  This parameter exists in alpha.
+// Pagination options.  This parameter exists in v1.
 func (r ApiListTrackingPlansRequest) Pagination(pagination PaginationInput) ApiListTrackingPlansRequest {
 	r.pagination = &pagination
 	return r
 }
 
-// Requests Tracking Plans of a certain type. If omitted, lists all types.  This parameter exists in alpha.
+// Requests Tracking Plans of a certain type. If omitted, lists all types.  This parameter exists in v1.
 func (r ApiListTrackingPlansRequest) Type_(type_ string) ApiListTrackingPlansRequest {
 	r.type_ = &type_
 	return r
@@ -957,7 +957,7 @@ func (a *TrackingPlansApiService) ListTrackingPlansExecute(r ApiListTrackingPlan
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1037,7 +1037,7 @@ type ApiRemoveRulesFromTrackingPlanRequest struct {
 	rules *[]RemoveRuleV1
 }
 
-// Rules to delete.  This parameter exists in alpha.
+// Rules to delete.  This parameter exists in v1.
 func (r ApiRemoveRulesFromTrackingPlanRequest) Rules(rules []RemoveRuleV1) ApiRemoveRulesFromTrackingPlanRequest {
 	r.rules = &rules
 	return r
@@ -1102,7 +1102,7 @@ func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlanExecute(r ApiRemove
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1182,7 +1182,7 @@ type ApiRemoveSourceFromTrackingPlanRequest struct {
 	sourceId *string
 }
 
-// The id of the Source associated with the Tracking Plan.  Config API note: analogous to &#x60;sourceName&#x60;.  This parameter exists in alpha.
+// The id of the Source associated with the Tracking Plan.  Config API note: analogous to &#x60;sourceName&#x60;.  This parameter exists in v1.
 func (r ApiRemoveSourceFromTrackingPlanRequest) SourceId(sourceId string) ApiRemoveSourceFromTrackingPlanRequest {
 	r.sourceId = &sourceId
 	return r
@@ -1250,7 +1250,7 @@ func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlanExecute(r ApiRemov
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1384,7 +1384,7 @@ func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlanExecute(r ApiReplace
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1393,7 +1393,7 @@ func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlanExecute(r ApiReplace
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1529,7 +1529,7 @@ func (a *TrackingPlansApiService) UpdateRulesInTrackingPlanExecute(r ApiUpdateRu
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1538,7 +1538,7 @@ func (a *TrackingPlansApiService) UpdateRulesInTrackingPlanExecute(r ApiUpdateRu
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1678,7 +1678,7 @@ func (a *TrackingPlansApiService) UpdateTrackingPlanExecute(r ApiUpdateTrackingP
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1687,7 +1687,7 @@ func (a *TrackingPlansApiService) UpdateTrackingPlanExecute(r ApiUpdateTrackingP
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

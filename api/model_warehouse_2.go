@@ -25,14 +25,14 @@ type Warehouse2 struct {
 	// When set to true, this Warehouse receives data.
 	Enabled bool `json:"enabled"`
 	// The settings associated with this Warehouse.  Common settings are connection-related configuration used to connect to it, for example host, username, and port.
-	Settings ModelMap `json:"settings"`
+	Settings NullableModelMap `json:"settings"`
 }
 
 // NewWarehouse2 instantiates a new Warehouse2 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWarehouse2(id string, metadata Metadata2, workspaceId string, enabled bool, settings ModelMap) *Warehouse2 {
+func NewWarehouse2(id string, metadata Metadata2, workspaceId string, enabled bool, settings NullableModelMap) *Warehouse2 {
 	this := Warehouse2{}
 	this.Id = id
 	this.Metadata = metadata
@@ -147,27 +147,29 @@ func (o *Warehouse2) SetEnabled(v bool) {
 }
 
 // GetSettings returns the Settings field value
+// If the value is explicit nil, the zero value for ModelMap will be returned
 func (o *Warehouse2) GetSettings() ModelMap {
-	if o == nil {
+	if o == nil || o.Settings.Get() == nil {
 		var ret ModelMap
 		return ret
 	}
 
-	return o.Settings
+	return *o.Settings.Get()
 }
 
 // GetSettingsOk returns a tuple with the Settings field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Warehouse2) GetSettingsOk() (*ModelMap, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Settings, true
+	return o.Settings.Get(), o.Settings.IsSet()
 }
 
 // SetSettings sets field value
 func (o *Warehouse2) SetSettings(v ModelMap) {
-	o.Settings = v
+	o.Settings.Set(&v)
 }
 
 func (o Warehouse2) MarshalJSON() ([]byte, error) {
@@ -185,7 +187,7 @@ func (o Warehouse2) MarshalJSON() ([]byte, error) {
 		toSerialize["enabled"] = o.Enabled
 	}
 	if true {
-		toSerialize["settings"] = o.Settings
+		toSerialize["settings"] = o.Settings.Get()
 	}
 	return json.Marshal(toSerialize)
 }

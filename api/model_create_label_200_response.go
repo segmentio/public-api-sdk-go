@@ -17,7 +17,7 @@ import (
 
 // CreateLabel200Response struct for CreateLabel200Response
 type CreateLabel200Response struct {
-	Data *CreateLabelAlphaOutput `json:"data,omitempty"`
+	Data *CreateLabelV1Output `json:"data,omitempty"`
 }
 
 // NewCreateLabel200Response instantiates a new CreateLabel200Response object
@@ -38,9 +38,9 @@ func NewCreateLabel200ResponseWithDefaults() *CreateLabel200Response {
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *CreateLabel200Response) GetData() CreateLabelAlphaOutput {
+func (o *CreateLabel200Response) GetData() CreateLabelV1Output {
 	if o == nil || o.Data == nil {
-		var ret CreateLabelAlphaOutput
+		var ret CreateLabelV1Output
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *CreateLabel200Response) GetData() CreateLabelAlphaOutput {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateLabel200Response) GetDataOk() (*CreateLabelAlphaOutput, bool) {
+func (o *CreateLabel200Response) GetDataOk() (*CreateLabelV1Output, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *CreateLabel200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given CreateLabelAlphaOutput and assigns it to the Data field.
-func (o *CreateLabel200Response) SetData(v CreateLabelAlphaOutput) {
+// SetData gets a reference to the given CreateLabelV1Output and assigns it to the Data field.
+func (o *CreateLabel200Response) SetData(v CreateLabelV1Output) {
 	o.Data = &v
 }
 

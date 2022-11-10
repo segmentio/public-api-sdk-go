@@ -88,7 +88,7 @@ func (a *DeletionAndSuppressionApiService) CreateCloudSourceRegulationExecute(r 
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -97,7 +97,7 @@ func (a *DeletionAndSuppressionApiService) CreateCloudSourceRegulationExecute(r 
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -240,7 +240,7 @@ func (a *DeletionAndSuppressionApiService) CreateSourceRegulationExecute(r ApiCr
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -249,7 +249,7 @@ func (a *DeletionAndSuppressionApiService) CreateSourceRegulationExecute(r ApiCr
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -388,7 +388,7 @@ func (a *DeletionAndSuppressionApiService) CreateWorkspaceRegulationExecute(r Ap
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -397,7 +397,7 @@ func (a *DeletionAndSuppressionApiService) CreateWorkspaceRegulationExecute(r Ap
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -536,7 +536,7 @@ func (a *DeletionAndSuppressionApiService) DeleteRegulationExecute(r ApiDeleteRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -672,7 +672,7 @@ func (a *DeletionAndSuppressionApiService) GetRegulationExecute(r ApiGetRegulati
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -754,19 +754,19 @@ type ApiListRegulationsFromSourceRequest struct {
 	regulationTypes *[]string
 }
 
-// Pagination parameters.  This parameter exists in alpha.
+// Pagination parameters.  This parameter exists in v1.
 func (r ApiListRegulationsFromSourceRequest) Pagination(pagination PaginationInput) ApiListRegulationsFromSourceRequest {
 	r.pagination = &pagination
 	return r
 }
 
-// The status on which to filter returned regulations.  This parameter exists in alpha.
+// The status on which to filter returned regulations.  This parameter exists in v1.
 func (r ApiListRegulationsFromSourceRequest) Status(status string) ApiListRegulationsFromSourceRequest {
 	r.status = &status
 	return r
 }
 
-// The regulation types on which to filter returned regulations.  This parameter exists in alpha.
+// The regulation types on which to filter returned regulations.  This parameter exists in v1.
 func (r ApiListRegulationsFromSourceRequest) RegulationTypes(regulationTypes []string) ApiListRegulationsFromSourceRequest {
 	r.regulationTypes = &regulationTypes
 	return r
@@ -835,7 +835,7 @@ func (a *DeletionAndSuppressionApiService) ListRegulationsFromSourceExecute(r Ap
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -914,7 +914,7 @@ type ApiListSuppressionsRequest struct {
 	pagination *PaginationInput
 }
 
-// Pagination parameters.  This parameter exists in alpha.
+// Pagination parameters.  This parameter exists in v1.
 func (r ApiListSuppressionsRequest) Pagination(pagination PaginationInput) ApiListSuppressionsRequest {
 	r.pagination = &pagination
 	return r
@@ -974,7 +974,7 @@ func (a *DeletionAndSuppressionApiService) ListSuppressionsExecute(r ApiListSupp
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1055,19 +1055,19 @@ type ApiListWorkspaceRegulationsRequest struct {
 	regulationTypes *[]string
 }
 
-// Pagination parameters.  This parameter exists in alpha.
+// Pagination parameters.  This parameter exists in v1.
 func (r ApiListWorkspaceRegulationsRequest) Pagination(pagination PaginationInput) ApiListWorkspaceRegulationsRequest {
 	r.pagination = &pagination
 	return r
 }
 
-// The status on which to filter the returned regulations.  This parameter exists in alpha.
+// The status on which to filter the returned regulations.  This parameter exists in v1.
 func (r ApiListWorkspaceRegulationsRequest) Status(status string) ApiListWorkspaceRegulationsRequest {
 	r.status = &status
 	return r
 }
 
-// The regulation types on which to filter returned regulations.  This parameter exists in alpha.
+// The regulation types on which to filter returned regulations.  This parameter exists in v1.
 func (r ApiListWorkspaceRegulationsRequest) RegulationTypes(regulationTypes []string) ApiListWorkspaceRegulationsRequest {
 	r.regulationTypes = &regulationTypes
 	return r
@@ -1133,7 +1133,7 @@ func (a *DeletionAndSuppressionApiService) ListWorkspaceRegulationsExecute(r Api
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

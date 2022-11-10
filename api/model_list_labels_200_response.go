@@ -17,7 +17,7 @@ import (
 
 // ListLabels200Response struct for ListLabels200Response
 type ListLabels200Response struct {
-	Data *ListLabelsAlphaOutput `json:"data,omitempty"`
+	Data *ListLabelsV1Output `json:"data,omitempty"`
 }
 
 // NewListLabels200Response instantiates a new ListLabels200Response object
@@ -38,9 +38,9 @@ func NewListLabels200ResponseWithDefaults() *ListLabels200Response {
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *ListLabels200Response) GetData() ListLabelsAlphaOutput {
+func (o *ListLabels200Response) GetData() ListLabelsV1Output {
 	if o == nil || o.Data == nil {
-		var ret ListLabelsAlphaOutput
+		var ret ListLabelsV1Output
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *ListLabels200Response) GetData() ListLabelsAlphaOutput {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListLabels200Response) GetDataOk() (*ListLabelsAlphaOutput, bool) {
+func (o *ListLabels200Response) GetDataOk() (*ListLabelsV1Output, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *ListLabels200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given ListLabelsAlphaOutput and assigns it to the Data field.
-func (o *ListLabels200Response) SetData(v ListLabelsAlphaOutput) {
+// SetData gets a reference to the given ListLabelsV1Output and assigns it to the Data field.
+func (o *ListLabels200Response) SetData(v ListLabelsV1Output) {
 	o.Data = &v
 }
 

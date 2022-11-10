@@ -84,7 +84,7 @@ func (a *TransformationsApiService) CreateTransformationExecute(r ApiCreateTrans
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -93,7 +93,7 @@ func (a *TransformationsApiService) CreateTransformationExecute(r ApiCreateTrans
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -232,7 +232,7 @@ func (a *TransformationsApiService) DeleteTransformationExecute(r ApiDeleteTrans
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -366,7 +366,7 @@ func (a *TransformationsApiService) GetTransformationExecute(r ApiGetTransformat
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -445,7 +445,7 @@ type ApiListTransformationsRequest struct {
 	pagination *PaginationInput
 }
 
-// Pagination options.  This parameter exists in alpha.
+// Pagination options.  This parameter exists in beta.
 func (r ApiListTransformationsRequest) Pagination(pagination PaginationInput) ApiListTransformationsRequest {
 	r.pagination = &pagination
 	return r
@@ -507,7 +507,7 @@ func (a *TransformationsApiService) ListTransformationsExecute(r ApiListTransfor
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -644,7 +644,7 @@ func (a *TransformationsApiService) UpdateTransformationExecute(r ApiUpdateTrans
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -653,7 +653,7 @@ func (a *TransformationsApiService) UpdateTransformationExecute(r ApiUpdateTrans
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

@@ -30,13 +30,13 @@ type ApiGetDailyPerSourceMTUUsageRequest struct {
 	pagination *PaginationInput
 }
 
-// The start of the usage month, in the ISO-8601 format.  This parameter exists in alpha.
+// The start of the usage month, in the ISO-8601 format.  This parameter exists in v1.
 func (r ApiGetDailyPerSourceMTUUsageRequest) Period(period string) ApiGetDailyPerSourceMTUUsageRequest {
 	r.period = &period
 	return r
 }
 
-// Pagination input for per Source MTU counts.  This parameter exists in alpha.
+// Pagination input for per Source MTU counts.  This parameter exists in v1.
 func (r ApiGetDailyPerSourceMTUUsageRequest) Pagination(pagination PaginationInput) ApiGetDailyPerSourceMTUUsageRequest {
 	r.pagination = &pagination
 	return r
@@ -100,7 +100,7 @@ func (a *MonthlyTrackedUsersApiService) GetDailyPerSourceMTUUsageExecute(r ApiGe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -180,13 +180,13 @@ type ApiGetDailyWorkspaceMTUUsageRequest struct {
 	pagination *PaginationInput
 }
 
-// The start of the usage month, in the ISO-8601 format.  This parameter exists in alpha.
+// The start of the usage month, in the ISO-8601 format.  This parameter exists in v1.
 func (r ApiGetDailyWorkspaceMTUUsageRequest) Period(period string) ApiGetDailyWorkspaceMTUUsageRequest {
 	r.period = &period
 	return r
 }
 
-// Pagination input for Workspace MTU counts.  This parameter exists in alpha.
+// Pagination input for Workspace MTU counts.  This parameter exists in v1.
 func (r ApiGetDailyWorkspaceMTUUsageRequest) Pagination(pagination PaginationInput) ApiGetDailyWorkspaceMTUUsageRequest {
 	r.pagination = &pagination
 	return r
@@ -250,7 +250,7 @@ func (a *MonthlyTrackedUsersApiService) GetDailyWorkspaceMTUUsageExecute(r ApiGe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

@@ -17,7 +17,7 @@ import (
 
 // DeleteLabel200Response struct for DeleteLabel200Response
 type DeleteLabel200Response struct {
-	Data *DeleteLabelAlphaOutput `json:"data,omitempty"`
+	Data *DeleteLabelV1Output `json:"data,omitempty"`
 }
 
 // NewDeleteLabel200Response instantiates a new DeleteLabel200Response object
@@ -38,9 +38,9 @@ func NewDeleteLabel200ResponseWithDefaults() *DeleteLabel200Response {
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *DeleteLabel200Response) GetData() DeleteLabelAlphaOutput {
+func (o *DeleteLabel200Response) GetData() DeleteLabelV1Output {
 	if o == nil || o.Data == nil {
-		var ret DeleteLabelAlphaOutput
+		var ret DeleteLabelV1Output
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *DeleteLabel200Response) GetData() DeleteLabelAlphaOutput {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DeleteLabel200Response) GetDataOk() (*DeleteLabelAlphaOutput, bool) {
+func (o *DeleteLabel200Response) GetDataOk() (*DeleteLabelV1Output, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *DeleteLabel200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given DeleteLabelAlphaOutput and assigns it to the Data field.
-func (o *DeleteLabel200Response) SetData(v DeleteLabelAlphaOutput) {
+// SetData gets a reference to the given DeleteLabelV1Output and assigns it to the Data field.
+func (o *DeleteLabel200Response) SetData(v DeleteLabelV1Output) {
 	o.Data = &v
 }
 

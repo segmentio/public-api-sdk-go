@@ -28,11 +28,11 @@ type ApiAddLabelsToSourceRequest struct {
 	ctx context.Context
 	ApiService *SourcesApiService
 	sourceId string
-	addLabelsToSourceAlphaInput *AddLabelsToSourceAlphaInput
+	addLabelsToSourceV1Input *AddLabelsToSourceV1Input
 }
 
-func (r ApiAddLabelsToSourceRequest) AddLabelsToSourceAlphaInput(addLabelsToSourceAlphaInput AddLabelsToSourceAlphaInput) ApiAddLabelsToSourceRequest {
-	r.addLabelsToSourceAlphaInput = &addLabelsToSourceAlphaInput
+func (r ApiAddLabelsToSourceRequest) AddLabelsToSourceV1Input(addLabelsToSourceV1Input AddLabelsToSourceV1Input) ApiAddLabelsToSourceRequest {
+	r.addLabelsToSourceV1Input = &addLabelsToSourceV1Input
 	return r
 }
 
@@ -83,12 +83,12 @@ func (a *SourcesApiService) AddLabelsToSourceExecute(r ApiAddLabelsToSourceReque
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.addLabelsToSourceAlphaInput == nil {
-		return localVarReturnValue, nil, reportError("addLabelsToSourceAlphaInput is required and must be specified")
+	if r.addLabelsToSourceV1Input == nil {
+		return localVarReturnValue, nil, reportError("addLabelsToSourceV1Input is required and must be specified")
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -97,7 +97,7 @@ func (a *SourcesApiService) AddLabelsToSourceExecute(r ApiAddLabelsToSourceReque
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -105,7 +105,7 @@ func (a *SourcesApiService) AddLabelsToSourceExecute(r ApiAddLabelsToSourceReque
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.addLabelsToSourceAlphaInput
+	localVarPostBody = r.addLabelsToSourceV1Input
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -175,11 +175,11 @@ func (a *SourcesApiService) AddLabelsToSourceExecute(r ApiAddLabelsToSourceReque
 type ApiCreateSourceRequest struct {
 	ctx context.Context
 	ApiService *SourcesApiService
-	createSourceAlphaInput *CreateSourceAlphaInput
+	createSourceV1Input *CreateSourceV1Input
 }
 
-func (r ApiCreateSourceRequest) CreateSourceAlphaInput(createSourceAlphaInput CreateSourceAlphaInput) ApiCreateSourceRequest {
-	r.createSourceAlphaInput = &createSourceAlphaInput
+func (r ApiCreateSourceRequest) CreateSourceV1Input(createSourceV1Input CreateSourceV1Input) ApiCreateSourceRequest {
+	r.createSourceV1Input = &createSourceV1Input
 	return r
 }
 
@@ -227,12 +227,12 @@ func (a *SourcesApiService) CreateSourceExecute(r ApiCreateSourceRequest) (*Crea
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createSourceAlphaInput == nil {
-		return localVarReturnValue, nil, reportError("createSourceAlphaInput is required and must be specified")
+	if r.createSourceV1Input == nil {
+		return localVarReturnValue, nil, reportError("createSourceV1Input is required and must be specified")
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -241,7 +241,7 @@ func (a *SourcesApiService) CreateSourceExecute(r ApiCreateSourceRequest) (*Crea
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -249,7 +249,7 @@ func (a *SourcesApiService) CreateSourceExecute(r ApiCreateSourceRequest) (*Crea
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createSourceAlphaInput
+	localVarPostBody = r.createSourceV1Input
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -380,7 +380,7 @@ func (a *SourcesApiService) DeleteSourceExecute(r ApiDeleteSourceRequest) (*Dele
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -512,7 +512,7 @@ func (a *SourcesApiService) GetSourceExecute(r ApiGetSourceRequest) (*GetSource2
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -592,7 +592,7 @@ type ApiListConnectedDestinationsFromSourceRequest struct {
 	pagination *PaginationInput
 }
 
-// Required pagination params for the request.  This parameter exists in beta.
+// Required pagination params for the request.  This parameter exists in alpha.
 func (r ApiListConnectedDestinationsFromSourceRequest) Pagination(pagination PaginationInput) ApiListConnectedDestinationsFromSourceRequest {
 	r.pagination = &pagination
 	return r
@@ -655,7 +655,7 @@ func (a *SourcesApiService) ListConnectedDestinationsFromSourceExecute(r ApiList
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -735,7 +735,7 @@ type ApiListConnectedWarehousesFromSourceRequest struct {
 	pagination *PaginationInput
 }
 
-// Required pagination params for the request.  This parameter exists in beta.
+// Required pagination params for the request.  This parameter exists in alpha.
 func (r ApiListConnectedWarehousesFromSourceRequest) Pagination(pagination PaginationInput) ApiListConnectedWarehousesFromSourceRequest {
 	r.pagination = &pagination
 	return r
@@ -798,7 +798,7 @@ func (a *SourcesApiService) ListConnectedWarehousesFromSourceExecute(r ApiListCo
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -930,7 +930,7 @@ func (a *SourcesApiService) ListSchemaSettingsInSourceExecute(r ApiListSchemaSet
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1009,7 +1009,7 @@ type ApiListSourcesRequest struct {
 	pagination *PaginationInput
 }
 
-// Defines the pagination parameters.  This parameter exists in beta.
+// Defines the pagination parameters.  This parameter exists in alpha.
 func (r ApiListSourcesRequest) Pagination(pagination PaginationInput) ApiListSourcesRequest {
 	r.pagination = &pagination
 	return r
@@ -1069,7 +1069,7 @@ func (a *SourcesApiService) ListSourcesExecute(r ApiListSourcesRequest) (*ListSo
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1146,11 +1146,11 @@ type ApiReplaceLabelsInSourceRequest struct {
 	ctx context.Context
 	ApiService *SourcesApiService
 	sourceId string
-	replaceLabelsInSourceAlphaInput *ReplaceLabelsInSourceAlphaInput
+	replaceLabelsInSourceV1Input *ReplaceLabelsInSourceV1Input
 }
 
-func (r ApiReplaceLabelsInSourceRequest) ReplaceLabelsInSourceAlphaInput(replaceLabelsInSourceAlphaInput ReplaceLabelsInSourceAlphaInput) ApiReplaceLabelsInSourceRequest {
-	r.replaceLabelsInSourceAlphaInput = &replaceLabelsInSourceAlphaInput
+func (r ApiReplaceLabelsInSourceRequest) ReplaceLabelsInSourceV1Input(replaceLabelsInSourceV1Input ReplaceLabelsInSourceV1Input) ApiReplaceLabelsInSourceRequest {
+	r.replaceLabelsInSourceV1Input = &replaceLabelsInSourceV1Input
 	return r
 }
 
@@ -1196,12 +1196,12 @@ func (a *SourcesApiService) ReplaceLabelsInSourceExecute(r ApiReplaceLabelsInSou
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.replaceLabelsInSourceAlphaInput == nil {
-		return localVarReturnValue, nil, reportError("replaceLabelsInSourceAlphaInput is required and must be specified")
+	if r.replaceLabelsInSourceV1Input == nil {
+		return localVarReturnValue, nil, reportError("replaceLabelsInSourceV1Input is required and must be specified")
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1210,7 +1210,7 @@ func (a *SourcesApiService) ReplaceLabelsInSourceExecute(r ApiReplaceLabelsInSou
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1218,7 +1218,7 @@ func (a *SourcesApiService) ReplaceLabelsInSourceExecute(r ApiReplaceLabelsInSou
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.replaceLabelsInSourceAlphaInput
+	localVarPostBody = r.replaceLabelsInSourceV1Input
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1348,7 +1348,7 @@ func (a *SourcesApiService) UpdateSchemaSettingsInSourceExecute(r ApiUpdateSchem
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1357,7 +1357,7 @@ func (a *SourcesApiService) UpdateSchemaSettingsInSourceExecute(r ApiUpdateSchem
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1436,11 +1436,11 @@ type ApiUpdateSourceRequest struct {
 	ctx context.Context
 	ApiService *SourcesApiService
 	sourceId string
-	updateSourceAlphaInput *UpdateSourceAlphaInput
+	updateSourceV1Input *UpdateSourceV1Input
 }
 
-func (r ApiUpdateSourceRequest) UpdateSourceAlphaInput(updateSourceAlphaInput UpdateSourceAlphaInput) ApiUpdateSourceRequest {
-	r.updateSourceAlphaInput = &updateSourceAlphaInput
+func (r ApiUpdateSourceRequest) UpdateSourceV1Input(updateSourceV1Input UpdateSourceV1Input) ApiUpdateSourceRequest {
+	r.updateSourceV1Input = &updateSourceV1Input
 	return r
 }
 
@@ -1496,12 +1496,12 @@ func (a *SourcesApiService) UpdateSourceExecute(r ApiUpdateSourceRequest) (*Upda
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.updateSourceAlphaInput == nil {
-		return localVarReturnValue, nil, reportError("updateSourceAlphaInput is required and must be specified")
+	if r.updateSourceV1Input == nil {
+		return localVarReturnValue, nil, reportError("updateSourceV1Input is required and must be specified")
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1510,7 +1510,7 @@ func (a *SourcesApiService) UpdateSourceExecute(r ApiUpdateSourceRequest) (*Upda
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1518,7 +1518,7 @@ func (a *SourcesApiService) UpdateSourceExecute(r ApiUpdateSourceRequest) (*Upda
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateSourceAlphaInput
+	localVarPostBody = r.updateSourceV1Input
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

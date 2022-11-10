@@ -30,13 +30,13 @@ type ApiGetDailyPerSourceAPICallsUsageRequest struct {
 	pagination *PaginationInput
 }
 
-// The start of the usage month in the ISO-8601 format.  This parameter exists in alpha.
+// The start of the usage month in the ISO-8601 format.  This parameter exists in v1.
 func (r ApiGetDailyPerSourceAPICallsUsageRequest) Period(period string) ApiGetDailyPerSourceAPICallsUsageRequest {
 	r.period = &period
 	return r
 }
 
-// Pagination input for per Source API calls counts.  This parameter exists in alpha.
+// Pagination input for per Source API calls counts.  This parameter exists in v1.
 func (r ApiGetDailyPerSourceAPICallsUsageRequest) Pagination(pagination PaginationInput) ApiGetDailyPerSourceAPICallsUsageRequest {
 	r.pagination = &pagination
 	return r
@@ -100,7 +100,7 @@ func (a *APICallsApiService) GetDailyPerSourceAPICallsUsageExecute(r ApiGetDaily
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -180,13 +180,13 @@ type ApiGetDailyWorkspaceAPICallsUsageRequest struct {
 	pagination *PaginationInput
 }
 
-// The start of the usage month in the ISO-8601 format.  This parameter exists in alpha.
+// The start of the usage month in the ISO-8601 format.  This parameter exists in v1.
 func (r ApiGetDailyWorkspaceAPICallsUsageRequest) Period(period string) ApiGetDailyWorkspaceAPICallsUsageRequest {
 	r.period = &period
 	return r
 }
 
-// Pagination input for Workspace API call counts.  This parameter exists in alpha.
+// Pagination input for Workspace API call counts.  This parameter exists in v1.
 func (r ApiGetDailyWorkspaceAPICallsUsageRequest) Pagination(pagination PaginationInput) ApiGetDailyWorkspaceAPICallsUsageRequest {
 	r.pagination = &pagination
 	return r
@@ -250,7 +250,7 @@ func (a *APICallsApiService) GetDailyWorkspaceAPICallsUsageExecute(r ApiGetDaily
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

@@ -33,31 +33,31 @@ type ApiListAuditEventsRequest struct {
 	resourceType *string
 }
 
-// Defines the pagination parameters.  This parameter exists in alpha.
+// Defines the pagination parameters.  This parameter exists in v1.
 func (r ApiListAuditEventsRequest) Pagination(pagination PaginationInput) ApiListAuditEventsRequest {
 	r.pagination = &pagination
 	return r
 }
 
-// Filter response to events that happened after this time.  This parameter exists in alpha.
+// Filter response to events that happened after this time.  This parameter exists in v1.
 func (r ApiListAuditEventsRequest) StartTime(startTime string) ApiListAuditEventsRequest {
 	r.startTime = &startTime
 	return r
 }
 
-// Filter response to events that happened before this time. Defaults to the current time, or the end time from the pagination cursor.  This parameter exists in alpha.
+// Filter response to events that happened before this time. Defaults to the current time, or the end time from the pagination cursor.  This parameter exists in v1.
 func (r ApiListAuditEventsRequest) EndTime(endTime string) ApiListAuditEventsRequest {
 	r.endTime = &endTime
 	return r
 }
 
-// Filter response to events that affect a specific resource, for example, a single Source.  This parameter exists in alpha.
+// Filter response to events that affect a specific resource, for example, a single Source.  This parameter exists in v1.
 func (r ApiListAuditEventsRequest) ResourceId(resourceId string) ApiListAuditEventsRequest {
 	r.resourceId = &resourceId
 	return r
 }
 
-// Filter response to events that affect a specific type, for example, Sources, Warehouses, and Tracking Plans.  This parameter exists in alpha.
+// Filter response to events that affect a specific type, for example, Sources, Warehouses, and Tracking Plans.  This parameter exists in v1.
 func (r ApiListAuditEventsRequest) ResourceType(resourceType string) ApiListAuditEventsRequest {
 	r.resourceType = &resourceType
 	return r
@@ -129,7 +129,7 @@ func (a *AuditTrailApiService) ListAuditEventsExecute(r ApiListAuditEventsReques
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

@@ -17,7 +17,7 @@ import (
 
 // CreateSource200Response struct for CreateSource200Response
 type CreateSource200Response struct {
-	Data *CreateSourceAlphaOutput `json:"data,omitempty"`
+	Data *CreateSourceV1Output `json:"data,omitempty"`
 }
 
 // NewCreateSource200Response instantiates a new CreateSource200Response object
@@ -38,9 +38,9 @@ func NewCreateSource200ResponseWithDefaults() *CreateSource200Response {
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *CreateSource200Response) GetData() CreateSourceAlphaOutput {
+func (o *CreateSource200Response) GetData() CreateSourceV1Output {
 	if o == nil || o.Data == nil {
-		var ret CreateSourceAlphaOutput
+		var ret CreateSourceV1Output
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *CreateSource200Response) GetData() CreateSourceAlphaOutput {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateSource200Response) GetDataOk() (*CreateSourceAlphaOutput, bool) {
+func (o *CreateSource200Response) GetDataOk() (*CreateSourceV1Output, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *CreateSource200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given CreateSourceAlphaOutput and assigns it to the Data field.
-func (o *CreateSource200Response) SetData(v CreateSourceAlphaOutput) {
+// SetData gets a reference to the given CreateSourceV1Output and assigns it to the Data field.
+func (o *CreateSource200Response) SetData(v CreateSourceV1Output) {
 	o.Data = &v
 }
 

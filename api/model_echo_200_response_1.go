@@ -17,7 +17,7 @@ import (
 
 // Echo200Response1 struct for Echo200Response1
 type Echo200Response1 struct {
-	Data *EchoV1Output `json:"data,omitempty"`
+	Data *EchoAlphaOutput `json:"data,omitempty"`
 }
 
 // NewEcho200Response1 instantiates a new Echo200Response1 object
@@ -38,9 +38,9 @@ func NewEcho200Response1WithDefaults() *Echo200Response1 {
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *Echo200Response1) GetData() EchoV1Output {
+func (o *Echo200Response1) GetData() EchoAlphaOutput {
 	if o == nil || o.Data == nil {
-		var ret EchoV1Output
+		var ret EchoAlphaOutput
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *Echo200Response1) GetData() EchoV1Output {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Echo200Response1) GetDataOk() (*EchoV1Output, bool) {
+func (o *Echo200Response1) GetDataOk() (*EchoAlphaOutput, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *Echo200Response1) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given EchoV1Output and assigns it to the Data field.
-func (o *Echo200Response1) SetData(v EchoV1Output) {
+// SetData gets a reference to the given EchoAlphaOutput and assigns it to the Data field.
+func (o *Echo200Response1) SetData(v EchoAlphaOutput) {
 	o.Data = &v
 }
 

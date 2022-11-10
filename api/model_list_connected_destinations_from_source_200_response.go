@@ -17,7 +17,7 @@ import (
 
 // ListConnectedDestinationsFromSource200Response struct for ListConnectedDestinationsFromSource200Response
 type ListConnectedDestinationsFromSource200Response struct {
-	Data *ListConnectedDestinationsFromSourceAlphaOutput `json:"data,omitempty"`
+	Data *ListConnectedDestinationsFromSourceV1Output `json:"data,omitempty"`
 }
 
 // NewListConnectedDestinationsFromSource200Response instantiates a new ListConnectedDestinationsFromSource200Response object
@@ -38,9 +38,9 @@ func NewListConnectedDestinationsFromSource200ResponseWithDefaults() *ListConnec
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *ListConnectedDestinationsFromSource200Response) GetData() ListConnectedDestinationsFromSourceAlphaOutput {
+func (o *ListConnectedDestinationsFromSource200Response) GetData() ListConnectedDestinationsFromSourceV1Output {
 	if o == nil || o.Data == nil {
-		var ret ListConnectedDestinationsFromSourceAlphaOutput
+		var ret ListConnectedDestinationsFromSourceV1Output
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *ListConnectedDestinationsFromSource200Response) GetData() ListConnected
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListConnectedDestinationsFromSource200Response) GetDataOk() (*ListConnectedDestinationsFromSourceAlphaOutput, bool) {
+func (o *ListConnectedDestinationsFromSource200Response) GetDataOk() (*ListConnectedDestinationsFromSourceV1Output, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *ListConnectedDestinationsFromSource200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given ListConnectedDestinationsFromSourceAlphaOutput and assigns it to the Data field.
-func (o *ListConnectedDestinationsFromSource200Response) SetData(v ListConnectedDestinationsFromSourceAlphaOutput) {
+// SetData gets a reference to the given ListConnectedDestinationsFromSourceV1Output and assigns it to the Data field.
+func (o *ListConnectedDestinationsFromSource200Response) SetData(v ListConnectedDestinationsFromSourceV1Output) {
 	o.Data = &v
 }
 

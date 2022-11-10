@@ -17,7 +17,7 @@ import (
 
 // ReplaceLabelsInSource200Response1 struct for ReplaceLabelsInSource200Response1
 type ReplaceLabelsInSource200Response1 struct {
-	Data *ReplaceLabelsInSourceV1Output `json:"data,omitempty"`
+	Data *ReplaceLabelsInSourceAlphaOutput `json:"data,omitempty"`
 }
 
 // NewReplaceLabelsInSource200Response1 instantiates a new ReplaceLabelsInSource200Response1 object
@@ -38,9 +38,9 @@ func NewReplaceLabelsInSource200Response1WithDefaults() *ReplaceLabelsInSource20
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *ReplaceLabelsInSource200Response1) GetData() ReplaceLabelsInSourceV1Output {
+func (o *ReplaceLabelsInSource200Response1) GetData() ReplaceLabelsInSourceAlphaOutput {
 	if o == nil || o.Data == nil {
-		var ret ReplaceLabelsInSourceV1Output
+		var ret ReplaceLabelsInSourceAlphaOutput
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *ReplaceLabelsInSource200Response1) GetData() ReplaceLabelsInSourceV1Out
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReplaceLabelsInSource200Response1) GetDataOk() (*ReplaceLabelsInSourceV1Output, bool) {
+func (o *ReplaceLabelsInSource200Response1) GetDataOk() (*ReplaceLabelsInSourceAlphaOutput, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *ReplaceLabelsInSource200Response1) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given ReplaceLabelsInSourceV1Output and assigns it to the Data field.
-func (o *ReplaceLabelsInSource200Response1) SetData(v ReplaceLabelsInSourceV1Output) {
+// SetData gets a reference to the given ReplaceLabelsInSourceAlphaOutput and assigns it to the Data field.
+func (o *ReplaceLabelsInSource200Response1) SetData(v ReplaceLabelsInSourceAlphaOutput) {
 	o.Data = &v
 }
 
