@@ -27,11 +27,11 @@ type LabelsApiService service
 type ApiCreateLabelRequest struct {
 	ctx context.Context
 	ApiService *LabelsApiService
-	createLabelAlphaInput *CreateLabelAlphaInput
+	createLabelV1Input *CreateLabelV1Input
 }
 
-func (r ApiCreateLabelRequest) CreateLabelAlphaInput(createLabelAlphaInput CreateLabelAlphaInput) ApiCreateLabelRequest {
-	r.createLabelAlphaInput = &createLabelAlphaInput
+func (r ApiCreateLabelRequest) CreateLabelV1Input(createLabelV1Input CreateLabelV1Input) ApiCreateLabelRequest {
+	r.createLabelV1Input = &createLabelV1Input
 	return r
 }
 
@@ -82,12 +82,12 @@ func (a *LabelsApiService) CreateLabelExecute(r ApiCreateLabelRequest) (*CreateL
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createLabelAlphaInput == nil {
-		return localVarReturnValue, nil, reportError("createLabelAlphaInput is required and must be specified")
+	if r.createLabelV1Input == nil {
+		return localVarReturnValue, nil, reportError("createLabelV1Input is required and must be specified")
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -96,7 +96,7 @@ func (a *LabelsApiService) CreateLabelExecute(r ApiCreateLabelRequest) (*CreateL
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -104,7 +104,7 @@ func (a *LabelsApiService) CreateLabelExecute(r ApiCreateLabelRequest) (*CreateL
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createLabelAlphaInput
+	localVarPostBody = r.createLabelV1Input
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -242,7 +242,7 @@ func (a *LabelsApiService) DeleteLabelExecute(r ApiDeleteLabelRequest) (*DeleteL
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -370,7 +370,7 @@ func (a *LabelsApiService) ListLabelsExecute(r ApiListLabelsRequest) (*ListLabel
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

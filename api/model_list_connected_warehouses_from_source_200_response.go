@@ -17,7 +17,7 @@ import (
 
 // ListConnectedWarehousesFromSource200Response struct for ListConnectedWarehousesFromSource200Response
 type ListConnectedWarehousesFromSource200Response struct {
-	Data *ListConnectedWarehousesFromSourceAlphaOutput `json:"data,omitempty"`
+	Data *ListConnectedWarehousesFromSourceV1Output `json:"data,omitempty"`
 }
 
 // NewListConnectedWarehousesFromSource200Response instantiates a new ListConnectedWarehousesFromSource200Response object
@@ -38,9 +38,9 @@ func NewListConnectedWarehousesFromSource200ResponseWithDefaults() *ListConnecte
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *ListConnectedWarehousesFromSource200Response) GetData() ListConnectedWarehousesFromSourceAlphaOutput {
+func (o *ListConnectedWarehousesFromSource200Response) GetData() ListConnectedWarehousesFromSourceV1Output {
 	if o == nil || o.Data == nil {
-		var ret ListConnectedWarehousesFromSourceAlphaOutput
+		var ret ListConnectedWarehousesFromSourceV1Output
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *ListConnectedWarehousesFromSource200Response) GetData() ListConnectedWa
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListConnectedWarehousesFromSource200Response) GetDataOk() (*ListConnectedWarehousesFromSourceAlphaOutput, bool) {
+func (o *ListConnectedWarehousesFromSource200Response) GetDataOk() (*ListConnectedWarehousesFromSourceV1Output, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *ListConnectedWarehousesFromSource200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given ListConnectedWarehousesFromSourceAlphaOutput and assigns it to the Data field.
-func (o *ListConnectedWarehousesFromSource200Response) SetData(v ListConnectedWarehousesFromSourceAlphaOutput) {
+// SetData gets a reference to the given ListConnectedWarehousesFromSourceV1Output and assigns it to the Data field.
+func (o *ListConnectedWarehousesFromSource200Response) SetData(v ListConnectedWarehousesFromSourceV1Output) {
 	o.Data = &v
 }
 

@@ -24,14 +24,14 @@ type CreateWarehouseV1Input struct {
 	// Enable to allow this Warehouse to receive data. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty"`
 	// A key-value object that contains instance-specific settings for a Warehouse.  Different kinds of Warehouses require different settings. The required and optional settings for a Warehouse are described in the `options` object of the associated Warehouse metadata.  You can find the full list of Warehouse metadata and related settings information in the `/catalog/warehouses` endpoint.
-	Settings ModelMap `json:"settings"`
+	Settings NullableModelMap `json:"settings"`
 }
 
 // NewCreateWarehouseV1Input instantiates a new CreateWarehouseV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateWarehouseV1Input(metadataId string, settings ModelMap) *CreateWarehouseV1Input {
+func NewCreateWarehouseV1Input(metadataId string, settings NullableModelMap) *CreateWarehouseV1Input {
 	this := CreateWarehouseV1Input{}
 	this.MetadataId = metadataId
 	this.Settings = settings
@@ -135,27 +135,29 @@ func (o *CreateWarehouseV1Input) SetEnabled(v bool) {
 }
 
 // GetSettings returns the Settings field value
+// If the value is explicit nil, the zero value for ModelMap will be returned
 func (o *CreateWarehouseV1Input) GetSettings() ModelMap {
-	if o == nil {
+	if o == nil || o.Settings.Get() == nil {
 		var ret ModelMap
 		return ret
 	}
 
-	return o.Settings
+	return *o.Settings.Get()
 }
 
 // GetSettingsOk returns a tuple with the Settings field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateWarehouseV1Input) GetSettingsOk() (*ModelMap, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Settings, true
+	return o.Settings.Get(), o.Settings.IsSet()
 }
 
 // SetSettings sets field value
 func (o *CreateWarehouseV1Input) SetSettings(v ModelMap) {
-	o.Settings = v
+	o.Settings.Set(&v)
 }
 
 func (o CreateWarehouseV1Input) MarshalJSON() ([]byte, error) {
@@ -170,7 +172,7 @@ func (o CreateWarehouseV1Input) MarshalJSON() ([]byte, error) {
 		toSerialize["enabled"] = o.Enabled
 	}
 	if true {
-		toSerialize["settings"] = o.Settings
+		toSerialize["settings"] = o.Settings.Get()
 	}
 	return json.Marshal(toSerialize)
 }

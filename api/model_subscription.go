@@ -30,7 +30,7 @@ type Subscription struct {
 	// Is the subscription enabled.
 	Enabled bool `json:"enabled"`
 	// The customer settings for action fields.
-	Settings ModelMap `json:"settings"`
+	Settings NullableModelMap `json:"settings"`
 	// FQL string that describes what events should trigger a Destination action.
 	Trigger string `json:"trigger"`
 }
@@ -39,7 +39,7 @@ type Subscription struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSubscription(id string, name string, actionId string, actionSlug string, destinationId string, enabled bool, settings ModelMap, trigger string) *Subscription {
+func NewSubscription(id string, name string, actionId string, actionSlug string, destinationId string, enabled bool, settings NullableModelMap, trigger string) *Subscription {
 	this := Subscription{}
 	this.Id = id
 	this.Name = name
@@ -205,27 +205,29 @@ func (o *Subscription) SetEnabled(v bool) {
 }
 
 // GetSettings returns the Settings field value
+// If the value is explicit nil, the zero value for ModelMap will be returned
 func (o *Subscription) GetSettings() ModelMap {
-	if o == nil {
+	if o == nil || o.Settings.Get() == nil {
 		var ret ModelMap
 		return ret
 	}
 
-	return o.Settings
+	return *o.Settings.Get()
 }
 
 // GetSettingsOk returns a tuple with the Settings field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Subscription) GetSettingsOk() (*ModelMap, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Settings, true
+	return o.Settings.Get(), o.Settings.IsSet()
 }
 
 // SetSettings sets field value
 func (o *Subscription) SetSettings(v ModelMap) {
-	o.Settings = v
+	o.Settings.Set(&v)
 }
 
 // GetTrigger returns the Trigger field value
@@ -273,7 +275,7 @@ func (o Subscription) MarshalJSON() ([]byte, error) {
 		toSerialize["enabled"] = o.Enabled
 	}
 	if true {
-		toSerialize["settings"] = o.Settings
+		toSerialize["settings"] = o.Settings.Get()
 	}
 	if true {
 		toSerialize["trigger"] = o.Trigger

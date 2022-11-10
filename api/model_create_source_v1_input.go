@@ -24,7 +24,7 @@ type CreateSourceV1Input struct {
 	// The id of the Source metadata from which this instance of the Source derives.  All Source metadata is available under `/catalog/sources`.
 	MetadataId string `json:"metadataId"`
 	// A key-value object that contains instance-specific settings for the Source.
-	Settings *ModelMap `json:"settings,omitempty"`
+	Settings NullableModelMap `json:"settings,omitempty"`
 }
 
 // NewCreateSourceV1Input instantiates a new CreateSourceV1Input object
@@ -119,36 +119,46 @@ func (o *CreateSourceV1Input) SetMetadataId(v string) {
 	o.MetadataId = v
 }
 
-// GetSettings returns the Settings field value if set, zero value otherwise.
+// GetSettings returns the Settings field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CreateSourceV1Input) GetSettings() ModelMap {
-	if o == nil || o.Settings == nil {
+	if o == nil || o.Settings.Get() == nil {
 		var ret ModelMap
 		return ret
 	}
-	return *o.Settings
+	return *o.Settings.Get()
 }
 
 // GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateSourceV1Input) GetSettingsOk() (*ModelMap, bool) {
-	if o == nil || o.Settings == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Settings, true
+	return o.Settings.Get(), o.Settings.IsSet()
 }
 
 // HasSettings returns a boolean if a field has been set.
 func (o *CreateSourceV1Input) HasSettings() bool {
-	if o != nil && o.Settings != nil {
+	if o != nil && o.Settings.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSettings gets a reference to the given ModelMap and assigns it to the Settings field.
+// SetSettings gets a reference to the given NullableModelMap and assigns it to the Settings field.
 func (o *CreateSourceV1Input) SetSettings(v ModelMap) {
-	o.Settings = &v
+	o.Settings.Set(&v)
+}
+// SetSettingsNil sets the value for Settings to be an explicit nil
+func (o *CreateSourceV1Input) SetSettingsNil() {
+	o.Settings.Set(nil)
+}
+
+// UnsetSettings ensures that no value is present for Settings, not even an explicit nil
+func (o *CreateSourceV1Input) UnsetSettings() {
+	o.Settings.Unset()
 }
 
 func (o CreateSourceV1Input) MarshalJSON() ([]byte, error) {
@@ -162,8 +172,8 @@ func (o CreateSourceV1Input) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["metadataId"] = o.MetadataId
 	}
-	if o.Settings != nil {
-		toSerialize["settings"] = o.Settings
+	if o.Settings.IsSet() {
+		toSerialize["settings"] = o.Settings.Get()
 	}
 	return json.Marshal(toSerialize)
 }

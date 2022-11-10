@@ -29,7 +29,7 @@ type ApiListRolesRequest struct {
 	pagination *PaginationInput
 }
 
-// Pagination for roles.  This parameter exists in alpha.
+// Pagination for roles.  This parameter exists in v1.
 func (r ApiListRolesRequest) Pagination(pagination PaginationInput) ApiListRolesRequest {
 	r.pagination = &pagination
 	return r
@@ -89,7 +89,7 @@ func (a *IAMRolesApiService) ListRolesExecute(r ApiListRolesRequest) (*ListRoles
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
