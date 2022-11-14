@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 32.0.4
 Contact: friends@segment.com
 */
 
@@ -84,7 +84,7 @@ func (a *DestinationsApiService) CreateDestinationExecute(r ApiCreateDestination
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -93,7 +93,7 @@ func (a *DestinationsApiService) CreateDestinationExecute(r ApiCreateDestination
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -378,7 +378,7 @@ func (a *DestinationsApiService) DeleteDestinationExecute(r ApiDeleteDestination
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -514,7 +514,7 @@ func (a *DestinationsApiService) GetDestinationExecute(r ApiGetDestinationReques
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -733,25 +733,25 @@ type ApiListDeliveryMetricsSummaryFromDestinationRequest struct {
 	granularity *string
 }
 
-// The id of the Source linked to the Destination.  Config API note: analogous to &#x60;parent&#x60;.  This parameter exists in alpha.
+// The id of the Source linked to the Destination.  Config API note: analogous to &#x60;parent&#x60;.  This parameter exists in beta.
 func (r ApiListDeliveryMetricsSummaryFromDestinationRequest) SourceId(sourceId string) ApiListDeliveryMetricsSummaryFromDestinationRequest {
 	r.sourceId = &sourceId
 	return r
 }
 
-// Filter events that happened after this time.  Defaults to: - 1 hour ago if granularity is &#x60;MINUTE&#x60;. - 7 days ago if granularity is &#x60;HOUR&#x60;. - 30 days ago if granularity is &#x60;DAY&#x60;.  This parameter exists in alpha.
+// Filter events that happened after this time.  Defaults to: - 1 hour ago if granularity is &#x60;MINUTE&#x60;. - 7 days ago if granularity is &#x60;HOUR&#x60;. - 30 days ago if granularity is &#x60;DAY&#x60;.  This parameter exists in beta.
 func (r ApiListDeliveryMetricsSummaryFromDestinationRequest) StartTime(startTime string) ApiListDeliveryMetricsSummaryFromDestinationRequest {
 	r.startTime = &startTime
 	return r
 }
 
-// Filter events that happened before this time. Defaults to now if not set.  This parameter exists in alpha.
+// Filter events that happened before this time. Defaults to now if not set.  This parameter exists in beta.
 func (r ApiListDeliveryMetricsSummaryFromDestinationRequest) EndTime(endTime string) ApiListDeliveryMetricsSummaryFromDestinationRequest {
 	r.endTime = &endTime
 	return r
 }
 
-// The granularity to filter metrics to. Either &#x60;MINUTE&#x60;, &#x60;HOUR&#x60; or &#x60;DAY&#x60;.  Defaults to &#x60;MINUTE&#x60; if not set.  This parameter exists in alpha.
+// The granularity to filter metrics to. Either &#x60;MINUTE&#x60;, &#x60;HOUR&#x60; or &#x60;DAY&#x60;.  Defaults to &#x60;MINUTE&#x60; if not set.  This parameter exists in beta.
 func (r ApiListDeliveryMetricsSummaryFromDestinationRequest) Granularity(granularity string) ApiListDeliveryMetricsSummaryFromDestinationRequest {
 	r.granularity = &granularity
 	return r
@@ -851,7 +851,7 @@ func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestinationExecut
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -930,7 +930,7 @@ type ApiListDestinationsRequest struct {
 	pagination *PaginationInput
 }
 
-// Required pagination params for the request.  This parameter exists in alpha.
+// Required pagination params for the request.  This parameter exists in v1.
 func (r ApiListDestinationsRequest) Pagination(pagination PaginationInput) ApiListDestinationsRequest {
 	r.pagination = &pagination
 	return r
@@ -990,7 +990,7 @@ func (a *DestinationsApiService) ListDestinationsExecute(r ApiListDestinationsRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1415,7 +1415,7 @@ func (a *DestinationsApiService) UpdateDestinationExecute(r ApiUpdateDestination
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1424,7 +1424,7 @@ func (a *DestinationsApiService) UpdateDestinationExecute(r ApiUpdateDestination
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

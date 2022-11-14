@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 32.0.4
 Contact: friends@segment.com
 */
 
@@ -17,7 +17,7 @@ import (
 
 // ReplaceLabelsInSource200Response struct for ReplaceLabelsInSource200Response
 type ReplaceLabelsInSource200Response struct {
-	Data *ReplaceLabelsInSourceAlphaOutput `json:"data,omitempty"`
+	Data *ReplaceLabelsInSourceV1Output `json:"data,omitempty"`
 }
 
 // NewReplaceLabelsInSource200Response instantiates a new ReplaceLabelsInSource200Response object
@@ -38,9 +38,9 @@ func NewReplaceLabelsInSource200ResponseWithDefaults() *ReplaceLabelsInSource200
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *ReplaceLabelsInSource200Response) GetData() ReplaceLabelsInSourceAlphaOutput {
+func (o *ReplaceLabelsInSource200Response) GetData() ReplaceLabelsInSourceV1Output {
 	if o == nil || o.Data == nil {
-		var ret ReplaceLabelsInSourceAlphaOutput
+		var ret ReplaceLabelsInSourceV1Output
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *ReplaceLabelsInSource200Response) GetData() ReplaceLabelsInSourceAlphaO
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReplaceLabelsInSource200Response) GetDataOk() (*ReplaceLabelsInSourceAlphaOutput, bool) {
+func (o *ReplaceLabelsInSource200Response) GetDataOk() (*ReplaceLabelsInSourceV1Output, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *ReplaceLabelsInSource200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given ReplaceLabelsInSourceAlphaOutput and assigns it to the Data field.
-func (o *ReplaceLabelsInSource200Response) SetData(v ReplaceLabelsInSourceAlphaOutput) {
+// SetData gets a reference to the given ReplaceLabelsInSourceV1Output and assigns it to the Data field.
+func (o *ReplaceLabelsInSource200Response) SetData(v ReplaceLabelsInSourceV1Output) {
 	o.Data = &v
 }
 

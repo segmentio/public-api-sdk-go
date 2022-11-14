@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 32.0.4
 Contact: friends@segment.com
 */
 
@@ -17,7 +17,7 @@ import (
 
 // DeleteSource200Response struct for DeleteSource200Response
 type DeleteSource200Response struct {
-	Data *DeleteSourceAlphaOutput `json:"data,omitempty"`
+	Data *DeleteSourceV1Output `json:"data,omitempty"`
 }
 
 // NewDeleteSource200Response instantiates a new DeleteSource200Response object
@@ -38,9 +38,9 @@ func NewDeleteSource200ResponseWithDefaults() *DeleteSource200Response {
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *DeleteSource200Response) GetData() DeleteSourceAlphaOutput {
+func (o *DeleteSource200Response) GetData() DeleteSourceV1Output {
 	if o == nil || o.Data == nil {
-		var ret DeleteSourceAlphaOutput
+		var ret DeleteSourceV1Output
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *DeleteSource200Response) GetData() DeleteSourceAlphaOutput {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DeleteSource200Response) GetDataOk() (*DeleteSourceAlphaOutput, bool) {
+func (o *DeleteSource200Response) GetDataOk() (*DeleteSourceV1Output, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *DeleteSource200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given DeleteSourceAlphaOutput and assigns it to the Data field.
-func (o *DeleteSource200Response) SetData(v DeleteSourceAlphaOutput) {
+// SetData gets a reference to the given DeleteSourceV1Output and assigns it to the Data field.
+func (o *DeleteSource200Response) SetData(v DeleteSourceV1Output) {
 	o.Data = &v
 }
 

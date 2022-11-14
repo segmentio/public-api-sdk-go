@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 32.0.4
 Contact: friends@segment.com
 */
 
@@ -91,7 +91,7 @@ func (a *IAMUsersApiService) AddPermissionsToUserExecute(r ApiAddPermissionsToUs
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -100,7 +100,7 @@ func (a *IAMUsersApiService) AddPermissionsToUserExecute(r ApiAddPermissionsToUs
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -242,7 +242,7 @@ func (a *IAMUsersApiService) CreateInvitesExecute(r ApiCreateInvitesRequest) (*C
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -251,7 +251,7 @@ func (a *IAMUsersApiService) CreateInvitesExecute(r ApiCreateInvitesRequest) (*C
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -332,7 +332,7 @@ type ApiDeleteInvitesRequest struct {
 	emails *[]string
 }
 
-// The list of emails to delete invites for.  This parameter exists in alpha.
+// The list of emails to delete invites for.  This parameter exists in v1.
 func (r ApiDeleteInvitesRequest) Emails(emails []string) ApiDeleteInvitesRequest {
 	r.emails = &emails
 	return r
@@ -400,7 +400,7 @@ func (a *IAMUsersApiService) DeleteInvitesExecute(r ApiDeleteInvitesRequest) (*D
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -479,7 +479,7 @@ type ApiDeleteUsersRequest struct {
 	userIds *[]string
 }
 
-// The ids of the users to remove.  This parameter exists in alpha.
+// The ids of the users to remove.  This parameter exists in v1.
 func (r ApiDeleteUsersRequest) UserIds(userIds []string) ApiDeleteUsersRequest {
 	r.userIds = &userIds
 	return r
@@ -547,7 +547,7 @@ func (a *IAMUsersApiService) DeleteUsersExecute(r ApiDeleteUsersRequest) (*Delet
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -679,7 +679,7 @@ func (a *IAMUsersApiService) GetUserExecute(r ApiGetUserRequest) (*GetUser200Res
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -758,7 +758,7 @@ type ApiListInvitesRequest struct {
 	pagination *PaginationInput
 }
 
-// Defines the pagination parameters.  This parameter exists in alpha.
+// Defines the pagination parameters.  This parameter exists in v1.
 func (r ApiListInvitesRequest) Pagination(pagination PaginationInput) ApiListInvitesRequest {
 	r.pagination = &pagination
 	return r
@@ -822,7 +822,7 @@ func (a *IAMUsersApiService) ListInvitesExecute(r ApiListInvitesRequest) (*ListI
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -902,7 +902,7 @@ type ApiListUserGroupsFromUserRequest struct {
 	pagination *PaginationInput
 }
 
-// Pagination for groups.  This parameter exists in alpha.
+// Pagination for groups.  This parameter exists in v1.
 func (r ApiListUserGroupsFromUserRequest) Pagination(pagination PaginationInput) ApiListUserGroupsFromUserRequest {
 	r.pagination = &pagination
 	return r
@@ -965,7 +965,7 @@ func (a *IAMUsersApiService) ListUserGroupsFromUserExecute(r ApiListUserGroupsFr
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1044,7 +1044,7 @@ type ApiListUsersRequest struct {
 	pagination *PaginationInput
 }
 
-// Pagination for users.  This parameter exists in alpha.
+// Pagination for users.  This parameter exists in v1.
 func (r ApiListUsersRequest) Pagination(pagination PaginationInput) ApiListUsersRequest {
 	r.pagination = &pagination
 	return r
@@ -1104,7 +1104,7 @@ func (a *IAMUsersApiService) ListUsersExecute(r ApiListUsersRequest) (*ListUsers
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1244,7 +1244,7 @@ func (a *IAMUsersApiService) ReplacePermissionsForUserExecute(r ApiReplacePermis
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1253,7 +1253,7 @@ func (a *IAMUsersApiService) ReplacePermissionsForUserExecute(r ApiReplacePermis
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
