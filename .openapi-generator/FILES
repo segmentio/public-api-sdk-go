@@ -364,7 +364,6 @@ docs/PreviewDestinationFilterV1.md
 docs/PreviewDestinationFilterV1Input.md
 docs/PreviewDestinationFilterV1Output.md
 docs/PropertyRenameBeta.md
-docs/PropertyValueTransformationBeta.md
 docs/Regulation.md
 docs/RegulationListEntryV1.md
 docs/RemoveFilterFromDestination200Response.md
@@ -842,7 +841,6 @@ model_preview_destination_filter_v1.go
 model_preview_destination_filter_v1_input.go
 model_preview_destination_filter_v1_output.go
 model_property_rename_beta.go
-model_property_value_transformation_beta.go
 model_regulation.go
 model_regulation_list_entry_v1.go
 model_remove_filter_from_destination_200_response.go

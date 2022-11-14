@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 32.0.4
 Contact: friends@segment.com
 */
 
@@ -17,7 +17,7 @@ import (
 
 // CreateSource200Response1 struct for CreateSource200Response1
 type CreateSource200Response1 struct {
-	Data *CreateSourceV1Output `json:"data,omitempty"`
+	Data *CreateSourceAlphaOutput `json:"data,omitempty"`
 }
 
 // NewCreateSource200Response1 instantiates a new CreateSource200Response1 object
@@ -38,9 +38,9 @@ func NewCreateSource200Response1WithDefaults() *CreateSource200Response1 {
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *CreateSource200Response1) GetData() CreateSourceV1Output {
+func (o *CreateSource200Response1) GetData() CreateSourceAlphaOutput {
 	if o == nil || o.Data == nil {
-		var ret CreateSourceV1Output
+		var ret CreateSourceAlphaOutput
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *CreateSource200Response1) GetData() CreateSourceV1Output {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateSource200Response1) GetDataOk() (*CreateSourceV1Output, bool) {
+func (o *CreateSource200Response1) GetDataOk() (*CreateSourceAlphaOutput, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *CreateSource200Response1) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given CreateSourceV1Output and assigns it to the Data field.
-func (o *CreateSource200Response1) SetData(v CreateSourceV1Output) {
+// SetData gets a reference to the given CreateSourceAlphaOutput and assigns it to the Data field.
+func (o *CreateSource200Response1) SetData(v CreateSourceAlphaOutput) {
 	o.Data = &v
 }
 

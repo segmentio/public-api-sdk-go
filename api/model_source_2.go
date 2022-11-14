@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 32.0.4
 Contact: friends@segment.com
 */
 
@@ -31,7 +31,7 @@ type Source2 struct {
 	// The write keys used to send data from the Source. This field is left empty when the current token does not have the 'source admin' permission.
 	WriteKeys []string `json:"writeKeys"`
 	// The settings associated with the Source.
-	Settings *ModelMap `json:"settings,omitempty"`
+	Settings NullableModelMap `json:"settings,omitempty"`
 	// A list of labels applied to the Source.
 	Labels []LabelV1 `json:"labels"`
 }
@@ -236,36 +236,46 @@ func (o *Source2) SetWriteKeys(v []string) {
 	o.WriteKeys = v
 }
 
-// GetSettings returns the Settings field value if set, zero value otherwise.
+// GetSettings returns the Settings field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Source2) GetSettings() ModelMap {
-	if o == nil || o.Settings == nil {
+	if o == nil || o.Settings.Get() == nil {
 		var ret ModelMap
 		return ret
 	}
-	return *o.Settings
+	return *o.Settings.Get()
 }
 
 // GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Source2) GetSettingsOk() (*ModelMap, bool) {
-	if o == nil || o.Settings == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Settings, true
+	return o.Settings.Get(), o.Settings.IsSet()
 }
 
 // HasSettings returns a boolean if a field has been set.
 func (o *Source2) HasSettings() bool {
-	if o != nil && o.Settings != nil {
+	if o != nil && o.Settings.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSettings gets a reference to the given ModelMap and assigns it to the Settings field.
+// SetSettings gets a reference to the given NullableModelMap and assigns it to the Settings field.
 func (o *Source2) SetSettings(v ModelMap) {
-	o.Settings = &v
+	o.Settings.Set(&v)
+}
+// SetSettingsNil sets the value for Settings to be an explicit nil
+func (o *Source2) SetSettingsNil() {
+	o.Settings.Set(nil)
+}
+
+// UnsetSettings ensures that no value is present for Settings, not even an explicit nil
+func (o *Source2) UnsetSettings() {
+	o.Settings.Unset()
 }
 
 // GetLabels returns the Labels field value
@@ -315,8 +325,8 @@ func (o Source2) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["writeKeys"] = o.WriteKeys
 	}
-	if o.Settings != nil {
-		toSerialize["settings"] = o.Settings
+	if o.Settings.IsSet() {
+		toSerialize["settings"] = o.Settings.Get()
 	}
 	if true {
 		toSerialize["labels"] = o.Labels

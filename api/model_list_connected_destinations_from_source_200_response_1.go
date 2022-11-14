@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 32.0.4
 Contact: friends@segment.com
 */
 
@@ -17,7 +17,7 @@ import (
 
 // ListConnectedDestinationsFromSource200Response1 struct for ListConnectedDestinationsFromSource200Response1
 type ListConnectedDestinationsFromSource200Response1 struct {
-	Data *ListConnectedDestinationsFromSourceV1Output `json:"data,omitempty"`
+	Data *ListConnectedDestinationsFromSourceAlphaOutput `json:"data,omitempty"`
 }
 
 // NewListConnectedDestinationsFromSource200Response1 instantiates a new ListConnectedDestinationsFromSource200Response1 object
@@ -38,9 +38,9 @@ func NewListConnectedDestinationsFromSource200Response1WithDefaults() *ListConne
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *ListConnectedDestinationsFromSource200Response1) GetData() ListConnectedDestinationsFromSourceV1Output {
+func (o *ListConnectedDestinationsFromSource200Response1) GetData() ListConnectedDestinationsFromSourceAlphaOutput {
 	if o == nil || o.Data == nil {
-		var ret ListConnectedDestinationsFromSourceV1Output
+		var ret ListConnectedDestinationsFromSourceAlphaOutput
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *ListConnectedDestinationsFromSource200Response1) GetData() ListConnecte
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListConnectedDestinationsFromSource200Response1) GetDataOk() (*ListConnectedDestinationsFromSourceV1Output, bool) {
+func (o *ListConnectedDestinationsFromSource200Response1) GetDataOk() (*ListConnectedDestinationsFromSourceAlphaOutput, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *ListConnectedDestinationsFromSource200Response1) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given ListConnectedDestinationsFromSourceV1Output and assigns it to the Data field.
-func (o *ListConnectedDestinationsFromSource200Response1) SetData(v ListConnectedDestinationsFromSourceV1Output) {
+// SetData gets a reference to the given ListConnectedDestinationsFromSourceAlphaOutput and assigns it to the Data field.
+func (o *ListConnectedDestinationsFromSource200Response1) SetData(v ListConnectedDestinationsFromSourceAlphaOutput) {
 	o.Data = &v
 }
 

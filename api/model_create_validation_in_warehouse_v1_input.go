@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 32.0.4
 Contact: friends@segment.com
 */
 
@@ -20,14 +20,14 @@ type CreateValidationInWarehouseV1Input struct {
 	// The id of the Warehouse metadata type.
 	MetadataId string `json:"metadataId"`
 	// The settings to check.
-	Settings ModelMap `json:"settings"`
+	Settings NullableModelMap `json:"settings"`
 }
 
 // NewCreateValidationInWarehouseV1Input instantiates a new CreateValidationInWarehouseV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateValidationInWarehouseV1Input(metadataId string, settings ModelMap) *CreateValidationInWarehouseV1Input {
+func NewCreateValidationInWarehouseV1Input(metadataId string, settings NullableModelMap) *CreateValidationInWarehouseV1Input {
 	this := CreateValidationInWarehouseV1Input{}
 	this.MetadataId = metadataId
 	this.Settings = settings
@@ -67,27 +67,29 @@ func (o *CreateValidationInWarehouseV1Input) SetMetadataId(v string) {
 }
 
 // GetSettings returns the Settings field value
+// If the value is explicit nil, the zero value for ModelMap will be returned
 func (o *CreateValidationInWarehouseV1Input) GetSettings() ModelMap {
-	if o == nil {
+	if o == nil || o.Settings.Get() == nil {
 		var ret ModelMap
 		return ret
 	}
 
-	return o.Settings
+	return *o.Settings.Get()
 }
 
 // GetSettingsOk returns a tuple with the Settings field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CreateValidationInWarehouseV1Input) GetSettingsOk() (*ModelMap, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Settings, true
+	return o.Settings.Get(), o.Settings.IsSet()
 }
 
 // SetSettings sets field value
 func (o *CreateValidationInWarehouseV1Input) SetSettings(v ModelMap) {
-	o.Settings = v
+	o.Settings.Set(&v)
 }
 
 func (o CreateValidationInWarehouseV1Input) MarshalJSON() ([]byte, error) {
@@ -96,7 +98,7 @@ func (o CreateValidationInWarehouseV1Input) MarshalJSON() ([]byte, error) {
 		toSerialize["metadataId"] = o.MetadataId
 	}
 	if true {
-		toSerialize["settings"] = o.Settings
+		toSerialize["settings"] = o.Settings.Get()
 	}
 	return json.Marshal(toSerialize)
 }

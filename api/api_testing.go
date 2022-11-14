@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.2
+API version: 32.0.4
 Contact: friends@segment.com
 */
 
@@ -34,37 +34,37 @@ type ApiEchoRequest struct {
 	statusCode *float32
 }
 
-// Sets the response &#x60;message&#x60; field. The response contains this field&#39;s entry.  This parameter exists in v1.
+// Sets the response &#x60;message&#x60; field. The response contains this field&#39;s entry.  This parameter exists in alpha.
 func (r ApiEchoRequest) Message(message string) ApiEchoRequest {
 	r.message = &message
 	return r
 }
 
-// The desired response delay, in milliseconds.  This parameter exists in v1.
+// The desired response delay, in milliseconds.  This parameter exists in alpha.
 func (r ApiEchoRequest) Delay(delay float32) ApiEchoRequest {
 	r.delay = &delay
 	return r
 }
 
-// If &#x60;true&#x60;, returns an HTTP &#x60;4xx&#x60; error that contains the string in &#x60;message&#x60;.  This parameter exists in v1.
+// If &#x60;true&#x60;, returns an HTTP &#x60;4xx&#x60; error that contains the string in &#x60;message&#x60;.  This parameter exists in alpha.
 func (r ApiEchoRequest) TriggerError(triggerError bool) ApiEchoRequest {
 	r.triggerError = &triggerError
 	return r
 }
 
-// If &#x60;true&#x60;, returns an HTTP &#x60;4xx&#x60; error that contains the value of the &#x60;message&#x60; field in the error message array.  This has no effect if the request sets &#x60;triggerError&#x60;.  This parameter exists in v1.
+// If &#x60;true&#x60;, returns an HTTP &#x60;4xx&#x60; error that contains the value of the &#x60;message&#x60; field in the error message array.  This has no effect if the request sets &#x60;triggerError&#x60;.  This parameter exists in alpha.
 func (r ApiEchoRequest) TriggerMultipleErrors(triggerMultipleErrors bool) ApiEchoRequest {
 	r.triggerMultipleErrors = &triggerMultipleErrors
 	return r
 }
 
-// If &#x60;true&#x60;, triggers a &#x60;500&#x60; error.  This has no effect if the request sets either &#x60;triggerError&#x60; or &#x60;triggerMultipleErrors&#x60;.  This parameter exists in v1.
+// If &#x60;true&#x60;, triggers a &#x60;500&#x60; error.  This has no effect if the request sets either &#x60;triggerError&#x60; or &#x60;triggerMultipleErrors&#x60;.  This parameter exists in alpha.
 func (r ApiEchoRequest) TriggerUnexpectedError(triggerUnexpectedError bool) ApiEchoRequest {
 	r.triggerUnexpectedError = &triggerUnexpectedError
 	return r
 }
 
-// Sets the HTTP status code to return.  This parameter exists in v1.
+// Sets the HTTP status code to return.  This parameter exists in alpha.
 func (r ApiEchoRequest) StatusCode(statusCode float32) ApiEchoRequest {
 	r.statusCode = &statusCode
 	return r
@@ -139,7 +139,7 @@ func (a *TestingApiService) EchoExecute(r ApiEchoRequest) (*Echo200Response, *ht
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/vnd.segment.v1+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1alpha+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
