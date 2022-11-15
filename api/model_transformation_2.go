@@ -33,6 +33,8 @@ type Transformation2 struct {
 	NewEventName *string `json:"newEventName,omitempty"`
 	// Optional array for renaming properties collected by your events.
 	PropertyRenames []PropertyRenameBeta `json:"propertyRenames,omitempty"`
+	// Optional array for transforming properties and values collected by your events. Limited to 10 properties.
+	PropertyValueTransformations []PropertyValueTransformationBeta `json:"propertyValueTransformations,omitempty"`
 }
 
 // NewTransformation2 instantiates a new Transformation2 object
@@ -273,6 +275,38 @@ func (o *Transformation2) SetPropertyRenames(v []PropertyRenameBeta) {
 	o.PropertyRenames = v
 }
 
+// GetPropertyValueTransformations returns the PropertyValueTransformations field value if set, zero value otherwise.
+func (o *Transformation2) GetPropertyValueTransformations() []PropertyValueTransformationBeta {
+	if o == nil || o.PropertyValueTransformations == nil {
+		var ret []PropertyValueTransformationBeta
+		return ret
+	}
+	return o.PropertyValueTransformations
+}
+
+// GetPropertyValueTransformationsOk returns a tuple with the PropertyValueTransformations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transformation2) GetPropertyValueTransformationsOk() ([]PropertyValueTransformationBeta, bool) {
+	if o == nil || o.PropertyValueTransformations == nil {
+		return nil, false
+	}
+	return o.PropertyValueTransformations, true
+}
+
+// HasPropertyValueTransformations returns a boolean if a field has been set.
+func (o *Transformation2) HasPropertyValueTransformations() bool {
+	if o != nil && o.PropertyValueTransformations != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPropertyValueTransformations gets a reference to the given []PropertyValueTransformationBeta and assigns it to the PropertyValueTransformations field.
+func (o *Transformation2) SetPropertyValueTransformations(v []PropertyValueTransformationBeta) {
+	o.PropertyValueTransformations = v
+}
+
 func (o Transformation2) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -298,6 +332,9 @@ func (o Transformation2) MarshalJSON() ([]byte, error) {
 	}
 	if o.PropertyRenames != nil {
 		toSerialize["propertyRenames"] = o.PropertyRenames
+	}
+	if o.PropertyValueTransformations != nil {
+		toSerialize["propertyValueTransformations"] = o.PropertyValueTransformations
 	}
 	return json.Marshal(toSerialize)
 }
