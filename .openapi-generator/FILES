@@ -107,6 +107,8 @@ docs/CreateTrackingPlanV1Output.md
 docs/CreateTransformation200Response.md
 docs/CreateTransformationBetaInput.md
 docs/CreateTransformationBetaOutput.md
+docs/CreateTransformationV1Input.md
+docs/CreateTransformationV1Output.md
 docs/CreateUserGroup200Response.md
 docs/CreateUserGroupV1Input.md
 docs/CreateUserGroupV1Output.md
@@ -138,7 +140,9 @@ docs/DeleteSourceV1Output.md
 docs/DeleteTrackingPlan200Response.md
 docs/DeleteTrackingPlanV1Output.md
 docs/DeleteTransformation200Response.md
+docs/DeleteTransformationBetaInput.md
 docs/DeleteTransformationBetaOutput.md
+docs/DeleteTransformationV1Output.md
 docs/DeleteUserGroup200Response.md
 docs/DeleteUserGroupV1Output.md
 docs/DeleteUsers200Response.md
@@ -239,7 +243,9 @@ docs/GetSubscriptionRequest.md
 docs/GetTrackingPlan200Response.md
 docs/GetTrackingPlanV1Output.md
 docs/GetTransformation200Response.md
+docs/GetTransformationBetaInput.md
 docs/GetTransformationBetaOutput.md
+docs/GetTransformationV1Output.md
 docs/GetUser200Response.md
 docs/GetUserGroup200Response.md
 docs/GetUserGroupV1Output.md
@@ -325,7 +331,9 @@ docs/ListSyncsFromWarehouseV1Output.md
 docs/ListTrackingPlans200Response.md
 docs/ListTrackingPlansV1Output.md
 docs/ListTransformations200Response.md
+docs/ListTransformationsBetaInput.md
 docs/ListTransformationsBetaOutput.md
+docs/ListTransformationsV1Output.md
 docs/ListUserGroups200Response.md
 docs/ListUserGroupsFromUser200Response.md
 docs/ListUserGroupsFromUserV1Output.md
@@ -354,6 +362,7 @@ docs/MinimalUserV1.md
 docs/MonthlyTrackedUsersApi.md
 docs/MtuSnapshotV1.md
 docs/Pagination.md
+docs/Pagination1.md
 docs/PaginationInput.md
 docs/PaginationOutput.md
 docs/PermissionInputV1.md
@@ -364,7 +373,9 @@ docs/PreviewDestinationFilterV1.md
 docs/PreviewDestinationFilterV1Input.md
 docs/PreviewDestinationFilterV1Output.md
 docs/PropertyRenameBeta.md
+docs/PropertyRenameV1.md
 docs/PropertyValueTransformationBeta.md
+docs/PropertyValueTransformationV1.md
 docs/Regulation.md
 docs/RegulationListEntryV1.md
 docs/RemoveFilterFromDestination200Response.md
@@ -451,7 +462,11 @@ docs/TrackingPlansApi.md
 docs/Transformation.md
 docs/Transformation1.md
 docs/Transformation2.md
+docs/Transformation3.md
+docs/Transformation4.md
+docs/Transformation5.md
 docs/TransformationBeta.md
+docs/TransformationV1.md
 docs/TransformationsApi.md
 docs/UpdateDestination200Response.md
 docs/UpdateDestinationV1Input.md
@@ -486,6 +501,8 @@ docs/UpdateTrackingPlanV1Output.md
 docs/UpdateTransformation200Response.md
 docs/UpdateTransformationBetaInput.md
 docs/UpdateTransformationBetaOutput.md
+docs/UpdateTransformationV1Input.md
+docs/UpdateTransformationV1Output.md
 docs/UpdateUserGroup200Response.md
 docs/UpdateUserGroupV1Input.md
 docs/UpdateUserGroupV1Output.md
@@ -595,6 +612,8 @@ model_create_tracking_plan_v1_output.go
 model_create_transformation_200_response.go
 model_create_transformation_beta_input.go
 model_create_transformation_beta_output.go
+model_create_transformation_v1_input.go
+model_create_transformation_v1_output.go
 model_create_user_group_200_response.go
 model_create_user_group_v1_input.go
 model_create_user_group_v1_output.go
@@ -626,7 +645,9 @@ model_delete_source_v1_output.go
 model_delete_tracking_plan_200_response.go
 model_delete_tracking_plan_v1_output.go
 model_delete_transformation_200_response.go
+model_delete_transformation_beta_input.go
 model_delete_transformation_beta_output.go
+model_delete_transformation_v1_output.go
 model_delete_user_group_200_response.go
 model_delete_user_group_v1_output.go
 model_delete_users_200_response.go
@@ -721,7 +742,9 @@ model_get_subscription_request.go
 model_get_tracking_plan_200_response.go
 model_get_tracking_plan_v1_output.go
 model_get_transformation_200_response.go
+model_get_transformation_beta_input.go
 model_get_transformation_beta_output.go
+model_get_transformation_v1_output.go
 model_get_user_200_response.go
 model_get_user_group_200_response.go
 model_get_user_group_v1_output.go
@@ -803,7 +826,9 @@ model_list_syncs_from_warehouse_v1_output.go
 model_list_tracking_plans_200_response.go
 model_list_tracking_plans_v1_output.go
 model_list_transformations_200_response.go
+model_list_transformations_beta_input.go
 model_list_transformations_beta_output.go
+model_list_transformations_v1_output.go
 model_list_user_groups_200_response.go
 model_list_user_groups_from_user_200_response.go
 model_list_user_groups_from_user_v1_output.go
@@ -832,6 +857,7 @@ model_minimal_user_group_v1.go
 model_minimal_user_v1.go
 model_mtu_snapshot_v1.go
 model_pagination.go
+model_pagination_1.go
 model_pagination_input.go
 model_pagination_output.go
 model_permission_input_v1.go
@@ -842,7 +868,9 @@ model_preview_destination_filter_v1.go
 model_preview_destination_filter_v1_input.go
 model_preview_destination_filter_v1_output.go
 model_property_rename_beta.go
+model_property_rename_v1.go
 model_property_value_transformation_beta.go
+model_property_value_transformation_v1.go
 model_regulation.go
 model_regulation_list_entry_v1.go
 model_remove_filter_from_destination_200_response.go
@@ -924,7 +952,11 @@ model_tracking_plan_v1.go
 model_transformation.go
 model_transformation_1.go
 model_transformation_2.go
+model_transformation_3.go
+model_transformation_4.go
+model_transformation_5.go
 model_transformation_beta.go
+model_transformation_v1.go
 model_update_destination_200_response.go
 model_update_destination_v1_input.go
 model_update_destination_v1_output.go
@@ -958,6 +990,8 @@ model_update_tracking_plan_v1_output.go
 model_update_transformation_200_response.go
 model_update_transformation_beta_input.go
 model_update_transformation_beta_output.go
+model_update_transformation_v1_input.go
+model_update_transformation_v1_output.go
 model_update_user_group_200_response.go
 model_update_user_group_v1_input.go
 model_update_user_group_v1_output.go
