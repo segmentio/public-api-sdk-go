@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 33.0.1
+API version: 32.0.4
 Contact: friends@segment.com
 */
 
@@ -17,8 +17,6 @@ import (
 
 // UpdateTransformationBetaInput The input to update a Transformation.
 type UpdateTransformationBetaInput struct {
-	// ID of the Transformation to update.
-	TransformationId string `json:"transformationId"`
 	// The name of the Transformation.
 	Name *string `json:"name,omitempty"`
 	// The optional Source to be associated with the Transformation.
@@ -41,9 +39,8 @@ type UpdateTransformationBetaInput struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateTransformationBetaInput(transformationId string) *UpdateTransformationBetaInput {
+func NewUpdateTransformationBetaInput() *UpdateTransformationBetaInput {
 	this := UpdateTransformationBetaInput{}
-	this.TransformationId = transformationId
 	return &this
 }
 
@@ -53,30 +50,6 @@ func NewUpdateTransformationBetaInput(transformationId string) *UpdateTransforma
 func NewUpdateTransformationBetaInputWithDefaults() *UpdateTransformationBetaInput {
 	this := UpdateTransformationBetaInput{}
 	return &this
-}
-
-// GetTransformationId returns the TransformationId field value
-func (o *UpdateTransformationBetaInput) GetTransformationId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.TransformationId
-}
-
-// GetTransformationIdOk returns a tuple with the TransformationId field value
-// and a boolean to check if the value has been set.
-func (o *UpdateTransformationBetaInput) GetTransformationIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.TransformationId, true
-}
-
-// SetTransformationId sets field value
-func (o *UpdateTransformationBetaInput) SetTransformationId(v string) {
-	o.TransformationId = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -337,9 +310,6 @@ func (o *UpdateTransformationBetaInput) SetPropertyValueTransformations(v []Prop
 
 func (o UpdateTransformationBetaInput) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["transformationId"] = o.TransformationId
-	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
