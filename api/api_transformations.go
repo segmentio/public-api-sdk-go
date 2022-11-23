@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 33.0.3
+API version: 33.0.2
 Contact: friends@segment.com
 */
 
@@ -27,11 +27,11 @@ type TransformationsApiService service
 type ApiCreateTransformationRequest struct {
 	ctx context.Context
 	ApiService *TransformationsApiService
-	createTransformationV1Input *CreateTransformationV1Input
+	createTransformationBetaInput *CreateTransformationBetaInput
 }
 
-func (r ApiCreateTransformationRequest) CreateTransformationV1Input(createTransformationV1Input CreateTransformationV1Input) ApiCreateTransformationRequest {
-	r.createTransformationV1Input = &createTransformationV1Input
+func (r ApiCreateTransformationRequest) CreateTransformationBetaInput(createTransformationBetaInput CreateTransformationBetaInput) ApiCreateTransformationRequest {
+	r.createTransformationBetaInput = &createTransformationBetaInput
 	return r
 }
 
@@ -79,12 +79,12 @@ func (a *TransformationsApiService) CreateTransformationExecute(r ApiCreateTrans
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createTransformationV1Input == nil {
-		return localVarReturnValue, nil, reportError("createTransformationV1Input is required and must be specified")
+	if r.createTransformationBetaInput == nil {
+		return localVarReturnValue, nil, reportError("createTransformationBetaInput is required and must be specified")
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -93,7 +93,7 @@ func (a *TransformationsApiService) CreateTransformationExecute(r ApiCreateTrans
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -101,7 +101,7 @@ func (a *TransformationsApiService) CreateTransformationExecute(r ApiCreateTrans
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createTransformationV1Input
+	localVarPostBody = r.createTransformationBetaInput
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -232,7 +232,7 @@ func (a *TransformationsApiService) DeleteTransformationExecute(r ApiDeleteTrans
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -366,7 +366,7 @@ func (a *TransformationsApiService) GetTransformationExecute(r ApiGetTransformat
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -445,7 +445,7 @@ type ApiListTransformationsRequest struct {
 	pagination *PaginationInput
 }
 
-// Pagination options.  This parameter exists in v1.
+// Pagination options.  This parameter exists in beta.
 func (r ApiListTransformationsRequest) Pagination(pagination PaginationInput) ApiListTransformationsRequest {
 	r.pagination = &pagination
 	return r
@@ -507,7 +507,7 @@ func (a *TransformationsApiService) ListTransformationsExecute(r ApiListTransfor
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -584,11 +584,11 @@ type ApiUpdateTransformationRequest struct {
 	ctx context.Context
 	ApiService *TransformationsApiService
 	transformationId string
-	updateTransformationV1Input *UpdateTransformationV1Input
+	updateTransformationBetaInput *UpdateTransformationBetaInput
 }
 
-func (r ApiUpdateTransformationRequest) UpdateTransformationV1Input(updateTransformationV1Input UpdateTransformationV1Input) ApiUpdateTransformationRequest {
-	r.updateTransformationV1Input = &updateTransformationV1Input
+func (r ApiUpdateTransformationRequest) UpdateTransformationBetaInput(updateTransformationBetaInput UpdateTransformationBetaInput) ApiUpdateTransformationRequest {
+	r.updateTransformationBetaInput = &updateTransformationBetaInput
 	return r
 }
 
@@ -639,12 +639,12 @@ func (a *TransformationsApiService) UpdateTransformationExecute(r ApiUpdateTrans
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.updateTransformationV1Input == nil {
-		return localVarReturnValue, nil, reportError("updateTransformationV1Input is required and must be specified")
+	if r.updateTransformationBetaInput == nil {
+		return localVarReturnValue, nil, reportError("updateTransformationBetaInput is required and must be specified")
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -653,7 +653,7 @@ func (a *TransformationsApiService) UpdateTransformationExecute(r ApiUpdateTrans
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -661,7 +661,7 @@ func (a *TransformationsApiService) UpdateTransformationExecute(r ApiUpdateTrans
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateTransformationV1Input
+	localVarPostBody = r.updateTransformationBetaInput
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
