@@ -42,7 +42,7 @@ Connects a Source to a Warehouse.
 
 
 
-When called, this endpoint may generate the `Storage Destination Modified` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Storage Destination Modified` event in the [audit trail](/tag/Audit-Trail).
       
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -187,7 +187,7 @@ Validates input settings against a Warehouse.
 
 
 
-When called, this endpoint may generate the `Storage Destination Settings Validation` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Storage Destination Settings Validation` event in the [audit trail](/tag/Audit-Trail).
       
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -331,7 +331,7 @@ Creates a new Warehouse.
 
 
 
-When called, this endpoint may generate the `Storage Destination Created` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Storage Destination Created` event in the [audit trail](/tag/Audit-Trail).
       
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -470,7 +470,7 @@ Deletes an existing Warehouse.
 
 
 
-When called, this endpoint may generate the `Storage Destination Deleted` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Storage Destination Deleted` event in the [audit trail](/tag/Audit-Trail).
       
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1296,7 +1296,7 @@ UpdateWarehouse Update Warehouse
 
 Updates an existing Warehouse.
 
-When called, this endpoint may generate one or more of the following [Audit Trail](/tag/Audit-Trail) events:
+When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
 * Storage Destination Modified
 * Storage Destination Enabled
       

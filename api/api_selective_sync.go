@@ -774,7 +774,7 @@ Configures the schema for a Warehouse, including Sources, Collections, and Prope
 
 
 
-When called, this endpoint may generate the `Storage Destination Modified` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Storage Destination Modified` event in the [audit trail](/tag/Audit-Trail).
       
 
 

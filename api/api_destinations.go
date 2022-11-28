@@ -46,7 +46,7 @@ Creates a new Destination.
 
 
 
-When called, this endpoint may generate the `Integration Created` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Integration Created` event in the [audit trail](/tag/Audit-Trail).
       
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -328,7 +328,7 @@ Deletes an existing Destination.
 
 
 
-When called, this endpoint may generate the `Integration Deleted` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Integration Deleted` event in the [audit trail](/tag/Audit-Trail).
 
 Config API omitted fields:
 - `catalogId`
@@ -1371,7 +1371,7 @@ Updates an existing Destination.
 
 
 
-When called, this endpoint may generate the `Integration Disabled` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Integration Disabled` event in the [audit trail](/tag/Audit-Trail).
 
 Config API omitted fields:
 - `updateMask`

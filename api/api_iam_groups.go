@@ -45,7 +45,7 @@ AddPermissionsToUserGroup Add Permissions to User Group
 
 Adds a list of access permissions to a user group.
 
-When called, this endpoint may generate one or more of the following [Audit Trail](/tag/Audit-Trail) events:
+When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
 * Policy Created
 * User Group Policy Updated
       
@@ -196,7 +196,7 @@ AddUsersToUserGroup Add Users to User Group
 
 Adds a list of users or invites to a user group.
 
-When called, this endpoint may generate one or more of the following [Audit Trail](/tag/Audit-Trail) events:
+When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
 * Subjects Added to Group
 * User Added To User Group
       
@@ -346,7 +346,7 @@ CreateUserGroup Create User Group
 
 Creates a user group.
 
-When called, this endpoint may generate one or more of the following [Audit Trail](/tag/Audit-Trail) events:
+When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
 * User Group Created
 * Policy Created
       
@@ -490,7 +490,7 @@ Removes a user group from a Workspace.
 
 
 
-When called, this endpoint may generate the `User Group Deleted` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `User Group Deleted` event in the [audit trail](/tag/Audit-Trail).
       
 
 
@@ -1192,7 +1192,7 @@ RemoveUsersFromUserGroup Remove Users from User Group
 
 Removes one or multiple users or invites from a user group by email.
 
-When called, this endpoint may generate one or more of the following [Audit Trail](/tag/Audit-Trail) events:
+When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
 * Group Memberships Deleted
 * User Removed From User Group
       
@@ -1344,7 +1344,7 @@ Updates the list of access permissions for a user group.
 
 
 
-When called, this endpoint may generate the `Policy Deleted` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Policy Deleted` event in the [audit trail](/tag/Audit-Trail).
       
 
 
@@ -1493,7 +1493,7 @@ ReplaceUsersInUserGroup Replace Users in User Group
 
 Replaces the members of a user group by email.
 
-When called, this endpoint may generate one or more of the following [Audit Trail](/tag/Audit-Trail) events:
+When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
 * Subjects Added to Group
 * User Added To User Group
 * Group Memberships Deleted
@@ -1647,7 +1647,7 @@ Updates a user group for a Workspace.
 
 
 
-When called, this endpoint may generate the `User Group Updated` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `User Group Updated` event in the [audit trail](/tag/Audit-Trail).
       
 
 

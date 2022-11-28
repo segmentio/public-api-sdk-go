@@ -46,7 +46,7 @@ Creates a new Transformation.
 
 
 
-When called, this endpoint may generate the `Transformation Created` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Transformation Created` event in the [audit trail](/tag/Audit-Trail).
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -185,7 +185,7 @@ Deletes a Transformation.
 
 
 
-When called, this endpoint may generate the `Transformation Deleted` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Transformation Deleted` event in the [audit trail](/tag/Audit-Trail).
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -603,7 +603,7 @@ Updates an existing Transformation.
 
 
 
-When called, this endpoint may generate the `Transformation Updated` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Transformation Updated` event in the [audit trail](/tag/Audit-Trail).
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

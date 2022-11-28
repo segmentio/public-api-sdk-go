@@ -45,7 +45,7 @@ AddPermissionsToUser Add Permissions to User
 
 Adds a list of access permissions to a user.
 
-When called, this endpoint may generate one or more of the following [Audit Trail](/tag/Audit-Trail) events:
+When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
 * Policy Created
 * User Policy Updated
       
@@ -195,7 +195,7 @@ CreateInvites Create Invites
 
 Invites a list of users to join a Workspace.
 
-When called, this endpoint may generate one or more of the following [Audit Trail](/tag/Audit-Trail) events:
+When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
 * Non-Segment User Invited to Workspace
 * Policy Created
 * New Segment User Invited to Workspace
@@ -347,7 +347,7 @@ DeleteInvites Delete Invites
 
 Removes a list of invitations to join a Workspace.
 
-When called, this endpoint may generate one or more of the following [Audit Trail](/tag/Audit-Trail) events:
+When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
 * Invite Deleted
 * Group Memberships Deleted
       
@@ -496,7 +496,7 @@ Removes one or multiple users.
 
 
 
-When called, this endpoint may generate the `Group Memberships Deleted` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Group Memberships Deleted` event in the [audit trail](/tag/Audit-Trail).
       
 
 
@@ -1200,7 +1200,7 @@ Updates the list of access permissions for a user.
 
 
 
-When called, this endpoint may generate the `Policy Deleted` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Policy Deleted` event in the [audit trail](/tag/Audit-Trail).
       
 
 

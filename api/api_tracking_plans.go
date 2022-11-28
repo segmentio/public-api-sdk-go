@@ -47,7 +47,7 @@ Connects a Source to a Tracking Plan.
 
 
 
-When called, this endpoint may generate the `Source Modified` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Source Modified` event in the [audit trail](/tag/Audit-Trail).
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1199,7 +1199,7 @@ Disconnects a Source from a Tracking Plan.
 
 
 
-When called, this endpoint may generate the `Source Modified` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Source Modified` event in the [audit trail](/tag/Audit-Trail).
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
