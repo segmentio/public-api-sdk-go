@@ -47,7 +47,7 @@ Creates a filter in a Destination.
 
 
 
-When called, this endpoint may generate the `Destination Filter Created` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Destination Filter Created` event in the [audit trail](/tag/Audit-Trail).
       
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -608,7 +608,7 @@ Deletes a Destination filter.
 
 
 
-When called, this endpoint may generate the `Destination Filter Deleted` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Destination Filter Deleted` event in the [audit trail](/tag/Audit-Trail).
       
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -753,7 +753,7 @@ UpdateFilterForDestination Update Filter for Destination
 
 Updates a filter in a Destination.
 
-When called, this endpoint may generate one or more of the following [Audit Trail](/tag/Audit-Trail) events:
+When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
 * Destination Filter Enabled
 * Destination Filter Disabled
       

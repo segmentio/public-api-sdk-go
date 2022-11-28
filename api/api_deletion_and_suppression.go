@@ -195,7 +195,7 @@ Creates a Source-scoped regulation.
 
 
 
-When called, this endpoint may generate the `Source Regulation Created` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Source Regulation Created` event in the [audit trail](/tag/Audit-Trail).
 
 Config API omitted fields:
 - `attributes`,
@@ -346,7 +346,7 @@ Creates a Workspace-scoped regulation.
 
 
 
-When called, this endpoint may generate the `Workspace Regulation Created` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Workspace Regulation Created` event in the [audit trail](/tag/Audit-Trail).
 
 Config API omitted fields:
 - `attributes`,
@@ -489,7 +489,7 @@ Deletes a regulation from the Workspace. The regulation must be in the initializ
 
 
 
-When called, this endpoint may generate the `Regulation Deleted` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Regulation Deleted` event in the [audit trail](/tag/Audit-Trail).
       
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

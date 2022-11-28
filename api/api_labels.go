@@ -46,7 +46,7 @@ Creates a new label.
 
 
 
-When called, this endpoint may generate the `Label Created` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Label Created` event in the [audit trail](/tag/Audit-Trail).
       
 
 
@@ -189,7 +189,7 @@ Deletes a label.
 
 
 
-When called, this endpoint may generate the `Label Deleted` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Label Deleted` event in the [audit trail](/tag/Audit-Trail).
       
 
 

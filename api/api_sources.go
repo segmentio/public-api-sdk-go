@@ -47,7 +47,7 @@ Adds an existing label to a Source.
 
 
 
-When called, this endpoint may generate the `Source Modified` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Source Modified` event in the [audit trail](/tag/Audit-Trail).
       
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -194,7 +194,7 @@ Creates a new Source.
 
 
 
-When called, this endpoint may generate the `Source Created` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Source Created` event in the [audit trail](/tag/Audit-Trail).
       
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -333,7 +333,7 @@ Deletes an existing Source.
 
 
 
-When called, this endpoint may generate the `Source Deleted` [Audit Trail](/tag/Audit-Trail) event.
+When called, this endpoint may generate the `Source Deleted` event in the [audit trail](/tag/Audit-Trail).
       
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1453,7 +1453,7 @@ UpdateSource Update Source
 
 Updates an existing Source.
 
-When called, this endpoint may generate one or more of the following [Audit Trail](/tag/Audit-Trail) events:
+When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
 * Source Modified
 * Source Enabled
 * Source Settings Modified
