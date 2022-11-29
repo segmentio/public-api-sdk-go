@@ -3,17 +3,18 @@
 package api
 
 import (
-    "context"
-    "github.com/stretchr/testify/assert"
-    "github.com/stretchr/testify/require"
-    "testing"
-    "net/http/httptest"
-    "net/http"
+	"context"
+	"net/http"
+	"net/http/httptest"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func Test_Echo(t *testing.T) {
-    fakeServer := httptest.NewServer(
-			http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+	fakeServer := httptest.NewServer(
+		http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 			w.Header().Set("content-type", "application/json")
 			_, _ = w.Write([]byte(`{
                     "data": {
@@ -21,10 +22,10 @@ func Test_Echo(t *testing.T) {
                     }
                 }`))
 		}),
-		)
-		defer fakeServer.Close()
+	)
+	defer fakeServer.Close()
 
-    configuration := &Configuration{
+	configuration := &Configuration{
 		DefaultHeader: make(map[string]string),
 		UserAgent:     "Segment (OpenAPI-Generator test)",
 		Debug:         false,
@@ -37,14 +38,14 @@ func Test_Echo(t *testing.T) {
 		OperationServers: map[string]ServerConfigurations{},
 	}
 
-    apiClient := NewAPIClient(configuration)
+	apiClient := NewAPIClient(configuration)
 
-    t.Run("Test Echo", func(t *testing.T) {
-        resp, httpRes, err := apiClient.TestingApi.Echo(context.Background()).Message("Hello Go-SDK!").Execute()
+	t.Run("Test Echo", func(t *testing.T) {
+		resp, httpRes, err := apiClient.TestingApi.Echo(context.Background()).Message("Hello Go-SDK!").Execute()
 
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        assert.Equal(t, resp.Data.Message, "Hello Go-SDK!")
-    })
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+		assert.Equal(t, resp.Data.Message, "Hello Go-SDK!")
+	})
 }

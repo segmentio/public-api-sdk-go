@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -31,7 +31,12 @@ type DestinationMetadataSubscriptionPresetV1 struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDestinationMetadataSubscriptionPresetV1(actionId string, name string, fields map[string]interface{}, trigger string) *DestinationMetadataSubscriptionPresetV1 {
+func NewDestinationMetadataSubscriptionPresetV1(
+	actionId string,
+	name string,
+	fields map[string]interface{},
+	trigger string,
+) *DestinationMetadataSubscriptionPresetV1 {
 	this := DestinationMetadataSubscriptionPresetV1{}
 	this.ActionId = actionId
 	this.Name = name
@@ -170,7 +175,9 @@ func (v NullableDestinationMetadataSubscriptionPresetV1) Get() *DestinationMetad
 	return v.value
 }
 
-func (v *NullableDestinationMetadataSubscriptionPresetV1) Set(val *DestinationMetadataSubscriptionPresetV1) {
+func (v *NullableDestinationMetadataSubscriptionPresetV1) Set(
+	val *DestinationMetadataSubscriptionPresetV1,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -184,7 +191,9 @@ func (v *NullableDestinationMetadataSubscriptionPresetV1) Unset() {
 	v.isSet = false
 }
 
-func NewNullableDestinationMetadataSubscriptionPresetV1(val *DestinationMetadataSubscriptionPresetV1) *NullableDestinationMetadataSubscriptionPresetV1 {
+func NewNullableDestinationMetadataSubscriptionPresetV1(
+	val *DestinationMetadataSubscriptionPresetV1,
+) *NullableDestinationMetadataSubscriptionPresetV1 {
 	return &NullableDestinationMetadataSubscriptionPresetV1{value: val, isSet: true}
 }
 
@@ -196,5 +205,3 @@ func (v *NullableDestinationMetadataSubscriptionPresetV1) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

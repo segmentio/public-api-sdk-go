@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -20,17 +20,18 @@ import (
 	"strings"
 )
 
-
 // FunctionsApiService FunctionsApi service
 type FunctionsApiService service
 
 type ApiCreateFunctionRequest struct {
-	ctx context.Context
-	ApiService *FunctionsApiService
+	ctx                   context.Context
+	ApiService            *FunctionsApiService
 	createFunctionV1Input *CreateFunctionV1Input
 }
 
-func (r ApiCreateFunctionRequest) CreateFunctionV1Input(createFunctionV1Input CreateFunctionV1Input) ApiCreateFunctionRequest {
+func (r ApiCreateFunctionRequest) CreateFunctionV1Input(
+	createFunctionV1Input CreateFunctionV1Input,
+) ApiCreateFunctionRequest {
 	r.createFunctionV1Input = &createFunctionV1Input
 	return r
 }
@@ -46,27 +47,33 @@ Creates a Function.
 
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Functions feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateFunctionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateFunctionRequest
 */
 func (a *FunctionsApiService) CreateFunction(ctx context.Context) ApiCreateFunctionRequest {
 	return ApiCreateFunctionRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateFunction200Response
-func (a *FunctionsApiService) CreateFunctionExecute(r ApiCreateFunctionRequest) (*CreateFunction200Response, *http.Response, error) {
+//
+//	@return CreateFunction200Response
+func (a *FunctionsApiService) CreateFunctionExecute(
+	r ApiCreateFunctionRequest,
+) (*CreateFunction200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateFunction200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateFunction200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FunctionsApiService.CreateFunction")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"FunctionsApiService.CreateFunction",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -77,11 +84,17 @@ func (a *FunctionsApiService) CreateFunctionExecute(r ApiCreateFunctionRequest) 
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.createFunctionV1Input == nil {
-		return localVarReturnValue, nil, reportError("createFunctionV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"createFunctionV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -90,7 +103,12 @@ func (a *FunctionsApiService) CreateFunctionExecute(r ApiCreateFunctionRequest) 
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -99,7 +117,16 @@ func (a *FunctionsApiService) CreateFunctionExecute(r ApiCreateFunctionRequest) 
 	}
 	// body params
 	localVarPostBody = r.createFunctionV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -153,7 +180,11 @@ func (a *FunctionsApiService) CreateFunctionExecute(r ApiCreateFunctionRequest) 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -166,7 +197,7 @@ func (a *FunctionsApiService) CreateFunctionExecute(r ApiCreateFunctionRequest) 
 }
 
 type ApiCreateFunctionDeploymentRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *FunctionsApiService
 	functionId string
 }
@@ -182,35 +213,49 @@ Deploys a Function. Only applicable to Source Function instances.
 
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Functions feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param functionId
- @return ApiCreateFunctionDeploymentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param functionId
+	@return ApiCreateFunctionDeploymentRequest
 */
-func (a *FunctionsApiService) CreateFunctionDeployment(ctx context.Context, functionId string) ApiCreateFunctionDeploymentRequest {
+func (a *FunctionsApiService) CreateFunctionDeployment(
+	ctx context.Context,
+	functionId string,
+) ApiCreateFunctionDeploymentRequest {
 	return ApiCreateFunctionDeploymentRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		functionId: functionId,
 	}
 }
 
 // Execute executes the request
-//  @return CreateFunctionDeployment200Response
-func (a *FunctionsApiService) CreateFunctionDeploymentExecute(r ApiCreateFunctionDeploymentRequest) (*CreateFunctionDeployment200Response, *http.Response, error) {
+//
+//	@return CreateFunctionDeployment200Response
+func (a *FunctionsApiService) CreateFunctionDeploymentExecute(
+	r ApiCreateFunctionDeploymentRequest,
+) (*CreateFunctionDeployment200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateFunctionDeployment200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateFunctionDeployment200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FunctionsApiService.CreateFunctionDeployment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"FunctionsApiService.CreateFunctionDeployment",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/functions/{functionId}/deploy"
-	localVarPath = strings.Replace(localVarPath, "{"+"functionId"+"}", url.PathEscape(parameterToString(r.functionId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"functionId"+"}",
+		url.PathEscape(parameterToString(r.functionId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -226,14 +271,28 @@ func (a *FunctionsApiService) CreateFunctionDeploymentExecute(r ApiCreateFunctio
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -287,7 +346,11 @@ func (a *FunctionsApiService) CreateFunctionDeploymentExecute(r ApiCreateFunctio
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -300,7 +363,7 @@ func (a *FunctionsApiService) CreateFunctionDeploymentExecute(r ApiCreateFunctio
 }
 
 type ApiDeleteFunctionRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *FunctionsApiService
 	functionId string
 }
@@ -316,35 +379,49 @@ Deletes a Function.
 
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Functions feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param functionId
- @return ApiDeleteFunctionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param functionId
+	@return ApiDeleteFunctionRequest
 */
-func (a *FunctionsApiService) DeleteFunction(ctx context.Context, functionId string) ApiDeleteFunctionRequest {
+func (a *FunctionsApiService) DeleteFunction(
+	ctx context.Context,
+	functionId string,
+) ApiDeleteFunctionRequest {
 	return ApiDeleteFunctionRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		functionId: functionId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteFunction200Response
-func (a *FunctionsApiService) DeleteFunctionExecute(r ApiDeleteFunctionRequest) (*DeleteFunction200Response, *http.Response, error) {
+//
+//	@return DeleteFunction200Response
+func (a *FunctionsApiService) DeleteFunctionExecute(
+	r ApiDeleteFunctionRequest,
+) (*DeleteFunction200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteFunction200Response
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteFunction200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FunctionsApiService.DeleteFunction")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"FunctionsApiService.DeleteFunction",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/functions/{functionId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"functionId"+"}", url.PathEscape(parameterToString(r.functionId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"functionId"+"}",
+		url.PathEscape(parameterToString(r.functionId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -360,14 +437,28 @@ func (a *FunctionsApiService) DeleteFunctionExecute(r ApiDeleteFunctionRequest) 
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -421,7 +512,11 @@ func (a *FunctionsApiService) DeleteFunctionExecute(r ApiDeleteFunctionRequest) 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -434,7 +529,7 @@ func (a *FunctionsApiService) DeleteFunctionExecute(r ApiDeleteFunctionRequest) 
 }
 
 type ApiGetFunctionRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *FunctionsApiService
 	functionId string
 }
@@ -450,35 +545,49 @@ Gets a Function.
 
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Functions feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param functionId
- @return ApiGetFunctionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param functionId
+	@return ApiGetFunctionRequest
 */
-func (a *FunctionsApiService) GetFunction(ctx context.Context, functionId string) ApiGetFunctionRequest {
+func (a *FunctionsApiService) GetFunction(
+	ctx context.Context,
+	functionId string,
+) ApiGetFunctionRequest {
 	return ApiGetFunctionRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		functionId: functionId,
 	}
 }
 
 // Execute executes the request
-//  @return GetFunction200Response
-func (a *FunctionsApiService) GetFunctionExecute(r ApiGetFunctionRequest) (*GetFunction200Response, *http.Response, error) {
+//
+//	@return GetFunction200Response
+func (a *FunctionsApiService) GetFunctionExecute(
+	r ApiGetFunctionRequest,
+) (*GetFunction200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetFunction200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetFunction200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FunctionsApiService.GetFunction")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"FunctionsApiService.GetFunction",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/functions/{functionId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"functionId"+"}", url.PathEscape(parameterToString(r.functionId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"functionId"+"}",
+		url.PathEscape(parameterToString(r.functionId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -494,14 +603,28 @@ func (a *FunctionsApiService) GetFunctionExecute(r ApiGetFunctionRequest) (*GetF
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -555,7 +678,11 @@ func (a *FunctionsApiService) GetFunctionExecute(r ApiGetFunctionRequest) (*GetF
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -568,9 +695,9 @@ func (a *FunctionsApiService) GetFunctionExecute(r ApiGetFunctionRequest) (*GetF
 }
 
 type ApiListFunctionsRequest struct {
-	ctx context.Context
-	ApiService *FunctionsApiService
-	pagination *PaginationInput
+	ctx          context.Context
+	ApiService   *FunctionsApiService
+	pagination   *PaginationInput
 	resourceType *string
 }
 
@@ -597,27 +724,33 @@ Lists all Functions in a Workspace.
 
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Functions feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListFunctionsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListFunctionsRequest
 */
 func (a *FunctionsApiService) ListFunctions(ctx context.Context) ApiListFunctionsRequest {
 	return ApiListFunctionsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListFunctions200Response
-func (a *FunctionsApiService) ListFunctionsExecute(r ApiListFunctionsRequest) (*ListFunctions200Response, *http.Response, error) {
+//
+//	@return ListFunctions200Response
+func (a *FunctionsApiService) ListFunctionsExecute(
+	r ApiListFunctionsRequest,
+) (*ListFunctions200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListFunctions200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListFunctions200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FunctionsApiService.ListFunctions")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"FunctionsApiService.ListFunctions",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -631,7 +764,9 @@ func (a *FunctionsApiService) ListFunctionsExecute(r ApiListFunctionsRequest) (*
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 	if r.resourceType == nil {
-		return localVarReturnValue, nil, reportError("resourceType is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"resourceType is required and must be specified",
+		)
 	}
 
 	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
@@ -646,14 +781,28 @@ func (a *FunctionsApiService) ListFunctionsExecute(r ApiListFunctionsRequest) (*
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -707,7 +856,11 @@ func (a *FunctionsApiService) ListFunctionsExecute(r ApiListFunctionsRequest) (*
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -720,13 +873,15 @@ func (a *FunctionsApiService) ListFunctionsExecute(r ApiListFunctionsRequest) (*
 }
 
 type ApiUpdateFunctionRequest struct {
-	ctx context.Context
-	ApiService *FunctionsApiService
-	functionId string
+	ctx                   context.Context
+	ApiService            *FunctionsApiService
+	functionId            string
 	updateFunctionV1Input *UpdateFunctionV1Input
 }
 
-func (r ApiUpdateFunctionRequest) UpdateFunctionV1Input(updateFunctionV1Input UpdateFunctionV1Input) ApiUpdateFunctionRequest {
+func (r ApiUpdateFunctionRequest) UpdateFunctionV1Input(
+	updateFunctionV1Input UpdateFunctionV1Input,
+) ApiUpdateFunctionRequest {
 	r.updateFunctionV1Input = &updateFunctionV1Input
 	return r
 }
@@ -745,46 +900,65 @@ Updates a Function.
 Config API omitted fields:
 - `updateMask`
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param functionId
- @return ApiUpdateFunctionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param functionId
+	@return ApiUpdateFunctionRequest
 */
-func (a *FunctionsApiService) UpdateFunction(ctx context.Context, functionId string) ApiUpdateFunctionRequest {
+func (a *FunctionsApiService) UpdateFunction(
+	ctx context.Context,
+	functionId string,
+) ApiUpdateFunctionRequest {
 	return ApiUpdateFunctionRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		functionId: functionId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateFunction200Response
-func (a *FunctionsApiService) UpdateFunctionExecute(r ApiUpdateFunctionRequest) (*UpdateFunction200Response, *http.Response, error) {
+//
+//	@return UpdateFunction200Response
+func (a *FunctionsApiService) UpdateFunctionExecute(
+	r ApiUpdateFunctionRequest,
+) (*UpdateFunction200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateFunction200Response
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateFunction200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FunctionsApiService.UpdateFunction")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"FunctionsApiService.UpdateFunction",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/functions/{functionId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"functionId"+"}", url.PathEscape(parameterToString(r.functionId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"functionId"+"}",
+		url.PathEscape(parameterToString(r.functionId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.updateFunctionV1Input == nil {
-		return localVarReturnValue, nil, reportError("updateFunctionV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"updateFunctionV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -793,7 +967,12 @@ func (a *FunctionsApiService) UpdateFunctionExecute(r ApiUpdateFunctionRequest) 
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -802,7 +981,16 @@ func (a *FunctionsApiService) UpdateFunctionExecute(r ApiUpdateFunctionRequest) 
 	}
 	// body params
 	localVarPostBody = r.updateFunctionV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -856,7 +1044,11 @@ func (a *FunctionsApiService) UpdateFunctionExecute(r ApiUpdateFunctionRequest) 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,

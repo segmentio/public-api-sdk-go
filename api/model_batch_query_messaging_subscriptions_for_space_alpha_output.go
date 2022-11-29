@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -22,15 +22,19 @@ type BatchQueryMessagingSubscriptionsForSpaceAlphaOutput struct {
 	// Validation errors due to invalid types or email/phone numbers.
 	Failures []GetMessagingSubscriptionFailureResponse `json:"failures"`
 	// General errors when making the request such as invalid payload or wrong http method errors.
-	Errors []MessageSubscriptionResponseError `json:"errors"`
-	Pagination *Pagination `json:"pagination,omitempty"`
+	Errors     []MessageSubscriptionResponseError `json:"errors"`
+	Pagination *Pagination                        `json:"pagination,omitempty"`
 }
 
 // NewBatchQueryMessagingSubscriptionsForSpaceAlphaOutput instantiates a new BatchQueryMessagingSubscriptionsForSpaceAlphaOutput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBatchQueryMessagingSubscriptionsForSpaceAlphaOutput(successes []GetMessagingSubscriptionSuccessResponse, failures []GetMessagingSubscriptionFailureResponse, errors []MessageSubscriptionResponseError) *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput {
+func NewBatchQueryMessagingSubscriptionsForSpaceAlphaOutput(
+	successes []GetMessagingSubscriptionSuccessResponse,
+	failures []GetMessagingSubscriptionFailureResponse,
+	errors []MessageSubscriptionResponseError,
+) *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput {
 	this := BatchQueryMessagingSubscriptionsForSpaceAlphaOutput{}
 	this.Successes = successes
 	this.Failures = failures
@@ -66,7 +70,9 @@ func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput) GetSuccessesOk() (
 }
 
 // SetSuccesses sets field value
-func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput) SetSuccesses(v []GetMessagingSubscriptionSuccessResponse) {
+func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput) SetSuccesses(
+	v []GetMessagingSubscriptionSuccessResponse,
+) {
 	o.Successes = v
 }
 
@@ -90,7 +96,9 @@ func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput) GetFailuresOk() ([
 }
 
 // SetFailures sets field value
-func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput) SetFailures(v []GetMessagingSubscriptionFailureResponse) {
+func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput) SetFailures(
+	v []GetMessagingSubscriptionFailureResponse,
+) {
 	o.Failures = v
 }
 
@@ -114,7 +122,9 @@ func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput) GetErrorsOk() ([]M
 }
 
 // SetErrors sets field value
-func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput) SetErrors(v []MessageSubscriptionResponseError) {
+func (o *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput) SetErrors(
+	v []MessageSubscriptionResponseError,
+) {
 	o.Errors = v
 }
 
@@ -176,7 +186,9 @@ func (v NullableBatchQueryMessagingSubscriptionsForSpaceAlphaOutput) Get() *Batc
 	return v.value
 }
 
-func (v *NullableBatchQueryMessagingSubscriptionsForSpaceAlphaOutput) Set(val *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput) {
+func (v *NullableBatchQueryMessagingSubscriptionsForSpaceAlphaOutput) Set(
+	val *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -190,7 +202,9 @@ func (v *NullableBatchQueryMessagingSubscriptionsForSpaceAlphaOutput) Unset() {
 	v.isSet = false
 }
 
-func NewNullableBatchQueryMessagingSubscriptionsForSpaceAlphaOutput(val *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput) *NullableBatchQueryMessagingSubscriptionsForSpaceAlphaOutput {
+func NewNullableBatchQueryMessagingSubscriptionsForSpaceAlphaOutput(
+	val *BatchQueryMessagingSubscriptionsForSpaceAlphaOutput,
+) *NullableBatchQueryMessagingSubscriptionsForSpaceAlphaOutput {
 	return &NullableBatchQueryMessagingSubscriptionsForSpaceAlphaOutput{value: val, isSet: true}
 }
 
@@ -198,9 +212,9 @@ func (v NullableBatchQueryMessagingSubscriptionsForSpaceAlphaOutput) MarshalJSON
 	return json.Marshal(v.value)
 }
 
-func (v *NullableBatchQueryMessagingSubscriptionsForSpaceAlphaOutput) UnmarshalJSON(src []byte) error {
+func (v *NullableBatchQueryMessagingSubscriptionsForSpaceAlphaOutput) UnmarshalJSON(
+	src []byte,
+) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -19,14 +19,16 @@ import (
 type ListSubscriptionsFromDestinationAlphaOutput struct {
 	// A list of Destination subscriptions.
 	Subscriptions []DestinationSubscription `json:"subscriptions"`
-	Pagination *Pagination `json:"pagination,omitempty"`
+	Pagination    *Pagination               `json:"pagination,omitempty"`
 }
 
 // NewListSubscriptionsFromDestinationAlphaOutput instantiates a new ListSubscriptionsFromDestinationAlphaOutput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListSubscriptionsFromDestinationAlphaOutput(subscriptions []DestinationSubscription) *ListSubscriptionsFromDestinationAlphaOutput {
+func NewListSubscriptionsFromDestinationAlphaOutput(
+	subscriptions []DestinationSubscription,
+) *ListSubscriptionsFromDestinationAlphaOutput {
 	this := ListSubscriptionsFromDestinationAlphaOutput{}
 	this.Subscriptions = subscriptions
 	return &this
@@ -60,7 +62,9 @@ func (o *ListSubscriptionsFromDestinationAlphaOutput) GetSubscriptionsOk() ([]De
 }
 
 // SetSubscriptions sets field value
-func (o *ListSubscriptionsFromDestinationAlphaOutput) SetSubscriptions(v []DestinationSubscription) {
+func (o *ListSubscriptionsFromDestinationAlphaOutput) SetSubscriptions(
+	v []DestinationSubscription,
+) {
 	o.Subscriptions = v
 }
 
@@ -116,7 +120,9 @@ func (v NullableListSubscriptionsFromDestinationAlphaOutput) Get() *ListSubscrip
 	return v.value
 }
 
-func (v *NullableListSubscriptionsFromDestinationAlphaOutput) Set(val *ListSubscriptionsFromDestinationAlphaOutput) {
+func (v *NullableListSubscriptionsFromDestinationAlphaOutput) Set(
+	val *ListSubscriptionsFromDestinationAlphaOutput,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -130,7 +136,9 @@ func (v *NullableListSubscriptionsFromDestinationAlphaOutput) Unset() {
 	v.isSet = false
 }
 
-func NewNullableListSubscriptionsFromDestinationAlphaOutput(val *ListSubscriptionsFromDestinationAlphaOutput) *NullableListSubscriptionsFromDestinationAlphaOutput {
+func NewNullableListSubscriptionsFromDestinationAlphaOutput(
+	val *ListSubscriptionsFromDestinationAlphaOutput,
+) *NullableListSubscriptionsFromDestinationAlphaOutput {
 	return &NullableListSubscriptionsFromDestinationAlphaOutput{value: val, isSet: true}
 }
 
@@ -142,5 +150,3 @@ func (v *NullableListSubscriptionsFromDestinationAlphaOutput) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

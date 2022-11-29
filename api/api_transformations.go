@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -20,17 +20,18 @@ import (
 	"strings"
 )
 
-
 // TransformationsApiService TransformationsApi service
 type TransformationsApiService service
 
 type ApiCreateTransformationRequest struct {
-	ctx context.Context
-	ApiService *TransformationsApiService
+	ctx                           context.Context
+	ApiService                    *TransformationsApiService
 	createTransformationBetaInput *CreateTransformationBetaInput
 }
 
-func (r ApiCreateTransformationRequest) CreateTransformationBetaInput(createTransformationBetaInput CreateTransformationBetaInput) ApiCreateTransformationRequest {
+func (r ApiCreateTransformationRequest) CreateTransformationBetaInput(
+	createTransformationBetaInput CreateTransformationBetaInput,
+) ApiCreateTransformationRequest {
 	r.createTransformationBetaInput = &createTransformationBetaInput
 	return r
 }
@@ -44,32 +45,38 @@ CreateTransformation Create Transformation
 
 Creates a new Transformation.
 
-
-
 When called, this endpoint may generate the `Transformation Created` event in the [audit trail](/tag/Audit-Trail).
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTransformationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTransformationRequest
 */
-func (a *TransformationsApiService) CreateTransformation(ctx context.Context) ApiCreateTransformationRequest {
+func (a *TransformationsApiService) CreateTransformation(
+	ctx context.Context,
+) ApiCreateTransformationRequest {
 	return ApiCreateTransformationRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateTransformation200Response
-func (a *TransformationsApiService) CreateTransformationExecute(r ApiCreateTransformationRequest) (*CreateTransformation200Response, *http.Response, error) {
+//
+//	@return CreateTransformation200Response
+func (a *TransformationsApiService) CreateTransformationExecute(
+	r ApiCreateTransformationRequest,
+) (*CreateTransformation200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateTransformation200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateTransformation200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransformationsApiService.CreateTransformation")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TransformationsApiService.CreateTransformation",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -80,11 +87,16 @@ func (a *TransformationsApiService) CreateTransformationExecute(r ApiCreateTrans
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.createTransformationBetaInput == nil {
-		return localVarReturnValue, nil, reportError("createTransformationBetaInput is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"createTransformationBetaInput is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -93,7 +105,11 @@ func (a *TransformationsApiService) CreateTransformationExecute(r ApiCreateTrans
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -102,7 +118,16 @@ func (a *TransformationsApiService) CreateTransformationExecute(r ApiCreateTrans
 	}
 	// body params
 	localVarPostBody = r.createTransformationBetaInput
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -156,7 +181,11 @@ func (a *TransformationsApiService) CreateTransformationExecute(r ApiCreateTrans
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -169,8 +198,8 @@ func (a *TransformationsApiService) CreateTransformationExecute(r ApiCreateTrans
 }
 
 type ApiDeleteTransformationRequest struct {
-	ctx context.Context
-	ApiService *TransformationsApiService
+	ctx              context.Context
+	ApiService       *TransformationsApiService
 	transformationId string
 }
 
@@ -183,40 +212,52 @@ DeleteTransformation Delete Transformation
 
 Deletes a Transformation.
 
-
-
 When called, this endpoint may generate the `Transformation Deleted` event in the [audit trail](/tag/Audit-Trail).
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param transformationId
- @return ApiDeleteTransformationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param transformationId
+	@return ApiDeleteTransformationRequest
 */
-func (a *TransformationsApiService) DeleteTransformation(ctx context.Context, transformationId string) ApiDeleteTransformationRequest {
+func (a *TransformationsApiService) DeleteTransformation(
+	ctx context.Context,
+	transformationId string,
+) ApiDeleteTransformationRequest {
 	return ApiDeleteTransformationRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:       a,
+		ctx:              ctx,
 		transformationId: transformationId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteTransformation200Response
-func (a *TransformationsApiService) DeleteTransformationExecute(r ApiDeleteTransformationRequest) (*DeleteTransformation200Response, *http.Response, error) {
+//
+//	@return DeleteTransformation200Response
+func (a *TransformationsApiService) DeleteTransformationExecute(
+	r ApiDeleteTransformationRequest,
+) (*DeleteTransformation200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteTransformation200Response
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteTransformation200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransformationsApiService.DeleteTransformation")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TransformationsApiService.DeleteTransformation",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/transformations/{transformationId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"transformationId"+"}", url.PathEscape(parameterToString(r.transformationId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"transformationId"+"}",
+		url.PathEscape(parameterToString(r.transformationId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -232,14 +273,27 @@ func (a *TransformationsApiService) DeleteTransformationExecute(r ApiDeleteTrans
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -293,7 +347,11 @@ func (a *TransformationsApiService) DeleteTransformationExecute(r ApiDeleteTrans
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -306,8 +364,8 @@ func (a *TransformationsApiService) DeleteTransformationExecute(r ApiDeleteTrans
 }
 
 type ApiGetTransformationRequest struct {
-	ctx context.Context
-	ApiService *TransformationsApiService
+	ctx              context.Context
+	ApiService       *TransformationsApiService
 	transformationId string
 }
 
@@ -322,35 +380,49 @@ Gets a Transformation.
 
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param transformationId
- @return ApiGetTransformationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param transformationId
+	@return ApiGetTransformationRequest
 */
-func (a *TransformationsApiService) GetTransformation(ctx context.Context, transformationId string) ApiGetTransformationRequest {
+func (a *TransformationsApiService) GetTransformation(
+	ctx context.Context,
+	transformationId string,
+) ApiGetTransformationRequest {
 	return ApiGetTransformationRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:       a,
+		ctx:              ctx,
 		transformationId: transformationId,
 	}
 }
 
 // Execute executes the request
-//  @return GetTransformation200Response
-func (a *TransformationsApiService) GetTransformationExecute(r ApiGetTransformationRequest) (*GetTransformation200Response, *http.Response, error) {
+//
+//	@return GetTransformation200Response
+func (a *TransformationsApiService) GetTransformationExecute(
+	r ApiGetTransformationRequest,
+) (*GetTransformation200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetTransformation200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetTransformation200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransformationsApiService.GetTransformation")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TransformationsApiService.GetTransformation",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/transformations/{transformationId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"transformationId"+"}", url.PathEscape(parameterToString(r.transformationId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"transformationId"+"}",
+		url.PathEscape(parameterToString(r.transformationId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -366,14 +438,27 @@ func (a *TransformationsApiService) GetTransformationExecute(r ApiGetTransformat
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -427,7 +512,11 @@ func (a *TransformationsApiService) GetTransformationExecute(r ApiGetTransformat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -440,13 +529,15 @@ func (a *TransformationsApiService) GetTransformationExecute(r ApiGetTransformat
 }
 
 type ApiListTransformationsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TransformationsApiService
 	pagination *PaginationInput
 }
 
 // Pagination options.  This parameter exists in beta.
-func (r ApiListTransformationsRequest) Pagination(pagination PaginationInput) ApiListTransformationsRequest {
+func (r ApiListTransformationsRequest) Pagination(
+	pagination PaginationInput,
+) ApiListTransformationsRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -462,27 +553,35 @@ Lists all Transformations in the Workspace.
 
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListTransformationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListTransformationsRequest
 */
-func (a *TransformationsApiService) ListTransformations(ctx context.Context) ApiListTransformationsRequest {
+func (a *TransformationsApiService) ListTransformations(
+	ctx context.Context,
+) ApiListTransformationsRequest {
 	return ApiListTransformationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListTransformations200Response
-func (a *TransformationsApiService) ListTransformationsExecute(r ApiListTransformationsRequest) (*ListTransformations200Response, *http.Response, error) {
+//
+//	@return ListTransformations200Response
+func (a *TransformationsApiService) ListTransformationsExecute(
+	r ApiListTransformationsRequest,
+) (*ListTransformations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListTransformations200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListTransformations200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransformationsApiService.ListTransformations")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TransformationsApiService.ListTransformations",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -507,14 +606,27 @@ func (a *TransformationsApiService) ListTransformationsExecute(r ApiListTransfor
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -568,7 +680,11 @@ func (a *TransformationsApiService) ListTransformationsExecute(r ApiListTransfor
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -581,13 +697,15 @@ func (a *TransformationsApiService) ListTransformationsExecute(r ApiListTransfor
 }
 
 type ApiUpdateTransformationRequest struct {
-	ctx context.Context
-	ApiService *TransformationsApiService
-	transformationId string
+	ctx                           context.Context
+	ApiService                    *TransformationsApiService
+	transformationId              string
 	updateTransformationBetaInput *UpdateTransformationBetaInput
 }
 
-func (r ApiUpdateTransformationRequest) UpdateTransformationBetaInput(updateTransformationBetaInput UpdateTransformationBetaInput) ApiUpdateTransformationRequest {
+func (r ApiUpdateTransformationRequest) UpdateTransformationBetaInput(
+	updateTransformationBetaInput UpdateTransformationBetaInput,
+) ApiUpdateTransformationRequest {
 	r.updateTransformationBetaInput = &updateTransformationBetaInput
 	return r
 }
@@ -601,50 +719,67 @@ UpdateTransformation Update Transformation
 
 Updates an existing Transformation.
 
-
-
 When called, this endpoint may generate the `Transformation Updated` event in the [audit trail](/tag/Audit-Trail).
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param transformationId
- @return ApiUpdateTransformationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param transformationId
+	@return ApiUpdateTransformationRequest
 */
-func (a *TransformationsApiService) UpdateTransformation(ctx context.Context, transformationId string) ApiUpdateTransformationRequest {
+func (a *TransformationsApiService) UpdateTransformation(
+	ctx context.Context,
+	transformationId string,
+) ApiUpdateTransformationRequest {
 	return ApiUpdateTransformationRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:       a,
+		ctx:              ctx,
 		transformationId: transformationId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateTransformation200Response
-func (a *TransformationsApiService) UpdateTransformationExecute(r ApiUpdateTransformationRequest) (*UpdateTransformation200Response, *http.Response, error) {
+//
+//	@return UpdateTransformation200Response
+func (a *TransformationsApiService) UpdateTransformationExecute(
+	r ApiUpdateTransformationRequest,
+) (*UpdateTransformation200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateTransformation200Response
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateTransformation200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransformationsApiService.UpdateTransformation")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TransformationsApiService.UpdateTransformation",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/transformations/{transformationId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"transformationId"+"}", url.PathEscape(parameterToString(r.transformationId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"transformationId"+"}",
+		url.PathEscape(parameterToString(r.transformationId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.updateTransformationBetaInput == nil {
-		return localVarReturnValue, nil, reportError("updateTransformationBetaInput is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"updateTransformationBetaInput is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -653,7 +788,11 @@ func (a *TransformationsApiService) UpdateTransformationExecute(r ApiUpdateTrans
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -662,7 +801,16 @@ func (a *TransformationsApiService) UpdateTransformationExecute(r ApiUpdateTrans
 	}
 	// body params
 	localVarPostBody = r.updateTransformationBetaInput
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -716,7 +864,11 @@ func (a *TransformationsApiService) UpdateTransformationExecute(r ApiUpdateTrans
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,

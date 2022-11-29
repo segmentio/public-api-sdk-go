@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -20,18 +20,19 @@ import (
 	"strings"
 )
 
-
 // DeletionAndSuppressionApiService DeletionAndSuppressionApi service
 type DeletionAndSuppressionApiService service
 
 type ApiCreateCloudSourceRegulationRequest struct {
-	ctx context.Context
-	ApiService *DeletionAndSuppressionApiService
-	sourceId string
+	ctx                                context.Context
+	ApiService                         *DeletionAndSuppressionApiService
+	sourceId                           string
 	createCloudSourceRegulationV1Input *CreateCloudSourceRegulationV1Input
 }
 
-func (r ApiCreateCloudSourceRegulationRequest) CreateCloudSourceRegulationV1Input(createCloudSourceRegulationV1Input CreateCloudSourceRegulationV1Input) ApiCreateCloudSourceRegulationRequest {
+func (r ApiCreateCloudSourceRegulationRequest) CreateCloudSourceRegulationV1Input(
+	createCloudSourceRegulationV1Input CreateCloudSourceRegulationV1Input,
+) ApiCreateCloudSourceRegulationRequest {
 	r.createCloudSourceRegulationV1Input = &createCloudSourceRegulationV1Input
 	return r
 }
@@ -45,50 +46,70 @@ CreateCloudSourceRegulation Create Cloud Source Regulation
 
 Creates a Source-scoped regulation.
 
-      Config API omitted fields:
+	Config API omitted fields:
+
 - `attributes`,
 - `userAgent`
-      
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sourceId
- @return ApiCreateCloudSourceRegulationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sourceId
+	@return ApiCreateCloudSourceRegulationRequest
 */
-func (a *DeletionAndSuppressionApiService) CreateCloudSourceRegulation(ctx context.Context, sourceId string) ApiCreateCloudSourceRegulationRequest {
+func (a *DeletionAndSuppressionApiService) CreateCloudSourceRegulation(
+	ctx context.Context,
+	sourceId string,
+) ApiCreateCloudSourceRegulationRequest {
 	return ApiCreateCloudSourceRegulationRequest{
 		ApiService: a,
-		ctx: ctx,
-		sourceId: sourceId,
+		ctx:        ctx,
+		sourceId:   sourceId,
 	}
 }
 
 // Execute executes the request
-//  @return CreateCloudSourceRegulation200Response
-func (a *DeletionAndSuppressionApiService) CreateCloudSourceRegulationExecute(r ApiCreateCloudSourceRegulationRequest) (*CreateCloudSourceRegulation200Response, *http.Response, error) {
+//
+//	@return CreateCloudSourceRegulation200Response
+func (a *DeletionAndSuppressionApiService) CreateCloudSourceRegulationExecute(
+	r ApiCreateCloudSourceRegulationRequest,
+) (*CreateCloudSourceRegulation200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateCloudSourceRegulation200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateCloudSourceRegulation200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DeletionAndSuppressionApiService.CreateCloudSourceRegulation")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DeletionAndSuppressionApiService.CreateCloudSourceRegulation",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/regulations/cloudsources/{sourceId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceId"+"}", url.PathEscape(parameterToString(r.sourceId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterToString(r.sourceId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.createCloudSourceRegulationV1Input == nil {
-		return localVarReturnValue, nil, reportError("createCloudSourceRegulationV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"createCloudSourceRegulationV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -97,7 +118,12 @@ func (a *DeletionAndSuppressionApiService) CreateCloudSourceRegulationExecute(r 
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -106,7 +132,16 @@ func (a *DeletionAndSuppressionApiService) CreateCloudSourceRegulationExecute(r 
 	}
 	// body params
 	localVarPostBody = r.createCloudSourceRegulationV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -160,7 +195,11 @@ func (a *DeletionAndSuppressionApiService) CreateCloudSourceRegulationExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -173,13 +212,15 @@ func (a *DeletionAndSuppressionApiService) CreateCloudSourceRegulationExecute(r 
 }
 
 type ApiCreateSourceRegulationRequest struct {
-	ctx context.Context
-	ApiService *DeletionAndSuppressionApiService
-	sourceId string
+	ctx                           context.Context
+	ApiService                    *DeletionAndSuppressionApiService
+	sourceId                      string
 	createSourceRegulationV1Input *CreateSourceRegulationV1Input
 }
 
-func (r ApiCreateSourceRegulationRequest) CreateSourceRegulationV1Input(createSourceRegulationV1Input CreateSourceRegulationV1Input) ApiCreateSourceRegulationRequest {
+func (r ApiCreateSourceRegulationRequest) CreateSourceRegulationV1Input(
+	createSourceRegulationV1Input CreateSourceRegulationV1Input,
+) ApiCreateSourceRegulationRequest {
 	r.createSourceRegulationV1Input = &createSourceRegulationV1Input
 	return r
 }
@@ -193,54 +234,71 @@ CreateSourceRegulation Create Source Regulation
 
 Creates a Source-scoped regulation.
 
-
-
 When called, this endpoint may generate the `Source Regulation Created` event in the [audit trail](/tag/Audit-Trail).
 
 Config API omitted fields:
 - `attributes`,
 - `userAgent`
-      
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sourceId
- @return ApiCreateSourceRegulationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sourceId
+	@return ApiCreateSourceRegulationRequest
 */
-func (a *DeletionAndSuppressionApiService) CreateSourceRegulation(ctx context.Context, sourceId string) ApiCreateSourceRegulationRequest {
+func (a *DeletionAndSuppressionApiService) CreateSourceRegulation(
+	ctx context.Context,
+	sourceId string,
+) ApiCreateSourceRegulationRequest {
 	return ApiCreateSourceRegulationRequest{
 		ApiService: a,
-		ctx: ctx,
-		sourceId: sourceId,
+		ctx:        ctx,
+		sourceId:   sourceId,
 	}
 }
 
 // Execute executes the request
-//  @return CreateSourceRegulation200Response
-func (a *DeletionAndSuppressionApiService) CreateSourceRegulationExecute(r ApiCreateSourceRegulationRequest) (*CreateSourceRegulation200Response, *http.Response, error) {
+//
+//	@return CreateSourceRegulation200Response
+func (a *DeletionAndSuppressionApiService) CreateSourceRegulationExecute(
+	r ApiCreateSourceRegulationRequest,
+) (*CreateSourceRegulation200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateSourceRegulation200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateSourceRegulation200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DeletionAndSuppressionApiService.CreateSourceRegulation")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DeletionAndSuppressionApiService.CreateSourceRegulation",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/regulations/sources/{sourceId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceId"+"}", url.PathEscape(parameterToString(r.sourceId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterToString(r.sourceId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.createSourceRegulationV1Input == nil {
-		return localVarReturnValue, nil, reportError("createSourceRegulationV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"createSourceRegulationV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -249,7 +307,12 @@ func (a *DeletionAndSuppressionApiService) CreateSourceRegulationExecute(r ApiCr
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -258,7 +321,16 @@ func (a *DeletionAndSuppressionApiService) CreateSourceRegulationExecute(r ApiCr
 	}
 	// body params
 	localVarPostBody = r.createSourceRegulationV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -312,7 +384,11 @@ func (a *DeletionAndSuppressionApiService) CreateSourceRegulationExecute(r ApiCr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -325,12 +401,14 @@ func (a *DeletionAndSuppressionApiService) CreateSourceRegulationExecute(r ApiCr
 }
 
 type ApiCreateWorkspaceRegulationRequest struct {
-	ctx context.Context
-	ApiService *DeletionAndSuppressionApiService
+	ctx                              context.Context
+	ApiService                       *DeletionAndSuppressionApiService
 	createWorkspaceRegulationV1Input *CreateWorkspaceRegulationV1Input
 }
 
-func (r ApiCreateWorkspaceRegulationRequest) CreateWorkspaceRegulationV1Input(createWorkspaceRegulationV1Input CreateWorkspaceRegulationV1Input) ApiCreateWorkspaceRegulationRequest {
+func (r ApiCreateWorkspaceRegulationRequest) CreateWorkspaceRegulationV1Input(
+	createWorkspaceRegulationV1Input CreateWorkspaceRegulationV1Input,
+) ApiCreateWorkspaceRegulationRequest {
 	r.createWorkspaceRegulationV1Input = &createWorkspaceRegulationV1Input
 	return r
 }
@@ -344,36 +422,41 @@ CreateWorkspaceRegulation Create Workspace Regulation
 
 Creates a Workspace-scoped regulation.
 
-
-
 When called, this endpoint may generate the `Workspace Regulation Created` event in the [audit trail](/tag/Audit-Trail).
 
 Config API omitted fields:
 - `attributes`,
 - `userAgent`
-      
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWorkspaceRegulationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWorkspaceRegulationRequest
 */
-func (a *DeletionAndSuppressionApiService) CreateWorkspaceRegulation(ctx context.Context) ApiCreateWorkspaceRegulationRequest {
+func (a *DeletionAndSuppressionApiService) CreateWorkspaceRegulation(
+	ctx context.Context,
+) ApiCreateWorkspaceRegulationRequest {
 	return ApiCreateWorkspaceRegulationRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateWorkspaceRegulation200Response
-func (a *DeletionAndSuppressionApiService) CreateWorkspaceRegulationExecute(r ApiCreateWorkspaceRegulationRequest) (*CreateWorkspaceRegulation200Response, *http.Response, error) {
+//
+//	@return CreateWorkspaceRegulation200Response
+func (a *DeletionAndSuppressionApiService) CreateWorkspaceRegulationExecute(
+	r ApiCreateWorkspaceRegulationRequest,
+) (*CreateWorkspaceRegulation200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateWorkspaceRegulation200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateWorkspaceRegulation200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DeletionAndSuppressionApiService.CreateWorkspaceRegulation")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DeletionAndSuppressionApiService.CreateWorkspaceRegulation",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -384,11 +467,17 @@ func (a *DeletionAndSuppressionApiService) CreateWorkspaceRegulationExecute(r Ap
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.createWorkspaceRegulationV1Input == nil {
-		return localVarReturnValue, nil, reportError("createWorkspaceRegulationV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"createWorkspaceRegulationV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -397,7 +486,12 @@ func (a *DeletionAndSuppressionApiService) CreateWorkspaceRegulationExecute(r Ap
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -406,7 +500,16 @@ func (a *DeletionAndSuppressionApiService) CreateWorkspaceRegulationExecute(r Ap
 	}
 	// body params
 	localVarPostBody = r.createWorkspaceRegulationV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -460,7 +563,11 @@ func (a *DeletionAndSuppressionApiService) CreateWorkspaceRegulationExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -473,7 +580,7 @@ func (a *DeletionAndSuppressionApiService) CreateWorkspaceRegulationExecute(r Ap
 }
 
 type ApiDeleteRegulationRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DeletionAndSuppressionApiService
 	regulateId string
 }
@@ -487,40 +594,51 @@ DeleteRegulation Delete Regulation
 
 Deletes a regulation from the Workspace. The regulation must be in the initialized state to be deleted.
 
-
-
 When called, this endpoint may generate the `Regulation Deleted` event in the [audit trail](/tag/Audit-Trail).
-      
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param regulateId
- @return ApiDeleteRegulationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param regulateId
+	@return ApiDeleteRegulationRequest
 */
-func (a *DeletionAndSuppressionApiService) DeleteRegulation(ctx context.Context, regulateId string) ApiDeleteRegulationRequest {
+func (a *DeletionAndSuppressionApiService) DeleteRegulation(
+	ctx context.Context,
+	regulateId string,
+) ApiDeleteRegulationRequest {
 	return ApiDeleteRegulationRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		regulateId: regulateId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteRegulation200Response
-func (a *DeletionAndSuppressionApiService) DeleteRegulationExecute(r ApiDeleteRegulationRequest) (*DeleteRegulation200Response, *http.Response, error) {
+//
+//	@return DeleteRegulation200Response
+func (a *DeletionAndSuppressionApiService) DeleteRegulationExecute(
+	r ApiDeleteRegulationRequest,
+) (*DeleteRegulation200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteRegulation200Response
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteRegulation200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DeletionAndSuppressionApiService.DeleteRegulation")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DeletionAndSuppressionApiService.DeleteRegulation",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/regulations/{regulateId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"regulateId"+"}", url.PathEscape(parameterToString(r.regulateId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"regulateId"+"}",
+		url.PathEscape(parameterToString(r.regulateId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -536,14 +654,28 @@ func (a *DeletionAndSuppressionApiService) DeleteRegulationExecute(r ApiDeleteRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -597,7 +729,11 @@ func (a *DeletionAndSuppressionApiService) DeleteRegulationExecute(r ApiDeleteRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -610,7 +746,7 @@ func (a *DeletionAndSuppressionApiService) DeleteRegulationExecute(r ApiDeleteRe
 }
 
 type ApiGetRegulationRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DeletionAndSuppressionApiService
 	regulateId string
 }
@@ -624,39 +760,53 @@ GetRegulation Get Regulation
 
 Gets a regulation from the Workspace.
 
-      Config API omitted fields:
-- `parent`
-      
+	Config API omitted fields:
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param regulateId
- @return ApiGetRegulationRequest
+- `parent`
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param regulateId
+	@return ApiGetRegulationRequest
 */
-func (a *DeletionAndSuppressionApiService) GetRegulation(ctx context.Context, regulateId string) ApiGetRegulationRequest {
+func (a *DeletionAndSuppressionApiService) GetRegulation(
+	ctx context.Context,
+	regulateId string,
+) ApiGetRegulationRequest {
 	return ApiGetRegulationRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		regulateId: regulateId,
 	}
 }
 
 // Execute executes the request
-//  @return GetRegulation200Response
-func (a *DeletionAndSuppressionApiService) GetRegulationExecute(r ApiGetRegulationRequest) (*GetRegulation200Response, *http.Response, error) {
+//
+//	@return GetRegulation200Response
+func (a *DeletionAndSuppressionApiService) GetRegulationExecute(
+	r ApiGetRegulationRequest,
+) (*GetRegulation200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetRegulation200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetRegulation200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DeletionAndSuppressionApiService.GetRegulation")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DeletionAndSuppressionApiService.GetRegulation",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/regulations/{regulateId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"regulateId"+"}", url.PathEscape(parameterToString(r.regulateId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"regulateId"+"}",
+		url.PathEscape(parameterToString(r.regulateId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -672,14 +822,28 @@ func (a *DeletionAndSuppressionApiService) GetRegulationExecute(r ApiGetRegulati
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -733,7 +897,11 @@ func (a *DeletionAndSuppressionApiService) GetRegulationExecute(r ApiGetRegulati
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -746,28 +914,34 @@ func (a *DeletionAndSuppressionApiService) GetRegulationExecute(r ApiGetRegulati
 }
 
 type ApiListRegulationsFromSourceRequest struct {
-	ctx context.Context
-	ApiService *DeletionAndSuppressionApiService
-	sourceId string
-	pagination *PaginationInput
-	status *string
+	ctx             context.Context
+	ApiService      *DeletionAndSuppressionApiService
+	sourceId        string
+	pagination      *PaginationInput
+	status          *string
 	regulationTypes *[]string
 }
 
 // Pagination parameters.  This parameter exists in v1.
-func (r ApiListRegulationsFromSourceRequest) Pagination(pagination PaginationInput) ApiListRegulationsFromSourceRequest {
+func (r ApiListRegulationsFromSourceRequest) Pagination(
+	pagination PaginationInput,
+) ApiListRegulationsFromSourceRequest {
 	r.pagination = &pagination
 	return r
 }
 
 // The status on which to filter returned regulations.  This parameter exists in v1.
-func (r ApiListRegulationsFromSourceRequest) Status(status string) ApiListRegulationsFromSourceRequest {
+func (r ApiListRegulationsFromSourceRequest) Status(
+	status string,
+) ApiListRegulationsFromSourceRequest {
 	r.status = &status
 	return r
 }
 
 // The regulation types on which to filter returned regulations.  This parameter exists in v1.
-func (r ApiListRegulationsFromSourceRequest) RegulationTypes(regulationTypes []string) ApiListRegulationsFromSourceRequest {
+func (r ApiListRegulationsFromSourceRequest) RegulationTypes(
+	regulationTypes []string,
+) ApiListRegulationsFromSourceRequest {
 	r.regulationTypes = &regulationTypes
 	return r
 }
@@ -781,35 +955,49 @@ ListRegulationsFromSource List Regulations from Source
 
 Lists all Source-scoped regulations.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sourceId
- @return ApiListRegulationsFromSourceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sourceId
+	@return ApiListRegulationsFromSourceRequest
 */
-func (a *DeletionAndSuppressionApiService) ListRegulationsFromSource(ctx context.Context, sourceId string) ApiListRegulationsFromSourceRequest {
+func (a *DeletionAndSuppressionApiService) ListRegulationsFromSource(
+	ctx context.Context,
+	sourceId string,
+) ApiListRegulationsFromSourceRequest {
 	return ApiListRegulationsFromSourceRequest{
 		ApiService: a,
-		ctx: ctx,
-		sourceId: sourceId,
+		ctx:        ctx,
+		sourceId:   sourceId,
 	}
 }
 
 // Execute executes the request
-//  @return ListRegulationsFromSource200Response
-func (a *DeletionAndSuppressionApiService) ListRegulationsFromSourceExecute(r ApiListRegulationsFromSourceRequest) (*ListRegulationsFromSource200Response, *http.Response, error) {
+//
+//	@return ListRegulationsFromSource200Response
+func (a *DeletionAndSuppressionApiService) ListRegulationsFromSourceExecute(
+	r ApiListRegulationsFromSourceRequest,
+) (*ListRegulationsFromSource200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListRegulationsFromSource200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListRegulationsFromSource200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DeletionAndSuppressionApiService.ListRegulationsFromSource")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DeletionAndSuppressionApiService.ListRegulationsFromSource",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/regulations/sources/{sourceId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceId"+"}", url.PathEscape(parameterToString(r.sourceId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterToString(r.sourceId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -835,14 +1023,28 @@ func (a *DeletionAndSuppressionApiService) ListRegulationsFromSourceExecute(r Ap
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -896,7 +1098,11 @@ func (a *DeletionAndSuppressionApiService) ListRegulationsFromSourceExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -909,13 +1115,15 @@ func (a *DeletionAndSuppressionApiService) ListRegulationsFromSourceExecute(r Ap
 }
 
 type ApiListSuppressionsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DeletionAndSuppressionApiService
 	pagination *PaginationInput
 }
 
 // Pagination parameters.  This parameter exists in v1.
-func (r ApiListSuppressionsRequest) Pagination(pagination PaginationInput) ApiListSuppressionsRequest {
+func (r ApiListSuppressionsRequest) Pagination(
+	pagination PaginationInput,
+) ApiListSuppressionsRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -929,27 +1137,35 @@ ListSuppressions List Suppressions
 
 Lists all suppressions in a given Workspace.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListSuppressionsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListSuppressionsRequest
 */
-func (a *DeletionAndSuppressionApiService) ListSuppressions(ctx context.Context) ApiListSuppressionsRequest {
+func (a *DeletionAndSuppressionApiService) ListSuppressions(
+	ctx context.Context,
+) ApiListSuppressionsRequest {
 	return ApiListSuppressionsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListSuppressions200Response
-func (a *DeletionAndSuppressionApiService) ListSuppressionsExecute(r ApiListSuppressionsRequest) (*ListSuppressions200Response, *http.Response, error) {
+//
+//	@return ListSuppressions200Response
+func (a *DeletionAndSuppressionApiService) ListSuppressionsExecute(
+	r ApiListSuppressionsRequest,
+) (*ListSuppressions200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListSuppressions200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListSuppressions200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DeletionAndSuppressionApiService.ListSuppressions")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DeletionAndSuppressionApiService.ListSuppressions",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -974,14 +1190,28 @@ func (a *DeletionAndSuppressionApiService) ListSuppressionsExecute(r ApiListSupp
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1035,7 +1265,11 @@ func (a *DeletionAndSuppressionApiService) ListSuppressionsExecute(r ApiListSupp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1048,27 +1282,33 @@ func (a *DeletionAndSuppressionApiService) ListSuppressionsExecute(r ApiListSupp
 }
 
 type ApiListWorkspaceRegulationsRequest struct {
-	ctx context.Context
-	ApiService *DeletionAndSuppressionApiService
-	pagination *PaginationInput
-	status *string
+	ctx             context.Context
+	ApiService      *DeletionAndSuppressionApiService
+	pagination      *PaginationInput
+	status          *string
 	regulationTypes *[]string
 }
 
 // Pagination parameters.  This parameter exists in v1.
-func (r ApiListWorkspaceRegulationsRequest) Pagination(pagination PaginationInput) ApiListWorkspaceRegulationsRequest {
+func (r ApiListWorkspaceRegulationsRequest) Pagination(
+	pagination PaginationInput,
+) ApiListWorkspaceRegulationsRequest {
 	r.pagination = &pagination
 	return r
 }
 
 // The status on which to filter the returned regulations.  This parameter exists in v1.
-func (r ApiListWorkspaceRegulationsRequest) Status(status string) ApiListWorkspaceRegulationsRequest {
+func (r ApiListWorkspaceRegulationsRequest) Status(
+	status string,
+) ApiListWorkspaceRegulationsRequest {
 	r.status = &status
 	return r
 }
 
 // The regulation types on which to filter returned regulations.  This parameter exists in v1.
-func (r ApiListWorkspaceRegulationsRequest) RegulationTypes(regulationTypes []string) ApiListWorkspaceRegulationsRequest {
+func (r ApiListWorkspaceRegulationsRequest) RegulationTypes(
+	regulationTypes []string,
+) ApiListWorkspaceRegulationsRequest {
 	r.regulationTypes = &regulationTypes
 	return r
 }
@@ -1082,27 +1322,35 @@ ListWorkspaceRegulations List Workspace Regulations
 
 Lists all Workspace-scoped regulations.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListWorkspaceRegulationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListWorkspaceRegulationsRequest
 */
-func (a *DeletionAndSuppressionApiService) ListWorkspaceRegulations(ctx context.Context) ApiListWorkspaceRegulationsRequest {
+func (a *DeletionAndSuppressionApiService) ListWorkspaceRegulations(
+	ctx context.Context,
+) ApiListWorkspaceRegulationsRequest {
 	return ApiListWorkspaceRegulationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListWorkspaceRegulations200Response
-func (a *DeletionAndSuppressionApiService) ListWorkspaceRegulationsExecute(r ApiListWorkspaceRegulationsRequest) (*ListWorkspaceRegulations200Response, *http.Response, error) {
+//
+//	@return ListWorkspaceRegulations200Response
+func (a *DeletionAndSuppressionApiService) ListWorkspaceRegulationsExecute(
+	r ApiListWorkspaceRegulationsRequest,
+) (*ListWorkspaceRegulations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListWorkspaceRegulations200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListWorkspaceRegulations200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DeletionAndSuppressionApiService.ListWorkspaceRegulations")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DeletionAndSuppressionApiService.ListWorkspaceRegulations",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1133,14 +1381,28 @@ func (a *DeletionAndSuppressionApiService) ListWorkspaceRegulationsExecute(r Api
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1194,7 +1456,11 @@ func (a *DeletionAndSuppressionApiService) ListWorkspaceRegulationsExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,

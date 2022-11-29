@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -19,14 +19,17 @@ import (
 type ListWorkspaceRegulationsV1Output struct {
 	// List of Workspace-scoped regulations with statuses.
 	Regulations []RegulationListEntryV1 `json:"regulations"`
-	Pagination Pagination `json:"pagination"`
+	Pagination  Pagination              `json:"pagination"`
 }
 
 // NewListWorkspaceRegulationsV1Output instantiates a new ListWorkspaceRegulationsV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListWorkspaceRegulationsV1Output(regulations []RegulationListEntryV1, pagination Pagination) *ListWorkspaceRegulationsV1Output {
+func NewListWorkspaceRegulationsV1Output(
+	regulations []RegulationListEntryV1,
+	pagination Pagination,
+) *ListWorkspaceRegulationsV1Output {
 	this := ListWorkspaceRegulationsV1Output{}
 	this.Regulations = regulations
 	this.Pagination = pagination
@@ -123,7 +126,9 @@ func (v *NullableListWorkspaceRegulationsV1Output) Unset() {
 	v.isSet = false
 }
 
-func NewNullableListWorkspaceRegulationsV1Output(val *ListWorkspaceRegulationsV1Output) *NullableListWorkspaceRegulationsV1Output {
+func NewNullableListWorkspaceRegulationsV1Output(
+	val *ListWorkspaceRegulationsV1Output,
+) *NullableListWorkspaceRegulationsV1Output {
 	return &NullableListWorkspaceRegulationsV1Output{value: val, isSet: true}
 }
 
@@ -135,5 +140,3 @@ func (v *NullableListWorkspaceRegulationsV1Output) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

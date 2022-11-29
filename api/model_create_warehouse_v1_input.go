@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -31,7 +31,10 @@ type CreateWarehouseV1Input struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateWarehouseV1Input(metadataId string, settings NullableModelMap) *CreateWarehouseV1Input {
+func NewCreateWarehouseV1Input(
+	metadataId string,
+	settings NullableModelMap,
+) *CreateWarehouseV1Input {
 	this := CreateWarehouseV1Input{}
 	this.MetadataId = metadataId
 	this.Settings = settings
@@ -200,7 +203,9 @@ func (v *NullableCreateWarehouseV1Input) Unset() {
 	v.isSet = false
 }
 
-func NewNullableCreateWarehouseV1Input(val *CreateWarehouseV1Input) *NullableCreateWarehouseV1Input {
+func NewNullableCreateWarehouseV1Input(
+	val *CreateWarehouseV1Input,
+) *NullableCreateWarehouseV1Input {
 	return &NullableCreateWarehouseV1Input{value: val, isSet: true}
 }
 
@@ -212,5 +217,3 @@ func (v *NullableCreateWarehouseV1Input) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

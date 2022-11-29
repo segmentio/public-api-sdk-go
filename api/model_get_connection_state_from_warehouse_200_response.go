@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -65,7 +65,9 @@ func (o *GetConnectionStateFromWarehouse200Response) HasData() bool {
 }
 
 // SetData gets a reference to the given GetConnectionStateFromWarehouseV1Output and assigns it to the Data field.
-func (o *GetConnectionStateFromWarehouse200Response) SetData(v GetConnectionStateFromWarehouseV1Output) {
+func (o *GetConnectionStateFromWarehouse200Response) SetData(
+	v GetConnectionStateFromWarehouseV1Output,
+) {
 	o.Data = &v
 }
 
@@ -86,7 +88,9 @@ func (v NullableGetConnectionStateFromWarehouse200Response) Get() *GetConnection
 	return v.value
 }
 
-func (v *NullableGetConnectionStateFromWarehouse200Response) Set(val *GetConnectionStateFromWarehouse200Response) {
+func (v *NullableGetConnectionStateFromWarehouse200Response) Set(
+	val *GetConnectionStateFromWarehouse200Response,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -100,7 +104,9 @@ func (v *NullableGetConnectionStateFromWarehouse200Response) Unset() {
 	v.isSet = false
 }
 
-func NewNullableGetConnectionStateFromWarehouse200Response(val *GetConnectionStateFromWarehouse200Response) *NullableGetConnectionStateFromWarehouse200Response {
+func NewNullableGetConnectionStateFromWarehouse200Response(
+	val *GetConnectionStateFromWarehouse200Response,
+) *NullableGetConnectionStateFromWarehouse200Response {
 	return &NullableGetConnectionStateFromWarehouse200Response{value: val, isSet: true}
 }
 
@@ -112,5 +118,3 @@ func (v *NullableGetConnectionStateFromWarehouse200Response) UnmarshalJSON(src [
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -65,7 +65,9 @@ func (o *ListSelectiveSyncsFromWarehouseAndSource200Response) HasData() bool {
 }
 
 // SetData gets a reference to the given ListSelectiveSyncsFromWarehouseAndSourceV1Output and assigns it to the Data field.
-func (o *ListSelectiveSyncsFromWarehouseAndSource200Response) SetData(v ListSelectiveSyncsFromWarehouseAndSourceV1Output) {
+func (o *ListSelectiveSyncsFromWarehouseAndSource200Response) SetData(
+	v ListSelectiveSyncsFromWarehouseAndSourceV1Output,
+) {
 	o.Data = &v
 }
 
@@ -86,7 +88,9 @@ func (v NullableListSelectiveSyncsFromWarehouseAndSource200Response) Get() *List
 	return v.value
 }
 
-func (v *NullableListSelectiveSyncsFromWarehouseAndSource200Response) Set(val *ListSelectiveSyncsFromWarehouseAndSource200Response) {
+func (v *NullableListSelectiveSyncsFromWarehouseAndSource200Response) Set(
+	val *ListSelectiveSyncsFromWarehouseAndSource200Response,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -100,7 +104,9 @@ func (v *NullableListSelectiveSyncsFromWarehouseAndSource200Response) Unset() {
 	v.isSet = false
 }
 
-func NewNullableListSelectiveSyncsFromWarehouseAndSource200Response(val *ListSelectiveSyncsFromWarehouseAndSource200Response) *NullableListSelectiveSyncsFromWarehouseAndSource200Response {
+func NewNullableListSelectiveSyncsFromWarehouseAndSource200Response(
+	val *ListSelectiveSyncsFromWarehouseAndSource200Response,
+) *NullableListSelectiveSyncsFromWarehouseAndSource200Response {
 	return &NullableListSelectiveSyncsFromWarehouseAndSource200Response{value: val, isSet: true}
 }
 
@@ -108,9 +114,9 @@ func (v NullableListSelectiveSyncsFromWarehouseAndSource200Response) MarshalJSON
 	return json.Marshal(v.value)
 }
 
-func (v *NullableListSelectiveSyncsFromWarehouseAndSource200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableListSelectiveSyncsFromWarehouseAndSource200Response) UnmarshalJSON(
+	src []byte,
+) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

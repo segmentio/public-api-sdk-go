@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -65,7 +65,9 @@ func (o *ListSubscriptionsFromDestination200Response) HasData() bool {
 }
 
 // SetData gets a reference to the given ListSubscriptionsFromDestinationAlphaOutput and assigns it to the Data field.
-func (o *ListSubscriptionsFromDestination200Response) SetData(v ListSubscriptionsFromDestinationAlphaOutput) {
+func (o *ListSubscriptionsFromDestination200Response) SetData(
+	v ListSubscriptionsFromDestinationAlphaOutput,
+) {
 	o.Data = &v
 }
 
@@ -86,7 +88,9 @@ func (v NullableListSubscriptionsFromDestination200Response) Get() *ListSubscrip
 	return v.value
 }
 
-func (v *NullableListSubscriptionsFromDestination200Response) Set(val *ListSubscriptionsFromDestination200Response) {
+func (v *NullableListSubscriptionsFromDestination200Response) Set(
+	val *ListSubscriptionsFromDestination200Response,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -100,7 +104,9 @@ func (v *NullableListSubscriptionsFromDestination200Response) Unset() {
 	v.isSet = false
 }
 
-func NewNullableListSubscriptionsFromDestination200Response(val *ListSubscriptionsFromDestination200Response) *NullableListSubscriptionsFromDestination200Response {
+func NewNullableListSubscriptionsFromDestination200Response(
+	val *ListSubscriptionsFromDestination200Response,
+) *NullableListSubscriptionsFromDestination200Response {
 	return &NullableListSubscriptionsFromDestination200Response{value: val, isSet: true}
 }
 
@@ -112,5 +118,3 @@ func (v *NullableListSubscriptionsFromDestination200Response) UnmarshalJSON(src 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -18,15 +18,18 @@ import (
 // ListSelectiveSyncsFromWarehouseAndSourceV1Output Results containing the Selective Sync configuration for a Warehouse.
 type ListSelectiveSyncsFromWarehouseAndSourceV1Output struct {
 	// Represents a list of Source, collection, and properties synced to the Warehouse.
-	Items []WarehouseSelectiveSyncItemV1 `json:"items"`
-	Pagination Pagination `json:"pagination"`
+	Items      []WarehouseSelectiveSyncItemV1 `json:"items"`
+	Pagination Pagination                     `json:"pagination"`
 }
 
 // NewListSelectiveSyncsFromWarehouseAndSourceV1Output instantiates a new ListSelectiveSyncsFromWarehouseAndSourceV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListSelectiveSyncsFromWarehouseAndSourceV1Output(items []WarehouseSelectiveSyncItemV1, pagination Pagination) *ListSelectiveSyncsFromWarehouseAndSourceV1Output {
+func NewListSelectiveSyncsFromWarehouseAndSourceV1Output(
+	items []WarehouseSelectiveSyncItemV1,
+	pagination Pagination,
+) *ListSelectiveSyncsFromWarehouseAndSourceV1Output {
 	this := ListSelectiveSyncsFromWarehouseAndSourceV1Output{}
 	this.Items = items
 	this.Pagination = pagination
@@ -61,7 +64,9 @@ func (o *ListSelectiveSyncsFromWarehouseAndSourceV1Output) GetItemsOk() ([]Wareh
 }
 
 // SetItems sets field value
-func (o *ListSelectiveSyncsFromWarehouseAndSourceV1Output) SetItems(v []WarehouseSelectiveSyncItemV1) {
+func (o *ListSelectiveSyncsFromWarehouseAndSourceV1Output) SetItems(
+	v []WarehouseSelectiveSyncItemV1,
+) {
 	o.Items = v
 }
 
@@ -109,7 +114,9 @@ func (v NullableListSelectiveSyncsFromWarehouseAndSourceV1Output) Get() *ListSel
 	return v.value
 }
 
-func (v *NullableListSelectiveSyncsFromWarehouseAndSourceV1Output) Set(val *ListSelectiveSyncsFromWarehouseAndSourceV1Output) {
+func (v *NullableListSelectiveSyncsFromWarehouseAndSourceV1Output) Set(
+	val *ListSelectiveSyncsFromWarehouseAndSourceV1Output,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -123,7 +130,9 @@ func (v *NullableListSelectiveSyncsFromWarehouseAndSourceV1Output) Unset() {
 	v.isSet = false
 }
 
-func NewNullableListSelectiveSyncsFromWarehouseAndSourceV1Output(val *ListSelectiveSyncsFromWarehouseAndSourceV1Output) *NullableListSelectiveSyncsFromWarehouseAndSourceV1Output {
+func NewNullableListSelectiveSyncsFromWarehouseAndSourceV1Output(
+	val *ListSelectiveSyncsFromWarehouseAndSourceV1Output,
+) *NullableListSelectiveSyncsFromWarehouseAndSourceV1Output {
 	return &NullableListSelectiveSyncsFromWarehouseAndSourceV1Output{value: val, isSet: true}
 }
 
@@ -135,5 +144,3 @@ func (v *NullableListSelectiveSyncsFromWarehouseAndSourceV1Output) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

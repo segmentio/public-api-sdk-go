@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -20,18 +20,19 @@ import (
 	"strings"
 )
 
-
 // IAMUsersApiService IAMUsersApi service
 type IAMUsersApiService service
 
 type ApiAddPermissionsToUserRequest struct {
-	ctx context.Context
-	ApiService *IAMUsersApiService
-	userId string
+	ctx                         context.Context
+	ApiService                  *IAMUsersApiService
+	userId                      string
 	addPermissionsToUserV1Input *AddPermissionsToUserV1Input
 }
 
-func (r ApiAddPermissionsToUserRequest) AddPermissionsToUserV1Input(addPermissionsToUserV1Input AddPermissionsToUserV1Input) ApiAddPermissionsToUserRequest {
+func (r ApiAddPermissionsToUserRequest) AddPermissionsToUserV1Input(
+	addPermissionsToUserV1Input AddPermissionsToUserV1Input,
+) ApiAddPermissionsToUserRequest {
 	r.addPermissionsToUserV1Input = &addPermissionsToUserV1Input
 	return r
 }
@@ -48,50 +49,68 @@ Adds a list of access permissions to a user.
 When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
 * Policy Created
 * User Policy Updated
-      
-
 
 The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param userId
- @return ApiAddPermissionsToUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param userId
+	@return ApiAddPermissionsToUserRequest
 */
-func (a *IAMUsersApiService) AddPermissionsToUser(ctx context.Context, userId string) ApiAddPermissionsToUserRequest {
+func (a *IAMUsersApiService) AddPermissionsToUser(
+	ctx context.Context,
+	userId string,
+) ApiAddPermissionsToUserRequest {
 	return ApiAddPermissionsToUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		userId: userId,
+		ctx:        ctx,
+		userId:     userId,
 	}
 }
 
 // Execute executes the request
-//  @return AddPermissionsToUser200Response
-func (a *IAMUsersApiService) AddPermissionsToUserExecute(r ApiAddPermissionsToUserRequest) (*AddPermissionsToUser200Response, *http.Response, error) {
+//
+//	@return AddPermissionsToUser200Response
+func (a *IAMUsersApiService) AddPermissionsToUserExecute(
+	r ApiAddPermissionsToUserRequest,
+) (*AddPermissionsToUser200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AddPermissionsToUser200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AddPermissionsToUser200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersApiService.AddPermissionsToUser")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"IAMUsersApiService.AddPermissionsToUser",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/users/{userId}/permissions"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterToString(r.userId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"userId"+"}",
+		url.PathEscape(parameterToString(r.userId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.addPermissionsToUserV1Input == nil {
-		return localVarReturnValue, nil, reportError("addPermissionsToUserV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"addPermissionsToUserV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -100,7 +119,12 @@ func (a *IAMUsersApiService) AddPermissionsToUserExecute(r ApiAddPermissionsToUs
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -109,7 +133,16 @@ func (a *IAMUsersApiService) AddPermissionsToUserExecute(r ApiAddPermissionsToUs
 	}
 	// body params
 	localVarPostBody = r.addPermissionsToUserV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -163,7 +196,11 @@ func (a *IAMUsersApiService) AddPermissionsToUserExecute(r ApiAddPermissionsToUs
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -176,12 +213,14 @@ func (a *IAMUsersApiService) AddPermissionsToUserExecute(r ApiAddPermissionsToUs
 }
 
 type ApiCreateInvitesRequest struct {
-	ctx context.Context
-	ApiService *IAMUsersApiService
+	ctx                  context.Context
+	ApiService           *IAMUsersApiService
 	createInvitesV1Input *CreateInvitesV1Input
 }
 
-func (r ApiCreateInvitesRequest) CreateInvitesV1Input(createInvitesV1Input CreateInvitesV1Input) ApiCreateInvitesRequest {
+func (r ApiCreateInvitesRequest) CreateInvitesV1Input(
+	createInvitesV1Input CreateInvitesV1Input,
+) ApiCreateInvitesRequest {
 	r.createInvitesV1Input = &createInvitesV1Input
 	return r
 }
@@ -202,32 +241,36 @@ When called, this endpoint may generate one or more of the following [audit trai
 
 Config API omitted fields:
 - `parent`
-      
-
 
 The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateInvitesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateInvitesRequest
 */
 func (a *IAMUsersApiService) CreateInvites(ctx context.Context) ApiCreateInvitesRequest {
 	return ApiCreateInvitesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateInvites200Response
-func (a *IAMUsersApiService) CreateInvitesExecute(r ApiCreateInvitesRequest) (*CreateInvites200Response, *http.Response, error) {
+//
+//	@return CreateInvites200Response
+func (a *IAMUsersApiService) CreateInvitesExecute(
+	r ApiCreateInvitesRequest,
+) (*CreateInvites200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateInvites200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateInvites200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersApiService.CreateInvites")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"IAMUsersApiService.CreateInvites",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -238,11 +281,17 @@ func (a *IAMUsersApiService) CreateInvitesExecute(r ApiCreateInvitesRequest) (*C
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.createInvitesV1Input == nil {
-		return localVarReturnValue, nil, reportError("createInvitesV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"createInvitesV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -251,7 +300,12 @@ func (a *IAMUsersApiService) CreateInvitesExecute(r ApiCreateInvitesRequest) (*C
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -260,7 +314,16 @@ func (a *IAMUsersApiService) CreateInvitesExecute(r ApiCreateInvitesRequest) (*C
 	}
 	// body params
 	localVarPostBody = r.createInvitesV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -314,7 +377,11 @@ func (a *IAMUsersApiService) CreateInvitesExecute(r ApiCreateInvitesRequest) (*C
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -327,9 +394,9 @@ func (a *IAMUsersApiService) CreateInvitesExecute(r ApiCreateInvitesRequest) (*C
 }
 
 type ApiDeleteInvitesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *IAMUsersApiService
-	emails *[]string
+	emails     *[]string
 }
 
 // The list of emails to delete invites for.  This parameter exists in v1.
@@ -350,32 +417,36 @@ Removes a list of invitations to join a Workspace.
 When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
 * Invite Deleted
 * Group Memberships Deleted
-      
-
 
 The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiDeleteInvitesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDeleteInvitesRequest
 */
 func (a *IAMUsersApiService) DeleteInvites(ctx context.Context) ApiDeleteInvitesRequest {
 	return ApiDeleteInvitesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteInvites200Response
-func (a *IAMUsersApiService) DeleteInvitesExecute(r ApiDeleteInvitesRequest) (*DeleteInvites200Response, *http.Response, error) {
+//
+//	@return DeleteInvites200Response
+func (a *IAMUsersApiService) DeleteInvitesExecute(
+	r ApiDeleteInvitesRequest,
+) (*DeleteInvites200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteInvites200Response
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteInvites200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersApiService.DeleteInvites")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"IAMUsersApiService.DeleteInvites",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -400,14 +471,28 @@ func (a *IAMUsersApiService) DeleteInvitesExecute(r ApiDeleteInvitesRequest) (*D
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -461,7 +546,11 @@ func (a *IAMUsersApiService) DeleteInvitesExecute(r ApiDeleteInvitesRequest) (*D
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -474,9 +563,9 @@ func (a *IAMUsersApiService) DeleteInvitesExecute(r ApiDeleteInvitesRequest) (*D
 }
 
 type ApiDeleteUsersRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *IAMUsersApiService
-	userIds *[]string
+	userIds    *[]string
 }
 
 // The ids of the users to remove.  This parameter exists in v1.
@@ -494,32 +583,31 @@ DeleteUsers Delete Users
 
 Removes one or multiple users.
 
-
-
 When called, this endpoint may generate the `Group Memberships Deleted` event in the [audit trail](/tag/Audit-Trail).
-      
-
 
 The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiDeleteUsersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiDeleteUsersRequest
 */
 func (a *IAMUsersApiService) DeleteUsers(ctx context.Context) ApiDeleteUsersRequest {
 	return ApiDeleteUsersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteUsers200Response
-func (a *IAMUsersApiService) DeleteUsersExecute(r ApiDeleteUsersRequest) (*DeleteUsers200Response, *http.Response, error) {
+//
+//	@return DeleteUsers200Response
+func (a *IAMUsersApiService) DeleteUsersExecute(
+	r ApiDeleteUsersRequest,
+) (*DeleteUsers200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteUsers200Response
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteUsers200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersApiService.DeleteUsers")
@@ -547,14 +635,28 @@ func (a *IAMUsersApiService) DeleteUsersExecute(r ApiDeleteUsersRequest) (*Delet
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -608,7 +710,11 @@ func (a *IAMUsersApiService) DeleteUsersExecute(r ApiDeleteUsersRequest) (*Delet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -621,9 +727,9 @@ func (a *IAMUsersApiService) DeleteUsersExecute(r ApiDeleteUsersRequest) (*Delet
 }
 
 type ApiGetUserRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *IAMUsersApiService
-	userId string
+	userId     string
 }
 
 func (r ApiGetUserRequest) Execute() (*GetUser200Response, *http.Response, error) {
@@ -635,26 +741,29 @@ GetUser Get User
 
 Returns a user given their id.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param userId
- @return ApiGetUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param userId
+	@return ApiGetUserRequest
 */
 func (a *IAMUsersApiService) GetUser(ctx context.Context, userId string) ApiGetUserRequest {
 	return ApiGetUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		userId: userId,
+		ctx:        ctx,
+		userId:     userId,
 	}
 }
 
 // Execute executes the request
-//  @return GetUser200Response
-func (a *IAMUsersApiService) GetUserExecute(r ApiGetUserRequest) (*GetUser200Response, *http.Response, error) {
+//
+//	@return GetUser200Response
+func (a *IAMUsersApiService) GetUserExecute(
+	r ApiGetUserRequest,
+) (*GetUser200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetUser200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetUser200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersApiService.GetUser")
@@ -663,7 +772,12 @@ func (a *IAMUsersApiService) GetUserExecute(r ApiGetUserRequest) (*GetUser200Res
 	}
 
 	localVarPath := localBasePath + "/users/{userId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterToString(r.userId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"userId"+"}",
+		url.PathEscape(parameterToString(r.userId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -679,14 +793,28 @@ func (a *IAMUsersApiService) GetUserExecute(r ApiGetUserRequest) (*GetUser200Res
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -740,7 +868,11 @@ func (a *IAMUsersApiService) GetUserExecute(r ApiGetUserRequest) (*GetUser200Res
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -753,7 +885,7 @@ func (a *IAMUsersApiService) GetUserExecute(r ApiGetUserRequest) (*GetUser200Res
 }
 
 type ApiListInvitesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *IAMUsersApiService
 	pagination *PaginationInput
 }
@@ -776,25 +908,27 @@ Returns a list of invitations to join a Workspace.
 Config API omitted fields:
 - `parent`
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListInvitesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListInvitesRequest
 */
 func (a *IAMUsersApiService) ListInvites(ctx context.Context) ApiListInvitesRequest {
 	return ApiListInvitesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListInvites200Response
-func (a *IAMUsersApiService) ListInvitesExecute(r ApiListInvitesRequest) (*ListInvites200Response, *http.Response, error) {
+//
+//	@return ListInvites200Response
+func (a *IAMUsersApiService) ListInvitesExecute(
+	r ApiListInvitesRequest,
+) (*ListInvites200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListInvites200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListInvites200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersApiService.ListInvites")
@@ -822,14 +956,28 @@ func (a *IAMUsersApiService) ListInvitesExecute(r ApiListInvitesRequest) (*ListI
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -883,7 +1031,11 @@ func (a *IAMUsersApiService) ListInvitesExecute(r ApiListInvitesRequest) (*ListI
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -896,14 +1048,16 @@ func (a *IAMUsersApiService) ListInvitesExecute(r ApiListInvitesRequest) (*ListI
 }
 
 type ApiListUserGroupsFromUserRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *IAMUsersApiService
-	userId string
+	userId     string
 	pagination *PaginationInput
 }
 
 // Pagination for groups.  This parameter exists in v1.
-func (r ApiListUserGroupsFromUserRequest) Pagination(pagination PaginationInput) ApiListUserGroupsFromUserRequest {
+func (r ApiListUserGroupsFromUserRequest) Pagination(
+	pagination PaginationInput,
+) ApiListUserGroupsFromUserRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -917,35 +1071,49 @@ ListUserGroupsFromUser List User Groups from User
 
 Returns all groups a user belongs to.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param userId
- @return ApiListUserGroupsFromUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param userId
+	@return ApiListUserGroupsFromUserRequest
 */
-func (a *IAMUsersApiService) ListUserGroupsFromUser(ctx context.Context, userId string) ApiListUserGroupsFromUserRequest {
+func (a *IAMUsersApiService) ListUserGroupsFromUser(
+	ctx context.Context,
+	userId string,
+) ApiListUserGroupsFromUserRequest {
 	return ApiListUserGroupsFromUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		userId: userId,
+		ctx:        ctx,
+		userId:     userId,
 	}
 }
 
 // Execute executes the request
-//  @return ListUserGroupsFromUser200Response
-func (a *IAMUsersApiService) ListUserGroupsFromUserExecute(r ApiListUserGroupsFromUserRequest) (*ListUserGroupsFromUser200Response, *http.Response, error) {
+//
+//	@return ListUserGroupsFromUser200Response
+func (a *IAMUsersApiService) ListUserGroupsFromUserExecute(
+	r ApiListUserGroupsFromUserRequest,
+) (*ListUserGroupsFromUser200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListUserGroupsFromUser200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListUserGroupsFromUser200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersApiService.ListUserGroupsFromUser")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"IAMUsersApiService.ListUserGroupsFromUser",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/users/{userId}/groups"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterToString(r.userId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"userId"+"}",
+		url.PathEscape(parameterToString(r.userId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -965,14 +1133,28 @@ func (a *IAMUsersApiService) ListUserGroupsFromUserExecute(r ApiListUserGroupsFr
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1026,7 +1208,11 @@ func (a *IAMUsersApiService) ListUserGroupsFromUserExecute(r ApiListUserGroupsFr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1039,7 +1225,7 @@ func (a *IAMUsersApiService) ListUserGroupsFromUserExecute(r ApiListUserGroupsFr
 }
 
 type ApiListUsersRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *IAMUsersApiService
 	pagination *PaginationInput
 }
@@ -1059,24 +1245,27 @@ ListUsers List Users
 
 Returns a list of users with access to the Workspace.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListUsersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListUsersRequest
 */
 func (a *IAMUsersApiService) ListUsers(ctx context.Context) ApiListUsersRequest {
 	return ApiListUsersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListUsers200Response
-func (a *IAMUsersApiService) ListUsersExecute(r ApiListUsersRequest) (*ListUsers200Response, *http.Response, error) {
+//
+//	@return ListUsers200Response
+func (a *IAMUsersApiService) ListUsersExecute(
+	r ApiListUsersRequest,
+) (*ListUsers200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListUsers200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListUsers200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersApiService.ListUsers")
@@ -1104,14 +1293,28 @@ func (a *IAMUsersApiService) ListUsersExecute(r ApiListUsersRequest) (*ListUsers
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1165,7 +1368,11 @@ func (a *IAMUsersApiService) ListUsersExecute(r ApiListUsersRequest) (*ListUsers
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1178,13 +1385,15 @@ func (a *IAMUsersApiService) ListUsersExecute(r ApiListUsersRequest) (*ListUsers
 }
 
 type ApiReplacePermissionsForUserRequest struct {
-	ctx context.Context
-	ApiService *IAMUsersApiService
-	userId string
+	ctx                              context.Context
+	ApiService                       *IAMUsersApiService
+	userId                           string
 	replacePermissionsForUserV1Input *ReplacePermissionsForUserV1Input
 }
 
-func (r ApiReplacePermissionsForUserRequest) ReplacePermissionsForUserV1Input(replacePermissionsForUserV1Input ReplacePermissionsForUserV1Input) ApiReplacePermissionsForUserRequest {
+func (r ApiReplacePermissionsForUserRequest) ReplacePermissionsForUserV1Input(
+	replacePermissionsForUserV1Input ReplacePermissionsForUserV1Input,
+) ApiReplacePermissionsForUserRequest {
 	r.replacePermissionsForUserV1Input = &replacePermissionsForUserV1Input
 	return r
 }
@@ -1198,53 +1407,69 @@ ReplacePermissionsForUser Replace Permissions for User
 
 Updates the list of access permissions for a user.
 
-
-
 When called, this endpoint may generate the `Policy Deleted` event in the [audit trail](/tag/Audit-Trail).
-      
-
 
 The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param userId
- @return ApiReplacePermissionsForUserRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param userId
+	@return ApiReplacePermissionsForUserRequest
 */
-func (a *IAMUsersApiService) ReplacePermissionsForUser(ctx context.Context, userId string) ApiReplacePermissionsForUserRequest {
+func (a *IAMUsersApiService) ReplacePermissionsForUser(
+	ctx context.Context,
+	userId string,
+) ApiReplacePermissionsForUserRequest {
 	return ApiReplacePermissionsForUserRequest{
 		ApiService: a,
-		ctx: ctx,
-		userId: userId,
+		ctx:        ctx,
+		userId:     userId,
 	}
 }
 
 // Execute executes the request
-//  @return ReplacePermissionsForUser200Response
-func (a *IAMUsersApiService) ReplacePermissionsForUserExecute(r ApiReplacePermissionsForUserRequest) (*ReplacePermissionsForUser200Response, *http.Response, error) {
+//
+//	@return ReplacePermissionsForUser200Response
+func (a *IAMUsersApiService) ReplacePermissionsForUserExecute(
+	r ApiReplacePermissionsForUserRequest,
+) (*ReplacePermissionsForUser200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReplacePermissionsForUser200Response
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReplacePermissionsForUser200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersApiService.ReplacePermissionsForUser")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"IAMUsersApiService.ReplacePermissionsForUser",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/users/{userId}/permissions"
-	localVarPath = strings.Replace(localVarPath, "{"+"userId"+"}", url.PathEscape(parameterToString(r.userId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"userId"+"}",
+		url.PathEscape(parameterToString(r.userId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.replacePermissionsForUserV1Input == nil {
-		return localVarReturnValue, nil, reportError("replacePermissionsForUserV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"replacePermissionsForUserV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1253,7 +1478,12 @@ func (a *IAMUsersApiService) ReplacePermissionsForUserExecute(r ApiReplacePermis
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1262,7 +1492,16 @@ func (a *IAMUsersApiService) ReplacePermissionsForUserExecute(r ApiReplacePermis
 	}
 	// body params
 	localVarPostBody = r.replacePermissionsForUserV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1316,7 +1555,11 @@ func (a *IAMUsersApiService) ReplacePermissionsForUserExecute(r ApiReplacePermis
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,

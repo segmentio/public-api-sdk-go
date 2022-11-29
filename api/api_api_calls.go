@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -19,25 +19,28 @@ import (
 	"net/url"
 )
 
-
 // APICallsApiService APICallsApi service
 type APICallsApiService service
 
 type ApiGetDailyPerSourceAPICallsUsageRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *APICallsApiService
-	period *string
+	period     *string
 	pagination *PaginationInput
 }
 
 // The start of the usage month in the ISO-8601 format.  This parameter exists in v1.
-func (r ApiGetDailyPerSourceAPICallsUsageRequest) Period(period string) ApiGetDailyPerSourceAPICallsUsageRequest {
+func (r ApiGetDailyPerSourceAPICallsUsageRequest) Period(
+	period string,
+) ApiGetDailyPerSourceAPICallsUsageRequest {
 	r.period = &period
 	return r
 }
 
 // Pagination input for per Source API calls counts.  This parameter exists in v1.
-func (r ApiGetDailyPerSourceAPICallsUsageRequest) Pagination(pagination PaginationInput) ApiGetDailyPerSourceAPICallsUsageRequest {
+func (r ApiGetDailyPerSourceAPICallsUsageRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetDailyPerSourceAPICallsUsageRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -51,27 +54,35 @@ GetDailyPerSourceAPICallsUsage Get Daily Per Source API Calls Usage
 
 Provides daily cumulative per-source API call counts for a usage period.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetDailyPerSourceAPICallsUsageRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetDailyPerSourceAPICallsUsageRequest
 */
-func (a *APICallsApiService) GetDailyPerSourceAPICallsUsage(ctx context.Context) ApiGetDailyPerSourceAPICallsUsageRequest {
+func (a *APICallsApiService) GetDailyPerSourceAPICallsUsage(
+	ctx context.Context,
+) ApiGetDailyPerSourceAPICallsUsageRequest {
 	return ApiGetDailyPerSourceAPICallsUsageRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetDailyPerSourceAPICallsUsage200Response
-func (a *APICallsApiService) GetDailyPerSourceAPICallsUsageExecute(r ApiGetDailyPerSourceAPICallsUsageRequest) (*GetDailyPerSourceAPICallsUsage200Response, *http.Response, error) {
+//
+//	@return GetDailyPerSourceAPICallsUsage200Response
+func (a *APICallsApiService) GetDailyPerSourceAPICallsUsageExecute(
+	r ApiGetDailyPerSourceAPICallsUsageRequest,
+) (*GetDailyPerSourceAPICallsUsage200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetDailyPerSourceAPICallsUsage200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetDailyPerSourceAPICallsUsage200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "APICallsApiService.GetDailyPerSourceAPICallsUsage")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"APICallsApiService.GetDailyPerSourceAPICallsUsage",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -100,14 +111,28 @@ func (a *APICallsApiService) GetDailyPerSourceAPICallsUsageExecute(r ApiGetDaily
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -161,7 +186,11 @@ func (a *APICallsApiService) GetDailyPerSourceAPICallsUsageExecute(r ApiGetDaily
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -174,20 +203,24 @@ func (a *APICallsApiService) GetDailyPerSourceAPICallsUsageExecute(r ApiGetDaily
 }
 
 type ApiGetDailyWorkspaceAPICallsUsageRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *APICallsApiService
-	period *string
+	period     *string
 	pagination *PaginationInput
 }
 
 // The start of the usage month in the ISO-8601 format.  This parameter exists in v1.
-func (r ApiGetDailyWorkspaceAPICallsUsageRequest) Period(period string) ApiGetDailyWorkspaceAPICallsUsageRequest {
+func (r ApiGetDailyWorkspaceAPICallsUsageRequest) Period(
+	period string,
+) ApiGetDailyWorkspaceAPICallsUsageRequest {
 	r.period = &period
 	return r
 }
 
 // Pagination input for Workspace API call counts.  This parameter exists in v1.
-func (r ApiGetDailyWorkspaceAPICallsUsageRequest) Pagination(pagination PaginationInput) ApiGetDailyWorkspaceAPICallsUsageRequest {
+func (r ApiGetDailyWorkspaceAPICallsUsageRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetDailyWorkspaceAPICallsUsageRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -201,27 +234,35 @@ GetDailyWorkspaceAPICallsUsage Get Daily Workspace API Calls Usage
 
 Provides daily cumulative API call counts for a usage period.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetDailyWorkspaceAPICallsUsageRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetDailyWorkspaceAPICallsUsageRequest
 */
-func (a *APICallsApiService) GetDailyWorkspaceAPICallsUsage(ctx context.Context) ApiGetDailyWorkspaceAPICallsUsageRequest {
+func (a *APICallsApiService) GetDailyWorkspaceAPICallsUsage(
+	ctx context.Context,
+) ApiGetDailyWorkspaceAPICallsUsageRequest {
 	return ApiGetDailyWorkspaceAPICallsUsageRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetDailyWorkspaceAPICallsUsage200Response
-func (a *APICallsApiService) GetDailyWorkspaceAPICallsUsageExecute(r ApiGetDailyWorkspaceAPICallsUsageRequest) (*GetDailyWorkspaceAPICallsUsage200Response, *http.Response, error) {
+//
+//	@return GetDailyWorkspaceAPICallsUsage200Response
+func (a *APICallsApiService) GetDailyWorkspaceAPICallsUsageExecute(
+	r ApiGetDailyWorkspaceAPICallsUsageRequest,
+) (*GetDailyWorkspaceAPICallsUsage200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetDailyWorkspaceAPICallsUsage200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetDailyWorkspaceAPICallsUsage200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "APICallsApiService.GetDailyWorkspaceAPICallsUsage")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"APICallsApiService.GetDailyWorkspaceAPICallsUsage",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -250,14 +291,28 @@ func (a *APICallsApiService) GetDailyWorkspaceAPICallsUsageExecute(r ApiGetDaily
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -311,7 +366,11 @@ func (a *APICallsApiService) GetDailyWorkspaceAPICallsUsageExecute(r ApiGetDaily
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,

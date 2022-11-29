@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -25,7 +25,7 @@ type SourceMetadataV1 struct {
 	Slug string `json:"slug"`
 	// The description of this Source.
 	Description string `json:"description"`
-	Logos Logos1 `json:"logos"`
+	Logos       Logos1 `json:"logos"`
 	// Options for this Source.
 	Options []IntegrationOptionBeta `json:"options"`
 	// A list of categories this Source belongs to.
@@ -38,7 +38,16 @@ type SourceMetadataV1 struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSourceMetadataV1(id string, name string, slug string, description string, logos Logos1, options []IntegrationOptionBeta, categories []string, isCloudEventSource bool) *SourceMetadataV1 {
+func NewSourceMetadataV1(
+	id string,
+	name string,
+	slug string,
+	description string,
+	logos Logos1,
+	options []IntegrationOptionBeta,
+	categories []string,
+	isCloudEventSource bool,
+) *SourceMetadataV1 {
 	this := SourceMetadataV1{}
 	this.Id = id
 	this.Name = name
@@ -315,5 +324,3 @@ func (v *NullableSourceMetadataV1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

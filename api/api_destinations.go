@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -20,17 +20,18 @@ import (
 	"strings"
 )
 
-
 // DestinationsApiService DestinationsApi service
 type DestinationsApiService service
 
 type ApiCreateDestinationRequest struct {
-	ctx context.Context
-	ApiService *DestinationsApiService
+	ctx                      context.Context
+	ApiService               *DestinationsApiService
 	createDestinationV1Input *CreateDestinationV1Input
 }
 
-func (r ApiCreateDestinationRequest) CreateDestinationV1Input(createDestinationV1Input CreateDestinationV1Input) ApiCreateDestinationRequest {
+func (r ApiCreateDestinationRequest) CreateDestinationV1Input(
+	createDestinationV1Input CreateDestinationV1Input,
+) ApiCreateDestinationRequest {
 	r.createDestinationV1Input = &createDestinationV1Input
 	return r
 }
@@ -44,32 +45,37 @@ CreateDestination Create Destination
 
 Creates a new Destination.
 
-
-
 When called, this endpoint may generate the `Integration Created` event in the [audit trail](/tag/Audit-Trail).
-      
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateDestinationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateDestinationRequest
 */
-func (a *DestinationsApiService) CreateDestination(ctx context.Context) ApiCreateDestinationRequest {
+func (a *DestinationsApiService) CreateDestination(
+	ctx context.Context,
+) ApiCreateDestinationRequest {
 	return ApiCreateDestinationRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateDestination200Response
-func (a *DestinationsApiService) CreateDestinationExecute(r ApiCreateDestinationRequest) (*CreateDestination200Response, *http.Response, error) {
+//
+//	@return CreateDestination200Response
+func (a *DestinationsApiService) CreateDestinationExecute(
+	r ApiCreateDestinationRequest,
+) (*CreateDestination200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateDestination200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateDestination200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DestinationsApiService.CreateDestination")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DestinationsApiService.CreateDestination",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -80,11 +86,17 @@ func (a *DestinationsApiService) CreateDestinationExecute(r ApiCreateDestination
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.createDestinationV1Input == nil {
-		return localVarReturnValue, nil, reportError("createDestinationV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"createDestinationV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -93,7 +105,12 @@ func (a *DestinationsApiService) CreateDestinationExecute(r ApiCreateDestination
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -102,7 +119,16 @@ func (a *DestinationsApiService) CreateDestinationExecute(r ApiCreateDestination
 	}
 	// body params
 	localVarPostBody = r.createDestinationV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -156,7 +182,11 @@ func (a *DestinationsApiService) CreateDestinationExecute(r ApiCreateDestination
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -169,13 +199,15 @@ func (a *DestinationsApiService) CreateDestinationExecute(r ApiCreateDestination
 }
 
 type ApiCreateDestinationSubscriptionRequest struct {
-	ctx context.Context
-	ApiService *DestinationsApiService
-	destinationId string
+	ctx                                     context.Context
+	ApiService                              *DestinationsApiService
+	destinationId                           string
 	createDestinationSubscriptionAlphaInput *CreateDestinationSubscriptionAlphaInput
 }
 
-func (r ApiCreateDestinationSubscriptionRequest) CreateDestinationSubscriptionAlphaInput(createDestinationSubscriptionAlphaInput CreateDestinationSubscriptionAlphaInput) ApiCreateDestinationSubscriptionRequest {
+func (r ApiCreateDestinationSubscriptionRequest) CreateDestinationSubscriptionAlphaInput(
+	createDestinationSubscriptionAlphaInput CreateDestinationSubscriptionAlphaInput,
+) ApiCreateDestinationSubscriptionRequest {
 	r.createDestinationSubscriptionAlphaInput = &createDestinationSubscriptionAlphaInput
 	return r
 }
@@ -189,41 +221,57 @@ CreateDestinationSubscription Create Destination Subscription
 
 Creates a new Destination subscription.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param destinationId
- @return ApiCreateDestinationSubscriptionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param destinationId
+	@return ApiCreateDestinationSubscriptionRequest
 */
-func (a *DestinationsApiService) CreateDestinationSubscription(ctx context.Context, destinationId string) ApiCreateDestinationSubscriptionRequest {
+func (a *DestinationsApiService) CreateDestinationSubscription(
+	ctx context.Context,
+	destinationId string,
+) ApiCreateDestinationSubscriptionRequest {
 	return ApiCreateDestinationSubscriptionRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:    a,
+		ctx:           ctx,
 		destinationId: destinationId,
 	}
 }
 
 // Execute executes the request
-//  @return CreateDestinationSubscription200Response
-func (a *DestinationsApiService) CreateDestinationSubscriptionExecute(r ApiCreateDestinationSubscriptionRequest) (*CreateDestinationSubscription200Response, *http.Response, error) {
+//
+//	@return CreateDestinationSubscription200Response
+func (a *DestinationsApiService) CreateDestinationSubscriptionExecute(
+	r ApiCreateDestinationSubscriptionRequest,
+) (*CreateDestinationSubscription200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateDestinationSubscription200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateDestinationSubscription200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DestinationsApiService.CreateDestinationSubscription")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DestinationsApiService.CreateDestinationSubscription",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/destinations/{destinationId}/subscriptions"
-	localVarPath = strings.Replace(localVarPath, "{"+"destinationId"+"}", url.PathEscape(parameterToString(r.destinationId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"destinationId"+"}",
+		url.PathEscape(parameterToString(r.destinationId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.createDestinationSubscriptionAlphaInput == nil {
-		return localVarReturnValue, nil, reportError("createDestinationSubscriptionAlphaInput is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"createDestinationSubscriptionAlphaInput is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
@@ -236,7 +284,10 @@ func (a *DestinationsApiService) CreateDestinationSubscriptionExecute(r ApiCreat
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -245,7 +296,16 @@ func (a *DestinationsApiService) CreateDestinationSubscriptionExecute(r ApiCreat
 	}
 	// body params
 	localVarPostBody = r.createDestinationSubscriptionAlphaInput
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -299,7 +359,11 @@ func (a *DestinationsApiService) CreateDestinationSubscriptionExecute(r ApiCreat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -312,8 +376,8 @@ func (a *DestinationsApiService) CreateDestinationSubscriptionExecute(r ApiCreat
 }
 
 type ApiDeleteDestinationRequest struct {
-	ctx context.Context
-	ApiService *DestinationsApiService
+	ctx           context.Context
+	ApiService    *DestinationsApiService
 	destinationId string
 }
 
@@ -326,43 +390,54 @@ DeleteDestination Delete Destination
 
 Deletes an existing Destination.
 
-
-
 When called, this endpoint may generate the `Integration Deleted` event in the [audit trail](/tag/Audit-Trail).
 
 Config API omitted fields:
 - `catalogId`
-      
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param destinationId
- @return ApiDeleteDestinationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param destinationId
+	@return ApiDeleteDestinationRequest
 */
-func (a *DestinationsApiService) DeleteDestination(ctx context.Context, destinationId string) ApiDeleteDestinationRequest {
+func (a *DestinationsApiService) DeleteDestination(
+	ctx context.Context,
+	destinationId string,
+) ApiDeleteDestinationRequest {
 	return ApiDeleteDestinationRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:    a,
+		ctx:           ctx,
 		destinationId: destinationId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteDestination200Response
-func (a *DestinationsApiService) DeleteDestinationExecute(r ApiDeleteDestinationRequest) (*DeleteDestination200Response, *http.Response, error) {
+//
+//	@return DeleteDestination200Response
+func (a *DestinationsApiService) DeleteDestinationExecute(
+	r ApiDeleteDestinationRequest,
+) (*DeleteDestination200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteDestination200Response
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteDestination200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DestinationsApiService.DeleteDestination")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DestinationsApiService.DeleteDestination",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/destinations/{destinationId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"destinationId"+"}", url.PathEscape(parameterToString(r.destinationId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"destinationId"+"}",
+		url.PathEscape(parameterToString(r.destinationId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -378,14 +453,28 @@ func (a *DestinationsApiService) DeleteDestinationExecute(r ApiDeleteDestination
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -439,7 +528,11 @@ func (a *DestinationsApiService) DeleteDestinationExecute(r ApiDeleteDestination
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -452,8 +545,8 @@ func (a *DestinationsApiService) DeleteDestinationExecute(r ApiDeleteDestination
 }
 
 type ApiGetDestinationRequest struct {
-	ctx context.Context
-	ApiService *DestinationsApiService
+	ctx           context.Context
+	ApiService    *DestinationsApiService
 	destinationId string
 }
 
@@ -466,39 +559,53 @@ GetDestination Get Destination
 
 Returns a Destination by its id.
 
-      Config API omitted fields:
+	Config API omitted fields:
+
 - `catalogId`
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param destinationId
- @return ApiGetDestinationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param destinationId
+	@return ApiGetDestinationRequest
 */
-func (a *DestinationsApiService) GetDestination(ctx context.Context, destinationId string) ApiGetDestinationRequest {
+func (a *DestinationsApiService) GetDestination(
+	ctx context.Context,
+	destinationId string,
+) ApiGetDestinationRequest {
 	return ApiGetDestinationRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:    a,
+		ctx:           ctx,
 		destinationId: destinationId,
 	}
 }
 
 // Execute executes the request
-//  @return GetDestination200Response
-func (a *DestinationsApiService) GetDestinationExecute(r ApiGetDestinationRequest) (*GetDestination200Response, *http.Response, error) {
+//
+//	@return GetDestination200Response
+func (a *DestinationsApiService) GetDestinationExecute(
+	r ApiGetDestinationRequest,
+) (*GetDestination200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetDestination200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetDestination200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DestinationsApiService.GetDestination")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DestinationsApiService.GetDestination",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/destinations/{destinationId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"destinationId"+"}", url.PathEscape(parameterToString(r.destinationId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"destinationId"+"}",
+		url.PathEscape(parameterToString(r.destinationId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -514,14 +621,28 @@ func (a *DestinationsApiService) GetDestinationExecute(r ApiGetDestinationReques
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -575,7 +696,11 @@ func (a *DestinationsApiService) GetDestinationExecute(r ApiGetDestinationReques
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -588,10 +713,10 @@ func (a *DestinationsApiService) GetDestinationExecute(r ApiGetDestinationReques
 }
 
 type ApiGetSubscriptionFromDestinationRequest struct {
-	ctx context.Context
-	ApiService *DestinationsApiService
+	ctx           context.Context
+	ApiService    *DestinationsApiService
 	destinationId string
-	id string
+	id            string
 }
 
 func (r ApiGetSubscriptionFromDestinationRequest) Execute() (*GetSubscriptionFromDestination200Response, *http.Response, error) {
@@ -603,38 +728,58 @@ GetSubscriptionFromDestination Get Subscription from Destination
 
 Gets a Destination subscription by id.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param destinationId
- @param id
- @return ApiGetSubscriptionFromDestinationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param destinationId
+	@param id
+	@return ApiGetSubscriptionFromDestinationRequest
 */
-func (a *DestinationsApiService) GetSubscriptionFromDestination(ctx context.Context, destinationId string, id string) ApiGetSubscriptionFromDestinationRequest {
+func (a *DestinationsApiService) GetSubscriptionFromDestination(
+	ctx context.Context,
+	destinationId string,
+	id string,
+) ApiGetSubscriptionFromDestinationRequest {
 	return ApiGetSubscriptionFromDestinationRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:    a,
+		ctx:           ctx,
 		destinationId: destinationId,
-		id: id,
+		id:            id,
 	}
 }
 
 // Execute executes the request
-//  @return GetSubscriptionFromDestination200Response
-func (a *DestinationsApiService) GetSubscriptionFromDestinationExecute(r ApiGetSubscriptionFromDestinationRequest) (*GetSubscriptionFromDestination200Response, *http.Response, error) {
+//
+//	@return GetSubscriptionFromDestination200Response
+func (a *DestinationsApiService) GetSubscriptionFromDestinationExecute(
+	r ApiGetSubscriptionFromDestinationRequest,
+) (*GetSubscriptionFromDestination200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetSubscriptionFromDestination200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetSubscriptionFromDestination200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DestinationsApiService.GetSubscriptionFromDestination")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DestinationsApiService.GetSubscriptionFromDestination",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/destinations/{destinationId}/subscriptions/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"destinationId"+"}", url.PathEscape(parameterToString(r.destinationId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"destinationId"+"}",
+		url.PathEscape(parameterToString(r.destinationId, "")),
+		-1,
+	)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"id"+"}",
+		url.PathEscape(parameterToString(r.id, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -650,14 +795,26 @@ func (a *DestinationsApiService) GetSubscriptionFromDestinationExecute(r ApiGetS
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -711,7 +868,11 @@ func (a *DestinationsApiService) GetSubscriptionFromDestinationExecute(r ApiGetS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -724,35 +885,43 @@ func (a *DestinationsApiService) GetSubscriptionFromDestinationExecute(r ApiGetS
 }
 
 type ApiListDeliveryMetricsSummaryFromDestinationRequest struct {
-	ctx context.Context
-	ApiService *DestinationsApiService
+	ctx           context.Context
+	ApiService    *DestinationsApiService
 	destinationId string
-	sourceId *string
-	startTime *string
-	endTime *string
-	granularity *string
+	sourceId      *string
+	startTime     *string
+	endTime       *string
+	granularity   *string
 }
 
 // The id of the Source linked to the Destination.  Config API note: analogous to &#x60;parent&#x60;.  This parameter exists in beta.
-func (r ApiListDeliveryMetricsSummaryFromDestinationRequest) SourceId(sourceId string) ApiListDeliveryMetricsSummaryFromDestinationRequest {
+func (r ApiListDeliveryMetricsSummaryFromDestinationRequest) SourceId(
+	sourceId string,
+) ApiListDeliveryMetricsSummaryFromDestinationRequest {
 	r.sourceId = &sourceId
 	return r
 }
 
 // Filter events that happened after this time.  Defaults to: - 1 hour ago if granularity is &#x60;MINUTE&#x60;. - 7 days ago if granularity is &#x60;HOUR&#x60;. - 30 days ago if granularity is &#x60;DAY&#x60;.  This parameter exists in beta.
-func (r ApiListDeliveryMetricsSummaryFromDestinationRequest) StartTime(startTime string) ApiListDeliveryMetricsSummaryFromDestinationRequest {
+func (r ApiListDeliveryMetricsSummaryFromDestinationRequest) StartTime(
+	startTime string,
+) ApiListDeliveryMetricsSummaryFromDestinationRequest {
 	r.startTime = &startTime
 	return r
 }
 
 // Filter events that happened before this time. Defaults to now if not set.  This parameter exists in beta.
-func (r ApiListDeliveryMetricsSummaryFromDestinationRequest) EndTime(endTime string) ApiListDeliveryMetricsSummaryFromDestinationRequest {
+func (r ApiListDeliveryMetricsSummaryFromDestinationRequest) EndTime(
+	endTime string,
+) ApiListDeliveryMetricsSummaryFromDestinationRequest {
 	r.endTime = &endTime
 	return r
 }
 
 // The granularity to filter metrics to. Either &#x60;MINUTE&#x60;, &#x60;HOUR&#x60; or &#x60;DAY&#x60;.  Defaults to &#x60;MINUTE&#x60; if not set.  This parameter exists in beta.
-func (r ApiListDeliveryMetricsSummaryFromDestinationRequest) Granularity(granularity string) ApiListDeliveryMetricsSummaryFromDestinationRequest {
+func (r ApiListDeliveryMetricsSummaryFromDestinationRequest) Granularity(
+	granularity string,
+) ApiListDeliveryMetricsSummaryFromDestinationRequest {
 	r.granularity = &granularity
 	return r
 }
@@ -765,64 +934,77 @@ func (r ApiListDeliveryMetricsSummaryFromDestinationRequest) Execute() (*ListDel
 ListDeliveryMetricsSummaryFromDestination List Delivery Metrics Summary from Destination
 
 Get event delivery metrics summary from a Destination.
-      
-  Based on the granularity, there are restrictions on the time range you can query:
+
+	Based on the granularity, there are restrictions on the time range you can query:
 
 
 
-  **Minute Granularity**:
+	**Minute Granularity**:
 
-  - Max time range: 4 hours
+	- Max time range: 4 hours
 
-  - Oldest possible start time: 48 hours in the past
-
-
-
-  **Hour Granularity**:
-
-  - Max Time range: 1 week
-
-  - Oldest possible start time: 10 days in the past
+	- Oldest possible start time: 48 hours in the past
 
 
 
-  **Day Granularity**:
+	**Hour Granularity**:
 
-  - Max time range: 60 days
+	- Max Time range: 1 week
 
-  - Oldest possible start time: 60 days in the past
-  
-      
+	- Oldest possible start time: 10 days in the past
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param destinationId
- @return ApiListDeliveryMetricsSummaryFromDestinationRequest
+
+
+	**Day Granularity**:
+
+	- Max time range: 60 days
+
+	- Oldest possible start time: 60 days in the past
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param destinationId
+	@return ApiListDeliveryMetricsSummaryFromDestinationRequest
 */
-func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestination(ctx context.Context, destinationId string) ApiListDeliveryMetricsSummaryFromDestinationRequest {
+func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestination(
+	ctx context.Context,
+	destinationId string,
+) ApiListDeliveryMetricsSummaryFromDestinationRequest {
 	return ApiListDeliveryMetricsSummaryFromDestinationRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:    a,
+		ctx:           ctx,
 		destinationId: destinationId,
 	}
 }
 
 // Execute executes the request
-//  @return ListDeliveryMetricsSummaryFromDestination200Response
-func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestinationExecute(r ApiListDeliveryMetricsSummaryFromDestinationRequest) (*ListDeliveryMetricsSummaryFromDestination200Response, *http.Response, error) {
+//
+//	@return ListDeliveryMetricsSummaryFromDestination200Response
+func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestinationExecute(
+	r ApiListDeliveryMetricsSummaryFromDestinationRequest,
+) (*ListDeliveryMetricsSummaryFromDestination200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListDeliveryMetricsSummaryFromDestination200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListDeliveryMetricsSummaryFromDestination200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DestinationsApiService.ListDeliveryMetricsSummaryFromDestination")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DestinationsApiService.ListDeliveryMetricsSummaryFromDestination",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/destinations/{destinationId}/delivery-metrics"
-	localVarPath = strings.Replace(localVarPath, "{"+"destinationId"+"}", url.PathEscape(parameterToString(r.destinationId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"destinationId"+"}",
+		url.PathEscape(parameterToString(r.destinationId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -851,14 +1033,27 @@ func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestinationExecut
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -912,7 +1107,11 @@ func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestinationExecut
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -925,13 +1124,15 @@ func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestinationExecut
 }
 
 type ApiListDestinationsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *DestinationsApiService
 	pagination *PaginationInput
 }
 
 // Required pagination params for the request.  This parameter exists in v1.
-func (r ApiListDestinationsRequest) Pagination(pagination PaginationInput) ApiListDestinationsRequest {
+func (r ApiListDestinationsRequest) Pagination(
+	pagination PaginationInput,
+) ApiListDestinationsRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -945,27 +1146,33 @@ ListDestinations List Destinations
 
 Returns a list of Destinations.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListDestinationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListDestinationsRequest
 */
 func (a *DestinationsApiService) ListDestinations(ctx context.Context) ApiListDestinationsRequest {
 	return ApiListDestinationsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListDestinations200Response
-func (a *DestinationsApiService) ListDestinationsExecute(r ApiListDestinationsRequest) (*ListDestinations200Response, *http.Response, error) {
+//
+//	@return ListDestinations200Response
+func (a *DestinationsApiService) ListDestinationsExecute(
+	r ApiListDestinationsRequest,
+) (*ListDestinations200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListDestinations200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListDestinations200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DestinationsApiService.ListDestinations")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DestinationsApiService.ListDestinations",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -990,14 +1197,28 @@ func (a *DestinationsApiService) ListDestinationsExecute(r ApiListDestinationsRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1051,7 +1272,11 @@ func (a *DestinationsApiService) ListDestinationsExecute(r ApiListDestinationsRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1064,14 +1289,16 @@ func (a *DestinationsApiService) ListDestinationsExecute(r ApiListDestinationsRe
 }
 
 type ApiListSubscriptionsFromDestinationRequest struct {
-	ctx context.Context
-	ApiService *DestinationsApiService
+	ctx           context.Context
+	ApiService    *DestinationsApiService
 	destinationId string
-	pagination *PaginationInput
+	pagination    *PaginationInput
 }
 
 // Pagination options.  This parameter exists in alpha.
-func (r ApiListSubscriptionsFromDestinationRequest) Pagination(pagination PaginationInput) ApiListSubscriptionsFromDestinationRequest {
+func (r ApiListSubscriptionsFromDestinationRequest) Pagination(
+	pagination PaginationInput,
+) ApiListSubscriptionsFromDestinationRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -1085,35 +1312,49 @@ ListSubscriptionsFromDestination List Subscriptions from Destination
 
 Lists subscriptions for a Destination.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param destinationId
- @return ApiListSubscriptionsFromDestinationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param destinationId
+	@return ApiListSubscriptionsFromDestinationRequest
 */
-func (a *DestinationsApiService) ListSubscriptionsFromDestination(ctx context.Context, destinationId string) ApiListSubscriptionsFromDestinationRequest {
+func (a *DestinationsApiService) ListSubscriptionsFromDestination(
+	ctx context.Context,
+	destinationId string,
+) ApiListSubscriptionsFromDestinationRequest {
 	return ApiListSubscriptionsFromDestinationRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:    a,
+		ctx:           ctx,
 		destinationId: destinationId,
 	}
 }
 
 // Execute executes the request
-//  @return ListSubscriptionsFromDestination200Response
-func (a *DestinationsApiService) ListSubscriptionsFromDestinationExecute(r ApiListSubscriptionsFromDestinationRequest) (*ListSubscriptionsFromDestination200Response, *http.Response, error) {
+//
+//	@return ListSubscriptionsFromDestination200Response
+func (a *DestinationsApiService) ListSubscriptionsFromDestinationExecute(
+	r ApiListSubscriptionsFromDestinationRequest,
+) (*ListSubscriptionsFromDestination200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListSubscriptionsFromDestination200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListSubscriptionsFromDestination200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DestinationsApiService.ListSubscriptionsFromDestination")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DestinationsApiService.ListSubscriptionsFromDestination",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/destinations/{destinationId}/subscriptions"
-	localVarPath = strings.Replace(localVarPath, "{"+"destinationId"+"}", url.PathEscape(parameterToString(r.destinationId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"destinationId"+"}",
+		url.PathEscape(parameterToString(r.destinationId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1133,14 +1374,26 @@ func (a *DestinationsApiService) ListSubscriptionsFromDestinationExecute(r ApiLi
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1194,7 +1447,11 @@ func (a *DestinationsApiService) ListSubscriptionsFromDestinationExecute(r ApiLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1207,10 +1464,10 @@ func (a *DestinationsApiService) ListSubscriptionsFromDestinationExecute(r ApiLi
 }
 
 type ApiRemoveSubscriptionFromDestinationRequest struct {
-	ctx context.Context
-	ApiService *DestinationsApiService
+	ctx           context.Context
+	ApiService    *DestinationsApiService
 	destinationId string
-	id string
+	id            string
 }
 
 func (r ApiRemoveSubscriptionFromDestinationRequest) Execute() (*RemoveSubscriptionFromDestination200Response, *http.Response, error) {
@@ -1222,38 +1479,58 @@ RemoveSubscriptionFromDestination Remove Subscription from Destination
 
 Deletes an existing Destination subscription.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param destinationId
- @param id
- @return ApiRemoveSubscriptionFromDestinationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param destinationId
+	@param id
+	@return ApiRemoveSubscriptionFromDestinationRequest
 */
-func (a *DestinationsApiService) RemoveSubscriptionFromDestination(ctx context.Context, destinationId string, id string) ApiRemoveSubscriptionFromDestinationRequest {
+func (a *DestinationsApiService) RemoveSubscriptionFromDestination(
+	ctx context.Context,
+	destinationId string,
+	id string,
+) ApiRemoveSubscriptionFromDestinationRequest {
 	return ApiRemoveSubscriptionFromDestinationRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:    a,
+		ctx:           ctx,
 		destinationId: destinationId,
-		id: id,
+		id:            id,
 	}
 }
 
 // Execute executes the request
-//  @return RemoveSubscriptionFromDestination200Response
-func (a *DestinationsApiService) RemoveSubscriptionFromDestinationExecute(r ApiRemoveSubscriptionFromDestinationRequest) (*RemoveSubscriptionFromDestination200Response, *http.Response, error) {
+//
+//	@return RemoveSubscriptionFromDestination200Response
+func (a *DestinationsApiService) RemoveSubscriptionFromDestinationExecute(
+	r ApiRemoveSubscriptionFromDestinationRequest,
+) (*RemoveSubscriptionFromDestination200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *RemoveSubscriptionFromDestination200Response
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RemoveSubscriptionFromDestination200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DestinationsApiService.RemoveSubscriptionFromDestination")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DestinationsApiService.RemoveSubscriptionFromDestination",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/destinations/{destinationId}/subscriptions/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"destinationId"+"}", url.PathEscape(parameterToString(r.destinationId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"destinationId"+"}",
+		url.PathEscape(parameterToString(r.destinationId, "")),
+		-1,
+	)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"id"+"}",
+		url.PathEscape(parameterToString(r.id, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1269,14 +1546,26 @@ func (a *DestinationsApiService) RemoveSubscriptionFromDestinationExecute(r ApiR
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1330,7 +1619,11 @@ func (a *DestinationsApiService) RemoveSubscriptionFromDestinationExecute(r ApiR
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1343,13 +1636,15 @@ func (a *DestinationsApiService) RemoveSubscriptionFromDestinationExecute(r ApiR
 }
 
 type ApiUpdateDestinationRequest struct {
-	ctx context.Context
-	ApiService *DestinationsApiService
-	destinationId string
+	ctx                      context.Context
+	ApiService               *DestinationsApiService
+	destinationId            string
 	updateDestinationV1Input *UpdateDestinationV1Input
 }
 
-func (r ApiUpdateDestinationRequest) UpdateDestinationV1Input(updateDestinationV1Input UpdateDestinationV1Input) ApiUpdateDestinationRequest {
+func (r ApiUpdateDestinationRequest) UpdateDestinationV1Input(
+	updateDestinationV1Input UpdateDestinationV1Input,
+) ApiUpdateDestinationRequest {
 	r.updateDestinationV1Input = &updateDestinationV1Input
 	return r
 }
@@ -1365,57 +1660,74 @@ Updates an existing Destination.
 
 **Note**: if you attempt to update read-only settings for your destination you'll encounter the following behavior:
 
-  * If only read-only properties are being updated, the endpoint will return an HTTP 400 error.
-  * If there's a mix of writable and read-only properties in the payload, the request will be accepted, the writable properties will be updated and the read-only properties ignored.
+  - If only read-only properties are being updated, the endpoint will return an HTTP 400 error.
 
-
-
+  - If there's a mix of writable and read-only properties in the payload, the request will be accepted, the writable properties will be updated and the read-only properties ignored.
 
 When called, this endpoint may generate the `Integration Disabled` event in the [audit trail](/tag/Audit-Trail).
 
 Config API omitted fields:
 - `updateMask`
-         
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param destinationId
- @return ApiUpdateDestinationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param destinationId
+	@return ApiUpdateDestinationRequest
 */
-func (a *DestinationsApiService) UpdateDestination(ctx context.Context, destinationId string) ApiUpdateDestinationRequest {
+func (a *DestinationsApiService) UpdateDestination(
+	ctx context.Context,
+	destinationId string,
+) ApiUpdateDestinationRequest {
 	return ApiUpdateDestinationRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:    a,
+		ctx:           ctx,
 		destinationId: destinationId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateDestination200Response
-func (a *DestinationsApiService) UpdateDestinationExecute(r ApiUpdateDestinationRequest) (*UpdateDestination200Response, *http.Response, error) {
+//
+//	@return UpdateDestination200Response
+func (a *DestinationsApiService) UpdateDestinationExecute(
+	r ApiUpdateDestinationRequest,
+) (*UpdateDestination200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateDestination200Response
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateDestination200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DestinationsApiService.UpdateDestination")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DestinationsApiService.UpdateDestination",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/destinations/{destinationId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"destinationId"+"}", url.PathEscape(parameterToString(r.destinationId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"destinationId"+"}",
+		url.PathEscape(parameterToString(r.destinationId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.updateDestinationV1Input == nil {
-		return localVarReturnValue, nil, reportError("updateDestinationV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"updateDestinationV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1424,7 +1736,12 @@ func (a *DestinationsApiService) UpdateDestinationExecute(r ApiUpdateDestination
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1433,7 +1750,16 @@ func (a *DestinationsApiService) UpdateDestinationExecute(r ApiUpdateDestination
 	}
 	// body params
 	localVarPostBody = r.updateDestinationV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1487,7 +1813,11 @@ func (a *DestinationsApiService) UpdateDestinationExecute(r ApiUpdateDestination
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1500,14 +1830,16 @@ func (a *DestinationsApiService) UpdateDestinationExecute(r ApiUpdateDestination
 }
 
 type ApiUpdateSubscriptionForDestinationRequest struct {
-	ctx context.Context
-	ApiService *DestinationsApiService
-	destinationId string
-	id string
+	ctx                                        context.Context
+	ApiService                                 *DestinationsApiService
+	destinationId                              string
+	id                                         string
 	updateSubscriptionForDestinationAlphaInput *UpdateSubscriptionForDestinationAlphaInput
 }
 
-func (r ApiUpdateSubscriptionForDestinationRequest) UpdateSubscriptionForDestinationAlphaInput(updateSubscriptionForDestinationAlphaInput UpdateSubscriptionForDestinationAlphaInput) ApiUpdateSubscriptionForDestinationRequest {
+func (r ApiUpdateSubscriptionForDestinationRequest) UpdateSubscriptionForDestinationAlphaInput(
+	updateSubscriptionForDestinationAlphaInput UpdateSubscriptionForDestinationAlphaInput,
+) ApiUpdateSubscriptionForDestinationRequest {
 	r.updateSubscriptionForDestinationAlphaInput = &updateSubscriptionForDestinationAlphaInput
 	return r
 }
@@ -1521,44 +1853,66 @@ UpdateSubscriptionForDestination Update Subscription for Destination
 
 Updates an existing Destination subscription.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param destinationId
- @param id
- @return ApiUpdateSubscriptionForDestinationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param destinationId
+	@param id
+	@return ApiUpdateSubscriptionForDestinationRequest
 */
-func (a *DestinationsApiService) UpdateSubscriptionForDestination(ctx context.Context, destinationId string, id string) ApiUpdateSubscriptionForDestinationRequest {
+func (a *DestinationsApiService) UpdateSubscriptionForDestination(
+	ctx context.Context,
+	destinationId string,
+	id string,
+) ApiUpdateSubscriptionForDestinationRequest {
 	return ApiUpdateSubscriptionForDestinationRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:    a,
+		ctx:           ctx,
 		destinationId: destinationId,
-		id: id,
+		id:            id,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateSubscriptionForDestination200Response
-func (a *DestinationsApiService) UpdateSubscriptionForDestinationExecute(r ApiUpdateSubscriptionForDestinationRequest) (*UpdateSubscriptionForDestination200Response, *http.Response, error) {
+//
+//	@return UpdateSubscriptionForDestination200Response
+func (a *DestinationsApiService) UpdateSubscriptionForDestinationExecute(
+	r ApiUpdateSubscriptionForDestinationRequest,
+) (*UpdateSubscriptionForDestination200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateSubscriptionForDestination200Response
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateSubscriptionForDestination200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DestinationsApiService.UpdateSubscriptionForDestination")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DestinationsApiService.UpdateSubscriptionForDestination",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/destinations/{destinationId}/subscriptions/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"destinationId"+"}", url.PathEscape(parameterToString(r.destinationId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterToString(r.id, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"destinationId"+"}",
+		url.PathEscape(parameterToString(r.destinationId, "")),
+		-1,
+	)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"id"+"}",
+		url.PathEscape(parameterToString(r.id, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.updateSubscriptionForDestinationAlphaInput == nil {
-		return localVarReturnValue, nil, reportError("updateSubscriptionForDestinationAlphaInput is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"updateSubscriptionForDestinationAlphaInput is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
@@ -1571,7 +1925,10 @@ func (a *DestinationsApiService) UpdateSubscriptionForDestinationExecute(r ApiUp
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1alpha+json", "application/json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1580,7 +1937,16 @@ func (a *DestinationsApiService) UpdateSubscriptionForDestinationExecute(r ApiUp
 	}
 	// body params
 	localVarPostBody = r.updateSubscriptionForDestinationAlphaInput
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1634,7 +2000,11 @@ func (a *DestinationsApiService) UpdateSubscriptionForDestinationExecute(r ApiUp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,

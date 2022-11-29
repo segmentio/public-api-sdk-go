@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -18,7 +18,7 @@ import (
 // UpdateSchemaSettingsInSourceV1Output Output of the Source with updated settings.
 type UpdateSchemaSettingsInSourceV1Output struct {
 	// The id of the updated Source.  Config API note: analogous to `parent` and `name`.
-	SourceId string `json:"sourceId"`
+	SourceId string    `json:"sourceId"`
 	Settings Settings1 `json:"settings"`
 }
 
@@ -26,7 +26,10 @@ type UpdateSchemaSettingsInSourceV1Output struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateSchemaSettingsInSourceV1Output(sourceId string, settings Settings1) *UpdateSchemaSettingsInSourceV1Output {
+func NewUpdateSchemaSettingsInSourceV1Output(
+	sourceId string,
+	settings Settings1,
+) *UpdateSchemaSettingsInSourceV1Output {
 	this := UpdateSchemaSettingsInSourceV1Output{}
 	this.SourceId = sourceId
 	this.Settings = settings
@@ -109,7 +112,9 @@ func (v NullableUpdateSchemaSettingsInSourceV1Output) Get() *UpdateSchemaSetting
 	return v.value
 }
 
-func (v *NullableUpdateSchemaSettingsInSourceV1Output) Set(val *UpdateSchemaSettingsInSourceV1Output) {
+func (v *NullableUpdateSchemaSettingsInSourceV1Output) Set(
+	val *UpdateSchemaSettingsInSourceV1Output,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -123,7 +128,9 @@ func (v *NullableUpdateSchemaSettingsInSourceV1Output) Unset() {
 	v.isSet = false
 }
 
-func NewNullableUpdateSchemaSettingsInSourceV1Output(val *UpdateSchemaSettingsInSourceV1Output) *NullableUpdateSchemaSettingsInSourceV1Output {
+func NewNullableUpdateSchemaSettingsInSourceV1Output(
+	val *UpdateSchemaSettingsInSourceV1Output,
+) *NullableUpdateSchemaSettingsInSourceV1Output {
 	return &NullableUpdateSchemaSettingsInSourceV1Output{value: val, isSet: true}
 }
 
@@ -135,5 +142,3 @@ func (v *NullableUpdateSchemaSettingsInSourceV1Output) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
