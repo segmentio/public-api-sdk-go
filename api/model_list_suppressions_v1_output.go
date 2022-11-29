@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -19,14 +19,17 @@ import (
 type ListSuppressionsV1Output struct {
 	// An array that lists the suppressions from the Workspace.  Config API note: equal to `attributes`.
 	Suppressed []SuppressedInner `json:"suppressed"`
-	Pagination Pagination `json:"pagination"`
+	Pagination Pagination        `json:"pagination"`
 }
 
 // NewListSuppressionsV1Output instantiates a new ListSuppressionsV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListSuppressionsV1Output(suppressed []SuppressedInner, pagination Pagination) *ListSuppressionsV1Output {
+func NewListSuppressionsV1Output(
+	suppressed []SuppressedInner,
+	pagination Pagination,
+) *ListSuppressionsV1Output {
 	this := ListSuppressionsV1Output{}
 	this.Suppressed = suppressed
 	this.Pagination = pagination
@@ -123,7 +126,9 @@ func (v *NullableListSuppressionsV1Output) Unset() {
 	v.isSet = false
 }
 
-func NewNullableListSuppressionsV1Output(val *ListSuppressionsV1Output) *NullableListSuppressionsV1Output {
+func NewNullableListSuppressionsV1Output(
+	val *ListSuppressionsV1Output,
+) *NullableListSuppressionsV1Output {
 	return &NullableListSuppressionsV1Output{value: val, isSet: true}
 }
 
@@ -135,5 +140,3 @@ func (v *NullableListSuppressionsV1Output) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

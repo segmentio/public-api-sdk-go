@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -20,18 +20,19 @@ import (
 	"strings"
 )
 
-
 // SourcesApiService SourcesApi service
 type SourcesApiService service
 
 type ApiAddLabelsToSourceRequest struct {
-	ctx context.Context
-	ApiService *SourcesApiService
-	sourceId string
+	ctx                      context.Context
+	ApiService               *SourcesApiService
+	sourceId                 string
 	addLabelsToSourceV1Input *AddLabelsToSourceV1Input
 }
 
-func (r ApiAddLabelsToSourceRequest) AddLabelsToSourceV1Input(addLabelsToSourceV1Input AddLabelsToSourceV1Input) ApiAddLabelsToSourceRequest {
+func (r ApiAddLabelsToSourceRequest) AddLabelsToSourceV1Input(
+	addLabelsToSourceV1Input AddLabelsToSourceV1Input,
+) ApiAddLabelsToSourceRequest {
 	r.addLabelsToSourceV1Input = &addLabelsToSourceV1Input
 	return r
 }
@@ -45,50 +46,67 @@ AddLabelsToSource Add Labels to Source
 
 Adds an existing label to a Source.
 
-
-
 When called, this endpoint may generate the `Source Modified` event in the [audit trail](/tag/Audit-Trail).
-      
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sourceId
- @return ApiAddLabelsToSourceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sourceId
+	@return ApiAddLabelsToSourceRequest
 */
-func (a *SourcesApiService) AddLabelsToSource(ctx context.Context, sourceId string) ApiAddLabelsToSourceRequest {
+func (a *SourcesApiService) AddLabelsToSource(
+	ctx context.Context,
+	sourceId string,
+) ApiAddLabelsToSourceRequest {
 	return ApiAddLabelsToSourceRequest{
 		ApiService: a,
-		ctx: ctx,
-		sourceId: sourceId,
+		ctx:        ctx,
+		sourceId:   sourceId,
 	}
 }
 
 // Execute executes the request
-//  @return AddLabelsToSource200Response
-func (a *SourcesApiService) AddLabelsToSourceExecute(r ApiAddLabelsToSourceRequest) (*AddLabelsToSource200Response, *http.Response, error) {
+//
+//	@return AddLabelsToSource200Response
+func (a *SourcesApiService) AddLabelsToSourceExecute(
+	r ApiAddLabelsToSourceRequest,
+) (*AddLabelsToSource200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AddLabelsToSource200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AddLabelsToSource200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesApiService.AddLabelsToSource")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"SourcesApiService.AddLabelsToSource",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/sources/{sourceId}/labels"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceId"+"}", url.PathEscape(parameterToString(r.sourceId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterToString(r.sourceId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.addLabelsToSourceV1Input == nil {
-		return localVarReturnValue, nil, reportError("addLabelsToSourceV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"addLabelsToSourceV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -97,7 +115,12 @@ func (a *SourcesApiService) AddLabelsToSourceExecute(r ApiAddLabelsToSourceReque
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -106,7 +129,16 @@ func (a *SourcesApiService) AddLabelsToSourceExecute(r ApiAddLabelsToSourceReque
 	}
 	// body params
 	localVarPostBody = r.addLabelsToSourceV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -160,7 +192,11 @@ func (a *SourcesApiService) AddLabelsToSourceExecute(r ApiAddLabelsToSourceReque
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -173,12 +209,14 @@ func (a *SourcesApiService) AddLabelsToSourceExecute(r ApiAddLabelsToSourceReque
 }
 
 type ApiCreateSourceRequest struct {
-	ctx context.Context
-	ApiService *SourcesApiService
+	ctx                 context.Context
+	ApiService          *SourcesApiService
 	createSourceV1Input *CreateSourceV1Input
 }
 
-func (r ApiCreateSourceRequest) CreateSourceV1Input(createSourceV1Input CreateSourceV1Input) ApiCreateSourceRequest {
+func (r ApiCreateSourceRequest) CreateSourceV1Input(
+	createSourceV1Input CreateSourceV1Input,
+) ApiCreateSourceRequest {
 	r.createSourceV1Input = &createSourceV1Input
 	return r
 }
@@ -192,29 +230,29 @@ CreateSource Create Source
 
 Creates a new Source.
 
-
-
 When called, this endpoint may generate the `Source Created` event in the [audit trail](/tag/Audit-Trail).
-      
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateSourceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateSourceRequest
 */
 func (a *SourcesApiService) CreateSource(ctx context.Context) ApiCreateSourceRequest {
 	return ApiCreateSourceRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateSource200Response
-func (a *SourcesApiService) CreateSourceExecute(r ApiCreateSourceRequest) (*CreateSource200Response, *http.Response, error) {
+//
+//	@return CreateSource200Response
+func (a *SourcesApiService) CreateSourceExecute(
+	r ApiCreateSourceRequest,
+) (*CreateSource200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateSource200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateSource200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesApiService.CreateSource")
@@ -228,11 +266,17 @@ func (a *SourcesApiService) CreateSourceExecute(r ApiCreateSourceRequest) (*Crea
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.createSourceV1Input == nil {
-		return localVarReturnValue, nil, reportError("createSourceV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"createSourceV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -241,7 +285,12 @@ func (a *SourcesApiService) CreateSourceExecute(r ApiCreateSourceRequest) (*Crea
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -250,7 +299,16 @@ func (a *SourcesApiService) CreateSourceExecute(r ApiCreateSourceRequest) (*Crea
 	}
 	// body params
 	localVarPostBody = r.createSourceV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -304,7 +362,11 @@ func (a *SourcesApiService) CreateSourceExecute(r ApiCreateSourceRequest) (*Crea
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -317,9 +379,9 @@ func (a *SourcesApiService) CreateSourceExecute(r ApiCreateSourceRequest) (*Crea
 }
 
 type ApiDeleteSourceRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SourcesApiService
-	sourceId string
+	sourceId   string
 }
 
 func (r ApiDeleteSourceRequest) Execute() (*DeleteSource200Response, *http.Response, error) {
@@ -331,31 +393,34 @@ DeleteSource Delete Source
 
 Deletes an existing Source.
 
-
-
 When called, this endpoint may generate the `Source Deleted` event in the [audit trail](/tag/Audit-Trail).
-      
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sourceId
- @return ApiDeleteSourceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sourceId
+	@return ApiDeleteSourceRequest
 */
-func (a *SourcesApiService) DeleteSource(ctx context.Context, sourceId string) ApiDeleteSourceRequest {
+func (a *SourcesApiService) DeleteSource(
+	ctx context.Context,
+	sourceId string,
+) ApiDeleteSourceRequest {
 	return ApiDeleteSourceRequest{
 		ApiService: a,
-		ctx: ctx,
-		sourceId: sourceId,
+		ctx:        ctx,
+		sourceId:   sourceId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteSource200Response
-func (a *SourcesApiService) DeleteSourceExecute(r ApiDeleteSourceRequest) (*DeleteSource200Response, *http.Response, error) {
+//
+//	@return DeleteSource200Response
+func (a *SourcesApiService) DeleteSourceExecute(
+	r ApiDeleteSourceRequest,
+) (*DeleteSource200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteSource200Response
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteSource200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesApiService.DeleteSource")
@@ -364,7 +429,12 @@ func (a *SourcesApiService) DeleteSourceExecute(r ApiDeleteSourceRequest) (*Dele
 	}
 
 	localVarPath := localBasePath + "/sources/{sourceId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceId"+"}", url.PathEscape(parameterToString(r.sourceId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterToString(r.sourceId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -380,14 +450,28 @@ func (a *SourcesApiService) DeleteSourceExecute(r ApiDeleteSourceRequest) (*Dele
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -441,7 +525,11 @@ func (a *SourcesApiService) DeleteSourceExecute(r ApiDeleteSourceRequest) (*Dele
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -454,9 +542,9 @@ func (a *SourcesApiService) DeleteSourceExecute(r ApiDeleteSourceRequest) (*Dele
 }
 
 type ApiGetSourceRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SourcesApiService
-	sourceId string
+	sourceId   string
 }
 
 func (r ApiGetSourceRequest) Execute() (*GetSource200Response, *http.Response, error) {
@@ -468,26 +556,29 @@ GetSource Get Source
 
 Returns a Source by its id.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sourceId
- @return ApiGetSourceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sourceId
+	@return ApiGetSourceRequest
 */
 func (a *SourcesApiService) GetSource(ctx context.Context, sourceId string) ApiGetSourceRequest {
 	return ApiGetSourceRequest{
 		ApiService: a,
-		ctx: ctx,
-		sourceId: sourceId,
+		ctx:        ctx,
+		sourceId:   sourceId,
 	}
 }
 
 // Execute executes the request
-//  @return GetSource200Response
-func (a *SourcesApiService) GetSourceExecute(r ApiGetSourceRequest) (*GetSource200Response, *http.Response, error) {
+//
+//	@return GetSource200Response
+func (a *SourcesApiService) GetSourceExecute(
+	r ApiGetSourceRequest,
+) (*GetSource200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetSource200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetSource200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesApiService.GetSource")
@@ -496,7 +587,12 @@ func (a *SourcesApiService) GetSourceExecute(r ApiGetSourceRequest) (*GetSource2
 	}
 
 	localVarPath := localBasePath + "/sources/{sourceId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceId"+"}", url.PathEscape(parameterToString(r.sourceId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterToString(r.sourceId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -512,14 +608,28 @@ func (a *SourcesApiService) GetSourceExecute(r ApiGetSourceRequest) (*GetSource2
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -573,7 +683,11 @@ func (a *SourcesApiService) GetSourceExecute(r ApiGetSourceRequest) (*GetSource2
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -586,14 +700,16 @@ func (a *SourcesApiService) GetSourceExecute(r ApiGetSourceRequest) (*GetSource2
 }
 
 type ApiListConnectedDestinationsFromSourceRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SourcesApiService
-	sourceId string
+	sourceId   string
 	pagination *PaginationInput
 }
 
 // Required pagination params for the request.  This parameter exists in alpha.
-func (r ApiListConnectedDestinationsFromSourceRequest) Pagination(pagination PaginationInput) ApiListConnectedDestinationsFromSourceRequest {
+func (r ApiListConnectedDestinationsFromSourceRequest) Pagination(
+	pagination PaginationInput,
+) ApiListConnectedDestinationsFromSourceRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -607,35 +723,49 @@ ListConnectedDestinationsFromSource List Connected Destinations from Source
 
 Returns a list of Destinations connected to a Source.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sourceId
- @return ApiListConnectedDestinationsFromSourceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sourceId
+	@return ApiListConnectedDestinationsFromSourceRequest
 */
-func (a *SourcesApiService) ListConnectedDestinationsFromSource(ctx context.Context, sourceId string) ApiListConnectedDestinationsFromSourceRequest {
+func (a *SourcesApiService) ListConnectedDestinationsFromSource(
+	ctx context.Context,
+	sourceId string,
+) ApiListConnectedDestinationsFromSourceRequest {
 	return ApiListConnectedDestinationsFromSourceRequest{
 		ApiService: a,
-		ctx: ctx,
-		sourceId: sourceId,
+		ctx:        ctx,
+		sourceId:   sourceId,
 	}
 }
 
 // Execute executes the request
-//  @return ListConnectedDestinationsFromSource200Response
-func (a *SourcesApiService) ListConnectedDestinationsFromSourceExecute(r ApiListConnectedDestinationsFromSourceRequest) (*ListConnectedDestinationsFromSource200Response, *http.Response, error) {
+//
+//	@return ListConnectedDestinationsFromSource200Response
+func (a *SourcesApiService) ListConnectedDestinationsFromSourceExecute(
+	r ApiListConnectedDestinationsFromSourceRequest,
+) (*ListConnectedDestinationsFromSource200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListConnectedDestinationsFromSource200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListConnectedDestinationsFromSource200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesApiService.ListConnectedDestinationsFromSource")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"SourcesApiService.ListConnectedDestinationsFromSource",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/sources/{sourceId}/connected-destinations"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceId"+"}", url.PathEscape(parameterToString(r.sourceId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterToString(r.sourceId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -655,14 +785,28 @@ func (a *SourcesApiService) ListConnectedDestinationsFromSourceExecute(r ApiList
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -716,7 +860,11 @@ func (a *SourcesApiService) ListConnectedDestinationsFromSourceExecute(r ApiList
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -729,14 +877,16 @@ func (a *SourcesApiService) ListConnectedDestinationsFromSourceExecute(r ApiList
 }
 
 type ApiListConnectedWarehousesFromSourceRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SourcesApiService
-	sourceId string
+	sourceId   string
 	pagination *PaginationInput
 }
 
 // Required pagination params for the request.  This parameter exists in alpha.
-func (r ApiListConnectedWarehousesFromSourceRequest) Pagination(pagination PaginationInput) ApiListConnectedWarehousesFromSourceRequest {
+func (r ApiListConnectedWarehousesFromSourceRequest) Pagination(
+	pagination PaginationInput,
+) ApiListConnectedWarehousesFromSourceRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -750,35 +900,49 @@ ListConnectedWarehousesFromSource List Connected Warehouses from Source
 
 Returns a list of Warehouses connected to a Source.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sourceId
- @return ApiListConnectedWarehousesFromSourceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sourceId
+	@return ApiListConnectedWarehousesFromSourceRequest
 */
-func (a *SourcesApiService) ListConnectedWarehousesFromSource(ctx context.Context, sourceId string) ApiListConnectedWarehousesFromSourceRequest {
+func (a *SourcesApiService) ListConnectedWarehousesFromSource(
+	ctx context.Context,
+	sourceId string,
+) ApiListConnectedWarehousesFromSourceRequest {
 	return ApiListConnectedWarehousesFromSourceRequest{
 		ApiService: a,
-		ctx: ctx,
-		sourceId: sourceId,
+		ctx:        ctx,
+		sourceId:   sourceId,
 	}
 }
 
 // Execute executes the request
-//  @return ListConnectedWarehousesFromSource200Response
-func (a *SourcesApiService) ListConnectedWarehousesFromSourceExecute(r ApiListConnectedWarehousesFromSourceRequest) (*ListConnectedWarehousesFromSource200Response, *http.Response, error) {
+//
+//	@return ListConnectedWarehousesFromSource200Response
+func (a *SourcesApiService) ListConnectedWarehousesFromSourceExecute(
+	r ApiListConnectedWarehousesFromSourceRequest,
+) (*ListConnectedWarehousesFromSource200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListConnectedWarehousesFromSource200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListConnectedWarehousesFromSource200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesApiService.ListConnectedWarehousesFromSource")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"SourcesApiService.ListConnectedWarehousesFromSource",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/sources/{sourceId}/connected-warehouses"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceId"+"}", url.PathEscape(parameterToString(r.sourceId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterToString(r.sourceId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -798,14 +962,28 @@ func (a *SourcesApiService) ListConnectedWarehousesFromSourceExecute(r ApiListCo
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -859,7 +1037,11 @@ func (a *SourcesApiService) ListConnectedWarehousesFromSourceExecute(r ApiListCo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -872,9 +1054,9 @@ func (a *SourcesApiService) ListConnectedWarehousesFromSourceExecute(r ApiListCo
 }
 
 type ApiListSchemaSettingsInSourceRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SourcesApiService
-	sourceId string
+	sourceId   string
 }
 
 func (r ApiListSchemaSettingsInSourceRequest) Execute() (*ListSchemaSettingsInSource200Response, *http.Response, error) {
@@ -886,35 +1068,49 @@ ListSchemaSettingsInSource List Schema Settings in Source
 
 Retrieves the schema configuration settings for a Source. If Protocols is not enabled for the Source, the configurations specific to Protocols will have default values.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sourceId
- @return ApiListSchemaSettingsInSourceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sourceId
+	@return ApiListSchemaSettingsInSourceRequest
 */
-func (a *SourcesApiService) ListSchemaSettingsInSource(ctx context.Context, sourceId string) ApiListSchemaSettingsInSourceRequest {
+func (a *SourcesApiService) ListSchemaSettingsInSource(
+	ctx context.Context,
+	sourceId string,
+) ApiListSchemaSettingsInSourceRequest {
 	return ApiListSchemaSettingsInSourceRequest{
 		ApiService: a,
-		ctx: ctx,
-		sourceId: sourceId,
+		ctx:        ctx,
+		sourceId:   sourceId,
 	}
 }
 
 // Execute executes the request
-//  @return ListSchemaSettingsInSource200Response
-func (a *SourcesApiService) ListSchemaSettingsInSourceExecute(r ApiListSchemaSettingsInSourceRequest) (*ListSchemaSettingsInSource200Response, *http.Response, error) {
+//
+//	@return ListSchemaSettingsInSource200Response
+func (a *SourcesApiService) ListSchemaSettingsInSourceExecute(
+	r ApiListSchemaSettingsInSourceRequest,
+) (*ListSchemaSettingsInSource200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListSchemaSettingsInSource200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListSchemaSettingsInSource200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesApiService.ListSchemaSettingsInSource")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"SourcesApiService.ListSchemaSettingsInSource",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/sources/{sourceId}/settings"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceId"+"}", url.PathEscape(parameterToString(r.sourceId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterToString(r.sourceId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -930,14 +1126,28 @@ func (a *SourcesApiService) ListSchemaSettingsInSourceExecute(r ApiListSchemaSet
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -991,7 +1201,11 @@ func (a *SourcesApiService) ListSchemaSettingsInSourceExecute(r ApiListSchemaSet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1004,7 +1218,7 @@ func (a *SourcesApiService) ListSchemaSettingsInSourceExecute(r ApiListSchemaSet
 }
 
 type ApiListSourcesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SourcesApiService
 	pagination *PaginationInput
 }
@@ -1024,24 +1238,27 @@ ListSources List Sources
 
 Returns a list of Sources.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListSourcesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListSourcesRequest
 */
 func (a *SourcesApiService) ListSources(ctx context.Context) ApiListSourcesRequest {
 	return ApiListSourcesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListSources200Response
-func (a *SourcesApiService) ListSourcesExecute(r ApiListSourcesRequest) (*ListSources200Response, *http.Response, error) {
+//
+//	@return ListSources200Response
+func (a *SourcesApiService) ListSourcesExecute(
+	r ApiListSourcesRequest,
+) (*ListSources200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListSources200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListSources200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesApiService.ListSources")
@@ -1069,14 +1286,28 @@ func (a *SourcesApiService) ListSourcesExecute(r ApiListSourcesRequest) (*ListSo
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1130,7 +1361,11 @@ func (a *SourcesApiService) ListSourcesExecute(r ApiListSourcesRequest) (*ListSo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1143,13 +1378,15 @@ func (a *SourcesApiService) ListSourcesExecute(r ApiListSourcesRequest) (*ListSo
 }
 
 type ApiReplaceLabelsInSourceRequest struct {
-	ctx context.Context
-	ApiService *SourcesApiService
-	sourceId string
+	ctx                          context.Context
+	ApiService                   *SourcesApiService
+	sourceId                     string
 	replaceLabelsInSourceV1Input *ReplaceLabelsInSourceV1Input
 }
 
-func (r ApiReplaceLabelsInSourceRequest) ReplaceLabelsInSourceV1Input(replaceLabelsInSourceV1Input ReplaceLabelsInSourceV1Input) ApiReplaceLabelsInSourceRequest {
+func (r ApiReplaceLabelsInSourceRequest) ReplaceLabelsInSourceV1Input(
+	replaceLabelsInSourceV1Input ReplaceLabelsInSourceV1Input,
+) ApiReplaceLabelsInSourceRequest {
 	r.replaceLabelsInSourceV1Input = &replaceLabelsInSourceV1Input
 	return r
 }
@@ -1163,45 +1400,65 @@ ReplaceLabelsInSource Replace Labels in Source
 
 Replaces all labels in a Source.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sourceId
- @return ApiReplaceLabelsInSourceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sourceId
+	@return ApiReplaceLabelsInSourceRequest
 */
-func (a *SourcesApiService) ReplaceLabelsInSource(ctx context.Context, sourceId string) ApiReplaceLabelsInSourceRequest {
+func (a *SourcesApiService) ReplaceLabelsInSource(
+	ctx context.Context,
+	sourceId string,
+) ApiReplaceLabelsInSourceRequest {
 	return ApiReplaceLabelsInSourceRequest{
 		ApiService: a,
-		ctx: ctx,
-		sourceId: sourceId,
+		ctx:        ctx,
+		sourceId:   sourceId,
 	}
 }
 
 // Execute executes the request
-//  @return ReplaceLabelsInSource200Response
-func (a *SourcesApiService) ReplaceLabelsInSourceExecute(r ApiReplaceLabelsInSourceRequest) (*ReplaceLabelsInSource200Response, *http.Response, error) {
+//
+//	@return ReplaceLabelsInSource200Response
+func (a *SourcesApiService) ReplaceLabelsInSourceExecute(
+	r ApiReplaceLabelsInSourceRequest,
+) (*ReplaceLabelsInSource200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReplaceLabelsInSource200Response
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReplaceLabelsInSource200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesApiService.ReplaceLabelsInSource")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"SourcesApiService.ReplaceLabelsInSource",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/sources/{sourceId}/labels"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceId"+"}", url.PathEscape(parameterToString(r.sourceId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterToString(r.sourceId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.replaceLabelsInSourceV1Input == nil {
-		return localVarReturnValue, nil, reportError("replaceLabelsInSourceV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"replaceLabelsInSourceV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1210,7 +1467,12 @@ func (a *SourcesApiService) ReplaceLabelsInSourceExecute(r ApiReplaceLabelsInSou
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1219,7 +1481,16 @@ func (a *SourcesApiService) ReplaceLabelsInSourceExecute(r ApiReplaceLabelsInSou
 	}
 	// body params
 	localVarPostBody = r.replaceLabelsInSourceV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1273,7 +1544,11 @@ func (a *SourcesApiService) ReplaceLabelsInSourceExecute(r ApiReplaceLabelsInSou
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1286,13 +1561,15 @@ func (a *SourcesApiService) ReplaceLabelsInSourceExecute(r ApiReplaceLabelsInSou
 }
 
 type ApiUpdateSchemaSettingsInSourceRequest struct {
-	ctx context.Context
-	ApiService *SourcesApiService
-	sourceId string
+	ctx                                 context.Context
+	ApiService                          *SourcesApiService
+	sourceId                            string
 	updateSchemaSettingsInSourceV1Input *UpdateSchemaSettingsInSourceV1Input
 }
 
-func (r ApiUpdateSchemaSettingsInSourceRequest) UpdateSchemaSettingsInSourceV1Input(updateSchemaSettingsInSourceV1Input UpdateSchemaSettingsInSourceV1Input) ApiUpdateSchemaSettingsInSourceRequest {
+func (r ApiUpdateSchemaSettingsInSourceRequest) UpdateSchemaSettingsInSourceV1Input(
+	updateSchemaSettingsInSourceV1Input UpdateSchemaSettingsInSourceV1Input,
+) ApiUpdateSchemaSettingsInSourceRequest {
 	r.updateSchemaSettingsInSourceV1Input = &updateSchemaSettingsInSourceV1Input
 	return r
 }
@@ -1306,49 +1583,69 @@ UpdateSchemaSettingsInSource Update Schema Settings in Source
 
 Updates the schema configuration for a Source. If Protocols is not enabled for the Source, any updates to Protocols-specific configurations will not be applied.
 
-      Config API omitted fields:
-- `updateMask`
-      
+	Config API omitted fields:
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sourceId
- @return ApiUpdateSchemaSettingsInSourceRequest
+- `updateMask`
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sourceId
+	@return ApiUpdateSchemaSettingsInSourceRequest
 */
-func (a *SourcesApiService) UpdateSchemaSettingsInSource(ctx context.Context, sourceId string) ApiUpdateSchemaSettingsInSourceRequest {
+func (a *SourcesApiService) UpdateSchemaSettingsInSource(
+	ctx context.Context,
+	sourceId string,
+) ApiUpdateSchemaSettingsInSourceRequest {
 	return ApiUpdateSchemaSettingsInSourceRequest{
 		ApiService: a,
-		ctx: ctx,
-		sourceId: sourceId,
+		ctx:        ctx,
+		sourceId:   sourceId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateSchemaSettingsInSource200Response
-func (a *SourcesApiService) UpdateSchemaSettingsInSourceExecute(r ApiUpdateSchemaSettingsInSourceRequest) (*UpdateSchemaSettingsInSource200Response, *http.Response, error) {
+//
+//	@return UpdateSchemaSettingsInSource200Response
+func (a *SourcesApiService) UpdateSchemaSettingsInSourceExecute(
+	r ApiUpdateSchemaSettingsInSourceRequest,
+) (*UpdateSchemaSettingsInSource200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateSchemaSettingsInSource200Response
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateSchemaSettingsInSource200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesApiService.UpdateSchemaSettingsInSource")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"SourcesApiService.UpdateSchemaSettingsInSource",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/sources/{sourceId}/settings"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceId"+"}", url.PathEscape(parameterToString(r.sourceId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterToString(r.sourceId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.updateSchemaSettingsInSourceV1Input == nil {
-		return localVarReturnValue, nil, reportError("updateSchemaSettingsInSourceV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"updateSchemaSettingsInSourceV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1357,7 +1654,12 @@ func (a *SourcesApiService) UpdateSchemaSettingsInSourceExecute(r ApiUpdateSchem
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1366,7 +1668,16 @@ func (a *SourcesApiService) UpdateSchemaSettingsInSourceExecute(r ApiUpdateSchem
 	}
 	// body params
 	localVarPostBody = r.updateSchemaSettingsInSourceV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1420,7 +1731,11 @@ func (a *SourcesApiService) UpdateSchemaSettingsInSourceExecute(r ApiUpdateSchem
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1433,13 +1748,15 @@ func (a *SourcesApiService) UpdateSchemaSettingsInSourceExecute(r ApiUpdateSchem
 }
 
 type ApiUpdateSourceRequest struct {
-	ctx context.Context
-	ApiService *SourcesApiService
-	sourceId string
+	ctx                 context.Context
+	ApiService          *SourcesApiService
+	sourceId            string
 	updateSourceV1Input *UpdateSourceV1Input
 }
 
-func (r ApiUpdateSourceRequest) UpdateSourceV1Input(updateSourceV1Input UpdateSourceV1Input) ApiUpdateSourceRequest {
+func (r ApiUpdateSourceRequest) UpdateSourceV1Input(
+	updateSourceV1Input UpdateSourceV1Input,
+) ApiUpdateSourceRequest {
 	r.updateSourceV1Input = &updateSourceV1Input
 	return r
 }
@@ -1462,27 +1779,32 @@ When called, this endpoint may generate one or more of the following [audit trai
 Config API omitted fields:
 - `updateMask`
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sourceId
- @return ApiUpdateSourceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sourceId
+	@return ApiUpdateSourceRequest
 */
-func (a *SourcesApiService) UpdateSource(ctx context.Context, sourceId string) ApiUpdateSourceRequest {
+func (a *SourcesApiService) UpdateSource(
+	ctx context.Context,
+	sourceId string,
+) ApiUpdateSourceRequest {
 	return ApiUpdateSourceRequest{
 		ApiService: a,
-		ctx: ctx,
-		sourceId: sourceId,
+		ctx:        ctx,
+		sourceId:   sourceId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateSource200Response
-func (a *SourcesApiService) UpdateSourceExecute(r ApiUpdateSourceRequest) (*UpdateSource200Response, *http.Response, error) {
+//
+//	@return UpdateSource200Response
+func (a *SourcesApiService) UpdateSourceExecute(
+	r ApiUpdateSourceRequest,
+) (*UpdateSource200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateSource200Response
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateSource200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesApiService.UpdateSource")
@@ -1491,17 +1813,28 @@ func (a *SourcesApiService) UpdateSourceExecute(r ApiUpdateSourceRequest) (*Upda
 	}
 
 	localVarPath := localBasePath + "/sources/{sourceId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceId"+"}", url.PathEscape(parameterToString(r.sourceId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterToString(r.sourceId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.updateSourceV1Input == nil {
-		return localVarReturnValue, nil, reportError("updateSourceV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"updateSourceV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1510,7 +1843,12 @@ func (a *SourcesApiService) UpdateSourceExecute(r ApiUpdateSourceRequest) (*Upda
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1519,7 +1857,16 @@ func (a *SourcesApiService) UpdateSourceExecute(r ApiUpdateSourceRequest) (*Upda
 	}
 	// body params
 	localVarPostBody = r.updateSourceV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1573,7 +1920,11 @@ func (a *SourcesApiService) UpdateSourceExecute(r ApiUpdateSourceRequest) (*Upda
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,

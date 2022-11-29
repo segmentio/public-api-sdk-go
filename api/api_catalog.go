@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -20,13 +20,12 @@ import (
 	"strings"
 )
 
-
 // CatalogApiService CatalogApi service
 type CatalogApiService service
 
 type ApiGetDestinationMetadataRequest struct {
-	ctx context.Context
-	ApiService *CatalogApiService
+	ctx                   context.Context
+	ApiService            *CatalogApiService
 	destinationMetadataId string
 }
 
@@ -39,35 +38,49 @@ GetDestinationMetadata Get Destination Metadata
 
 Returns a Destination catalog item by its id.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param destinationMetadataId
- @return ApiGetDestinationMetadataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param destinationMetadataId
+	@return ApiGetDestinationMetadataRequest
 */
-func (a *CatalogApiService) GetDestinationMetadata(ctx context.Context, destinationMetadataId string) ApiGetDestinationMetadataRequest {
+func (a *CatalogApiService) GetDestinationMetadata(
+	ctx context.Context,
+	destinationMetadataId string,
+) ApiGetDestinationMetadataRequest {
 	return ApiGetDestinationMetadataRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:            a,
+		ctx:                   ctx,
 		destinationMetadataId: destinationMetadataId,
 	}
 }
 
 // Execute executes the request
-//  @return GetDestinationMetadata200Response
-func (a *CatalogApiService) GetDestinationMetadataExecute(r ApiGetDestinationMetadataRequest) (*GetDestinationMetadata200Response, *http.Response, error) {
+//
+//	@return GetDestinationMetadata200Response
+func (a *CatalogApiService) GetDestinationMetadataExecute(
+	r ApiGetDestinationMetadataRequest,
+) (*GetDestinationMetadata200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetDestinationMetadata200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetDestinationMetadata200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CatalogApiService.GetDestinationMetadata")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"CatalogApiService.GetDestinationMetadata",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/catalog/destinations/{destinationMetadataId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"destinationMetadataId"+"}", url.PathEscape(parameterToString(r.destinationMetadataId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"destinationMetadataId"+"}",
+		url.PathEscape(parameterToString(r.destinationMetadataId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -83,14 +96,28 @@ func (a *CatalogApiService) GetDestinationMetadataExecute(r ApiGetDestinationMet
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -144,7 +171,11 @@ func (a *CatalogApiService) GetDestinationMetadataExecute(r ApiGetDestinationMet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -157,13 +188,15 @@ func (a *CatalogApiService) GetDestinationMetadataExecute(r ApiGetDestinationMet
 }
 
 type ApiGetDestinationsCatalogRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CatalogApiService
 	pagination *PaginationInput
 }
 
 // Required pagination parameters used to filter the Destinations catalog.  This parameter exists in v1.
-func (r ApiGetDestinationsCatalogRequest) Pagination(pagination PaginationInput) ApiGetDestinationsCatalogRequest {
+func (r ApiGetDestinationsCatalogRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetDestinationsCatalogRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -177,27 +210,35 @@ GetDestinationsCatalog Get Destinations Catalog
 
 Returns a list of all available Destinations in the Segment catalog.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetDestinationsCatalogRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetDestinationsCatalogRequest
 */
-func (a *CatalogApiService) GetDestinationsCatalog(ctx context.Context) ApiGetDestinationsCatalogRequest {
+func (a *CatalogApiService) GetDestinationsCatalog(
+	ctx context.Context,
+) ApiGetDestinationsCatalogRequest {
 	return ApiGetDestinationsCatalogRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetDestinationsCatalog200Response
-func (a *CatalogApiService) GetDestinationsCatalogExecute(r ApiGetDestinationsCatalogRequest) (*GetDestinationsCatalog200Response, *http.Response, error) {
+//
+//	@return GetDestinationsCatalog200Response
+func (a *CatalogApiService) GetDestinationsCatalogExecute(
+	r ApiGetDestinationsCatalogRequest,
+) (*GetDestinationsCatalog200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetDestinationsCatalog200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetDestinationsCatalog200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CatalogApiService.GetDestinationsCatalog")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"CatalogApiService.GetDestinationsCatalog",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -222,14 +263,28 @@ func (a *CatalogApiService) GetDestinationsCatalogExecute(r ApiGetDestinationsCa
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -283,7 +338,11 @@ func (a *CatalogApiService) GetDestinationsCatalogExecute(r ApiGetDestinationsCa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -296,8 +355,8 @@ func (a *CatalogApiService) GetDestinationsCatalogExecute(r ApiGetDestinationsCa
 }
 
 type ApiGetSourceMetadataRequest struct {
-	ctx context.Context
-	ApiService *CatalogApiService
+	ctx              context.Context
+	ApiService       *CatalogApiService
 	sourceMetadataId string
 }
 
@@ -310,35 +369,49 @@ GetSourceMetadata Get Source Metadata
 
 Returns a Source catalog item by its id.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sourceMetadataId
- @return ApiGetSourceMetadataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sourceMetadataId
+	@return ApiGetSourceMetadataRequest
 */
-func (a *CatalogApiService) GetSourceMetadata(ctx context.Context, sourceMetadataId string) ApiGetSourceMetadataRequest {
+func (a *CatalogApiService) GetSourceMetadata(
+	ctx context.Context,
+	sourceMetadataId string,
+) ApiGetSourceMetadataRequest {
 	return ApiGetSourceMetadataRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:       a,
+		ctx:              ctx,
 		sourceMetadataId: sourceMetadataId,
 	}
 }
 
 // Execute executes the request
-//  @return GetSourceMetadata200Response
-func (a *CatalogApiService) GetSourceMetadataExecute(r ApiGetSourceMetadataRequest) (*GetSourceMetadata200Response, *http.Response, error) {
+//
+//	@return GetSourceMetadata200Response
+func (a *CatalogApiService) GetSourceMetadataExecute(
+	r ApiGetSourceMetadataRequest,
+) (*GetSourceMetadata200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetSourceMetadata200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetSourceMetadata200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CatalogApiService.GetSourceMetadata")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"CatalogApiService.GetSourceMetadata",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/catalog/sources/{sourceMetadataId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceMetadataId"+"}", url.PathEscape(parameterToString(r.sourceMetadataId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceMetadataId"+"}",
+		url.PathEscape(parameterToString(r.sourceMetadataId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -354,14 +427,28 @@ func (a *CatalogApiService) GetSourceMetadataExecute(r ApiGetSourceMetadataReque
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -415,7 +502,11 @@ func (a *CatalogApiService) GetSourceMetadataExecute(r ApiGetSourceMetadataReque
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -428,13 +519,15 @@ func (a *CatalogApiService) GetSourceMetadataExecute(r ApiGetSourceMetadataReque
 }
 
 type ApiGetSourcesCatalogRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CatalogApiService
 	pagination *PaginationInput
 }
 
 // Defines the pagination parameters.  This parameter exists in v1.
-func (r ApiGetSourcesCatalogRequest) Pagination(pagination PaginationInput) ApiGetSourcesCatalogRequest {
+func (r ApiGetSourcesCatalogRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetSourcesCatalogRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -448,27 +541,33 @@ GetSourcesCatalog Get Sources Catalog
 
 Returns a list of all available Sources in the Segment catalog.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSourcesCatalogRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSourcesCatalogRequest
 */
 func (a *CatalogApiService) GetSourcesCatalog(ctx context.Context) ApiGetSourcesCatalogRequest {
 	return ApiGetSourcesCatalogRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetSourcesCatalog200Response
-func (a *CatalogApiService) GetSourcesCatalogExecute(r ApiGetSourcesCatalogRequest) (*GetSourcesCatalog200Response, *http.Response, error) {
+//
+//	@return GetSourcesCatalog200Response
+func (a *CatalogApiService) GetSourcesCatalogExecute(
+	r ApiGetSourcesCatalogRequest,
+) (*GetSourcesCatalog200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetSourcesCatalog200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetSourcesCatalog200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CatalogApiService.GetSourcesCatalog")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"CatalogApiService.GetSourcesCatalog",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -493,14 +592,28 @@ func (a *CatalogApiService) GetSourcesCatalogExecute(r ApiGetSourcesCatalogReque
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -554,7 +667,11 @@ func (a *CatalogApiService) GetSourcesCatalogExecute(r ApiGetSourcesCatalogReque
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -567,8 +684,8 @@ func (a *CatalogApiService) GetSourcesCatalogExecute(r ApiGetSourcesCatalogReque
 }
 
 type ApiGetWarehouseMetadataRequest struct {
-	ctx context.Context
-	ApiService *CatalogApiService
+	ctx                 context.Context
+	ApiService          *CatalogApiService
 	warehouseMetadataId string
 }
 
@@ -581,35 +698,49 @@ GetWarehouseMetadata Get Warehouse Metadata
 
 Returns a Warehouse catalog item by its id.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param warehouseMetadataId
- @return ApiGetWarehouseMetadataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param warehouseMetadataId
+	@return ApiGetWarehouseMetadataRequest
 */
-func (a *CatalogApiService) GetWarehouseMetadata(ctx context.Context, warehouseMetadataId string) ApiGetWarehouseMetadataRequest {
+func (a *CatalogApiService) GetWarehouseMetadata(
+	ctx context.Context,
+	warehouseMetadataId string,
+) ApiGetWarehouseMetadataRequest {
 	return ApiGetWarehouseMetadataRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:          a,
+		ctx:                 ctx,
 		warehouseMetadataId: warehouseMetadataId,
 	}
 }
 
 // Execute executes the request
-//  @return GetWarehouseMetadata200Response
-func (a *CatalogApiService) GetWarehouseMetadataExecute(r ApiGetWarehouseMetadataRequest) (*GetWarehouseMetadata200Response, *http.Response, error) {
+//
+//	@return GetWarehouseMetadata200Response
+func (a *CatalogApiService) GetWarehouseMetadataExecute(
+	r ApiGetWarehouseMetadataRequest,
+) (*GetWarehouseMetadata200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetWarehouseMetadata200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetWarehouseMetadata200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CatalogApiService.GetWarehouseMetadata")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"CatalogApiService.GetWarehouseMetadata",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/catalog/warehouses/{warehouseMetadataId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"warehouseMetadataId"+"}", url.PathEscape(parameterToString(r.warehouseMetadataId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"warehouseMetadataId"+"}",
+		url.PathEscape(parameterToString(r.warehouseMetadataId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -625,14 +756,28 @@ func (a *CatalogApiService) GetWarehouseMetadataExecute(r ApiGetWarehouseMetadat
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -686,7 +831,11 @@ func (a *CatalogApiService) GetWarehouseMetadataExecute(r ApiGetWarehouseMetadat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -699,13 +848,15 @@ func (a *CatalogApiService) GetWarehouseMetadataExecute(r ApiGetWarehouseMetadat
 }
 
 type ApiGetWarehousesCatalogRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *CatalogApiService
 	pagination *PaginationInput
 }
 
 // Required pagination params used to filter the Warehouses catalog.  This parameter exists in v1.
-func (r ApiGetWarehousesCatalogRequest) Pagination(pagination PaginationInput) ApiGetWarehousesCatalogRequest {
+func (r ApiGetWarehousesCatalogRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetWarehousesCatalogRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -719,27 +870,35 @@ GetWarehousesCatalog Get Warehouses Catalog
 
 Returns a list of all available Warehouses in the Segment catalog.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetWarehousesCatalogRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWarehousesCatalogRequest
 */
-func (a *CatalogApiService) GetWarehousesCatalog(ctx context.Context) ApiGetWarehousesCatalogRequest {
+func (a *CatalogApiService) GetWarehousesCatalog(
+	ctx context.Context,
+) ApiGetWarehousesCatalogRequest {
 	return ApiGetWarehousesCatalogRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetWarehousesCatalog200Response
-func (a *CatalogApiService) GetWarehousesCatalogExecute(r ApiGetWarehousesCatalogRequest) (*GetWarehousesCatalog200Response, *http.Response, error) {
+//
+//	@return GetWarehousesCatalog200Response
+func (a *CatalogApiService) GetWarehousesCatalogExecute(
+	r ApiGetWarehousesCatalogRequest,
+) (*GetWarehousesCatalog200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetWarehousesCatalog200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetWarehousesCatalog200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CatalogApiService.GetWarehousesCatalog")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"CatalogApiService.GetWarehousesCatalog",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -764,14 +923,28 @@ func (a *CatalogApiService) GetWarehousesCatalogExecute(r ApiGetWarehousesCatalo
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -825,7 +998,11 @@ func (a *CatalogApiService) GetWarehousesCatalogExecute(r ApiGetWarehousesCatalo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,

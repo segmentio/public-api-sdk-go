@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -20,13 +20,12 @@ import (
 	"strings"
 )
 
-
 // SelectiveSyncApiService SelectiveSyncApi service
 type SelectiveSyncApiService service
 
 type ApiGetAdvancedSyncScheduleFromWarehouseRequest struct {
-	ctx context.Context
-	ApiService *SelectiveSyncApiService
+	ctx         context.Context
+	ApiService  *SelectiveSyncApiService
 	warehouseId string
 }
 
@@ -39,38 +38,51 @@ GetAdvancedSyncScheduleFromWarehouse Get Advanced Sync Schedule from Warehouse
 
 Returns the advanced sync schedule for a Warehouse.
 
-
 The rate limit for this endpoint is 2 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param warehouseId
- @return ApiGetAdvancedSyncScheduleFromWarehouseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param warehouseId
+	@return ApiGetAdvancedSyncScheduleFromWarehouseRequest
 */
-func (a *SelectiveSyncApiService) GetAdvancedSyncScheduleFromWarehouse(ctx context.Context, warehouseId string) ApiGetAdvancedSyncScheduleFromWarehouseRequest {
+func (a *SelectiveSyncApiService) GetAdvancedSyncScheduleFromWarehouse(
+	ctx context.Context,
+	warehouseId string,
+) ApiGetAdvancedSyncScheduleFromWarehouseRequest {
 	return ApiGetAdvancedSyncScheduleFromWarehouseRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		warehouseId: warehouseId,
 	}
 }
 
 // Execute executes the request
-//  @return GetAdvancedSyncScheduleFromWarehouse200Response
-func (a *SelectiveSyncApiService) GetAdvancedSyncScheduleFromWarehouseExecute(r ApiGetAdvancedSyncScheduleFromWarehouseRequest) (*GetAdvancedSyncScheduleFromWarehouse200Response, *http.Response, error) {
+//
+//	@return GetAdvancedSyncScheduleFromWarehouse200Response
+func (a *SelectiveSyncApiService) GetAdvancedSyncScheduleFromWarehouseExecute(
+	r ApiGetAdvancedSyncScheduleFromWarehouseRequest,
+) (*GetAdvancedSyncScheduleFromWarehouse200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetAdvancedSyncScheduleFromWarehouse200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetAdvancedSyncScheduleFromWarehouse200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SelectiveSyncApiService.GetAdvancedSyncScheduleFromWarehouse")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"SelectiveSyncApiService.GetAdvancedSyncScheduleFromWarehouse",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/warehouses/{warehouseId}/advanced-sync-schedule"
-	localVarPath = strings.Replace(localVarPath, "{"+"warehouseId"+"}", url.PathEscape(parameterToString(r.warehouseId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"warehouseId"+"}",
+		url.PathEscape(parameterToString(r.warehouseId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -86,14 +98,28 @@ func (a *SelectiveSyncApiService) GetAdvancedSyncScheduleFromWarehouseExecute(r 
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -147,7 +173,11 @@ func (a *SelectiveSyncApiService) GetAdvancedSyncScheduleFromWarehouseExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -160,15 +190,17 @@ func (a *SelectiveSyncApiService) GetAdvancedSyncScheduleFromWarehouseExecute(r 
 }
 
 type ApiListSelectiveSyncsFromWarehouseAndSourceRequest struct {
-	ctx context.Context
-	ApiService *SelectiveSyncApiService
+	ctx         context.Context
+	ApiService  *SelectiveSyncApiService
 	warehouseId string
-	sourceId string
-	pagination *PaginationInput
+	sourceId    string
+	pagination  *PaginationInput
 }
 
 // Defines the pagination parameters.  This parameter exists in v1.
-func (r ApiListSelectiveSyncsFromWarehouseAndSourceRequest) Pagination(pagination PaginationInput) ApiListSelectiveSyncsFromWarehouseAndSourceRequest {
+func (r ApiListSelectiveSyncsFromWarehouseAndSourceRequest) Pagination(
+	pagination PaginationInput,
+) ApiListSelectiveSyncsFromWarehouseAndSourceRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -182,41 +214,60 @@ ListSelectiveSyncsFromWarehouseAndSource List Selective Syncs from Warehouse And
 
 Returns the schema for a Warehouse, including Sources, Collections, and Properties.
 
-
 The rate limit for this endpoint is 2 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param warehouseId
- @param sourceId
- @return ApiListSelectiveSyncsFromWarehouseAndSourceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param warehouseId
+	@param sourceId
+	@return ApiListSelectiveSyncsFromWarehouseAndSourceRequest
 */
-func (a *SelectiveSyncApiService) ListSelectiveSyncsFromWarehouseAndSource(ctx context.Context, warehouseId string, sourceId string) ApiListSelectiveSyncsFromWarehouseAndSourceRequest {
+func (a *SelectiveSyncApiService) ListSelectiveSyncsFromWarehouseAndSource(
+	ctx context.Context,
+	warehouseId string,
+	sourceId string,
+) ApiListSelectiveSyncsFromWarehouseAndSourceRequest {
 	return ApiListSelectiveSyncsFromWarehouseAndSourceRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		warehouseId: warehouseId,
-		sourceId: sourceId,
+		sourceId:    sourceId,
 	}
 }
 
 // Execute executes the request
-//  @return ListSelectiveSyncsFromWarehouseAndSource200Response
-func (a *SelectiveSyncApiService) ListSelectiveSyncsFromWarehouseAndSourceExecute(r ApiListSelectiveSyncsFromWarehouseAndSourceRequest) (*ListSelectiveSyncsFromWarehouseAndSource200Response, *http.Response, error) {
+//
+//	@return ListSelectiveSyncsFromWarehouseAndSource200Response
+func (a *SelectiveSyncApiService) ListSelectiveSyncsFromWarehouseAndSourceExecute(
+	r ApiListSelectiveSyncsFromWarehouseAndSourceRequest,
+) (*ListSelectiveSyncsFromWarehouseAndSource200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListSelectiveSyncsFromWarehouseAndSource200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListSelectiveSyncsFromWarehouseAndSource200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SelectiveSyncApiService.ListSelectiveSyncsFromWarehouseAndSource")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"SelectiveSyncApiService.ListSelectiveSyncsFromWarehouseAndSource",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/warehouses/{warehouseId}/connected-sources/{sourceId}/selective-syncs"
-	localVarPath = strings.Replace(localVarPath, "{"+"warehouseId"+"}", url.PathEscape(parameterToString(r.warehouseId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceId"+"}", url.PathEscape(parameterToString(r.sourceId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"warehouseId"+"}",
+		url.PathEscape(parameterToString(r.warehouseId, "")),
+		-1,
+	)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterToString(r.sourceId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -236,14 +287,28 @@ func (a *SelectiveSyncApiService) ListSelectiveSyncsFromWarehouseAndSourceExecut
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -297,7 +362,11 @@ func (a *SelectiveSyncApiService) ListSelectiveSyncsFromWarehouseAndSourceExecut
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -310,14 +379,16 @@ func (a *SelectiveSyncApiService) ListSelectiveSyncsFromWarehouseAndSourceExecut
 }
 
 type ApiListSyncsFromWarehouseRequest struct {
-	ctx context.Context
-	ApiService *SelectiveSyncApiService
+	ctx         context.Context
+	ApiService  *SelectiveSyncApiService
 	warehouseId string
-	pagination *PaginationInput
+	pagination  *PaginationInput
 }
 
 // Defines the pagination parameters.  This parameter exists in v1.
-func (r ApiListSyncsFromWarehouseRequest) Pagination(pagination PaginationInput) ApiListSyncsFromWarehouseRequest {
+func (r ApiListSyncsFromWarehouseRequest) Pagination(
+	pagination PaginationInput,
+) ApiListSyncsFromWarehouseRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -331,38 +402,51 @@ ListSyncsFromWarehouse List Syncs from Warehouse
 
 Returns the overview of syncs for every Source connected to a Warehouse.
 
-
 The rate limit for this endpoint is 2 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param warehouseId
- @return ApiListSyncsFromWarehouseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param warehouseId
+	@return ApiListSyncsFromWarehouseRequest
 */
-func (a *SelectiveSyncApiService) ListSyncsFromWarehouse(ctx context.Context, warehouseId string) ApiListSyncsFromWarehouseRequest {
+func (a *SelectiveSyncApiService) ListSyncsFromWarehouse(
+	ctx context.Context,
+	warehouseId string,
+) ApiListSyncsFromWarehouseRequest {
 	return ApiListSyncsFromWarehouseRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		warehouseId: warehouseId,
 	}
 }
 
 // Execute executes the request
-//  @return ListSyncsFromWarehouse200Response
-func (a *SelectiveSyncApiService) ListSyncsFromWarehouseExecute(r ApiListSyncsFromWarehouseRequest) (*ListSyncsFromWarehouse200Response, *http.Response, error) {
+//
+//	@return ListSyncsFromWarehouse200Response
+func (a *SelectiveSyncApiService) ListSyncsFromWarehouseExecute(
+	r ApiListSyncsFromWarehouseRequest,
+) (*ListSyncsFromWarehouse200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListSyncsFromWarehouse200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListSyncsFromWarehouse200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SelectiveSyncApiService.ListSyncsFromWarehouse")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"SelectiveSyncApiService.ListSyncsFromWarehouse",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/warehouses/{warehouseId}/syncs"
-	localVarPath = strings.Replace(localVarPath, "{"+"warehouseId"+"}", url.PathEscape(parameterToString(r.warehouseId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"warehouseId"+"}",
+		url.PathEscape(parameterToString(r.warehouseId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -382,14 +466,28 @@ func (a *SelectiveSyncApiService) ListSyncsFromWarehouseExecute(r ApiListSyncsFr
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -443,7 +541,11 @@ func (a *SelectiveSyncApiService) ListSyncsFromWarehouseExecute(r ApiListSyncsFr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -456,15 +558,17 @@ func (a *SelectiveSyncApiService) ListSyncsFromWarehouseExecute(r ApiListSyncsFr
 }
 
 type ApiListSyncsFromWarehouseAndSourceRequest struct {
-	ctx context.Context
-	ApiService *SelectiveSyncApiService
+	ctx         context.Context
+	ApiService  *SelectiveSyncApiService
 	warehouseId string
-	sourceId string
-	pagination *PaginationInput
+	sourceId    string
+	pagination  *PaginationInput
 }
 
 // Defines the pagination parameters.  This parameter exists in v1.
-func (r ApiListSyncsFromWarehouseAndSourceRequest) Pagination(pagination PaginationInput) ApiListSyncsFromWarehouseAndSourceRequest {
+func (r ApiListSyncsFromWarehouseAndSourceRequest) Pagination(
+	pagination PaginationInput,
+) ApiListSyncsFromWarehouseAndSourceRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -478,41 +582,60 @@ ListSyncsFromWarehouseAndSource List Syncs from Warehouse And Source
 
 Returns the overview of syncs for a Source connected to a Warehouse.
 
-
 The rate limit for this endpoint is 2 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param warehouseId
- @param sourceId
- @return ApiListSyncsFromWarehouseAndSourceRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param warehouseId
+	@param sourceId
+	@return ApiListSyncsFromWarehouseAndSourceRequest
 */
-func (a *SelectiveSyncApiService) ListSyncsFromWarehouseAndSource(ctx context.Context, warehouseId string, sourceId string) ApiListSyncsFromWarehouseAndSourceRequest {
+func (a *SelectiveSyncApiService) ListSyncsFromWarehouseAndSource(
+	ctx context.Context,
+	warehouseId string,
+	sourceId string,
+) ApiListSyncsFromWarehouseAndSourceRequest {
 	return ApiListSyncsFromWarehouseAndSourceRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		warehouseId: warehouseId,
-		sourceId: sourceId,
+		sourceId:    sourceId,
 	}
 }
 
 // Execute executes the request
-//  @return ListSyncsFromWarehouseAndSource200Response
-func (a *SelectiveSyncApiService) ListSyncsFromWarehouseAndSourceExecute(r ApiListSyncsFromWarehouseAndSourceRequest) (*ListSyncsFromWarehouseAndSource200Response, *http.Response, error) {
+//
+//	@return ListSyncsFromWarehouseAndSource200Response
+func (a *SelectiveSyncApiService) ListSyncsFromWarehouseAndSourceExecute(
+	r ApiListSyncsFromWarehouseAndSourceRequest,
+) (*ListSyncsFromWarehouseAndSource200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListSyncsFromWarehouseAndSource200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListSyncsFromWarehouseAndSource200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SelectiveSyncApiService.ListSyncsFromWarehouseAndSource")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"SelectiveSyncApiService.ListSyncsFromWarehouseAndSource",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/warehouses/{warehouseId}/connected-sources/{sourceId}/syncs"
-	localVarPath = strings.Replace(localVarPath, "{"+"warehouseId"+"}", url.PathEscape(parameterToString(r.warehouseId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceId"+"}", url.PathEscape(parameterToString(r.sourceId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"warehouseId"+"}",
+		url.PathEscape(parameterToString(r.warehouseId, "")),
+		-1,
+	)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterToString(r.sourceId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -532,14 +655,28 @@ func (a *SelectiveSyncApiService) ListSyncsFromWarehouseAndSourceExecute(r ApiLi
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -593,7 +730,11 @@ func (a *SelectiveSyncApiService) ListSyncsFromWarehouseAndSourceExecute(r ApiLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -606,13 +747,15 @@ func (a *SelectiveSyncApiService) ListSyncsFromWarehouseAndSourceExecute(r ApiLi
 }
 
 type ApiReplaceAdvancedSyncScheduleForWarehouseRequest struct {
-	ctx context.Context
-	ApiService *SelectiveSyncApiService
-	warehouseId string
+	ctx                                            context.Context
+	ApiService                                     *SelectiveSyncApiService
+	warehouseId                                    string
 	replaceAdvancedSyncScheduleForWarehouseV1Input *ReplaceAdvancedSyncScheduleForWarehouseV1Input
 }
 
-func (r ApiReplaceAdvancedSyncScheduleForWarehouseRequest) ReplaceAdvancedSyncScheduleForWarehouseV1Input(replaceAdvancedSyncScheduleForWarehouseV1Input ReplaceAdvancedSyncScheduleForWarehouseV1Input) ApiReplaceAdvancedSyncScheduleForWarehouseRequest {
+func (r ApiReplaceAdvancedSyncScheduleForWarehouseRequest) ReplaceAdvancedSyncScheduleForWarehouseV1Input(
+	replaceAdvancedSyncScheduleForWarehouseV1Input ReplaceAdvancedSyncScheduleForWarehouseV1Input,
+) ApiReplaceAdvancedSyncScheduleForWarehouseRequest {
 	r.replaceAdvancedSyncScheduleForWarehouseV1Input = &replaceAdvancedSyncScheduleForWarehouseV1Input
 	return r
 }
@@ -626,48 +769,67 @@ ReplaceAdvancedSyncScheduleForWarehouse Replace Advanced Sync Schedule for Wareh
 
 Updates the advanced sync schedule for a Warehouse, replacing the sync schedule with a new schedule.
 
-
 The rate limit for this endpoint is 2 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param warehouseId
- @return ApiReplaceAdvancedSyncScheduleForWarehouseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param warehouseId
+	@return ApiReplaceAdvancedSyncScheduleForWarehouseRequest
 */
-func (a *SelectiveSyncApiService) ReplaceAdvancedSyncScheduleForWarehouse(ctx context.Context, warehouseId string) ApiReplaceAdvancedSyncScheduleForWarehouseRequest {
+func (a *SelectiveSyncApiService) ReplaceAdvancedSyncScheduleForWarehouse(
+	ctx context.Context,
+	warehouseId string,
+) ApiReplaceAdvancedSyncScheduleForWarehouseRequest {
 	return ApiReplaceAdvancedSyncScheduleForWarehouseRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		warehouseId: warehouseId,
 	}
 }
 
 // Execute executes the request
-//  @return ReplaceAdvancedSyncScheduleForWarehouse200Response
-func (a *SelectiveSyncApiService) ReplaceAdvancedSyncScheduleForWarehouseExecute(r ApiReplaceAdvancedSyncScheduleForWarehouseRequest) (*ReplaceAdvancedSyncScheduleForWarehouse200Response, *http.Response, error) {
+//
+//	@return ReplaceAdvancedSyncScheduleForWarehouse200Response
+func (a *SelectiveSyncApiService) ReplaceAdvancedSyncScheduleForWarehouseExecute(
+	r ApiReplaceAdvancedSyncScheduleForWarehouseRequest,
+) (*ReplaceAdvancedSyncScheduleForWarehouse200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReplaceAdvancedSyncScheduleForWarehouse200Response
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReplaceAdvancedSyncScheduleForWarehouse200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SelectiveSyncApiService.ReplaceAdvancedSyncScheduleForWarehouse")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"SelectiveSyncApiService.ReplaceAdvancedSyncScheduleForWarehouse",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/warehouses/{warehouseId}/advanced-sync-schedule"
-	localVarPath = strings.Replace(localVarPath, "{"+"warehouseId"+"}", url.PathEscape(parameterToString(r.warehouseId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"warehouseId"+"}",
+		url.PathEscape(parameterToString(r.warehouseId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.replaceAdvancedSyncScheduleForWarehouseV1Input == nil {
-		return localVarReturnValue, nil, reportError("replaceAdvancedSyncScheduleForWarehouseV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"replaceAdvancedSyncScheduleForWarehouseV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -676,7 +838,12 @@ func (a *SelectiveSyncApiService) ReplaceAdvancedSyncScheduleForWarehouseExecute
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -685,7 +852,16 @@ func (a *SelectiveSyncApiService) ReplaceAdvancedSyncScheduleForWarehouseExecute
 	}
 	// body params
 	localVarPostBody = r.replaceAdvancedSyncScheduleForWarehouseV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -739,7 +915,11 @@ func (a *SelectiveSyncApiService) ReplaceAdvancedSyncScheduleForWarehouseExecute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -752,13 +932,15 @@ func (a *SelectiveSyncApiService) ReplaceAdvancedSyncScheduleForWarehouseExecute
 }
 
 type ApiUpdateSelectiveSyncForWarehouseRequest struct {
-	ctx context.Context
-	ApiService *SelectiveSyncApiService
-	warehouseId string
+	ctx                                    context.Context
+	ApiService                             *SelectiveSyncApiService
+	warehouseId                            string
 	updateSelectiveSyncForWarehouseV1Input *UpdateSelectiveSyncForWarehouseV1Input
 }
 
-func (r ApiUpdateSelectiveSyncForWarehouseRequest) UpdateSelectiveSyncForWarehouseV1Input(updateSelectiveSyncForWarehouseV1Input UpdateSelectiveSyncForWarehouseV1Input) ApiUpdateSelectiveSyncForWarehouseRequest {
+func (r ApiUpdateSelectiveSyncForWarehouseRequest) UpdateSelectiveSyncForWarehouseV1Input(
+	updateSelectiveSyncForWarehouseV1Input UpdateSelectiveSyncForWarehouseV1Input,
+) ApiUpdateSelectiveSyncForWarehouseRequest {
 	r.updateSelectiveSyncForWarehouseV1Input = &updateSelectiveSyncForWarehouseV1Input
 	return r
 }
@@ -772,53 +954,69 @@ UpdateSelectiveSyncForWarehouse Update Selective Sync for Warehouse
 
 Configures the schema for a Warehouse, including Sources, Collections, and Properties.
 
-
-
 When called, this endpoint may generate the `Storage Destination Modified` event in the [audit trail](/tag/Audit-Trail).
-      
-
 
 The rate limit for this endpoint is 2 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param warehouseId
- @return ApiUpdateSelectiveSyncForWarehouseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param warehouseId
+	@return ApiUpdateSelectiveSyncForWarehouseRequest
 */
-func (a *SelectiveSyncApiService) UpdateSelectiveSyncForWarehouse(ctx context.Context, warehouseId string) ApiUpdateSelectiveSyncForWarehouseRequest {
+func (a *SelectiveSyncApiService) UpdateSelectiveSyncForWarehouse(
+	ctx context.Context,
+	warehouseId string,
+) ApiUpdateSelectiveSyncForWarehouseRequest {
 	return ApiUpdateSelectiveSyncForWarehouseRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		warehouseId: warehouseId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateSelectiveSyncForWarehouse200Response
-func (a *SelectiveSyncApiService) UpdateSelectiveSyncForWarehouseExecute(r ApiUpdateSelectiveSyncForWarehouseRequest) (*UpdateSelectiveSyncForWarehouse200Response, *http.Response, error) {
+//
+//	@return UpdateSelectiveSyncForWarehouse200Response
+func (a *SelectiveSyncApiService) UpdateSelectiveSyncForWarehouseExecute(
+	r ApiUpdateSelectiveSyncForWarehouseRequest,
+) (*UpdateSelectiveSyncForWarehouse200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateSelectiveSyncForWarehouse200Response
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateSelectiveSyncForWarehouse200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SelectiveSyncApiService.UpdateSelectiveSyncForWarehouse")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"SelectiveSyncApiService.UpdateSelectiveSyncForWarehouse",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/warehouses/{warehouseId}/selective-sync"
-	localVarPath = strings.Replace(localVarPath, "{"+"warehouseId"+"}", url.PathEscape(parameterToString(r.warehouseId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"warehouseId"+"}",
+		url.PathEscape(parameterToString(r.warehouseId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.updateSelectiveSyncForWarehouseV1Input == nil {
-		return localVarReturnValue, nil, reportError("updateSelectiveSyncForWarehouseV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"updateSelectiveSyncForWarehouseV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -827,7 +1025,12 @@ func (a *SelectiveSyncApiService) UpdateSelectiveSyncForWarehouseExecute(r ApiUp
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -836,7 +1039,16 @@ func (a *SelectiveSyncApiService) UpdateSelectiveSyncForWarehouseExecute(r ApiUp
 	}
 	// body params
 	localVarPostBody = r.updateSelectiveSyncForWarehouseV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -890,7 +1102,11 @@ func (a *SelectiveSyncApiService) UpdateSelectiveSyncForWarehouseExecute(r ApiUp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,

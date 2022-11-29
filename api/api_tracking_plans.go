@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -20,18 +20,19 @@ import (
 	"strings"
 )
 
-
 // TrackingPlansApiService TrackingPlansApi service
 type TrackingPlansApiService service
 
 type ApiAddSourceToTrackingPlanRequest struct {
-	ctx context.Context
-	ApiService *TrackingPlansApiService
-	trackingPlanId string
+	ctx                            context.Context
+	ApiService                     *TrackingPlansApiService
+	trackingPlanId                 string
 	addSourceToTrackingPlanV1Input *AddSourceToTrackingPlanV1Input
 }
 
-func (r ApiAddSourceToTrackingPlanRequest) AddSourceToTrackingPlanV1Input(addSourceToTrackingPlanV1Input AddSourceToTrackingPlanV1Input) ApiAddSourceToTrackingPlanRequest {
+func (r ApiAddSourceToTrackingPlanRequest) AddSourceToTrackingPlanV1Input(
+	addSourceToTrackingPlanV1Input AddSourceToTrackingPlanV1Input,
+) ApiAddSourceToTrackingPlanRequest {
 	r.addSourceToTrackingPlanV1Input = &addSourceToTrackingPlanV1Input
 	return r
 }
@@ -45,50 +46,68 @@ AddSourceToTrackingPlan Add Source to Tracking Plan
 
 Connects a Source to a Tracking Plan.
 
-
-
 When called, this endpoint may generate the `Source Modified` event in the [audit trail](/tag/Audit-Trail).
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param trackingPlanId
- @return ApiAddSourceToTrackingPlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param trackingPlanId
+	@return ApiAddSourceToTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) AddSourceToTrackingPlan(ctx context.Context, trackingPlanId string) ApiAddSourceToTrackingPlanRequest {
+func (a *TrackingPlansApiService) AddSourceToTrackingPlan(
+	ctx context.Context,
+	trackingPlanId string,
+) ApiAddSourceToTrackingPlanRequest {
 	return ApiAddSourceToTrackingPlanRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		trackingPlanId: trackingPlanId,
 	}
 }
 
 // Execute executes the request
-//  @return AddSourceToTrackingPlan200Response
-func (a *TrackingPlansApiService) AddSourceToTrackingPlanExecute(r ApiAddSourceToTrackingPlanRequest) (*AddSourceToTrackingPlan200Response, *http.Response, error) {
+//
+//	@return AddSourceToTrackingPlan200Response
+func (a *TrackingPlansApiService) AddSourceToTrackingPlanExecute(
+	r ApiAddSourceToTrackingPlanRequest,
+) (*AddSourceToTrackingPlan200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AddSourceToTrackingPlan200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AddSourceToTrackingPlan200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TrackingPlansApiService.AddSourceToTrackingPlan")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TrackingPlansApiService.AddSourceToTrackingPlan",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/tracking-plans/{trackingPlanId}/sources"
-	localVarPath = strings.Replace(localVarPath, "{"+"trackingPlanId"+"}", url.PathEscape(parameterToString(r.trackingPlanId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"trackingPlanId"+"}",
+		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.addSourceToTrackingPlanV1Input == nil {
-		return localVarReturnValue, nil, reportError("addSourceToTrackingPlanV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"addSourceToTrackingPlanV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -97,7 +116,12 @@ func (a *TrackingPlansApiService) AddSourceToTrackingPlanExecute(r ApiAddSourceT
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -106,7 +130,16 @@ func (a *TrackingPlansApiService) AddSourceToTrackingPlanExecute(r ApiAddSourceT
 	}
 	// body params
 	localVarPostBody = r.addSourceToTrackingPlanV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -160,7 +193,11 @@ func (a *TrackingPlansApiService) AddSourceToTrackingPlanExecute(r ApiAddSourceT
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -173,12 +210,14 @@ func (a *TrackingPlansApiService) AddSourceToTrackingPlanExecute(r ApiAddSourceT
 }
 
 type ApiCreateTrackingPlanRequest struct {
-	ctx context.Context
-	ApiService *TrackingPlansApiService
+	ctx                       context.Context
+	ApiService                *TrackingPlansApiService
 	createTrackingPlanV1Input *CreateTrackingPlanV1Input
 }
 
-func (r ApiCreateTrackingPlanRequest) CreateTrackingPlanV1Input(createTrackingPlanV1Input CreateTrackingPlanV1Input) ApiCreateTrackingPlanRequest {
+func (r ApiCreateTrackingPlanRequest) CreateTrackingPlanV1Input(
+	createTrackingPlanV1Input CreateTrackingPlanV1Input,
+) ApiCreateTrackingPlanRequest {
 	r.createTrackingPlanV1Input = &createTrackingPlanV1Input
 	return r
 }
@@ -194,27 +233,35 @@ Creates a Tracking Plan.
 
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateTrackingPlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) CreateTrackingPlan(ctx context.Context) ApiCreateTrackingPlanRequest {
+func (a *TrackingPlansApiService) CreateTrackingPlan(
+	ctx context.Context,
+) ApiCreateTrackingPlanRequest {
 	return ApiCreateTrackingPlanRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateTrackingPlan200Response
-func (a *TrackingPlansApiService) CreateTrackingPlanExecute(r ApiCreateTrackingPlanRequest) (*CreateTrackingPlan200Response, *http.Response, error) {
+//
+//	@return CreateTrackingPlan200Response
+func (a *TrackingPlansApiService) CreateTrackingPlanExecute(
+	r ApiCreateTrackingPlanRequest,
+) (*CreateTrackingPlan200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateTrackingPlan200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateTrackingPlan200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TrackingPlansApiService.CreateTrackingPlan")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TrackingPlansApiService.CreateTrackingPlan",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -225,11 +272,17 @@ func (a *TrackingPlansApiService) CreateTrackingPlanExecute(r ApiCreateTrackingP
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.createTrackingPlanV1Input == nil {
-		return localVarReturnValue, nil, reportError("createTrackingPlanV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"createTrackingPlanV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -238,7 +291,12 @@ func (a *TrackingPlansApiService) CreateTrackingPlanExecute(r ApiCreateTrackingP
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -247,7 +305,16 @@ func (a *TrackingPlansApiService) CreateTrackingPlanExecute(r ApiCreateTrackingP
 	}
 	// body params
 	localVarPostBody = r.createTrackingPlanV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -301,7 +368,11 @@ func (a *TrackingPlansApiService) CreateTrackingPlanExecute(r ApiCreateTrackingP
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -314,8 +385,8 @@ func (a *TrackingPlansApiService) CreateTrackingPlanExecute(r ApiCreateTrackingP
 }
 
 type ApiDeleteTrackingPlanRequest struct {
-	ctx context.Context
-	ApiService *TrackingPlansApiService
+	ctx            context.Context
+	ApiService     *TrackingPlansApiService
 	trackingPlanId string
 }
 
@@ -330,35 +401,49 @@ Deletes a Tracking Plan.
 
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param trackingPlanId
- @return ApiDeleteTrackingPlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param trackingPlanId
+	@return ApiDeleteTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) DeleteTrackingPlan(ctx context.Context, trackingPlanId string) ApiDeleteTrackingPlanRequest {
+func (a *TrackingPlansApiService) DeleteTrackingPlan(
+	ctx context.Context,
+	trackingPlanId string,
+) ApiDeleteTrackingPlanRequest {
 	return ApiDeleteTrackingPlanRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		trackingPlanId: trackingPlanId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteTrackingPlan200Response
-func (a *TrackingPlansApiService) DeleteTrackingPlanExecute(r ApiDeleteTrackingPlanRequest) (*DeleteTrackingPlan200Response, *http.Response, error) {
+//
+//	@return DeleteTrackingPlan200Response
+func (a *TrackingPlansApiService) DeleteTrackingPlanExecute(
+	r ApiDeleteTrackingPlanRequest,
+) (*DeleteTrackingPlan200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteTrackingPlan200Response
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteTrackingPlan200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TrackingPlansApiService.DeleteTrackingPlan")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TrackingPlansApiService.DeleteTrackingPlan",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/tracking-plans/{trackingPlanId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"trackingPlanId"+"}", url.PathEscape(parameterToString(r.trackingPlanId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"trackingPlanId"+"}",
+		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -374,14 +459,28 @@ func (a *TrackingPlansApiService) DeleteTrackingPlanExecute(r ApiDeleteTrackingP
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -435,7 +534,11 @@ func (a *TrackingPlansApiService) DeleteTrackingPlanExecute(r ApiDeleteTrackingP
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -448,8 +551,8 @@ func (a *TrackingPlansApiService) DeleteTrackingPlanExecute(r ApiDeleteTrackingP
 }
 
 type ApiGetTrackingPlanRequest struct {
-	ctx context.Context
-	ApiService *TrackingPlansApiService
+	ctx            context.Context
+	ApiService     *TrackingPlansApiService
 	trackingPlanId string
 }
 
@@ -464,35 +567,49 @@ Returns a Tracking Plan.
 
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param trackingPlanId
- @return ApiGetTrackingPlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param trackingPlanId
+	@return ApiGetTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) GetTrackingPlan(ctx context.Context, trackingPlanId string) ApiGetTrackingPlanRequest {
+func (a *TrackingPlansApiService) GetTrackingPlan(
+	ctx context.Context,
+	trackingPlanId string,
+) ApiGetTrackingPlanRequest {
 	return ApiGetTrackingPlanRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		trackingPlanId: trackingPlanId,
 	}
 }
 
 // Execute executes the request
-//  @return GetTrackingPlan200Response
-func (a *TrackingPlansApiService) GetTrackingPlanExecute(r ApiGetTrackingPlanRequest) (*GetTrackingPlan200Response, *http.Response, error) {
+//
+//	@return GetTrackingPlan200Response
+func (a *TrackingPlansApiService) GetTrackingPlanExecute(
+	r ApiGetTrackingPlanRequest,
+) (*GetTrackingPlan200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetTrackingPlan200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetTrackingPlan200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TrackingPlansApiService.GetTrackingPlan")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TrackingPlansApiService.GetTrackingPlan",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/tracking-plans/{trackingPlanId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"trackingPlanId"+"}", url.PathEscape(parameterToString(r.trackingPlanId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"trackingPlanId"+"}",
+		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -508,14 +625,28 @@ func (a *TrackingPlansApiService) GetTrackingPlanExecute(r ApiGetTrackingPlanReq
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -569,7 +700,11 @@ func (a *TrackingPlansApiService) GetTrackingPlanExecute(r ApiGetTrackingPlanReq
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -582,14 +717,16 @@ func (a *TrackingPlansApiService) GetTrackingPlanExecute(r ApiGetTrackingPlanReq
 }
 
 type ApiListRulesFromTrackingPlanRequest struct {
-	ctx context.Context
-	ApiService *TrackingPlansApiService
+	ctx            context.Context
+	ApiService     *TrackingPlansApiService
 	trackingPlanId string
-	pagination *PaginationInput
+	pagination     *PaginationInput
 }
 
 // Pagination options.  This parameter exists in v1.
-func (r ApiListRulesFromTrackingPlanRequest) Pagination(pagination PaginationInput) ApiListRulesFromTrackingPlanRequest {
+func (r ApiListRulesFromTrackingPlanRequest) Pagination(
+	pagination PaginationInput,
+) ApiListRulesFromTrackingPlanRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -605,38 +742,51 @@ Lists Tracking Plan rules.
 
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
-
 The rate limit for this endpoint is 20 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param trackingPlanId
- @return ApiListRulesFromTrackingPlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param trackingPlanId
+	@return ApiListRulesFromTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) ListRulesFromTrackingPlan(ctx context.Context, trackingPlanId string) ApiListRulesFromTrackingPlanRequest {
+func (a *TrackingPlansApiService) ListRulesFromTrackingPlan(
+	ctx context.Context,
+	trackingPlanId string,
+) ApiListRulesFromTrackingPlanRequest {
 	return ApiListRulesFromTrackingPlanRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		trackingPlanId: trackingPlanId,
 	}
 }
 
 // Execute executes the request
-//  @return ListRulesFromTrackingPlan200Response
-func (a *TrackingPlansApiService) ListRulesFromTrackingPlanExecute(r ApiListRulesFromTrackingPlanRequest) (*ListRulesFromTrackingPlan200Response, *http.Response, error) {
+//
+//	@return ListRulesFromTrackingPlan200Response
+func (a *TrackingPlansApiService) ListRulesFromTrackingPlanExecute(
+	r ApiListRulesFromTrackingPlanRequest,
+) (*ListRulesFromTrackingPlan200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListRulesFromTrackingPlan200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListRulesFromTrackingPlan200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TrackingPlansApiService.ListRulesFromTrackingPlan")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TrackingPlansApiService.ListRulesFromTrackingPlan",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/tracking-plans/{trackingPlanId}/rules"
-	localVarPath = strings.Replace(localVarPath, "{"+"trackingPlanId"+"}", url.PathEscape(parameterToString(r.trackingPlanId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"trackingPlanId"+"}",
+		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -656,14 +806,28 @@ func (a *TrackingPlansApiService) ListRulesFromTrackingPlanExecute(r ApiListRule
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -717,7 +881,11 @@ func (a *TrackingPlansApiService) ListRulesFromTrackingPlanExecute(r ApiListRule
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -730,14 +898,16 @@ func (a *TrackingPlansApiService) ListRulesFromTrackingPlanExecute(r ApiListRule
 }
 
 type ApiListSourcesFromTrackingPlanRequest struct {
-	ctx context.Context
-	ApiService *TrackingPlansApiService
+	ctx            context.Context
+	ApiService     *TrackingPlansApiService
 	trackingPlanId string
-	pagination *PaginationInput
+	pagination     *PaginationInput
 }
 
 // Pagination options.  This parameter exists in v1.
-func (r ApiListSourcesFromTrackingPlanRequest) Pagination(pagination PaginationInput) ApiListSourcesFromTrackingPlanRequest {
+func (r ApiListSourcesFromTrackingPlanRequest) Pagination(
+	pagination PaginationInput,
+) ApiListSourcesFromTrackingPlanRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -753,40 +923,55 @@ Lists Sources connected to a Tracking Plan.
 
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
+This endpoint requires the user to have at least the following permission(s):
 
-This endpoint requires the user to have at least the following permission(s): 
- * Source Read-only
- * Tracking Plan Read-only
+  - Source Read-only
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param trackingPlanId
- @return ApiListSourcesFromTrackingPlanRequest
+  - Tracking Plan Read-only
+
+    @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @param trackingPlanId
+    @return ApiListSourcesFromTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) ListSourcesFromTrackingPlan(ctx context.Context, trackingPlanId string) ApiListSourcesFromTrackingPlanRequest {
+func (a *TrackingPlansApiService) ListSourcesFromTrackingPlan(
+	ctx context.Context,
+	trackingPlanId string,
+) ApiListSourcesFromTrackingPlanRequest {
 	return ApiListSourcesFromTrackingPlanRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		trackingPlanId: trackingPlanId,
 	}
 }
 
 // Execute executes the request
-//  @return ListSourcesFromTrackingPlan200Response
-func (a *TrackingPlansApiService) ListSourcesFromTrackingPlanExecute(r ApiListSourcesFromTrackingPlanRequest) (*ListSourcesFromTrackingPlan200Response, *http.Response, error) {
+//
+//	@return ListSourcesFromTrackingPlan200Response
+func (a *TrackingPlansApiService) ListSourcesFromTrackingPlanExecute(
+	r ApiListSourcesFromTrackingPlanRequest,
+) (*ListSourcesFromTrackingPlan200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListSourcesFromTrackingPlan200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListSourcesFromTrackingPlan200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TrackingPlansApiService.ListSourcesFromTrackingPlan")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TrackingPlansApiService.ListSourcesFromTrackingPlan",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/tracking-plans/{trackingPlanId}/sources"
-	localVarPath = strings.Replace(localVarPath, "{"+"trackingPlanId"+"}", url.PathEscape(parameterToString(r.trackingPlanId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"trackingPlanId"+"}",
+		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -806,14 +991,28 @@ func (a *TrackingPlansApiService) ListSourcesFromTrackingPlanExecute(r ApiListSo
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -867,7 +1066,11 @@ func (a *TrackingPlansApiService) ListSourcesFromTrackingPlanExecute(r ApiListSo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -880,14 +1083,16 @@ func (a *TrackingPlansApiService) ListSourcesFromTrackingPlanExecute(r ApiListSo
 }
 
 type ApiListTrackingPlansRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *TrackingPlansApiService
 	pagination *PaginationInput
-	type_ *string
+	type_      *string
 }
 
 // Pagination options.  This parameter exists in v1.
-func (r ApiListTrackingPlansRequest) Pagination(pagination PaginationInput) ApiListTrackingPlansRequest {
+func (r ApiListTrackingPlansRequest) Pagination(
+	pagination PaginationInput,
+) ApiListTrackingPlansRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -909,27 +1114,35 @@ Returns a list of Tracking Plans.
 
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListTrackingPlansRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListTrackingPlansRequest
 */
-func (a *TrackingPlansApiService) ListTrackingPlans(ctx context.Context) ApiListTrackingPlansRequest {
+func (a *TrackingPlansApiService) ListTrackingPlans(
+	ctx context.Context,
+) ApiListTrackingPlansRequest {
 	return ApiListTrackingPlansRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListTrackingPlans200Response
-func (a *TrackingPlansApiService) ListTrackingPlansExecute(r ApiListTrackingPlansRequest) (*ListTrackingPlans200Response, *http.Response, error) {
+//
+//	@return ListTrackingPlans200Response
+func (a *TrackingPlansApiService) ListTrackingPlansExecute(
+	r ApiListTrackingPlansRequest,
+) (*ListTrackingPlans200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListTrackingPlans200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListTrackingPlans200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TrackingPlansApiService.ListTrackingPlans")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TrackingPlansApiService.ListTrackingPlans",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -957,14 +1170,28 @@ func (a *TrackingPlansApiService) ListTrackingPlansExecute(r ApiListTrackingPlan
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1018,7 +1245,11 @@ func (a *TrackingPlansApiService) ListTrackingPlansExecute(r ApiListTrackingPlan
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1031,14 +1262,16 @@ func (a *TrackingPlansApiService) ListTrackingPlansExecute(r ApiListTrackingPlan
 }
 
 type ApiRemoveRulesFromTrackingPlanRequest struct {
-	ctx context.Context
-	ApiService *TrackingPlansApiService
+	ctx            context.Context
+	ApiService     *TrackingPlansApiService
 	trackingPlanId string
-	rules *[]RemoveRuleV1
+	rules          *[]RemoveRuleV1
 }
 
 // Rules to delete.  This parameter exists in v1.
-func (r ApiRemoveRulesFromTrackingPlanRequest) Rules(rules []RemoveRuleV1) ApiRemoveRulesFromTrackingPlanRequest {
+func (r ApiRemoveRulesFromTrackingPlanRequest) Rules(
+	rules []RemoveRuleV1,
+) ApiRemoveRulesFromTrackingPlanRequest {
 	r.rules = &rules
 	return r
 }
@@ -1054,35 +1287,49 @@ Deletes Tracking Plan rules.
 
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param trackingPlanId
- @return ApiRemoveRulesFromTrackingPlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param trackingPlanId
+	@return ApiRemoveRulesFromTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlan(ctx context.Context, trackingPlanId string) ApiRemoveRulesFromTrackingPlanRequest {
+func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlan(
+	ctx context.Context,
+	trackingPlanId string,
+) ApiRemoveRulesFromTrackingPlanRequest {
 	return ApiRemoveRulesFromTrackingPlanRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		trackingPlanId: trackingPlanId,
 	}
 }
 
 // Execute executes the request
-//  @return RemoveRulesFromTrackingPlan200Response
-func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlanExecute(r ApiRemoveRulesFromTrackingPlanRequest) (*RemoveRulesFromTrackingPlan200Response, *http.Response, error) {
+//
+//	@return RemoveRulesFromTrackingPlan200Response
+func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlanExecute(
+	r ApiRemoveRulesFromTrackingPlanRequest,
+) (*RemoveRulesFromTrackingPlan200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *RemoveRulesFromTrackingPlan200Response
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RemoveRulesFromTrackingPlan200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TrackingPlansApiService.RemoveRulesFromTrackingPlan")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TrackingPlansApiService.RemoveRulesFromTrackingPlan",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/tracking-plans/{trackingPlanId}/rules"
-	localVarPath = strings.Replace(localVarPath, "{"+"trackingPlanId"+"}", url.PathEscape(parameterToString(r.trackingPlanId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"trackingPlanId"+"}",
+		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1102,14 +1349,28 @@ func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlanExecute(r ApiRemove
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1163,7 +1424,11 @@ func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlanExecute(r ApiRemove
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1176,14 +1441,16 @@ func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlanExecute(r ApiRemove
 }
 
 type ApiRemoveSourceFromTrackingPlanRequest struct {
-	ctx context.Context
-	ApiService *TrackingPlansApiService
+	ctx            context.Context
+	ApiService     *TrackingPlansApiService
 	trackingPlanId string
-	sourceId *string
+	sourceId       *string
 }
 
 // The id of the Source associated with the Tracking Plan.  Config API note: analogous to &#x60;sourceName&#x60;.  This parameter exists in v1.
-func (r ApiRemoveSourceFromTrackingPlanRequest) SourceId(sourceId string) ApiRemoveSourceFromTrackingPlanRequest {
+func (r ApiRemoveSourceFromTrackingPlanRequest) SourceId(
+	sourceId string,
+) ApiRemoveSourceFromTrackingPlanRequest {
 	r.sourceId = &sourceId
 	return r
 }
@@ -1197,40 +1464,52 @@ RemoveSourceFromTrackingPlan Remove Source from Tracking Plan
 
 Disconnects a Source from a Tracking Plan.
 
-
-
 When called, this endpoint may generate the `Source Modified` event in the [audit trail](/tag/Audit-Trail).
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param trackingPlanId
- @return ApiRemoveSourceFromTrackingPlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param trackingPlanId
+	@return ApiRemoveSourceFromTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlan(ctx context.Context, trackingPlanId string) ApiRemoveSourceFromTrackingPlanRequest {
+func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlan(
+	ctx context.Context,
+	trackingPlanId string,
+) ApiRemoveSourceFromTrackingPlanRequest {
 	return ApiRemoveSourceFromTrackingPlanRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		trackingPlanId: trackingPlanId,
 	}
 }
 
 // Execute executes the request
-//  @return RemoveSourceFromTrackingPlan200Response
-func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlanExecute(r ApiRemoveSourceFromTrackingPlanRequest) (*RemoveSourceFromTrackingPlan200Response, *http.Response, error) {
+//
+//	@return RemoveSourceFromTrackingPlan200Response
+func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlanExecute(
+	r ApiRemoveSourceFromTrackingPlanRequest,
+) (*RemoveSourceFromTrackingPlan200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *RemoveSourceFromTrackingPlan200Response
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RemoveSourceFromTrackingPlan200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TrackingPlansApiService.RemoveSourceFromTrackingPlan")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TrackingPlansApiService.RemoveSourceFromTrackingPlan",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/tracking-plans/{trackingPlanId}/sources"
-	localVarPath = strings.Replace(localVarPath, "{"+"trackingPlanId"+"}", url.PathEscape(parameterToString(r.trackingPlanId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"trackingPlanId"+"}",
+		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1250,14 +1529,28 @@ func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlanExecute(r ApiRemov
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1311,7 +1604,11 @@ func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlanExecute(r ApiRemov
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1324,13 +1621,15 @@ func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlanExecute(r ApiRemov
 }
 
 type ApiReplaceRulesInTrackingPlanRequest struct {
-	ctx context.Context
-	ApiService *TrackingPlansApiService
-	trackingPlanId string
+	ctx                               context.Context
+	ApiService                        *TrackingPlansApiService
+	trackingPlanId                    string
 	replaceRulesInTrackingPlanV1Input *ReplaceRulesInTrackingPlanV1Input
 }
 
-func (r ApiReplaceRulesInTrackingPlanRequest) ReplaceRulesInTrackingPlanV1Input(replaceRulesInTrackingPlanV1Input ReplaceRulesInTrackingPlanV1Input) ApiReplaceRulesInTrackingPlanRequest {
+func (r ApiReplaceRulesInTrackingPlanRequest) ReplaceRulesInTrackingPlanV1Input(
+	replaceRulesInTrackingPlanV1Input ReplaceRulesInTrackingPlanV1Input,
+) ApiReplaceRulesInTrackingPlanRequest {
 	r.replaceRulesInTrackingPlanV1Input = &replaceRulesInTrackingPlanV1Input
 	return r
 }
@@ -1346,45 +1645,65 @@ Replaces Tracking Plan rules.
 
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param trackingPlanId
- @return ApiReplaceRulesInTrackingPlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param trackingPlanId
+	@return ApiReplaceRulesInTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlan(ctx context.Context, trackingPlanId string) ApiReplaceRulesInTrackingPlanRequest {
+func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlan(
+	ctx context.Context,
+	trackingPlanId string,
+) ApiReplaceRulesInTrackingPlanRequest {
 	return ApiReplaceRulesInTrackingPlanRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		trackingPlanId: trackingPlanId,
 	}
 }
 
 // Execute executes the request
-//  @return ReplaceRulesInTrackingPlan200Response
-func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlanExecute(r ApiReplaceRulesInTrackingPlanRequest) (*ReplaceRulesInTrackingPlan200Response, *http.Response, error) {
+//
+//	@return ReplaceRulesInTrackingPlan200Response
+func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlanExecute(
+	r ApiReplaceRulesInTrackingPlanRequest,
+) (*ReplaceRulesInTrackingPlan200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ReplaceRulesInTrackingPlan200Response
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ReplaceRulesInTrackingPlan200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TrackingPlansApiService.ReplaceRulesInTrackingPlan")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TrackingPlansApiService.ReplaceRulesInTrackingPlan",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/tracking-plans/{trackingPlanId}/rules"
-	localVarPath = strings.Replace(localVarPath, "{"+"trackingPlanId"+"}", url.PathEscape(parameterToString(r.trackingPlanId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"trackingPlanId"+"}",
+		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.replaceRulesInTrackingPlanV1Input == nil {
-		return localVarReturnValue, nil, reportError("replaceRulesInTrackingPlanV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"replaceRulesInTrackingPlanV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1393,7 +1712,12 @@ func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlanExecute(r ApiReplace
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1402,7 +1726,16 @@ func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlanExecute(r ApiReplace
 	}
 	// body params
 	localVarPostBody = r.replaceRulesInTrackingPlanV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1456,7 +1789,11 @@ func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlanExecute(r ApiReplace
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1469,13 +1806,15 @@ func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlanExecute(r ApiReplace
 }
 
 type ApiUpdateRulesInTrackingPlanRequest struct {
-	ctx context.Context
-	ApiService *TrackingPlansApiService
-	trackingPlanId string
+	ctx                              context.Context
+	ApiService                       *TrackingPlansApiService
+	trackingPlanId                   string
 	updateRulesInTrackingPlanV1Input *UpdateRulesInTrackingPlanV1Input
 }
 
-func (r ApiUpdateRulesInTrackingPlanRequest) UpdateRulesInTrackingPlanV1Input(updateRulesInTrackingPlanV1Input UpdateRulesInTrackingPlanV1Input) ApiUpdateRulesInTrackingPlanRequest {
+func (r ApiUpdateRulesInTrackingPlanRequest) UpdateRulesInTrackingPlanV1Input(
+	updateRulesInTrackingPlanV1Input UpdateRulesInTrackingPlanV1Input,
+) ApiUpdateRulesInTrackingPlanRequest {
 	r.updateRulesInTrackingPlanV1Input = &updateRulesInTrackingPlanV1Input
 	return r
 }
@@ -1491,45 +1830,65 @@ Updates Tracking Plan rules.
 
 **Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param trackingPlanId
- @return ApiUpdateRulesInTrackingPlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param trackingPlanId
+	@return ApiUpdateRulesInTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) UpdateRulesInTrackingPlan(ctx context.Context, trackingPlanId string) ApiUpdateRulesInTrackingPlanRequest {
+func (a *TrackingPlansApiService) UpdateRulesInTrackingPlan(
+	ctx context.Context,
+	trackingPlanId string,
+) ApiUpdateRulesInTrackingPlanRequest {
 	return ApiUpdateRulesInTrackingPlanRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		trackingPlanId: trackingPlanId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateRulesInTrackingPlan200Response
-func (a *TrackingPlansApiService) UpdateRulesInTrackingPlanExecute(r ApiUpdateRulesInTrackingPlanRequest) (*UpdateRulesInTrackingPlan200Response, *http.Response, error) {
+//
+//	@return UpdateRulesInTrackingPlan200Response
+func (a *TrackingPlansApiService) UpdateRulesInTrackingPlanExecute(
+	r ApiUpdateRulesInTrackingPlanRequest,
+) (*UpdateRulesInTrackingPlan200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateRulesInTrackingPlan200Response
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateRulesInTrackingPlan200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TrackingPlansApiService.UpdateRulesInTrackingPlan")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TrackingPlansApiService.UpdateRulesInTrackingPlan",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/tracking-plans/{trackingPlanId}/rules"
-	localVarPath = strings.Replace(localVarPath, "{"+"trackingPlanId"+"}", url.PathEscape(parameterToString(r.trackingPlanId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"trackingPlanId"+"}",
+		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.updateRulesInTrackingPlanV1Input == nil {
-		return localVarReturnValue, nil, reportError("updateRulesInTrackingPlanV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"updateRulesInTrackingPlanV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1538,7 +1897,12 @@ func (a *TrackingPlansApiService) UpdateRulesInTrackingPlanExecute(r ApiUpdateRu
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1547,7 +1911,16 @@ func (a *TrackingPlansApiService) UpdateRulesInTrackingPlanExecute(r ApiUpdateRu
 	}
 	// body params
 	localVarPostBody = r.updateRulesInTrackingPlanV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1601,7 +1974,11 @@ func (a *TrackingPlansApiService) UpdateRulesInTrackingPlanExecute(r ApiUpdateRu
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1614,13 +1991,15 @@ func (a *TrackingPlansApiService) UpdateRulesInTrackingPlanExecute(r ApiUpdateRu
 }
 
 type ApiUpdateTrackingPlanRequest struct {
-	ctx context.Context
-	ApiService *TrackingPlansApiService
-	trackingPlanId string
+	ctx                       context.Context
+	ApiService                *TrackingPlansApiService
+	trackingPlanId            string
 	updateTrackingPlanV1Input *UpdateTrackingPlanV1Input
 }
 
-func (r ApiUpdateTrackingPlanRequest) UpdateTrackingPlanV1Input(updateTrackingPlanV1Input UpdateTrackingPlanV1Input) ApiUpdateTrackingPlanRequest {
+func (r ApiUpdateTrackingPlanRequest) UpdateTrackingPlanV1Input(
+	updateTrackingPlanV1Input UpdateTrackingPlanV1Input,
+) ApiUpdateTrackingPlanRequest {
 	r.updateTrackingPlanV1Input = &updateTrackingPlanV1Input
 	return r
 }
@@ -1638,47 +2017,66 @@ Updates a Tracking Plan.
 
 Config API omitted fields:
 - `updateMask`
-      
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param trackingPlanId
- @return ApiUpdateTrackingPlanRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param trackingPlanId
+	@return ApiUpdateTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) UpdateTrackingPlan(ctx context.Context, trackingPlanId string) ApiUpdateTrackingPlanRequest {
+func (a *TrackingPlansApiService) UpdateTrackingPlan(
+	ctx context.Context,
+	trackingPlanId string,
+) ApiUpdateTrackingPlanRequest {
 	return ApiUpdateTrackingPlanRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:     a,
+		ctx:            ctx,
 		trackingPlanId: trackingPlanId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateTrackingPlan200Response
-func (a *TrackingPlansApiService) UpdateTrackingPlanExecute(r ApiUpdateTrackingPlanRequest) (*UpdateTrackingPlan200Response, *http.Response, error) {
+//
+//	@return UpdateTrackingPlan200Response
+func (a *TrackingPlansApiService) UpdateTrackingPlanExecute(
+	r ApiUpdateTrackingPlanRequest,
+) (*UpdateTrackingPlan200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateTrackingPlan200Response
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateTrackingPlan200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TrackingPlansApiService.UpdateTrackingPlan")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"TrackingPlansApiService.UpdateTrackingPlan",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/tracking-plans/{trackingPlanId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"trackingPlanId"+"}", url.PathEscape(parameterToString(r.trackingPlanId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"trackingPlanId"+"}",
+		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.updateTrackingPlanV1Input == nil {
-		return localVarReturnValue, nil, reportError("updateTrackingPlanV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"updateTrackingPlanV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1687,7 +2085,12 @@ func (a *TrackingPlansApiService) UpdateTrackingPlanExecute(r ApiUpdateTrackingP
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1696,7 +2099,16 @@ func (a *TrackingPlansApiService) UpdateTrackingPlanExecute(r ApiUpdateTrackingP
 	}
 	// body params
 	localVarPostBody = r.updateTrackingPlanV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1750,7 +2162,11 @@ func (a *TrackingPlansApiService) UpdateTrackingPlanExecute(r ApiUpdateTrackingP
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,

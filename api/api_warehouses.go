@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -20,15 +20,14 @@ import (
 	"strings"
 )
 
-
 // WarehousesApiService WarehousesApi service
 type WarehousesApiService service
 
 type ApiAddConnectionFromSourceToWarehouseRequest struct {
-	ctx context.Context
-	ApiService *WarehousesApiService
+	ctx         context.Context
+	ApiService  *WarehousesApiService
 	warehouseId string
-	sourceId string
+	sourceId    string
 }
 
 func (r ApiAddConnectionFromSourceToWarehouseRequest) Execute() (*AddConnectionFromSourceToWarehouse200Response, *http.Response, error) {
@@ -40,43 +39,60 @@ AddConnectionFromSourceToWarehouse Add Connection from Source to Warehouse
 
 Connects a Source to a Warehouse.
 
-
-
 When called, this endpoint may generate the `Storage Destination Modified` event in the [audit trail](/tag/Audit-Trail).
-      
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param warehouseId
- @param sourceId
- @return ApiAddConnectionFromSourceToWarehouseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param warehouseId
+	@param sourceId
+	@return ApiAddConnectionFromSourceToWarehouseRequest
 */
-func (a *WarehousesApiService) AddConnectionFromSourceToWarehouse(ctx context.Context, warehouseId string, sourceId string) ApiAddConnectionFromSourceToWarehouseRequest {
+func (a *WarehousesApiService) AddConnectionFromSourceToWarehouse(
+	ctx context.Context,
+	warehouseId string,
+	sourceId string,
+) ApiAddConnectionFromSourceToWarehouseRequest {
 	return ApiAddConnectionFromSourceToWarehouseRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		warehouseId: warehouseId,
-		sourceId: sourceId,
+		sourceId:    sourceId,
 	}
 }
 
 // Execute executes the request
-//  @return AddConnectionFromSourceToWarehouse200Response
-func (a *WarehousesApiService) AddConnectionFromSourceToWarehouseExecute(r ApiAddConnectionFromSourceToWarehouseRequest) (*AddConnectionFromSourceToWarehouse200Response, *http.Response, error) {
+//
+//	@return AddConnectionFromSourceToWarehouse200Response
+func (a *WarehousesApiService) AddConnectionFromSourceToWarehouseExecute(
+	r ApiAddConnectionFromSourceToWarehouseRequest,
+) (*AddConnectionFromSourceToWarehouse200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AddConnectionFromSourceToWarehouse200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AddConnectionFromSourceToWarehouse200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WarehousesApiService.AddConnectionFromSourceToWarehouse")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"WarehousesApiService.AddConnectionFromSourceToWarehouse",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/warehouses/{warehouseId}/connected-sources/{sourceId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"warehouseId"+"}", url.PathEscape(parameterToString(r.warehouseId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceId"+"}", url.PathEscape(parameterToString(r.sourceId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"warehouseId"+"}",
+		url.PathEscape(parameterToString(r.warehouseId, "")),
+		-1,
+	)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterToString(r.sourceId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -92,14 +108,28 @@ func (a *WarehousesApiService) AddConnectionFromSourceToWarehouseExecute(r ApiAd
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -153,7 +183,11 @@ func (a *WarehousesApiService) AddConnectionFromSourceToWarehouseExecute(r ApiAd
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -166,12 +200,14 @@ func (a *WarehousesApiService) AddConnectionFromSourceToWarehouseExecute(r ApiAd
 }
 
 type ApiCreateValidationInWarehouseRequest struct {
-	ctx context.Context
-	ApiService *WarehousesApiService
+	ctx                                context.Context
+	ApiService                         *WarehousesApiService
 	createValidationInWarehouseV1Input *CreateValidationInWarehouseV1Input
 }
 
-func (r ApiCreateValidationInWarehouseRequest) CreateValidationInWarehouseV1Input(createValidationInWarehouseV1Input CreateValidationInWarehouseV1Input) ApiCreateValidationInWarehouseRequest {
+func (r ApiCreateValidationInWarehouseRequest) CreateValidationInWarehouseV1Input(
+	createValidationInWarehouseV1Input CreateValidationInWarehouseV1Input,
+) ApiCreateValidationInWarehouseRequest {
 	r.createValidationInWarehouseV1Input = &createValidationInWarehouseV1Input
 	return r
 }
@@ -185,32 +221,37 @@ CreateValidationInWarehouse Create Validation in Warehouse
 
 Validates input settings against a Warehouse.
 
-
-
 When called, this endpoint may generate the `Storage Destination Settings Validation` event in the [audit trail](/tag/Audit-Trail).
-      
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateValidationInWarehouseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateValidationInWarehouseRequest
 */
-func (a *WarehousesApiService) CreateValidationInWarehouse(ctx context.Context) ApiCreateValidationInWarehouseRequest {
+func (a *WarehousesApiService) CreateValidationInWarehouse(
+	ctx context.Context,
+) ApiCreateValidationInWarehouseRequest {
 	return ApiCreateValidationInWarehouseRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateValidationInWarehouse200Response
-func (a *WarehousesApiService) CreateValidationInWarehouseExecute(r ApiCreateValidationInWarehouseRequest) (*CreateValidationInWarehouse200Response, *http.Response, error) {
+//
+//	@return CreateValidationInWarehouse200Response
+func (a *WarehousesApiService) CreateValidationInWarehouseExecute(
+	r ApiCreateValidationInWarehouseRequest,
+) (*CreateValidationInWarehouse200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateValidationInWarehouse200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateValidationInWarehouse200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WarehousesApiService.CreateValidationInWarehouse")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"WarehousesApiService.CreateValidationInWarehouse",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -221,11 +262,17 @@ func (a *WarehousesApiService) CreateValidationInWarehouseExecute(r ApiCreateVal
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.createValidationInWarehouseV1Input == nil {
-		return localVarReturnValue, nil, reportError("createValidationInWarehouseV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"createValidationInWarehouseV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -234,7 +281,12 @@ func (a *WarehousesApiService) CreateValidationInWarehouseExecute(r ApiCreateVal
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -243,7 +295,16 @@ func (a *WarehousesApiService) CreateValidationInWarehouseExecute(r ApiCreateVal
 	}
 	// body params
 	localVarPostBody = r.createValidationInWarehouseV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -297,7 +358,11 @@ func (a *WarehousesApiService) CreateValidationInWarehouseExecute(r ApiCreateVal
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -310,12 +375,14 @@ func (a *WarehousesApiService) CreateValidationInWarehouseExecute(r ApiCreateVal
 }
 
 type ApiCreateWarehouseRequest struct {
-	ctx context.Context
-	ApiService *WarehousesApiService
+	ctx                    context.Context
+	ApiService             *WarehousesApiService
 	createWarehouseV1Input *CreateWarehouseV1Input
 }
 
-func (r ApiCreateWarehouseRequest) CreateWarehouseV1Input(createWarehouseV1Input CreateWarehouseV1Input) ApiCreateWarehouseRequest {
+func (r ApiCreateWarehouseRequest) CreateWarehouseV1Input(
+	createWarehouseV1Input CreateWarehouseV1Input,
+) ApiCreateWarehouseRequest {
 	r.createWarehouseV1Input = &createWarehouseV1Input
 	return r
 }
@@ -329,32 +396,35 @@ CreateWarehouse Create Warehouse
 
 Creates a new Warehouse.
 
-
-
 When called, this endpoint may generate the `Storage Destination Created` event in the [audit trail](/tag/Audit-Trail).
-      
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateWarehouseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWarehouseRequest
 */
 func (a *WarehousesApiService) CreateWarehouse(ctx context.Context) ApiCreateWarehouseRequest {
 	return ApiCreateWarehouseRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CreateWarehouse200Response
-func (a *WarehousesApiService) CreateWarehouseExecute(r ApiCreateWarehouseRequest) (*CreateWarehouse200Response, *http.Response, error) {
+//
+//	@return CreateWarehouse200Response
+func (a *WarehousesApiService) CreateWarehouseExecute(
+	r ApiCreateWarehouseRequest,
+) (*CreateWarehouse200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateWarehouse200Response
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateWarehouse200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WarehousesApiService.CreateWarehouse")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"WarehousesApiService.CreateWarehouse",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -365,11 +435,17 @@ func (a *WarehousesApiService) CreateWarehouseExecute(r ApiCreateWarehouseReques
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.createWarehouseV1Input == nil {
-		return localVarReturnValue, nil, reportError("createWarehouseV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"createWarehouseV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -378,7 +454,12 @@ func (a *WarehousesApiService) CreateWarehouseExecute(r ApiCreateWarehouseReques
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -387,7 +468,16 @@ func (a *WarehousesApiService) CreateWarehouseExecute(r ApiCreateWarehouseReques
 	}
 	// body params
 	localVarPostBody = r.createWarehouseV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -441,7 +531,11 @@ func (a *WarehousesApiService) CreateWarehouseExecute(r ApiCreateWarehouseReques
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -454,8 +548,8 @@ func (a *WarehousesApiService) CreateWarehouseExecute(r ApiCreateWarehouseReques
 }
 
 type ApiDeleteWarehouseRequest struct {
-	ctx context.Context
-	ApiService *WarehousesApiService
+	ctx         context.Context
+	ApiService  *WarehousesApiService
 	warehouseId string
 }
 
@@ -468,40 +562,51 @@ DeleteWarehouse Delete Warehouse
 
 Deletes an existing Warehouse.
 
-
-
 When called, this endpoint may generate the `Storage Destination Deleted` event in the [audit trail](/tag/Audit-Trail).
-      
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param warehouseId
- @return ApiDeleteWarehouseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param warehouseId
+	@return ApiDeleteWarehouseRequest
 */
-func (a *WarehousesApiService) DeleteWarehouse(ctx context.Context, warehouseId string) ApiDeleteWarehouseRequest {
+func (a *WarehousesApiService) DeleteWarehouse(
+	ctx context.Context,
+	warehouseId string,
+) ApiDeleteWarehouseRequest {
 	return ApiDeleteWarehouseRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		warehouseId: warehouseId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteWarehouse200Response
-func (a *WarehousesApiService) DeleteWarehouseExecute(r ApiDeleteWarehouseRequest) (*DeleteWarehouse200Response, *http.Response, error) {
+//
+//	@return DeleteWarehouse200Response
+func (a *WarehousesApiService) DeleteWarehouseExecute(
+	r ApiDeleteWarehouseRequest,
+) (*DeleteWarehouse200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteWarehouse200Response
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteWarehouse200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WarehousesApiService.DeleteWarehouse")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"WarehousesApiService.DeleteWarehouse",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/warehouses/{warehouseId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"warehouseId"+"}", url.PathEscape(parameterToString(r.warehouseId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"warehouseId"+"}",
+		url.PathEscape(parameterToString(r.warehouseId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -517,14 +622,28 @@ func (a *WarehousesApiService) DeleteWarehouseExecute(r ApiDeleteWarehouseReques
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -578,7 +697,11 @@ func (a *WarehousesApiService) DeleteWarehouseExecute(r ApiDeleteWarehouseReques
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -591,8 +714,8 @@ func (a *WarehousesApiService) DeleteWarehouseExecute(r ApiDeleteWarehouseReques
 }
 
 type ApiGetConnectionStateFromWarehouseRequest struct {
-	ctx context.Context
-	ApiService *WarehousesApiService
+	ctx         context.Context
+	ApiService  *WarehousesApiService
 	warehouseId string
 }
 
@@ -605,38 +728,51 @@ GetConnectionStateFromWarehouse Get Connection State from Warehouse
 
 Verifies the state of Warehouse connection settings.
 
-
 The rate limit for this endpoint is 20 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param warehouseId
- @return ApiGetConnectionStateFromWarehouseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param warehouseId
+	@return ApiGetConnectionStateFromWarehouseRequest
 */
-func (a *WarehousesApiService) GetConnectionStateFromWarehouse(ctx context.Context, warehouseId string) ApiGetConnectionStateFromWarehouseRequest {
+func (a *WarehousesApiService) GetConnectionStateFromWarehouse(
+	ctx context.Context,
+	warehouseId string,
+) ApiGetConnectionStateFromWarehouseRequest {
 	return ApiGetConnectionStateFromWarehouseRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		warehouseId: warehouseId,
 	}
 }
 
 // Execute executes the request
-//  @return GetConnectionStateFromWarehouse200Response
-func (a *WarehousesApiService) GetConnectionStateFromWarehouseExecute(r ApiGetConnectionStateFromWarehouseRequest) (*GetConnectionStateFromWarehouse200Response, *http.Response, error) {
+//
+//	@return GetConnectionStateFromWarehouse200Response
+func (a *WarehousesApiService) GetConnectionStateFromWarehouseExecute(
+	r ApiGetConnectionStateFromWarehouseRequest,
+) (*GetConnectionStateFromWarehouse200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetConnectionStateFromWarehouse200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetConnectionStateFromWarehouse200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WarehousesApiService.GetConnectionStateFromWarehouse")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"WarehousesApiService.GetConnectionStateFromWarehouse",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/warehouses/{warehouseId}/connection-state"
-	localVarPath = strings.Replace(localVarPath, "{"+"warehouseId"+"}", url.PathEscape(parameterToString(r.warehouseId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"warehouseId"+"}",
+		url.PathEscape(parameterToString(r.warehouseId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -652,14 +788,28 @@ func (a *WarehousesApiService) GetConnectionStateFromWarehouseExecute(r ApiGetCo
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -713,7 +863,11 @@ func (a *WarehousesApiService) GetConnectionStateFromWarehouseExecute(r ApiGetCo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -726,8 +880,8 @@ func (a *WarehousesApiService) GetConnectionStateFromWarehouseExecute(r ApiGetCo
 }
 
 type ApiGetWarehouseRequest struct {
-	ctx context.Context
-	ApiService *WarehousesApiService
+	ctx         context.Context
+	ApiService  *WarehousesApiService
 	warehouseId string
 }
 
@@ -740,35 +894,49 @@ GetWarehouse Get Warehouse
 
 Returns a Warehouse by its id.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param warehouseId
- @return ApiGetWarehouseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param warehouseId
+	@return ApiGetWarehouseRequest
 */
-func (a *WarehousesApiService) GetWarehouse(ctx context.Context, warehouseId string) ApiGetWarehouseRequest {
+func (a *WarehousesApiService) GetWarehouse(
+	ctx context.Context,
+	warehouseId string,
+) ApiGetWarehouseRequest {
 	return ApiGetWarehouseRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		warehouseId: warehouseId,
 	}
 }
 
 // Execute executes the request
-//  @return GetWarehouse200Response
-func (a *WarehousesApiService) GetWarehouseExecute(r ApiGetWarehouseRequest) (*GetWarehouse200Response, *http.Response, error) {
+//
+//	@return GetWarehouse200Response
+func (a *WarehousesApiService) GetWarehouseExecute(
+	r ApiGetWarehouseRequest,
+) (*GetWarehouse200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetWarehouse200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetWarehouse200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WarehousesApiService.GetWarehouse")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"WarehousesApiService.GetWarehouse",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/warehouses/{warehouseId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"warehouseId"+"}", url.PathEscape(parameterToString(r.warehouseId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"warehouseId"+"}",
+		url.PathEscape(parameterToString(r.warehouseId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -784,14 +952,28 @@ func (a *WarehousesApiService) GetWarehouseExecute(r ApiGetWarehouseRequest) (*G
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -845,7 +1027,11 @@ func (a *WarehousesApiService) GetWarehouseExecute(r ApiGetWarehouseRequest) (*G
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -858,14 +1044,16 @@ func (a *WarehousesApiService) GetWarehouseExecute(r ApiGetWarehouseRequest) (*G
 }
 
 type ApiListConnectedSourcesFromWarehouseRequest struct {
-	ctx context.Context
-	ApiService *WarehousesApiService
+	ctx         context.Context
+	ApiService  *WarehousesApiService
 	warehouseId string
-	pagination *PaginationInput
+	pagination  *PaginationInput
 }
 
 // Defines the pagination parameters.  This parameter exists in v1.
-func (r ApiListConnectedSourcesFromWarehouseRequest) Pagination(pagination PaginationInput) ApiListConnectedSourcesFromWarehouseRequest {
+func (r ApiListConnectedSourcesFromWarehouseRequest) Pagination(
+	pagination PaginationInput,
+) ApiListConnectedSourcesFromWarehouseRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -879,35 +1067,49 @@ ListConnectedSourcesFromWarehouse List Connected Sources from Warehouse
 
 Returns the list of Sources that are connected to a Warehouse.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param warehouseId
- @return ApiListConnectedSourcesFromWarehouseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param warehouseId
+	@return ApiListConnectedSourcesFromWarehouseRequest
 */
-func (a *WarehousesApiService) ListConnectedSourcesFromWarehouse(ctx context.Context, warehouseId string) ApiListConnectedSourcesFromWarehouseRequest {
+func (a *WarehousesApiService) ListConnectedSourcesFromWarehouse(
+	ctx context.Context,
+	warehouseId string,
+) ApiListConnectedSourcesFromWarehouseRequest {
 	return ApiListConnectedSourcesFromWarehouseRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		warehouseId: warehouseId,
 	}
 }
 
 // Execute executes the request
-//  @return ListConnectedSourcesFromWarehouse200Response
-func (a *WarehousesApiService) ListConnectedSourcesFromWarehouseExecute(r ApiListConnectedSourcesFromWarehouseRequest) (*ListConnectedSourcesFromWarehouse200Response, *http.Response, error) {
+//
+//	@return ListConnectedSourcesFromWarehouse200Response
+func (a *WarehousesApiService) ListConnectedSourcesFromWarehouseExecute(
+	r ApiListConnectedSourcesFromWarehouseRequest,
+) (*ListConnectedSourcesFromWarehouse200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListConnectedSourcesFromWarehouse200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListConnectedSourcesFromWarehouse200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WarehousesApiService.ListConnectedSourcesFromWarehouse")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"WarehousesApiService.ListConnectedSourcesFromWarehouse",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/warehouses/{warehouseId}/connected-sources"
-	localVarPath = strings.Replace(localVarPath, "{"+"warehouseId"+"}", url.PathEscape(parameterToString(r.warehouseId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"warehouseId"+"}",
+		url.PathEscape(parameterToString(r.warehouseId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -927,14 +1129,28 @@ func (a *WarehousesApiService) ListConnectedSourcesFromWarehouseExecute(r ApiLis
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -988,7 +1204,11 @@ func (a *WarehousesApiService) ListConnectedSourcesFromWarehouseExecute(r ApiLis
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1001,7 +1221,7 @@ func (a *WarehousesApiService) ListConnectedSourcesFromWarehouseExecute(r ApiLis
 }
 
 type ApiListWarehousesRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *WarehousesApiService
 	pagination *PaginationInput
 }
@@ -1021,27 +1241,33 @@ ListWarehouses List Warehouses
 
 Returns a list of Warehouses.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListWarehousesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListWarehousesRequest
 */
 func (a *WarehousesApiService) ListWarehouses(ctx context.Context) ApiListWarehousesRequest {
 	return ApiListWarehousesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListWarehouses200Response
-func (a *WarehousesApiService) ListWarehousesExecute(r ApiListWarehousesRequest) (*ListWarehouses200Response, *http.Response, error) {
+//
+//	@return ListWarehouses200Response
+func (a *WarehousesApiService) ListWarehousesExecute(
+	r ApiListWarehousesRequest,
+) (*ListWarehouses200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListWarehouses200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListWarehouses200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WarehousesApiService.ListWarehouses")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"WarehousesApiService.ListWarehouses",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1066,14 +1292,28 @@ func (a *WarehousesApiService) ListWarehousesExecute(r ApiListWarehousesRequest)
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1127,7 +1367,11 @@ func (a *WarehousesApiService) ListWarehousesExecute(r ApiListWarehousesRequest)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1140,10 +1384,10 @@ func (a *WarehousesApiService) ListWarehousesExecute(r ApiListWarehousesRequest)
 }
 
 type ApiRemoveSourceConnectionFromWarehouseRequest struct {
-	ctx context.Context
-	ApiService *WarehousesApiService
+	ctx         context.Context
+	ApiService  *WarehousesApiService
 	warehouseId string
-	sourceId string
+	sourceId    string
 }
 
 func (r ApiRemoveSourceConnectionFromWarehouseRequest) Execute() (*RemoveSourceConnectionFromWarehouse200Response, *http.Response, error) {
@@ -1155,38 +1399,58 @@ RemoveSourceConnectionFromWarehouse Remove Source Connection from Warehouse
 
 Disconnects a Source from a Warehouse.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param warehouseId
- @param sourceId
- @return ApiRemoveSourceConnectionFromWarehouseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param warehouseId
+	@param sourceId
+	@return ApiRemoveSourceConnectionFromWarehouseRequest
 */
-func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouse(ctx context.Context, warehouseId string, sourceId string) ApiRemoveSourceConnectionFromWarehouseRequest {
+func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouse(
+	ctx context.Context,
+	warehouseId string,
+	sourceId string,
+) ApiRemoveSourceConnectionFromWarehouseRequest {
 	return ApiRemoveSourceConnectionFromWarehouseRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		warehouseId: warehouseId,
-		sourceId: sourceId,
+		sourceId:    sourceId,
 	}
 }
 
 // Execute executes the request
-//  @return RemoveSourceConnectionFromWarehouse200Response
-func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouseExecute(r ApiRemoveSourceConnectionFromWarehouseRequest) (*RemoveSourceConnectionFromWarehouse200Response, *http.Response, error) {
+//
+//	@return RemoveSourceConnectionFromWarehouse200Response
+func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouseExecute(
+	r ApiRemoveSourceConnectionFromWarehouseRequest,
+) (*RemoveSourceConnectionFromWarehouse200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *RemoveSourceConnectionFromWarehouse200Response
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RemoveSourceConnectionFromWarehouse200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WarehousesApiService.RemoveSourceConnectionFromWarehouse")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"WarehousesApiService.RemoveSourceConnectionFromWarehouse",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/warehouses/{warehouseId}/connected-sources/{sourceId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"warehouseId"+"}", url.PathEscape(parameterToString(r.warehouseId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"sourceId"+"}", url.PathEscape(parameterToString(r.sourceId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"warehouseId"+"}",
+		url.PathEscape(parameterToString(r.warehouseId, "")),
+		-1,
+	)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterToString(r.sourceId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1202,14 +1466,28 @@ func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouseExecute(r ApiR
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1263,7 +1541,11 @@ func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouseExecute(r ApiR
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
@@ -1276,13 +1558,15 @@ func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouseExecute(r ApiR
 }
 
 type ApiUpdateWarehouseRequest struct {
-	ctx context.Context
-	ApiService *WarehousesApiService
-	warehouseId string
+	ctx                    context.Context
+	ApiService             *WarehousesApiService
+	warehouseId            string
 	updateWarehouseV1Input *UpdateWarehouseV1Input
 }
 
-func (r ApiUpdateWarehouseRequest) UpdateWarehouseV1Input(updateWarehouseV1Input UpdateWarehouseV1Input) ApiUpdateWarehouseRequest {
+func (r ApiUpdateWarehouseRequest) UpdateWarehouseV1Input(
+	updateWarehouseV1Input UpdateWarehouseV1Input,
+) ApiUpdateWarehouseRequest {
 	r.updateWarehouseV1Input = &updateWarehouseV1Input
 	return r
 }
@@ -1299,47 +1583,66 @@ Updates an existing Warehouse.
 When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
 * Storage Destination Modified
 * Storage Destination Enabled
-      
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param warehouseId
- @return ApiUpdateWarehouseRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param warehouseId
+	@return ApiUpdateWarehouseRequest
 */
-func (a *WarehousesApiService) UpdateWarehouse(ctx context.Context, warehouseId string) ApiUpdateWarehouseRequest {
+func (a *WarehousesApiService) UpdateWarehouse(
+	ctx context.Context,
+	warehouseId string,
+) ApiUpdateWarehouseRequest {
 	return ApiUpdateWarehouseRequest{
-		ApiService: a,
-		ctx: ctx,
+		ApiService:  a,
+		ctx:         ctx,
 		warehouseId: warehouseId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateWarehouse200Response
-func (a *WarehousesApiService) UpdateWarehouseExecute(r ApiUpdateWarehouseRequest) (*UpdateWarehouse200Response, *http.Response, error) {
+//
+//	@return UpdateWarehouse200Response
+func (a *WarehousesApiService) UpdateWarehouseExecute(
+	r ApiUpdateWarehouseRequest,
+) (*UpdateWarehouse200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateWarehouse200Response
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateWarehouse200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WarehousesApiService.UpdateWarehouse")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"WarehousesApiService.UpdateWarehouse",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/warehouses/{warehouseId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"warehouseId"+"}", url.PathEscape(parameterToString(r.warehouseId, "")), -1)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"warehouseId"+"}",
+		url.PathEscape(parameterToString(r.warehouseId, "")),
+		-1,
+	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 	if r.updateWarehouseV1Input == nil {
-		return localVarReturnValue, nil, reportError("updateWarehouseV1Input is required and must be specified")
+		return localVarReturnValue, nil, reportError(
+			"updateWarehouseV1Input is required and must be specified",
+		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1+json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1348,7 +1651,12 @@ func (a *WarehousesApiService) UpdateWarehouseExecute(r ApiUpdateWarehouseReques
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1357,7 +1665,16 @@ func (a *WarehousesApiService) UpdateWarehouseExecute(r ApiUpdateWarehouseReques
 	}
 	// body params
 	localVarPostBody = r.updateWarehouseV1Input
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -1411,7 +1728,11 @@ func (a *WarehousesApiService) UpdateWarehouseExecute(r ApiUpdateWarehouseReques
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,

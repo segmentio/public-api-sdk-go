@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -18,7 +18,7 @@ import (
 // ListSyncsFromWarehouseAndSourceV1Output Returns a list that contains the most recent syncs for a Warehouse-source pair, filtered and constrained by a given set of pagination parameters.
 type ListSyncsFromWarehouseAndSourceV1Output struct {
 	// A list that contains the latest syncs for the specified Warehouse-source pair.
-	Reports []SyncV1 `json:"reports"`
+	Reports    []SyncV1   `json:"reports"`
 	Pagination Pagination `json:"pagination"`
 }
 
@@ -26,7 +26,10 @@ type ListSyncsFromWarehouseAndSourceV1Output struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListSyncsFromWarehouseAndSourceV1Output(reports []SyncV1, pagination Pagination) *ListSyncsFromWarehouseAndSourceV1Output {
+func NewListSyncsFromWarehouseAndSourceV1Output(
+	reports []SyncV1,
+	pagination Pagination,
+) *ListSyncsFromWarehouseAndSourceV1Output {
 	this := ListSyncsFromWarehouseAndSourceV1Output{}
 	this.Reports = reports
 	this.Pagination = pagination
@@ -109,7 +112,9 @@ func (v NullableListSyncsFromWarehouseAndSourceV1Output) Get() *ListSyncsFromWar
 	return v.value
 }
 
-func (v *NullableListSyncsFromWarehouseAndSourceV1Output) Set(val *ListSyncsFromWarehouseAndSourceV1Output) {
+func (v *NullableListSyncsFromWarehouseAndSourceV1Output) Set(
+	val *ListSyncsFromWarehouseAndSourceV1Output,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -123,7 +128,9 @@ func (v *NullableListSyncsFromWarehouseAndSourceV1Output) Unset() {
 	v.isSet = false
 }
 
-func NewNullableListSyncsFromWarehouseAndSourceV1Output(val *ListSyncsFromWarehouseAndSourceV1Output) *NullableListSyncsFromWarehouseAndSourceV1Output {
+func NewNullableListSyncsFromWarehouseAndSourceV1Output(
+	val *ListSyncsFromWarehouseAndSourceV1Output,
+) *NullableListSyncsFromWarehouseAndSourceV1Output {
 	return &NullableListSyncsFromWarehouseAndSourceV1Output{value: val, isSet: true}
 }
 
@@ -135,5 +142,3 @@ func (v *NullableListSyncsFromWarehouseAndSourceV1Output) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

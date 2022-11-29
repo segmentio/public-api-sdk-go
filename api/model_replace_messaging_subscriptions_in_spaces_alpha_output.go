@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -20,15 +20,18 @@ type ReplaceMessagingSubscriptionsInSpacesAlphaOutput struct {
 	// Array of successful subscription status.
 	Successes []MessageSubscriptionResponse `json:"successes"`
 	// Array of failure subscription status.
-	Failures []MessageSubscriptionResponse `json:"failures"`
-	Pagination *Pagination `json:"pagination,omitempty"`
+	Failures   []MessageSubscriptionResponse `json:"failures"`
+	Pagination *Pagination                   `json:"pagination,omitempty"`
 }
 
 // NewReplaceMessagingSubscriptionsInSpacesAlphaOutput instantiates a new ReplaceMessagingSubscriptionsInSpacesAlphaOutput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReplaceMessagingSubscriptionsInSpacesAlphaOutput(successes []MessageSubscriptionResponse, failures []MessageSubscriptionResponse) *ReplaceMessagingSubscriptionsInSpacesAlphaOutput {
+func NewReplaceMessagingSubscriptionsInSpacesAlphaOutput(
+	successes []MessageSubscriptionResponse,
+	failures []MessageSubscriptionResponse,
+) *ReplaceMessagingSubscriptionsInSpacesAlphaOutput {
 	this := ReplaceMessagingSubscriptionsInSpacesAlphaOutput{}
 	this.Successes = successes
 	this.Failures = failures
@@ -63,7 +66,9 @@ func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) GetSuccessesOk() ([]M
 }
 
 // SetSuccesses sets field value
-func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) SetSuccesses(v []MessageSubscriptionResponse) {
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) SetSuccesses(
+	v []MessageSubscriptionResponse,
+) {
 	o.Successes = v
 }
 
@@ -87,7 +92,9 @@ func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) GetFailuresOk() ([]Me
 }
 
 // SetFailures sets field value
-func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) SetFailures(v []MessageSubscriptionResponse) {
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) SetFailures(
+	v []MessageSubscriptionResponse,
+) {
 	o.Failures = v
 }
 
@@ -146,7 +153,9 @@ func (v NullableReplaceMessagingSubscriptionsInSpacesAlphaOutput) Get() *Replace
 	return v.value
 }
 
-func (v *NullableReplaceMessagingSubscriptionsInSpacesAlphaOutput) Set(val *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) {
+func (v *NullableReplaceMessagingSubscriptionsInSpacesAlphaOutput) Set(
+	val *ReplaceMessagingSubscriptionsInSpacesAlphaOutput,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -160,7 +169,9 @@ func (v *NullableReplaceMessagingSubscriptionsInSpacesAlphaOutput) Unset() {
 	v.isSet = false
 }
 
-func NewNullableReplaceMessagingSubscriptionsInSpacesAlphaOutput(val *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) *NullableReplaceMessagingSubscriptionsInSpacesAlphaOutput {
+func NewNullableReplaceMessagingSubscriptionsInSpacesAlphaOutput(
+	val *ReplaceMessagingSubscriptionsInSpacesAlphaOutput,
+) *NullableReplaceMessagingSubscriptionsInSpacesAlphaOutput {
 	return &NullableReplaceMessagingSubscriptionsInSpacesAlphaOutput{value: val, isSet: true}
 }
 
@@ -172,5 +183,3 @@ func (v *NullableReplaceMessagingSubscriptionsInSpacesAlphaOutput) UnmarshalJSON
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

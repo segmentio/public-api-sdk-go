@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -22,7 +22,7 @@ type Source6 struct {
 	// The slug used to identify the Source in the Segment app.  Config API note: equal to `name`.
 	Slug string `json:"slug"`
 	// The name of the Source.  Config API note: equal to `displayName`.
-	Name *string `json:"name,omitempty"`
+	Name     *string   `json:"name,omitempty"`
 	Metadata Metadata1 `json:"metadata"`
 	// The id of the Workspace that owns the Source.  Config API note: equal to `parent`.
 	WorkspaceId string `json:"workspaceId"`
@@ -40,7 +40,15 @@ type Source6 struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSource6(id string, slug string, metadata Metadata1, workspaceId string, enabled bool, writeKeys []string, labels []LabelV1) *Source6 {
+func NewSource6(
+	id string,
+	slug string,
+	metadata Metadata1,
+	workspaceId string,
+	enabled bool,
+	writeKeys []string,
+	labels []LabelV1,
+) *Source6 {
 	this := Source6{}
 	this.Id = id
 	this.Slug = slug
@@ -268,6 +276,7 @@ func (o *Source6) HasSettings() bool {
 func (o *Source6) SetSettings(v ModelMap) {
 	o.Settings.Set(&v)
 }
+
 // SetSettingsNil sets the value for Settings to be an explicit nil
 func (o *Source6) SetSettingsNil() {
 	o.Settings.Set(nil)
@@ -369,5 +378,3 @@ func (v *NullableSource6) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

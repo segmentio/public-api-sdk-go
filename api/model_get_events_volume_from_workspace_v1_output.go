@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -18,15 +18,17 @@ import (
 // GetEventsVolumeFromWorkspaceV1Output GetEventsVolumeFromWorkspaceV1Output represents the results given the input query.
 type GetEventsVolumeFromWorkspaceV1Output struct {
 	// The resultant list of series broken down by the dimensions requested over the time frame requested and ordered by the total count of events in all series. Note: The limit of entries returned is 5000.
-	Result []SourceEventVolumeV1 `json:"result"`
-	Pagination *Pagination `json:"pagination,omitempty"`
+	Result     []SourceEventVolumeV1 `json:"result"`
+	Pagination *Pagination           `json:"pagination,omitempty"`
 }
 
 // NewGetEventsVolumeFromWorkspaceV1Output instantiates a new GetEventsVolumeFromWorkspaceV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetEventsVolumeFromWorkspaceV1Output(result []SourceEventVolumeV1) *GetEventsVolumeFromWorkspaceV1Output {
+func NewGetEventsVolumeFromWorkspaceV1Output(
+	result []SourceEventVolumeV1,
+) *GetEventsVolumeFromWorkspaceV1Output {
 	this := GetEventsVolumeFromWorkspaceV1Output{}
 	this.Result = result
 	return &this
@@ -116,7 +118,9 @@ func (v NullableGetEventsVolumeFromWorkspaceV1Output) Get() *GetEventsVolumeFrom
 	return v.value
 }
 
-func (v *NullableGetEventsVolumeFromWorkspaceV1Output) Set(val *GetEventsVolumeFromWorkspaceV1Output) {
+func (v *NullableGetEventsVolumeFromWorkspaceV1Output) Set(
+	val *GetEventsVolumeFromWorkspaceV1Output,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -130,7 +134,9 @@ func (v *NullableGetEventsVolumeFromWorkspaceV1Output) Unset() {
 	v.isSet = false
 }
 
-func NewNullableGetEventsVolumeFromWorkspaceV1Output(val *GetEventsVolumeFromWorkspaceV1Output) *NullableGetEventsVolumeFromWorkspaceV1Output {
+func NewNullableGetEventsVolumeFromWorkspaceV1Output(
+	val *GetEventsVolumeFromWorkspaceV1Output,
+) *NullableGetEventsVolumeFromWorkspaceV1Output {
 	return &NullableGetEventsVolumeFromWorkspaceV1Output{value: val, isSet: true}
 }
 
@@ -142,5 +148,3 @@ func (v *NullableGetEventsVolumeFromWorkspaceV1Output) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -146,9 +146,11 @@ func selectHeaderContentType(contentTypes []string) string {
 	if len(contentTypes) == 0 {
 		return ""
 	}
+
 	if contains(contentTypes, "application/json") {
 		return "application/json"
 	}
+
 	return contentTypes[0] // use the first content type specified in 'consumes'
 }
 
@@ -165,13 +167,14 @@ func selectHeaderAccept(accepts []string) string {
 	return strings.Join(accepts, ",")
 }
 
-// contains is a case insensitive match, finding needle in a haystack
+// contains is a case-insensitive match, finding needle in a haystack
 func contains(haystack []string, needle string) bool {
 	for _, a := range haystack {
 		if strings.EqualFold(a, needle) {
 			return true
 		}
 	}
+
 	return false
 }
 
@@ -184,8 +187,14 @@ func typeCheckParameter(obj interface{}, expected string, name string) error {
 
 	// Check the type is as expected.
 	if reflect.TypeOf(obj).String() != expected {
-		return fmt.Errorf("Expected %s to be of type %s but received %s.", name, expected, reflect.TypeOf(obj).String())
+		return fmt.Errorf(
+			"Expected %s to be of type %s but received %s.",
+			name,
+			expected,
+			reflect.TypeOf(obj).String(),
+		)
 	}
+
 	return nil
 }
 
@@ -214,6 +223,7 @@ func parameterToString(obj interface{}, collectionFormat string) string {
 	if err != nil {
 		return fmt.Sprintf("%v", obj)
 	}
+
 	return objJson
 }
 
@@ -223,6 +233,7 @@ func parameterToJson(obj interface{}) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	return string(jsonBuf), err
 }
 
@@ -233,6 +244,7 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 		if err != nil {
 			return nil, err
 		}
+
 		log.Printf("\n%s\n", string(dump))
 	}
 
@@ -246,8 +258,10 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 		if err != nil {
 			return resp, err
 		}
+
 		log.Printf("\n%s\n", string(dump))
 	}
+
 	return resp, err
 }
 
@@ -258,9 +272,9 @@ func (c *APIClient) GetConfig() *Configuration {
 }
 
 type formFile struct {
-		fileBytes []byte
-		fileName string
-		formFileName string
+	fileBytes    []byte
+	fileName     string
+	formFileName string
 }
 
 // prepareRequest build the request
@@ -290,10 +304,13 @@ func (c *APIClient) prepareRequest(
 	}
 
 	// add form parameters and file if available.
-	if strings.HasPrefix(headerParams["Content-Type"], "multipart/form-data") && len(formParams) > 0 || (len(formFiles) > 0) {
+	if strings.HasPrefix(headerParams["Content-Type"], "multipart/form-data") &&
+		len(formParams) > 0 ||
+		(len(formFiles) > 0) {
 		if body != nil {
 			return nil, errors.New("Cannot specify postBody and multipart form at the same time.")
 		}
+
 		body = &bytes.Buffer{}
 		w := multipart.NewWriter(body)
 
@@ -309,16 +326,20 @@ func (c *APIClient) prepareRequest(
 				}
 			}
 		}
+
 		for _, formFile := range formFiles {
 			if len(formFile.fileBytes) > 0 && formFile.fileName != "" {
 				w.Boundary()
-				part, err := w.CreateFormFile(formFile.formFileName, filepath.Base(formFile.fileName))
+				part, err := w.CreateFormFile(
+					formFile.formFileName,
+					filepath.Base(formFile.fileName),
+				)
 				if err != nil {
-						return nil, err
+					return nil, err
 				}
 				_, err = part.Write(formFile.fileBytes)
 				if err != nil {
-						return nil, err
+					return nil, err
 				}
 			}
 		}
@@ -331,9 +352,12 @@ func (c *APIClient) prepareRequest(
 		w.Close()
 	}
 
-	if strings.HasPrefix(headerParams["Content-Type"], "application/x-www-form-urlencoded") && len(formParams) > 0 {
+	if strings.HasPrefix(headerParams["Content-Type"], "application/x-www-form-urlencoded") &&
+		len(formParams) > 0 {
 		if body != nil {
-			return nil, errors.New("Cannot specify postBody and x-www-form-urlencoded form at the same time.")
+			return nil, errors.New(
+				"Cannot specify postBody and x-www-form-urlencoded form at the same time.",
+			)
 		}
 		body = &bytes.Buffer{}
 		body.WriteString(formParams.Encode())
@@ -374,6 +398,7 @@ func (c *APIClient) prepareRequest(
 	} else {
 		localVarRequest, err = http.NewRequest(method, url.String(), nil)
 	}
+
 	if err != nil {
 		return nil, err
 	}
@@ -429,10 +454,12 @@ func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err err
 	if len(b) == 0 {
 		return nil
 	}
+
 	if s, ok := v.(*string); ok {
 		*s = string(b)
 		return nil
 	}
+
 	if f, ok := v.(**os.File); ok {
 		*f, err = ioutil.TempFile("", "HttpClientFile")
 		if err != nil {
@@ -445,12 +472,14 @@ func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err err
 		_, err = (*f).Seek(0, io.SeekStart)
 		return
 	}
+
 	if xmlCheck.MatchString(contentType) {
 		if err = xml.Unmarshal(b, v); err != nil {
 			return err
 		}
 		return nil
 	}
+
 	if jsonCheck.MatchString(contentType) {
 		if actualObj, ok := v.(interface{ GetActualInstance() interface{} }); ok { // oneOf, anyOf schemas
 			if unmarshalObj, ok := actualObj.(interface{ UnmarshalJSON([]byte) error }); ok { // make sure it has UnmarshalJSON defined
@@ -463,8 +492,10 @@ func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err err
 		} else if err = json.Unmarshal(b, v); err != nil { // simple model
 			return err
 		}
+
 		return nil
 	}
+
 	return errors.New("undefined response type")
 }
 
@@ -474,6 +505,7 @@ func addFile(w *multipart.Writer, fieldName, path string) error {
 	if err != nil {
 		return err
 	}
+
 	err = file.Close()
 	if err != nil {
 		return err
@@ -530,6 +562,7 @@ func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err e
 		err = fmt.Errorf("Invalid body type %s\n", contentType)
 		return nil, err
 	}
+
 	return bodyBuf, nil
 }
 
@@ -560,11 +593,13 @@ type cacheControl map[string]string
 func parseCacheControl(headers http.Header) cacheControl {
 	cc := cacheControl{}
 	ccHeader := headers.Get("Cache-Control")
+
 	for _, part := range strings.Split(ccHeader, ",") {
 		part = strings.Trim(part, " ")
 		if part == "" {
 			continue
 		}
+
 		if strings.ContainsRune(part, '=') {
 			keyval := strings.Split(part, "=")
 			cc[strings.Trim(keyval[0], " ")] = strings.Trim(keyval[1], ",")
@@ -572,6 +607,7 @@ func parseCacheControl(headers http.Header) cacheControl {
 			cc[part] = ""
 		}
 	}
+
 	return cc
 }
 
@@ -583,6 +619,7 @@ func CacheExpires(r *http.Response) time.Time {
 	if err != nil {
 		return time.Now()
 	}
+
 	respCacheControl := parseCacheControl(r.Header)
 
 	if maxAge, ok := respCacheControl["max-age"]; ok {
@@ -601,6 +638,7 @@ func CacheExpires(r *http.Response) time.Time {
 			}
 		}
 	}
+
 	return expires
 }
 
