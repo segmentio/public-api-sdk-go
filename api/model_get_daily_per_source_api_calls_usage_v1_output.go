@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -19,14 +19,17 @@ import (
 type GetDailyPerSourceAPICallsUsageV1Output struct {
 	// The list of daily per Source API calls count aggregates.
 	DailyPerSourceAPICallsUsage []SourceAPICallSnapshotV1 `json:"dailyPerSourceAPICallsUsage"`
-	Pagination Pagination `json:"pagination"`
+	Pagination                  Pagination                `json:"pagination"`
 }
 
 // NewGetDailyPerSourceAPICallsUsageV1Output instantiates a new GetDailyPerSourceAPICallsUsageV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetDailyPerSourceAPICallsUsageV1Output(dailyPerSourceAPICallsUsage []SourceAPICallSnapshotV1, pagination Pagination) *GetDailyPerSourceAPICallsUsageV1Output {
+func NewGetDailyPerSourceAPICallsUsageV1Output(
+	dailyPerSourceAPICallsUsage []SourceAPICallSnapshotV1,
+	pagination Pagination,
+) *GetDailyPerSourceAPICallsUsageV1Output {
 	this := GetDailyPerSourceAPICallsUsageV1Output{}
 	this.DailyPerSourceAPICallsUsage = dailyPerSourceAPICallsUsage
 	this.Pagination = pagination
@@ -61,7 +64,9 @@ func (o *GetDailyPerSourceAPICallsUsageV1Output) GetDailyPerSourceAPICallsUsageO
 }
 
 // SetDailyPerSourceAPICallsUsage sets field value
-func (o *GetDailyPerSourceAPICallsUsageV1Output) SetDailyPerSourceAPICallsUsage(v []SourceAPICallSnapshotV1) {
+func (o *GetDailyPerSourceAPICallsUsageV1Output) SetDailyPerSourceAPICallsUsage(
+	v []SourceAPICallSnapshotV1,
+) {
 	o.DailyPerSourceAPICallsUsage = v
 }
 
@@ -109,7 +114,9 @@ func (v NullableGetDailyPerSourceAPICallsUsageV1Output) Get() *GetDailyPerSource
 	return v.value
 }
 
-func (v *NullableGetDailyPerSourceAPICallsUsageV1Output) Set(val *GetDailyPerSourceAPICallsUsageV1Output) {
+func (v *NullableGetDailyPerSourceAPICallsUsageV1Output) Set(
+	val *GetDailyPerSourceAPICallsUsageV1Output,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -123,7 +130,9 @@ func (v *NullableGetDailyPerSourceAPICallsUsageV1Output) Unset() {
 	v.isSet = false
 }
 
-func NewNullableGetDailyPerSourceAPICallsUsageV1Output(val *GetDailyPerSourceAPICallsUsageV1Output) *NullableGetDailyPerSourceAPICallsUsageV1Output {
+func NewNullableGetDailyPerSourceAPICallsUsageV1Output(
+	val *GetDailyPerSourceAPICallsUsageV1Output,
+) *NullableGetDailyPerSourceAPICallsUsageV1Output {
 	return &NullableGetDailyPerSourceAPICallsUsageV1Output{value: val, isSet: true}
 }
 
@@ -135,5 +144,3 @@ func (v *NullableGetDailyPerSourceAPICallsUsageV1Output) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -18,7 +18,7 @@ import (
 // ListInvitesFromUserGroupV1Output Returns the emails of invitees to a user group with the given group id.
 type ListInvitesFromUserGroupV1Output struct {
 	// The emails of the invitees to the user group.
-	Emails []string `json:"emails"`
+	Emails     []string   `json:"emails"`
 	Pagination Pagination `json:"pagination"`
 }
 
@@ -26,7 +26,10 @@ type ListInvitesFromUserGroupV1Output struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListInvitesFromUserGroupV1Output(emails []string, pagination Pagination) *ListInvitesFromUserGroupV1Output {
+func NewListInvitesFromUserGroupV1Output(
+	emails []string,
+	pagination Pagination,
+) *ListInvitesFromUserGroupV1Output {
 	this := ListInvitesFromUserGroupV1Output{}
 	this.Emails = emails
 	this.Pagination = pagination
@@ -123,7 +126,9 @@ func (v *NullableListInvitesFromUserGroupV1Output) Unset() {
 	v.isSet = false
 }
 
-func NewNullableListInvitesFromUserGroupV1Output(val *ListInvitesFromUserGroupV1Output) *NullableListInvitesFromUserGroupV1Output {
+func NewNullableListInvitesFromUserGroupV1Output(
+	val *ListInvitesFromUserGroupV1Output,
+) *NullableListInvitesFromUserGroupV1Output {
 	return &NullableListInvitesFromUserGroupV1Output{value: val, isSet: true}
 }
 
@@ -135,5 +140,3 @@ func (v *NullableListInvitesFromUserGroupV1Output) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

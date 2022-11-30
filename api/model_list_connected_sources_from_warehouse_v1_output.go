@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -18,7 +18,7 @@ import (
 // ListConnectedSourcesFromWarehouseV1Output Returns a list of Sources connected to a Warehouse.
 type ListConnectedSourcesFromWarehouseV1Output struct {
 	// A list that contains the Sources connected to the requested Warehouse.
-	Sources []SourceV1 `json:"sources"`
+	Sources    []SourceV1 `json:"sources"`
 	Pagination Pagination `json:"pagination"`
 }
 
@@ -26,7 +26,10 @@ type ListConnectedSourcesFromWarehouseV1Output struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListConnectedSourcesFromWarehouseV1Output(sources []SourceV1, pagination Pagination) *ListConnectedSourcesFromWarehouseV1Output {
+func NewListConnectedSourcesFromWarehouseV1Output(
+	sources []SourceV1,
+	pagination Pagination,
+) *ListConnectedSourcesFromWarehouseV1Output {
 	this := ListConnectedSourcesFromWarehouseV1Output{}
 	this.Sources = sources
 	this.Pagination = pagination
@@ -109,7 +112,9 @@ func (v NullableListConnectedSourcesFromWarehouseV1Output) Get() *ListConnectedS
 	return v.value
 }
 
-func (v *NullableListConnectedSourcesFromWarehouseV1Output) Set(val *ListConnectedSourcesFromWarehouseV1Output) {
+func (v *NullableListConnectedSourcesFromWarehouseV1Output) Set(
+	val *ListConnectedSourcesFromWarehouseV1Output,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -123,7 +128,9 @@ func (v *NullableListConnectedSourcesFromWarehouseV1Output) Unset() {
 	v.isSet = false
 }
 
-func NewNullableListConnectedSourcesFromWarehouseV1Output(val *ListConnectedSourcesFromWarehouseV1Output) *NullableListConnectedSourcesFromWarehouseV1Output {
+func NewNullableListConnectedSourcesFromWarehouseV1Output(
+	val *ListConnectedSourcesFromWarehouseV1Output,
+) *NullableListConnectedSourcesFromWarehouseV1Output {
 	return &NullableListConnectedSourcesFromWarehouseV1Output{value: val, isSet: true}
 }
 
@@ -135,5 +142,3 @@ func (v *NullableListConnectedSourcesFromWarehouseV1Output) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

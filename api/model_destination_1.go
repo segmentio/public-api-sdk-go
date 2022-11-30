@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -22,7 +22,7 @@ type Destination1 struct {
 	// The name of this instance of a Destination.  Config API note: equal to `displayName`.
 	Name *string `json:"name,omitempty"`
 	// Whether this instance of a Destination receives data.
-	Enabled bool `json:"enabled"`
+	Enabled  bool     `json:"enabled"`
 	Metadata Metadata `json:"metadata"`
 	// The id of a Source connected to this instance of a Destination.  Config API note: analogous to `parent`.
 	SourceId string `json:"sourceId"`
@@ -34,7 +34,13 @@ type Destination1 struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDestination1(id string, enabled bool, metadata Metadata, sourceId string, settings map[string]interface{}) *Destination1 {
+func NewDestination1(
+	id string,
+	enabled bool,
+	metadata Metadata,
+	sourceId string,
+	settings map[string]interface{},
+) *Destination1 {
 	this := Destination1{}
 	this.Id = id
 	this.Enabled = enabled
@@ -262,5 +268,3 @@ func (v *NullableDestination1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

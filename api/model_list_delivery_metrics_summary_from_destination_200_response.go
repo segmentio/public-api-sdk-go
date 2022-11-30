@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -65,7 +65,9 @@ func (o *ListDeliveryMetricsSummaryFromDestination200Response) HasData() bool {
 }
 
 // SetData gets a reference to the given ListDeliveryMetricsSummaryFromDestinationBetaOutput and assigns it to the Data field.
-func (o *ListDeliveryMetricsSummaryFromDestination200Response) SetData(v ListDeliveryMetricsSummaryFromDestinationBetaOutput) {
+func (o *ListDeliveryMetricsSummaryFromDestination200Response) SetData(
+	v ListDeliveryMetricsSummaryFromDestinationBetaOutput,
+) {
 	o.Data = &v
 }
 
@@ -86,7 +88,9 @@ func (v NullableListDeliveryMetricsSummaryFromDestination200Response) Get() *Lis
 	return v.value
 }
 
-func (v *NullableListDeliveryMetricsSummaryFromDestination200Response) Set(val *ListDeliveryMetricsSummaryFromDestination200Response) {
+func (v *NullableListDeliveryMetricsSummaryFromDestination200Response) Set(
+	val *ListDeliveryMetricsSummaryFromDestination200Response,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -100,7 +104,9 @@ func (v *NullableListDeliveryMetricsSummaryFromDestination200Response) Unset() {
 	v.isSet = false
 }
 
-func NewNullableListDeliveryMetricsSummaryFromDestination200Response(val *ListDeliveryMetricsSummaryFromDestination200Response) *NullableListDeliveryMetricsSummaryFromDestination200Response {
+func NewNullableListDeliveryMetricsSummaryFromDestination200Response(
+	val *ListDeliveryMetricsSummaryFromDestination200Response,
+) *NullableListDeliveryMetricsSummaryFromDestination200Response {
 	return &NullableListDeliveryMetricsSummaryFromDestination200Response{value: val, isSet: true}
 }
 
@@ -108,9 +114,9 @@ func (v NullableListDeliveryMetricsSummaryFromDestination200Response) MarshalJSO
 	return json.Marshal(v.value)
 }
 
-func (v *NullableListDeliveryMetricsSummaryFromDestination200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableListDeliveryMetricsSummaryFromDestination200Response) UnmarshalJSON(
+	src []byte,
+) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

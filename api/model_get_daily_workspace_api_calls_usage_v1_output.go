@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -19,14 +19,17 @@ import (
 type GetDailyWorkspaceAPICallsUsageV1Output struct {
 	// The list of daily Workspace API calls count aggregates.
 	DailyWorkspaceAPICallsUsage []APICallSnapshotV1 `json:"dailyWorkspaceAPICallsUsage"`
-	Pagination Pagination `json:"pagination"`
+	Pagination                  Pagination          `json:"pagination"`
 }
 
 // NewGetDailyWorkspaceAPICallsUsageV1Output instantiates a new GetDailyWorkspaceAPICallsUsageV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetDailyWorkspaceAPICallsUsageV1Output(dailyWorkspaceAPICallsUsage []APICallSnapshotV1, pagination Pagination) *GetDailyWorkspaceAPICallsUsageV1Output {
+func NewGetDailyWorkspaceAPICallsUsageV1Output(
+	dailyWorkspaceAPICallsUsage []APICallSnapshotV1,
+	pagination Pagination,
+) *GetDailyWorkspaceAPICallsUsageV1Output {
 	this := GetDailyWorkspaceAPICallsUsageV1Output{}
 	this.DailyWorkspaceAPICallsUsage = dailyWorkspaceAPICallsUsage
 	this.Pagination = pagination
@@ -61,7 +64,9 @@ func (o *GetDailyWorkspaceAPICallsUsageV1Output) GetDailyWorkspaceAPICallsUsageO
 }
 
 // SetDailyWorkspaceAPICallsUsage sets field value
-func (o *GetDailyWorkspaceAPICallsUsageV1Output) SetDailyWorkspaceAPICallsUsage(v []APICallSnapshotV1) {
+func (o *GetDailyWorkspaceAPICallsUsageV1Output) SetDailyWorkspaceAPICallsUsage(
+	v []APICallSnapshotV1,
+) {
 	o.DailyWorkspaceAPICallsUsage = v
 }
 
@@ -109,7 +114,9 @@ func (v NullableGetDailyWorkspaceAPICallsUsageV1Output) Get() *GetDailyWorkspace
 	return v.value
 }
 
-func (v *NullableGetDailyWorkspaceAPICallsUsageV1Output) Set(val *GetDailyWorkspaceAPICallsUsageV1Output) {
+func (v *NullableGetDailyWorkspaceAPICallsUsageV1Output) Set(
+	val *GetDailyWorkspaceAPICallsUsageV1Output,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -123,7 +130,9 @@ func (v *NullableGetDailyWorkspaceAPICallsUsageV1Output) Unset() {
 	v.isSet = false
 }
 
-func NewNullableGetDailyWorkspaceAPICallsUsageV1Output(val *GetDailyWorkspaceAPICallsUsageV1Output) *NullableGetDailyWorkspaceAPICallsUsageV1Output {
+func NewNullableGetDailyWorkspaceAPICallsUsageV1Output(
+	val *GetDailyWorkspaceAPICallsUsageV1Output,
+) *NullableGetDailyWorkspaceAPICallsUsageV1Output {
 	return &NullableGetDailyWorkspaceAPICallsUsageV1Output{value: val, isSet: true}
 }
 
@@ -135,5 +144,3 @@ func (v *NullableGetDailyWorkspaceAPICallsUsageV1Output) UnmarshalJSON(src []byt
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

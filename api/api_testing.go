@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -19,19 +19,18 @@ import (
 	"net/url"
 )
 
-
 // TestingApiService TestingApi service
 type TestingApiService service
 
 type ApiEchoRequest struct {
-	ctx context.Context
-	ApiService *TestingApiService
-	message *string
-	delay *float32
-	triggerError *bool
-	triggerMultipleErrors *bool
+	ctx                    context.Context
+	ApiService             *TestingApiService
+	message                *string
+	delay                  *float32
+	triggerError           *bool
+	triggerMultipleErrors  *bool
 	triggerUnexpectedError *bool
-	statusCode *float32
+	statusCode             *float32
 }
 
 // Sets the response &#x60;message&#x60; field. The response contains this field&#39;s entry.  This parameter exists in alpha.
@@ -79,24 +78,27 @@ Echo Echo
 
 Public Echo endpoint.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiEchoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiEchoRequest
 */
 func (a *TestingApiService) Echo(ctx context.Context) ApiEchoRequest {
 	return ApiEchoRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return Echo200Response
-func (a *TestingApiService) EchoExecute(r ApiEchoRequest) (*Echo200Response, *http.Response, error) {
+//
+//	@return Echo200Response
+func (a *TestingApiService) EchoExecute(
+	r ApiEchoRequest,
+) (*Echo200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *Echo200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *Echo200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TestingApiService.Echo")
@@ -121,10 +123,16 @@ func (a *TestingApiService) EchoExecute(r ApiEchoRequest) (*Echo200Response, *ht
 		localVarQueryParams.Add("triggerError", parameterToString(*r.triggerError, ""))
 	}
 	if r.triggerMultipleErrors != nil {
-		localVarQueryParams.Add("triggerMultipleErrors", parameterToString(*r.triggerMultipleErrors, ""))
+		localVarQueryParams.Add(
+			"triggerMultipleErrors",
+			parameterToString(*r.triggerMultipleErrors, ""),
+		)
 	}
 	if r.triggerUnexpectedError != nil {
-		localVarQueryParams.Add("triggerUnexpectedError", parameterToString(*r.triggerUnexpectedError, ""))
+		localVarQueryParams.Add(
+			"triggerUnexpectedError",
+			parameterToString(*r.triggerUnexpectedError, ""),
+		)
 	}
 	if r.statusCode != nil {
 		localVarQueryParams.Add("statusCode", parameterToString(*r.statusCode, ""))
@@ -139,14 +147,27 @@ func (a *TestingApiService) EchoExecute(r ApiEchoRequest) (*Echo200Response, *ht
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -200,7 +221,11 @@ func (a *TestingApiService) EchoExecute(r ApiEchoRequest) (*Echo200Response, *ht
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,

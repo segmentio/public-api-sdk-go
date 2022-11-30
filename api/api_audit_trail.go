@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -19,22 +19,23 @@ import (
 	"net/url"
 )
 
-
 // AuditTrailApiService AuditTrailApi service
 type AuditTrailApiService service
 
 type ApiListAuditEventsRequest struct {
-	ctx context.Context
-	ApiService *AuditTrailApiService
-	pagination *PaginationInput
-	startTime *string
-	endTime *string
-	resourceId *string
+	ctx          context.Context
+	ApiService   *AuditTrailApiService
+	pagination   *PaginationInput
+	startTime    *string
+	endTime      *string
+	resourceId   *string
 	resourceType *string
 }
 
 // Defines the pagination parameters.  This parameter exists in v1.
-func (r ApiListAuditEventsRequest) Pagination(pagination PaginationInput) ApiListAuditEventsRequest {
+func (r ApiListAuditEventsRequest) Pagination(
+	pagination PaginationInput,
+) ApiListAuditEventsRequest {
 	r.pagination = &pagination
 	return r
 }
@@ -72,27 +73,33 @@ ListAuditEvents List Audit Events
 
 Returns a list of Audit Trail events.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListAuditEventsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListAuditEventsRequest
 */
 func (a *AuditTrailApiService) ListAuditEvents(ctx context.Context) ApiListAuditEventsRequest {
 	return ApiListAuditEventsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return ListAuditEvents200Response
-func (a *AuditTrailApiService) ListAuditEventsExecute(r ApiListAuditEventsRequest) (*ListAuditEvents200Response, *http.Response, error) {
+//
+//	@return ListAuditEvents200Response
+func (a *AuditTrailApiService) ListAuditEventsExecute(
+	r ApiListAuditEventsRequest,
+) (*ListAuditEvents200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ListAuditEvents200Response
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListAuditEvents200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditTrailApiService.ListAuditEvents")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"AuditTrailApiService.ListAuditEvents",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -129,14 +136,28 @@ func (a *AuditTrailApiService) ListAuditEventsExecute(r ApiListAuditEventsReques
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json", "application/vnd.segment.v1beta+json", "application/vnd.segment.v1alpha+json"}
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
@@ -190,7 +211,11 @@ func (a *AuditTrailApiService) ListAuditEventsExecute(r ApiListAuditEventsReques
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
 	if err != nil {
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,

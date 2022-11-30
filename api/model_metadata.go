@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -24,8 +24,8 @@ type Metadata struct {
 	// The description of the Destination.
 	Description string `json:"description"`
 	// The slug used to identify the Destination in the Segment app.
-	Slug string `json:"slug"`
-	Logos Logos `json:"logos"`
+	Slug  string `json:"slug"`
+	Logos Logos  `json:"logos"`
 	// Options configured for the Destination.
 	Options []IntegrationOptionBeta `json:"options"`
 	// Support status of the Destination.
@@ -37,10 +37,10 @@ type Metadata struct {
 	// A website URL for this Destination.
 	Website string `json:"website"`
 	// A list of components this Destination provides.
-	Components []DestinationMetadataComponentV1 `json:"components"`
-	SupportedFeatures SupportedFeatures `json:"supportedFeatures"`
-	SupportedMethods SupportedMethods `json:"supportedMethods"`
-	SupportedPlatforms SupportedPlatforms `json:"supportedPlatforms"`
+	Components         []DestinationMetadataComponentV1 `json:"components"`
+	SupportedFeatures  SupportedFeatures                `json:"supportedFeatures"`
+	SupportedMethods   SupportedMethods                 `json:"supportedMethods"`
+	SupportedPlatforms SupportedPlatforms               `json:"supportedPlatforms"`
 	// Actions available for the Destination.
 	Actions []DestinationMetadataActionV1 `json:"actions"`
 	// Predefined Destination subscriptions that can optionally be applied when connecting a new instance of the Destination.
@@ -55,7 +55,24 @@ type Metadata struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMetadata(id string, name string, description string, slug string, logos Logos, options []IntegrationOptionBeta, status string, previousNames []string, categories []string, website string, components []DestinationMetadataComponentV1, supportedFeatures SupportedFeatures, supportedMethods SupportedMethods, supportedPlatforms SupportedPlatforms, actions []DestinationMetadataActionV1, presets []DestinationMetadataSubscriptionPresetV1) *Metadata {
+func NewMetadata(
+	id string,
+	name string,
+	description string,
+	slug string,
+	logos Logos,
+	options []IntegrationOptionBeta,
+	status string,
+	previousNames []string,
+	categories []string,
+	website string,
+	components []DestinationMetadataComponentV1,
+	supportedFeatures SupportedFeatures,
+	supportedMethods SupportedMethods,
+	supportedPlatforms SupportedPlatforms,
+	actions []DestinationMetadataActionV1,
+	presets []DestinationMetadataSubscriptionPresetV1,
+) *Metadata {
 	this := Metadata{}
 	this.Id = id
 	this.Name = name
@@ -626,5 +643,3 @@ func (v *NullableMetadata) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

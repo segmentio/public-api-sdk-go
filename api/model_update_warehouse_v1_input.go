@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -74,6 +74,7 @@ func (o *UpdateWarehouseV1Input) HasName() bool {
 func (o *UpdateWarehouseV1Input) SetName(v string) {
 	o.Name.Set(&v)
 }
+
 // SetNameNil sets the value for Name to be an explicit nil
 func (o *UpdateWarehouseV1Input) SetNameNil() {
 	o.Name.Set(nil)
@@ -148,6 +149,7 @@ func (o *UpdateWarehouseV1Input) HasSettings() bool {
 func (o *UpdateWarehouseV1Input) SetSettings(v ModelMap) {
 	o.Settings.Set(&v)
 }
+
 // SetSettingsNil sets the value for Settings to be an explicit nil
 func (o *UpdateWarehouseV1Input) SetSettingsNil() {
 	o.Settings.Set(nil)
@@ -195,7 +197,9 @@ func (v *NullableUpdateWarehouseV1Input) Unset() {
 	v.isSet = false
 }
 
-func NewNullableUpdateWarehouseV1Input(val *UpdateWarehouseV1Input) *NullableUpdateWarehouseV1Input {
+func NewNullableUpdateWarehouseV1Input(
+	val *UpdateWarehouseV1Input,
+) *NullableUpdateWarehouseV1Input {
 	return &NullableUpdateWarehouseV1Input{value: val, isSet: true}
 }
 
@@ -207,5 +211,3 @@ func (v *NullableUpdateWarehouseV1Input) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -174,6 +174,7 @@ func (o *UpdateFilterForDestinationV1Input) HasDescription() bool {
 func (o *UpdateFilterForDestinationV1Input) SetDescription(v string) {
 	o.Description.Set(&v)
 }
+
 // SetDescriptionNil sets the value for Description to be an explicit nil
 func (o *UpdateFilterForDestinationV1Input) SetDescriptionNil() {
 	o.Description.Set(nil)
@@ -259,7 +260,9 @@ func (v *NullableUpdateFilterForDestinationV1Input) Unset() {
 	v.isSet = false
 }
 
-func NewNullableUpdateFilterForDestinationV1Input(val *UpdateFilterForDestinationV1Input) *NullableUpdateFilterForDestinationV1Input {
+func NewNullableUpdateFilterForDestinationV1Input(
+	val *UpdateFilterForDestinationV1Input,
+) *NullableUpdateFilterForDestinationV1Input {
 	return &NullableUpdateFilterForDestinationV1Input{value: val, isSet: true}
 }
 
@@ -271,5 +274,3 @@ func (v *NullableUpdateFilterForDestinationV1Input) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

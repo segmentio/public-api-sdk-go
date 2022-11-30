@@ -1,7 +1,7 @@
 /*
 Segment Public API
 
-The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
+The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
 API version: 33.0.2
 Contact: friends@segment.com
@@ -65,7 +65,9 @@ func (o *ReplacePermissionsForUserGroup200Response) HasData() bool {
 }
 
 // SetData gets a reference to the given ReplacePermissionsForUserGroupV1Output and assigns it to the Data field.
-func (o *ReplacePermissionsForUserGroup200Response) SetData(v ReplacePermissionsForUserGroupV1Output) {
+func (o *ReplacePermissionsForUserGroup200Response) SetData(
+	v ReplacePermissionsForUserGroupV1Output,
+) {
 	o.Data = &v
 }
 
@@ -86,7 +88,9 @@ func (v NullableReplacePermissionsForUserGroup200Response) Get() *ReplacePermiss
 	return v.value
 }
 
-func (v *NullableReplacePermissionsForUserGroup200Response) Set(val *ReplacePermissionsForUserGroup200Response) {
+func (v *NullableReplacePermissionsForUserGroup200Response) Set(
+	val *ReplacePermissionsForUserGroup200Response,
+) {
 	v.value = val
 	v.isSet = true
 }
@@ -100,7 +104,9 @@ func (v *NullableReplacePermissionsForUserGroup200Response) Unset() {
 	v.isSet = false
 }
 
-func NewNullableReplacePermissionsForUserGroup200Response(val *ReplacePermissionsForUserGroup200Response) *NullableReplacePermissionsForUserGroup200Response {
+func NewNullableReplacePermissionsForUserGroup200Response(
+	val *ReplacePermissionsForUserGroup200Response,
+) *NullableReplacePermissionsForUserGroup200Response {
 	return &NullableReplacePermissionsForUserGroup200Response{value: val, isSet: true}
 }
 
@@ -112,5 +118,3 @@ func (v *NullableReplacePermissionsForUserGroup200Response) UnmarshalJSON(src []
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
