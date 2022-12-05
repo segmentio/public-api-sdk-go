@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 33.0.2
+API version: 33.0.3
 Contact: friends@segment.com
 */
 
@@ -17,7 +17,7 @@ import (
 
 // ListTransformations200Response struct for ListTransformations200Response
 type ListTransformations200Response struct {
-	Data *ListTransformationsBetaOutput `json:"data,omitempty"`
+	Data *ListTransformationsV1Output `json:"data,omitempty"`
 }
 
 // NewListTransformations200Response instantiates a new ListTransformations200Response object
@@ -38,9 +38,9 @@ func NewListTransformations200ResponseWithDefaults() *ListTransformations200Resp
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *ListTransformations200Response) GetData() ListTransformationsBetaOutput {
+func (o *ListTransformations200Response) GetData() ListTransformationsV1Output {
 	if o == nil || o.Data == nil {
-		var ret ListTransformationsBetaOutput
+		var ret ListTransformationsV1Output
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *ListTransformations200Response) GetData() ListTransformationsBetaOutput
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListTransformations200Response) GetDataOk() (*ListTransformationsBetaOutput, bool) {
+func (o *ListTransformations200Response) GetDataOk() (*ListTransformationsV1Output, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *ListTransformations200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given ListTransformationsBetaOutput and assigns it to the Data field.
-func (o *ListTransformations200Response) SetData(v ListTransformationsBetaOutput) {
+// SetData gets a reference to the given ListTransformationsV1Output and assigns it to the Data field.
+func (o *ListTransformations200Response) SetData(v ListTransformationsV1Output) {
 	o.Data = &v
 }
 

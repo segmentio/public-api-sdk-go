@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 33.0.2
+API version: 33.0.3
 Contact: friends@segment.com
 */
 
@@ -17,7 +17,7 @@ import (
 
 // CreateTransformation200Response struct for CreateTransformation200Response
 type CreateTransformation200Response struct {
-	Data *CreateTransformationBetaOutput `json:"data,omitempty"`
+	Data *CreateTransformationV1Output `json:"data,omitempty"`
 }
 
 // NewCreateTransformation200Response instantiates a new CreateTransformation200Response object
@@ -38,9 +38,9 @@ func NewCreateTransformation200ResponseWithDefaults() *CreateTransformation200Re
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *CreateTransformation200Response) GetData() CreateTransformationBetaOutput {
+func (o *CreateTransformation200Response) GetData() CreateTransformationV1Output {
 	if o == nil || o.Data == nil {
-		var ret CreateTransformationBetaOutput
+		var ret CreateTransformationV1Output
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *CreateTransformation200Response) GetData() CreateTransformationBetaOutp
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateTransformation200Response) GetDataOk() (*CreateTransformationBetaOutput, bool) {
+func (o *CreateTransformation200Response) GetDataOk() (*CreateTransformationV1Output, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *CreateTransformation200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given CreateTransformationBetaOutput and assigns it to the Data field.
-func (o *CreateTransformation200Response) SetData(v CreateTransformationBetaOutput) {
+// SetData gets a reference to the given CreateTransformationV1Output and assigns it to the Data field.
+func (o *CreateTransformation200Response) SetData(v CreateTransformationV1Output) {
 	o.Data = &v
 }
 
