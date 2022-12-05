@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API. 
 
-API version: 32.0.8
+API version: 33.0.3
 Contact: friends@segment.com
 */
 
@@ -20,14 +20,14 @@ type PreviewDestinationFilterV1Output struct {
 	// The pre-filter JSON input.
 	InputPayload map[string]interface{} `json:"inputPayload"`
 	// The filtered JSON output.
-	Result NullableModelMap `json:"result"`
+	Result map[string]interface{} `json:"result"`
 }
 
 // NewPreviewDestinationFilterV1Output instantiates a new PreviewDestinationFilterV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPreviewDestinationFilterV1Output(inputPayload map[string]interface{}, result NullableModelMap) *PreviewDestinationFilterV1Output {
+func NewPreviewDestinationFilterV1Output(inputPayload map[string]interface{}, result map[string]interface{}) *PreviewDestinationFilterV1Output {
 	this := PreviewDestinationFilterV1Output{}
 	this.InputPayload = inputPayload
 	this.Result = result
@@ -67,29 +67,29 @@ func (o *PreviewDestinationFilterV1Output) SetInputPayload(v map[string]interfac
 }
 
 // GetResult returns the Result field value
-// If the value is explicit nil, the zero value for ModelMap will be returned
-func (o *PreviewDestinationFilterV1Output) GetResult() ModelMap {
-	if o == nil || o.Result.Get() == nil {
-		var ret ModelMap
+// If the value is explicit nil, the zero value for map[string]interface{} will be returned
+func (o *PreviewDestinationFilterV1Output) GetResult() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
 		return ret
 	}
 
-	return *o.Result.Get()
+	return o.Result
 }
 
 // GetResultOk returns a tuple with the Result field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PreviewDestinationFilterV1Output) GetResultOk() (*ModelMap, bool) {
-	if o == nil {
+func (o *PreviewDestinationFilterV1Output) GetResultOk() (map[string]interface{}, bool) {
+	if o == nil || o.Result == nil {
 		return nil, false
 	}
-	return o.Result.Get(), o.Result.IsSet()
+	return o.Result, true
 }
 
 // SetResult sets field value
-func (o *PreviewDestinationFilterV1Output) SetResult(v ModelMap) {
-	o.Result.Set(&v)
+func (o *PreviewDestinationFilterV1Output) SetResult(v map[string]interface{}) {
+	o.Result = v
 }
 
 func (o PreviewDestinationFilterV1Output) MarshalJSON() ([]byte, error) {
@@ -97,8 +97,8 @@ func (o PreviewDestinationFilterV1Output) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["inputPayload"] = o.InputPayload
 	}
-	if true {
-		toSerialize["result"] = o.Result.Get()
+	if o.Result != nil {
+		toSerialize["result"] = o.Result
 	}
 	return json.Marshal(toSerialize)
 }
