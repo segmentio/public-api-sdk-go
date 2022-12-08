@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 33.0.3
+API version: 33.0.4
 Contact: friends@segment.com
 */
 
@@ -49,6 +49,10 @@ type DestinationMetadataV1 struct {
 	Contacts []Contact `json:"contacts,omitempty"`
 	// Partner Owned flag.
 	PartnerOwned *bool `json:"partnerOwned,omitempty"`
+	// A list of supported regions for this Destination.
+	SupportedRegions []string `json:"supportedRegions,omitempty"`
+	// The list of regional endpoints for this Destination.
+	RegionEndpoints []string `json:"regionEndpoints,omitempty"`
 }
 
 // NewDestinationMetadataV1 instantiates a new DestinationMetadataV1 object
@@ -549,6 +553,70 @@ func (o *DestinationMetadataV1) SetPartnerOwned(v bool) {
 	o.PartnerOwned = &v
 }
 
+// GetSupportedRegions returns the SupportedRegions field value if set, zero value otherwise.
+func (o *DestinationMetadataV1) GetSupportedRegions() []string {
+	if o == nil || o.SupportedRegions == nil {
+		var ret []string
+		return ret
+	}
+	return o.SupportedRegions
+}
+
+// GetSupportedRegionsOk returns a tuple with the SupportedRegions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DestinationMetadataV1) GetSupportedRegionsOk() ([]string, bool) {
+	if o == nil || o.SupportedRegions == nil {
+		return nil, false
+	}
+	return o.SupportedRegions, true
+}
+
+// HasSupportedRegions returns a boolean if a field has been set.
+func (o *DestinationMetadataV1) HasSupportedRegions() bool {
+	if o != nil && o.SupportedRegions != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSupportedRegions gets a reference to the given []string and assigns it to the SupportedRegions field.
+func (o *DestinationMetadataV1) SetSupportedRegions(v []string) {
+	o.SupportedRegions = v
+}
+
+// GetRegionEndpoints returns the RegionEndpoints field value if set, zero value otherwise.
+func (o *DestinationMetadataV1) GetRegionEndpoints() []string {
+	if o == nil || o.RegionEndpoints == nil {
+		var ret []string
+		return ret
+	}
+	return o.RegionEndpoints
+}
+
+// GetRegionEndpointsOk returns a tuple with the RegionEndpoints field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DestinationMetadataV1) GetRegionEndpointsOk() ([]string, bool) {
+	if o == nil || o.RegionEndpoints == nil {
+		return nil, false
+	}
+	return o.RegionEndpoints, true
+}
+
+// HasRegionEndpoints returns a boolean if a field has been set.
+func (o *DestinationMetadataV1) HasRegionEndpoints() bool {
+	if o != nil && o.RegionEndpoints != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRegionEndpoints gets a reference to the given []string and assigns it to the RegionEndpoints field.
+func (o *DestinationMetadataV1) SetRegionEndpoints(v []string) {
+	o.RegionEndpoints = v
+}
+
 func (o DestinationMetadataV1) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -604,6 +672,12 @@ func (o DestinationMetadataV1) MarshalJSON() ([]byte, error) {
 	}
 	if o.PartnerOwned != nil {
 		toSerialize["partnerOwned"] = o.PartnerOwned
+	}
+	if o.SupportedRegions != nil {
+		toSerialize["supportedRegions"] = o.SupportedRegions
+	}
+	if o.RegionEndpoints != nil {
+		toSerialize["regionEndpoints"] = o.RegionEndpoints
 	}
 	return json.Marshal(toSerialize)
 }
