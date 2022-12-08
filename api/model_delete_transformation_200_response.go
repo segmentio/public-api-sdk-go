@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 33.0.2
+API version: 33.0.4
 Contact: friends@segment.com
 */
 
@@ -17,7 +17,7 @@ import (
 
 // DeleteTransformation200Response struct for DeleteTransformation200Response
 type DeleteTransformation200Response struct {
-	Data *DeleteTransformationBetaOutput `json:"data,omitempty"`
+	Data *DeleteTransformationV1Output `json:"data,omitempty"`
 }
 
 // NewDeleteTransformation200Response instantiates a new DeleteTransformation200Response object
@@ -38,9 +38,9 @@ func NewDeleteTransformation200ResponseWithDefaults() *DeleteTransformation200Re
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *DeleteTransformation200Response) GetData() DeleteTransformationBetaOutput {
+func (o *DeleteTransformation200Response) GetData() DeleteTransformationV1Output {
 	if o == nil || o.Data == nil {
-		var ret DeleteTransformationBetaOutput
+		var ret DeleteTransformationV1Output
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *DeleteTransformation200Response) GetData() DeleteTransformationBetaOutp
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DeleteTransformation200Response) GetDataOk() (*DeleteTransformationBetaOutput, bool) {
+func (o *DeleteTransformation200Response) GetDataOk() (*DeleteTransformationV1Output, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *DeleteTransformation200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given DeleteTransformationBetaOutput and assigns it to the Data field.
-func (o *DeleteTransformation200Response) SetData(v DeleteTransformationBetaOutput) {
+// SetData gets a reference to the given DeleteTransformationV1Output and assigns it to the Data field.
+func (o *DeleteTransformation200Response) SetData(v DeleteTransformationV1Output) {
 	o.Data = &v
 }
 
