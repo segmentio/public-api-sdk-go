@@ -20,18 +20,24 @@ type CreateSourceRegulationV1Input struct {
 	// The regulation type to create.
 	RegulationType string `json:"regulationType"`
 	// The subject type.
-	SubjectType *string `json:"subjectType,omitempty"`
+	SubjectType string `json:"subjectType"`
 	// The user or object ids of the subjects to regulate.  Config API note: equal to `parent` but allows an array.
-	SubjectIds []string `json:"subjectIds,omitempty"`
+	SubjectIds []string `json:"subjectIds"`
 }
 
 // NewCreateSourceRegulationV1Input instantiates a new CreateSourceRegulationV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateSourceRegulationV1Input(regulationType string) *CreateSourceRegulationV1Input {
+func NewCreateSourceRegulationV1Input(
+	regulationType string,
+	subjectType string,
+	subjectIds []string,
+) *CreateSourceRegulationV1Input {
 	this := CreateSourceRegulationV1Input{}
 	this.RegulationType = regulationType
+	this.SubjectType = subjectType
+	this.SubjectIds = subjectIds
 	return &this
 }
 
@@ -67,66 +73,50 @@ func (o *CreateSourceRegulationV1Input) SetRegulationType(v string) {
 	o.RegulationType = v
 }
 
-// GetSubjectType returns the SubjectType field value if set, zero value otherwise.
+// GetSubjectType returns the SubjectType field value
 func (o *CreateSourceRegulationV1Input) GetSubjectType() string {
-	if o == nil || o.SubjectType == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.SubjectType
+
+	return o.SubjectType
 }
 
-// GetSubjectTypeOk returns a tuple with the SubjectType field value if set, nil otherwise
+// GetSubjectTypeOk returns a tuple with the SubjectType field value
 // and a boolean to check if the value has been set.
 func (o *CreateSourceRegulationV1Input) GetSubjectTypeOk() (*string, bool) {
-	if o == nil || o.SubjectType == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SubjectType, true
+	return &o.SubjectType, true
 }
 
-// HasSubjectType returns a boolean if a field has been set.
-func (o *CreateSourceRegulationV1Input) HasSubjectType() bool {
-	if o != nil && o.SubjectType != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSubjectType gets a reference to the given string and assigns it to the SubjectType field.
+// SetSubjectType sets field value
 func (o *CreateSourceRegulationV1Input) SetSubjectType(v string) {
-	o.SubjectType = &v
+	o.SubjectType = v
 }
 
-// GetSubjectIds returns the SubjectIds field value if set, zero value otherwise.
+// GetSubjectIds returns the SubjectIds field value
 func (o *CreateSourceRegulationV1Input) GetSubjectIds() []string {
-	if o == nil || o.SubjectIds == nil {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.SubjectIds
 }
 
-// GetSubjectIdsOk returns a tuple with the SubjectIds field value if set, nil otherwise
+// GetSubjectIdsOk returns a tuple with the SubjectIds field value
 // and a boolean to check if the value has been set.
 func (o *CreateSourceRegulationV1Input) GetSubjectIdsOk() ([]string, bool) {
-	if o == nil || o.SubjectIds == nil {
+	if o == nil {
 		return nil, false
 	}
 	return o.SubjectIds, true
 }
 
-// HasSubjectIds returns a boolean if a field has been set.
-func (o *CreateSourceRegulationV1Input) HasSubjectIds() bool {
-	if o != nil && o.SubjectIds != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSubjectIds gets a reference to the given []string and assigns it to the SubjectIds field.
+// SetSubjectIds sets field value
 func (o *CreateSourceRegulationV1Input) SetSubjectIds(v []string) {
 	o.SubjectIds = v
 }
@@ -136,10 +126,10 @@ func (o CreateSourceRegulationV1Input) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["regulationType"] = o.RegulationType
 	}
-	if o.SubjectType != nil {
+	if true {
 		toSerialize["subjectType"] = o.SubjectType
 	}
-	if o.SubjectIds != nil {
+	if true {
 		toSerialize["subjectIds"] = o.SubjectIds
 	}
 	return json.Marshal(toSerialize)

@@ -18,15 +18,16 @@ import (
 // ReplaceUsersInUserGroupV1Input Replace a user group's list of users and invites with a new one.
 type ReplaceUsersInUserGroupV1Input struct {
 	// The email addresses of the users and invites to replace.
-	Emails []string `json:"emails,omitempty"`
+	Emails []string `json:"emails"`
 }
 
 // NewReplaceUsersInUserGroupV1Input instantiates a new ReplaceUsersInUserGroupV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReplaceUsersInUserGroupV1Input() *ReplaceUsersInUserGroupV1Input {
+func NewReplaceUsersInUserGroupV1Input(emails []string) *ReplaceUsersInUserGroupV1Input {
 	this := ReplaceUsersInUserGroupV1Input{}
+	this.Emails = emails
 	return &this
 }
 
@@ -38,41 +39,33 @@ func NewReplaceUsersInUserGroupV1InputWithDefaults() *ReplaceUsersInUserGroupV1I
 	return &this
 }
 
-// GetEmails returns the Emails field value if set, zero value otherwise.
+// GetEmails returns the Emails field value
 func (o *ReplaceUsersInUserGroupV1Input) GetEmails() []string {
-	if o == nil || o.Emails == nil {
+	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.Emails
 }
 
-// GetEmailsOk returns a tuple with the Emails field value if set, nil otherwise
+// GetEmailsOk returns a tuple with the Emails field value
 // and a boolean to check if the value has been set.
 func (o *ReplaceUsersInUserGroupV1Input) GetEmailsOk() ([]string, bool) {
-	if o == nil || o.Emails == nil {
+	if o == nil {
 		return nil, false
 	}
 	return o.Emails, true
 }
 
-// HasEmails returns a boolean if a field has been set.
-func (o *ReplaceUsersInUserGroupV1Input) HasEmails() bool {
-	if o != nil && o.Emails != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEmails gets a reference to the given []string and assigns it to the Emails field.
+// SetEmails sets field value
 func (o *ReplaceUsersInUserGroupV1Input) SetEmails(v []string) {
 	o.Emails = v
 }
 
 func (o ReplaceUsersInUserGroupV1Input) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Emails != nil {
+	if true {
 		toSerialize["emails"] = o.Emails
 	}
 	return json.Marshal(toSerialize)

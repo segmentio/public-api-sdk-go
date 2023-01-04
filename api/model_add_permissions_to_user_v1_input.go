@@ -18,15 +18,16 @@ import (
 // AddPermissionsToUserV1Input Adds a list of permissions to a user.
 type AddPermissionsToUserV1Input struct {
 	// The permissions to add.
-	Permissions []PermissionInputV1 `json:"permissions,omitempty"`
+	Permissions []PermissionInputV1 `json:"permissions"`
 }
 
 // NewAddPermissionsToUserV1Input instantiates a new AddPermissionsToUserV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAddPermissionsToUserV1Input() *AddPermissionsToUserV1Input {
+func NewAddPermissionsToUserV1Input(permissions []PermissionInputV1) *AddPermissionsToUserV1Input {
 	this := AddPermissionsToUserV1Input{}
+	this.Permissions = permissions
 	return &this
 }
 
@@ -38,41 +39,33 @@ func NewAddPermissionsToUserV1InputWithDefaults() *AddPermissionsToUserV1Input {
 	return &this
 }
 
-// GetPermissions returns the Permissions field value if set, zero value otherwise.
+// GetPermissions returns the Permissions field value
 func (o *AddPermissionsToUserV1Input) GetPermissions() []PermissionInputV1 {
-	if o == nil || o.Permissions == nil {
+	if o == nil {
 		var ret []PermissionInputV1
 		return ret
 	}
+
 	return o.Permissions
 }
 
-// GetPermissionsOk returns a tuple with the Permissions field value if set, nil otherwise
+// GetPermissionsOk returns a tuple with the Permissions field value
 // and a boolean to check if the value has been set.
 func (o *AddPermissionsToUserV1Input) GetPermissionsOk() ([]PermissionInputV1, bool) {
-	if o == nil || o.Permissions == nil {
+	if o == nil {
 		return nil, false
 	}
 	return o.Permissions, true
 }
 
-// HasPermissions returns a boolean if a field has been set.
-func (o *AddPermissionsToUserV1Input) HasPermissions() bool {
-	if o != nil && o.Permissions != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPermissions gets a reference to the given []PermissionInputV1 and assigns it to the Permissions field.
+// SetPermissions sets field value
 func (o *AddPermissionsToUserV1Input) SetPermissions(v []PermissionInputV1) {
 	o.Permissions = v
 }
 
 func (o AddPermissionsToUserV1Input) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Permissions != nil {
+	if true {
 		toSerialize["permissions"] = o.Permissions
 	}
 	return json.Marshal(toSerialize)

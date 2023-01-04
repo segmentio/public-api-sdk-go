@@ -18,15 +18,18 @@ import (
 // UpdateSelectiveSyncForWarehouseV1Input Updates the schema for a Warehouse/sources pair.
 type UpdateSelectiveSyncForWarehouseV1Input struct {
 	// A list of sync schema overrides to apply to this Warehouse.
-	SyncOverrides []WarehouseSyncOverrideV1 `json:"syncOverrides,omitempty"`
+	SyncOverrides []WarehouseSyncOverrideV1 `json:"syncOverrides"`
 }
 
 // NewUpdateSelectiveSyncForWarehouseV1Input instantiates a new UpdateSelectiveSyncForWarehouseV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateSelectiveSyncForWarehouseV1Input() *UpdateSelectiveSyncForWarehouseV1Input {
+func NewUpdateSelectiveSyncForWarehouseV1Input(
+	syncOverrides []WarehouseSyncOverrideV1,
+) *UpdateSelectiveSyncForWarehouseV1Input {
 	this := UpdateSelectiveSyncForWarehouseV1Input{}
+	this.SyncOverrides = syncOverrides
 	return &this
 }
 
@@ -38,41 +41,33 @@ func NewUpdateSelectiveSyncForWarehouseV1InputWithDefaults() *UpdateSelectiveSyn
 	return &this
 }
 
-// GetSyncOverrides returns the SyncOverrides field value if set, zero value otherwise.
+// GetSyncOverrides returns the SyncOverrides field value
 func (o *UpdateSelectiveSyncForWarehouseV1Input) GetSyncOverrides() []WarehouseSyncOverrideV1 {
-	if o == nil || o.SyncOverrides == nil {
+	if o == nil {
 		var ret []WarehouseSyncOverrideV1
 		return ret
 	}
+
 	return o.SyncOverrides
 }
 
-// GetSyncOverridesOk returns a tuple with the SyncOverrides field value if set, nil otherwise
+// GetSyncOverridesOk returns a tuple with the SyncOverrides field value
 // and a boolean to check if the value has been set.
 func (o *UpdateSelectiveSyncForWarehouseV1Input) GetSyncOverridesOk() ([]WarehouseSyncOverrideV1, bool) {
-	if o == nil || o.SyncOverrides == nil {
+	if o == nil {
 		return nil, false
 	}
 	return o.SyncOverrides, true
 }
 
-// HasSyncOverrides returns a boolean if a field has been set.
-func (o *UpdateSelectiveSyncForWarehouseV1Input) HasSyncOverrides() bool {
-	if o != nil && o.SyncOverrides != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSyncOverrides gets a reference to the given []WarehouseSyncOverrideV1 and assigns it to the SyncOverrides field.
+// SetSyncOverrides sets field value
 func (o *UpdateSelectiveSyncForWarehouseV1Input) SetSyncOverrides(v []WarehouseSyncOverrideV1) {
 	o.SyncOverrides = v
 }
 
 func (o UpdateSelectiveSyncForWarehouseV1Input) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.SyncOverrides != nil {
+	if true {
 		toSerialize["syncOverrides"] = o.SyncOverrides
 	}
 	return json.Marshal(toSerialize)

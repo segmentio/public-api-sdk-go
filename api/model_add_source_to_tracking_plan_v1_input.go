@@ -18,15 +18,16 @@ import (
 // AddSourceToTrackingPlanV1Input Connects a Source to a Tracking Plan.
 type AddSourceToTrackingPlanV1Input struct {
 	// The id of the Source associated with the Tracking Plan.  Config API note: analogous to `sourceName`.
-	SourceId *string `json:"sourceId,omitempty"`
+	SourceId string `json:"sourceId"`
 }
 
 // NewAddSourceToTrackingPlanV1Input instantiates a new AddSourceToTrackingPlanV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAddSourceToTrackingPlanV1Input() *AddSourceToTrackingPlanV1Input {
+func NewAddSourceToTrackingPlanV1Input(sourceId string) *AddSourceToTrackingPlanV1Input {
 	this := AddSourceToTrackingPlanV1Input{}
+	this.SourceId = sourceId
 	return &this
 }
 
@@ -38,41 +39,33 @@ func NewAddSourceToTrackingPlanV1InputWithDefaults() *AddSourceToTrackingPlanV1I
 	return &this
 }
 
-// GetSourceId returns the SourceId field value if set, zero value otherwise.
+// GetSourceId returns the SourceId field value
 func (o *AddSourceToTrackingPlanV1Input) GetSourceId() string {
-	if o == nil || o.SourceId == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.SourceId
+
+	return o.SourceId
 }
 
-// GetSourceIdOk returns a tuple with the SourceId field value if set, nil otherwise
+// GetSourceIdOk returns a tuple with the SourceId field value
 // and a boolean to check if the value has been set.
 func (o *AddSourceToTrackingPlanV1Input) GetSourceIdOk() (*string, bool) {
-	if o == nil || o.SourceId == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SourceId, true
+	return &o.SourceId, true
 }
 
-// HasSourceId returns a boolean if a field has been set.
-func (o *AddSourceToTrackingPlanV1Input) HasSourceId() bool {
-	if o != nil && o.SourceId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceId gets a reference to the given string and assigns it to the SourceId field.
+// SetSourceId sets field value
 func (o *AddSourceToTrackingPlanV1Input) SetSourceId(v string) {
-	o.SourceId = &v
+	o.SourceId = v
 }
 
 func (o AddSourceToTrackingPlanV1Input) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.SourceId != nil {
+	if true {
 		toSerialize["sourceId"] = o.SourceId
 	}
 	return json.Marshal(toSerialize)
