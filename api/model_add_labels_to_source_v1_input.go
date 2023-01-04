@@ -18,15 +18,16 @@ import (
 // AddLabelsToSourceV1Input Applies an existing label to an existing Source.
 type AddLabelsToSourceV1Input struct {
 	// The labels to associate with a Source.
-	Labels []LabelV1 `json:"labels,omitempty"`
+	Labels []LabelV1 `json:"labels"`
 }
 
 // NewAddLabelsToSourceV1Input instantiates a new AddLabelsToSourceV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAddLabelsToSourceV1Input() *AddLabelsToSourceV1Input {
+func NewAddLabelsToSourceV1Input(labels []LabelV1) *AddLabelsToSourceV1Input {
 	this := AddLabelsToSourceV1Input{}
+	this.Labels = labels
 	return &this
 }
 
@@ -38,41 +39,33 @@ func NewAddLabelsToSourceV1InputWithDefaults() *AddLabelsToSourceV1Input {
 	return &this
 }
 
-// GetLabels returns the Labels field value if set, zero value otherwise.
+// GetLabels returns the Labels field value
 func (o *AddLabelsToSourceV1Input) GetLabels() []LabelV1 {
-	if o == nil || o.Labels == nil {
+	if o == nil {
 		var ret []LabelV1
 		return ret
 	}
+
 	return o.Labels
 }
 
-// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
+// GetLabelsOk returns a tuple with the Labels field value
 // and a boolean to check if the value has been set.
 func (o *AddLabelsToSourceV1Input) GetLabelsOk() ([]LabelV1, bool) {
-	if o == nil || o.Labels == nil {
+	if o == nil {
 		return nil, false
 	}
 	return o.Labels, true
 }
 
-// HasLabels returns a boolean if a field has been set.
-func (o *AddLabelsToSourceV1Input) HasLabels() bool {
-	if o != nil && o.Labels != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetLabels gets a reference to the given []LabelV1 and assigns it to the Labels field.
+// SetLabels sets field value
 func (o *AddLabelsToSourceV1Input) SetLabels(v []LabelV1) {
 	o.Labels = v
 }
 
 func (o AddLabelsToSourceV1Input) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Labels != nil {
+	if true {
 		toSerialize["labels"] = o.Labels
 	}
 	return json.Marshal(toSerialize)

@@ -18,13 +18,13 @@ import (
 // CreateFilterForDestinationV1Input Input for CreateDestinationFilterV1.
 type CreateFilterForDestinationV1Input struct {
 	// The id of the Source associated with this filter.
-	SourceId *string `json:"sourceId,omitempty"`
+	SourceId string `json:"sourceId"`
 	// The filter's condition.
 	If string `json:"if"`
 	// Actions for the Destination filter.
 	Actions []DestinationFilterActionV1 `json:"actions"`
 	// The title of the filter.
-	Title *string `json:"title,omitempty"`
+	Title string `json:"title"`
 	// The description of the filter.
 	Description *string `json:"description,omitempty"`
 	// When set to true, the Destination filter is active.
@@ -36,13 +36,17 @@ type CreateFilterForDestinationV1Input struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewCreateFilterForDestinationV1Input(
+	sourceId string,
 	if_ string,
 	actions []DestinationFilterActionV1,
+	title string,
 	enabled bool,
 ) *CreateFilterForDestinationV1Input {
 	this := CreateFilterForDestinationV1Input{}
+	this.SourceId = sourceId
 	this.If = if_
 	this.Actions = actions
+	this.Title = title
 	this.Enabled = enabled
 	return &this
 }
@@ -55,36 +59,28 @@ func NewCreateFilterForDestinationV1InputWithDefaults() *CreateFilterForDestinat
 	return &this
 }
 
-// GetSourceId returns the SourceId field value if set, zero value otherwise.
+// GetSourceId returns the SourceId field value
 func (o *CreateFilterForDestinationV1Input) GetSourceId() string {
-	if o == nil || o.SourceId == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.SourceId
+
+	return o.SourceId
 }
 
-// GetSourceIdOk returns a tuple with the SourceId field value if set, nil otherwise
+// GetSourceIdOk returns a tuple with the SourceId field value
 // and a boolean to check if the value has been set.
 func (o *CreateFilterForDestinationV1Input) GetSourceIdOk() (*string, bool) {
-	if o == nil || o.SourceId == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.SourceId, true
+	return &o.SourceId, true
 }
 
-// HasSourceId returns a boolean if a field has been set.
-func (o *CreateFilterForDestinationV1Input) HasSourceId() bool {
-	if o != nil && o.SourceId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSourceId gets a reference to the given string and assigns it to the SourceId field.
+// SetSourceId sets field value
 func (o *CreateFilterForDestinationV1Input) SetSourceId(v string) {
-	o.SourceId = &v
+	o.SourceId = v
 }
 
 // GetIf returns the If field value
@@ -135,36 +131,28 @@ func (o *CreateFilterForDestinationV1Input) SetActions(v []DestinationFilterActi
 	o.Actions = v
 }
 
-// GetTitle returns the Title field value if set, zero value otherwise.
+// GetTitle returns the Title field value
 func (o *CreateFilterForDestinationV1Input) GetTitle() string {
-	if o == nil || o.Title == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Title
+
+	return o.Title
 }
 
-// GetTitleOk returns a tuple with the Title field value if set, nil otherwise
+// GetTitleOk returns a tuple with the Title field value
 // and a boolean to check if the value has been set.
 func (o *CreateFilterForDestinationV1Input) GetTitleOk() (*string, bool) {
-	if o == nil || o.Title == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Title, true
+	return &o.Title, true
 }
 
-// HasTitle returns a boolean if a field has been set.
-func (o *CreateFilterForDestinationV1Input) HasTitle() bool {
-	if o != nil && o.Title != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTitle gets a reference to the given string and assigns it to the Title field.
+// SetTitle sets field value
 func (o *CreateFilterForDestinationV1Input) SetTitle(v string) {
-	o.Title = &v
+	o.Title = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -225,7 +213,7 @@ func (o *CreateFilterForDestinationV1Input) SetEnabled(v bool) {
 
 func (o CreateFilterForDestinationV1Input) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.SourceId != nil {
+	if true {
 		toSerialize["sourceId"] = o.SourceId
 	}
 	if true {
@@ -234,7 +222,7 @@ func (o CreateFilterForDestinationV1Input) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["actions"] = o.Actions
 	}
-	if o.Title != nil {
+	if true {
 		toSerialize["title"] = o.Title
 	}
 	if o.Description != nil {

@@ -18,15 +18,16 @@ import (
 // UpdateUserGroupV1Input Updates a user group with a given id.
 type UpdateUserGroupV1Input struct {
 	// The intended value to rename the user group to.
-	Name *string `json:"name,omitempty"`
+	Name string `json:"name"`
 }
 
 // NewUpdateUserGroupV1Input instantiates a new UpdateUserGroupV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateUserGroupV1Input() *UpdateUserGroupV1Input {
+func NewUpdateUserGroupV1Input(name string) *UpdateUserGroupV1Input {
 	this := UpdateUserGroupV1Input{}
+	this.Name = name
 	return &this
 }
 
@@ -38,41 +39,33 @@ func NewUpdateUserGroupV1InputWithDefaults() *UpdateUserGroupV1Input {
 	return &this
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value
 func (o *UpdateUserGroupV1Input) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 func (o *UpdateUserGroupV1Input) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Name, true
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *UpdateUserGroupV1Input) HasName() bool {
-	if o != nil && o.Name != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName sets field value
 func (o *UpdateUserGroupV1Input) SetName(v string) {
-	o.Name = &v
+	o.Name = v
 }
 
 func (o UpdateUserGroupV1Input) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Name != nil {
+	if true {
 		toSerialize["name"] = o.Name
 	}
 	return json.Marshal(toSerialize)

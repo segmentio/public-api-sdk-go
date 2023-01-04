@@ -18,15 +18,16 @@ import (
 // ReplaceRulesInTrackingPlanV1Input Replaces Tracking Plan rules.
 type ReplaceRulesInTrackingPlanV1Input struct {
 	// Rules to replace.
-	Rules []RuleV1 `json:"rules,omitempty"`
+	Rules []RuleV1 `json:"rules"`
 }
 
 // NewReplaceRulesInTrackingPlanV1Input instantiates a new ReplaceRulesInTrackingPlanV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReplaceRulesInTrackingPlanV1Input() *ReplaceRulesInTrackingPlanV1Input {
+func NewReplaceRulesInTrackingPlanV1Input(rules []RuleV1) *ReplaceRulesInTrackingPlanV1Input {
 	this := ReplaceRulesInTrackingPlanV1Input{}
+	this.Rules = rules
 	return &this
 }
 
@@ -38,41 +39,33 @@ func NewReplaceRulesInTrackingPlanV1InputWithDefaults() *ReplaceRulesInTrackingP
 	return &this
 }
 
-// GetRules returns the Rules field value if set, zero value otherwise.
+// GetRules returns the Rules field value
 func (o *ReplaceRulesInTrackingPlanV1Input) GetRules() []RuleV1 {
-	if o == nil || o.Rules == nil {
+	if o == nil {
 		var ret []RuleV1
 		return ret
 	}
+
 	return o.Rules
 }
 
-// GetRulesOk returns a tuple with the Rules field value if set, nil otherwise
+// GetRulesOk returns a tuple with the Rules field value
 // and a boolean to check if the value has been set.
 func (o *ReplaceRulesInTrackingPlanV1Input) GetRulesOk() ([]RuleV1, bool) {
-	if o == nil || o.Rules == nil {
+	if o == nil {
 		return nil, false
 	}
 	return o.Rules, true
 }
 
-// HasRules returns a boolean if a field has been set.
-func (o *ReplaceRulesInTrackingPlanV1Input) HasRules() bool {
-	if o != nil && o.Rules != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetRules gets a reference to the given []RuleV1 and assigns it to the Rules field.
+// SetRules sets field value
 func (o *ReplaceRulesInTrackingPlanV1Input) SetRules(v []RuleV1) {
 	o.Rules = v
 }
 
 func (o ReplaceRulesInTrackingPlanV1Input) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Rules != nil {
+	if true {
 		toSerialize["rules"] = o.Rules
 	}
 	return json.Marshal(toSerialize)

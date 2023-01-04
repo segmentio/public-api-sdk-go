@@ -18,15 +18,16 @@ import (
 // ReplaceLabelsInSourceV1Input Replaces all labels in a Source with a list of new labels.
 type ReplaceLabelsInSourceV1Input struct {
 	// The list of labels to replace in the Source.
-	Labels []LabelV1 `json:"labels,omitempty"`
+	Labels []LabelV1 `json:"labels"`
 }
 
 // NewReplaceLabelsInSourceV1Input instantiates a new ReplaceLabelsInSourceV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReplaceLabelsInSourceV1Input() *ReplaceLabelsInSourceV1Input {
+func NewReplaceLabelsInSourceV1Input(labels []LabelV1) *ReplaceLabelsInSourceV1Input {
 	this := ReplaceLabelsInSourceV1Input{}
+	this.Labels = labels
 	return &this
 }
 
@@ -38,41 +39,33 @@ func NewReplaceLabelsInSourceV1InputWithDefaults() *ReplaceLabelsInSourceV1Input
 	return &this
 }
 
-// GetLabels returns the Labels field value if set, zero value otherwise.
+// GetLabels returns the Labels field value
 func (o *ReplaceLabelsInSourceV1Input) GetLabels() []LabelV1 {
-	if o == nil || o.Labels == nil {
+	if o == nil {
 		var ret []LabelV1
 		return ret
 	}
+
 	return o.Labels
 }
 
-// GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
+// GetLabelsOk returns a tuple with the Labels field value
 // and a boolean to check if the value has been set.
 func (o *ReplaceLabelsInSourceV1Input) GetLabelsOk() ([]LabelV1, bool) {
-	if o == nil || o.Labels == nil {
+	if o == nil {
 		return nil, false
 	}
 	return o.Labels, true
 }
 
-// HasLabels returns a boolean if a field has been set.
-func (o *ReplaceLabelsInSourceV1Input) HasLabels() bool {
-	if o != nil && o.Labels != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetLabels gets a reference to the given []LabelV1 and assigns it to the Labels field.
+// SetLabels sets field value
 func (o *ReplaceLabelsInSourceV1Input) SetLabels(v []LabelV1) {
 	o.Labels = v
 }
 
 func (o ReplaceLabelsInSourceV1Input) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Labels != nil {
+	if true {
 		toSerialize["labels"] = o.Labels
 	}
 	return json.Marshal(toSerialize)

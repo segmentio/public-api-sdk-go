@@ -22,15 +22,16 @@ type UpdateWarehouseV1Input struct {
 	// Enable to allow this Warehouse to receive data.
 	Enabled *bool `json:"enabled,omitempty"`
 	// A key-value object that contains instance-specific settings for a Warehouse.  Different kinds of Warehouses require different settings. The required and optional settings for a Warehouse are described in the `options` object of the associated Warehouse metadata.  You can find the full list of Warehouse metadata and related settings information in the `/catalog/warehouses` endpoint.
-	Settings NullableModelMap `json:"settings,omitempty"`
+	Settings NullableModelMap `json:"settings"`
 }
 
 // NewUpdateWarehouseV1Input instantiates a new UpdateWarehouseV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateWarehouseV1Input() *UpdateWarehouseV1Input {
+func NewUpdateWarehouseV1Input(settings NullableModelMap) *UpdateWarehouseV1Input {
 	this := UpdateWarehouseV1Input{}
+	this.Settings = settings
 	return &this
 }
 
@@ -117,16 +118,18 @@ func (o *UpdateWarehouseV1Input) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetSettings returns the Settings field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSettings returns the Settings field value
+// If the value is explicit nil, the zero value for ModelMap will be returned
 func (o *UpdateWarehouseV1Input) GetSettings() ModelMap {
 	if o == nil || o.Settings.Get() == nil {
 		var ret ModelMap
 		return ret
 	}
+
 	return *o.Settings.Get()
 }
 
-// GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
+// GetSettingsOk returns a tuple with the Settings field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateWarehouseV1Input) GetSettingsOk() (*ModelMap, bool) {
@@ -136,28 +139,9 @@ func (o *UpdateWarehouseV1Input) GetSettingsOk() (*ModelMap, bool) {
 	return o.Settings.Get(), o.Settings.IsSet()
 }
 
-// HasSettings returns a boolean if a field has been set.
-func (o *UpdateWarehouseV1Input) HasSettings() bool {
-	if o != nil && o.Settings.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSettings gets a reference to the given NullableModelMap and assigns it to the Settings field.
+// SetSettings sets field value
 func (o *UpdateWarehouseV1Input) SetSettings(v ModelMap) {
 	o.Settings.Set(&v)
-}
-
-// SetSettingsNil sets the value for Settings to be an explicit nil
-func (o *UpdateWarehouseV1Input) SetSettingsNil() {
-	o.Settings.Set(nil)
-}
-
-// UnsetSettings ensures that no value is present for Settings, not even an explicit nil
-func (o *UpdateWarehouseV1Input) UnsetSettings() {
-	o.Settings.Unset()
 }
 
 func (o UpdateWarehouseV1Input) MarshalJSON() ([]byte, error) {
@@ -168,7 +152,7 @@ func (o UpdateWarehouseV1Input) MarshalJSON() ([]byte, error) {
 	if o.Enabled != nil {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if o.Settings.IsSet() {
+	if true {
 		toSerialize["settings"] = o.Settings.Get()
 	}
 	return json.Marshal(toSerialize)
