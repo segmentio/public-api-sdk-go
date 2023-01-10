@@ -44,9 +44,11 @@ func (r ApiCreateEdgeFunctionsRequest) Execute() (*CreateEdgeFunctions200Respons
 /*
 CreateEdgeFunctions Create Edge Functions
 
-Create EdgeFunctions for your Source, given a valid upload URL for an Edge Functions bundle.
+Create EdgeFunctions for your Source given a valid upload URL for an Edge Functions bundle.
 
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sourceId
@@ -217,7 +219,9 @@ DisableEdgeFunctions Disable Edge Functions
 
 Disable Edge Functions for your Source.
 
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sourceId
@@ -379,9 +383,11 @@ func (r ApiGenerateUploadURLForEdgeFunctionsRequest) Execute() (*GenerateUploadU
 /*
 GenerateUploadURLForEdgeFunctions Generate Upload URL for Edge Functions
 
-Generate a temporary upload URL, that can be used to upload an Edge Functions bundle.
+Generate a temporary upload URL that can be used to upload an Edge Functions bundle.
 
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sourceId
@@ -545,7 +551,9 @@ GetLatestFromEdgeFunctions Get Latest from Edge Functions
 
 Get the latest Edge Functions for your Source.
 
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sourceId

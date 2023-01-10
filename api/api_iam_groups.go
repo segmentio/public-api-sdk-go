@@ -46,8 +46,7 @@ AddPermissionsToUserGroup Add Permissions to User Group
 
 Adds a list of access permissions to a user group.
 
-When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
-* Policy Created
+• When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:* Policy Created
 * User Group Policy Updated
 
 The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
@@ -235,8 +234,7 @@ AddUsersToUserGroup Add Users to User Group
 
 Adds a list of users or invites to a user group.
 
-When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
-* Subjects Added to Group
+• When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:* Subjects Added to Group
 * User Added To User Group
 
 The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
@@ -423,8 +421,7 @@ CreateUserGroup Create User Group
 
 Creates a user group.
 
-When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
-* User Group Created
+• When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:* User Group Created
 * Policy Created
 
 The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
@@ -593,7 +590,7 @@ DeleteUserGroup Delete User Group
 
 Removes a user group from a Workspace.
 
-When called, this endpoint may generate the `User Group Deleted` event in the [audit trail](/tag/Audit-Trail).
+• When called, this endpoint may generate the `User Group Deleted` event in the [audit trail](/tag/Audit-Trail).
 
 The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
@@ -1451,8 +1448,7 @@ RemoveUsersFromUserGroup Remove Users from User Group
 
 Removes one or multiple users or invites from a user group by email.
 
-When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
-* Group Memberships Deleted
+• When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:* Group Memberships Deleted
 * User Removed From User Group
 
 The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
@@ -1633,7 +1629,7 @@ ReplacePermissionsForUserGroup Replace Permissions for User Group
 
 Updates the list of access permissions for a user group.
 
-When called, this endpoint may generate the `Policy Deleted` event in the [audit trail](/tag/Audit-Trail).
+• When called, this endpoint may generate the `Policy Deleted` event in the [audit trail](/tag/Audit-Trail).
 
 The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
@@ -1820,8 +1816,7 @@ ReplaceUsersInUserGroup Replace Users in User Group
 
 Replaces the members of a user group by email.
 
-When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:
-* Subjects Added to Group
+• When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:* Subjects Added to Group
 * User Added To User Group
 * Group Memberships Deleted
 
@@ -2010,7 +2005,7 @@ UpdateUserGroup Update User Group
 
 Updates a user group for a Workspace.
 
-When called, this endpoint may generate the `User Group Updated` event in the [audit trail](/tag/Audit-Trail).
+• When called, this endpoint may generate the `User Group Updated` event in the [audit trail](/tag/Audit-Trail).
 
 The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 

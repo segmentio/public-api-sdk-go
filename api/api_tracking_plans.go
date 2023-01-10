@@ -46,8 +46,9 @@ AddSourceToTrackingPlan Add Source to Tracking Plan
 
 Connects a Source to a Tracking Plan.
 
-When called, this endpoint may generate the `Source Modified` event in the [audit trail](/tag/Audit-Trail).
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• When called, this endpoint may generate the `Source Modified` event in the [audit trail](/tag/Audit-Trail).
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param trackingPlanId
@@ -231,7 +232,7 @@ CreateTrackingPlan Create Tracking Plan
 
 Creates a Tracking Plan.
 
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateTrackingPlanRequest
@@ -399,7 +400,7 @@ DeleteTrackingPlan Delete Tracking Plan
 
 Deletes a Tracking Plan.
 
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param trackingPlanId
@@ -565,7 +566,7 @@ GetTrackingPlan Get Tracking Plan
 
 Returns a Tracking Plan.
 
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param trackingPlanId
@@ -740,7 +741,7 @@ ListRulesFromTrackingPlan List Rules from Tracking Plan
 
 Lists Tracking Plan rules.
 
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 The rate limit for this endpoint is 20 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
@@ -921,7 +922,7 @@ ListSourcesFromTrackingPlan List Sources from Tracking Plan
 
 Lists Sources connected to a Tracking Plan.
 
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 This endpoint requires the user to have at least the following permission(s):
 
@@ -1112,7 +1113,7 @@ ListTrackingPlans List Tracking Plans
 
 Returns a list of Tracking Plans.
 
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListTrackingPlansRequest
@@ -1285,7 +1286,7 @@ RemoveRulesFromTrackingPlan Remove Rules from Tracking Plan
 
 Deletes Tracking Plan rules.
 
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param trackingPlanId
@@ -1464,8 +1465,9 @@ RemoveSourceFromTrackingPlan Remove Source from Tracking Plan
 
 Disconnects a Source from a Tracking Plan.
 
-When called, this endpoint may generate the `Source Modified` event in the [audit trail](/tag/Audit-Trail).
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• When called, this endpoint may generate the `Source Modified` event in the [audit trail](/tag/Audit-Trail).
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param trackingPlanId
@@ -1643,7 +1645,7 @@ ReplaceRulesInTrackingPlan Replace Rules in Tracking Plan
 
 Replaces Tracking Plan rules.
 
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param trackingPlanId
@@ -1828,7 +1830,7 @@ UpdateRulesInTrackingPlan Update Rules in Tracking Plan
 
 Updates Tracking Plan rules.
 
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param trackingPlanId
@@ -2013,7 +2015,7 @@ UpdateTrackingPlan Update Tracking Plan
 
 Updates a Tracking Plan.
 
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 Config API omitted fields:
 - `updateMask`

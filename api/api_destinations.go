@@ -45,7 +45,7 @@ CreateDestination Create Destination
 
 Creates a new Destination.
 
-When called, this endpoint may generate the `Integration Created` event in the [audit trail](/tag/Audit-Trail).
+• When called, this endpoint may generate the `Integration Created` event in the [audit trail](/tag/Audit-Trail).
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateDestinationRequest
@@ -221,6 +221,10 @@ CreateDestinationSubscription Create Destination Subscription
 
 Creates a new Destination subscription.
 
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Destination Subscriptions feature enabled. Please reach out to your customer success manager for more information.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param destinationId
 	@return ApiCreateDestinationSubscriptionRequest
@@ -390,7 +394,7 @@ DeleteDestination Delete Destination
 
 Deletes an existing Destination.
 
-When called, this endpoint may generate the `Integration Deleted` event in the [audit trail](/tag/Audit-Trail).
+• When called, this endpoint may generate the `Integration Deleted` event in the [audit trail](/tag/Audit-Trail).
 
 Config API omitted fields:
 - `catalogId`
@@ -727,6 +731,10 @@ func (r ApiGetSubscriptionFromDestinationRequest) Execute() (*GetSubscriptionFro
 GetSubscriptionFromDestination Get Subscription from Destination
 
 Gets a Destination subscription by id.
+
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Destination Subscriptions feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param destinationId
@@ -1312,6 +1320,10 @@ ListSubscriptionsFromDestination List Subscriptions from Destination
 
 Lists subscriptions for a Destination.
 
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Destination Subscriptions feature enabled. Please reach out to your customer success manager for more information.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param destinationId
 	@return ApiListSubscriptionsFromDestinationRequest
@@ -1478,6 +1490,10 @@ func (r ApiRemoveSubscriptionFromDestinationRequest) Execute() (*RemoveSubscript
 RemoveSubscriptionFromDestination Remove Subscription from Destination
 
 Deletes an existing Destination subscription.
+
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Destination Subscriptions feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param destinationId
@@ -1664,7 +1680,7 @@ Updates an existing Destination.
 
   - If there's a mix of writable and read-only properties in the payload, the request will be accepted, the writable properties will be updated and the read-only properties ignored.
 
-When called, this endpoint may generate the `Integration Disabled` event in the [audit trail](/tag/Audit-Trail).
+• When called, this endpoint may generate the `Integration Disabled` event in the [audit trail](/tag/Audit-Trail).
 
 Config API omitted fields:
 - `updateMask`
@@ -1852,6 +1868,10 @@ func (r ApiUpdateSubscriptionForDestinationRequest) Execute() (*UpdateSubscripti
 UpdateSubscriptionForDestination Update Subscription for Destination
 
 Updates an existing Destination subscription.
+
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Destination Subscriptions feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param destinationId

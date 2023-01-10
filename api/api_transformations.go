@@ -45,8 +45,9 @@ CreateTransformation Create Transformation
 
 Creates a new Transformation.
 
-When called, this endpoint may generate the `Transformation Created` event in the [audit trail](/tag/Audit-Trail).
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• When called, this endpoint may generate the `Transformation Created` event in the [audit trail](/tag/Audit-Trail).
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateTransformationRequest
@@ -214,8 +215,9 @@ DeleteTransformation Delete Transformation
 
 Deletes a Transformation.
 
-When called, this endpoint may generate the `Transformation Deleted` event in the [audit trail](/tag/Audit-Trail).
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• When called, this endpoint may generate the `Transformation Deleted` event in the [audit trail](/tag/Audit-Trail).
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param transformationId
@@ -381,7 +383,7 @@ GetTransformation Get Transformation
 
 Gets a Transformation.
 
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param transformationId
@@ -555,7 +557,7 @@ ListTransformations List Transformations
 
 Lists all Transformations in the Workspace.
 
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListTransformationsRequest
@@ -724,8 +726,9 @@ UpdateTransformation Update Transformation
 
 Updates an existing Transformation.
 
-When called, this endpoint may generate the `Transformation Updated` event in the [audit trail](/tag/Audit-Trail).
-**Note**: In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
+• When called, this endpoint may generate the `Transformation Updated` event in the [audit trail](/tag/Audit-Trail).
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Protocols feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param transformationId

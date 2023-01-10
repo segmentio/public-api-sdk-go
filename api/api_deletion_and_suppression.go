@@ -234,7 +234,7 @@ CreateSourceRegulation Create Source Regulation
 
 Creates a Source-scoped regulation.
 
-When called, this endpoint may generate the `Source Regulation Created` event in the [audit trail](/tag/Audit-Trail).
+• When called, this endpoint may generate the `Source Regulation Created` event in the [audit trail](/tag/Audit-Trail).
 
 Config API omitted fields:
 - `attributes`,
@@ -422,7 +422,7 @@ CreateWorkspaceRegulation Create Workspace Regulation
 
 Creates a Workspace-scoped regulation.
 
-When called, this endpoint may generate the `Workspace Regulation Created` event in the [audit trail](/tag/Audit-Trail).
+• When called, this endpoint may generate the `Workspace Regulation Created` event in the [audit trail](/tag/Audit-Trail).
 
 Config API omitted fields:
 - `attributes`,
@@ -594,7 +594,7 @@ DeleteRegulation Delete Regulation
 
 Deletes a regulation from the Workspace. The regulation must be in the initialized state to be deleted.
 
-When called, this endpoint may generate the `Regulation Deleted` event in the [audit trail](/tag/Audit-Trail).
+• When called, this endpoint may generate the `Regulation Deleted` event in the [audit trail](/tag/Audit-Trail).
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param regulateId
