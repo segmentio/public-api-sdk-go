@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 33.0.4
+API version: 34.0.0
 Contact: friends@segment.com
 */
 
@@ -17,7 +17,7 @@ import (
 
 // SourceEventVolumeV1 SourceEventVolume represents a time series of event volume for a Workspace broken down by the dimensions which the customer specifies (optional parameters).
 type SourceEventVolumeV1 struct {
-	Source Source `json:"source"`
+	Source *Source `json:"source,omitempty"`
 	// The name of the event, if applicable.
 	EventName *string `json:"eventName,omitempty"`
 	// The event type, if applicable.
@@ -33,12 +33,10 @@ type SourceEventVolumeV1 struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewSourceEventVolumeV1(
-	source Source,
 	total float32,
 	series []SourceEventVolumeDatapointV1,
 ) *SourceEventVolumeV1 {
 	this := SourceEventVolumeV1{}
-	this.Source = source
 	this.Total = total
 	this.Series = series
 	return &this
@@ -52,28 +50,36 @@ func NewSourceEventVolumeV1WithDefaults() *SourceEventVolumeV1 {
 	return &this
 }
 
-// GetSource returns the Source field value
+// GetSource returns the Source field value if set, zero value otherwise.
 func (o *SourceEventVolumeV1) GetSource() Source {
-	if o == nil {
+	if o == nil || o.Source == nil {
 		var ret Source
 		return ret
 	}
-
-	return o.Source
+	return *o.Source
 }
 
-// GetSourceOk returns a tuple with the Source field value
+// GetSourceOk returns a tuple with the Source field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceEventVolumeV1) GetSourceOk() (*Source, bool) {
-	if o == nil {
+	if o == nil || o.Source == nil {
 		return nil, false
 	}
-	return &o.Source, true
+	return o.Source, true
 }
 
-// SetSource sets field value
+// HasSource returns a boolean if a field has been set.
+func (o *SourceEventVolumeV1) HasSource() bool {
+	if o != nil && o.Source != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSource gets a reference to the given Source and assigns it to the Source field.
 func (o *SourceEventVolumeV1) SetSource(v Source) {
-	o.Source = v
+	o.Source = &v
 }
 
 // GetEventName returns the EventName field value if set, zero value otherwise.
@@ -190,7 +196,7 @@ func (o *SourceEventVolumeV1) SetSeries(v []SourceEventVolumeDatapointV1) {
 
 func (o SourceEventVolumeV1) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.Source != nil {
 		toSerialize["source"] = o.Source
 	}
 	if o.EventName != nil {
