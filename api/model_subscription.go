@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 34.0.1
+API version: 34.1.0
 Contact: friends@segment.com
 */
 
@@ -33,6 +33,8 @@ type Subscription struct {
 	Settings NullableModelMap `json:"settings"`
 	// FQL string that describes what events should trigger a Destination action.
 	Trigger string `json:"trigger"`
+	// The unique identifier for the linked ReverseETLModel, if this part of a Reverse ETL connection.
+	ModelId *string `json:"modelId,omitempty"`
 }
 
 // NewSubscription instantiates a new Subscription object
@@ -263,6 +265,38 @@ func (o *Subscription) SetTrigger(v string) {
 	o.Trigger = v
 }
 
+// GetModelId returns the ModelId field value if set, zero value otherwise.
+func (o *Subscription) GetModelId() string {
+	if o == nil || o.ModelId == nil {
+		var ret string
+		return ret
+	}
+	return *o.ModelId
+}
+
+// GetModelIdOk returns a tuple with the ModelId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Subscription) GetModelIdOk() (*string, bool) {
+	if o == nil || o.ModelId == nil {
+		return nil, false
+	}
+	return o.ModelId, true
+}
+
+// HasModelId returns a boolean if a field has been set.
+func (o *Subscription) HasModelId() bool {
+	if o != nil && o.ModelId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetModelId gets a reference to the given string and assigns it to the ModelId field.
+func (o *Subscription) SetModelId(v string) {
+	o.ModelId = &v
+}
+
 func (o Subscription) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -288,6 +322,9 @@ func (o Subscription) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["trigger"] = o.Trigger
+	}
+	if o.ModelId != nil {
+		toSerialize["modelId"] = o.ModelId
 	}
 	return json.Marshal(toSerialize)
 }

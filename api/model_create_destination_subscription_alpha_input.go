@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 34.0.1
+API version: 34.1.0
 Contact: friends@segment.com
 */
 
@@ -27,6 +27,8 @@ type CreateDestinationSubscriptionAlphaInput struct {
 	Enabled bool `json:"enabled"`
 	// The fields used for configuring this action.
 	Settings NullableModelMap `json:"settings,omitempty"`
+	// When creating a Reverse ETL connection, indicates the Model being used to extract data.
+	ModelId *string `json:"modelId,omitempty"`
 }
 
 // NewCreateDestinationSubscriptionAlphaInput instantiates a new CreateDestinationSubscriptionAlphaInput object
@@ -194,6 +196,38 @@ func (o *CreateDestinationSubscriptionAlphaInput) UnsetSettings() {
 	o.Settings.Unset()
 }
 
+// GetModelId returns the ModelId field value if set, zero value otherwise.
+func (o *CreateDestinationSubscriptionAlphaInput) GetModelId() string {
+	if o == nil || o.ModelId == nil {
+		var ret string
+		return ret
+	}
+	return *o.ModelId
+}
+
+// GetModelIdOk returns a tuple with the ModelId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateDestinationSubscriptionAlphaInput) GetModelIdOk() (*string, bool) {
+	if o == nil || o.ModelId == nil {
+		return nil, false
+	}
+	return o.ModelId, true
+}
+
+// HasModelId returns a boolean if a field has been set.
+func (o *CreateDestinationSubscriptionAlphaInput) HasModelId() bool {
+	if o != nil && o.ModelId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetModelId gets a reference to the given string and assigns it to the ModelId field.
+func (o *CreateDestinationSubscriptionAlphaInput) SetModelId(v string) {
+	o.ModelId = &v
+}
+
 func (o CreateDestinationSubscriptionAlphaInput) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -210,6 +244,9 @@ func (o CreateDestinationSubscriptionAlphaInput) MarshalJSON() ([]byte, error) {
 	}
 	if o.Settings.IsSet() {
 		toSerialize["settings"] = o.Settings.Get()
+	}
+	if o.ModelId != nil {
+		toSerialize["modelId"] = o.ModelId
 	}
 	return json.Marshal(toSerialize)
 }
