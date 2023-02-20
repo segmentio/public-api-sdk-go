@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 34.0.1
+API version: 34.1.0
 Contact: friends@segment.com
 */
 
@@ -941,34 +941,23 @@ func (r ApiListDeliveryMetricsSummaryFromDestinationRequest) Execute() (*ListDel
 /*
 ListDeliveryMetricsSummaryFromDestination List Delivery Metrics Summary from Destination
 
-Get event delivery metrics summary from a Destination.
+Get an event delivery metrics summary from a Destination.
 
-	Based on the granularity, there are restrictions on the time range you can query:
+Based on the granularity chosen, there are restrictions on the time range you can query:
 
+**Minute**:
+- Max time range: 4 hours
+- Oldest possible start time: 48 hours in the past
 
+**Hour**:
+- Max Time range: 1 week
+- Oldest possible start time: 10 days in the past
 
-	**Minute Granularity**:
+**Day**:
+- Max time range: 60 days
+- Oldest possible start time: 60 days in the past
 
-	- Max time range: 4 hours
-
-	- Oldest possible start time: 48 hours in the past
-
-
-
-	**Hour Granularity**:
-
-	- Max Time range: 1 week
-
-	- Oldest possible start time: 10 days in the past
-
-
-
-	**Day Granularity**:
-
-	- Max time range: 60 days
-
-	- Oldest possible start time: 60 days in the past
-
+The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param destinationId
