@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 34.1.0
+API version: 34.2.0
 Contact: friends@segment.com
 */
 
@@ -35,6 +35,8 @@ type Transformation5 struct {
 	PropertyRenames []PropertyRenameV1 `json:"propertyRenames,omitempty"`
 	// Optional array for transforming properties and values collected by your events. Limited to 10 properties.
 	PropertyValueTransformations []PropertyValueTransformationV1 `json:"propertyValueTransformations,omitempty"`
+	// Optional array for defining new properties in FQL. Limited to 1 property right now.
+	FqlDefinedProperties []FQLDefinedPropertyV1 `json:"fqlDefinedProperties,omitempty"`
 }
 
 // NewTransformation5 instantiates a new Transformation5 object
@@ -313,6 +315,38 @@ func (o *Transformation5) SetPropertyValueTransformations(v []PropertyValueTrans
 	o.PropertyValueTransformations = v
 }
 
+// GetFqlDefinedProperties returns the FqlDefinedProperties field value if set, zero value otherwise.
+func (o *Transformation5) GetFqlDefinedProperties() []FQLDefinedPropertyV1 {
+	if o == nil || o.FqlDefinedProperties == nil {
+		var ret []FQLDefinedPropertyV1
+		return ret
+	}
+	return o.FqlDefinedProperties
+}
+
+// GetFqlDefinedPropertiesOk returns a tuple with the FqlDefinedProperties field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transformation5) GetFqlDefinedPropertiesOk() ([]FQLDefinedPropertyV1, bool) {
+	if o == nil || o.FqlDefinedProperties == nil {
+		return nil, false
+	}
+	return o.FqlDefinedProperties, true
+}
+
+// HasFqlDefinedProperties returns a boolean if a field has been set.
+func (o *Transformation5) HasFqlDefinedProperties() bool {
+	if o != nil && o.FqlDefinedProperties != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFqlDefinedProperties gets a reference to the given []FQLDefinedPropertyV1 and assigns it to the FqlDefinedProperties field.
+func (o *Transformation5) SetFqlDefinedProperties(v []FQLDefinedPropertyV1) {
+	o.FqlDefinedProperties = v
+}
+
 func (o Transformation5) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -341,6 +375,9 @@ func (o Transformation5) MarshalJSON() ([]byte, error) {
 	}
 	if o.PropertyValueTransformations != nil {
 		toSerialize["propertyValueTransformations"] = o.PropertyValueTransformations
+	}
+	if o.FqlDefinedProperties != nil {
+		toSerialize["fqlDefinedProperties"] = o.FqlDefinedProperties
 	}
 	return json.Marshal(toSerialize)
 }
