@@ -33,7 +33,7 @@ type CreateTransformationV1Input struct {
 	PropertyRenames []PropertyRenameV1 `json:"propertyRenames,omitempty"`
 	// Optional array for transforming properties and values collected by your events. Limited to 10 properties.
 	PropertyValueTransformations []PropertyValueTransformationV1 `json:"propertyValueTransformations,omitempty"`
-	// Optional array for defining new properties in FQL. Currently limited to 1 property.
+	// Optional array for defining new properties in [FQL](https://segment.com/docs/config-api/fql/). Currently limited to 1 property.
 	FqlDefinedProperties []FQLDefinedPropertyV1 `json:"fqlDefinedProperties,omitempty"`
 }
 
