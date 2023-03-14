@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 34.2.0
+API version: 34.3.0
 Contact: friends@segment.com
 */
 
@@ -23,7 +23,7 @@ type SourceAlpha struct {
 	Slug string `json:"slug"`
 	// The name of the Source.  Config API note: equal to `displayName`.
 	Name     *string   `json:"name,omitempty"`
-	Metadata Metadata1 `json:"metadata"`
+	Metadata Metadata2 `json:"metadata"`
 	// The id of the Workspace that owns the Source.  Config API note: equal to `parent`.
 	WorkspaceId string `json:"workspaceId"`
 	// Enable to receive data from the Source.
@@ -43,7 +43,7 @@ type SourceAlpha struct {
 func NewSourceAlpha(
 	id string,
 	slug string,
-	metadata Metadata1,
+	metadata Metadata2,
 	workspaceId string,
 	enabled bool,
 	writeKeys []string,
@@ -149,9 +149,9 @@ func (o *SourceAlpha) SetName(v string) {
 }
 
 // GetMetadata returns the Metadata field value
-func (o *SourceAlpha) GetMetadata() Metadata1 {
+func (o *SourceAlpha) GetMetadata() Metadata2 {
 	if o == nil {
-		var ret Metadata1
+		var ret Metadata2
 		return ret
 	}
 
@@ -160,7 +160,7 @@ func (o *SourceAlpha) GetMetadata() Metadata1 {
 
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
-func (o *SourceAlpha) GetMetadataOk() (*Metadata1, bool) {
+func (o *SourceAlpha) GetMetadataOk() (*Metadata2, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -168,7 +168,7 @@ func (o *SourceAlpha) GetMetadataOk() (*Metadata1, bool) {
 }
 
 // SetMetadata sets field value
-func (o *SourceAlpha) SetMetadata(v Metadata1) {
+func (o *SourceAlpha) SetMetadata(v Metadata2) {
 	o.Metadata = v
 }
 

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 34.2.0
+API version: 34.3.0
 Contact: friends@segment.com
 */
 
@@ -15,23 +15,19 @@ import (
 	"encoding/json"
 )
 
-// Metadata1 The metadata for the Source.  Config API note: includes `catalogName` and `catalogId`.
+// Metadata1 The metadata for the Warehouse.
 type Metadata1 struct {
-	// The id for this Source metadata in the Segment catalog.  Config API note: analogous to `name`.
+	// The id of this object.
 	Id string `json:"id"`
-	// The user-friendly name of this Source.  Config API note: equal to `displayName`.
+	// The name of this object.
 	Name string `json:"name"`
-	// The slug that identifies this Source in the Segment app.  Config API note: equal to `name`.
+	// A human-readable, unique identifier for object.
 	Slug string `json:"slug"`
-	// The description of this Source.
+	// A description, in English, of this object.
 	Description string `json:"description"`
-	Logos       Logos1 `json:"logos"`
-	// Options for this Source.
+	Logos       Logos2 `json:"logos"`
+	// The Integration options for this object.
 	Options []IntegrationOptionBeta `json:"options"`
-	// A list of categories this Source belongs to.
-	Categories []string `json:"categories"`
-	// True if this is a Cloud Event Source.
-	IsCloudEventSource bool `json:"isCloudEventSource"`
 }
 
 // NewMetadata1 instantiates a new Metadata1 object
@@ -43,10 +39,8 @@ func NewMetadata1(
 	name string,
 	slug string,
 	description string,
-	logos Logos1,
+	logos Logos2,
 	options []IntegrationOptionBeta,
-	categories []string,
-	isCloudEventSource bool,
 ) *Metadata1 {
 	this := Metadata1{}
 	this.Id = id
@@ -55,8 +49,6 @@ func NewMetadata1(
 	this.Description = description
 	this.Logos = logos
 	this.Options = options
-	this.Categories = categories
-	this.IsCloudEventSource = isCloudEventSource
 	return &this
 }
 
@@ -165,9 +157,9 @@ func (o *Metadata1) SetDescription(v string) {
 }
 
 // GetLogos returns the Logos field value
-func (o *Metadata1) GetLogos() Logos1 {
+func (o *Metadata1) GetLogos() Logos2 {
 	if o == nil {
-		var ret Logos1
+		var ret Logos2
 		return ret
 	}
 
@@ -176,7 +168,7 @@ func (o *Metadata1) GetLogos() Logos1 {
 
 // GetLogosOk returns a tuple with the Logos field value
 // and a boolean to check if the value has been set.
-func (o *Metadata1) GetLogosOk() (*Logos1, bool) {
+func (o *Metadata1) GetLogosOk() (*Logos2, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -184,7 +176,7 @@ func (o *Metadata1) GetLogosOk() (*Logos1, bool) {
 }
 
 // SetLogos sets field value
-func (o *Metadata1) SetLogos(v Logos1) {
+func (o *Metadata1) SetLogos(v Logos2) {
 	o.Logos = v
 }
 
@@ -212,54 +204,6 @@ func (o *Metadata1) SetOptions(v []IntegrationOptionBeta) {
 	o.Options = v
 }
 
-// GetCategories returns the Categories field value
-func (o *Metadata1) GetCategories() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.Categories
-}
-
-// GetCategoriesOk returns a tuple with the Categories field value
-// and a boolean to check if the value has been set.
-func (o *Metadata1) GetCategoriesOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Categories, true
-}
-
-// SetCategories sets field value
-func (o *Metadata1) SetCategories(v []string) {
-	o.Categories = v
-}
-
-// GetIsCloudEventSource returns the IsCloudEventSource field value
-func (o *Metadata1) GetIsCloudEventSource() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.IsCloudEventSource
-}
-
-// GetIsCloudEventSourceOk returns a tuple with the IsCloudEventSource field value
-// and a boolean to check if the value has been set.
-func (o *Metadata1) GetIsCloudEventSourceOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.IsCloudEventSource, true
-}
-
-// SetIsCloudEventSource sets field value
-func (o *Metadata1) SetIsCloudEventSource(v bool) {
-	o.IsCloudEventSource = v
-}
-
 func (o Metadata1) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -279,12 +223,6 @@ func (o Metadata1) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["options"] = o.Options
-	}
-	if true {
-		toSerialize["categories"] = o.Categories
-	}
-	if true {
-		toSerialize["isCloudEventSource"] = o.IsCloudEventSource
 	}
 	return json.Marshal(toSerialize)
 }

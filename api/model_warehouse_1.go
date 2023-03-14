@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 34.2.0
+API version: 34.3.0
 Contact: friends@segment.com
 */
 
@@ -19,7 +19,7 @@ import (
 type Warehouse1 struct {
 	// The id of the Warehouse.
 	Id       string    `json:"id"`
-	Metadata Metadata2 `json:"metadata"`
+	Metadata Metadata1 `json:"metadata"`
 	// The id of the Workspace that owns this Warehouse.
 	WorkspaceId string `json:"workspaceId"`
 	// When set to true, this Warehouse receives data.
@@ -34,7 +34,7 @@ type Warehouse1 struct {
 // will change when the set of required properties is changed
 func NewWarehouse1(
 	id string,
-	metadata Metadata2,
+	metadata Metadata1,
 	workspaceId string,
 	enabled bool,
 	settings NullableModelMap,
@@ -81,9 +81,9 @@ func (o *Warehouse1) SetId(v string) {
 }
 
 // GetMetadata returns the Metadata field value
-func (o *Warehouse1) GetMetadata() Metadata2 {
+func (o *Warehouse1) GetMetadata() Metadata1 {
 	if o == nil {
-		var ret Metadata2
+		var ret Metadata1
 		return ret
 	}
 
@@ -92,7 +92,7 @@ func (o *Warehouse1) GetMetadata() Metadata2 {
 
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
-func (o *Warehouse1) GetMetadataOk() (*Metadata2, bool) {
+func (o *Warehouse1) GetMetadataOk() (*Metadata1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -100,7 +100,7 @@ func (o *Warehouse1) GetMetadataOk() (*Metadata2, bool) {
 }
 
 // SetMetadata sets field value
-func (o *Warehouse1) SetMetadata(v Metadata2) {
+func (o *Warehouse1) SetMetadata(v Metadata1) {
 	o.Metadata = v
 }
 
