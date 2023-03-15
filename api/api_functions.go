@@ -1057,7 +1057,7 @@ func (r ApiRestoreFunctionVersionRequest) Execute() (*RestoreFunctionVersion200R
 /*
 RestoreFunctionVersion Restore Function Version
 
-Restore a given Function version and make the latest version.
+Restore an old Function version as a latest version.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Functions feature enabled. Please reach out to your customer success manager for more information.
 
