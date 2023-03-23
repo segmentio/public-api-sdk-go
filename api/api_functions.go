@@ -890,7 +890,7 @@ func (r ApiListFunctionVersionsRequest) Execute() (*ListFunctionVersions200Respo
 /*
 ListFunctionVersions List Function Versions
 
-Lists versions for a Functions in a Workspace.
+Lists versions for a Function in a Workspace.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Functions feature enabled. Please reach out to your customer success manager for more information.
 
