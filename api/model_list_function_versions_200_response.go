@@ -17,7 +17,7 @@ import (
 
 // ListFunctionVersions200Response struct for ListFunctionVersions200Response
 type ListFunctionVersions200Response struct {
-	Data *ListVersionsAlphaOutput `json:"data,omitempty"`
+	Data *ListFunctionVersionsAlphaOutput `json:"data,omitempty"`
 }
 
 // NewListFunctionVersions200Response instantiates a new ListFunctionVersions200Response object
@@ -38,9 +38,9 @@ func NewListFunctionVersions200ResponseWithDefaults() *ListFunctionVersions200Re
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *ListFunctionVersions200Response) GetData() ListVersionsAlphaOutput {
+func (o *ListFunctionVersions200Response) GetData() ListFunctionVersionsAlphaOutput {
 	if o == nil || o.Data == nil {
-		var ret ListVersionsAlphaOutput
+		var ret ListFunctionVersionsAlphaOutput
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *ListFunctionVersions200Response) GetData() ListVersionsAlphaOutput {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListFunctionVersions200Response) GetDataOk() (*ListVersionsAlphaOutput, bool) {
+func (o *ListFunctionVersions200Response) GetDataOk() (*ListFunctionVersionsAlphaOutput, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *ListFunctionVersions200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given ListVersionsAlphaOutput and assigns it to the Data field.
-func (o *ListFunctionVersions200Response) SetData(v ListVersionsAlphaOutput) {
+// SetData gets a reference to the given ListFunctionVersionsAlphaOutput and assigns it to the Data field.
+func (o *ListFunctionVersions200Response) SetData(v ListFunctionVersionsAlphaOutput) {
 	o.Data = &v
 }
 

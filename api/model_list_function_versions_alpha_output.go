@@ -15,37 +15,37 @@ import (
 	"encoding/json"
 )
 
-// ListVersionsAlphaOutput Lists Versions of a Function.
-type ListVersionsAlphaOutput struct {
+// ListFunctionVersionsAlphaOutput Lists Versions of a Function.
+type ListFunctionVersionsAlphaOutput struct {
 	// An array of Functions.
 	Versions   []Version  `json:"versions"`
 	Pagination Pagination `json:"pagination"`
 }
 
-// NewListVersionsAlphaOutput instantiates a new ListVersionsAlphaOutput object
+// NewListFunctionVersionsAlphaOutput instantiates a new ListFunctionVersionsAlphaOutput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListVersionsAlphaOutput(
+func NewListFunctionVersionsAlphaOutput(
 	versions []Version,
 	pagination Pagination,
-) *ListVersionsAlphaOutput {
-	this := ListVersionsAlphaOutput{}
+) *ListFunctionVersionsAlphaOutput {
+	this := ListFunctionVersionsAlphaOutput{}
 	this.Versions = versions
 	this.Pagination = pagination
 	return &this
 }
 
-// NewListVersionsAlphaOutputWithDefaults instantiates a new ListVersionsAlphaOutput object
+// NewListFunctionVersionsAlphaOutputWithDefaults instantiates a new ListFunctionVersionsAlphaOutput object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewListVersionsAlphaOutputWithDefaults() *ListVersionsAlphaOutput {
-	this := ListVersionsAlphaOutput{}
+func NewListFunctionVersionsAlphaOutputWithDefaults() *ListFunctionVersionsAlphaOutput {
+	this := ListFunctionVersionsAlphaOutput{}
 	return &this
 }
 
 // GetVersions returns the Versions field value
-func (o *ListVersionsAlphaOutput) GetVersions() []Version {
+func (o *ListFunctionVersionsAlphaOutput) GetVersions() []Version {
 	if o == nil {
 		var ret []Version
 		return ret
@@ -56,7 +56,7 @@ func (o *ListVersionsAlphaOutput) GetVersions() []Version {
 
 // GetVersionsOk returns a tuple with the Versions field value
 // and a boolean to check if the value has been set.
-func (o *ListVersionsAlphaOutput) GetVersionsOk() ([]Version, bool) {
+func (o *ListFunctionVersionsAlphaOutput) GetVersionsOk() ([]Version, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,12 +64,12 @@ func (o *ListVersionsAlphaOutput) GetVersionsOk() ([]Version, bool) {
 }
 
 // SetVersions sets field value
-func (o *ListVersionsAlphaOutput) SetVersions(v []Version) {
+func (o *ListFunctionVersionsAlphaOutput) SetVersions(v []Version) {
 	o.Versions = v
 }
 
 // GetPagination returns the Pagination field value
-func (o *ListVersionsAlphaOutput) GetPagination() Pagination {
+func (o *ListFunctionVersionsAlphaOutput) GetPagination() Pagination {
 	if o == nil {
 		var ret Pagination
 		return ret
@@ -80,7 +80,7 @@ func (o *ListVersionsAlphaOutput) GetPagination() Pagination {
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *ListVersionsAlphaOutput) GetPaginationOk() (*Pagination, bool) {
+func (o *ListFunctionVersionsAlphaOutput) GetPaginationOk() (*Pagination, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,11 +88,11 @@ func (o *ListVersionsAlphaOutput) GetPaginationOk() (*Pagination, bool) {
 }
 
 // SetPagination sets field value
-func (o *ListVersionsAlphaOutput) SetPagination(v Pagination) {
+func (o *ListFunctionVersionsAlphaOutput) SetPagination(v Pagination) {
 	o.Pagination = v
 }
 
-func (o ListVersionsAlphaOutput) MarshalJSON() ([]byte, error) {
+func (o ListFunctionVersionsAlphaOutput) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["versions"] = o.Versions
@@ -103,40 +103,40 @@ func (o ListVersionsAlphaOutput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableListVersionsAlphaOutput struct {
-	value *ListVersionsAlphaOutput
+type NullableListFunctionVersionsAlphaOutput struct {
+	value *ListFunctionVersionsAlphaOutput
 	isSet bool
 }
 
-func (v NullableListVersionsAlphaOutput) Get() *ListVersionsAlphaOutput {
+func (v NullableListFunctionVersionsAlphaOutput) Get() *ListFunctionVersionsAlphaOutput {
 	return v.value
 }
 
-func (v *NullableListVersionsAlphaOutput) Set(val *ListVersionsAlphaOutput) {
+func (v *NullableListFunctionVersionsAlphaOutput) Set(val *ListFunctionVersionsAlphaOutput) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableListVersionsAlphaOutput) IsSet() bool {
+func (v NullableListFunctionVersionsAlphaOutput) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableListVersionsAlphaOutput) Unset() {
+func (v *NullableListFunctionVersionsAlphaOutput) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableListVersionsAlphaOutput(
-	val *ListVersionsAlphaOutput,
-) *NullableListVersionsAlphaOutput {
-	return &NullableListVersionsAlphaOutput{value: val, isSet: true}
+func NewNullableListFunctionVersionsAlphaOutput(
+	val *ListFunctionVersionsAlphaOutput,
+) *NullableListFunctionVersionsAlphaOutput {
+	return &NullableListFunctionVersionsAlphaOutput{value: val, isSet: true}
 }
 
-func (v NullableListVersionsAlphaOutput) MarshalJSON() ([]byte, error) {
+func (v NullableListFunctionVersionsAlphaOutput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableListVersionsAlphaOutput) UnmarshalJSON(src []byte) error {
+func (v *NullableListFunctionVersionsAlphaOutput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
