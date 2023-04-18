@@ -17,17 +17,17 @@ import (
 
 // FunctionSettingV1 struct for FunctionSettingV1
 type FunctionSettingV1 struct {
-	// The name of this Function.
+	// The name of this Function Setting.
 	Name string `json:"name"`
-	// The label for this Function.
+	// The label for this Function Setting.
 	Label string `json:"label"`
-	// A description of this Function.
+	// A description of this Function Setting.
 	Description string `json:"description"`
-	// The Function type.
+	// The type of this Function Setting.
 	Type string `json:"type"`
-	// Whether this Function is required.
+	// Whether this Function Setting is required.
 	Required bool `json:"required"`
-	// Whether this Function contains sensitive information.
+	// Whether this Function Setting contains sensitive information.
 	Sensitive bool `json:"sensitive"`
 }
 
