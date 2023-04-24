@@ -78,8 +78,6 @@ type APIClient struct {
 
 	MonthlyTrackedUsersApi *MonthlyTrackedUsersApiService
 
-	ProfilesSelectiveSyncApi *ProfilesSelectiveSyncApiService
-
 	ProfilesSyncApi *ProfilesSyncApiService
 
 	ReverseETLApi *ReverseETLApiService
@@ -131,7 +129,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.IAMUsersApi = (*IAMUsersApiService)(&c.common)
 	c.LabelsApi = (*LabelsApiService)(&c.common)
 	c.MonthlyTrackedUsersApi = (*MonthlyTrackedUsersApiService)(&c.common)
-	c.ProfilesSelectiveSyncApi = (*ProfilesSelectiveSyncApiService)(&c.common)
 	c.ProfilesSyncApi = (*ProfilesSyncApiService)(&c.common)
 	c.ReverseETLApi = (*ReverseETLApiService)(&c.common)
 	c.SelectiveSyncApi = (*SelectiveSyncApiService)(&c.common)
