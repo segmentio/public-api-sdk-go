@@ -401,7 +401,7 @@ func (r ApiListSelectiveSyncsFromWarehouseAndSpaceRequest) Execute() (*ListSelec
 /*
 ListSelectiveSyncsFromWarehouseAndSpace List Selective Syncs from Warehouse And Space
 
-Returns the schema for a Space Warehouse connection, including Sources, Collections, and Properties..
+Returns the schema for a Space Warehouse connection, including Sources, Collections, and Properties.
 
 • When called, this endpoint may generate the `Profiles Sync Warehouse Schema Retrieved` event in the [audit trail](/tag/Audit-Trail).
 

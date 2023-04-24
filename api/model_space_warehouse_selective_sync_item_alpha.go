@@ -23,6 +23,10 @@ type SpaceWarehouseSelectiveSyncItemAlpha struct {
 	Collection string `json:"collection"`
 	// The id of the Warehouse this sync belongs to.
 	WarehouseId string `json:"warehouseId"`
+	// The Source of the collection in this Space Warehouse.
+	Source *string `json:"source,omitempty"`
+	// The Enabled flag ok telling whether the Collection is enabled or not.
+	Enabled bool `json:"enabled"`
 	// A map that contains the properties within the collection to which the Warehouse should sync.
 	Properties map[string]interface{} `json:"properties"`
 }
@@ -35,12 +39,14 @@ func NewSpaceWarehouseSelectiveSyncItemAlpha(
 	spaceId string,
 	collection string,
 	warehouseId string,
+	enabled bool,
 	properties map[string]interface{},
 ) *SpaceWarehouseSelectiveSyncItemAlpha {
 	this := SpaceWarehouseSelectiveSyncItemAlpha{}
 	this.SpaceId = spaceId
 	this.Collection = collection
 	this.WarehouseId = warehouseId
+	this.Enabled = enabled
 	this.Properties = properties
 	return &this
 }
@@ -125,6 +131,62 @@ func (o *SpaceWarehouseSelectiveSyncItemAlpha) SetWarehouseId(v string) {
 	o.WarehouseId = v
 }
 
+// GetSource returns the Source field value if set, zero value otherwise.
+func (o *SpaceWarehouseSelectiveSyncItemAlpha) GetSource() string {
+	if o == nil || o.Source == nil {
+		var ret string
+		return ret
+	}
+	return *o.Source
+}
+
+// GetSourceOk returns a tuple with the Source field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SpaceWarehouseSelectiveSyncItemAlpha) GetSourceOk() (*string, bool) {
+	if o == nil || o.Source == nil {
+		return nil, false
+	}
+	return o.Source, true
+}
+
+// HasSource returns a boolean if a field has been set.
+func (o *SpaceWarehouseSelectiveSyncItemAlpha) HasSource() bool {
+	if o != nil && o.Source != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSource gets a reference to the given string and assigns it to the Source field.
+func (o *SpaceWarehouseSelectiveSyncItemAlpha) SetSource(v string) {
+	o.Source = &v
+}
+
+// GetEnabled returns the Enabled field value
+func (o *SpaceWarehouseSelectiveSyncItemAlpha) GetEnabled() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Enabled
+}
+
+// GetEnabledOk returns a tuple with the Enabled field value
+// and a boolean to check if the value has been set.
+func (o *SpaceWarehouseSelectiveSyncItemAlpha) GetEnabledOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Enabled, true
+}
+
+// SetEnabled sets field value
+func (o *SpaceWarehouseSelectiveSyncItemAlpha) SetEnabled(v bool) {
+	o.Enabled = v
+}
+
 // GetProperties returns the Properties field value
 func (o *SpaceWarehouseSelectiveSyncItemAlpha) GetProperties() map[string]interface{} {
 	if o == nil {
@@ -159,6 +221,12 @@ func (o SpaceWarehouseSelectiveSyncItemAlpha) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["warehouseId"] = o.WarehouseId
+	}
+	if o.Source != nil {
+		toSerialize["source"] = o.Source
+	}
+	if true {
+		toSerialize["enabled"] = o.Enabled
 	}
 	if true {
 		toSerialize["properties"] = o.Properties
