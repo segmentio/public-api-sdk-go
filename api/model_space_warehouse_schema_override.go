@@ -17,12 +17,8 @@ import (
 
 // SpaceWarehouseSchemaOverride Represents the override for a Source/collection/property? path to apply to a Space Warehouse.
 type SpaceWarehouseSchemaOverride struct {
-	// The id of the space this schema item should apply to.
-	SpaceId string `json:"spaceId"`
 	// The collection within the Source.
 	Collection string `json:"collection"`
-	// The Source of the collection in this Space Warehouse.
-	Source string `json:"source"`
 	// The Enabled flag ok telling whether the Collection is enabled or not.
 	Enabled bool `json:"enabled"`
 	// A map that contains the properties within the collection to which the Warehouse should sync.
@@ -34,16 +30,12 @@ type SpaceWarehouseSchemaOverride struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewSpaceWarehouseSchemaOverride(
-	spaceId string,
 	collection string,
-	source string,
 	enabled bool,
 	property string,
 ) *SpaceWarehouseSchemaOverride {
 	this := SpaceWarehouseSchemaOverride{}
-	this.SpaceId = spaceId
 	this.Collection = collection
-	this.Source = source
 	this.Enabled = enabled
 	this.Property = property
 	return &this
@@ -55,30 +47,6 @@ func NewSpaceWarehouseSchemaOverride(
 func NewSpaceWarehouseSchemaOverrideWithDefaults() *SpaceWarehouseSchemaOverride {
 	this := SpaceWarehouseSchemaOverride{}
 	return &this
-}
-
-// GetSpaceId returns the SpaceId field value
-func (o *SpaceWarehouseSchemaOverride) GetSpaceId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.SpaceId
-}
-
-// GetSpaceIdOk returns a tuple with the SpaceId field value
-// and a boolean to check if the value has been set.
-func (o *SpaceWarehouseSchemaOverride) GetSpaceIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.SpaceId, true
-}
-
-// SetSpaceId sets field value
-func (o *SpaceWarehouseSchemaOverride) SetSpaceId(v string) {
-	o.SpaceId = v
 }
 
 // GetCollection returns the Collection field value
@@ -103,30 +71,6 @@ func (o *SpaceWarehouseSchemaOverride) GetCollectionOk() (*string, bool) {
 // SetCollection sets field value
 func (o *SpaceWarehouseSchemaOverride) SetCollection(v string) {
 	o.Collection = v
-}
-
-// GetSource returns the Source field value
-func (o *SpaceWarehouseSchemaOverride) GetSource() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Source
-}
-
-// GetSourceOk returns a tuple with the Source field value
-// and a boolean to check if the value has been set.
-func (o *SpaceWarehouseSchemaOverride) GetSourceOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Source, true
-}
-
-// SetSource sets field value
-func (o *SpaceWarehouseSchemaOverride) SetSource(v string) {
-	o.Source = v
 }
 
 // GetEnabled returns the Enabled field value
@@ -180,13 +124,7 @@ func (o *SpaceWarehouseSchemaOverride) SetProperty(v string) {
 func (o SpaceWarehouseSchemaOverride) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["spaceId"] = o.SpaceId
-	}
-	if true {
 		toSerialize["collection"] = o.Collection
-	}
-	if true {
-		toSerialize["source"] = o.Source
 	}
 	if true {
 		toSerialize["enabled"] = o.Enabled

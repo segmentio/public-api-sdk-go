@@ -401,9 +401,7 @@ func (r ApiListSelectiveSyncsFromWarehouseAndSpaceRequest) Execute() (*ListSelec
 /*
 ListSelectiveSyncsFromWarehouseAndSpace List Selective Syncs from Warehouse And Space
 
-Returns the schema for a Space Warehouse connection, including Sources, Collections, and Properties.
-
-• When called, this endpoint may generate the `Profiles Sync Warehouse Schema Retrieved` event in the [audit trail](/tag/Audit-Trail).
+Returns the schema for a Space Warehouse connection, including Collections and Properties.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param spaceId
@@ -950,9 +948,9 @@ func (r ApiUpdateSelectiveSyncForWarehouseAndSpaceRequest) Execute() (*UpdateSel
 /*
 UpdateSelectiveSyncForWarehouseAndSpace Update Selective Sync for Warehouse And Space
 
-Updates an existing Profiles Warehouse.
+Updates the schema for a Space Warehouse connection, including Collections and Properties.
 
-• When called, this endpoint may generate the `Profiles Sync Schema Updated` event in the [audit trail](/tag/Audit-Trail).
+• When called, this endpoint may generate the `Profiles Sync Warehouse Modified` event in the [audit trail](/tag/Audit-Trail).
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param spaceId
