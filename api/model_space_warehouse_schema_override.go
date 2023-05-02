@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// SpaceWarehouseSchemaOverride Represents the override for a Source/collection/property? path to apply to a Space Warehouse.
+// SpaceWarehouseSchemaOverride Represents the override for a collection/property? path to apply to a Space Warehouse.
 type SpaceWarehouseSchemaOverride struct {
 	// The collection within the Source.
 	Collection string `json:"collection"`

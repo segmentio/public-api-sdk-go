@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput Results from a selectiveSync patch to a Warehouse/Space pair.
+// UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput Results from a selectiveSync patch to a Space Warehouse connection.
 type UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput struct {
 	// Status of the update operation.
 	Status string `json:"status"`
