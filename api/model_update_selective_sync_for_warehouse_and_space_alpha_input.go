@@ -17,7 +17,7 @@ import (
 
 // UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput Updates the schema for a Space Warehouse connection.
 type UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput struct {
-	// A list of sync schema overrides to apply to this Space Warehouse. Note: Selective enabling of Event tables under disabled all event tables conditions is not currently supported. EnableEventTables flag need to be set to true before any selective operation on the event tables.
+	// A list of sync Schema overrides to apply to this Space Warehouse. Note: Selective Sync is not supported if the enableEventTables flag is false.
 	SyncOverrides []SpaceWarehouseSchemaOverride `json:"syncOverrides,omitempty"`
 	// A flag to enable or disable all event Tables.
 	EnableEventTables *bool `json:"enableEventTables,omitempty"`

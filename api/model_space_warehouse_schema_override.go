@@ -22,7 +22,7 @@ type SpaceWarehouseSchemaOverride struct {
 	// The Enabled flag ok telling whether the Collection is enabled or not.
 	Enabled bool `json:"enabled"`
 	// A map that contains the properties within the collection to which the Warehouse should sync.
-	Property string `json:"property"`
+	Property *string `json:"property,omitempty"`
 }
 
 // NewSpaceWarehouseSchemaOverride instantiates a new SpaceWarehouseSchemaOverride object
@@ -32,12 +32,10 @@ type SpaceWarehouseSchemaOverride struct {
 func NewSpaceWarehouseSchemaOverride(
 	collection string,
 	enabled bool,
-	property string,
 ) *SpaceWarehouseSchemaOverride {
 	this := SpaceWarehouseSchemaOverride{}
 	this.Collection = collection
 	this.Enabled = enabled
-	this.Property = property
 	return &this
 }
 
@@ -97,28 +95,36 @@ func (o *SpaceWarehouseSchemaOverride) SetEnabled(v bool) {
 	o.Enabled = v
 }
 
-// GetProperty returns the Property field value
+// GetProperty returns the Property field value if set, zero value otherwise.
 func (o *SpaceWarehouseSchemaOverride) GetProperty() string {
-	if o == nil {
+	if o == nil || o.Property == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Property
+	return *o.Property
 }
 
-// GetPropertyOk returns a tuple with the Property field value
+// GetPropertyOk returns a tuple with the Property field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SpaceWarehouseSchemaOverride) GetPropertyOk() (*string, bool) {
-	if o == nil {
+	if o == nil || o.Property == nil {
 		return nil, false
 	}
-	return &o.Property, true
+	return o.Property, true
 }
 
-// SetProperty sets field value
+// HasProperty returns a boolean if a field has been set.
+func (o *SpaceWarehouseSchemaOverride) HasProperty() bool {
+	if o != nil && o.Property != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetProperty gets a reference to the given string and assigns it to the Property field.
 func (o *SpaceWarehouseSchemaOverride) SetProperty(v string) {
-	o.Property = v
+	o.Property = &v
 }
 
 func (o SpaceWarehouseSchemaOverride) MarshalJSON() ([]byte, error) {
@@ -129,7 +135,7 @@ func (o SpaceWarehouseSchemaOverride) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if true {
+	if o.Property != nil {
 		toSerialize["property"] = o.Property
 	}
 	return json.Marshal(toSerialize)
