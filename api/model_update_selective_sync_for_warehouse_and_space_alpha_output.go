@@ -15,12 +15,10 @@ import (
 	"encoding/json"
 )
 
-// UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput Results from a selectiveSync patch to a Warehouse/Space pair.
+// UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput Results from a selectiveSync patch to a Space Warehouse connection.
 type UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput struct {
 	// Status of the update operation.
 	Status string `json:"status"`
-	// Warnings returned by the operation.
-	Warnings []string `json:"warnings"`
 }
 
 // NewUpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput instantiates a new UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput object
@@ -29,11 +27,9 @@ type UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput struct {
 // will change when the set of required properties is changed
 func NewUpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput(
 	status string,
-	warnings []string,
 ) *UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput {
 	this := UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput{}
 	this.Status = status
-	this.Warnings = warnings
 	return &this
 }
 
@@ -69,37 +65,10 @@ func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput) SetStatus(v string)
 	o.Status = v
 }
 
-// GetWarnings returns the Warnings field value
-func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput) GetWarnings() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.Warnings
-}
-
-// GetWarningsOk returns a tuple with the Warnings field value
-// and a boolean to check if the value has been set.
-func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput) GetWarningsOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Warnings, true
-}
-
-// SetWarnings sets field value
-func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput) SetWarnings(v []string) {
-	o.Warnings = v
-}
-
 func (o UpdateSelectiveSyncForWarehouseAndSpaceAlphaOutput) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["status"] = o.Status
-	}
-	if true {
-		toSerialize["warnings"] = o.Warnings
 	}
 	return json.Marshal(toSerialize)
 }

@@ -401,7 +401,7 @@ func (r ApiListSelectiveSyncsFromWarehouseAndSpaceRequest) Execute() (*ListSelec
 /*
 ListSelectiveSyncsFromWarehouseAndSpace List Selective Syncs from Warehouse And Space
 
-Returns the schema for a Space Warehouse connection, including Sources, Collections, and Properties.
+Returns the schema for a Space Warehouse connection, including Collections and Properties.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param spaceId
