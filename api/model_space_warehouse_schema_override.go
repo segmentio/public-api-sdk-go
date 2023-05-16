@@ -15,11 +15,11 @@ import (
 	"encoding/json"
 )
 
-// SpaceWarehouseSchemaOverride Represents the override for a collection/property? path to apply to a Space Warehouse.
+// SpaceWarehouseSchemaOverride Overrides the enabled or disabled state of the specified collection and / or properties within the schema.
 type SpaceWarehouseSchemaOverride struct {
 	// The collection within the Source.
 	Collection string `json:"collection"`
-	// The Enabled flag ok telling whether the Collection is enabled or not.
+	// Represents the overridden enabled state for the listed collection and / or properties.
 	Enabled bool `json:"enabled"`
 	// A map that contains the properties within the collection to which the Warehouse should sync.
 	Property *string `json:"property,omitempty"`
