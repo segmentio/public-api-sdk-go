@@ -19,7 +19,7 @@ import (
 type ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput struct {
 	// Represents a list of collections and properties synced to the Warehouse.
 	Items []SpaceWarehouseSelectiveSyncItemAlpha `json:"items"`
-	// A flag that represent if all event Tables are enable or disable. This field is optional.
+	// Optional. Represents the enabled state of all event tables.
 	EnableEventTables *bool      `json:"enableEventTables,omitempty"`
 	Pagination        Pagination `json:"pagination"`
 }
