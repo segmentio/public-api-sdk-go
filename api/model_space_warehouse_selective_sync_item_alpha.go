@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 34.3.5
+API version: 34.3.6
 Contact: friends@segment.com
 */
 
@@ -17,14 +17,10 @@ import (
 
 // SpaceWarehouseSelectiveSyncItemAlpha Represents an entry in the Space Warehouse Selective Sync schema for a Warehouse and Space pair.
 type SpaceWarehouseSelectiveSyncItemAlpha struct {
-	// The space id attached to this Warehouse.
-	SpaceId string `json:"spaceId"`
 	// The collection within the Source.
 	Collection string `json:"collection"`
 	// The id of the Warehouse this sync belongs to.
 	WarehouseId string `json:"warehouseId"`
-	// The Source of the collection in this Space Warehouse.
-	Source *string `json:"source,omitempty"`
 	// The Enabled flag ok telling whether the Collection is enabled or not.
 	Enabled bool `json:"enabled"`
 	// A map that contains the properties within the collection to which the Warehouse should sync.
@@ -36,14 +32,12 @@ type SpaceWarehouseSelectiveSyncItemAlpha struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewSpaceWarehouseSelectiveSyncItemAlpha(
-	spaceId string,
 	collection string,
 	warehouseId string,
 	enabled bool,
 	properties map[string]interface{},
 ) *SpaceWarehouseSelectiveSyncItemAlpha {
 	this := SpaceWarehouseSelectiveSyncItemAlpha{}
-	this.SpaceId = spaceId
 	this.Collection = collection
 	this.WarehouseId = warehouseId
 	this.Enabled = enabled
@@ -57,30 +51,6 @@ func NewSpaceWarehouseSelectiveSyncItemAlpha(
 func NewSpaceWarehouseSelectiveSyncItemAlphaWithDefaults() *SpaceWarehouseSelectiveSyncItemAlpha {
 	this := SpaceWarehouseSelectiveSyncItemAlpha{}
 	return &this
-}
-
-// GetSpaceId returns the SpaceId field value
-func (o *SpaceWarehouseSelectiveSyncItemAlpha) GetSpaceId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.SpaceId
-}
-
-// GetSpaceIdOk returns a tuple with the SpaceId field value
-// and a boolean to check if the value has been set.
-func (o *SpaceWarehouseSelectiveSyncItemAlpha) GetSpaceIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.SpaceId, true
-}
-
-// SetSpaceId sets field value
-func (o *SpaceWarehouseSelectiveSyncItemAlpha) SetSpaceId(v string) {
-	o.SpaceId = v
 }
 
 // GetCollection returns the Collection field value
@@ -129,38 +99,6 @@ func (o *SpaceWarehouseSelectiveSyncItemAlpha) GetWarehouseIdOk() (*string, bool
 // SetWarehouseId sets field value
 func (o *SpaceWarehouseSelectiveSyncItemAlpha) SetWarehouseId(v string) {
 	o.WarehouseId = v
-}
-
-// GetSource returns the Source field value if set, zero value otherwise.
-func (o *SpaceWarehouseSelectiveSyncItemAlpha) GetSource() string {
-	if o == nil || o.Source == nil {
-		var ret string
-		return ret
-	}
-	return *o.Source
-}
-
-// GetSourceOk returns a tuple with the Source field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SpaceWarehouseSelectiveSyncItemAlpha) GetSourceOk() (*string, bool) {
-	if o == nil || o.Source == nil {
-		return nil, false
-	}
-	return o.Source, true
-}
-
-// HasSource returns a boolean if a field has been set.
-func (o *SpaceWarehouseSelectiveSyncItemAlpha) HasSource() bool {
-	if o != nil && o.Source != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSource gets a reference to the given string and assigns it to the Source field.
-func (o *SpaceWarehouseSelectiveSyncItemAlpha) SetSource(v string) {
-	o.Source = &v
 }
 
 // GetEnabled returns the Enabled field value
@@ -214,16 +152,10 @@ func (o *SpaceWarehouseSelectiveSyncItemAlpha) SetProperties(v map[string]interf
 func (o SpaceWarehouseSelectiveSyncItemAlpha) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["spaceId"] = o.SpaceId
-	}
-	if true {
 		toSerialize["collection"] = o.Collection
 	}
 	if true {
 		toSerialize["warehouseId"] = o.WarehouseId
-	}
-	if o.Source != nil {
-		toSerialize["source"] = o.Source
 	}
 	if true {
 		toSerialize["enabled"] = o.Enabled
