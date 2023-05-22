@@ -17,8 +17,11 @@ import (
 
 // RemoveRuleV1 Represents the parameters needed to identify a rule on the backend-side.
 type RemoveRuleV1 struct {
-	Type    string  `json:"type"`
-	Key     *string `json:"key,omitempty"`
+	// The type for this Tracking Plan rule.
+	Type string `json:"type"`
+	// Key to this rule (free-form string like 'Button clicked').
+	Key *string `json:"key,omitempty"`
+	// Version of this rule.
 	Version float32 `json:"version"`
 }
 
