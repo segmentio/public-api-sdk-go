@@ -24,9 +24,9 @@ type UpsertRuleV1 struct {
 	// Key to this rule (free-form string like 'Button clicked').
 	Key *string `json:"key,omitempty"`
 	// JSON Schema of this rule.
-	JsonSchema interface{} `json:"jsonSchema"`
+	JsonSchema interface{} `json:"jsonSchema,omitempty"`
 	// Version of this rule.
-	Version float32 `json:"version"`
+	Version *float32 `json:"version,omitempty"`
 	// The timestamp of this rule's creation.
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// The timestamp of this rule's last change.
@@ -39,11 +39,9 @@ type UpsertRuleV1 struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpsertRuleV1(type_ string, jsonSchema interface{}, version float32) *UpsertRuleV1 {
+func NewUpsertRuleV1(type_ string) *UpsertRuleV1 {
 	this := UpsertRuleV1{}
 	this.Type = type_
-	this.JsonSchema = jsonSchema
-	this.Version = version
 	return &this
 }
 
@@ -143,18 +141,16 @@ func (o *UpsertRuleV1) SetKey(v string) {
 	o.Key = &v
 }
 
-// GetJsonSchema returns the JsonSchema field value
-// If the value is explicit nil, the zero value for interface{} will be returned
+// GetJsonSchema returns the JsonSchema field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpsertRuleV1) GetJsonSchema() interface{} {
 	if o == nil {
 		var ret interface{}
 		return ret
 	}
-
 	return o.JsonSchema
 }
 
-// GetJsonSchemaOk returns a tuple with the JsonSchema field value
+// GetJsonSchemaOk returns a tuple with the JsonSchema field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpsertRuleV1) GetJsonSchemaOk() (*interface{}, bool) {
@@ -164,33 +160,50 @@ func (o *UpsertRuleV1) GetJsonSchemaOk() (*interface{}, bool) {
 	return &o.JsonSchema, true
 }
 
-// SetJsonSchema sets field value
+// HasJsonSchema returns a boolean if a field has been set.
+func (o *UpsertRuleV1) HasJsonSchema() bool {
+	if o != nil && o.JsonSchema != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetJsonSchema gets a reference to the given interface{} and assigns it to the JsonSchema field.
 func (o *UpsertRuleV1) SetJsonSchema(v interface{}) {
 	o.JsonSchema = v
 }
 
-// GetVersion returns the Version field value
+// GetVersion returns the Version field value if set, zero value otherwise.
 func (o *UpsertRuleV1) GetVersion() float32 {
-	if o == nil {
+	if o == nil || o.Version == nil {
 		var ret float32
 		return ret
 	}
-
-	return o.Version
+	return *o.Version
 }
 
-// GetVersionOk returns a tuple with the Version field value
+// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpsertRuleV1) GetVersionOk() (*float32, bool) {
-	if o == nil {
+	if o == nil || o.Version == nil {
 		return nil, false
 	}
-	return &o.Version, true
+	return o.Version, true
 }
 
-// SetVersion sets field value
+// HasVersion returns a boolean if a field has been set.
+func (o *UpsertRuleV1) HasVersion() bool {
+	if o != nil && o.Version != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVersion gets a reference to the given float32 and assigns it to the Version field.
 func (o *UpsertRuleV1) SetVersion(v float32) {
-	o.Version = v
+	o.Version = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -303,7 +316,7 @@ func (o UpsertRuleV1) MarshalJSON() ([]byte, error) {
 	if o.JsonSchema != nil {
 		toSerialize["jsonSchema"] = o.JsonSchema
 	}
-	if true {
+	if o.Version != nil {
 		toSerialize["version"] = o.Version
 	}
 	if o.CreatedAt != nil {
