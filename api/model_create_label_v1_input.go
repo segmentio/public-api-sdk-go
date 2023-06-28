@@ -17,14 +17,14 @@ import (
 
 // CreateLabelV1Input Creates a new label in the current Workspace.
 type CreateLabelV1Input struct {
-	Label Label1 `json:"label"`
+	Label Label `json:"label"`
 }
 
 // NewCreateLabelV1Input instantiates a new CreateLabelV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateLabelV1Input(label Label1) *CreateLabelV1Input {
+func NewCreateLabelV1Input(label Label) *CreateLabelV1Input {
 	this := CreateLabelV1Input{}
 	this.Label = label
 	return &this
@@ -39,9 +39,9 @@ func NewCreateLabelV1InputWithDefaults() *CreateLabelV1Input {
 }
 
 // GetLabel returns the Label field value
-func (o *CreateLabelV1Input) GetLabel() Label1 {
+func (o *CreateLabelV1Input) GetLabel() Label {
 	if o == nil {
-		var ret Label1
+		var ret Label
 		return ret
 	}
 
@@ -50,7 +50,7 @@ func (o *CreateLabelV1Input) GetLabel() Label1 {
 
 // GetLabelOk returns a tuple with the Label field value
 // and a boolean to check if the value has been set.
-func (o *CreateLabelV1Input) GetLabelOk() (*Label1, bool) {
+func (o *CreateLabelV1Input) GetLabelOk() (*Label, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -58,7 +58,7 @@ func (o *CreateLabelV1Input) GetLabelOk() (*Label1, bool) {
 }
 
 // SetLabel sets field value
-func (o *CreateLabelV1Input) SetLabel(v Label1) {
+func (o *CreateLabelV1Input) SetLabel(v Label) {
 	o.Label = v
 }
 

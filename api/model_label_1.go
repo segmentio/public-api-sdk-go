@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// Label1 The new label to create in the Workspace.
+// Label1 The newly created label.
 type Label1 struct {
 	// The key that represents the name of this label.
 	Key string `json:"key"`
