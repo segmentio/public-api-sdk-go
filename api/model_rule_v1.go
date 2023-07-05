@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 35.0.0
+API version: 36.0.0
 Contact: friends@segment.com
 */
 
@@ -22,9 +22,9 @@ type RuleV1 struct {
 	// Key to this rule (free-form string like 'Button clicked').
 	Key *string `json:"key,omitempty"`
 	// JSON Schema of this rule.
-	JsonSchema interface{} `json:"jsonSchema,omitempty"`
+	JsonSchema interface{} `json:"jsonSchema"`
 	// Version of this rule.
-	Version *float32 `json:"version,omitempty"`
+	Version float32 `json:"version"`
 	// The timestamp of this rule's creation.
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// The timestamp of this rule's last change.
@@ -37,9 +37,11 @@ type RuleV1 struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRuleV1(type_ string) *RuleV1 {
+func NewRuleV1(type_ string, jsonSchema interface{}, version float32) *RuleV1 {
 	this := RuleV1{}
 	this.Type = type_
+	this.JsonSchema = jsonSchema
+	this.Version = version
 	return &this
 }
 
@@ -107,16 +109,18 @@ func (o *RuleV1) SetKey(v string) {
 	o.Key = &v
 }
 
-// GetJsonSchema returns the JsonSchema field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetJsonSchema returns the JsonSchema field value
+// If the value is explicit nil, the zero value for interface{} will be returned
 func (o *RuleV1) GetJsonSchema() interface{} {
 	if o == nil {
 		var ret interface{}
 		return ret
 	}
+
 	return o.JsonSchema
 }
 
-// GetJsonSchemaOk returns a tuple with the JsonSchema field value if set, nil otherwise
+// GetJsonSchemaOk returns a tuple with the JsonSchema field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RuleV1) GetJsonSchemaOk() (*interface{}, bool) {
@@ -126,50 +130,33 @@ func (o *RuleV1) GetJsonSchemaOk() (*interface{}, bool) {
 	return &o.JsonSchema, true
 }
 
-// HasJsonSchema returns a boolean if a field has been set.
-func (o *RuleV1) HasJsonSchema() bool {
-	if o != nil && o.JsonSchema != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetJsonSchema gets a reference to the given interface{} and assigns it to the JsonSchema field.
+// SetJsonSchema sets field value
 func (o *RuleV1) SetJsonSchema(v interface{}) {
 	o.JsonSchema = v
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise.
+// GetVersion returns the Version field value
 func (o *RuleV1) GetVersion() float32 {
-	if o == nil || o.Version == nil {
+	if o == nil {
 		var ret float32
 		return ret
 	}
-	return *o.Version
+
+	return o.Version
 }
 
-// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
 func (o *RuleV1) GetVersionOk() (*float32, bool) {
-	if o == nil || o.Version == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Version, true
+	return &o.Version, true
 }
 
-// HasVersion returns a boolean if a field has been set.
-func (o *RuleV1) HasVersion() bool {
-	if o != nil && o.Version != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVersion gets a reference to the given float32 and assigns it to the Version field.
+// SetVersion sets field value
 func (o *RuleV1) SetVersion(v float32) {
-	o.Version = &v
+	o.Version = v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -279,7 +266,7 @@ func (o RuleV1) MarshalJSON() ([]byte, error) {
 	if o.JsonSchema != nil {
 		toSerialize["jsonSchema"] = o.JsonSchema
 	}
-	if o.Version != nil {
+	if true {
 		toSerialize["version"] = o.Version
 	}
 	if o.CreatedAt != nil {
