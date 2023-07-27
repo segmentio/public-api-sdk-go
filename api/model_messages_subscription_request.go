@@ -19,25 +19,22 @@ import (
 type MessagesSubscriptionRequest struct {
 	// Key is the phone number or email.
 	Key string `json:"key"`
-	// Type is communication medium used. Either EMAIL or SMS.
+	// Type is communication medium used.
 	Type string `json:"type"`
-	// The user subscribed, unsubscribed, or on initial status.
-	Status string `json:"status"`
+	// The user subscribed, unsubscribed, or on initial status globally.
+	Status *string `json:"status,omitempty"`
+	// Optional groups subscription status.
+	Groups []GroupSubscriptionStatus `json:"groups,omitempty"`
 }
 
 // NewMessagesSubscriptionRequest instantiates a new MessagesSubscriptionRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMessagesSubscriptionRequest(
-	key string,
-	type_ string,
-	status string,
-) *MessagesSubscriptionRequest {
+func NewMessagesSubscriptionRequest(key string, type_ string) *MessagesSubscriptionRequest {
 	this := MessagesSubscriptionRequest{}
 	this.Key = key
 	this.Type = type_
-	this.Status = status
 	return &this
 }
 
@@ -97,28 +94,68 @@ func (o *MessagesSubscriptionRequest) SetType(v string) {
 	o.Type = v
 }
 
-// GetStatus returns the Status field value
+// GetStatus returns the Status field value if set, zero value otherwise.
 func (o *MessagesSubscriptionRequest) GetStatus() string {
-	if o == nil {
+	if o == nil || o.Status == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Status
+	return *o.Status
 }
 
-// GetStatusOk returns a tuple with the Status field value
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MessagesSubscriptionRequest) GetStatusOk() (*string, bool) {
-	if o == nil {
+	if o == nil || o.Status == nil {
 		return nil, false
 	}
-	return &o.Status, true
+	return o.Status, true
 }
 
-// SetStatus sets field value
+// HasStatus returns a boolean if a field has been set.
+func (o *MessagesSubscriptionRequest) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given string and assigns it to the Status field.
 func (o *MessagesSubscriptionRequest) SetStatus(v string) {
-	o.Status = v
+	o.Status = &v
+}
+
+// GetGroups returns the Groups field value if set, zero value otherwise.
+func (o *MessagesSubscriptionRequest) GetGroups() []GroupSubscriptionStatus {
+	if o == nil || o.Groups == nil {
+		var ret []GroupSubscriptionStatus
+		return ret
+	}
+	return o.Groups
+}
+
+// GetGroupsOk returns a tuple with the Groups field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MessagesSubscriptionRequest) GetGroupsOk() ([]GroupSubscriptionStatus, bool) {
+	if o == nil || o.Groups == nil {
+		return nil, false
+	}
+	return o.Groups, true
+}
+
+// HasGroups returns a boolean if a field has been set.
+func (o *MessagesSubscriptionRequest) HasGroups() bool {
+	if o != nil && o.Groups != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGroups gets a reference to the given []GroupSubscriptionStatus and assigns it to the Groups field.
+func (o *MessagesSubscriptionRequest) SetGroups(v []GroupSubscriptionStatus) {
+	o.Groups = v
 }
 
 func (o MessagesSubscriptionRequest) MarshalJSON() ([]byte, error) {
@@ -129,8 +166,11 @@ func (o MessagesSubscriptionRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["type"] = o.Type
 	}
-	if true {
+	if o.Status != nil {
 		toSerialize["status"] = o.Status
+	}
+	if o.Groups != nil {
+		toSerialize["groups"] = o.Groups
 	}
 	return json.Marshal(toSerialize)
 }

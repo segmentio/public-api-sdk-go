@@ -19,7 +19,7 @@ import (
 type GetSubscriptionRequest struct {
 	// Key is the phone number or email.
 	Key string `json:"key"`
-	// Type is communication medium used. Either EMAIL or SMS.
+	// Type is communication medium used.
 	Type string `json:"type"`
 }
 

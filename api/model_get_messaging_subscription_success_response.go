@@ -19,10 +19,14 @@ import (
 type GetMessagingSubscriptionSuccessResponse struct {
 	// Key is the phone number or email.
 	Key string `json:"key"`
-	// Type is communication medium used. Either EMAIL or SMS.
+	// Type is communication medium used.
 	Type string `json:"type"`
 	// The user subscribed, unsubscribed, or on initial status. This is absent if the phone number or email is not found.
 	Status *string `json:"status,omitempty"`
+	// Optional subscription groups.
+	Groups []GroupSubscriptionStatusResponse `json:"groups,omitempty"`
+	// The timestamp of this subscription status's last change.
+	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
 // NewGetMessagingSubscriptionSuccessResponse instantiates a new GetMessagingSubscriptionSuccessResponse object
@@ -127,6 +131,70 @@ func (o *GetMessagingSubscriptionSuccessResponse) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetGroups returns the Groups field value if set, zero value otherwise.
+func (o *GetMessagingSubscriptionSuccessResponse) GetGroups() []GroupSubscriptionStatusResponse {
+	if o == nil || o.Groups == nil {
+		var ret []GroupSubscriptionStatusResponse
+		return ret
+	}
+	return o.Groups
+}
+
+// GetGroupsOk returns a tuple with the Groups field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetMessagingSubscriptionSuccessResponse) GetGroupsOk() ([]GroupSubscriptionStatusResponse, bool) {
+	if o == nil || o.Groups == nil {
+		return nil, false
+	}
+	return o.Groups, true
+}
+
+// HasGroups returns a boolean if a field has been set.
+func (o *GetMessagingSubscriptionSuccessResponse) HasGroups() bool {
+	if o != nil && o.Groups != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGroups gets a reference to the given []GroupSubscriptionStatusResponse and assigns it to the Groups field.
+func (o *GetMessagingSubscriptionSuccessResponse) SetGroups(v []GroupSubscriptionStatusResponse) {
+	o.Groups = v
+}
+
+// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+func (o *GetMessagingSubscriptionSuccessResponse) GetUpdatedAt() string {
+	if o == nil || o.UpdatedAt == nil {
+		var ret string
+		return ret
+	}
+	return *o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetMessagingSubscriptionSuccessResponse) GetUpdatedAtOk() (*string, bool) {
+	if o == nil || o.UpdatedAt == nil {
+		return nil, false
+	}
+	return o.UpdatedAt, true
+}
+
+// HasUpdatedAt returns a boolean if a field has been set.
+func (o *GetMessagingSubscriptionSuccessResponse) HasUpdatedAt() bool {
+	if o != nil && o.UpdatedAt != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdatedAt gets a reference to the given string and assigns it to the UpdatedAt field.
+func (o *GetMessagingSubscriptionSuccessResponse) SetUpdatedAt(v string) {
+	o.UpdatedAt = &v
+}
+
 func (o GetMessagingSubscriptionSuccessResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -137,6 +205,12 @@ func (o GetMessagingSubscriptionSuccessResponse) MarshalJSON() ([]byte, error) {
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
+	}
+	if o.Groups != nil {
+		toSerialize["groups"] = o.Groups
+	}
+	if o.UpdatedAt != nil {
+		toSerialize["updatedAt"] = o.UpdatedAt
 	}
 	return json.Marshal(toSerialize)
 }
