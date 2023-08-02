@@ -23,7 +23,7 @@ go get github.com/segmentio/public-api-sdk-go
 In your code, add the following in import:
 
 ```golang
-import api "github.com/segmentio/public-api-sdk-go"
+import api "github.com/segmentio/public-api-sdk-go/api"
 ```
 
 You are now ready to start making calls to Public API!
@@ -34,8 +34,8 @@ Requests are authorized by setting your API token in the context object:
 
 ```golang
 token := // ...
-auth := context.WithValue(context.Background(), sw.ContextAccessToken, token)
-r, err := client.Service.Operation(auth, args)
+ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
+r, err := client.<Service>.<Operation>(ctx, args)
 ```
 
 ## Example
@@ -54,7 +54,10 @@ func main() {
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
 
-    resp, r, err := apiClient.SourcesApi.ListSources(context.Background())
+    token := // ...
+    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
+
+    resp, r, err := apiClient.SourcesApi.ListSources(ctx)
 			.Pagination(&api.PaginationInput{ count: 10 })
 			.Execute()
 
