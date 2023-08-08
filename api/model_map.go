@@ -15,7 +15,10 @@ import "encoding/json"
 
 type ModelMap struct {
 	value map[string]interface{}
-	isSet bool
+}
+
+func (v ModelMap) Get() map[string]interface{} {
+	return v.value
 }
 
 type NullableModelMap struct {

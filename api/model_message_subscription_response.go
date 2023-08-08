@@ -19,27 +19,24 @@ import (
 type MessageSubscriptionResponse struct {
 	// Key is the phone number or email.
 	Key string `json:"key"`
-	// Type is communication medium used. Either EMAIL or SMS.
+	// Type is communication medium used. Either SMS, EMAIL or WHATSAPP.
 	Type string `json:"type"`
 	// The user subscribed, unsubscribed, or on initial status.
-	Status string `json:"status"`
+	Status *string `json:"status,omitempty"`
 	// Error messages.
 	Errors []MessageSubscriptionResponseError `json:"errors,omitempty"`
+	// Optional subscription groups.
+	Groups []UpdateGroupSubscriptionStatusResponse `json:"groups,omitempty"`
 }
 
 // NewMessageSubscriptionResponse instantiates a new MessageSubscriptionResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMessageSubscriptionResponse(
-	key string,
-	type_ string,
-	status string,
-) *MessageSubscriptionResponse {
+func NewMessageSubscriptionResponse(key string, type_ string) *MessageSubscriptionResponse {
 	this := MessageSubscriptionResponse{}
 	this.Key = key
 	this.Type = type_
-	this.Status = status
 	return &this
 }
 
@@ -99,28 +96,36 @@ func (o *MessageSubscriptionResponse) SetType(v string) {
 	o.Type = v
 }
 
-// GetStatus returns the Status field value
+// GetStatus returns the Status field value if set, zero value otherwise.
 func (o *MessageSubscriptionResponse) GetStatus() string {
-	if o == nil {
+	if o == nil || o.Status == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Status
+	return *o.Status
 }
 
-// GetStatusOk returns a tuple with the Status field value
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MessageSubscriptionResponse) GetStatusOk() (*string, bool) {
-	if o == nil {
+	if o == nil || o.Status == nil {
 		return nil, false
 	}
-	return &o.Status, true
+	return o.Status, true
 }
 
-// SetStatus sets field value
+// HasStatus returns a boolean if a field has been set.
+func (o *MessageSubscriptionResponse) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given string and assigns it to the Status field.
 func (o *MessageSubscriptionResponse) SetStatus(v string) {
-	o.Status = v
+	o.Status = &v
 }
 
 // GetErrors returns the Errors field value if set, zero value otherwise.
@@ -155,6 +160,38 @@ func (o *MessageSubscriptionResponse) SetErrors(v []MessageSubscriptionResponseE
 	o.Errors = v
 }
 
+// GetGroups returns the Groups field value if set, zero value otherwise.
+func (o *MessageSubscriptionResponse) GetGroups() []UpdateGroupSubscriptionStatusResponse {
+	if o == nil || o.Groups == nil {
+		var ret []UpdateGroupSubscriptionStatusResponse
+		return ret
+	}
+	return o.Groups
+}
+
+// GetGroupsOk returns a tuple with the Groups field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MessageSubscriptionResponse) GetGroupsOk() ([]UpdateGroupSubscriptionStatusResponse, bool) {
+	if o == nil || o.Groups == nil {
+		return nil, false
+	}
+	return o.Groups, true
+}
+
+// HasGroups returns a boolean if a field has been set.
+func (o *MessageSubscriptionResponse) HasGroups() bool {
+	if o != nil && o.Groups != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGroups gets a reference to the given []UpdateGroupSubscriptionStatusResponse and assigns it to the Groups field.
+func (o *MessageSubscriptionResponse) SetGroups(v []UpdateGroupSubscriptionStatusResponse) {
+	o.Groups = v
+}
+
 func (o MessageSubscriptionResponse) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -163,11 +200,14 @@ func (o MessageSubscriptionResponse) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["type"] = o.Type
 	}
-	if true {
+	if o.Status != nil {
 		toSerialize["status"] = o.Status
 	}
 	if o.Errors != nil {
 		toSerialize["errors"] = o.Errors
+	}
+	if o.Groups != nil {
+		toSerialize["groups"] = o.Groups
 	}
 	return json.Marshal(toSerialize)
 }
