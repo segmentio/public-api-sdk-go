@@ -62,5 +62,13 @@ func (v NullableModelMap) MarshalJSON() ([]byte, error) {
 
 func (v *NullableModelMap) UnmarshalJSON(src []byte) error {
 	v.isSet = true
-	return json.Unmarshal(src, &v.value)
+
+	var modelMap map[string]interface{}
+	err := json.Unmarshal(src, &modelMap)
+	if err != nil {
+		return err
+	}
+
+	v.value = NewModelMap(modelMap)
+	return nil
 }
