@@ -21,6 +21,14 @@ func (v ModelMap) Get() map[string]interface{} {
 	return v.value
 }
 
+func (v *ModelMap) Set(val map[string]interface{}) {
+	v.value = val
+}
+
+func NewModelMap(val map[string]interface{}) *ModelMap {
+	return &ModelMap{value: val}
+}
+
 type NullableModelMap struct {
 	value *ModelMap
 	isSet bool
