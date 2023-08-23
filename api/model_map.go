@@ -29,6 +29,14 @@ func NewModelMap(val map[string]interface{}) *ModelMap {
 	return &ModelMap{value: val}
 }
 
+func (v ModelMap) MarshalJSON() ([]byte, error) {
+	return json.Marshal(v.value)
+}
+
+func (v *ModelMap) UnmarshalJSON(src []byte) error {
+	return json.Unmarshal(src, &v.value)
+}
+
 type NullableModelMap struct {
 	value *ModelMap
 	isSet bool
@@ -57,7 +65,7 @@ func NewNullableModelMap(val *ModelMap) *NullableModelMap {
 }
 
 func (v NullableModelMap) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
+	return v.value.MarshalJSON()
 }
 
 func (v *NullableModelMap) UnmarshalJSON(src []byte) error {
