@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 36.1.1
+API version: 36.2.0
 Contact: friends@segment.com
 */
 
@@ -45,10 +45,10 @@ CreateReverseEtlModel Create Reverse Etl Model
 
 Creates a new Reverse ETL Model.
 
-  - When called, this endpoint may generate the `Model Created` event in the [audit trail](/tag/Audit-Trail).
+• When called, this endpoint may generate the `Model Created` event in the [audit trail](/tag/Audit-Trail).
 
-    @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-    @return ApiCreateReverseEtlModelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateReverseEtlModelRequest
 */
 func (a *ReverseETLApiService) CreateReverseEtlModel(
 	ctx context.Context,
@@ -207,11 +207,11 @@ DeleteReverseEtlModel Delete Reverse Etl Model
 
 Deletes an existing Model.
 
-  - When called, this endpoint may generate the `Model Deleted` event in the [audit trail](/tag/Audit-Trail).
+• When called, this endpoint may generate the `Model Deleted` event in the [audit trail](/tag/Audit-Trail).
 
-    @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-    @param modelId
-    @return ApiDeleteReverseEtlModelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param modelId
+	@return ApiDeleteReverseEtlModelRequest
 */
 func (a *ReverseETLApiService) DeleteReverseEtlModel(
 	ctx context.Context,
@@ -706,8 +706,7 @@ UpdateReverseEtlModel Update Reverse Etl Model
 
 Updates an existing Reverse ETL Model.
 
-  - When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:* Model Settings Saved
-
+• When called, this endpoint may generate one or more of the following [audit trail](/tag/Audit-Trail) events:* Model Settings Saved
 * Model State Change Toggled
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
