@@ -15,10 +15,8 @@ import (
 	"encoding/json"
 )
 
-// UpsertRuleV1 struct for UpsertRuleV1
-type UpsertRuleV1 struct {
-	// This rule's new intended key.
-	NewKey *string `json:"newKey,omitempty"`
+// RuleInputV1 Represents a rule to add to a Tracking Plan.
+type RuleInputV1 struct {
 	// The type for this Tracking Plan rule.
 	Type string `json:"type"`
 	// Key to this rule (free-form string like 'Button clicked').
@@ -29,60 +27,28 @@ type UpsertRuleV1 struct {
 	Version float32 `json:"version"`
 }
 
-// NewUpsertRuleV1 instantiates a new UpsertRuleV1 object
+// NewRuleInputV1 instantiates a new RuleInputV1 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpsertRuleV1(type_ string, jsonSchema interface{}, version float32) *UpsertRuleV1 {
-	this := UpsertRuleV1{}
+func NewRuleInputV1(type_ string, jsonSchema interface{}, version float32) *RuleInputV1 {
+	this := RuleInputV1{}
 	this.Type = type_
 	this.JsonSchema = jsonSchema
 	this.Version = version
 	return &this
 }
 
-// NewUpsertRuleV1WithDefaults instantiates a new UpsertRuleV1 object
+// NewRuleInputV1WithDefaults instantiates a new RuleInputV1 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUpsertRuleV1WithDefaults() *UpsertRuleV1 {
-	this := UpsertRuleV1{}
+func NewRuleInputV1WithDefaults() *RuleInputV1 {
+	this := RuleInputV1{}
 	return &this
 }
 
-// GetNewKey returns the NewKey field value if set, zero value otherwise.
-func (o *UpsertRuleV1) GetNewKey() string {
-	if o == nil || o.NewKey == nil {
-		var ret string
-		return ret
-	}
-	return *o.NewKey
-}
-
-// GetNewKeyOk returns a tuple with the NewKey field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpsertRuleV1) GetNewKeyOk() (*string, bool) {
-	if o == nil || o.NewKey == nil {
-		return nil, false
-	}
-	return o.NewKey, true
-}
-
-// HasNewKey returns a boolean if a field has been set.
-func (o *UpsertRuleV1) HasNewKey() bool {
-	if o != nil && o.NewKey != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetNewKey gets a reference to the given string and assigns it to the NewKey field.
-func (o *UpsertRuleV1) SetNewKey(v string) {
-	o.NewKey = &v
-}
-
 // GetType returns the Type field value
-func (o *UpsertRuleV1) GetType() string {
+func (o *RuleInputV1) GetType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -93,7 +59,7 @@ func (o *UpsertRuleV1) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *UpsertRuleV1) GetTypeOk() (*string, bool) {
+func (o *RuleInputV1) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -101,12 +67,12 @@ func (o *UpsertRuleV1) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *UpsertRuleV1) SetType(v string) {
+func (o *RuleInputV1) SetType(v string) {
 	o.Type = v
 }
 
 // GetKey returns the Key field value if set, zero value otherwise.
-func (o *UpsertRuleV1) GetKey() string {
+func (o *RuleInputV1) GetKey() string {
 	if o == nil || o.Key == nil {
 		var ret string
 		return ret
@@ -116,7 +82,7 @@ func (o *UpsertRuleV1) GetKey() string {
 
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpsertRuleV1) GetKeyOk() (*string, bool) {
+func (o *RuleInputV1) GetKeyOk() (*string, bool) {
 	if o == nil || o.Key == nil {
 		return nil, false
 	}
@@ -124,7 +90,7 @@ func (o *UpsertRuleV1) GetKeyOk() (*string, bool) {
 }
 
 // HasKey returns a boolean if a field has been set.
-func (o *UpsertRuleV1) HasKey() bool {
+func (o *RuleInputV1) HasKey() bool {
 	if o != nil && o.Key != nil {
 		return true
 	}
@@ -133,13 +99,13 @@ func (o *UpsertRuleV1) HasKey() bool {
 }
 
 // SetKey gets a reference to the given string and assigns it to the Key field.
-func (o *UpsertRuleV1) SetKey(v string) {
+func (o *RuleInputV1) SetKey(v string) {
 	o.Key = &v
 }
 
 // GetJsonSchema returns the JsonSchema field value
 // If the value is explicit nil, the zero value for interface{} will be returned
-func (o *UpsertRuleV1) GetJsonSchema() interface{} {
+func (o *RuleInputV1) GetJsonSchema() interface{} {
 	if o == nil {
 		var ret interface{}
 		return ret
@@ -151,7 +117,7 @@ func (o *UpsertRuleV1) GetJsonSchema() interface{} {
 // GetJsonSchemaOk returns a tuple with the JsonSchema field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpsertRuleV1) GetJsonSchemaOk() (*interface{}, bool) {
+func (o *RuleInputV1) GetJsonSchemaOk() (*interface{}, bool) {
 	if o == nil || o.JsonSchema == nil {
 		return nil, false
 	}
@@ -159,12 +125,12 @@ func (o *UpsertRuleV1) GetJsonSchemaOk() (*interface{}, bool) {
 }
 
 // SetJsonSchema sets field value
-func (o *UpsertRuleV1) SetJsonSchema(v interface{}) {
+func (o *RuleInputV1) SetJsonSchema(v interface{}) {
 	o.JsonSchema = v
 }
 
 // GetVersion returns the Version field value
-func (o *UpsertRuleV1) GetVersion() float32 {
+func (o *RuleInputV1) GetVersion() float32 {
 	if o == nil {
 		var ret float32
 		return ret
@@ -175,7 +141,7 @@ func (o *UpsertRuleV1) GetVersion() float32 {
 
 // GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
-func (o *UpsertRuleV1) GetVersionOk() (*float32, bool) {
+func (o *RuleInputV1) GetVersionOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -183,15 +149,12 @@ func (o *UpsertRuleV1) GetVersionOk() (*float32, bool) {
 }
 
 // SetVersion sets field value
-func (o *UpsertRuleV1) SetVersion(v float32) {
+func (o *RuleInputV1) SetVersion(v float32) {
 	o.Version = v
 }
 
-func (o UpsertRuleV1) MarshalJSON() ([]byte, error) {
+func (o RuleInputV1) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.NewKey != nil {
-		toSerialize["newKey"] = o.NewKey
-	}
 	if true {
 		toSerialize["type"] = o.Type
 	}
@@ -207,38 +170,38 @@ func (o UpsertRuleV1) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableUpsertRuleV1 struct {
-	value *UpsertRuleV1
+type NullableRuleInputV1 struct {
+	value *RuleInputV1
 	isSet bool
 }
 
-func (v NullableUpsertRuleV1) Get() *UpsertRuleV1 {
+func (v NullableRuleInputV1) Get() *RuleInputV1 {
 	return v.value
 }
 
-func (v *NullableUpsertRuleV1) Set(val *UpsertRuleV1) {
+func (v *NullableRuleInputV1) Set(val *RuleInputV1) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUpsertRuleV1) IsSet() bool {
+func (v NullableRuleInputV1) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUpsertRuleV1) Unset() {
+func (v *NullableRuleInputV1) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUpsertRuleV1(val *UpsertRuleV1) *NullableUpsertRuleV1 {
-	return &NullableUpsertRuleV1{value: val, isSet: true}
+func NewNullableRuleInputV1(val *RuleInputV1) *NullableRuleInputV1 {
+	return &NullableRuleInputV1{value: val, isSet: true}
 }
 
-func (v NullableUpsertRuleV1) MarshalJSON() ([]byte, error) {
+func (v NullableRuleInputV1) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUpsertRuleV1) UnmarshalJSON(src []byte) error {
+func (v *NullableRuleInputV1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
