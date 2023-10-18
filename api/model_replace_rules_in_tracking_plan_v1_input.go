@@ -18,14 +18,14 @@ import (
 // ReplaceRulesInTrackingPlanV1Input Replaces Tracking Plan rules.
 type ReplaceRulesInTrackingPlanV1Input struct {
 	// Rules to replace.
-	Rules []RuleV1 `json:"rules"`
+	Rules []RuleInputV1 `json:"rules"`
 }
 
 // NewReplaceRulesInTrackingPlanV1Input instantiates a new ReplaceRulesInTrackingPlanV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReplaceRulesInTrackingPlanV1Input(rules []RuleV1) *ReplaceRulesInTrackingPlanV1Input {
+func NewReplaceRulesInTrackingPlanV1Input(rules []RuleInputV1) *ReplaceRulesInTrackingPlanV1Input {
 	this := ReplaceRulesInTrackingPlanV1Input{}
 	this.Rules = rules
 	return &this
@@ -40,9 +40,9 @@ func NewReplaceRulesInTrackingPlanV1InputWithDefaults() *ReplaceRulesInTrackingP
 }
 
 // GetRules returns the Rules field value
-func (o *ReplaceRulesInTrackingPlanV1Input) GetRules() []RuleV1 {
+func (o *ReplaceRulesInTrackingPlanV1Input) GetRules() []RuleInputV1 {
 	if o == nil {
-		var ret []RuleV1
+		var ret []RuleInputV1
 		return ret
 	}
 
@@ -51,7 +51,7 @@ func (o *ReplaceRulesInTrackingPlanV1Input) GetRules() []RuleV1 {
 
 // GetRulesOk returns a tuple with the Rules field value
 // and a boolean to check if the value has been set.
-func (o *ReplaceRulesInTrackingPlanV1Input) GetRulesOk() ([]RuleV1, bool) {
+func (o *ReplaceRulesInTrackingPlanV1Input) GetRulesOk() ([]RuleInputV1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -59,7 +59,7 @@ func (o *ReplaceRulesInTrackingPlanV1Input) GetRulesOk() ([]RuleV1, bool) {
 }
 
 // SetRules sets field value
-func (o *ReplaceRulesInTrackingPlanV1Input) SetRules(v []RuleV1) {
+func (o *ReplaceRulesInTrackingPlanV1Input) SetRules(v []RuleInputV1) {
 	o.Rules = v
 }
 

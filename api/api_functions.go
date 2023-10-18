@@ -362,6 +362,175 @@ func (a *FunctionsApiService) CreateFunctionDeploymentExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCreateInsertFunctionInstanceRequest struct {
+	ctx                                    context.Context
+	ApiService                             *FunctionsApiService
+	createInsertFunctionInstanceAlphaInput *CreateInsertFunctionInstanceAlphaInput
+}
+
+func (r ApiCreateInsertFunctionInstanceRequest) CreateInsertFunctionInstanceAlphaInput(
+	createInsertFunctionInstanceAlphaInput CreateInsertFunctionInstanceAlphaInput,
+) ApiCreateInsertFunctionInstanceRequest {
+	r.createInsertFunctionInstanceAlphaInput = &createInsertFunctionInstanceAlphaInput
+	return r
+}
+
+func (r ApiCreateInsertFunctionInstanceRequest) Execute() (*CreateInsertFunctionInstance200Response, *http.Response, error) {
+	return r.ApiService.CreateInsertFunctionInstanceExecute(r)
+}
+
+/*
+CreateInsertFunctionInstance Create Insert Function Instance
+
+Creates an insert Function instance connected to the given Destination.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Functions feature enabled. Please reach out to your customer success manager for more information.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateInsertFunctionInstanceRequest
+*/
+func (a *FunctionsApiService) CreateInsertFunctionInstance(
+	ctx context.Context,
+) ApiCreateInsertFunctionInstanceRequest {
+	return ApiCreateInsertFunctionInstanceRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CreateInsertFunctionInstance200Response
+func (a *FunctionsApiService) CreateInsertFunctionInstanceExecute(
+	r ApiCreateInsertFunctionInstanceRequest,
+) (*CreateInsertFunctionInstance200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateInsertFunctionInstance200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"FunctionsApiService.CreateInsertFunctionInstance",
+	)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/insert-function-instances"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.createInsertFunctionInstanceAlphaInput == nil {
+		return localVarReturnValue, nil, reportError(
+			"createInsertFunctionInstanceAlphaInput is required and must be specified",
+		)
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createInsertFunctionInstanceAlphaInput
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiDeleteFunctionRequest struct {
 	ctx        context.Context
 	ApiService *FunctionsApiService
@@ -442,6 +611,170 @@ func (a *FunctionsApiService) DeleteFunctionExecute(
 		"application/json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
+	}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDeleteInsertFunctionInstanceRequest struct {
+	ctx        context.Context
+	ApiService *FunctionsApiService
+	instanceId string
+}
+
+func (r ApiDeleteInsertFunctionInstanceRequest) Execute() (*DeleteInsertFunctionInstance200Response, *http.Response, error) {
+	return r.ApiService.DeleteInsertFunctionInstanceExecute(r)
+}
+
+/*
+DeleteInsertFunctionInstance Delete Insert Function Instance
+
+Deletes an insert Function instance.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Functions feature enabled. Please reach out to your customer success manager for more information.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId
+	@return ApiDeleteInsertFunctionInstanceRequest
+*/
+func (a *FunctionsApiService) DeleteInsertFunctionInstance(
+	ctx context.Context,
+	instanceId string,
+) ApiDeleteInsertFunctionInstanceRequest {
+	return ApiDeleteInsertFunctionInstanceRequest{
+		ApiService: a,
+		ctx:        ctx,
+		instanceId: instanceId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return DeleteInsertFunctionInstance200Response
+func (a *FunctionsApiService) DeleteInsertFunctionInstanceExecute(
+	r ApiDeleteInsertFunctionInstanceRequest,
+) (*DeleteInsertFunctionInstance200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteInsertFunctionInstance200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"FunctionsApiService.DeleteInsertFunctionInstance",
+	)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/insert-function-instances/{instanceId}"
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"instanceId"+"}",
+		url.PathEscape(parameterToString(r.instanceId, "")),
+		-1,
+	)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
 	}
 
 	// set Accept header
@@ -1223,6 +1556,186 @@ func (a *FunctionsApiService) ListFunctionsExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiListInsertFunctionInstancesRequest struct {
+	ctx        context.Context
+	ApiService *FunctionsApiService
+	pagination *PaginationInput
+	functionId *string
+}
+
+// Pagination parameters.  This parameter exists in alpha.
+func (r ApiListInsertFunctionInstancesRequest) Pagination(
+	pagination PaginationInput,
+) ApiListInsertFunctionInstancesRequest {
+	r.pagination = &pagination
+	return r
+}
+
+// The insert Function class id to lookup.  This parameter exists in alpha.
+func (r ApiListInsertFunctionInstancesRequest) FunctionId(
+	functionId string,
+) ApiListInsertFunctionInstancesRequest {
+	r.functionId = &functionId
+	return r
+}
+
+func (r ApiListInsertFunctionInstancesRequest) Execute() (*ListInsertFunctionInstances200Response, *http.Response, error) {
+	return r.ApiService.ListInsertFunctionInstancesExecute(r)
+}
+
+/*
+ListInsertFunctionInstances List Insert Function Instances
+
+Lists all insert Function instances connected to the given insert Function.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Functions feature enabled. Please reach out to your customer success manager for more information.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiListInsertFunctionInstancesRequest
+*/
+func (a *FunctionsApiService) ListInsertFunctionInstances(
+	ctx context.Context,
+) ApiListInsertFunctionInstancesRequest {
+	return ApiListInsertFunctionInstancesRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ListInsertFunctionInstances200Response
+func (a *FunctionsApiService) ListInsertFunctionInstancesExecute(
+	r ApiListInsertFunctionInstancesRequest,
+) (*ListInsertFunctionInstances200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListInsertFunctionInstances200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"FunctionsApiService.ListInsertFunctionInstances",
+	)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/insert-function-instances"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.pagination == nil {
+		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
+	}
+	if r.functionId == nil {
+		return localVarReturnValue, nil, reportError("functionId is required and must be specified")
+	}
+
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	localVarQueryParams.Add("functionId", parameterToString(*r.functionId, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiRestoreFunctionVersionRequest struct {
 	ctx                              context.Context
 	ApiService                       *FunctionsApiService
@@ -1511,6 +2024,185 @@ func (a *FunctionsApiService) UpdateFunctionExecute(
 	}
 	// body params
 	localVarPostBody = r.updateFunctionV1Input
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateInsertFunctionInstanceRequest struct {
+	ctx                                    context.Context
+	ApiService                             *FunctionsApiService
+	instanceId                             string
+	updateInsertFunctionInstanceAlphaInput *UpdateInsertFunctionInstanceAlphaInput
+}
+
+func (r ApiUpdateInsertFunctionInstanceRequest) UpdateInsertFunctionInstanceAlphaInput(
+	updateInsertFunctionInstanceAlphaInput UpdateInsertFunctionInstanceAlphaInput,
+) ApiUpdateInsertFunctionInstanceRequest {
+	r.updateInsertFunctionInstanceAlphaInput = &updateInsertFunctionInstanceAlphaInput
+	return r
+}
+
+func (r ApiUpdateInsertFunctionInstanceRequest) Execute() (*UpdateInsertFunctionInstance200Response, *http.Response, error) {
+	return r.ApiService.UpdateInsertFunctionInstanceExecute(r)
+}
+
+/*
+UpdateInsertFunctionInstance Update Insert Function Instance
+
+Updates an insert Function instance connected to the given Destination.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Functions feature enabled. Please reach out to your customer success manager for more information.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param instanceId
+	@return ApiUpdateInsertFunctionInstanceRequest
+*/
+func (a *FunctionsApiService) UpdateInsertFunctionInstance(
+	ctx context.Context,
+	instanceId string,
+) ApiUpdateInsertFunctionInstanceRequest {
+	return ApiUpdateInsertFunctionInstanceRequest{
+		ApiService: a,
+		ctx:        ctx,
+		instanceId: instanceId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return UpdateInsertFunctionInstance200Response
+func (a *FunctionsApiService) UpdateInsertFunctionInstanceExecute(
+	r ApiUpdateInsertFunctionInstanceRequest,
+) (*UpdateInsertFunctionInstance200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateInsertFunctionInstance200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"FunctionsApiService.UpdateInsertFunctionInstance",
+	)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/insert-function-instances/{instanceId}"
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"instanceId"+"}",
+		url.PathEscape(parameterToString(r.instanceId, "")),
+		-1,
+	)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.updateInsertFunctionInstanceAlphaInput == nil {
+		return localVarReturnValue, nil, reportError(
+			"updateInsertFunctionInstanceAlphaInput is required and must be specified",
+		)
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateInsertFunctionInstanceAlphaInput
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,
