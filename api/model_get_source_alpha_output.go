@@ -18,15 +18,18 @@ import (
 // GetSourceAlphaOutput Returns a Source.
 type GetSourceAlphaOutput struct {
 	Source Source1 `json:"source"`
+	// The id of the Tracking Plan connected to the Source.
+	TrackingPlanId NullableString `json:"trackingPlanId"`
 }
 
 // NewGetSourceAlphaOutput instantiates a new GetSourceAlphaOutput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetSourceAlphaOutput(source Source1) *GetSourceAlphaOutput {
+func NewGetSourceAlphaOutput(source Source1, trackingPlanId NullableString) *GetSourceAlphaOutput {
 	this := GetSourceAlphaOutput{}
 	this.Source = source
+	this.TrackingPlanId = trackingPlanId
 	return &this
 }
 
@@ -62,10 +65,39 @@ func (o *GetSourceAlphaOutput) SetSource(v Source1) {
 	o.Source = v
 }
 
+// GetTrackingPlanId returns the TrackingPlanId field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *GetSourceAlphaOutput) GetTrackingPlanId() string {
+	if o == nil || o.TrackingPlanId.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.TrackingPlanId.Get()
+}
+
+// GetTrackingPlanIdOk returns a tuple with the TrackingPlanId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetSourceAlphaOutput) GetTrackingPlanIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TrackingPlanId.Get(), o.TrackingPlanId.IsSet()
+}
+
+// SetTrackingPlanId sets field value
+func (o *GetSourceAlphaOutput) SetTrackingPlanId(v string) {
+	o.TrackingPlanId.Set(&v)
+}
+
 func (o GetSourceAlphaOutput) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["source"] = o.Source
+	}
+	if true {
+		toSerialize["trackingPlanId"] = o.TrackingPlanId.Get()
 	}
 	return json.Marshal(toSerialize)
 }
