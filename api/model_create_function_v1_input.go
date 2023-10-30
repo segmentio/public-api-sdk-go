@@ -23,8 +23,6 @@ type CreateFunctionV1Input struct {
 	Settings []FunctionSettingV1 `json:"settings,omitempty"`
 	// A display name for this Function.  Note that Destination Functions append the Workspace to the display name.
 	DisplayName string `json:"displayName"`
-	// The URL of the logo for this Function.
-	LogoUrl *string `json:"logoUrl,omitempty"`
 	// The Function type.  Config API note: equal to `type`.
 	ResourceType string `json:"resourceType"`
 	// A description for this Function.
@@ -135,38 +133,6 @@ func (o *CreateFunctionV1Input) SetDisplayName(v string) {
 	o.DisplayName = v
 }
 
-// GetLogoUrl returns the LogoUrl field value if set, zero value otherwise.
-func (o *CreateFunctionV1Input) GetLogoUrl() string {
-	if o == nil || o.LogoUrl == nil {
-		var ret string
-		return ret
-	}
-	return *o.LogoUrl
-}
-
-// GetLogoUrlOk returns a tuple with the LogoUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CreateFunctionV1Input) GetLogoUrlOk() (*string, bool) {
-	if o == nil || o.LogoUrl == nil {
-		return nil, false
-	}
-	return o.LogoUrl, true
-}
-
-// HasLogoUrl returns a boolean if a field has been set.
-func (o *CreateFunctionV1Input) HasLogoUrl() bool {
-	if o != nil && o.LogoUrl != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetLogoUrl gets a reference to the given string and assigns it to the LogoUrl field.
-func (o *CreateFunctionV1Input) SetLogoUrl(v string) {
-	o.LogoUrl = &v
-}
-
 // GetResourceType returns the ResourceType field value
 func (o *CreateFunctionV1Input) GetResourceType() string {
 	if o == nil {
@@ -233,9 +199,6 @@ func (o CreateFunctionV1Input) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["displayName"] = o.DisplayName
-	}
-	if o.LogoUrl != nil {
-		toSerialize["logoUrl"] = o.LogoUrl
 	}
 	if true {
 		toSerialize["resourceType"] = o.ResourceType

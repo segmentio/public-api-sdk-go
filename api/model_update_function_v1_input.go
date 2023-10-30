@@ -23,8 +23,6 @@ type UpdateFunctionV1Input struct {
 	Settings []FunctionSettingV1 `json:"settings,omitempty"`
 	// A display name for this Function.
 	DisplayName *string `json:"displayName,omitempty"`
-	// A logo for this Function.
-	LogoUrl *string `json:"logoUrl,omitempty"`
 	// A description for this Function.
 	Description *string `json:"description,omitempty"`
 }
@@ -142,38 +140,6 @@ func (o *UpdateFunctionV1Input) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
-// GetLogoUrl returns the LogoUrl field value if set, zero value otherwise.
-func (o *UpdateFunctionV1Input) GetLogoUrl() string {
-	if o == nil || o.LogoUrl == nil {
-		var ret string
-		return ret
-	}
-	return *o.LogoUrl
-}
-
-// GetLogoUrlOk returns a tuple with the LogoUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateFunctionV1Input) GetLogoUrlOk() (*string, bool) {
-	if o == nil || o.LogoUrl == nil {
-		return nil, false
-	}
-	return o.LogoUrl, true
-}
-
-// HasLogoUrl returns a boolean if a field has been set.
-func (o *UpdateFunctionV1Input) HasLogoUrl() bool {
-	if o != nil && o.LogoUrl != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetLogoUrl gets a reference to the given string and assigns it to the LogoUrl field.
-func (o *UpdateFunctionV1Input) SetLogoUrl(v string) {
-	o.LogoUrl = &v
-}
-
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *UpdateFunctionV1Input) GetDescription() string {
 	if o == nil || o.Description == nil {
@@ -216,9 +182,6 @@ func (o UpdateFunctionV1Input) MarshalJSON() ([]byte, error) {
 	}
 	if o.DisplayName != nil {
 		toSerialize["displayName"] = o.DisplayName
-	}
-	if o.LogoUrl != nil {
-		toSerialize["logoUrl"] = o.LogoUrl
 	}
 	if o.Description != nil {
 		toSerialize["description"] = o.Description
