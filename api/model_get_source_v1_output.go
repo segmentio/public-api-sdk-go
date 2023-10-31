@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.0.0
+API version: 37.1.0
 Contact: friends@segment.com
 */
 
@@ -18,15 +18,18 @@ import (
 // GetSourceV1Output Returns a Source.
 type GetSourceV1Output struct {
 	Source Source4 `json:"source"`
+	// The id of the Tracking Plan connected to the Source.
+	TrackingPlanId NullableString `json:"trackingPlanId"`
 }
 
 // NewGetSourceV1Output instantiates a new GetSourceV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetSourceV1Output(source Source4) *GetSourceV1Output {
+func NewGetSourceV1Output(source Source4, trackingPlanId NullableString) *GetSourceV1Output {
 	this := GetSourceV1Output{}
 	this.Source = source
+	this.TrackingPlanId = trackingPlanId
 	return &this
 }
 
@@ -62,10 +65,39 @@ func (o *GetSourceV1Output) SetSource(v Source4) {
 	o.Source = v
 }
 
+// GetTrackingPlanId returns the TrackingPlanId field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *GetSourceV1Output) GetTrackingPlanId() string {
+	if o == nil || o.TrackingPlanId.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.TrackingPlanId.Get()
+}
+
+// GetTrackingPlanIdOk returns a tuple with the TrackingPlanId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetSourceV1Output) GetTrackingPlanIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TrackingPlanId.Get(), o.TrackingPlanId.IsSet()
+}
+
+// SetTrackingPlanId sets field value
+func (o *GetSourceV1Output) SetTrackingPlanId(v string) {
+	o.TrackingPlanId.Set(&v)
+}
+
 func (o GetSourceV1Output) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["source"] = o.Source
+	}
+	if true {
+		toSerialize["trackingPlanId"] = o.TrackingPlanId.Get()
 	}
 	return json.Marshal(toSerialize)
 }
