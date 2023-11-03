@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the DestinationMetadataActionFieldV1 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DestinationMetadataActionFieldV1{}
 
 // DestinationMetadataActionFieldV1 Represents a field used in configuring an action.
 type DestinationMetadataActionFieldV1 struct {
@@ -229,7 +232,7 @@ func (o *DestinationMetadataActionFieldV1) SetDescription(v string) {
 
 // GetPlaceholder returns the Placeholder field value if set, zero value otherwise.
 func (o *DestinationMetadataActionFieldV1) GetPlaceholder() string {
-	if o == nil || o.Placeholder == nil {
+	if o == nil || IsNil(o.Placeholder) {
 		var ret string
 		return ret
 	}
@@ -239,7 +242,7 @@ func (o *DestinationMetadataActionFieldV1) GetPlaceholder() string {
 // GetPlaceholderOk returns a tuple with the Placeholder field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataActionFieldV1) GetPlaceholderOk() (*string, bool) {
-	if o == nil || o.Placeholder == nil {
+	if o == nil || IsNil(o.Placeholder) {
 		return nil, false
 	}
 	return o.Placeholder, true
@@ -247,7 +250,7 @@ func (o *DestinationMetadataActionFieldV1) GetPlaceholderOk() (*string, bool) {
 
 // HasPlaceholder returns a boolean if a field has been set.
 func (o *DestinationMetadataActionFieldV1) HasPlaceholder() bool {
-	if o != nil && o.Placeholder != nil {
+	if o != nil && !IsNil(o.Placeholder) {
 		return true
 	}
 
@@ -272,7 +275,7 @@ func (o *DestinationMetadataActionFieldV1) GetDefaultValue() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DestinationMetadataActionFieldV1) GetDefaultValueOk() (*interface{}, bool) {
-	if o == nil || o.DefaultValue == nil {
+	if o == nil || IsNil(o.DefaultValue) {
 		return nil, false
 	}
 	return &o.DefaultValue, true
@@ -280,7 +283,7 @@ func (o *DestinationMetadataActionFieldV1) GetDefaultValueOk() (*interface{}, bo
 
 // HasDefaultValue returns a boolean if a field has been set.
 func (o *DestinationMetadataActionFieldV1) HasDefaultValue() bool {
-	if o != nil && o.DefaultValue != nil {
+	if o != nil && IsNil(o.DefaultValue) {
 		return true
 	}
 
@@ -353,7 +356,7 @@ func (o *DestinationMetadataActionFieldV1) GetChoices() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DestinationMetadataActionFieldV1) GetChoicesOk() (*interface{}, bool) {
-	if o == nil || o.Choices == nil {
+	if o == nil || IsNil(o.Choices) {
 		return nil, false
 	}
 	return &o.Choices, true
@@ -361,7 +364,7 @@ func (o *DestinationMetadataActionFieldV1) GetChoicesOk() (*interface{}, bool) {
 
 // HasChoices returns a boolean if a field has been set.
 func (o *DestinationMetadataActionFieldV1) HasChoices() bool {
-	if o != nil && o.Choices != nil {
+	if o != nil && IsNil(o.Choices) {
 		return true
 	}
 
@@ -422,47 +425,35 @@ func (o *DestinationMetadataActionFieldV1) SetAllowNull(v bool) {
 }
 
 func (o DestinationMetadataActionFieldV1) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o DestinationMetadataActionFieldV1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["sortOrder"] = o.SortOrder
-	}
-	if true {
-		toSerialize["fieldKey"] = o.FieldKey
-	}
-	if true {
-		toSerialize["label"] = o.Label
-	}
-	if true {
-		toSerialize["type"] = o.Type
-	}
-	if true {
-		toSerialize["description"] = o.Description
-	}
-	if o.Placeholder != nil {
+	toSerialize["id"] = o.Id
+	toSerialize["sortOrder"] = o.SortOrder
+	toSerialize["fieldKey"] = o.FieldKey
+	toSerialize["label"] = o.Label
+	toSerialize["type"] = o.Type
+	toSerialize["description"] = o.Description
+	if !IsNil(o.Placeholder) {
 		toSerialize["placeholder"] = o.Placeholder
 	}
 	if o.DefaultValue != nil {
 		toSerialize["defaultValue"] = o.DefaultValue
 	}
-	if true {
-		toSerialize["required"] = o.Required
-	}
-	if true {
-		toSerialize["multiple"] = o.Multiple
-	}
+	toSerialize["required"] = o.Required
+	toSerialize["multiple"] = o.Multiple
 	if o.Choices != nil {
 		toSerialize["choices"] = o.Choices
 	}
-	if true {
-		toSerialize["dynamic"] = o.Dynamic
-	}
-	if true {
-		toSerialize["allowNull"] = o.AllowNull
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["dynamic"] = o.Dynamic
+	toSerialize["allowNull"] = o.AllowNull
+	return toSerialize, nil
 }
 
 type NullableDestinationMetadataActionFieldV1 struct {

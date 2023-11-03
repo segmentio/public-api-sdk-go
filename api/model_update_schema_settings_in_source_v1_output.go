@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,11 +15,14 @@ import (
 	"encoding/json"
 )
 
+// checks if the UpdateSchemaSettingsInSourceV1Output type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateSchemaSettingsInSourceV1Output{}
+
 // UpdateSchemaSettingsInSourceV1Output Output of the Source with updated settings.
 type UpdateSchemaSettingsInSourceV1Output struct {
 	// The id of the updated Source.  Config API note: analogous to `parent` and `name`.
-	SourceId string    `json:"sourceId"`
-	Settings Settings1 `json:"settings"`
+	SourceId string                 `json:"sourceId"`
+	Settings SourceSettingsOutputV1 `json:"settings"`
 }
 
 // NewUpdateSchemaSettingsInSourceV1Output instantiates a new UpdateSchemaSettingsInSourceV1Output object
@@ -28,7 +31,7 @@ type UpdateSchemaSettingsInSourceV1Output struct {
 // will change when the set of required properties is changed
 func NewUpdateSchemaSettingsInSourceV1Output(
 	sourceId string,
-	settings Settings1,
+	settings SourceSettingsOutputV1,
 ) *UpdateSchemaSettingsInSourceV1Output {
 	this := UpdateSchemaSettingsInSourceV1Output{}
 	this.SourceId = sourceId
@@ -69,9 +72,9 @@ func (o *UpdateSchemaSettingsInSourceV1Output) SetSourceId(v string) {
 }
 
 // GetSettings returns the Settings field value
-func (o *UpdateSchemaSettingsInSourceV1Output) GetSettings() Settings1 {
+func (o *UpdateSchemaSettingsInSourceV1Output) GetSettings() SourceSettingsOutputV1 {
 	if o == nil {
-		var ret Settings1
+		var ret SourceSettingsOutputV1
 		return ret
 	}
 
@@ -80,7 +83,7 @@ func (o *UpdateSchemaSettingsInSourceV1Output) GetSettings() Settings1 {
 
 // GetSettingsOk returns a tuple with the Settings field value
 // and a boolean to check if the value has been set.
-func (o *UpdateSchemaSettingsInSourceV1Output) GetSettingsOk() (*Settings1, bool) {
+func (o *UpdateSchemaSettingsInSourceV1Output) GetSettingsOk() (*SourceSettingsOutputV1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,19 +91,23 @@ func (o *UpdateSchemaSettingsInSourceV1Output) GetSettingsOk() (*Settings1, bool
 }
 
 // SetSettings sets field value
-func (o *UpdateSchemaSettingsInSourceV1Output) SetSettings(v Settings1) {
+func (o *UpdateSchemaSettingsInSourceV1Output) SetSettings(v SourceSettingsOutputV1) {
 	o.Settings = v
 }
 
 func (o UpdateSchemaSettingsInSourceV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["sourceId"] = o.SourceId
-	}
-	if true {
-		toSerialize["settings"] = o.Settings
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UpdateSchemaSettingsInSourceV1Output) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["sourceId"] = o.SourceId
+	toSerialize["settings"] = o.Settings
+	return toSerialize, nil
 }
 
 type NullableUpdateSchemaSettingsInSourceV1Output struct {

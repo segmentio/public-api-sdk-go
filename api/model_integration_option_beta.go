@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the IntegrationOptionBeta type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &IntegrationOptionBeta{}
 
 // IntegrationOptionBeta Describes an Integration option field required to set up a Segment Integration such as Sources, Destinations, or warehouses.
 type IntegrationOptionBeta struct {
@@ -125,7 +128,7 @@ func (o *IntegrationOptionBeta) SetRequired(v bool) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *IntegrationOptionBeta) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -135,7 +138,7 @@ func (o *IntegrationOptionBeta) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IntegrationOptionBeta) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -143,7 +146,7 @@ func (o *IntegrationOptionBeta) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *IntegrationOptionBeta) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -168,7 +171,7 @@ func (o *IntegrationOptionBeta) GetDefaultValue() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IntegrationOptionBeta) GetDefaultValueOk() (*interface{}, bool) {
-	if o == nil || o.DefaultValue == nil {
+	if o == nil || IsNil(o.DefaultValue) {
 		return nil, false
 	}
 	return &o.DefaultValue, true
@@ -176,7 +179,7 @@ func (o *IntegrationOptionBeta) GetDefaultValueOk() (*interface{}, bool) {
 
 // HasDefaultValue returns a boolean if a field has been set.
 func (o *IntegrationOptionBeta) HasDefaultValue() bool {
-	if o != nil && o.DefaultValue != nil {
+	if o != nil && IsNil(o.DefaultValue) {
 		return true
 	}
 
@@ -190,7 +193,7 @@ func (o *IntegrationOptionBeta) SetDefaultValue(v interface{}) {
 
 // GetLabel returns the Label field value if set, zero value otherwise.
 func (o *IntegrationOptionBeta) GetLabel() string {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		var ret string
 		return ret
 	}
@@ -200,7 +203,7 @@ func (o *IntegrationOptionBeta) GetLabel() string {
 // GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IntegrationOptionBeta) GetLabelOk() (*string, bool) {
-	if o == nil || o.Label == nil {
+	if o == nil || IsNil(o.Label) {
 		return nil, false
 	}
 	return o.Label, true
@@ -208,7 +211,7 @@ func (o *IntegrationOptionBeta) GetLabelOk() (*string, bool) {
 
 // HasLabel returns a boolean if a field has been set.
 func (o *IntegrationOptionBeta) HasLabel() bool {
-	if o != nil && o.Label != nil {
+	if o != nil && !IsNil(o.Label) {
 		return true
 	}
 
@@ -221,26 +224,28 @@ func (o *IntegrationOptionBeta) SetLabel(v string) {
 }
 
 func (o IntegrationOptionBeta) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o IntegrationOptionBeta) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if true {
-		toSerialize["type"] = o.Type
-	}
-	if true {
-		toSerialize["required"] = o.Required
-	}
-	if o.Description != nil {
+	toSerialize["name"] = o.Name
+	toSerialize["type"] = o.Type
+	toSerialize["required"] = o.Required
+	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
 	if o.DefaultValue != nil {
 		toSerialize["defaultValue"] = o.DefaultValue
 	}
-	if o.Label != nil {
+	if !IsNil(o.Label) {
 		toSerialize["label"] = o.Label
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableIntegrationOptionBeta struct {

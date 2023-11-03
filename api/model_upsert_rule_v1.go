@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the UpsertRuleV1 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpsertRuleV1{}
 
 // UpsertRuleV1 struct for UpsertRuleV1
 type UpsertRuleV1 struct {
@@ -51,7 +54,7 @@ func NewUpsertRuleV1WithDefaults() *UpsertRuleV1 {
 
 // GetNewKey returns the NewKey field value if set, zero value otherwise.
 func (o *UpsertRuleV1) GetNewKey() string {
-	if o == nil || o.NewKey == nil {
+	if o == nil || IsNil(o.NewKey) {
 		var ret string
 		return ret
 	}
@@ -61,7 +64,7 @@ func (o *UpsertRuleV1) GetNewKey() string {
 // GetNewKeyOk returns a tuple with the NewKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpsertRuleV1) GetNewKeyOk() (*string, bool) {
-	if o == nil || o.NewKey == nil {
+	if o == nil || IsNil(o.NewKey) {
 		return nil, false
 	}
 	return o.NewKey, true
@@ -69,7 +72,7 @@ func (o *UpsertRuleV1) GetNewKeyOk() (*string, bool) {
 
 // HasNewKey returns a boolean if a field has been set.
 func (o *UpsertRuleV1) HasNewKey() bool {
-	if o != nil && o.NewKey != nil {
+	if o != nil && !IsNil(o.NewKey) {
 		return true
 	}
 
@@ -107,7 +110,7 @@ func (o *UpsertRuleV1) SetType(v string) {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *UpsertRuleV1) GetKey() string {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		var ret string
 		return ret
 	}
@@ -117,7 +120,7 @@ func (o *UpsertRuleV1) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpsertRuleV1) GetKeyOk() (*string, bool) {
-	if o == nil || o.Key == nil {
+	if o == nil || IsNil(o.Key) {
 		return nil, false
 	}
 	return o.Key, true
@@ -125,7 +128,7 @@ func (o *UpsertRuleV1) GetKeyOk() (*string, bool) {
 
 // HasKey returns a boolean if a field has been set.
 func (o *UpsertRuleV1) HasKey() bool {
-	if o != nil && o.Key != nil {
+	if o != nil && !IsNil(o.Key) {
 		return true
 	}
 
@@ -152,7 +155,7 @@ func (o *UpsertRuleV1) GetJsonSchema() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpsertRuleV1) GetJsonSchemaOk() (*interface{}, bool) {
-	if o == nil || o.JsonSchema == nil {
+	if o == nil || IsNil(o.JsonSchema) {
 		return nil, false
 	}
 	return &o.JsonSchema, true
@@ -188,23 +191,27 @@ func (o *UpsertRuleV1) SetVersion(v float32) {
 }
 
 func (o UpsertRuleV1) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UpsertRuleV1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.NewKey != nil {
+	if !IsNil(o.NewKey) {
 		toSerialize["newKey"] = o.NewKey
 	}
-	if true {
-		toSerialize["type"] = o.Type
-	}
-	if o.Key != nil {
+	toSerialize["type"] = o.Type
+	if !IsNil(o.Key) {
 		toSerialize["key"] = o.Key
 	}
 	if o.JsonSchema != nil {
 		toSerialize["jsonSchema"] = o.JsonSchema
 	}
-	if true {
-		toSerialize["version"] = o.Version
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["version"] = o.Version
+	return toSerialize, nil
 }
 
 type NullableUpsertRuleV1 struct {

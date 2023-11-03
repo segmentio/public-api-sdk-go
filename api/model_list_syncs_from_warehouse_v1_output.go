@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,11 +15,14 @@ import (
 	"encoding/json"
 )
 
+// checks if the ListSyncsFromWarehouseV1Output type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListSyncsFromWarehouseV1Output{}
+
 // ListSyncsFromWarehouseV1Output Returns an overview page that contains the last syncs for a Warehouse.
 type ListSyncsFromWarehouseV1Output struct {
 	// A list that contains the latest syncs for the specified Warehouse.
-	Reports    []SyncV1   `json:"reports"`
-	Pagination Pagination `json:"pagination"`
+	Reports    []SyncV1         `json:"reports"`
+	Pagination PaginationOutput `json:"pagination"`
 }
 
 // NewListSyncsFromWarehouseV1Output instantiates a new ListSyncsFromWarehouseV1Output object
@@ -28,7 +31,7 @@ type ListSyncsFromWarehouseV1Output struct {
 // will change when the set of required properties is changed
 func NewListSyncsFromWarehouseV1Output(
 	reports []SyncV1,
-	pagination Pagination,
+	pagination PaginationOutput,
 ) *ListSyncsFromWarehouseV1Output {
 	this := ListSyncsFromWarehouseV1Output{}
 	this.Reports = reports
@@ -69,9 +72,9 @@ func (o *ListSyncsFromWarehouseV1Output) SetReports(v []SyncV1) {
 }
 
 // GetPagination returns the Pagination field value
-func (o *ListSyncsFromWarehouseV1Output) GetPagination() Pagination {
+func (o *ListSyncsFromWarehouseV1Output) GetPagination() PaginationOutput {
 	if o == nil {
-		var ret Pagination
+		var ret PaginationOutput
 		return ret
 	}
 
@@ -80,7 +83,7 @@ func (o *ListSyncsFromWarehouseV1Output) GetPagination() Pagination {
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *ListSyncsFromWarehouseV1Output) GetPaginationOk() (*Pagination, bool) {
+func (o *ListSyncsFromWarehouseV1Output) GetPaginationOk() (*PaginationOutput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,19 +91,23 @@ func (o *ListSyncsFromWarehouseV1Output) GetPaginationOk() (*Pagination, bool) {
 }
 
 // SetPagination sets field value
-func (o *ListSyncsFromWarehouseV1Output) SetPagination(v Pagination) {
+func (o *ListSyncsFromWarehouseV1Output) SetPagination(v PaginationOutput) {
 	o.Pagination = v
 }
 
 func (o ListSyncsFromWarehouseV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["reports"] = o.Reports
-	}
-	if true {
-		toSerialize["pagination"] = o.Pagination
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ListSyncsFromWarehouseV1Output) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["reports"] = o.Reports
+	toSerialize["pagination"] = o.Pagination
+	return toSerialize, nil
 }
 
 type NullableListSyncsFromWarehouseV1Output struct {

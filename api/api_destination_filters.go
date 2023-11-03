@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// DestinationFiltersApiService DestinationFiltersApi service
-type DestinationFiltersApiService service
+// DestinationFiltersAPIService DestinationFiltersAPI service
+type DestinationFiltersAPIService service
 
 type ApiCreateFilterForDestinationRequest struct {
 	ctx                               context.Context
-	ApiService                        *DestinationFiltersApiService
+	ApiService                        *DestinationFiltersAPIService
 	destinationId                     string
 	createFilterForDestinationV1Input *CreateFilterForDestinationV1Input
 }
@@ -52,7 +52,7 @@ Creates a filter in a Destination.
 	@param destinationId
 	@return ApiCreateFilterForDestinationRequest
 */
-func (a *DestinationFiltersApiService) CreateFilterForDestination(
+func (a *DestinationFiltersAPIService) CreateFilterForDestination(
 	ctx context.Context,
 	destinationId string,
 ) ApiCreateFilterForDestinationRequest {
@@ -66,7 +66,7 @@ func (a *DestinationFiltersApiService) CreateFilterForDestination(
 // Execute executes the request
 //
 //	@return CreateFilterForDestination200Response
-func (a *DestinationFiltersApiService) CreateFilterForDestinationExecute(
+func (a *DestinationFiltersAPIService) CreateFilterForDestinationExecute(
 	r ApiCreateFilterForDestinationRequest,
 ) (*CreateFilterForDestination200Response, *http.Response, error) {
 	var (
@@ -78,7 +78,7 @@ func (a *DestinationFiltersApiService) CreateFilterForDestinationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationFiltersApiService.CreateFilterForDestination",
+		"DestinationFiltersAPIService.CreateFilterForDestination",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -88,7 +88,7 @@ func (a *DestinationFiltersApiService) CreateFilterForDestinationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"destinationId"+"}",
-		url.PathEscape(parameterToString(r.destinationId, "")),
+		url.PathEscape(parameterValueToString(r.destinationId, "destinationId")),
 		-1,
 	)
 
@@ -148,9 +148,9 @@ func (a *DestinationFiltersApiService) CreateFilterForDestinationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -167,6 +167,7 @@ func (a *DestinationFiltersApiService) CreateFilterForDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -177,6 +178,7 @@ func (a *DestinationFiltersApiService) CreateFilterForDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -187,6 +189,7 @@ func (a *DestinationFiltersApiService) CreateFilterForDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -210,7 +213,7 @@ func (a *DestinationFiltersApiService) CreateFilterForDestinationExecute(
 
 type ApiGetFilterInDestinationRequest struct {
 	ctx           context.Context
-	ApiService    *DestinationFiltersApiService
+	ApiService    *DestinationFiltersAPIService
 	destinationId string
 	filterId      string
 }
@@ -229,7 +232,7 @@ Gets a Destination filter by id.
 	@param filterId
 	@return ApiGetFilterInDestinationRequest
 */
-func (a *DestinationFiltersApiService) GetFilterInDestination(
+func (a *DestinationFiltersAPIService) GetFilterInDestination(
 	ctx context.Context,
 	destinationId string,
 	filterId string,
@@ -245,7 +248,7 @@ func (a *DestinationFiltersApiService) GetFilterInDestination(
 // Execute executes the request
 //
 //	@return GetFilterInDestination200Response
-func (a *DestinationFiltersApiService) GetFilterInDestinationExecute(
+func (a *DestinationFiltersAPIService) GetFilterInDestinationExecute(
 	r ApiGetFilterInDestinationRequest,
 ) (*GetFilterInDestination200Response, *http.Response, error) {
 	var (
@@ -257,7 +260,7 @@ func (a *DestinationFiltersApiService) GetFilterInDestinationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationFiltersApiService.GetFilterInDestination",
+		"DestinationFiltersAPIService.GetFilterInDestination",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -267,13 +270,13 @@ func (a *DestinationFiltersApiService) GetFilterInDestinationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"destinationId"+"}",
-		url.PathEscape(parameterToString(r.destinationId, "")),
+		url.PathEscape(parameterValueToString(r.destinationId, "destinationId")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"filterId"+"}",
-		url.PathEscape(parameterToString(r.filterId, "")),
+		url.PathEscape(parameterValueToString(r.filterId, "filterId")),
 		-1,
 	)
 
@@ -322,9 +325,9 @@ func (a *DestinationFiltersApiService) GetFilterInDestinationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -341,6 +344,7 @@ func (a *DestinationFiltersApiService) GetFilterInDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -351,6 +355,7 @@ func (a *DestinationFiltersApiService) GetFilterInDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -361,6 +366,7 @@ func (a *DestinationFiltersApiService) GetFilterInDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -384,7 +390,7 @@ func (a *DestinationFiltersApiService) GetFilterInDestinationExecute(
 
 type ApiListFiltersFromDestinationRequest struct {
 	ctx           context.Context
-	ApiService    *DestinationFiltersApiService
+	ApiService    *DestinationFiltersAPIService
 	destinationId string
 	pagination    *PaginationInput
 }
@@ -410,7 +416,7 @@ Lists filters for a Destination.
 	@param destinationId
 	@return ApiListFiltersFromDestinationRequest
 */
-func (a *DestinationFiltersApiService) ListFiltersFromDestination(
+func (a *DestinationFiltersAPIService) ListFiltersFromDestination(
 	ctx context.Context,
 	destinationId string,
 ) ApiListFiltersFromDestinationRequest {
@@ -424,7 +430,7 @@ func (a *DestinationFiltersApiService) ListFiltersFromDestination(
 // Execute executes the request
 //
 //	@return ListFiltersFromDestination200Response
-func (a *DestinationFiltersApiService) ListFiltersFromDestinationExecute(
+func (a *DestinationFiltersAPIService) ListFiltersFromDestinationExecute(
 	r ApiListFiltersFromDestinationRequest,
 ) (*ListFiltersFromDestination200Response, *http.Response, error) {
 	var (
@@ -436,7 +442,7 @@ func (a *DestinationFiltersApiService) ListFiltersFromDestinationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationFiltersApiService.ListFiltersFromDestination",
+		"DestinationFiltersAPIService.ListFiltersFromDestination",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -446,7 +452,7 @@ func (a *DestinationFiltersApiService) ListFiltersFromDestinationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"destinationId"+"}",
-		url.PathEscape(parameterToString(r.destinationId, "")),
+		url.PathEscape(parameterValueToString(r.destinationId, "destinationId")),
 		-1,
 	)
 
@@ -457,7 +463,7 @@ func (a *DestinationFiltersApiService) ListFiltersFromDestinationExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -499,9 +505,9 @@ func (a *DestinationFiltersApiService) ListFiltersFromDestinationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -518,6 +524,7 @@ func (a *DestinationFiltersApiService) ListFiltersFromDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -528,6 +535,7 @@ func (a *DestinationFiltersApiService) ListFiltersFromDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -538,6 +546,7 @@ func (a *DestinationFiltersApiService) ListFiltersFromDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -561,7 +570,7 @@ func (a *DestinationFiltersApiService) ListFiltersFromDestinationExecute(
 
 type ApiPreviewDestinationFilterRequest struct {
 	ctx                             context.Context
-	ApiService                      *DestinationFiltersApiService
+	ApiService                      *DestinationFiltersAPIService
 	previewDestinationFilterV1Input *PreviewDestinationFilterV1Input
 }
 
@@ -584,7 +593,7 @@ Simulates the application of a Destination filter to a provided JSON payload.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiPreviewDestinationFilterRequest
 */
-func (a *DestinationFiltersApiService) PreviewDestinationFilter(
+func (a *DestinationFiltersAPIService) PreviewDestinationFilter(
 	ctx context.Context,
 ) ApiPreviewDestinationFilterRequest {
 	return ApiPreviewDestinationFilterRequest{
@@ -596,7 +605,7 @@ func (a *DestinationFiltersApiService) PreviewDestinationFilter(
 // Execute executes the request
 //
 //	@return PreviewDestinationFilter200Response
-func (a *DestinationFiltersApiService) PreviewDestinationFilterExecute(
+func (a *DestinationFiltersAPIService) PreviewDestinationFilterExecute(
 	r ApiPreviewDestinationFilterRequest,
 ) (*PreviewDestinationFilter200Response, *http.Response, error) {
 	var (
@@ -608,7 +617,7 @@ func (a *DestinationFiltersApiService) PreviewDestinationFilterExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationFiltersApiService.PreviewDestinationFilter",
+		"DestinationFiltersAPIService.PreviewDestinationFilter",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -672,9 +681,9 @@ func (a *DestinationFiltersApiService) PreviewDestinationFilterExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -691,6 +700,7 @@ func (a *DestinationFiltersApiService) PreviewDestinationFilterExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -701,6 +711,7 @@ func (a *DestinationFiltersApiService) PreviewDestinationFilterExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -711,6 +722,7 @@ func (a *DestinationFiltersApiService) PreviewDestinationFilterExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -734,7 +746,7 @@ func (a *DestinationFiltersApiService) PreviewDestinationFilterExecute(
 
 type ApiRemoveFilterFromDestinationRequest struct {
 	ctx           context.Context
-	ApiService    *DestinationFiltersApiService
+	ApiService    *DestinationFiltersAPIService
 	destinationId string
 	filterId      string
 }
@@ -755,7 +767,7 @@ Deletes a Destination filter.
 	@param filterId
 	@return ApiRemoveFilterFromDestinationRequest
 */
-func (a *DestinationFiltersApiService) RemoveFilterFromDestination(
+func (a *DestinationFiltersAPIService) RemoveFilterFromDestination(
 	ctx context.Context,
 	destinationId string,
 	filterId string,
@@ -771,7 +783,7 @@ func (a *DestinationFiltersApiService) RemoveFilterFromDestination(
 // Execute executes the request
 //
 //	@return RemoveFilterFromDestination200Response
-func (a *DestinationFiltersApiService) RemoveFilterFromDestinationExecute(
+func (a *DestinationFiltersAPIService) RemoveFilterFromDestinationExecute(
 	r ApiRemoveFilterFromDestinationRequest,
 ) (*RemoveFilterFromDestination200Response, *http.Response, error) {
 	var (
@@ -783,7 +795,7 @@ func (a *DestinationFiltersApiService) RemoveFilterFromDestinationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationFiltersApiService.RemoveFilterFromDestination",
+		"DestinationFiltersAPIService.RemoveFilterFromDestination",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -793,13 +805,13 @@ func (a *DestinationFiltersApiService) RemoveFilterFromDestinationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"destinationId"+"}",
-		url.PathEscape(parameterToString(r.destinationId, "")),
+		url.PathEscape(parameterValueToString(r.destinationId, "destinationId")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"filterId"+"}",
-		url.PathEscape(parameterToString(r.filterId, "")),
+		url.PathEscape(parameterValueToString(r.filterId, "filterId")),
 		-1,
 	)
 
@@ -848,9 +860,9 @@ func (a *DestinationFiltersApiService) RemoveFilterFromDestinationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -867,6 +879,7 @@ func (a *DestinationFiltersApiService) RemoveFilterFromDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -877,6 +890,7 @@ func (a *DestinationFiltersApiService) RemoveFilterFromDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -887,6 +901,7 @@ func (a *DestinationFiltersApiService) RemoveFilterFromDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -910,7 +925,7 @@ func (a *DestinationFiltersApiService) RemoveFilterFromDestinationExecute(
 
 type ApiUpdateFilterForDestinationRequest struct {
 	ctx                               context.Context
-	ApiService                        *DestinationFiltersApiService
+	ApiService                        *DestinationFiltersAPIService
 	destinationId                     string
 	filterId                          string
 	updateFilterForDestinationV1Input *UpdateFilterForDestinationV1Input
@@ -940,7 +955,7 @@ Updates a filter in a Destination.
 	@param filterId
 	@return ApiUpdateFilterForDestinationRequest
 */
-func (a *DestinationFiltersApiService) UpdateFilterForDestination(
+func (a *DestinationFiltersAPIService) UpdateFilterForDestination(
 	ctx context.Context,
 	destinationId string,
 	filterId string,
@@ -956,7 +971,7 @@ func (a *DestinationFiltersApiService) UpdateFilterForDestination(
 // Execute executes the request
 //
 //	@return UpdateFilterForDestination200Response
-func (a *DestinationFiltersApiService) UpdateFilterForDestinationExecute(
+func (a *DestinationFiltersAPIService) UpdateFilterForDestinationExecute(
 	r ApiUpdateFilterForDestinationRequest,
 ) (*UpdateFilterForDestination200Response, *http.Response, error) {
 	var (
@@ -968,7 +983,7 @@ func (a *DestinationFiltersApiService) UpdateFilterForDestinationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationFiltersApiService.UpdateFilterForDestination",
+		"DestinationFiltersAPIService.UpdateFilterForDestination",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -978,13 +993,13 @@ func (a *DestinationFiltersApiService) UpdateFilterForDestinationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"destinationId"+"}",
-		url.PathEscape(parameterToString(r.destinationId, "")),
+		url.PathEscape(parameterValueToString(r.destinationId, "destinationId")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"filterId"+"}",
-		url.PathEscape(parameterToString(r.filterId, "")),
+		url.PathEscape(parameterValueToString(r.filterId, "filterId")),
 		-1,
 	)
 
@@ -1044,9 +1059,9 @@ func (a *DestinationFiltersApiService) UpdateFilterForDestinationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1063,6 +1078,7 @@ func (a *DestinationFiltersApiService) UpdateFilterForDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1073,6 +1089,7 @@ func (a *DestinationFiltersApiService) UpdateFilterForDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1083,6 +1100,7 @@ func (a *DestinationFiltersApiService) UpdateFilterForDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

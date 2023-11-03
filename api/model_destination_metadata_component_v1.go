@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the DestinationMetadataComponentV1 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DestinationMetadataComponentV1{}
 
 // DestinationMetadataComponentV1 Represents a component this Destination provides.
 type DestinationMetadataComponentV1 struct {
@@ -94,7 +97,7 @@ func (o *DestinationMetadataComponentV1) SetCode(v string) {
 
 // GetOwner returns the Owner field value if set, zero value otherwise.
 func (o *DestinationMetadataComponentV1) GetOwner() string {
-	if o == nil || o.Owner == nil {
+	if o == nil || IsNil(o.Owner) {
 		var ret string
 		return ret
 	}
@@ -104,7 +107,7 @@ func (o *DestinationMetadataComponentV1) GetOwner() string {
 // GetOwnerOk returns a tuple with the Owner field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataComponentV1) GetOwnerOk() (*string, bool) {
-	if o == nil || o.Owner == nil {
+	if o == nil || IsNil(o.Owner) {
 		return nil, false
 	}
 	return o.Owner, true
@@ -112,7 +115,7 @@ func (o *DestinationMetadataComponentV1) GetOwnerOk() (*string, bool) {
 
 // HasOwner returns a boolean if a field has been set.
 func (o *DestinationMetadataComponentV1) HasOwner() bool {
-	if o != nil && o.Owner != nil {
+	if o != nil && !IsNil(o.Owner) {
 		return true
 	}
 
@@ -125,17 +128,21 @@ func (o *DestinationMetadataComponentV1) SetOwner(v string) {
 }
 
 func (o DestinationMetadataComponentV1) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["type"] = o.Type
-	}
-	if true {
-		toSerialize["code"] = o.Code
-	}
-	if o.Owner != nil {
-		toSerialize["owner"] = o.Owner
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o DestinationMetadataComponentV1) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["type"] = o.Type
+	toSerialize["code"] = o.Code
+	if !IsNil(o.Owner) {
+		toSerialize["owner"] = o.Owner
+	}
+	return toSerialize, nil
 }
 
 type NullableDestinationMetadataComponentV1 struct {

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// TransformationsApiService TransformationsApi service
-type TransformationsApiService service
+// TransformationsAPIService TransformationsAPI service
+type TransformationsAPIService service
 
 type ApiCreateTransformationRequest struct {
 	ctx                         context.Context
-	ApiService                  *TransformationsApiService
+	ApiService                  *TransformationsAPIService
 	createTransformationV1Input *CreateTransformationV1Input
 }
 
@@ -52,7 +52,7 @@ Creates a new Transformation.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateTransformationRequest
 */
-func (a *TransformationsApiService) CreateTransformation(
+func (a *TransformationsAPIService) CreateTransformation(
 	ctx context.Context,
 ) ApiCreateTransformationRequest {
 	return ApiCreateTransformationRequest{
@@ -64,7 +64,7 @@ func (a *TransformationsApiService) CreateTransformation(
 // Execute executes the request
 //
 //	@return CreateTransformation200Response
-func (a *TransformationsApiService) CreateTransformationExecute(
+func (a *TransformationsAPIService) CreateTransformationExecute(
 	r ApiCreateTransformationRequest,
 ) (*CreateTransformation200Response, *http.Response, error) {
 	var (
@@ -76,7 +76,7 @@ func (a *TransformationsApiService) CreateTransformationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TransformationsApiService.CreateTransformation",
+		"TransformationsAPIService.CreateTransformation",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -140,9 +140,9 @@ func (a *TransformationsApiService) CreateTransformationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -159,6 +159,7 @@ func (a *TransformationsApiService) CreateTransformationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -169,6 +170,7 @@ func (a *TransformationsApiService) CreateTransformationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -179,6 +181,7 @@ func (a *TransformationsApiService) CreateTransformationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -202,7 +205,7 @@ func (a *TransformationsApiService) CreateTransformationExecute(
 
 type ApiDeleteTransformationRequest struct {
 	ctx              context.Context
-	ApiService       *TransformationsApiService
+	ApiService       *TransformationsAPIService
 	transformationId string
 }
 
@@ -223,7 +226,7 @@ Deletes a Transformation.
 	@param transformationId
 	@return ApiDeleteTransformationRequest
 */
-func (a *TransformationsApiService) DeleteTransformation(
+func (a *TransformationsAPIService) DeleteTransformation(
 	ctx context.Context,
 	transformationId string,
 ) ApiDeleteTransformationRequest {
@@ -237,7 +240,7 @@ func (a *TransformationsApiService) DeleteTransformation(
 // Execute executes the request
 //
 //	@return DeleteTransformation200Response
-func (a *TransformationsApiService) DeleteTransformationExecute(
+func (a *TransformationsAPIService) DeleteTransformationExecute(
 	r ApiDeleteTransformationRequest,
 ) (*DeleteTransformation200Response, *http.Response, error) {
 	var (
@@ -249,7 +252,7 @@ func (a *TransformationsApiService) DeleteTransformationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TransformationsApiService.DeleteTransformation",
+		"TransformationsAPIService.DeleteTransformation",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -259,7 +262,7 @@ func (a *TransformationsApiService) DeleteTransformationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"transformationId"+"}",
-		url.PathEscape(parameterToString(r.transformationId, "")),
+		url.PathEscape(parameterValueToString(r.transformationId, "transformationId")),
 		-1,
 	)
 
@@ -308,9 +311,9 @@ func (a *TransformationsApiService) DeleteTransformationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -327,6 +330,7 @@ func (a *TransformationsApiService) DeleteTransformationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -337,6 +341,7 @@ func (a *TransformationsApiService) DeleteTransformationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -347,6 +352,7 @@ func (a *TransformationsApiService) DeleteTransformationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -370,7 +376,7 @@ func (a *TransformationsApiService) DeleteTransformationExecute(
 
 type ApiGetTransformationRequest struct {
 	ctx              context.Context
-	ApiService       *TransformationsApiService
+	ApiService       *TransformationsAPIService
 	transformationId string
 }
 
@@ -389,7 +395,7 @@ Gets a Transformation.
 	@param transformationId
 	@return ApiGetTransformationRequest
 */
-func (a *TransformationsApiService) GetTransformation(
+func (a *TransformationsAPIService) GetTransformation(
 	ctx context.Context,
 	transformationId string,
 ) ApiGetTransformationRequest {
@@ -403,7 +409,7 @@ func (a *TransformationsApiService) GetTransformation(
 // Execute executes the request
 //
 //	@return GetTransformation200Response
-func (a *TransformationsApiService) GetTransformationExecute(
+func (a *TransformationsAPIService) GetTransformationExecute(
 	r ApiGetTransformationRequest,
 ) (*GetTransformation200Response, *http.Response, error) {
 	var (
@@ -415,7 +421,7 @@ func (a *TransformationsApiService) GetTransformationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TransformationsApiService.GetTransformation",
+		"TransformationsAPIService.GetTransformation",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -425,7 +431,7 @@ func (a *TransformationsApiService) GetTransformationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"transformationId"+"}",
-		url.PathEscape(parameterToString(r.transformationId, "")),
+		url.PathEscape(parameterValueToString(r.transformationId, "transformationId")),
 		-1,
 	)
 
@@ -474,9 +480,9 @@ func (a *TransformationsApiService) GetTransformationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -493,6 +499,7 @@ func (a *TransformationsApiService) GetTransformationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -503,6 +510,7 @@ func (a *TransformationsApiService) GetTransformationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -513,6 +521,7 @@ func (a *TransformationsApiService) GetTransformationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -536,7 +545,7 @@ func (a *TransformationsApiService) GetTransformationExecute(
 
 type ApiListTransformationsRequest struct {
 	ctx        context.Context
-	ApiService *TransformationsApiService
+	ApiService *TransformationsAPIService
 	pagination *PaginationInput
 }
 
@@ -562,7 +571,7 @@ Lists all Transformations in the Workspace.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListTransformationsRequest
 */
-func (a *TransformationsApiService) ListTransformations(
+func (a *TransformationsAPIService) ListTransformations(
 	ctx context.Context,
 ) ApiListTransformationsRequest {
 	return ApiListTransformationsRequest{
@@ -574,7 +583,7 @@ func (a *TransformationsApiService) ListTransformations(
 // Execute executes the request
 //
 //	@return ListTransformations200Response
-func (a *TransformationsApiService) ListTransformationsExecute(
+func (a *TransformationsAPIService) ListTransformationsExecute(
 	r ApiListTransformationsRequest,
 ) (*ListTransformations200Response, *http.Response, error) {
 	var (
@@ -586,7 +595,7 @@ func (a *TransformationsApiService) ListTransformationsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TransformationsApiService.ListTransformations",
+		"TransformationsAPIService.ListTransformations",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -601,7 +610,7 @@ func (a *TransformationsApiService) ListTransformationsExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -643,9 +652,9 @@ func (a *TransformationsApiService) ListTransformationsExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -662,6 +671,7 @@ func (a *TransformationsApiService) ListTransformationsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -672,6 +682,7 @@ func (a *TransformationsApiService) ListTransformationsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -682,6 +693,7 @@ func (a *TransformationsApiService) ListTransformationsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -705,7 +717,7 @@ func (a *TransformationsApiService) ListTransformationsExecute(
 
 type ApiUpdateTransformationRequest struct {
 	ctx                         context.Context
-	ApiService                  *TransformationsApiService
+	ApiService                  *TransformationsAPIService
 	transformationId            string
 	updateTransformationV1Input *UpdateTransformationV1Input
 }
@@ -734,7 +746,7 @@ Updates an existing Transformation.
 	@param transformationId
 	@return ApiUpdateTransformationRequest
 */
-func (a *TransformationsApiService) UpdateTransformation(
+func (a *TransformationsAPIService) UpdateTransformation(
 	ctx context.Context,
 	transformationId string,
 ) ApiUpdateTransformationRequest {
@@ -748,7 +760,7 @@ func (a *TransformationsApiService) UpdateTransformation(
 // Execute executes the request
 //
 //	@return UpdateTransformation200Response
-func (a *TransformationsApiService) UpdateTransformationExecute(
+func (a *TransformationsAPIService) UpdateTransformationExecute(
 	r ApiUpdateTransformationRequest,
 ) (*UpdateTransformation200Response, *http.Response, error) {
 	var (
@@ -760,7 +772,7 @@ func (a *TransformationsApiService) UpdateTransformationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TransformationsApiService.UpdateTransformation",
+		"TransformationsAPIService.UpdateTransformation",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -770,7 +782,7 @@ func (a *TransformationsApiService) UpdateTransformationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"transformationId"+"}",
-		url.PathEscape(parameterToString(r.transformationId, "")),
+		url.PathEscape(parameterValueToString(r.transformationId, "transformationId")),
 		-1,
 	)
 
@@ -830,9 +842,9 @@ func (a *TransformationsApiService) UpdateTransformationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -849,6 +861,7 @@ func (a *TransformationsApiService) UpdateTransformationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -859,6 +872,7 @@ func (a *TransformationsApiService) UpdateTransformationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -869,6 +883,7 @@ func (a *TransformationsApiService) UpdateTransformationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

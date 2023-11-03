@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the WarehouseSyncOverrideV1 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WarehouseSyncOverrideV1{}
 
 // WarehouseSyncOverrideV1 Represents the override for a Source/collection/property? path to apply to a Warehouse.
 type WarehouseSyncOverrideV1 struct {
@@ -72,7 +75,7 @@ func (o *WarehouseSyncOverrideV1) SetSourceId(v string) {
 
 // GetCollection returns the Collection field value if set, zero value otherwise.
 func (o *WarehouseSyncOverrideV1) GetCollection() string {
-	if o == nil || o.Collection == nil {
+	if o == nil || IsNil(o.Collection) {
 		var ret string
 		return ret
 	}
@@ -82,7 +85,7 @@ func (o *WarehouseSyncOverrideV1) GetCollection() string {
 // GetCollectionOk returns a tuple with the Collection field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WarehouseSyncOverrideV1) GetCollectionOk() (*string, bool) {
-	if o == nil || o.Collection == nil {
+	if o == nil || IsNil(o.Collection) {
 		return nil, false
 	}
 	return o.Collection, true
@@ -90,7 +93,7 @@ func (o *WarehouseSyncOverrideV1) GetCollectionOk() (*string, bool) {
 
 // HasCollection returns a boolean if a field has been set.
 func (o *WarehouseSyncOverrideV1) HasCollection() bool {
-	if o != nil && o.Collection != nil {
+	if o != nil && !IsNil(o.Collection) {
 		return true
 	}
 
@@ -128,7 +131,7 @@ func (o *WarehouseSyncOverrideV1) SetEnabled(v bool) {
 
 // GetProperty returns the Property field value if set, zero value otherwise.
 func (o *WarehouseSyncOverrideV1) GetProperty() string {
-	if o == nil || o.Property == nil {
+	if o == nil || IsNil(o.Property) {
 		var ret string
 		return ret
 	}
@@ -138,7 +141,7 @@ func (o *WarehouseSyncOverrideV1) GetProperty() string {
 // GetPropertyOk returns a tuple with the Property field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WarehouseSyncOverrideV1) GetPropertyOk() (*string, bool) {
-	if o == nil || o.Property == nil {
+	if o == nil || IsNil(o.Property) {
 		return nil, false
 	}
 	return o.Property, true
@@ -146,7 +149,7 @@ func (o *WarehouseSyncOverrideV1) GetPropertyOk() (*string, bool) {
 
 // HasProperty returns a boolean if a field has been set.
 func (o *WarehouseSyncOverrideV1) HasProperty() bool {
-	if o != nil && o.Property != nil {
+	if o != nil && !IsNil(o.Property) {
 		return true
 	}
 
@@ -159,20 +162,24 @@ func (o *WarehouseSyncOverrideV1) SetProperty(v string) {
 }
 
 func (o WarehouseSyncOverrideV1) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["sourceId"] = o.SourceId
-	}
-	if o.Collection != nil {
-		toSerialize["collection"] = o.Collection
-	}
-	if true {
-		toSerialize["enabled"] = o.Enabled
-	}
-	if o.Property != nil {
-		toSerialize["property"] = o.Property
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o WarehouseSyncOverrideV1) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["sourceId"] = o.SourceId
+	if !IsNil(o.Collection) {
+		toSerialize["collection"] = o.Collection
+	}
+	toSerialize["enabled"] = o.Enabled
+	if !IsNil(o.Property) {
+		toSerialize["property"] = o.Property
+	}
+	return toSerialize, nil
 }
 
 type NullableWarehouseSyncOverrideV1 struct {
