@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the DeliveryMetricsSummaryBeta type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &DeliveryMetricsSummaryBeta{}
 
 // DeliveryMetricsSummaryBeta Defines the summary of delivery metrics for a Destination.
 type DeliveryMetricsSummaryBeta struct {
@@ -125,19 +122,17 @@ func (o *DeliveryMetricsSummaryBeta) SetMetrics(v []MetricBeta) {
 }
 
 func (o DeliveryMetricsSummaryBeta) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["sourceId"] = o.SourceId
+	}
+	if true {
+		toSerialize["destinationMetadataId"] = o.DestinationMetadataId
+	}
+	if true {
+		toSerialize["metrics"] = o.Metrics
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o DeliveryMetricsSummaryBeta) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["sourceId"] = o.SourceId
-	toSerialize["destinationMetadataId"] = o.DestinationMetadataId
-	toSerialize["metrics"] = o.Metrics
-	return toSerialize, nil
 }
 
 type NullableDeliveryMetricsSummaryBeta struct {

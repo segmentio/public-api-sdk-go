@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,14 +15,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the ListInsertFunctionInstancesAlphaOutput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListInsertFunctionInstancesAlphaOutput{}
-
 // ListInsertFunctionInstancesAlphaOutput Returns a list of insert Function instances connected to the insert Function.
 type ListInsertFunctionInstancesAlphaOutput struct {
 	// All insert Function instances found.
 	Instances  []InsertFunctionInstanceAlpha `json:"instances"`
-	Pagination PaginationOutput              `json:"pagination"`
+	Pagination Pagination                    `json:"pagination"`
 }
 
 // NewListInsertFunctionInstancesAlphaOutput instantiates a new ListInsertFunctionInstancesAlphaOutput object
@@ -31,7 +28,7 @@ type ListInsertFunctionInstancesAlphaOutput struct {
 // will change when the set of required properties is changed
 func NewListInsertFunctionInstancesAlphaOutput(
 	instances []InsertFunctionInstanceAlpha,
-	pagination PaginationOutput,
+	pagination Pagination,
 ) *ListInsertFunctionInstancesAlphaOutput {
 	this := ListInsertFunctionInstancesAlphaOutput{}
 	this.Instances = instances
@@ -72,9 +69,9 @@ func (o *ListInsertFunctionInstancesAlphaOutput) SetInstances(v []InsertFunction
 }
 
 // GetPagination returns the Pagination field value
-func (o *ListInsertFunctionInstancesAlphaOutput) GetPagination() PaginationOutput {
+func (o *ListInsertFunctionInstancesAlphaOutput) GetPagination() Pagination {
 	if o == nil {
-		var ret PaginationOutput
+		var ret Pagination
 		return ret
 	}
 
@@ -83,7 +80,7 @@ func (o *ListInsertFunctionInstancesAlphaOutput) GetPagination() PaginationOutpu
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *ListInsertFunctionInstancesAlphaOutput) GetPaginationOk() (*PaginationOutput, bool) {
+func (o *ListInsertFunctionInstancesAlphaOutput) GetPaginationOk() (*Pagination, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,23 +88,19 @@ func (o *ListInsertFunctionInstancesAlphaOutput) GetPaginationOk() (*PaginationO
 }
 
 // SetPagination sets field value
-func (o *ListInsertFunctionInstancesAlphaOutput) SetPagination(v PaginationOutput) {
+func (o *ListInsertFunctionInstancesAlphaOutput) SetPagination(v Pagination) {
 	o.Pagination = v
 }
 
 func (o ListInsertFunctionInstancesAlphaOutput) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["instances"] = o.Instances
+	}
+	if true {
+		toSerialize["pagination"] = o.Pagination
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o ListInsertFunctionInstancesAlphaOutput) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["instances"] = o.Instances
-	toSerialize["pagination"] = o.Pagination
-	return toSerialize, nil
 }
 
 type NullableListInsertFunctionInstancesAlphaOutput struct {

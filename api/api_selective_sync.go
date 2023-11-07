@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// SelectiveSyncAPIService SelectiveSyncAPI service
-type SelectiveSyncAPIService service
+// SelectiveSyncApiService SelectiveSyncApi service
+type SelectiveSyncApiService service
 
 type ApiGetAdvancedSyncScheduleFromWarehouseRequest struct {
 	ctx         context.Context
-	ApiService  *SelectiveSyncAPIService
+	ApiService  *SelectiveSyncApiService
 	warehouseId string
 }
 
@@ -44,7 +44,7 @@ The rate limit for this endpoint is 2 requests per minute, which is lower than t
 	@param warehouseId
 	@return ApiGetAdvancedSyncScheduleFromWarehouseRequest
 */
-func (a *SelectiveSyncAPIService) GetAdvancedSyncScheduleFromWarehouse(
+func (a *SelectiveSyncApiService) GetAdvancedSyncScheduleFromWarehouse(
 	ctx context.Context,
 	warehouseId string,
 ) ApiGetAdvancedSyncScheduleFromWarehouseRequest {
@@ -58,7 +58,7 @@ func (a *SelectiveSyncAPIService) GetAdvancedSyncScheduleFromWarehouse(
 // Execute executes the request
 //
 //	@return GetAdvancedSyncScheduleFromWarehouse200Response
-func (a *SelectiveSyncAPIService) GetAdvancedSyncScheduleFromWarehouseExecute(
+func (a *SelectiveSyncApiService) GetAdvancedSyncScheduleFromWarehouseExecute(
 	r ApiGetAdvancedSyncScheduleFromWarehouseRequest,
 ) (*GetAdvancedSyncScheduleFromWarehouse200Response, *http.Response, error) {
 	var (
@@ -70,7 +70,7 @@ func (a *SelectiveSyncAPIService) GetAdvancedSyncScheduleFromWarehouseExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SelectiveSyncAPIService.GetAdvancedSyncScheduleFromWarehouse",
+		"SelectiveSyncApiService.GetAdvancedSyncScheduleFromWarehouse",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -80,7 +80,7 @@ func (a *SelectiveSyncAPIService) GetAdvancedSyncScheduleFromWarehouseExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
+		url.PathEscape(parameterToString(r.warehouseId, "")),
 		-1,
 	)
 
@@ -129,9 +129,9 @@ func (a *SelectiveSyncAPIService) GetAdvancedSyncScheduleFromWarehouseExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -148,7 +148,6 @@ func (a *SelectiveSyncAPIService) GetAdvancedSyncScheduleFromWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -159,7 +158,6 @@ func (a *SelectiveSyncAPIService) GetAdvancedSyncScheduleFromWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -170,7 +168,6 @@ func (a *SelectiveSyncAPIService) GetAdvancedSyncScheduleFromWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -194,7 +191,7 @@ func (a *SelectiveSyncAPIService) GetAdvancedSyncScheduleFromWarehouseExecute(
 
 type ApiListSelectiveSyncsFromWarehouseAndSourceRequest struct {
 	ctx         context.Context
-	ApiService  *SelectiveSyncAPIService
+	ApiService  *SelectiveSyncApiService
 	warehouseId string
 	sourceId    string
 	pagination  *PaginationInput
@@ -224,7 +221,7 @@ The rate limit for this endpoint is 2 requests per minute, which is lower than t
 	@param sourceId
 	@return ApiListSelectiveSyncsFromWarehouseAndSourceRequest
 */
-func (a *SelectiveSyncAPIService) ListSelectiveSyncsFromWarehouseAndSource(
+func (a *SelectiveSyncApiService) ListSelectiveSyncsFromWarehouseAndSource(
 	ctx context.Context,
 	warehouseId string,
 	sourceId string,
@@ -240,7 +237,7 @@ func (a *SelectiveSyncAPIService) ListSelectiveSyncsFromWarehouseAndSource(
 // Execute executes the request
 //
 //	@return ListSelectiveSyncsFromWarehouseAndSource200Response
-func (a *SelectiveSyncAPIService) ListSelectiveSyncsFromWarehouseAndSourceExecute(
+func (a *SelectiveSyncApiService) ListSelectiveSyncsFromWarehouseAndSourceExecute(
 	r ApiListSelectiveSyncsFromWarehouseAndSourceRequest,
 ) (*ListSelectiveSyncsFromWarehouseAndSource200Response, *http.Response, error) {
 	var (
@@ -252,7 +249,7 @@ func (a *SelectiveSyncAPIService) ListSelectiveSyncsFromWarehouseAndSourceExecut
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SelectiveSyncAPIService.ListSelectiveSyncsFromWarehouseAndSource",
+		"SelectiveSyncApiService.ListSelectiveSyncsFromWarehouseAndSource",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -262,13 +259,13 @@ func (a *SelectiveSyncAPIService) ListSelectiveSyncsFromWarehouseAndSourceExecut
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
+		url.PathEscape(parameterToString(r.warehouseId, "")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -279,7 +276,7 @@ func (a *SelectiveSyncAPIService) ListSelectiveSyncsFromWarehouseAndSourceExecut
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -321,9 +318,9 @@ func (a *SelectiveSyncAPIService) ListSelectiveSyncsFromWarehouseAndSourceExecut
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -340,7 +337,6 @@ func (a *SelectiveSyncAPIService) ListSelectiveSyncsFromWarehouseAndSourceExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -351,7 +347,6 @@ func (a *SelectiveSyncAPIService) ListSelectiveSyncsFromWarehouseAndSourceExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -362,7 +357,6 @@ func (a *SelectiveSyncAPIService) ListSelectiveSyncsFromWarehouseAndSourceExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -386,7 +380,7 @@ func (a *SelectiveSyncAPIService) ListSelectiveSyncsFromWarehouseAndSourceExecut
 
 type ApiListSyncsFromWarehouseRequest struct {
 	ctx         context.Context
-	ApiService  *SelectiveSyncAPIService
+	ApiService  *SelectiveSyncApiService
 	warehouseId string
 	pagination  *PaginationInput
 }
@@ -414,7 +408,7 @@ The rate limit for this endpoint is 2 requests per minute, which is lower than t
 	@param warehouseId
 	@return ApiListSyncsFromWarehouseRequest
 */
-func (a *SelectiveSyncAPIService) ListSyncsFromWarehouse(
+func (a *SelectiveSyncApiService) ListSyncsFromWarehouse(
 	ctx context.Context,
 	warehouseId string,
 ) ApiListSyncsFromWarehouseRequest {
@@ -428,7 +422,7 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouse(
 // Execute executes the request
 //
 //	@return ListSyncsFromWarehouse200Response
-func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseExecute(
+func (a *SelectiveSyncApiService) ListSyncsFromWarehouseExecute(
 	r ApiListSyncsFromWarehouseRequest,
 ) (*ListSyncsFromWarehouse200Response, *http.Response, error) {
 	var (
@@ -440,7 +434,7 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SelectiveSyncAPIService.ListSyncsFromWarehouse",
+		"SelectiveSyncApiService.ListSyncsFromWarehouse",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -450,7 +444,7 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
+		url.PathEscape(parameterToString(r.warehouseId, "")),
 		-1,
 	)
 
@@ -461,7 +455,7 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -503,9 +497,9 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -522,7 +516,6 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -533,7 +526,6 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -544,7 +536,6 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -568,7 +559,7 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseExecute(
 
 type ApiListSyncsFromWarehouseAndSourceRequest struct {
 	ctx         context.Context
-	ApiService  *SelectiveSyncAPIService
+	ApiService  *SelectiveSyncApiService
 	warehouseId string
 	sourceId    string
 	pagination  *PaginationInput
@@ -598,7 +589,7 @@ The rate limit for this endpoint is 2 requests per minute, which is lower than t
 	@param sourceId
 	@return ApiListSyncsFromWarehouseAndSourceRequest
 */
-func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseAndSource(
+func (a *SelectiveSyncApiService) ListSyncsFromWarehouseAndSource(
 	ctx context.Context,
 	warehouseId string,
 	sourceId string,
@@ -614,7 +605,7 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseAndSource(
 // Execute executes the request
 //
 //	@return ListSyncsFromWarehouseAndSource200Response
-func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseAndSourceExecute(
+func (a *SelectiveSyncApiService) ListSyncsFromWarehouseAndSourceExecute(
 	r ApiListSyncsFromWarehouseAndSourceRequest,
 ) (*ListSyncsFromWarehouseAndSource200Response, *http.Response, error) {
 	var (
@@ -626,7 +617,7 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseAndSourceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SelectiveSyncAPIService.ListSyncsFromWarehouseAndSource",
+		"SelectiveSyncApiService.ListSyncsFromWarehouseAndSource",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -636,13 +627,13 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseAndSourceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
+		url.PathEscape(parameterToString(r.warehouseId, "")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -653,7 +644,7 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseAndSourceExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -695,9 +686,9 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseAndSourceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -714,7 +705,6 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseAndSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -725,7 +715,6 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseAndSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -736,7 +725,6 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseAndSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -760,7 +748,7 @@ func (a *SelectiveSyncAPIService) ListSyncsFromWarehouseAndSourceExecute(
 
 type ApiReplaceAdvancedSyncScheduleForWarehouseRequest struct {
 	ctx                                            context.Context
-	ApiService                                     *SelectiveSyncAPIService
+	ApiService                                     *SelectiveSyncApiService
 	warehouseId                                    string
 	replaceAdvancedSyncScheduleForWarehouseV1Input *ReplaceAdvancedSyncScheduleForWarehouseV1Input
 }
@@ -787,7 +775,7 @@ The rate limit for this endpoint is 2 requests per minute, which is lower than t
 	@param warehouseId
 	@return ApiReplaceAdvancedSyncScheduleForWarehouseRequest
 */
-func (a *SelectiveSyncAPIService) ReplaceAdvancedSyncScheduleForWarehouse(
+func (a *SelectiveSyncApiService) ReplaceAdvancedSyncScheduleForWarehouse(
 	ctx context.Context,
 	warehouseId string,
 ) ApiReplaceAdvancedSyncScheduleForWarehouseRequest {
@@ -801,7 +789,7 @@ func (a *SelectiveSyncAPIService) ReplaceAdvancedSyncScheduleForWarehouse(
 // Execute executes the request
 //
 //	@return ReplaceAdvancedSyncScheduleForWarehouse200Response
-func (a *SelectiveSyncAPIService) ReplaceAdvancedSyncScheduleForWarehouseExecute(
+func (a *SelectiveSyncApiService) ReplaceAdvancedSyncScheduleForWarehouseExecute(
 	r ApiReplaceAdvancedSyncScheduleForWarehouseRequest,
 ) (*ReplaceAdvancedSyncScheduleForWarehouse200Response, *http.Response, error) {
 	var (
@@ -813,7 +801,7 @@ func (a *SelectiveSyncAPIService) ReplaceAdvancedSyncScheduleForWarehouseExecute
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SelectiveSyncAPIService.ReplaceAdvancedSyncScheduleForWarehouse",
+		"SelectiveSyncApiService.ReplaceAdvancedSyncScheduleForWarehouse",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -823,7 +811,7 @@ func (a *SelectiveSyncAPIService) ReplaceAdvancedSyncScheduleForWarehouseExecute
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
+		url.PathEscape(parameterToString(r.warehouseId, "")),
 		-1,
 	)
 
@@ -883,9 +871,9 @@ func (a *SelectiveSyncAPIService) ReplaceAdvancedSyncScheduleForWarehouseExecute
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -902,7 +890,6 @@ func (a *SelectiveSyncAPIService) ReplaceAdvancedSyncScheduleForWarehouseExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -913,7 +900,6 @@ func (a *SelectiveSyncAPIService) ReplaceAdvancedSyncScheduleForWarehouseExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -924,7 +910,6 @@ func (a *SelectiveSyncAPIService) ReplaceAdvancedSyncScheduleForWarehouseExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -948,7 +933,7 @@ func (a *SelectiveSyncAPIService) ReplaceAdvancedSyncScheduleForWarehouseExecute
 
 type ApiUpdateSelectiveSyncForWarehouseRequest struct {
 	ctx                                    context.Context
-	ApiService                             *SelectiveSyncAPIService
+	ApiService                             *SelectiveSyncApiService
 	warehouseId                            string
 	updateSelectiveSyncForWarehouseV1Input *UpdateSelectiveSyncForWarehouseV1Input
 }
@@ -977,7 +962,7 @@ The rate limit for this endpoint is 2 requests per minute, which is lower than t
 	@param warehouseId
 	@return ApiUpdateSelectiveSyncForWarehouseRequest
 */
-func (a *SelectiveSyncAPIService) UpdateSelectiveSyncForWarehouse(
+func (a *SelectiveSyncApiService) UpdateSelectiveSyncForWarehouse(
 	ctx context.Context,
 	warehouseId string,
 ) ApiUpdateSelectiveSyncForWarehouseRequest {
@@ -991,7 +976,7 @@ func (a *SelectiveSyncAPIService) UpdateSelectiveSyncForWarehouse(
 // Execute executes the request
 //
 //	@return UpdateSelectiveSyncForWarehouse200Response
-func (a *SelectiveSyncAPIService) UpdateSelectiveSyncForWarehouseExecute(
+func (a *SelectiveSyncApiService) UpdateSelectiveSyncForWarehouseExecute(
 	r ApiUpdateSelectiveSyncForWarehouseRequest,
 ) (*UpdateSelectiveSyncForWarehouse200Response, *http.Response, error) {
 	var (
@@ -1003,7 +988,7 @@ func (a *SelectiveSyncAPIService) UpdateSelectiveSyncForWarehouseExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SelectiveSyncAPIService.UpdateSelectiveSyncForWarehouse",
+		"SelectiveSyncApiService.UpdateSelectiveSyncForWarehouse",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1013,7 +998,7 @@ func (a *SelectiveSyncAPIService) UpdateSelectiveSyncForWarehouseExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
+		url.PathEscape(parameterToString(r.warehouseId, "")),
 		-1,
 	)
 
@@ -1073,9 +1058,9 @@ func (a *SelectiveSyncAPIService) UpdateSelectiveSyncForWarehouseExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1092,7 +1077,6 @@ func (a *SelectiveSyncAPIService) UpdateSelectiveSyncForWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1103,7 +1087,6 @@ func (a *SelectiveSyncAPIService) UpdateSelectiveSyncForWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1114,7 +1097,6 @@ func (a *SelectiveSyncAPIService) UpdateSelectiveSyncForWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

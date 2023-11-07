@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// ComputedTraitsAPIService ComputedTraitsAPI service
-type ComputedTraitsAPIService service
+// ComputedTraitsApiService ComputedTraitsApi service
+type ComputedTraitsApiService service
 
 type ApiGetComputedTraitRequest struct {
 	ctx        context.Context
-	ApiService *ComputedTraitsAPIService
+	ApiService *ComputedTraitsApiService
 	spaceId    string
 	id         string
 }
@@ -50,7 +50,7 @@ The rate limit for this endpoint is 100 requests per minute, which is lower than
 	@param id
 	@return ApiGetComputedTraitRequest
 */
-func (a *ComputedTraitsAPIService) GetComputedTrait(
+func (a *ComputedTraitsApiService) GetComputedTrait(
 	ctx context.Context,
 	spaceId string,
 	id string,
@@ -66,7 +66,7 @@ func (a *ComputedTraitsAPIService) GetComputedTrait(
 // Execute executes the request
 //
 //	@return GetComputedTrait200Response
-func (a *ComputedTraitsAPIService) GetComputedTraitExecute(
+func (a *ComputedTraitsApiService) GetComputedTraitExecute(
 	r ApiGetComputedTraitRequest,
 ) (*GetComputedTrait200Response, *http.Response, error) {
 	var (
@@ -78,7 +78,7 @@ func (a *ComputedTraitsAPIService) GetComputedTraitExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ComputedTraitsAPIService.GetComputedTrait",
+		"ComputedTraitsApiService.GetComputedTrait",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -88,13 +88,13 @@ func (a *ComputedTraitsAPIService) GetComputedTraitExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"id"+"}",
-		url.PathEscape(parameterValueToString(r.id, "id")),
+		url.PathEscape(parameterToString(r.id, "")),
 		-1,
 	)
 
@@ -141,9 +141,9 @@ func (a *ComputedTraitsAPIService) GetComputedTraitExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -160,7 +160,6 @@ func (a *ComputedTraitsAPIService) GetComputedTraitExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -171,7 +170,6 @@ func (a *ComputedTraitsAPIService) GetComputedTraitExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -182,7 +180,6 @@ func (a *ComputedTraitsAPIService) GetComputedTraitExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -206,7 +203,7 @@ func (a *ComputedTraitsAPIService) GetComputedTraitExecute(
 
 type ApiListComputedTraitsRequest struct {
 	ctx        context.Context
-	ApiService *ComputedTraitsAPIService
+	ApiService *ComputedTraitsApiService
 	spaceId    string
 	pagination *PaginationInput
 }
@@ -238,7 +235,7 @@ The rate limit for this endpoint is 25 requests per minute, which is lower than 
 	@param spaceId
 	@return ApiListComputedTraitsRequest
 */
-func (a *ComputedTraitsAPIService) ListComputedTraits(
+func (a *ComputedTraitsApiService) ListComputedTraits(
 	ctx context.Context,
 	spaceId string,
 ) ApiListComputedTraitsRequest {
@@ -252,7 +249,7 @@ func (a *ComputedTraitsAPIService) ListComputedTraits(
 // Execute executes the request
 //
 //	@return ListComputedTraits200Response
-func (a *ComputedTraitsAPIService) ListComputedTraitsExecute(
+func (a *ComputedTraitsApiService) ListComputedTraitsExecute(
 	r ApiListComputedTraitsRequest,
 ) (*ListComputedTraits200Response, *http.Response, error) {
 	var (
@@ -264,7 +261,7 @@ func (a *ComputedTraitsAPIService) ListComputedTraitsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ComputedTraitsAPIService.ListComputedTraits",
+		"ComputedTraitsApiService.ListComputedTraits",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -274,7 +271,7 @@ func (a *ComputedTraitsAPIService) ListComputedTraitsExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 
@@ -285,7 +282,7 @@ func (a *ComputedTraitsAPIService) ListComputedTraitsExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -325,9 +322,9 @@ func (a *ComputedTraitsAPIService) ListComputedTraitsExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -344,7 +341,6 @@ func (a *ComputedTraitsAPIService) ListComputedTraitsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -355,7 +351,6 @@ func (a *ComputedTraitsAPIService) ListComputedTraitsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -366,7 +361,6 @@ func (a *ComputedTraitsAPIService) ListComputedTraitsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -390,7 +384,7 @@ func (a *ComputedTraitsAPIService) ListComputedTraitsExecute(
 
 type ApiRemoveComputedTraitFromSpaceRequest struct {
 	ctx        context.Context
-	ApiService *ComputedTraitsAPIService
+	ApiService *ComputedTraitsApiService
 	spaceId    string
 	id         string
 }
@@ -417,7 +411,7 @@ The rate limit for this endpoint is 20 requests per minute, which is lower than 
 	@param id
 	@return ApiRemoveComputedTraitFromSpaceRequest
 */
-func (a *ComputedTraitsAPIService) RemoveComputedTraitFromSpace(
+func (a *ComputedTraitsApiService) RemoveComputedTraitFromSpace(
 	ctx context.Context,
 	spaceId string,
 	id string,
@@ -433,7 +427,7 @@ func (a *ComputedTraitsAPIService) RemoveComputedTraitFromSpace(
 // Execute executes the request
 //
 //	@return RemoveComputedTraitFromSpace200Response
-func (a *ComputedTraitsAPIService) RemoveComputedTraitFromSpaceExecute(
+func (a *ComputedTraitsApiService) RemoveComputedTraitFromSpaceExecute(
 	r ApiRemoveComputedTraitFromSpaceRequest,
 ) (*RemoveComputedTraitFromSpace200Response, *http.Response, error) {
 	var (
@@ -445,7 +439,7 @@ func (a *ComputedTraitsAPIService) RemoveComputedTraitFromSpaceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ComputedTraitsAPIService.RemoveComputedTraitFromSpace",
+		"ComputedTraitsApiService.RemoveComputedTraitFromSpace",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -455,13 +449,13 @@ func (a *ComputedTraitsAPIService) RemoveComputedTraitFromSpaceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"id"+"}",
-		url.PathEscape(parameterValueToString(r.id, "id")),
+		url.PathEscape(parameterToString(r.id, "")),
 		-1,
 	)
 
@@ -508,9 +502,9 @@ func (a *ComputedTraitsAPIService) RemoveComputedTraitFromSpaceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -527,7 +521,6 @@ func (a *ComputedTraitsAPIService) RemoveComputedTraitFromSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -538,7 +531,6 @@ func (a *ComputedTraitsAPIService) RemoveComputedTraitFromSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -549,7 +541,6 @@ func (a *ComputedTraitsAPIService) RemoveComputedTraitFromSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -573,7 +564,7 @@ func (a *ComputedTraitsAPIService) RemoveComputedTraitFromSpaceExecute(
 
 type ApiUpdateComputedTraitForSpaceRequest struct {
 	ctx                                   context.Context
-	ApiService                            *ComputedTraitsAPIService
+	ApiService                            *ComputedTraitsApiService
 	spaceId                               string
 	id                                    string
 	updateComputedTraitForSpaceAlphaInput *UpdateComputedTraitForSpaceAlphaInput
@@ -610,7 +601,7 @@ The rate limit for this endpoint is 10 requests per minute, which is lower than 
 	@param id
 	@return ApiUpdateComputedTraitForSpaceRequest
 */
-func (a *ComputedTraitsAPIService) UpdateComputedTraitForSpace(
+func (a *ComputedTraitsApiService) UpdateComputedTraitForSpace(
 	ctx context.Context,
 	spaceId string,
 	id string,
@@ -626,7 +617,7 @@ func (a *ComputedTraitsAPIService) UpdateComputedTraitForSpace(
 // Execute executes the request
 //
 //	@return UpdateComputedTraitForSpace200Response
-func (a *ComputedTraitsAPIService) UpdateComputedTraitForSpaceExecute(
+func (a *ComputedTraitsApiService) UpdateComputedTraitForSpaceExecute(
 	r ApiUpdateComputedTraitForSpaceRequest,
 ) (*UpdateComputedTraitForSpace200Response, *http.Response, error) {
 	var (
@@ -638,7 +629,7 @@ func (a *ComputedTraitsAPIService) UpdateComputedTraitForSpaceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ComputedTraitsAPIService.UpdateComputedTraitForSpace",
+		"ComputedTraitsApiService.UpdateComputedTraitForSpace",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -648,13 +639,13 @@ func (a *ComputedTraitsAPIService) UpdateComputedTraitForSpaceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"id"+"}",
-		url.PathEscape(parameterValueToString(r.id, "id")),
+		url.PathEscape(parameterToString(r.id, "")),
 		-1,
 	)
 
@@ -708,9 +699,9 @@ func (a *ComputedTraitsAPIService) UpdateComputedTraitForSpaceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -727,7 +718,6 @@ func (a *ComputedTraitsAPIService) UpdateComputedTraitForSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -738,7 +728,6 @@ func (a *ComputedTraitsAPIService) UpdateComputedTraitForSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -749,7 +738,6 @@ func (a *ComputedTraitsAPIService) UpdateComputedTraitForSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

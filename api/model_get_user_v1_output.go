@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,19 +15,16 @@ import (
 	"encoding/json"
 )
 
-// checks if the GetUserV1Output type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetUserV1Output{}
-
 // GetUserV1Output Returns the user.
 type GetUserV1Output struct {
-	User UserV1 `json:"user"`
+	User User `json:"user"`
 }
 
 // NewGetUserV1Output instantiates a new GetUserV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetUserV1Output(user UserV1) *GetUserV1Output {
+func NewGetUserV1Output(user User) *GetUserV1Output {
 	this := GetUserV1Output{}
 	this.User = user
 	return &this
@@ -42,9 +39,9 @@ func NewGetUserV1OutputWithDefaults() *GetUserV1Output {
 }
 
 // GetUser returns the User field value
-func (o *GetUserV1Output) GetUser() UserV1 {
+func (o *GetUserV1Output) GetUser() User {
 	if o == nil {
-		var ret UserV1
+		var ret User
 		return ret
 	}
 
@@ -53,7 +50,7 @@ func (o *GetUserV1Output) GetUser() UserV1 {
 
 // GetUserOk returns a tuple with the User field value
 // and a boolean to check if the value has been set.
-func (o *GetUserV1Output) GetUserOk() (*UserV1, bool) {
+func (o *GetUserV1Output) GetUserOk() (*User, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -61,22 +58,16 @@ func (o *GetUserV1Output) GetUserOk() (*UserV1, bool) {
 }
 
 // SetUser sets field value
-func (o *GetUserV1Output) SetUser(v UserV1) {
+func (o *GetUserV1Output) SetUser(v User) {
 	o.User = v
 }
 
 func (o GetUserV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["user"] = o.User
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o GetUserV1Output) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["user"] = o.User
-	return toSerialize, nil
 }
 
 type NullableGetUserV1Output struct {

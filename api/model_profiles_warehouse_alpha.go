@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,22 +15,19 @@ import (
 	"encoding/json"
 )
 
-// checks if the ProfilesWarehouseAlpha type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ProfilesWarehouseAlpha{}
-
 // ProfilesWarehouseAlpha Defines a Profiles data Warehouse used as a Destination for Segment data.
 type ProfilesWarehouseAlpha struct {
 	// The id of the Warehouse.
 	Id string `json:"id"`
 	// The Space id.
-	SpaceId  string              `json:"spaceId"`
-	Metadata WarehouseMetadataV1 `json:"metadata"`
+	SpaceId  string    `json:"spaceId"`
+	Metadata Metadata1 `json:"metadata"`
 	// The id of the Workspace that owns this Warehouse.
 	WorkspaceId string `json:"workspaceId"`
 	// When set to true, this Warehouse receives data.
 	Enabled bool `json:"enabled"`
-	// A key-value object that contains instance-specific Warehouse settings.
-	Settings map[string]interface{} `json:"settings"`
+	// The settings associated with this Warehouse.  Common settings are connection-related configuration used to connect to it, for example host, username, and port.
+	Settings NullableModelMap `json:"settings"`
 	// The custom schema name that Segment uses on the Warehouse side.
 	SchemaName *string `json:"schemaName,omitempty"`
 }
@@ -42,10 +39,10 @@ type ProfilesWarehouseAlpha struct {
 func NewProfilesWarehouseAlpha(
 	id string,
 	spaceId string,
-	metadata WarehouseMetadataV1,
+	metadata Metadata1,
 	workspaceId string,
 	enabled bool,
-	settings map[string]interface{},
+	settings NullableModelMap,
 ) *ProfilesWarehouseAlpha {
 	this := ProfilesWarehouseAlpha{}
 	this.Id = id
@@ -114,9 +111,9 @@ func (o *ProfilesWarehouseAlpha) SetSpaceId(v string) {
 }
 
 // GetMetadata returns the Metadata field value
-func (o *ProfilesWarehouseAlpha) GetMetadata() WarehouseMetadataV1 {
+func (o *ProfilesWarehouseAlpha) GetMetadata() Metadata1 {
 	if o == nil {
-		var ret WarehouseMetadataV1
+		var ret Metadata1
 		return ret
 	}
 
@@ -125,7 +122,7 @@ func (o *ProfilesWarehouseAlpha) GetMetadata() WarehouseMetadataV1 {
 
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
-func (o *ProfilesWarehouseAlpha) GetMetadataOk() (*WarehouseMetadataV1, bool) {
+func (o *ProfilesWarehouseAlpha) GetMetadataOk() (*Metadata1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -133,7 +130,7 @@ func (o *ProfilesWarehouseAlpha) GetMetadataOk() (*WarehouseMetadataV1, bool) {
 }
 
 // SetMetadata sets field value
-func (o *ProfilesWarehouseAlpha) SetMetadata(v WarehouseMetadataV1) {
+func (o *ProfilesWarehouseAlpha) SetMetadata(v Metadata1) {
 	o.Metadata = v
 }
 
@@ -186,32 +183,34 @@ func (o *ProfilesWarehouseAlpha) SetEnabled(v bool) {
 }
 
 // GetSettings returns the Settings field value
-func (o *ProfilesWarehouseAlpha) GetSettings() map[string]interface{} {
-	if o == nil {
-		var ret map[string]interface{}
+// If the value is explicit nil, the zero value for ModelMap will be returned
+func (o *ProfilesWarehouseAlpha) GetSettings() ModelMap {
+	if o == nil || o.Settings.Get() == nil {
+		var ret ModelMap
 		return ret
 	}
 
-	return o.Settings
+	return *o.Settings.Get()
 }
 
 // GetSettingsOk returns a tuple with the Settings field value
 // and a boolean to check if the value has been set.
-func (o *ProfilesWarehouseAlpha) GetSettingsOk() (map[string]interface{}, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ProfilesWarehouseAlpha) GetSettingsOk() (*ModelMap, bool) {
 	if o == nil {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
-	return o.Settings, true
+	return o.Settings.Get(), o.Settings.IsSet()
 }
 
 // SetSettings sets field value
-func (o *ProfilesWarehouseAlpha) SetSettings(v map[string]interface{}) {
-	o.Settings = v
+func (o *ProfilesWarehouseAlpha) SetSettings(v ModelMap) {
+	o.Settings.Set(&v)
 }
 
 // GetSchemaName returns the SchemaName field value if set, zero value otherwise.
 func (o *ProfilesWarehouseAlpha) GetSchemaName() string {
-	if o == nil || IsNil(o.SchemaName) {
+	if o == nil || o.SchemaName == nil {
 		var ret string
 		return ret
 	}
@@ -221,7 +220,7 @@ func (o *ProfilesWarehouseAlpha) GetSchemaName() string {
 // GetSchemaNameOk returns a tuple with the SchemaName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ProfilesWarehouseAlpha) GetSchemaNameOk() (*string, bool) {
-	if o == nil || IsNil(o.SchemaName) {
+	if o == nil || o.SchemaName == nil {
 		return nil, false
 	}
 	return o.SchemaName, true
@@ -229,7 +228,7 @@ func (o *ProfilesWarehouseAlpha) GetSchemaNameOk() (*string, bool) {
 
 // HasSchemaName returns a boolean if a field has been set.
 func (o *ProfilesWarehouseAlpha) HasSchemaName() bool {
-	if o != nil && !IsNil(o.SchemaName) {
+	if o != nil && o.SchemaName != nil {
 		return true
 	}
 
@@ -242,25 +241,29 @@ func (o *ProfilesWarehouseAlpha) SetSchemaName(v string) {
 }
 
 func (o ProfilesWarehouseAlpha) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o ProfilesWarehouseAlpha) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["spaceId"] = o.SpaceId
-	toSerialize["metadata"] = o.Metadata
-	toSerialize["workspaceId"] = o.WorkspaceId
-	toSerialize["enabled"] = o.Enabled
-	toSerialize["settings"] = o.Settings
-	if !IsNil(o.SchemaName) {
+	if true {
+		toSerialize["id"] = o.Id
+	}
+	if true {
+		toSerialize["spaceId"] = o.SpaceId
+	}
+	if true {
+		toSerialize["metadata"] = o.Metadata
+	}
+	if true {
+		toSerialize["workspaceId"] = o.WorkspaceId
+	}
+	if true {
+		toSerialize["enabled"] = o.Enabled
+	}
+	if true {
+		toSerialize["settings"] = o.Settings.Get()
+	}
+	if o.SchemaName != nil {
 		toSerialize["schemaName"] = o.SchemaName
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableProfilesWarehouseAlpha struct {

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the UpdateFunctionV1Input type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateFunctionV1Input{}
 
 // UpdateFunctionV1Input Update a Function.
 type UpdateFunctionV1Input struct {
@@ -51,7 +48,7 @@ func NewUpdateFunctionV1InputWithDefaults() *UpdateFunctionV1Input {
 
 // GetCode returns the Code field value if set, zero value otherwise.
 func (o *UpdateFunctionV1Input) GetCode() string {
-	if o == nil || IsNil(o.Code) {
+	if o == nil || o.Code == nil {
 		var ret string
 		return ret
 	}
@@ -61,7 +58,7 @@ func (o *UpdateFunctionV1Input) GetCode() string {
 // GetCodeOk returns a tuple with the Code field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateFunctionV1Input) GetCodeOk() (*string, bool) {
-	if o == nil || IsNil(o.Code) {
+	if o == nil || o.Code == nil {
 		return nil, false
 	}
 	return o.Code, true
@@ -69,7 +66,7 @@ func (o *UpdateFunctionV1Input) GetCodeOk() (*string, bool) {
 
 // HasCode returns a boolean if a field has been set.
 func (o *UpdateFunctionV1Input) HasCode() bool {
-	if o != nil && !IsNil(o.Code) {
+	if o != nil && o.Code != nil {
 		return true
 	}
 
@@ -83,7 +80,7 @@ func (o *UpdateFunctionV1Input) SetCode(v string) {
 
 // GetSettings returns the Settings field value if set, zero value otherwise.
 func (o *UpdateFunctionV1Input) GetSettings() []FunctionSettingV1 {
-	if o == nil || IsNil(o.Settings) {
+	if o == nil || o.Settings == nil {
 		var ret []FunctionSettingV1
 		return ret
 	}
@@ -93,7 +90,7 @@ func (o *UpdateFunctionV1Input) GetSettings() []FunctionSettingV1 {
 // GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateFunctionV1Input) GetSettingsOk() ([]FunctionSettingV1, bool) {
-	if o == nil || IsNil(o.Settings) {
+	if o == nil || o.Settings == nil {
 		return nil, false
 	}
 	return o.Settings, true
@@ -101,7 +98,7 @@ func (o *UpdateFunctionV1Input) GetSettingsOk() ([]FunctionSettingV1, bool) {
 
 // HasSettings returns a boolean if a field has been set.
 func (o *UpdateFunctionV1Input) HasSettings() bool {
-	if o != nil && !IsNil(o.Settings) {
+	if o != nil && o.Settings != nil {
 		return true
 	}
 
@@ -115,7 +112,7 @@ func (o *UpdateFunctionV1Input) SetSettings(v []FunctionSettingV1) {
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
 func (o *UpdateFunctionV1Input) GetDisplayName() string {
-	if o == nil || IsNil(o.DisplayName) {
+	if o == nil || o.DisplayName == nil {
 		var ret string
 		return ret
 	}
@@ -125,7 +122,7 @@ func (o *UpdateFunctionV1Input) GetDisplayName() string {
 // GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateFunctionV1Input) GetDisplayNameOk() (*string, bool) {
-	if o == nil || IsNil(o.DisplayName) {
+	if o == nil || o.DisplayName == nil {
 		return nil, false
 	}
 	return o.DisplayName, true
@@ -133,7 +130,7 @@ func (o *UpdateFunctionV1Input) GetDisplayNameOk() (*string, bool) {
 
 // HasDisplayName returns a boolean if a field has been set.
 func (o *UpdateFunctionV1Input) HasDisplayName() bool {
-	if o != nil && !IsNil(o.DisplayName) {
+	if o != nil && o.DisplayName != nil {
 		return true
 	}
 
@@ -147,7 +144,7 @@ func (o *UpdateFunctionV1Input) SetDisplayName(v string) {
 
 // GetLogoUrl returns the LogoUrl field value if set, zero value otherwise.
 func (o *UpdateFunctionV1Input) GetLogoUrl() string {
-	if o == nil || IsNil(o.LogoUrl) {
+	if o == nil || o.LogoUrl == nil {
 		var ret string
 		return ret
 	}
@@ -157,7 +154,7 @@ func (o *UpdateFunctionV1Input) GetLogoUrl() string {
 // GetLogoUrlOk returns a tuple with the LogoUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateFunctionV1Input) GetLogoUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.LogoUrl) {
+	if o == nil || o.LogoUrl == nil {
 		return nil, false
 	}
 	return o.LogoUrl, true
@@ -165,7 +162,7 @@ func (o *UpdateFunctionV1Input) GetLogoUrlOk() (*string, bool) {
 
 // HasLogoUrl returns a boolean if a field has been set.
 func (o *UpdateFunctionV1Input) HasLogoUrl() bool {
-	if o != nil && !IsNil(o.LogoUrl) {
+	if o != nil && o.LogoUrl != nil {
 		return true
 	}
 
@@ -179,7 +176,7 @@ func (o *UpdateFunctionV1Input) SetLogoUrl(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *UpdateFunctionV1Input) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || o.Description == nil {
 		var ret string
 		return ret
 	}
@@ -189,7 +186,7 @@ func (o *UpdateFunctionV1Input) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateFunctionV1Input) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || o.Description == nil {
 		return nil, false
 	}
 	return o.Description, true
@@ -197,7 +194,7 @@ func (o *UpdateFunctionV1Input) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *UpdateFunctionV1Input) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
+	if o != nil && o.Description != nil {
 		return true
 	}
 
@@ -210,31 +207,23 @@ func (o *UpdateFunctionV1Input) SetDescription(v string) {
 }
 
 func (o UpdateFunctionV1Input) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o UpdateFunctionV1Input) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Code) {
+	if o.Code != nil {
 		toSerialize["code"] = o.Code
 	}
-	if !IsNil(o.Settings) {
+	if o.Settings != nil {
 		toSerialize["settings"] = o.Settings
 	}
-	if !IsNil(o.DisplayName) {
+	if o.DisplayName != nil {
 		toSerialize["displayName"] = o.DisplayName
 	}
-	if !IsNil(o.LogoUrl) {
+	if o.LogoUrl != nil {
 		toSerialize["logoUrl"] = o.LogoUrl
 	}
-	if !IsNil(o.Description) {
+	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableUpdateFunctionV1Input struct {

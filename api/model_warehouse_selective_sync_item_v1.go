@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the WarehouseSelectiveSyncItemV1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &WarehouseSelectiveSyncItemV1{}
 
 // WarehouseSelectiveSyncItemV1 Represents an entry in the Warehouse Selective Sync schema for a Warehouse and Source pair.
 type WarehouseSelectiveSyncItemV1 struct {
@@ -142,7 +139,7 @@ func (o *WarehouseSelectiveSyncItemV1) GetProperties() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *WarehouseSelectiveSyncItemV1) GetPropertiesOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.Properties, true
 }
@@ -153,20 +150,20 @@ func (o *WarehouseSelectiveSyncItemV1) SetProperties(v map[string]interface{}) {
 }
 
 func (o WarehouseSelectiveSyncItemV1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["sourceId"] = o.SourceId
+	}
+	if true {
+		toSerialize["collection"] = o.Collection
+	}
+	if true {
+		toSerialize["warehouseId"] = o.WarehouseId
+	}
+	if true {
+		toSerialize["properties"] = o.Properties
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o WarehouseSelectiveSyncItemV1) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["sourceId"] = o.SourceId
-	toSerialize["collection"] = o.Collection
-	toSerialize["warehouseId"] = o.WarehouseId
-	toSerialize["properties"] = o.Properties
-	return toSerialize, nil
 }
 
 type NullableWarehouseSelectiveSyncItemV1 struct {

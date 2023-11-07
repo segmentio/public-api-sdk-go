@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the UpdateTrackingPlanV1Input type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateTrackingPlanV1Input{}
 
 // UpdateTrackingPlanV1Input Updates the Workspace's Tracking Plan.
 type UpdateTrackingPlanV1Input struct {
@@ -45,7 +42,7 @@ func NewUpdateTrackingPlanV1InputWithDefaults() *UpdateTrackingPlanV1Input {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *UpdateTrackingPlanV1Input) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || o.Name == nil {
 		var ret string
 		return ret
 	}
@@ -55,7 +52,7 @@ func (o *UpdateTrackingPlanV1Input) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateTrackingPlanV1Input) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || o.Name == nil {
 		return nil, false
 	}
 	return o.Name, true
@@ -63,7 +60,7 @@ func (o *UpdateTrackingPlanV1Input) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *UpdateTrackingPlanV1Input) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name != nil {
 		return true
 	}
 
@@ -77,7 +74,7 @@ func (o *UpdateTrackingPlanV1Input) SetName(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *UpdateTrackingPlanV1Input) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || o.Description == nil {
 		var ret string
 		return ret
 	}
@@ -87,7 +84,7 @@ func (o *UpdateTrackingPlanV1Input) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateTrackingPlanV1Input) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || o.Description == nil {
 		return nil, false
 	}
 	return o.Description, true
@@ -95,7 +92,7 @@ func (o *UpdateTrackingPlanV1Input) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *UpdateTrackingPlanV1Input) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
+	if o != nil && o.Description != nil {
 		return true
 	}
 
@@ -108,22 +105,14 @@ func (o *UpdateTrackingPlanV1Input) SetDescription(v string) {
 }
 
 func (o UpdateTrackingPlanV1Input) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o UpdateTrackingPlanV1Input) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
+	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.Description) {
+	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableUpdateTrackingPlanV1Input struct {

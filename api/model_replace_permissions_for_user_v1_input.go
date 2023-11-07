@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the ReplacePermissionsForUserV1Input type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ReplacePermissionsForUserV1Input{}
 
 // ReplacePermissionsForUserV1Input Updates the list of permissions for a user.
 type ReplacePermissionsForUserV1Input struct {
@@ -69,17 +66,11 @@ func (o *ReplacePermissionsForUserV1Input) SetPermissions(v []PermissionInputV1)
 }
 
 func (o ReplacePermissionsForUserV1Input) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["permissions"] = o.Permissions
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o ReplacePermissionsForUserV1Input) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["permissions"] = o.Permissions
-	return toSerialize, nil
 }
 
 type NullableReplacePermissionsForUserV1Input struct {

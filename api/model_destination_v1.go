@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,9 +15,6 @@ import (
 	"encoding/json"
 )
 
-// checks if the DestinationV1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &DestinationV1{}
-
 // DestinationV1 Business tools or apps that you can connect to the data flowing through Segment.  This is equal to the Destination object in Config API, with the following fields omitted: - catalogId - createTime - updateTime - connectionMode.
 type DestinationV1 struct {
 	// The unique identifier of this instance of a Destination.  Config API note: analogous to `name`.
@@ -25,8 +22,8 @@ type DestinationV1 struct {
 	// The name of this instance of a Destination.  Config API note: equal to `displayName`.
 	Name *string `json:"name,omitempty"`
 	// Whether this instance of a Destination receives data.
-	Enabled  bool                  `json:"enabled"`
-	Metadata DestinationMetadataV1 `json:"metadata"`
+	Enabled  bool     `json:"enabled"`
+	Metadata Metadata `json:"metadata"`
 	// The id of a Source connected to this instance of a Destination.  Config API note: analogous to `parent`.
 	SourceId string `json:"sourceId"`
 	// The collection of settings associated with a Destination.  Config API note: equal to `config`.
@@ -40,7 +37,7 @@ type DestinationV1 struct {
 func NewDestinationV1(
 	id string,
 	enabled bool,
-	metadata DestinationMetadataV1,
+	metadata Metadata,
 	sourceId string,
 	settings map[string]interface{},
 ) *DestinationV1 {
@@ -87,7 +84,7 @@ func (o *DestinationV1) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *DestinationV1) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || o.Name == nil {
 		var ret string
 		return ret
 	}
@@ -97,7 +94,7 @@ func (o *DestinationV1) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationV1) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || o.Name == nil {
 		return nil, false
 	}
 	return o.Name, true
@@ -105,7 +102,7 @@ func (o *DestinationV1) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *DestinationV1) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name != nil {
 		return true
 	}
 
@@ -142,9 +139,9 @@ func (o *DestinationV1) SetEnabled(v bool) {
 }
 
 // GetMetadata returns the Metadata field value
-func (o *DestinationV1) GetMetadata() DestinationMetadataV1 {
+func (o *DestinationV1) GetMetadata() Metadata {
 	if o == nil {
-		var ret DestinationMetadataV1
+		var ret Metadata
 		return ret
 	}
 
@@ -153,7 +150,7 @@ func (o *DestinationV1) GetMetadata() DestinationMetadataV1 {
 
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
-func (o *DestinationV1) GetMetadataOk() (*DestinationMetadataV1, bool) {
+func (o *DestinationV1) GetMetadataOk() (*Metadata, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -161,7 +158,7 @@ func (o *DestinationV1) GetMetadataOk() (*DestinationMetadataV1, bool) {
 }
 
 // SetMetadata sets field value
-func (o *DestinationV1) SetMetadata(v DestinationMetadataV1) {
+func (o *DestinationV1) SetMetadata(v Metadata) {
 	o.Metadata = v
 }
 
@@ -203,7 +200,7 @@ func (o *DestinationV1) GetSettings() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *DestinationV1) GetSettingsOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.Settings, true
 }
@@ -214,24 +211,26 @@ func (o *DestinationV1) SetSettings(v map[string]interface{}) {
 }
 
 func (o DestinationV1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o DestinationV1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	if !IsNil(o.Name) {
+	if true {
+		toSerialize["id"] = o.Id
+	}
+	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
-	toSerialize["enabled"] = o.Enabled
-	toSerialize["metadata"] = o.Metadata
-	toSerialize["sourceId"] = o.SourceId
-	toSerialize["settings"] = o.Settings
-	return toSerialize, nil
+	if true {
+		toSerialize["enabled"] = o.Enabled
+	}
+	if true {
+		toSerialize["metadata"] = o.Metadata
+	}
+	if true {
+		toSerialize["sourceId"] = o.SourceId
+	}
+	if true {
+		toSerialize["settings"] = o.Settings
+	}
+	return json.Marshal(toSerialize)
 }
 
 type NullableDestinationV1 struct {

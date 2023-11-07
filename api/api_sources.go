@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// SourcesAPIService SourcesAPI service
-type SourcesAPIService service
+// SourcesApiService SourcesApi service
+type SourcesApiService service
 
 type ApiAddLabelsToSourceRequest struct {
 	ctx                      context.Context
-	ApiService               *SourcesAPIService
+	ApiService               *SourcesApiService
 	sourceId                 string
 	addLabelsToSourceV1Input *AddLabelsToSourceV1Input
 }
@@ -52,7 +52,7 @@ Adds an existing label to a Source.
 	@param sourceId
 	@return ApiAddLabelsToSourceRequest
 */
-func (a *SourcesAPIService) AddLabelsToSource(
+func (a *SourcesApiService) AddLabelsToSource(
 	ctx context.Context,
 	sourceId string,
 ) ApiAddLabelsToSourceRequest {
@@ -66,7 +66,7 @@ func (a *SourcesAPIService) AddLabelsToSource(
 // Execute executes the request
 //
 //	@return AddLabelsToSource200Response
-func (a *SourcesAPIService) AddLabelsToSourceExecute(
+func (a *SourcesApiService) AddLabelsToSourceExecute(
 	r ApiAddLabelsToSourceRequest,
 ) (*AddLabelsToSource200Response, *http.Response, error) {
 	var (
@@ -78,7 +78,7 @@ func (a *SourcesAPIService) AddLabelsToSourceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SourcesAPIService.AddLabelsToSource",
+		"SourcesApiService.AddLabelsToSource",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -88,7 +88,7 @@ func (a *SourcesAPIService) AddLabelsToSourceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -148,9 +148,9 @@ func (a *SourcesAPIService) AddLabelsToSourceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -167,7 +167,6 @@ func (a *SourcesAPIService) AddLabelsToSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -178,7 +177,6 @@ func (a *SourcesAPIService) AddLabelsToSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -189,7 +187,6 @@ func (a *SourcesAPIService) AddLabelsToSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -213,7 +210,7 @@ func (a *SourcesAPIService) AddLabelsToSourceExecute(
 
 type ApiCreateSourceRequest struct {
 	ctx                 context.Context
-	ApiService          *SourcesAPIService
+	ApiService          *SourcesApiService
 	createSourceV1Input *CreateSourceV1Input
 }
 
@@ -238,7 +235,7 @@ Creates a new Source.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateSourceRequest
 */
-func (a *SourcesAPIService) CreateSource(ctx context.Context) ApiCreateSourceRequest {
+func (a *SourcesApiService) CreateSource(ctx context.Context) ApiCreateSourceRequest {
 	return ApiCreateSourceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -248,7 +245,7 @@ func (a *SourcesAPIService) CreateSource(ctx context.Context) ApiCreateSourceReq
 // Execute executes the request
 //
 //	@return CreateSource200Response
-func (a *SourcesAPIService) CreateSourceExecute(
+func (a *SourcesApiService) CreateSourceExecute(
 	r ApiCreateSourceRequest,
 ) (*CreateSource200Response, *http.Response, error) {
 	var (
@@ -258,7 +255,7 @@ func (a *SourcesAPIService) CreateSourceExecute(
 		localVarReturnValue *CreateSource200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesAPIService.CreateSource")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesApiService.CreateSource")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -321,9 +318,9 @@ func (a *SourcesAPIService) CreateSourceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -340,7 +337,6 @@ func (a *SourcesAPIService) CreateSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -351,7 +347,6 @@ func (a *SourcesAPIService) CreateSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -362,7 +357,6 @@ func (a *SourcesAPIService) CreateSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -386,7 +380,7 @@ func (a *SourcesAPIService) CreateSourceExecute(
 
 type ApiDeleteSourceRequest struct {
 	ctx        context.Context
-	ApiService *SourcesAPIService
+	ApiService *SourcesApiService
 	sourceId   string
 }
 
@@ -405,7 +399,7 @@ Deletes an existing Source.
 	@param sourceId
 	@return ApiDeleteSourceRequest
 */
-func (a *SourcesAPIService) DeleteSource(
+func (a *SourcesApiService) DeleteSource(
 	ctx context.Context,
 	sourceId string,
 ) ApiDeleteSourceRequest {
@@ -419,7 +413,7 @@ func (a *SourcesAPIService) DeleteSource(
 // Execute executes the request
 //
 //	@return DeleteSource200Response
-func (a *SourcesAPIService) DeleteSourceExecute(
+func (a *SourcesApiService) DeleteSourceExecute(
 	r ApiDeleteSourceRequest,
 ) (*DeleteSource200Response, *http.Response, error) {
 	var (
@@ -429,7 +423,7 @@ func (a *SourcesAPIService) DeleteSourceExecute(
 		localVarReturnValue *DeleteSource200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesAPIService.DeleteSource")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesApiService.DeleteSource")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -438,7 +432,7 @@ func (a *SourcesAPIService) DeleteSourceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -487,9 +481,9 @@ func (a *SourcesAPIService) DeleteSourceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -506,7 +500,6 @@ func (a *SourcesAPIService) DeleteSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -517,7 +510,6 @@ func (a *SourcesAPIService) DeleteSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -528,7 +520,6 @@ func (a *SourcesAPIService) DeleteSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -552,7 +543,7 @@ func (a *SourcesAPIService) DeleteSourceExecute(
 
 type ApiGetSourceRequest struct {
 	ctx        context.Context
-	ApiService *SourcesAPIService
+	ApiService *SourcesApiService
 	sourceId   string
 }
 
@@ -569,7 +560,7 @@ Returns a Source by its id.
 	@param sourceId
 	@return ApiGetSourceRequest
 */
-func (a *SourcesAPIService) GetSource(ctx context.Context, sourceId string) ApiGetSourceRequest {
+func (a *SourcesApiService) GetSource(ctx context.Context, sourceId string) ApiGetSourceRequest {
 	return ApiGetSourceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -580,7 +571,7 @@ func (a *SourcesAPIService) GetSource(ctx context.Context, sourceId string) ApiG
 // Execute executes the request
 //
 //	@return GetSource200Response
-func (a *SourcesAPIService) GetSourceExecute(
+func (a *SourcesApiService) GetSourceExecute(
 	r ApiGetSourceRequest,
 ) (*GetSource200Response, *http.Response, error) {
 	var (
@@ -590,7 +581,7 @@ func (a *SourcesAPIService) GetSourceExecute(
 		localVarReturnValue *GetSource200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesAPIService.GetSource")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesApiService.GetSource")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -599,7 +590,7 @@ func (a *SourcesAPIService) GetSourceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -648,9 +639,9 @@ func (a *SourcesAPIService) GetSourceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -667,7 +658,6 @@ func (a *SourcesAPIService) GetSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -678,7 +668,6 @@ func (a *SourcesAPIService) GetSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -689,7 +678,6 @@ func (a *SourcesAPIService) GetSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -713,7 +701,7 @@ func (a *SourcesAPIService) GetSourceExecute(
 
 type ApiListConnectedDestinationsFromSourceRequest struct {
 	ctx        context.Context
-	ApiService *SourcesAPIService
+	ApiService *SourcesApiService
 	sourceId   string
 	pagination *PaginationInput
 }
@@ -739,7 +727,7 @@ Returns a list of Destinations connected to a Source.
 	@param sourceId
 	@return ApiListConnectedDestinationsFromSourceRequest
 */
-func (a *SourcesAPIService) ListConnectedDestinationsFromSource(
+func (a *SourcesApiService) ListConnectedDestinationsFromSource(
 	ctx context.Context,
 	sourceId string,
 ) ApiListConnectedDestinationsFromSourceRequest {
@@ -753,7 +741,7 @@ func (a *SourcesAPIService) ListConnectedDestinationsFromSource(
 // Execute executes the request
 //
 //	@return ListConnectedDestinationsFromSource200Response
-func (a *SourcesAPIService) ListConnectedDestinationsFromSourceExecute(
+func (a *SourcesApiService) ListConnectedDestinationsFromSourceExecute(
 	r ApiListConnectedDestinationsFromSourceRequest,
 ) (*ListConnectedDestinationsFromSource200Response, *http.Response, error) {
 	var (
@@ -765,7 +753,7 @@ func (a *SourcesAPIService) ListConnectedDestinationsFromSourceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SourcesAPIService.ListConnectedDestinationsFromSource",
+		"SourcesApiService.ListConnectedDestinationsFromSource",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -775,7 +763,7 @@ func (a *SourcesAPIService) ListConnectedDestinationsFromSourceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -786,7 +774,7 @@ func (a *SourcesAPIService) ListConnectedDestinationsFromSourceExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -828,9 +816,9 @@ func (a *SourcesAPIService) ListConnectedDestinationsFromSourceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -847,7 +835,6 @@ func (a *SourcesAPIService) ListConnectedDestinationsFromSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -858,7 +845,6 @@ func (a *SourcesAPIService) ListConnectedDestinationsFromSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -869,7 +855,6 @@ func (a *SourcesAPIService) ListConnectedDestinationsFromSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -893,7 +878,7 @@ func (a *SourcesAPIService) ListConnectedDestinationsFromSourceExecute(
 
 type ApiListConnectedWarehousesFromSourceRequest struct {
 	ctx        context.Context
-	ApiService *SourcesAPIService
+	ApiService *SourcesApiService
 	sourceId   string
 	pagination *PaginationInput
 }
@@ -919,7 +904,7 @@ Returns a list of Warehouses connected to a Source.
 	@param sourceId
 	@return ApiListConnectedWarehousesFromSourceRequest
 */
-func (a *SourcesAPIService) ListConnectedWarehousesFromSource(
+func (a *SourcesApiService) ListConnectedWarehousesFromSource(
 	ctx context.Context,
 	sourceId string,
 ) ApiListConnectedWarehousesFromSourceRequest {
@@ -933,7 +918,7 @@ func (a *SourcesAPIService) ListConnectedWarehousesFromSource(
 // Execute executes the request
 //
 //	@return ListConnectedWarehousesFromSource200Response
-func (a *SourcesAPIService) ListConnectedWarehousesFromSourceExecute(
+func (a *SourcesApiService) ListConnectedWarehousesFromSourceExecute(
 	r ApiListConnectedWarehousesFromSourceRequest,
 ) (*ListConnectedWarehousesFromSource200Response, *http.Response, error) {
 	var (
@@ -945,7 +930,7 @@ func (a *SourcesAPIService) ListConnectedWarehousesFromSourceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SourcesAPIService.ListConnectedWarehousesFromSource",
+		"SourcesApiService.ListConnectedWarehousesFromSource",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -955,7 +940,7 @@ func (a *SourcesAPIService) ListConnectedWarehousesFromSourceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -966,7 +951,7 @@ func (a *SourcesAPIService) ListConnectedWarehousesFromSourceExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1008,9 +993,9 @@ func (a *SourcesAPIService) ListConnectedWarehousesFromSourceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1027,7 +1012,6 @@ func (a *SourcesAPIService) ListConnectedWarehousesFromSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1038,7 +1022,6 @@ func (a *SourcesAPIService) ListConnectedWarehousesFromSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1049,7 +1032,6 @@ func (a *SourcesAPIService) ListConnectedWarehousesFromSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1073,7 +1055,7 @@ func (a *SourcesAPIService) ListConnectedWarehousesFromSourceExecute(
 
 type ApiListSchemaSettingsInSourceRequest struct {
 	ctx        context.Context
-	ApiService *SourcesAPIService
+	ApiService *SourcesApiService
 	sourceId   string
 }
 
@@ -1090,7 +1072,7 @@ Retrieves the schema configuration settings for a Source. If Protocols is not en
 	@param sourceId
 	@return ApiListSchemaSettingsInSourceRequest
 */
-func (a *SourcesAPIService) ListSchemaSettingsInSource(
+func (a *SourcesApiService) ListSchemaSettingsInSource(
 	ctx context.Context,
 	sourceId string,
 ) ApiListSchemaSettingsInSourceRequest {
@@ -1104,7 +1086,7 @@ func (a *SourcesAPIService) ListSchemaSettingsInSource(
 // Execute executes the request
 //
 //	@return ListSchemaSettingsInSource200Response
-func (a *SourcesAPIService) ListSchemaSettingsInSourceExecute(
+func (a *SourcesApiService) ListSchemaSettingsInSourceExecute(
 	r ApiListSchemaSettingsInSourceRequest,
 ) (*ListSchemaSettingsInSource200Response, *http.Response, error) {
 	var (
@@ -1116,7 +1098,7 @@ func (a *SourcesAPIService) ListSchemaSettingsInSourceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SourcesAPIService.ListSchemaSettingsInSource",
+		"SourcesApiService.ListSchemaSettingsInSource",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1126,7 +1108,7 @@ func (a *SourcesAPIService) ListSchemaSettingsInSourceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -1175,9 +1157,9 @@ func (a *SourcesAPIService) ListSchemaSettingsInSourceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1194,7 +1176,6 @@ func (a *SourcesAPIService) ListSchemaSettingsInSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1205,7 +1186,6 @@ func (a *SourcesAPIService) ListSchemaSettingsInSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1216,7 +1196,6 @@ func (a *SourcesAPIService) ListSchemaSettingsInSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1240,7 +1219,7 @@ func (a *SourcesAPIService) ListSchemaSettingsInSourceExecute(
 
 type ApiListSourcesRequest struct {
 	ctx        context.Context
-	ApiService *SourcesAPIService
+	ApiService *SourcesApiService
 	pagination *PaginationInput
 }
 
@@ -1262,7 +1241,7 @@ Returns a list of Sources.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListSourcesRequest
 */
-func (a *SourcesAPIService) ListSources(ctx context.Context) ApiListSourcesRequest {
+func (a *SourcesApiService) ListSources(ctx context.Context) ApiListSourcesRequest {
 	return ApiListSourcesRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1272,7 +1251,7 @@ func (a *SourcesAPIService) ListSources(ctx context.Context) ApiListSourcesReque
 // Execute executes the request
 //
 //	@return ListSources200Response
-func (a *SourcesAPIService) ListSourcesExecute(
+func (a *SourcesApiService) ListSourcesExecute(
 	r ApiListSourcesRequest,
 ) (*ListSources200Response, *http.Response, error) {
 	var (
@@ -1282,7 +1261,7 @@ func (a *SourcesAPIService) ListSourcesExecute(
 		localVarReturnValue *ListSources200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesAPIService.ListSources")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesApiService.ListSources")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1296,7 +1275,7 @@ func (a *SourcesAPIService) ListSourcesExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1338,9 +1317,9 @@ func (a *SourcesAPIService) ListSourcesExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1357,7 +1336,6 @@ func (a *SourcesAPIService) ListSourcesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1368,7 +1346,6 @@ func (a *SourcesAPIService) ListSourcesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1379,7 +1356,6 @@ func (a *SourcesAPIService) ListSourcesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1403,7 +1379,7 @@ func (a *SourcesAPIService) ListSourcesExecute(
 
 type ApiReplaceLabelsInSourceRequest struct {
 	ctx                          context.Context
-	ApiService                   *SourcesAPIService
+	ApiService                   *SourcesApiService
 	sourceId                     string
 	replaceLabelsInSourceV1Input *ReplaceLabelsInSourceV1Input
 }
@@ -1428,7 +1404,7 @@ Replaces all labels in a Source.
 	@param sourceId
 	@return ApiReplaceLabelsInSourceRequest
 */
-func (a *SourcesAPIService) ReplaceLabelsInSource(
+func (a *SourcesApiService) ReplaceLabelsInSource(
 	ctx context.Context,
 	sourceId string,
 ) ApiReplaceLabelsInSourceRequest {
@@ -1442,7 +1418,7 @@ func (a *SourcesAPIService) ReplaceLabelsInSource(
 // Execute executes the request
 //
 //	@return ReplaceLabelsInSource200Response
-func (a *SourcesAPIService) ReplaceLabelsInSourceExecute(
+func (a *SourcesApiService) ReplaceLabelsInSourceExecute(
 	r ApiReplaceLabelsInSourceRequest,
 ) (*ReplaceLabelsInSource200Response, *http.Response, error) {
 	var (
@@ -1454,7 +1430,7 @@ func (a *SourcesAPIService) ReplaceLabelsInSourceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SourcesAPIService.ReplaceLabelsInSource",
+		"SourcesApiService.ReplaceLabelsInSource",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1464,7 +1440,7 @@ func (a *SourcesAPIService) ReplaceLabelsInSourceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -1524,9 +1500,9 @@ func (a *SourcesAPIService) ReplaceLabelsInSourceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1543,7 +1519,6 @@ func (a *SourcesAPIService) ReplaceLabelsInSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1554,7 +1529,6 @@ func (a *SourcesAPIService) ReplaceLabelsInSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1565,7 +1539,6 @@ func (a *SourcesAPIService) ReplaceLabelsInSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1589,7 +1562,7 @@ func (a *SourcesAPIService) ReplaceLabelsInSourceExecute(
 
 type ApiUpdateSchemaSettingsInSourceRequest struct {
 	ctx                                 context.Context
-	ApiService                          *SourcesAPIService
+	ApiService                          *SourcesApiService
 	sourceId                            string
 	updateSchemaSettingsInSourceV1Input *UpdateSchemaSettingsInSourceV1Input
 }
@@ -1618,7 +1591,7 @@ Updates the schema configuration for a Source. If Protocols is not enabled for t
 	@param sourceId
 	@return ApiUpdateSchemaSettingsInSourceRequest
 */
-func (a *SourcesAPIService) UpdateSchemaSettingsInSource(
+func (a *SourcesApiService) UpdateSchemaSettingsInSource(
 	ctx context.Context,
 	sourceId string,
 ) ApiUpdateSchemaSettingsInSourceRequest {
@@ -1632,7 +1605,7 @@ func (a *SourcesAPIService) UpdateSchemaSettingsInSource(
 // Execute executes the request
 //
 //	@return UpdateSchemaSettingsInSource200Response
-func (a *SourcesAPIService) UpdateSchemaSettingsInSourceExecute(
+func (a *SourcesApiService) UpdateSchemaSettingsInSourceExecute(
 	r ApiUpdateSchemaSettingsInSourceRequest,
 ) (*UpdateSchemaSettingsInSource200Response, *http.Response, error) {
 	var (
@@ -1644,7 +1617,7 @@ func (a *SourcesAPIService) UpdateSchemaSettingsInSourceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SourcesAPIService.UpdateSchemaSettingsInSource",
+		"SourcesApiService.UpdateSchemaSettingsInSource",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1654,7 +1627,7 @@ func (a *SourcesAPIService) UpdateSchemaSettingsInSourceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -1714,9 +1687,9 @@ func (a *SourcesAPIService) UpdateSchemaSettingsInSourceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1733,7 +1706,6 @@ func (a *SourcesAPIService) UpdateSchemaSettingsInSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1744,7 +1716,6 @@ func (a *SourcesAPIService) UpdateSchemaSettingsInSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1755,7 +1726,6 @@ func (a *SourcesAPIService) UpdateSchemaSettingsInSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1779,7 +1749,7 @@ func (a *SourcesAPIService) UpdateSchemaSettingsInSourceExecute(
 
 type ApiUpdateSourceRequest struct {
 	ctx                 context.Context
-	ApiService          *SourcesAPIService
+	ApiService          *SourcesApiService
 	sourceId            string
 	updateSourceV1Input *UpdateSourceV1Input
 }
@@ -1812,7 +1782,7 @@ Config API omitted fields:
 	@param sourceId
 	@return ApiUpdateSourceRequest
 */
-func (a *SourcesAPIService) UpdateSource(
+func (a *SourcesApiService) UpdateSource(
 	ctx context.Context,
 	sourceId string,
 ) ApiUpdateSourceRequest {
@@ -1826,7 +1796,7 @@ func (a *SourcesAPIService) UpdateSource(
 // Execute executes the request
 //
 //	@return UpdateSource200Response
-func (a *SourcesAPIService) UpdateSourceExecute(
+func (a *SourcesApiService) UpdateSourceExecute(
 	r ApiUpdateSourceRequest,
 ) (*UpdateSource200Response, *http.Response, error) {
 	var (
@@ -1836,7 +1806,7 @@ func (a *SourcesAPIService) UpdateSourceExecute(
 		localVarReturnValue *UpdateSource200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesAPIService.UpdateSource")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesApiService.UpdateSource")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1845,7 +1815,7 @@ func (a *SourcesAPIService) UpdateSourceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -1905,9 +1875,9 @@ func (a *SourcesAPIService) UpdateSourceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1924,7 +1894,6 @@ func (a *SourcesAPIService) UpdateSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1935,7 +1904,6 @@ func (a *SourcesAPIService) UpdateSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1946,7 +1914,6 @@ func (a *SourcesAPIService) UpdateSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// ProfilesSyncAPIService ProfilesSyncAPI service
-type ProfilesSyncAPIService service
+// ProfilesSyncApiService ProfilesSyncApi service
+type ProfilesSyncApiService service
 
 type ApiCreateProfilesWarehouseRequest struct {
 	ctx                               context.Context
-	ApiService                        *ProfilesSyncAPIService
+	ApiService                        *ProfilesSyncApiService
 	spaceId                           string
 	createProfilesWarehouseAlphaInput *CreateProfilesWarehouseAlphaInput
 }
@@ -52,7 +52,7 @@ Creates a new Profiles Warehouse.
 	@param spaceId
 	@return ApiCreateProfilesWarehouseRequest
 */
-func (a *ProfilesSyncAPIService) CreateProfilesWarehouse(
+func (a *ProfilesSyncApiService) CreateProfilesWarehouse(
 	ctx context.Context,
 	spaceId string,
 ) ApiCreateProfilesWarehouseRequest {
@@ -66,7 +66,7 @@ func (a *ProfilesSyncAPIService) CreateProfilesWarehouse(
 // Execute executes the request
 //
 //	@return CreateProfilesWarehouse200Response
-func (a *ProfilesSyncAPIService) CreateProfilesWarehouseExecute(
+func (a *ProfilesSyncApiService) CreateProfilesWarehouseExecute(
 	r ApiCreateProfilesWarehouseRequest,
 ) (*CreateProfilesWarehouse200Response, *http.Response, error) {
 	var (
@@ -78,7 +78,7 @@ func (a *ProfilesSyncAPIService) CreateProfilesWarehouseExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ProfilesSyncAPIService.CreateProfilesWarehouse",
+		"ProfilesSyncApiService.CreateProfilesWarehouse",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -88,7 +88,7 @@ func (a *ProfilesSyncAPIService) CreateProfilesWarehouseExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 
@@ -142,9 +142,9 @@ func (a *ProfilesSyncAPIService) CreateProfilesWarehouseExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -161,7 +161,6 @@ func (a *ProfilesSyncAPIService) CreateProfilesWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -172,7 +171,6 @@ func (a *ProfilesSyncAPIService) CreateProfilesWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -183,7 +181,6 @@ func (a *ProfilesSyncAPIService) CreateProfilesWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -207,7 +204,7 @@ func (a *ProfilesSyncAPIService) CreateProfilesWarehouseExecute(
 
 type ApiListProfilesWarehouseInSpaceRequest struct {
 	ctx        context.Context
-	ApiService *ProfilesSyncAPIService
+	ApiService *ProfilesSyncApiService
 	spaceId    string
 	pagination *PaginationInput
 }
@@ -235,7 +232,7 @@ Lists all Profile Warehouses for a given space id.
 	@param spaceId
 	@return ApiListProfilesWarehouseInSpaceRequest
 */
-func (a *ProfilesSyncAPIService) ListProfilesWarehouseInSpace(
+func (a *ProfilesSyncApiService) ListProfilesWarehouseInSpace(
 	ctx context.Context,
 	spaceId string,
 ) ApiListProfilesWarehouseInSpaceRequest {
@@ -249,7 +246,7 @@ func (a *ProfilesSyncAPIService) ListProfilesWarehouseInSpace(
 // Execute executes the request
 //
 //	@return ListProfilesWarehouseInSpace200Response
-func (a *ProfilesSyncAPIService) ListProfilesWarehouseInSpaceExecute(
+func (a *ProfilesSyncApiService) ListProfilesWarehouseInSpaceExecute(
 	r ApiListProfilesWarehouseInSpaceRequest,
 ) (*ListProfilesWarehouseInSpace200Response, *http.Response, error) {
 	var (
@@ -261,7 +258,7 @@ func (a *ProfilesSyncAPIService) ListProfilesWarehouseInSpaceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ProfilesSyncAPIService.ListProfilesWarehouseInSpace",
+		"ProfilesSyncApiService.ListProfilesWarehouseInSpace",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -271,7 +268,7 @@ func (a *ProfilesSyncAPIService) ListProfilesWarehouseInSpaceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 
@@ -280,7 +277,7 @@ func (a *ProfilesSyncAPIService) ListProfilesWarehouseInSpaceExecute(
 	localVarFormParams := url.Values{}
 
 	if r.pagination != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+		localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -321,9 +318,9 @@ func (a *ProfilesSyncAPIService) ListProfilesWarehouseInSpaceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -340,7 +337,6 @@ func (a *ProfilesSyncAPIService) ListProfilesWarehouseInSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -351,7 +347,6 @@ func (a *ProfilesSyncAPIService) ListProfilesWarehouseInSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -362,7 +357,6 @@ func (a *ProfilesSyncAPIService) ListProfilesWarehouseInSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -386,7 +380,7 @@ func (a *ProfilesSyncAPIService) ListProfilesWarehouseInSpaceExecute(
 
 type ApiListSelectiveSyncsFromWarehouseAndSpaceRequest struct {
 	ctx         context.Context
-	ApiService  *ProfilesSyncAPIService
+	ApiService  *ProfilesSyncApiService
 	spaceId     string
 	warehouseId string
 	pagination  *PaginationInput
@@ -414,7 +408,7 @@ Returns the schema for a Space Warehouse connection, including Collections and P
 	@param warehouseId
 	@return ApiListSelectiveSyncsFromWarehouseAndSpaceRequest
 */
-func (a *ProfilesSyncAPIService) ListSelectiveSyncsFromWarehouseAndSpace(
+func (a *ProfilesSyncApiService) ListSelectiveSyncsFromWarehouseAndSpace(
 	ctx context.Context,
 	spaceId string,
 	warehouseId string,
@@ -430,7 +424,7 @@ func (a *ProfilesSyncAPIService) ListSelectiveSyncsFromWarehouseAndSpace(
 // Execute executes the request
 //
 //	@return ListSelectiveSyncsFromWarehouseAndSpace200Response
-func (a *ProfilesSyncAPIService) ListSelectiveSyncsFromWarehouseAndSpaceExecute(
+func (a *ProfilesSyncApiService) ListSelectiveSyncsFromWarehouseAndSpaceExecute(
 	r ApiListSelectiveSyncsFromWarehouseAndSpaceRequest,
 ) (*ListSelectiveSyncsFromWarehouseAndSpace200Response, *http.Response, error) {
 	var (
@@ -442,7 +436,7 @@ func (a *ProfilesSyncAPIService) ListSelectiveSyncsFromWarehouseAndSpaceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ProfilesSyncAPIService.ListSelectiveSyncsFromWarehouseAndSpace",
+		"ProfilesSyncApiService.ListSelectiveSyncsFromWarehouseAndSpace",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -452,13 +446,13 @@ func (a *ProfilesSyncAPIService) ListSelectiveSyncsFromWarehouseAndSpaceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
+		url.PathEscape(parameterToString(r.warehouseId, "")),
 		-1,
 	)
 
@@ -469,7 +463,7 @@ func (a *ProfilesSyncAPIService) ListSelectiveSyncsFromWarehouseAndSpaceExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -509,9 +503,9 @@ func (a *ProfilesSyncAPIService) ListSelectiveSyncsFromWarehouseAndSpaceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -528,7 +522,6 @@ func (a *ProfilesSyncAPIService) ListSelectiveSyncsFromWarehouseAndSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -539,7 +532,6 @@ func (a *ProfilesSyncAPIService) ListSelectiveSyncsFromWarehouseAndSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -550,7 +542,6 @@ func (a *ProfilesSyncAPIService) ListSelectiveSyncsFromWarehouseAndSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -574,7 +565,7 @@ func (a *ProfilesSyncAPIService) ListSelectiveSyncsFromWarehouseAndSpaceExecute(
 
 type ApiRemoveProfilesWarehouseFromSpaceRequest struct {
 	ctx         context.Context
-	ApiService  *ProfilesSyncAPIService
+	ApiService  *ProfilesSyncApiService
 	spaceId     string
 	warehouseId string
 }
@@ -595,7 +586,7 @@ Deletes an existing Profiles Warehouse.
 	@param warehouseId
 	@return ApiRemoveProfilesWarehouseFromSpaceRequest
 */
-func (a *ProfilesSyncAPIService) RemoveProfilesWarehouseFromSpace(
+func (a *ProfilesSyncApiService) RemoveProfilesWarehouseFromSpace(
 	ctx context.Context,
 	spaceId string,
 	warehouseId string,
@@ -611,7 +602,7 @@ func (a *ProfilesSyncAPIService) RemoveProfilesWarehouseFromSpace(
 // Execute executes the request
 //
 //	@return RemoveProfilesWarehouseFromSpace200Response
-func (a *ProfilesSyncAPIService) RemoveProfilesWarehouseFromSpaceExecute(
+func (a *ProfilesSyncApiService) RemoveProfilesWarehouseFromSpaceExecute(
 	r ApiRemoveProfilesWarehouseFromSpaceRequest,
 ) (*RemoveProfilesWarehouseFromSpace200Response, *http.Response, error) {
 	var (
@@ -623,7 +614,7 @@ func (a *ProfilesSyncAPIService) RemoveProfilesWarehouseFromSpaceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ProfilesSyncAPIService.RemoveProfilesWarehouseFromSpace",
+		"ProfilesSyncApiService.RemoveProfilesWarehouseFromSpace",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -633,13 +624,13 @@ func (a *ProfilesSyncAPIService) RemoveProfilesWarehouseFromSpaceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
+		url.PathEscape(parameterToString(r.warehouseId, "")),
 		-1,
 	)
 
@@ -686,9 +677,9 @@ func (a *ProfilesSyncAPIService) RemoveProfilesWarehouseFromSpaceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -705,7 +696,6 @@ func (a *ProfilesSyncAPIService) RemoveProfilesWarehouseFromSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -716,7 +706,6 @@ func (a *ProfilesSyncAPIService) RemoveProfilesWarehouseFromSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -727,7 +716,6 @@ func (a *ProfilesSyncAPIService) RemoveProfilesWarehouseFromSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -751,7 +739,7 @@ func (a *ProfilesSyncAPIService) RemoveProfilesWarehouseFromSpaceExecute(
 
 type ApiUpdateProfilesWarehouseForSpaceWarehouseRequest struct {
 	ctx                                                context.Context
-	ApiService                                         *ProfilesSyncAPIService
+	ApiService                                         *ProfilesSyncApiService
 	spaceId                                            string
 	warehouseId                                        string
 	updateProfilesWarehouseForSpaceWarehouseAlphaInput *UpdateProfilesWarehouseForSpaceWarehouseAlphaInput
@@ -780,7 +768,7 @@ Updates an existing Profiles Warehouse.
 	@param warehouseId
 	@return ApiUpdateProfilesWarehouseForSpaceWarehouseRequest
 */
-func (a *ProfilesSyncAPIService) UpdateProfilesWarehouseForSpaceWarehouse(
+func (a *ProfilesSyncApiService) UpdateProfilesWarehouseForSpaceWarehouse(
 	ctx context.Context,
 	spaceId string,
 	warehouseId string,
@@ -796,7 +784,7 @@ func (a *ProfilesSyncAPIService) UpdateProfilesWarehouseForSpaceWarehouse(
 // Execute executes the request
 //
 //	@return UpdateProfilesWarehouseForSpaceWarehouse200Response
-func (a *ProfilesSyncAPIService) UpdateProfilesWarehouseForSpaceWarehouseExecute(
+func (a *ProfilesSyncApiService) UpdateProfilesWarehouseForSpaceWarehouseExecute(
 	r ApiUpdateProfilesWarehouseForSpaceWarehouseRequest,
 ) (*UpdateProfilesWarehouseForSpaceWarehouse200Response, *http.Response, error) {
 	var (
@@ -808,7 +796,7 @@ func (a *ProfilesSyncAPIService) UpdateProfilesWarehouseForSpaceWarehouseExecute
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ProfilesSyncAPIService.UpdateProfilesWarehouseForSpaceWarehouse",
+		"ProfilesSyncApiService.UpdateProfilesWarehouseForSpaceWarehouse",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -818,13 +806,13 @@ func (a *ProfilesSyncAPIService) UpdateProfilesWarehouseForSpaceWarehouseExecute
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
+		url.PathEscape(parameterToString(r.warehouseId, "")),
 		-1,
 	)
 
@@ -878,9 +866,9 @@ func (a *ProfilesSyncAPIService) UpdateProfilesWarehouseForSpaceWarehouseExecute
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -897,7 +885,6 @@ func (a *ProfilesSyncAPIService) UpdateProfilesWarehouseForSpaceWarehouseExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -908,7 +895,6 @@ func (a *ProfilesSyncAPIService) UpdateProfilesWarehouseForSpaceWarehouseExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -919,7 +905,6 @@ func (a *ProfilesSyncAPIService) UpdateProfilesWarehouseForSpaceWarehouseExecute
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -943,7 +928,7 @@ func (a *ProfilesSyncAPIService) UpdateProfilesWarehouseForSpaceWarehouseExecute
 
 type ApiUpdateSelectiveSyncForWarehouseAndSpaceRequest struct {
 	ctx                                               context.Context
-	ApiService                                        *ProfilesSyncAPIService
+	ApiService                                        *ProfilesSyncApiService
 	spaceId                                           string
 	warehouseId                                       string
 	updateSelectiveSyncForWarehouseAndSpaceAlphaInput *UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput
@@ -972,7 +957,7 @@ Updates the schema for a Space Warehouse connection, including Collections and P
 	@param warehouseId
 	@return ApiUpdateSelectiveSyncForWarehouseAndSpaceRequest
 */
-func (a *ProfilesSyncAPIService) UpdateSelectiveSyncForWarehouseAndSpace(
+func (a *ProfilesSyncApiService) UpdateSelectiveSyncForWarehouseAndSpace(
 	ctx context.Context,
 	spaceId string,
 	warehouseId string,
@@ -988,7 +973,7 @@ func (a *ProfilesSyncAPIService) UpdateSelectiveSyncForWarehouseAndSpace(
 // Execute executes the request
 //
 //	@return UpdateSelectiveSyncForWarehouseAndSpace200Response
-func (a *ProfilesSyncAPIService) UpdateSelectiveSyncForWarehouseAndSpaceExecute(
+func (a *ProfilesSyncApiService) UpdateSelectiveSyncForWarehouseAndSpaceExecute(
 	r ApiUpdateSelectiveSyncForWarehouseAndSpaceRequest,
 ) (*UpdateSelectiveSyncForWarehouseAndSpace200Response, *http.Response, error) {
 	var (
@@ -1000,7 +985,7 @@ func (a *ProfilesSyncAPIService) UpdateSelectiveSyncForWarehouseAndSpaceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ProfilesSyncAPIService.UpdateSelectiveSyncForWarehouseAndSpace",
+		"ProfilesSyncApiService.UpdateSelectiveSyncForWarehouseAndSpace",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1010,13 +995,13 @@ func (a *ProfilesSyncAPIService) UpdateSelectiveSyncForWarehouseAndSpaceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
+		url.PathEscape(parameterToString(r.warehouseId, "")),
 		-1,
 	)
 
@@ -1070,9 +1055,9 @@ func (a *ProfilesSyncAPIService) UpdateSelectiveSyncForWarehouseAndSpaceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1089,7 +1074,6 @@ func (a *ProfilesSyncAPIService) UpdateSelectiveSyncForWarehouseAndSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1100,7 +1084,6 @@ func (a *ProfilesSyncAPIService) UpdateSelectiveSyncForWarehouseAndSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1111,7 +1094,6 @@ func (a *ProfilesSyncAPIService) UpdateSelectiveSyncForWarehouseAndSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

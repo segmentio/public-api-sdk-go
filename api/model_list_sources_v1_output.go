@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,21 +15,18 @@ import (
 	"encoding/json"
 )
 
-// checks if the ListSourcesV1Output type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListSourcesV1Output{}
-
 // ListSourcesV1Output Returns a list of Sources that belong to the current Workspace.
 type ListSourcesV1Output struct {
 	// A list of Sources that belong to the Workspace.
-	Sources    []SourceV1       `json:"sources"`
-	Pagination PaginationOutput `json:"pagination"`
+	Sources    []SourceV1 `json:"sources"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // NewListSourcesV1Output instantiates a new ListSourcesV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListSourcesV1Output(sources []SourceV1, pagination PaginationOutput) *ListSourcesV1Output {
+func NewListSourcesV1Output(sources []SourceV1, pagination Pagination) *ListSourcesV1Output {
 	this := ListSourcesV1Output{}
 	this.Sources = sources
 	this.Pagination = pagination
@@ -69,9 +66,9 @@ func (o *ListSourcesV1Output) SetSources(v []SourceV1) {
 }
 
 // GetPagination returns the Pagination field value
-func (o *ListSourcesV1Output) GetPagination() PaginationOutput {
+func (o *ListSourcesV1Output) GetPagination() Pagination {
 	if o == nil {
-		var ret PaginationOutput
+		var ret Pagination
 		return ret
 	}
 
@@ -80,7 +77,7 @@ func (o *ListSourcesV1Output) GetPagination() PaginationOutput {
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *ListSourcesV1Output) GetPaginationOk() (*PaginationOutput, bool) {
+func (o *ListSourcesV1Output) GetPaginationOk() (*Pagination, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,23 +85,19 @@ func (o *ListSourcesV1Output) GetPaginationOk() (*PaginationOutput, bool) {
 }
 
 // SetPagination sets field value
-func (o *ListSourcesV1Output) SetPagination(v PaginationOutput) {
+func (o *ListSourcesV1Output) SetPagination(v Pagination) {
 	o.Pagination = v
 }
 
 func (o ListSourcesV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["sources"] = o.Sources
+	}
+	if true {
+		toSerialize["pagination"] = o.Pagination
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o ListSourcesV1Output) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["sources"] = o.Sources
-	toSerialize["pagination"] = o.Pagination
-	return toSerialize, nil
 }
 
 type NullableListSourcesV1Output struct {

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,17 +14,17 @@ package api
 import (
 	"bytes"
 	"context"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 )
 
-// TestingAPIService TestingAPI service
-type TestingAPIService service
+// TestingApiService TestingApi service
+type TestingApiService service
 
 type ApiEchoRequest struct {
 	ctx                    context.Context
-	ApiService             *TestingAPIService
+	ApiService             *TestingApiService
 	message                *string
 	delay                  *float32
 	triggerError           *bool
@@ -81,7 +81,7 @@ Public Echo endpoint.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiEchoRequest
 */
-func (a *TestingAPIService) Echo(ctx context.Context) ApiEchoRequest {
+func (a *TestingApiService) Echo(ctx context.Context) ApiEchoRequest {
 	return ApiEchoRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -91,7 +91,7 @@ func (a *TestingAPIService) Echo(ctx context.Context) ApiEchoRequest {
 // Execute executes the request
 //
 //	@return Echo200Response
-func (a *TestingAPIService) EchoExecute(
+func (a *TestingApiService) EchoExecute(
 	r ApiEchoRequest,
 ) (*Echo200Response, *http.Response, error) {
 	var (
@@ -101,7 +101,7 @@ func (a *TestingAPIService) EchoExecute(
 		localVarReturnValue *Echo200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TestingAPIService.Echo")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TestingApiService.Echo")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -115,31 +115,27 @@ func (a *TestingAPIService) EchoExecute(
 		return localVarReturnValue, nil, reportError("message is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "message", r.message, "")
+	localVarQueryParams.Add("message", parameterToString(*r.message, ""))
 	if r.delay != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "delay", r.delay, "")
+		localVarQueryParams.Add("delay", parameterToString(*r.delay, ""))
 	}
 	if r.triggerError != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "triggerError", r.triggerError, "")
+		localVarQueryParams.Add("triggerError", parameterToString(*r.triggerError, ""))
 	}
 	if r.triggerMultipleErrors != nil {
-		parameterAddToHeaderOrQuery(
-			localVarQueryParams,
+		localVarQueryParams.Add(
 			"triggerMultipleErrors",
-			r.triggerMultipleErrors,
-			"",
+			parameterToString(*r.triggerMultipleErrors, ""),
 		)
 	}
 	if r.triggerUnexpectedError != nil {
-		parameterAddToHeaderOrQuery(
-			localVarQueryParams,
+		localVarQueryParams.Add(
 			"triggerUnexpectedError",
-			r.triggerUnexpectedError,
-			"",
+			parameterToString(*r.triggerUnexpectedError, ""),
 		)
 	}
 	if r.statusCode != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "statusCode", r.statusCode, "")
+		localVarQueryParams.Add("statusCode", parameterToString(*r.statusCode, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -181,9 +177,9 @@ func (a *TestingAPIService) EchoExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -200,7 +196,6 @@ func (a *TestingAPIService) EchoExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -211,7 +206,6 @@ func (a *TestingAPIService) EchoExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -222,7 +216,6 @@ func (a *TestingAPIService) EchoExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

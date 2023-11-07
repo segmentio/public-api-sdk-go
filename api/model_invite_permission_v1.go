@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the InvitePermissionV1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &InvitePermissionV1{}
 
 // InvitePermissionV1 Defines a permission to apply to the user in an invite.
 type InvitePermissionV1 struct {
@@ -72,7 +69,7 @@ func (o *InvitePermissionV1) SetRoleId(v string) {
 
 // GetResources returns the Resources field value if set, zero value otherwise.
 func (o *InvitePermissionV1) GetResources() []ResourceV1 {
-	if o == nil || IsNil(o.Resources) {
+	if o == nil || o.Resources == nil {
 		var ret []ResourceV1
 		return ret
 	}
@@ -82,7 +79,7 @@ func (o *InvitePermissionV1) GetResources() []ResourceV1 {
 // GetResourcesOk returns a tuple with the Resources field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InvitePermissionV1) GetResourcesOk() ([]ResourceV1, bool) {
-	if o == nil || IsNil(o.Resources) {
+	if o == nil || o.Resources == nil {
 		return nil, false
 	}
 	return o.Resources, true
@@ -90,7 +87,7 @@ func (o *InvitePermissionV1) GetResourcesOk() ([]ResourceV1, bool) {
 
 // HasResources returns a boolean if a field has been set.
 func (o *InvitePermissionV1) HasResources() bool {
-	if o != nil && !IsNil(o.Resources) {
+	if o != nil && o.Resources != nil {
 		return true
 	}
 
@@ -104,7 +101,7 @@ func (o *InvitePermissionV1) SetResources(v []ResourceV1) {
 
 // GetLabels returns the Labels field value if set, zero value otherwise.
 func (o *InvitePermissionV1) GetLabels() []AllowedLabelBeta {
-	if o == nil || IsNil(o.Labels) {
+	if o == nil || o.Labels == nil {
 		var ret []AllowedLabelBeta
 		return ret
 	}
@@ -114,7 +111,7 @@ func (o *InvitePermissionV1) GetLabels() []AllowedLabelBeta {
 // GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InvitePermissionV1) GetLabelsOk() ([]AllowedLabelBeta, bool) {
-	if o == nil || IsNil(o.Labels) {
+	if o == nil || o.Labels == nil {
 		return nil, false
 	}
 	return o.Labels, true
@@ -122,7 +119,7 @@ func (o *InvitePermissionV1) GetLabelsOk() ([]AllowedLabelBeta, bool) {
 
 // HasLabels returns a boolean if a field has been set.
 func (o *InvitePermissionV1) HasLabels() bool {
-	if o != nil && !IsNil(o.Labels) {
+	if o != nil && o.Labels != nil {
 		return true
 	}
 
@@ -135,23 +132,17 @@ func (o *InvitePermissionV1) SetLabels(v []AllowedLabelBeta) {
 }
 
 func (o InvitePermissionV1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o InvitePermissionV1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["roleId"] = o.RoleId
-	if !IsNil(o.Resources) {
+	if true {
+		toSerialize["roleId"] = o.RoleId
+	}
+	if o.Resources != nil {
 		toSerialize["resources"] = o.Resources
 	}
-	if !IsNil(o.Labels) {
+	if o.Labels != nil {
 		toSerialize["labels"] = o.Labels
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableInvitePermissionV1 struct {

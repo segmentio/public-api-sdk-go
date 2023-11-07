@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// EdgeFunctionsAPIService EdgeFunctionsAPI service
-type EdgeFunctionsAPIService service
+// EdgeFunctionsApiService EdgeFunctionsApi service
+type EdgeFunctionsApiService service
 
 type ApiCreateEdgeFunctionsRequest struct {
 	ctx                           context.Context
-	ApiService                    *EdgeFunctionsAPIService
+	ApiService                    *EdgeFunctionsApiService
 	sourceId                      string
 	createEdgeFunctionsAlphaInput *CreateEdgeFunctionsAlphaInput
 }
@@ -54,7 +54,7 @@ Create EdgeFunctions for your Source given a valid upload URL for an Edge Functi
 	@param sourceId
 	@return ApiCreateEdgeFunctionsRequest
 */
-func (a *EdgeFunctionsAPIService) CreateEdgeFunctions(
+func (a *EdgeFunctionsApiService) CreateEdgeFunctions(
 	ctx context.Context,
 	sourceId string,
 ) ApiCreateEdgeFunctionsRequest {
@@ -68,7 +68,7 @@ func (a *EdgeFunctionsAPIService) CreateEdgeFunctions(
 // Execute executes the request
 //
 //	@return CreateEdgeFunctions200Response
-func (a *EdgeFunctionsAPIService) CreateEdgeFunctionsExecute(
+func (a *EdgeFunctionsApiService) CreateEdgeFunctionsExecute(
 	r ApiCreateEdgeFunctionsRequest,
 ) (*CreateEdgeFunctions200Response, *http.Response, error) {
 	var (
@@ -80,7 +80,7 @@ func (a *EdgeFunctionsAPIService) CreateEdgeFunctionsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"EdgeFunctionsAPIService.CreateEdgeFunctions",
+		"EdgeFunctionsApiService.CreateEdgeFunctions",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -90,7 +90,7 @@ func (a *EdgeFunctionsAPIService) CreateEdgeFunctionsExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -144,9 +144,9 @@ func (a *EdgeFunctionsAPIService) CreateEdgeFunctionsExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -163,7 +163,6 @@ func (a *EdgeFunctionsAPIService) CreateEdgeFunctionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -174,7 +173,6 @@ func (a *EdgeFunctionsAPIService) CreateEdgeFunctionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -185,7 +183,6 @@ func (a *EdgeFunctionsAPIService) CreateEdgeFunctionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -209,7 +206,7 @@ func (a *EdgeFunctionsAPIService) CreateEdgeFunctionsExecute(
 
 type ApiDisableEdgeFunctionsRequest struct {
 	ctx        context.Context
-	ApiService *EdgeFunctionsAPIService
+	ApiService *EdgeFunctionsApiService
 	sourceId   string
 }
 
@@ -230,7 +227,7 @@ Disable Edge Functions for your Source.
 	@param sourceId
 	@return ApiDisableEdgeFunctionsRequest
 */
-func (a *EdgeFunctionsAPIService) DisableEdgeFunctions(
+func (a *EdgeFunctionsApiService) DisableEdgeFunctions(
 	ctx context.Context,
 	sourceId string,
 ) ApiDisableEdgeFunctionsRequest {
@@ -244,7 +241,7 @@ func (a *EdgeFunctionsAPIService) DisableEdgeFunctions(
 // Execute executes the request
 //
 //	@return DisableEdgeFunctions200Response
-func (a *EdgeFunctionsAPIService) DisableEdgeFunctionsExecute(
+func (a *EdgeFunctionsApiService) DisableEdgeFunctionsExecute(
 	r ApiDisableEdgeFunctionsRequest,
 ) (*DisableEdgeFunctions200Response, *http.Response, error) {
 	var (
@@ -256,7 +253,7 @@ func (a *EdgeFunctionsAPIService) DisableEdgeFunctionsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"EdgeFunctionsAPIService.DisableEdgeFunctions",
+		"EdgeFunctionsApiService.DisableEdgeFunctions",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -266,7 +263,7 @@ func (a *EdgeFunctionsAPIService) DisableEdgeFunctionsExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -313,9 +310,9 @@ func (a *EdgeFunctionsAPIService) DisableEdgeFunctionsExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -332,7 +329,6 @@ func (a *EdgeFunctionsAPIService) DisableEdgeFunctionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -343,7 +339,6 @@ func (a *EdgeFunctionsAPIService) DisableEdgeFunctionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -354,7 +349,6 @@ func (a *EdgeFunctionsAPIService) DisableEdgeFunctionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -378,7 +372,7 @@ func (a *EdgeFunctionsAPIService) DisableEdgeFunctionsExecute(
 
 type ApiGenerateUploadURLForEdgeFunctionsRequest struct {
 	ctx        context.Context
-	ApiService *EdgeFunctionsAPIService
+	ApiService *EdgeFunctionsApiService
 	sourceId   string
 }
 
@@ -399,7 +393,7 @@ Generate a temporary upload URL that can be used to upload an Edge Functions bun
 	@param sourceId
 	@return ApiGenerateUploadURLForEdgeFunctionsRequest
 */
-func (a *EdgeFunctionsAPIService) GenerateUploadURLForEdgeFunctions(
+func (a *EdgeFunctionsApiService) GenerateUploadURLForEdgeFunctions(
 	ctx context.Context,
 	sourceId string,
 ) ApiGenerateUploadURLForEdgeFunctionsRequest {
@@ -413,7 +407,7 @@ func (a *EdgeFunctionsAPIService) GenerateUploadURLForEdgeFunctions(
 // Execute executes the request
 //
 //	@return GenerateUploadURLForEdgeFunctions200Response
-func (a *EdgeFunctionsAPIService) GenerateUploadURLForEdgeFunctionsExecute(
+func (a *EdgeFunctionsApiService) GenerateUploadURLForEdgeFunctionsExecute(
 	r ApiGenerateUploadURLForEdgeFunctionsRequest,
 ) (*GenerateUploadURLForEdgeFunctions200Response, *http.Response, error) {
 	var (
@@ -425,7 +419,7 @@ func (a *EdgeFunctionsAPIService) GenerateUploadURLForEdgeFunctionsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"EdgeFunctionsAPIService.GenerateUploadURLForEdgeFunctions",
+		"EdgeFunctionsApiService.GenerateUploadURLForEdgeFunctions",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -435,7 +429,7 @@ func (a *EdgeFunctionsAPIService) GenerateUploadURLForEdgeFunctionsExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -482,9 +476,9 @@ func (a *EdgeFunctionsAPIService) GenerateUploadURLForEdgeFunctionsExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -501,7 +495,6 @@ func (a *EdgeFunctionsAPIService) GenerateUploadURLForEdgeFunctionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -512,7 +505,6 @@ func (a *EdgeFunctionsAPIService) GenerateUploadURLForEdgeFunctionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -523,7 +515,6 @@ func (a *EdgeFunctionsAPIService) GenerateUploadURLForEdgeFunctionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -547,7 +538,7 @@ func (a *EdgeFunctionsAPIService) GenerateUploadURLForEdgeFunctionsExecute(
 
 type ApiGetLatestFromEdgeFunctionsRequest struct {
 	ctx        context.Context
-	ApiService *EdgeFunctionsAPIService
+	ApiService *EdgeFunctionsApiService
 	sourceId   string
 }
 
@@ -568,7 +559,7 @@ Get the latest Edge Functions for your Source.
 	@param sourceId
 	@return ApiGetLatestFromEdgeFunctionsRequest
 */
-func (a *EdgeFunctionsAPIService) GetLatestFromEdgeFunctions(
+func (a *EdgeFunctionsApiService) GetLatestFromEdgeFunctions(
 	ctx context.Context,
 	sourceId string,
 ) ApiGetLatestFromEdgeFunctionsRequest {
@@ -582,7 +573,7 @@ func (a *EdgeFunctionsAPIService) GetLatestFromEdgeFunctions(
 // Execute executes the request
 //
 //	@return GetLatestFromEdgeFunctions200Response
-func (a *EdgeFunctionsAPIService) GetLatestFromEdgeFunctionsExecute(
+func (a *EdgeFunctionsApiService) GetLatestFromEdgeFunctionsExecute(
 	r ApiGetLatestFromEdgeFunctionsRequest,
 ) (*GetLatestFromEdgeFunctions200Response, *http.Response, error) {
 	var (
@@ -594,7 +585,7 @@ func (a *EdgeFunctionsAPIService) GetLatestFromEdgeFunctionsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"EdgeFunctionsAPIService.GetLatestFromEdgeFunctions",
+		"EdgeFunctionsApiService.GetLatestFromEdgeFunctions",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -604,7 +595,7 @@ func (a *EdgeFunctionsAPIService) GetLatestFromEdgeFunctionsExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -651,9 +642,9 @@ func (a *EdgeFunctionsAPIService) GetLatestFromEdgeFunctionsExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -670,7 +661,6 @@ func (a *EdgeFunctionsAPIService) GetLatestFromEdgeFunctionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -681,7 +671,6 @@ func (a *EdgeFunctionsAPIService) GetLatestFromEdgeFunctionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -692,7 +681,6 @@ func (a *EdgeFunctionsAPIService) GetLatestFromEdgeFunctionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

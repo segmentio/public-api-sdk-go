@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,19 +15,16 @@ import (
 	"encoding/json"
 )
 
-// checks if the UpdateSourceV1Output type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateSourceV1Output{}
-
 // UpdateSourceV1Output Returns the updated Source.
 type UpdateSourceV1Output struct {
-	Source SourceV1 `json:"source"`
+	Source Source6 `json:"source"`
 }
 
 // NewUpdateSourceV1Output instantiates a new UpdateSourceV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateSourceV1Output(source SourceV1) *UpdateSourceV1Output {
+func NewUpdateSourceV1Output(source Source6) *UpdateSourceV1Output {
 	this := UpdateSourceV1Output{}
 	this.Source = source
 	return &this
@@ -42,9 +39,9 @@ func NewUpdateSourceV1OutputWithDefaults() *UpdateSourceV1Output {
 }
 
 // GetSource returns the Source field value
-func (o *UpdateSourceV1Output) GetSource() SourceV1 {
+func (o *UpdateSourceV1Output) GetSource() Source6 {
 	if o == nil {
-		var ret SourceV1
+		var ret Source6
 		return ret
 	}
 
@@ -53,7 +50,7 @@ func (o *UpdateSourceV1Output) GetSource() SourceV1 {
 
 // GetSourceOk returns a tuple with the Source field value
 // and a boolean to check if the value has been set.
-func (o *UpdateSourceV1Output) GetSourceOk() (*SourceV1, bool) {
+func (o *UpdateSourceV1Output) GetSourceOk() (*Source6, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -61,22 +58,16 @@ func (o *UpdateSourceV1Output) GetSourceOk() (*SourceV1, bool) {
 }
 
 // SetSource sets field value
-func (o *UpdateSourceV1Output) SetSource(v SourceV1) {
+func (o *UpdateSourceV1Output) SetSource(v Source6) {
 	o.Source = v
 }
 
 func (o UpdateSourceV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["source"] = o.Source
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o UpdateSourceV1Output) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["source"] = o.Source
-	return toSerialize, nil
 }
 
 type NullableUpdateSourceV1Output struct {

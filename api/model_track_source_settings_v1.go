@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the TrackSourceSettingsV1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &TrackSourceSettingsV1{}
 
 // TrackSourceSettingsV1 struct for TrackSourceSettingsV1
 type TrackSourceSettingsV1 struct {
@@ -51,7 +48,7 @@ func NewTrackSourceSettingsV1WithDefaults() *TrackSourceSettingsV1 {
 
 // GetAllowUnplannedEvents returns the AllowUnplannedEvents field value if set, zero value otherwise.
 func (o *TrackSourceSettingsV1) GetAllowUnplannedEvents() bool {
-	if o == nil || IsNil(o.AllowUnplannedEvents) {
+	if o == nil || o.AllowUnplannedEvents == nil {
 		var ret bool
 		return ret
 	}
@@ -61,7 +58,7 @@ func (o *TrackSourceSettingsV1) GetAllowUnplannedEvents() bool {
 // GetAllowUnplannedEventsOk returns a tuple with the AllowUnplannedEvents field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TrackSourceSettingsV1) GetAllowUnplannedEventsOk() (*bool, bool) {
-	if o == nil || IsNil(o.AllowUnplannedEvents) {
+	if o == nil || o.AllowUnplannedEvents == nil {
 		return nil, false
 	}
 	return o.AllowUnplannedEvents, true
@@ -69,7 +66,7 @@ func (o *TrackSourceSettingsV1) GetAllowUnplannedEventsOk() (*bool, bool) {
 
 // HasAllowUnplannedEvents returns a boolean if a field has been set.
 func (o *TrackSourceSettingsV1) HasAllowUnplannedEvents() bool {
-	if o != nil && !IsNil(o.AllowUnplannedEvents) {
+	if o != nil && o.AllowUnplannedEvents != nil {
 		return true
 	}
 
@@ -83,7 +80,7 @@ func (o *TrackSourceSettingsV1) SetAllowUnplannedEvents(v bool) {
 
 // GetAllowUnplannedEventProperties returns the AllowUnplannedEventProperties field value if set, zero value otherwise.
 func (o *TrackSourceSettingsV1) GetAllowUnplannedEventProperties() bool {
-	if o == nil || IsNil(o.AllowUnplannedEventProperties) {
+	if o == nil || o.AllowUnplannedEventProperties == nil {
 		var ret bool
 		return ret
 	}
@@ -93,7 +90,7 @@ func (o *TrackSourceSettingsV1) GetAllowUnplannedEventProperties() bool {
 // GetAllowUnplannedEventPropertiesOk returns a tuple with the AllowUnplannedEventProperties field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TrackSourceSettingsV1) GetAllowUnplannedEventPropertiesOk() (*bool, bool) {
-	if o == nil || IsNil(o.AllowUnplannedEventProperties) {
+	if o == nil || o.AllowUnplannedEventProperties == nil {
 		return nil, false
 	}
 	return o.AllowUnplannedEventProperties, true
@@ -101,7 +98,7 @@ func (o *TrackSourceSettingsV1) GetAllowUnplannedEventPropertiesOk() (*bool, boo
 
 // HasAllowUnplannedEventProperties returns a boolean if a field has been set.
 func (o *TrackSourceSettingsV1) HasAllowUnplannedEventProperties() bool {
-	if o != nil && !IsNil(o.AllowUnplannedEventProperties) {
+	if o != nil && o.AllowUnplannedEventProperties != nil {
 		return true
 	}
 
@@ -115,7 +112,7 @@ func (o *TrackSourceSettingsV1) SetAllowUnplannedEventProperties(v bool) {
 
 // GetAllowEventOnViolations returns the AllowEventOnViolations field value if set, zero value otherwise.
 func (o *TrackSourceSettingsV1) GetAllowEventOnViolations() bool {
-	if o == nil || IsNil(o.AllowEventOnViolations) {
+	if o == nil || o.AllowEventOnViolations == nil {
 		var ret bool
 		return ret
 	}
@@ -125,7 +122,7 @@ func (o *TrackSourceSettingsV1) GetAllowEventOnViolations() bool {
 // GetAllowEventOnViolationsOk returns a tuple with the AllowEventOnViolations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TrackSourceSettingsV1) GetAllowEventOnViolationsOk() (*bool, bool) {
-	if o == nil || IsNil(o.AllowEventOnViolations) {
+	if o == nil || o.AllowEventOnViolations == nil {
 		return nil, false
 	}
 	return o.AllowEventOnViolations, true
@@ -133,7 +130,7 @@ func (o *TrackSourceSettingsV1) GetAllowEventOnViolationsOk() (*bool, bool) {
 
 // HasAllowEventOnViolations returns a boolean if a field has been set.
 func (o *TrackSourceSettingsV1) HasAllowEventOnViolations() bool {
-	if o != nil && !IsNil(o.AllowEventOnViolations) {
+	if o != nil && o.AllowEventOnViolations != nil {
 		return true
 	}
 
@@ -147,7 +144,7 @@ func (o *TrackSourceSettingsV1) SetAllowEventOnViolations(v bool) {
 
 // GetAllowPropertiesOnViolations returns the AllowPropertiesOnViolations field value if set, zero value otherwise.
 func (o *TrackSourceSettingsV1) GetAllowPropertiesOnViolations() bool {
-	if o == nil || IsNil(o.AllowPropertiesOnViolations) {
+	if o == nil || o.AllowPropertiesOnViolations == nil {
 		var ret bool
 		return ret
 	}
@@ -157,7 +154,7 @@ func (o *TrackSourceSettingsV1) GetAllowPropertiesOnViolations() bool {
 // GetAllowPropertiesOnViolationsOk returns a tuple with the AllowPropertiesOnViolations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TrackSourceSettingsV1) GetAllowPropertiesOnViolationsOk() (*bool, bool) {
-	if o == nil || IsNil(o.AllowPropertiesOnViolations) {
+	if o == nil || o.AllowPropertiesOnViolations == nil {
 		return nil, false
 	}
 	return o.AllowPropertiesOnViolations, true
@@ -165,7 +162,7 @@ func (o *TrackSourceSettingsV1) GetAllowPropertiesOnViolationsOk() (*bool, bool)
 
 // HasAllowPropertiesOnViolations returns a boolean if a field has been set.
 func (o *TrackSourceSettingsV1) HasAllowPropertiesOnViolations() bool {
-	if o != nil && !IsNil(o.AllowPropertiesOnViolations) {
+	if o != nil && o.AllowPropertiesOnViolations != nil {
 		return true
 	}
 
@@ -179,7 +176,7 @@ func (o *TrackSourceSettingsV1) SetAllowPropertiesOnViolations(v bool) {
 
 // GetCommonEventOnViolations returns the CommonEventOnViolations field value if set, zero value otherwise.
 func (o *TrackSourceSettingsV1) GetCommonEventOnViolations() string {
-	if o == nil || IsNil(o.CommonEventOnViolations) {
+	if o == nil || o.CommonEventOnViolations == nil {
 		var ret string
 		return ret
 	}
@@ -189,7 +186,7 @@ func (o *TrackSourceSettingsV1) GetCommonEventOnViolations() string {
 // GetCommonEventOnViolationsOk returns a tuple with the CommonEventOnViolations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TrackSourceSettingsV1) GetCommonEventOnViolationsOk() (*string, bool) {
-	if o == nil || IsNil(o.CommonEventOnViolations) {
+	if o == nil || o.CommonEventOnViolations == nil {
 		return nil, false
 	}
 	return o.CommonEventOnViolations, true
@@ -197,7 +194,7 @@ func (o *TrackSourceSettingsV1) GetCommonEventOnViolationsOk() (*string, bool) {
 
 // HasCommonEventOnViolations returns a boolean if a field has been set.
 func (o *TrackSourceSettingsV1) HasCommonEventOnViolations() bool {
-	if o != nil && !IsNil(o.CommonEventOnViolations) {
+	if o != nil && o.CommonEventOnViolations != nil {
 		return true
 	}
 
@@ -210,31 +207,23 @@ func (o *TrackSourceSettingsV1) SetCommonEventOnViolations(v string) {
 }
 
 func (o TrackSourceSettingsV1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o TrackSourceSettingsV1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AllowUnplannedEvents) {
+	if o.AllowUnplannedEvents != nil {
 		toSerialize["allowUnplannedEvents"] = o.AllowUnplannedEvents
 	}
-	if !IsNil(o.AllowUnplannedEventProperties) {
+	if o.AllowUnplannedEventProperties != nil {
 		toSerialize["allowUnplannedEventProperties"] = o.AllowUnplannedEventProperties
 	}
-	if !IsNil(o.AllowEventOnViolations) {
+	if o.AllowEventOnViolations != nil {
 		toSerialize["allowEventOnViolations"] = o.AllowEventOnViolations
 	}
-	if !IsNil(o.AllowPropertiesOnViolations) {
+	if o.AllowPropertiesOnViolations != nil {
 		toSerialize["allowPropertiesOnViolations"] = o.AllowPropertiesOnViolations
 	}
-	if !IsNil(o.CommonEventOnViolations) {
+	if o.CommonEventOnViolations != nil {
 		toSerialize["commonEventOnViolations"] = o.CommonEventOnViolations
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableTrackSourceSettingsV1 struct {

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,12 +15,9 @@ import (
 	"encoding/json"
 )
 
-// checks if the PreviewDestinationFilterV1Input type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &PreviewDestinationFilterV1Input{}
-
 // PreviewDestinationFilterV1Input Input of the Destination filter to preview. For guidance on using FQL, see the Segment documentation site.
 type PreviewDestinationFilterV1Input struct {
-	Filter PreviewDestinationFilterV1 `json:"filter"`
+	Filter Filter `json:"filter"`
 	// The JSON payload to apply the filter to.
 	Payload map[string]interface{} `json:"payload"`
 }
@@ -30,7 +27,7 @@ type PreviewDestinationFilterV1Input struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewPreviewDestinationFilterV1Input(
-	filter PreviewDestinationFilterV1,
+	filter Filter,
 	payload map[string]interface{},
 ) *PreviewDestinationFilterV1Input {
 	this := PreviewDestinationFilterV1Input{}
@@ -48,9 +45,9 @@ func NewPreviewDestinationFilterV1InputWithDefaults() *PreviewDestinationFilterV
 }
 
 // GetFilter returns the Filter field value
-func (o *PreviewDestinationFilterV1Input) GetFilter() PreviewDestinationFilterV1 {
+func (o *PreviewDestinationFilterV1Input) GetFilter() Filter {
 	if o == nil {
-		var ret PreviewDestinationFilterV1
+		var ret Filter
 		return ret
 	}
 
@@ -59,7 +56,7 @@ func (o *PreviewDestinationFilterV1Input) GetFilter() PreviewDestinationFilterV1
 
 // GetFilterOk returns a tuple with the Filter field value
 // and a boolean to check if the value has been set.
-func (o *PreviewDestinationFilterV1Input) GetFilterOk() (*PreviewDestinationFilterV1, bool) {
+func (o *PreviewDestinationFilterV1Input) GetFilterOk() (*Filter, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,7 +64,7 @@ func (o *PreviewDestinationFilterV1Input) GetFilterOk() (*PreviewDestinationFilt
 }
 
 // SetFilter sets field value
-func (o *PreviewDestinationFilterV1Input) SetFilter(v PreviewDestinationFilterV1) {
+func (o *PreviewDestinationFilterV1Input) SetFilter(v Filter) {
 	o.Filter = v
 }
 
@@ -85,7 +82,7 @@ func (o *PreviewDestinationFilterV1Input) GetPayload() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *PreviewDestinationFilterV1Input) GetPayloadOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.Payload, true
 }
@@ -96,18 +93,14 @@ func (o *PreviewDestinationFilterV1Input) SetPayload(v map[string]interface{}) {
 }
 
 func (o PreviewDestinationFilterV1Input) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["filter"] = o.Filter
+	}
+	if true {
+		toSerialize["payload"] = o.Payload
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o PreviewDestinationFilterV1Input) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["filter"] = o.Filter
-	toSerialize["payload"] = o.Payload
-	return toSerialize, nil
 }
 
 type NullablePreviewDestinationFilterV1Input struct {

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,10 +15,7 @@ import (
 	"encoding/json"
 )
 
-// checks if the DestinationSubscription type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &DestinationSubscription{}
-
-// DestinationSubscription struct for DestinationSubscription
+// DestinationSubscription The Destination subscription.
 type DestinationSubscription struct {
 	// The unique identifier for the subscription.
 	Id string `json:"id"`
@@ -32,8 +29,8 @@ type DestinationSubscription struct {
 	DestinationId string `json:"destinationId"`
 	// Is the subscription enabled.
 	Enabled bool `json:"enabled"`
-	// Represents settings used to configure an action subscription.
-	Settings map[string]interface{} `json:"settings"`
+	// The customer settings for action fields.
+	Settings NullableModelMap `json:"settings"`
 	// FQL string that describes what events should trigger a Destination action.
 	Trigger string `json:"trigger"`
 	// The unique identifier for the linked ReverseETLModel, if this part of a Reverse ETL connection.
@@ -51,7 +48,7 @@ func NewDestinationSubscription(
 	actionSlug string,
 	destinationId string,
 	enabled bool,
-	settings map[string]interface{},
+	settings NullableModelMap,
 	trigger string,
 ) *DestinationSubscription {
 	this := DestinationSubscription{}
@@ -219,27 +216,29 @@ func (o *DestinationSubscription) SetEnabled(v bool) {
 }
 
 // GetSettings returns the Settings field value
-func (o *DestinationSubscription) GetSettings() map[string]interface{} {
-	if o == nil {
-		var ret map[string]interface{}
+// If the value is explicit nil, the zero value for ModelMap will be returned
+func (o *DestinationSubscription) GetSettings() ModelMap {
+	if o == nil || o.Settings.Get() == nil {
+		var ret ModelMap
 		return ret
 	}
 
-	return o.Settings
+	return *o.Settings.Get()
 }
 
 // GetSettingsOk returns a tuple with the Settings field value
 // and a boolean to check if the value has been set.
-func (o *DestinationSubscription) GetSettingsOk() (map[string]interface{}, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DestinationSubscription) GetSettingsOk() (*ModelMap, bool) {
 	if o == nil {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
-	return o.Settings, true
+	return o.Settings.Get(), o.Settings.IsSet()
 }
 
 // SetSettings sets field value
-func (o *DestinationSubscription) SetSettings(v map[string]interface{}) {
-	o.Settings = v
+func (o *DestinationSubscription) SetSettings(v ModelMap) {
+	o.Settings.Set(&v)
 }
 
 // GetTrigger returns the Trigger field value
@@ -268,7 +267,7 @@ func (o *DestinationSubscription) SetTrigger(v string) {
 
 // GetModelId returns the ModelId field value if set, zero value otherwise.
 func (o *DestinationSubscription) GetModelId() string {
-	if o == nil || IsNil(o.ModelId) {
+	if o == nil || o.ModelId == nil {
 		var ret string
 		return ret
 	}
@@ -278,7 +277,7 @@ func (o *DestinationSubscription) GetModelId() string {
 // GetModelIdOk returns a tuple with the ModelId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationSubscription) GetModelIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ModelId) {
+	if o == nil || o.ModelId == nil {
 		return nil, false
 	}
 	return o.ModelId, true
@@ -286,7 +285,7 @@ func (o *DestinationSubscription) GetModelIdOk() (*string, bool) {
 
 // HasModelId returns a boolean if a field has been set.
 func (o *DestinationSubscription) HasModelId() bool {
-	if o != nil && !IsNil(o.ModelId) {
+	if o != nil && o.ModelId != nil {
 		return true
 	}
 
@@ -299,27 +298,35 @@ func (o *DestinationSubscription) SetModelId(v string) {
 }
 
 func (o DestinationSubscription) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o DestinationSubscription) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["name"] = o.Name
-	toSerialize["actionId"] = o.ActionId
-	toSerialize["actionSlug"] = o.ActionSlug
-	toSerialize["destinationId"] = o.DestinationId
-	toSerialize["enabled"] = o.Enabled
-	toSerialize["settings"] = o.Settings
-	toSerialize["trigger"] = o.Trigger
-	if !IsNil(o.ModelId) {
+	if true {
+		toSerialize["id"] = o.Id
+	}
+	if true {
+		toSerialize["name"] = o.Name
+	}
+	if true {
+		toSerialize["actionId"] = o.ActionId
+	}
+	if true {
+		toSerialize["actionSlug"] = o.ActionSlug
+	}
+	if true {
+		toSerialize["destinationId"] = o.DestinationId
+	}
+	if true {
+		toSerialize["enabled"] = o.Enabled
+	}
+	if true {
+		toSerialize["settings"] = o.Settings.Get()
+	}
+	if true {
+		toSerialize["trigger"] = o.Trigger
+	}
+	if o.ModelId != nil {
 		toSerialize["modelId"] = o.ModelId
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableDestinationSubscription struct {

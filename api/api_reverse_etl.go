@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// ReverseETLAPIService ReverseETLAPI service
-type ReverseETLAPIService service
+// ReverseETLApiService ReverseETLApi service
+type ReverseETLApiService service
 
 type ApiCreateReverseEtlModelRequest struct {
 	ctx                        context.Context
-	ApiService                 *ReverseETLAPIService
+	ApiService                 *ReverseETLApiService
 	createReverseEtlModelInput *CreateReverseEtlModelInput
 }
 
@@ -50,7 +50,7 @@ Creates a new Reverse ETL Model.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateReverseEtlModelRequest
 */
-func (a *ReverseETLAPIService) CreateReverseEtlModel(
+func (a *ReverseETLApiService) CreateReverseEtlModel(
 	ctx context.Context,
 ) ApiCreateReverseEtlModelRequest {
 	return ApiCreateReverseEtlModelRequest{
@@ -62,7 +62,7 @@ func (a *ReverseETLAPIService) CreateReverseEtlModel(
 // Execute executes the request
 //
 //	@return CreateReverseEtlModel200Response
-func (a *ReverseETLAPIService) CreateReverseEtlModelExecute(
+func (a *ReverseETLApiService) CreateReverseEtlModelExecute(
 	r ApiCreateReverseEtlModelRequest,
 ) (*CreateReverseEtlModel200Response, *http.Response, error) {
 	var (
@@ -74,7 +74,7 @@ func (a *ReverseETLAPIService) CreateReverseEtlModelExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ReverseETLAPIService.CreateReverseEtlModel",
+		"ReverseETLApiService.CreateReverseEtlModel",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -132,9 +132,9 @@ func (a *ReverseETLAPIService) CreateReverseEtlModelExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -151,7 +151,6 @@ func (a *ReverseETLAPIService) CreateReverseEtlModelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -162,7 +161,6 @@ func (a *ReverseETLAPIService) CreateReverseEtlModelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -173,7 +171,6 @@ func (a *ReverseETLAPIService) CreateReverseEtlModelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -197,7 +194,7 @@ func (a *ReverseETLAPIService) CreateReverseEtlModelExecute(
 
 type ApiDeleteReverseEtlModelRequest struct {
 	ctx        context.Context
-	ApiService *ReverseETLAPIService
+	ApiService *ReverseETLApiService
 	modelId    string
 }
 
@@ -216,7 +213,7 @@ Deletes an existing Model.
 	@param modelId
 	@return ApiDeleteReverseEtlModelRequest
 */
-func (a *ReverseETLAPIService) DeleteReverseEtlModel(
+func (a *ReverseETLApiService) DeleteReverseEtlModel(
 	ctx context.Context,
 	modelId string,
 ) ApiDeleteReverseEtlModelRequest {
@@ -230,7 +227,7 @@ func (a *ReverseETLAPIService) DeleteReverseEtlModel(
 // Execute executes the request
 //
 //	@return DeleteReverseEtlModel200Response
-func (a *ReverseETLAPIService) DeleteReverseEtlModelExecute(
+func (a *ReverseETLApiService) DeleteReverseEtlModelExecute(
 	r ApiDeleteReverseEtlModelRequest,
 ) (*DeleteReverseEtlModel200Response, *http.Response, error) {
 	var (
@@ -242,7 +239,7 @@ func (a *ReverseETLAPIService) DeleteReverseEtlModelExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ReverseETLAPIService.DeleteReverseEtlModel",
+		"ReverseETLApiService.DeleteReverseEtlModel",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -252,7 +249,7 @@ func (a *ReverseETLAPIService) DeleteReverseEtlModelExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"modelId"+"}",
-		url.PathEscape(parameterValueToString(r.modelId, "modelId")),
+		url.PathEscape(parameterToString(r.modelId, "")),
 		-1,
 	)
 
@@ -299,9 +296,9 @@ func (a *ReverseETLAPIService) DeleteReverseEtlModelExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -318,7 +315,6 @@ func (a *ReverseETLAPIService) DeleteReverseEtlModelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -329,7 +325,6 @@ func (a *ReverseETLAPIService) DeleteReverseEtlModelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -340,7 +335,6 @@ func (a *ReverseETLAPIService) DeleteReverseEtlModelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -364,7 +358,7 @@ func (a *ReverseETLAPIService) DeleteReverseEtlModelExecute(
 
 type ApiGetReverseEtlModelRequest struct {
 	ctx        context.Context
-	ApiService *ReverseETLAPIService
+	ApiService *ReverseETLApiService
 	modelId    string
 }
 
@@ -381,7 +375,7 @@ Returns a Reverse ETL Model by its id.
 	@param modelId
 	@return ApiGetReverseEtlModelRequest
 */
-func (a *ReverseETLAPIService) GetReverseEtlModel(
+func (a *ReverseETLApiService) GetReverseEtlModel(
 	ctx context.Context,
 	modelId string,
 ) ApiGetReverseEtlModelRequest {
@@ -395,7 +389,7 @@ func (a *ReverseETLAPIService) GetReverseEtlModel(
 // Execute executes the request
 //
 //	@return GetReverseEtlModel200Response
-func (a *ReverseETLAPIService) GetReverseEtlModelExecute(
+func (a *ReverseETLApiService) GetReverseEtlModelExecute(
 	r ApiGetReverseEtlModelRequest,
 ) (*GetReverseEtlModel200Response, *http.Response, error) {
 	var (
@@ -407,7 +401,7 @@ func (a *ReverseETLAPIService) GetReverseEtlModelExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ReverseETLAPIService.GetReverseEtlModel",
+		"ReverseETLApiService.GetReverseEtlModel",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -417,7 +411,7 @@ func (a *ReverseETLAPIService) GetReverseEtlModelExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"modelId"+"}",
-		url.PathEscape(parameterValueToString(r.modelId, "modelId")),
+		url.PathEscape(parameterToString(r.modelId, "")),
 		-1,
 	)
 
@@ -464,9 +458,9 @@ func (a *ReverseETLAPIService) GetReverseEtlModelExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -483,7 +477,6 @@ func (a *ReverseETLAPIService) GetReverseEtlModelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -494,7 +487,6 @@ func (a *ReverseETLAPIService) GetReverseEtlModelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -505,7 +497,6 @@ func (a *ReverseETLAPIService) GetReverseEtlModelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -529,7 +520,7 @@ func (a *ReverseETLAPIService) GetReverseEtlModelExecute(
 
 type ApiListReverseEtlModelsRequest struct {
 	ctx        context.Context
-	ApiService *ReverseETLAPIService
+	ApiService *ReverseETLApiService
 	pagination *PaginationInput
 }
 
@@ -553,7 +544,7 @@ Returns a list of Reverse ETL Models.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListReverseEtlModelsRequest
 */
-func (a *ReverseETLAPIService) ListReverseEtlModels(
+func (a *ReverseETLApiService) ListReverseEtlModels(
 	ctx context.Context,
 ) ApiListReverseEtlModelsRequest {
 	return ApiListReverseEtlModelsRequest{
@@ -565,7 +556,7 @@ func (a *ReverseETLAPIService) ListReverseEtlModels(
 // Execute executes the request
 //
 //	@return ListReverseEtlModels200Response
-func (a *ReverseETLAPIService) ListReverseEtlModelsExecute(
+func (a *ReverseETLApiService) ListReverseEtlModelsExecute(
 	r ApiListReverseEtlModelsRequest,
 ) (*ListReverseEtlModels200Response, *http.Response, error) {
 	var (
@@ -577,7 +568,7 @@ func (a *ReverseETLAPIService) ListReverseEtlModelsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ReverseETLAPIService.ListReverseEtlModels",
+		"ReverseETLApiService.ListReverseEtlModels",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -592,7 +583,7 @@ func (a *ReverseETLAPIService) ListReverseEtlModelsExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -632,9 +623,9 @@ func (a *ReverseETLAPIService) ListReverseEtlModelsExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -651,7 +642,6 @@ func (a *ReverseETLAPIService) ListReverseEtlModelsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -662,7 +652,6 @@ func (a *ReverseETLAPIService) ListReverseEtlModelsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -673,7 +662,6 @@ func (a *ReverseETLAPIService) ListReverseEtlModelsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -697,7 +685,7 @@ func (a *ReverseETLAPIService) ListReverseEtlModelsExecute(
 
 type ApiUpdateReverseEtlModelRequest struct {
 	ctx                        context.Context
-	ApiService                 *ReverseETLAPIService
+	ApiService                 *ReverseETLApiService
 	modelId                    string
 	updateReverseEtlModelInput *UpdateReverseEtlModelInput
 }
@@ -725,7 +713,7 @@ Updates an existing Reverse ETL Model.
 	@param modelId
 	@return ApiUpdateReverseEtlModelRequest
 */
-func (a *ReverseETLAPIService) UpdateReverseEtlModel(
+func (a *ReverseETLApiService) UpdateReverseEtlModel(
 	ctx context.Context,
 	modelId string,
 ) ApiUpdateReverseEtlModelRequest {
@@ -739,7 +727,7 @@ func (a *ReverseETLAPIService) UpdateReverseEtlModel(
 // Execute executes the request
 //
 //	@return UpdateReverseEtlModel200Response
-func (a *ReverseETLAPIService) UpdateReverseEtlModelExecute(
+func (a *ReverseETLApiService) UpdateReverseEtlModelExecute(
 	r ApiUpdateReverseEtlModelRequest,
 ) (*UpdateReverseEtlModel200Response, *http.Response, error) {
 	var (
@@ -751,7 +739,7 @@ func (a *ReverseETLAPIService) UpdateReverseEtlModelExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ReverseETLAPIService.UpdateReverseEtlModel",
+		"ReverseETLApiService.UpdateReverseEtlModel",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -761,7 +749,7 @@ func (a *ReverseETLAPIService) UpdateReverseEtlModelExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"modelId"+"}",
-		url.PathEscape(parameterValueToString(r.modelId, "modelId")),
+		url.PathEscape(parameterToString(r.modelId, "")),
 		-1,
 	)
 
@@ -815,9 +803,9 @@ func (a *ReverseETLAPIService) UpdateReverseEtlModelExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -834,7 +822,6 @@ func (a *ReverseETLAPIService) UpdateReverseEtlModelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -845,7 +832,6 @@ func (a *ReverseETLAPIService) UpdateReverseEtlModelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -856,7 +842,6 @@ func (a *ReverseETLAPIService) UpdateReverseEtlModelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the SpaceWarehouseSchemaOverride type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &SpaceWarehouseSchemaOverride{}
 
 // SpaceWarehouseSchemaOverride Overrides the enabled or disabled state of the specified collection and / or properties within the schema.
 type SpaceWarehouseSchemaOverride struct {
@@ -100,7 +97,7 @@ func (o *SpaceWarehouseSchemaOverride) SetEnabled(v bool) {
 
 // GetProperty returns the Property field value if set, zero value otherwise.
 func (o *SpaceWarehouseSchemaOverride) GetProperty() string {
-	if o == nil || IsNil(o.Property) {
+	if o == nil || o.Property == nil {
 		var ret string
 		return ret
 	}
@@ -110,7 +107,7 @@ func (o *SpaceWarehouseSchemaOverride) GetProperty() string {
 // GetPropertyOk returns a tuple with the Property field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SpaceWarehouseSchemaOverride) GetPropertyOk() (*string, bool) {
-	if o == nil || IsNil(o.Property) {
+	if o == nil || o.Property == nil {
 		return nil, false
 	}
 	return o.Property, true
@@ -118,7 +115,7 @@ func (o *SpaceWarehouseSchemaOverride) GetPropertyOk() (*string, bool) {
 
 // HasProperty returns a boolean if a field has been set.
 func (o *SpaceWarehouseSchemaOverride) HasProperty() bool {
-	if o != nil && !IsNil(o.Property) {
+	if o != nil && o.Property != nil {
 		return true
 	}
 
@@ -131,21 +128,17 @@ func (o *SpaceWarehouseSchemaOverride) SetProperty(v string) {
 }
 
 func (o SpaceWarehouseSchemaOverride) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o SpaceWarehouseSchemaOverride) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["collection"] = o.Collection
-	toSerialize["enabled"] = o.Enabled
-	if !IsNil(o.Property) {
+	if true {
+		toSerialize["collection"] = o.Collection
+	}
+	if true {
+		toSerialize["enabled"] = o.Enabled
+	}
+	if o.Property != nil {
 		toSerialize["property"] = o.Property
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableSpaceWarehouseSchemaOverride struct {

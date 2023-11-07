@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the CreateCloudSourceRegulation200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateCloudSourceRegulation200Response{}
 
 // CreateCloudSourceRegulation200Response struct for CreateCloudSourceRegulation200Response
 type CreateCloudSourceRegulation200Response struct {
@@ -42,7 +39,7 @@ func NewCreateCloudSourceRegulation200ResponseWithDefaults() *CreateCloudSourceR
 
 // GetData returns the Data field value if set, zero value otherwise.
 func (o *CreateCloudSourceRegulation200Response) GetData() CreateCloudSourceRegulationV1Output {
-	if o == nil || IsNil(o.Data) {
+	if o == nil || o.Data == nil {
 		var ret CreateCloudSourceRegulationV1Output
 		return ret
 	}
@@ -52,7 +49,7 @@ func (o *CreateCloudSourceRegulation200Response) GetData() CreateCloudSourceRegu
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateCloudSourceRegulation200Response) GetDataOk() (*CreateCloudSourceRegulationV1Output, bool) {
-	if o == nil || IsNil(o.Data) {
+	if o == nil || o.Data == nil {
 		return nil, false
 	}
 	return o.Data, true
@@ -60,7 +57,7 @@ func (o *CreateCloudSourceRegulation200Response) GetDataOk() (*CreateCloudSource
 
 // HasData returns a boolean if a field has been set.
 func (o *CreateCloudSourceRegulation200Response) HasData() bool {
-	if o != nil && !IsNil(o.Data) {
+	if o != nil && o.Data != nil {
 		return true
 	}
 
@@ -73,19 +70,11 @@ func (o *CreateCloudSourceRegulation200Response) SetData(v CreateCloudSourceRegu
 }
 
 func (o CreateCloudSourceRegulation200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o CreateCloudSourceRegulation200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Data) {
+	if o.Data != nil {
 		toSerialize["data"] = o.Data
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableCreateCloudSourceRegulation200Response struct {

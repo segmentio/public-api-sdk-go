@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// DeletionAndSuppressionAPIService DeletionAndSuppressionAPI service
-type DeletionAndSuppressionAPIService service
+// DeletionAndSuppressionApiService DeletionAndSuppressionApi service
+type DeletionAndSuppressionApiService service
 
 type ApiCreateCloudSourceRegulationRequest struct {
 	ctx                                context.Context
-	ApiService                         *DeletionAndSuppressionAPIService
+	ApiService                         *DeletionAndSuppressionApiService
 	sourceId                           string
 	createCloudSourceRegulationV1Input *CreateCloudSourceRegulationV1Input
 }
@@ -55,7 +55,7 @@ Creates a Source-scoped regulation.
 	@param sourceId
 	@return ApiCreateCloudSourceRegulationRequest
 */
-func (a *DeletionAndSuppressionAPIService) CreateCloudSourceRegulation(
+func (a *DeletionAndSuppressionApiService) CreateCloudSourceRegulation(
 	ctx context.Context,
 	sourceId string,
 ) ApiCreateCloudSourceRegulationRequest {
@@ -69,7 +69,7 @@ func (a *DeletionAndSuppressionAPIService) CreateCloudSourceRegulation(
 // Execute executes the request
 //
 //	@return CreateCloudSourceRegulation200Response
-func (a *DeletionAndSuppressionAPIService) CreateCloudSourceRegulationExecute(
+func (a *DeletionAndSuppressionApiService) CreateCloudSourceRegulationExecute(
 	r ApiCreateCloudSourceRegulationRequest,
 ) (*CreateCloudSourceRegulation200Response, *http.Response, error) {
 	var (
@@ -81,7 +81,7 @@ func (a *DeletionAndSuppressionAPIService) CreateCloudSourceRegulationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DeletionAndSuppressionAPIService.CreateCloudSourceRegulation",
+		"DeletionAndSuppressionApiService.CreateCloudSourceRegulation",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -91,7 +91,7 @@ func (a *DeletionAndSuppressionAPIService) CreateCloudSourceRegulationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -151,9 +151,9 @@ func (a *DeletionAndSuppressionAPIService) CreateCloudSourceRegulationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -170,7 +170,6 @@ func (a *DeletionAndSuppressionAPIService) CreateCloudSourceRegulationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -181,7 +180,6 @@ func (a *DeletionAndSuppressionAPIService) CreateCloudSourceRegulationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -192,7 +190,6 @@ func (a *DeletionAndSuppressionAPIService) CreateCloudSourceRegulationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -216,7 +213,7 @@ func (a *DeletionAndSuppressionAPIService) CreateCloudSourceRegulationExecute(
 
 type ApiCreateSourceRegulationRequest struct {
 	ctx                           context.Context
-	ApiService                    *DeletionAndSuppressionAPIService
+	ApiService                    *DeletionAndSuppressionApiService
 	sourceId                      string
 	createSourceRegulationV1Input *CreateSourceRegulationV1Input
 }
@@ -247,7 +244,7 @@ Config API omitted fields:
 	@param sourceId
 	@return ApiCreateSourceRegulationRequest
 */
-func (a *DeletionAndSuppressionAPIService) CreateSourceRegulation(
+func (a *DeletionAndSuppressionApiService) CreateSourceRegulation(
 	ctx context.Context,
 	sourceId string,
 ) ApiCreateSourceRegulationRequest {
@@ -261,7 +258,7 @@ func (a *DeletionAndSuppressionAPIService) CreateSourceRegulation(
 // Execute executes the request
 //
 //	@return CreateSourceRegulation200Response
-func (a *DeletionAndSuppressionAPIService) CreateSourceRegulationExecute(
+func (a *DeletionAndSuppressionApiService) CreateSourceRegulationExecute(
 	r ApiCreateSourceRegulationRequest,
 ) (*CreateSourceRegulation200Response, *http.Response, error) {
 	var (
@@ -273,7 +270,7 @@ func (a *DeletionAndSuppressionAPIService) CreateSourceRegulationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DeletionAndSuppressionAPIService.CreateSourceRegulation",
+		"DeletionAndSuppressionApiService.CreateSourceRegulation",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -283,7 +280,7 @@ func (a *DeletionAndSuppressionAPIService) CreateSourceRegulationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -343,9 +340,9 @@ func (a *DeletionAndSuppressionAPIService) CreateSourceRegulationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -362,7 +359,6 @@ func (a *DeletionAndSuppressionAPIService) CreateSourceRegulationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -373,7 +369,6 @@ func (a *DeletionAndSuppressionAPIService) CreateSourceRegulationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -384,7 +379,6 @@ func (a *DeletionAndSuppressionAPIService) CreateSourceRegulationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -408,7 +402,7 @@ func (a *DeletionAndSuppressionAPIService) CreateSourceRegulationExecute(
 
 type ApiCreateWorkspaceRegulationRequest struct {
 	ctx                              context.Context
-	ApiService                       *DeletionAndSuppressionAPIService
+	ApiService                       *DeletionAndSuppressionApiService
 	createWorkspaceRegulationV1Input *CreateWorkspaceRegulationV1Input
 }
 
@@ -437,7 +431,7 @@ Config API omitted fields:
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateWorkspaceRegulationRequest
 */
-func (a *DeletionAndSuppressionAPIService) CreateWorkspaceRegulation(
+func (a *DeletionAndSuppressionApiService) CreateWorkspaceRegulation(
 	ctx context.Context,
 ) ApiCreateWorkspaceRegulationRequest {
 	return ApiCreateWorkspaceRegulationRequest{
@@ -449,7 +443,7 @@ func (a *DeletionAndSuppressionAPIService) CreateWorkspaceRegulation(
 // Execute executes the request
 //
 //	@return CreateWorkspaceRegulation200Response
-func (a *DeletionAndSuppressionAPIService) CreateWorkspaceRegulationExecute(
+func (a *DeletionAndSuppressionApiService) CreateWorkspaceRegulationExecute(
 	r ApiCreateWorkspaceRegulationRequest,
 ) (*CreateWorkspaceRegulation200Response, *http.Response, error) {
 	var (
@@ -461,7 +455,7 @@ func (a *DeletionAndSuppressionAPIService) CreateWorkspaceRegulationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DeletionAndSuppressionAPIService.CreateWorkspaceRegulation",
+		"DeletionAndSuppressionApiService.CreateWorkspaceRegulation",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -525,9 +519,9 @@ func (a *DeletionAndSuppressionAPIService) CreateWorkspaceRegulationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -544,7 +538,6 @@ func (a *DeletionAndSuppressionAPIService) CreateWorkspaceRegulationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -555,7 +548,6 @@ func (a *DeletionAndSuppressionAPIService) CreateWorkspaceRegulationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -566,7 +558,6 @@ func (a *DeletionAndSuppressionAPIService) CreateWorkspaceRegulationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -590,7 +581,7 @@ func (a *DeletionAndSuppressionAPIService) CreateWorkspaceRegulationExecute(
 
 type ApiDeleteRegulationRequest struct {
 	ctx        context.Context
-	ApiService *DeletionAndSuppressionAPIService
+	ApiService *DeletionAndSuppressionApiService
 	regulateId string
 }
 
@@ -609,7 +600,7 @@ Deletes a regulation from the Workspace. The regulation must be in the initializ
 	@param regulateId
 	@return ApiDeleteRegulationRequest
 */
-func (a *DeletionAndSuppressionAPIService) DeleteRegulation(
+func (a *DeletionAndSuppressionApiService) DeleteRegulation(
 	ctx context.Context,
 	regulateId string,
 ) ApiDeleteRegulationRequest {
@@ -623,7 +614,7 @@ func (a *DeletionAndSuppressionAPIService) DeleteRegulation(
 // Execute executes the request
 //
 //	@return DeleteRegulation200Response
-func (a *DeletionAndSuppressionAPIService) DeleteRegulationExecute(
+func (a *DeletionAndSuppressionApiService) DeleteRegulationExecute(
 	r ApiDeleteRegulationRequest,
 ) (*DeleteRegulation200Response, *http.Response, error) {
 	var (
@@ -635,7 +626,7 @@ func (a *DeletionAndSuppressionAPIService) DeleteRegulationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DeletionAndSuppressionAPIService.DeleteRegulation",
+		"DeletionAndSuppressionApiService.DeleteRegulation",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -645,7 +636,7 @@ func (a *DeletionAndSuppressionAPIService) DeleteRegulationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"regulateId"+"}",
-		url.PathEscape(parameterValueToString(r.regulateId, "regulateId")),
+		url.PathEscape(parameterToString(r.regulateId, "")),
 		-1,
 	)
 
@@ -694,9 +685,9 @@ func (a *DeletionAndSuppressionAPIService) DeleteRegulationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -713,7 +704,6 @@ func (a *DeletionAndSuppressionAPIService) DeleteRegulationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -724,7 +714,6 @@ func (a *DeletionAndSuppressionAPIService) DeleteRegulationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -735,7 +724,6 @@ func (a *DeletionAndSuppressionAPIService) DeleteRegulationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -759,7 +747,7 @@ func (a *DeletionAndSuppressionAPIService) DeleteRegulationExecute(
 
 type ApiGetRegulationRequest struct {
 	ctx        context.Context
-	ApiService *DeletionAndSuppressionAPIService
+	ApiService *DeletionAndSuppressionApiService
 	regulateId string
 }
 
@@ -780,7 +768,7 @@ Gets a regulation from the Workspace.
 	@param regulateId
 	@return ApiGetRegulationRequest
 */
-func (a *DeletionAndSuppressionAPIService) GetRegulation(
+func (a *DeletionAndSuppressionApiService) GetRegulation(
 	ctx context.Context,
 	regulateId string,
 ) ApiGetRegulationRequest {
@@ -794,7 +782,7 @@ func (a *DeletionAndSuppressionAPIService) GetRegulation(
 // Execute executes the request
 //
 //	@return GetRegulation200Response
-func (a *DeletionAndSuppressionAPIService) GetRegulationExecute(
+func (a *DeletionAndSuppressionApiService) GetRegulationExecute(
 	r ApiGetRegulationRequest,
 ) (*GetRegulation200Response, *http.Response, error) {
 	var (
@@ -806,7 +794,7 @@ func (a *DeletionAndSuppressionAPIService) GetRegulationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DeletionAndSuppressionAPIService.GetRegulation",
+		"DeletionAndSuppressionApiService.GetRegulation",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -816,7 +804,7 @@ func (a *DeletionAndSuppressionAPIService) GetRegulationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"regulateId"+"}",
-		url.PathEscape(parameterValueToString(r.regulateId, "regulateId")),
+		url.PathEscape(parameterToString(r.regulateId, "")),
 		-1,
 	)
 
@@ -865,9 +853,9 @@ func (a *DeletionAndSuppressionAPIService) GetRegulationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -884,7 +872,6 @@ func (a *DeletionAndSuppressionAPIService) GetRegulationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -895,7 +882,6 @@ func (a *DeletionAndSuppressionAPIService) GetRegulationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -906,7 +892,6 @@ func (a *DeletionAndSuppressionAPIService) GetRegulationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -930,7 +915,7 @@ func (a *DeletionAndSuppressionAPIService) GetRegulationExecute(
 
 type ApiListRegulationsFromSourceRequest struct {
 	ctx             context.Context
-	ApiService      *DeletionAndSuppressionAPIService
+	ApiService      *DeletionAndSuppressionApiService
 	sourceId        string
 	pagination      *PaginationInput
 	status          *string
@@ -974,7 +959,7 @@ Lists all Source-scoped regulations.
 	@param sourceId
 	@return ApiListRegulationsFromSourceRequest
 */
-func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSource(
+func (a *DeletionAndSuppressionApiService) ListRegulationsFromSource(
 	ctx context.Context,
 	sourceId string,
 ) ApiListRegulationsFromSourceRequest {
@@ -988,7 +973,7 @@ func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSource(
 // Execute executes the request
 //
 //	@return ListRegulationsFromSource200Response
-func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSourceExecute(
+func (a *DeletionAndSuppressionApiService) ListRegulationsFromSourceExecute(
 	r ApiListRegulationsFromSourceRequest,
 ) (*ListRegulationsFromSource200Response, *http.Response, error) {
 	var (
@@ -1000,7 +985,7 @@ func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSourceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DeletionAndSuppressionAPIService.ListRegulationsFromSource",
+		"DeletionAndSuppressionApiService.ListRegulationsFromSource",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1010,7 +995,7 @@ func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSourceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		url.PathEscape(parameterToString(r.sourceId, "")),
 		-1,
 	)
 
@@ -1022,17 +1007,12 @@ func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSourceExecute(
 	}
 
 	if r.status != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "")
+		localVarQueryParams.Add("status", parameterToString(*r.status, ""))
 	}
 	if r.regulationTypes != nil {
-		parameterAddToHeaderOrQuery(
-			localVarQueryParams,
-			"regulationTypes",
-			r.regulationTypes,
-			"csv",
-		)
+		localVarQueryParams.Add("regulationTypes", parameterToString(*r.regulationTypes, "csv"))
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1074,9 +1054,9 @@ func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSourceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1093,7 +1073,6 @@ func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1104,7 +1083,6 @@ func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1115,7 +1093,6 @@ func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSourceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1139,7 +1116,7 @@ func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSourceExecute(
 
 type ApiListSuppressionsRequest struct {
 	ctx        context.Context
-	ApiService *DeletionAndSuppressionAPIService
+	ApiService *DeletionAndSuppressionApiService
 	pagination *PaginationInput
 }
 
@@ -1163,7 +1140,7 @@ Lists all suppressions in a given Workspace.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListSuppressionsRequest
 */
-func (a *DeletionAndSuppressionAPIService) ListSuppressions(
+func (a *DeletionAndSuppressionApiService) ListSuppressions(
 	ctx context.Context,
 ) ApiListSuppressionsRequest {
 	return ApiListSuppressionsRequest{
@@ -1175,7 +1152,7 @@ func (a *DeletionAndSuppressionAPIService) ListSuppressions(
 // Execute executes the request
 //
 //	@return ListSuppressions200Response
-func (a *DeletionAndSuppressionAPIService) ListSuppressionsExecute(
+func (a *DeletionAndSuppressionApiService) ListSuppressionsExecute(
 	r ApiListSuppressionsRequest,
 ) (*ListSuppressions200Response, *http.Response, error) {
 	var (
@@ -1187,7 +1164,7 @@ func (a *DeletionAndSuppressionAPIService) ListSuppressionsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DeletionAndSuppressionAPIService.ListSuppressions",
+		"DeletionAndSuppressionApiService.ListSuppressions",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1202,7 +1179,7 @@ func (a *DeletionAndSuppressionAPIService) ListSuppressionsExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1244,9 +1221,9 @@ func (a *DeletionAndSuppressionAPIService) ListSuppressionsExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1263,7 +1240,6 @@ func (a *DeletionAndSuppressionAPIService) ListSuppressionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1274,7 +1250,6 @@ func (a *DeletionAndSuppressionAPIService) ListSuppressionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1285,7 +1260,6 @@ func (a *DeletionAndSuppressionAPIService) ListSuppressionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1309,7 +1283,7 @@ func (a *DeletionAndSuppressionAPIService) ListSuppressionsExecute(
 
 type ApiListWorkspaceRegulationsRequest struct {
 	ctx             context.Context
-	ApiService      *DeletionAndSuppressionAPIService
+	ApiService      *DeletionAndSuppressionApiService
 	pagination      *PaginationInput
 	status          *string
 	regulationTypes *[]string
@@ -1351,7 +1325,7 @@ Lists all Workspace-scoped regulations.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListWorkspaceRegulationsRequest
 */
-func (a *DeletionAndSuppressionAPIService) ListWorkspaceRegulations(
+func (a *DeletionAndSuppressionApiService) ListWorkspaceRegulations(
 	ctx context.Context,
 ) ApiListWorkspaceRegulationsRequest {
 	return ApiListWorkspaceRegulationsRequest{
@@ -1363,7 +1337,7 @@ func (a *DeletionAndSuppressionAPIService) ListWorkspaceRegulations(
 // Execute executes the request
 //
 //	@return ListWorkspaceRegulations200Response
-func (a *DeletionAndSuppressionAPIService) ListWorkspaceRegulationsExecute(
+func (a *DeletionAndSuppressionApiService) ListWorkspaceRegulationsExecute(
 	r ApiListWorkspaceRegulationsRequest,
 ) (*ListWorkspaceRegulations200Response, *http.Response, error) {
 	var (
@@ -1375,7 +1349,7 @@ func (a *DeletionAndSuppressionAPIService) ListWorkspaceRegulationsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DeletionAndSuppressionAPIService.ListWorkspaceRegulations",
+		"DeletionAndSuppressionApiService.ListWorkspaceRegulations",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1391,17 +1365,12 @@ func (a *DeletionAndSuppressionAPIService) ListWorkspaceRegulationsExecute(
 	}
 
 	if r.status != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "")
+		localVarQueryParams.Add("status", parameterToString(*r.status, ""))
 	}
 	if r.regulationTypes != nil {
-		parameterAddToHeaderOrQuery(
-			localVarQueryParams,
-			"regulationTypes",
-			r.regulationTypes,
-			"csv",
-		)
+		localVarQueryParams.Add("regulationTypes", parameterToString(*r.regulationTypes, "csv"))
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1443,9 +1412,9 @@ func (a *DeletionAndSuppressionAPIService) ListWorkspaceRegulationsExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1462,7 +1431,6 @@ func (a *DeletionAndSuppressionAPIService) ListWorkspaceRegulationsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1473,7 +1441,6 @@ func (a *DeletionAndSuppressionAPIService) ListWorkspaceRegulationsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1484,7 +1451,6 @@ func (a *DeletionAndSuppressionAPIService) ListWorkspaceRegulationsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the CreateDestinationV1Input type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateDestinationV1Input{}
 
 // CreateDestinationV1Input Creates a new Destination.
 type CreateDestinationV1Input struct {
@@ -106,7 +103,7 @@ func (o *CreateDestinationV1Input) SetMetadataId(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *CreateDestinationV1Input) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil || o.Enabled == nil {
 		var ret bool
 		return ret
 	}
@@ -116,7 +113,7 @@ func (o *CreateDestinationV1Input) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateDestinationV1Input) GetEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil || o.Enabled == nil {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -124,7 +121,7 @@ func (o *CreateDestinationV1Input) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *CreateDestinationV1Input) HasEnabled() bool {
-	if o != nil && !IsNil(o.Enabled) {
+	if o != nil && o.Enabled != nil {
 		return true
 	}
 
@@ -138,7 +135,7 @@ func (o *CreateDestinationV1Input) SetEnabled(v bool) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *CreateDestinationV1Input) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || o.Name == nil {
 		var ret string
 		return ret
 	}
@@ -148,7 +145,7 @@ func (o *CreateDestinationV1Input) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateDestinationV1Input) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || o.Name == nil {
 		return nil, false
 	}
 	return o.Name, true
@@ -156,7 +153,7 @@ func (o *CreateDestinationV1Input) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *CreateDestinationV1Input) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name != nil {
 		return true
 	}
 
@@ -182,7 +179,7 @@ func (o *CreateDestinationV1Input) GetSettings() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *CreateDestinationV1Input) GetSettingsOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.Settings, true
 }
@@ -193,25 +190,23 @@ func (o *CreateDestinationV1Input) SetSettings(v map[string]interface{}) {
 }
 
 func (o CreateDestinationV1Input) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o CreateDestinationV1Input) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["sourceId"] = o.SourceId
-	toSerialize["metadataId"] = o.MetadataId
-	if !IsNil(o.Enabled) {
+	if true {
+		toSerialize["sourceId"] = o.SourceId
+	}
+	if true {
+		toSerialize["metadataId"] = o.MetadataId
+	}
+	if o.Enabled != nil {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if !IsNil(o.Name) {
+	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
-	toSerialize["settings"] = o.Settings
-	return toSerialize, nil
+	if true {
+		toSerialize["settings"] = o.Settings
+	}
+	return json.Marshal(toSerialize)
 }
 
 type NullableCreateDestinationV1Input struct {

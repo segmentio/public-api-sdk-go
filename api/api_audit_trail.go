@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,17 +14,17 @@ package api
 import (
 	"bytes"
 	"context"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 )
 
-// AuditTrailAPIService AuditTrailAPI service
-type AuditTrailAPIService service
+// AuditTrailApiService AuditTrailApi service
+type AuditTrailApiService service
 
 type ApiListAuditEventsRequest struct {
 	ctx          context.Context
-	ApiService   *AuditTrailAPIService
+	ApiService   *AuditTrailApiService
 	pagination   *PaginationInput
 	startTime    *string
 	endTime      *string
@@ -76,7 +76,7 @@ Returns a list of Audit Trail events.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListAuditEventsRequest
 */
-func (a *AuditTrailAPIService) ListAuditEvents(ctx context.Context) ApiListAuditEventsRequest {
+func (a *AuditTrailApiService) ListAuditEvents(ctx context.Context) ApiListAuditEventsRequest {
 	return ApiListAuditEventsRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -86,7 +86,7 @@ func (a *AuditTrailAPIService) ListAuditEvents(ctx context.Context) ApiListAudit
 // Execute executes the request
 //
 //	@return ListAuditEvents200Response
-func (a *AuditTrailAPIService) ListAuditEventsExecute(
+func (a *AuditTrailApiService) ListAuditEventsExecute(
 	r ApiListAuditEventsRequest,
 ) (*ListAuditEvents200Response, *http.Response, error) {
 	var (
@@ -98,7 +98,7 @@ func (a *AuditTrailAPIService) ListAuditEventsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"AuditTrailAPIService.ListAuditEvents",
+		"AuditTrailApiService.ListAuditEvents",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -114,18 +114,18 @@ func (a *AuditTrailAPIService) ListAuditEventsExecute(
 	}
 
 	if r.startTime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
+		localVarQueryParams.Add("startTime", parameterToString(*r.startTime, ""))
 	}
 	if r.endTime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "")
+		localVarQueryParams.Add("endTime", parameterToString(*r.endTime, ""))
 	}
 	if r.resourceId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "resourceId", r.resourceId, "")
+		localVarQueryParams.Add("resourceId", parameterToString(*r.resourceId, ""))
 	}
 	if r.resourceType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "resourceType", r.resourceType, "")
+		localVarQueryParams.Add("resourceType", parameterToString(*r.resourceType, ""))
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -167,9 +167,9 @@ func (a *AuditTrailAPIService) ListAuditEventsExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -186,7 +186,6 @@ func (a *AuditTrailAPIService) ListAuditEventsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -197,7 +196,6 @@ func (a *AuditTrailAPIService) ListAuditEventsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -208,7 +206,6 @@ func (a *AuditTrailAPIService) ListAuditEventsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

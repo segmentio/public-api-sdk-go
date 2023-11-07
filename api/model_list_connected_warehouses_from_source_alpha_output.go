@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,14 +15,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the ListConnectedWarehousesFromSourceAlphaOutput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListConnectedWarehousesFromSourceAlphaOutput{}
-
 // ListConnectedWarehousesFromSourceAlphaOutput Returns a list of Warehouses connected to a Source.
 type ListConnectedWarehousesFromSourceAlphaOutput struct {
 	// A list that contains the Warehouses connected to the Source.
-	Warehouses []WarehouseV1    `json:"warehouses"`
-	Pagination PaginationOutput `json:"pagination"`
+	Warehouses []WarehouseV1 `json:"warehouses"`
+	Pagination Pagination    `json:"pagination"`
 }
 
 // NewListConnectedWarehousesFromSourceAlphaOutput instantiates a new ListConnectedWarehousesFromSourceAlphaOutput object
@@ -31,7 +28,7 @@ type ListConnectedWarehousesFromSourceAlphaOutput struct {
 // will change when the set of required properties is changed
 func NewListConnectedWarehousesFromSourceAlphaOutput(
 	warehouses []WarehouseV1,
-	pagination PaginationOutput,
+	pagination Pagination,
 ) *ListConnectedWarehousesFromSourceAlphaOutput {
 	this := ListConnectedWarehousesFromSourceAlphaOutput{}
 	this.Warehouses = warehouses
@@ -72,9 +69,9 @@ func (o *ListConnectedWarehousesFromSourceAlphaOutput) SetWarehouses(v []Warehou
 }
 
 // GetPagination returns the Pagination field value
-func (o *ListConnectedWarehousesFromSourceAlphaOutput) GetPagination() PaginationOutput {
+func (o *ListConnectedWarehousesFromSourceAlphaOutput) GetPagination() Pagination {
 	if o == nil {
-		var ret PaginationOutput
+		var ret Pagination
 		return ret
 	}
 
@@ -83,7 +80,7 @@ func (o *ListConnectedWarehousesFromSourceAlphaOutput) GetPagination() Paginatio
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *ListConnectedWarehousesFromSourceAlphaOutput) GetPaginationOk() (*PaginationOutput, bool) {
+func (o *ListConnectedWarehousesFromSourceAlphaOutput) GetPaginationOk() (*Pagination, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,23 +88,19 @@ func (o *ListConnectedWarehousesFromSourceAlphaOutput) GetPaginationOk() (*Pagin
 }
 
 // SetPagination sets field value
-func (o *ListConnectedWarehousesFromSourceAlphaOutput) SetPagination(v PaginationOutput) {
+func (o *ListConnectedWarehousesFromSourceAlphaOutput) SetPagination(v Pagination) {
 	o.Pagination = v
 }
 
 func (o ListConnectedWarehousesFromSourceAlphaOutput) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["warehouses"] = o.Warehouses
+	}
+	if true {
+		toSerialize["pagination"] = o.Pagination
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o ListConnectedWarehousesFromSourceAlphaOutput) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["warehouses"] = o.Warehouses
-	toSerialize["pagination"] = o.Pagination
-	return toSerialize, nil
 }
 
 type NullableListConnectedWarehousesFromSourceAlphaOutput struct {

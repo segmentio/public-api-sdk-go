@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// FunctionsAPIService FunctionsAPI service
-type FunctionsAPIService service
+// FunctionsApiService FunctionsApi service
+type FunctionsApiService service
 
 type ApiCreateFunctionRequest struct {
 	ctx                   context.Context
-	ApiService            *FunctionsAPIService
+	ApiService            *FunctionsApiService
 	createFunctionV1Input *CreateFunctionV1Input
 }
 
@@ -50,7 +50,7 @@ Creates a Function.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateFunctionRequest
 */
-func (a *FunctionsAPIService) CreateFunction(ctx context.Context) ApiCreateFunctionRequest {
+func (a *FunctionsApiService) CreateFunction(ctx context.Context) ApiCreateFunctionRequest {
 	return ApiCreateFunctionRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -60,7 +60,7 @@ func (a *FunctionsAPIService) CreateFunction(ctx context.Context) ApiCreateFunct
 // Execute executes the request
 //
 //	@return CreateFunction200Response
-func (a *FunctionsAPIService) CreateFunctionExecute(
+func (a *FunctionsApiService) CreateFunctionExecute(
 	r ApiCreateFunctionRequest,
 ) (*CreateFunction200Response, *http.Response, error) {
 	var (
@@ -72,7 +72,7 @@ func (a *FunctionsAPIService) CreateFunctionExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FunctionsAPIService.CreateFunction",
+		"FunctionsApiService.CreateFunction",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -136,9 +136,9 @@ func (a *FunctionsAPIService) CreateFunctionExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -155,7 +155,6 @@ func (a *FunctionsAPIService) CreateFunctionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -166,7 +165,6 @@ func (a *FunctionsAPIService) CreateFunctionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -177,7 +175,6 @@ func (a *FunctionsAPIService) CreateFunctionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -201,7 +198,7 @@ func (a *FunctionsAPIService) CreateFunctionExecute(
 
 type ApiCreateFunctionDeploymentRequest struct {
 	ctx        context.Context
-	ApiService *FunctionsAPIService
+	ApiService *FunctionsApiService
 	functionId string
 }
 
@@ -220,7 +217,7 @@ Deploys a Function. Only applicable to Source Function instances.
 	@param functionId
 	@return ApiCreateFunctionDeploymentRequest
 */
-func (a *FunctionsAPIService) CreateFunctionDeployment(
+func (a *FunctionsApiService) CreateFunctionDeployment(
 	ctx context.Context,
 	functionId string,
 ) ApiCreateFunctionDeploymentRequest {
@@ -234,7 +231,7 @@ func (a *FunctionsAPIService) CreateFunctionDeployment(
 // Execute executes the request
 //
 //	@return CreateFunctionDeployment200Response
-func (a *FunctionsAPIService) CreateFunctionDeploymentExecute(
+func (a *FunctionsApiService) CreateFunctionDeploymentExecute(
 	r ApiCreateFunctionDeploymentRequest,
 ) (*CreateFunctionDeployment200Response, *http.Response, error) {
 	var (
@@ -246,7 +243,7 @@ func (a *FunctionsAPIService) CreateFunctionDeploymentExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FunctionsAPIService.CreateFunctionDeployment",
+		"FunctionsApiService.CreateFunctionDeployment",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -256,7 +253,7 @@ func (a *FunctionsAPIService) CreateFunctionDeploymentExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"functionId"+"}",
-		url.PathEscape(parameterValueToString(r.functionId, "functionId")),
+		url.PathEscape(parameterToString(r.functionId, "")),
 		-1,
 	)
 
@@ -305,9 +302,9 @@ func (a *FunctionsAPIService) CreateFunctionDeploymentExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -324,7 +321,6 @@ func (a *FunctionsAPIService) CreateFunctionDeploymentExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -335,7 +331,6 @@ func (a *FunctionsAPIService) CreateFunctionDeploymentExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -346,7 +341,6 @@ func (a *FunctionsAPIService) CreateFunctionDeploymentExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -370,7 +364,7 @@ func (a *FunctionsAPIService) CreateFunctionDeploymentExecute(
 
 type ApiCreateInsertFunctionInstanceRequest struct {
 	ctx                                    context.Context
-	ApiService                             *FunctionsAPIService
+	ApiService                             *FunctionsApiService
 	createInsertFunctionInstanceAlphaInput *CreateInsertFunctionInstanceAlphaInput
 }
 
@@ -395,7 +389,7 @@ Creates an insert Function instance connected to the given Destination.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateInsertFunctionInstanceRequest
 */
-func (a *FunctionsAPIService) CreateInsertFunctionInstance(
+func (a *FunctionsApiService) CreateInsertFunctionInstance(
 	ctx context.Context,
 ) ApiCreateInsertFunctionInstanceRequest {
 	return ApiCreateInsertFunctionInstanceRequest{
@@ -407,7 +401,7 @@ func (a *FunctionsAPIService) CreateInsertFunctionInstance(
 // Execute executes the request
 //
 //	@return CreateInsertFunctionInstance200Response
-func (a *FunctionsAPIService) CreateInsertFunctionInstanceExecute(
+func (a *FunctionsApiService) CreateInsertFunctionInstanceExecute(
 	r ApiCreateInsertFunctionInstanceRequest,
 ) (*CreateInsertFunctionInstance200Response, *http.Response, error) {
 	var (
@@ -419,7 +413,7 @@ func (a *FunctionsAPIService) CreateInsertFunctionInstanceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FunctionsAPIService.CreateInsertFunctionInstance",
+		"FunctionsApiService.CreateInsertFunctionInstance",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -477,9 +471,9 @@ func (a *FunctionsAPIService) CreateInsertFunctionInstanceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -496,7 +490,6 @@ func (a *FunctionsAPIService) CreateInsertFunctionInstanceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -507,7 +500,6 @@ func (a *FunctionsAPIService) CreateInsertFunctionInstanceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -518,7 +510,6 @@ func (a *FunctionsAPIService) CreateInsertFunctionInstanceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -542,7 +533,7 @@ func (a *FunctionsAPIService) CreateInsertFunctionInstanceExecute(
 
 type ApiDeleteFunctionRequest struct {
 	ctx        context.Context
-	ApiService *FunctionsAPIService
+	ApiService *FunctionsApiService
 	functionId string
 }
 
@@ -561,7 +552,7 @@ Deletes a Function.
 	@param functionId
 	@return ApiDeleteFunctionRequest
 */
-func (a *FunctionsAPIService) DeleteFunction(
+func (a *FunctionsApiService) DeleteFunction(
 	ctx context.Context,
 	functionId string,
 ) ApiDeleteFunctionRequest {
@@ -575,7 +566,7 @@ func (a *FunctionsAPIService) DeleteFunction(
 // Execute executes the request
 //
 //	@return DeleteFunction200Response
-func (a *FunctionsAPIService) DeleteFunctionExecute(
+func (a *FunctionsApiService) DeleteFunctionExecute(
 	r ApiDeleteFunctionRequest,
 ) (*DeleteFunction200Response, *http.Response, error) {
 	var (
@@ -587,7 +578,7 @@ func (a *FunctionsAPIService) DeleteFunctionExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FunctionsAPIService.DeleteFunction",
+		"FunctionsApiService.DeleteFunction",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -597,7 +588,7 @@ func (a *FunctionsAPIService) DeleteFunctionExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"functionId"+"}",
-		url.PathEscape(parameterValueToString(r.functionId, "functionId")),
+		url.PathEscape(parameterToString(r.functionId, "")),
 		-1,
 	)
 
@@ -646,9 +637,9 @@ func (a *FunctionsAPIService) DeleteFunctionExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -665,7 +656,6 @@ func (a *FunctionsAPIService) DeleteFunctionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -676,7 +666,6 @@ func (a *FunctionsAPIService) DeleteFunctionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -687,7 +676,6 @@ func (a *FunctionsAPIService) DeleteFunctionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -711,7 +699,7 @@ func (a *FunctionsAPIService) DeleteFunctionExecute(
 
 type ApiDeleteInsertFunctionInstanceRequest struct {
 	ctx        context.Context
-	ApiService *FunctionsAPIService
+	ApiService *FunctionsApiService
 	instanceId string
 }
 
@@ -730,7 +718,7 @@ Deletes an insert Function instance.
 	@param instanceId
 	@return ApiDeleteInsertFunctionInstanceRequest
 */
-func (a *FunctionsAPIService) DeleteInsertFunctionInstance(
+func (a *FunctionsApiService) DeleteInsertFunctionInstance(
 	ctx context.Context,
 	instanceId string,
 ) ApiDeleteInsertFunctionInstanceRequest {
@@ -744,7 +732,7 @@ func (a *FunctionsAPIService) DeleteInsertFunctionInstance(
 // Execute executes the request
 //
 //	@return DeleteInsertFunctionInstance200Response
-func (a *FunctionsAPIService) DeleteInsertFunctionInstanceExecute(
+func (a *FunctionsApiService) DeleteInsertFunctionInstanceExecute(
 	r ApiDeleteInsertFunctionInstanceRequest,
 ) (*DeleteInsertFunctionInstance200Response, *http.Response, error) {
 	var (
@@ -756,7 +744,7 @@ func (a *FunctionsAPIService) DeleteInsertFunctionInstanceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FunctionsAPIService.DeleteInsertFunctionInstance",
+		"FunctionsApiService.DeleteInsertFunctionInstance",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -766,7 +754,7 @@ func (a *FunctionsAPIService) DeleteInsertFunctionInstanceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"instanceId"+"}",
-		url.PathEscape(parameterValueToString(r.instanceId, "instanceId")),
+		url.PathEscape(parameterToString(r.instanceId, "")),
 		-1,
 	)
 
@@ -813,9 +801,9 @@ func (a *FunctionsAPIService) DeleteInsertFunctionInstanceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -832,7 +820,6 @@ func (a *FunctionsAPIService) DeleteInsertFunctionInstanceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -843,7 +830,6 @@ func (a *FunctionsAPIService) DeleteInsertFunctionInstanceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -854,7 +840,6 @@ func (a *FunctionsAPIService) DeleteInsertFunctionInstanceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -878,7 +863,7 @@ func (a *FunctionsAPIService) DeleteInsertFunctionInstanceExecute(
 
 type ApiGetFunctionRequest struct {
 	ctx        context.Context
-	ApiService *FunctionsAPIService
+	ApiService *FunctionsApiService
 	functionId string
 }
 
@@ -897,7 +882,7 @@ Gets a Function.
 	@param functionId
 	@return ApiGetFunctionRequest
 */
-func (a *FunctionsAPIService) GetFunction(
+func (a *FunctionsApiService) GetFunction(
 	ctx context.Context,
 	functionId string,
 ) ApiGetFunctionRequest {
@@ -911,7 +896,7 @@ func (a *FunctionsAPIService) GetFunction(
 // Execute executes the request
 //
 //	@return GetFunction200Response
-func (a *FunctionsAPIService) GetFunctionExecute(
+func (a *FunctionsApiService) GetFunctionExecute(
 	r ApiGetFunctionRequest,
 ) (*GetFunction200Response, *http.Response, error) {
 	var (
@@ -923,7 +908,7 @@ func (a *FunctionsAPIService) GetFunctionExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FunctionsAPIService.GetFunction",
+		"FunctionsApiService.GetFunction",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -933,7 +918,7 @@ func (a *FunctionsAPIService) GetFunctionExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"functionId"+"}",
-		url.PathEscape(parameterValueToString(r.functionId, "functionId")),
+		url.PathEscape(parameterToString(r.functionId, "")),
 		-1,
 	)
 
@@ -982,9 +967,9 @@ func (a *FunctionsAPIService) GetFunctionExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1001,7 +986,6 @@ func (a *FunctionsAPIService) GetFunctionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1012,7 +996,6 @@ func (a *FunctionsAPIService) GetFunctionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1023,7 +1006,6 @@ func (a *FunctionsAPIService) GetFunctionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1047,7 +1029,7 @@ func (a *FunctionsAPIService) GetFunctionExecute(
 
 type ApiGetFunctionVersionRequest struct {
 	ctx        context.Context
-	ApiService *FunctionsAPIService
+	ApiService *FunctionsApiService
 	functionId string
 	versionId  string
 }
@@ -1068,7 +1050,7 @@ Gets a Function version.
 	@param versionId
 	@return ApiGetFunctionVersionRequest
 */
-func (a *FunctionsAPIService) GetFunctionVersion(
+func (a *FunctionsApiService) GetFunctionVersion(
 	ctx context.Context,
 	functionId string,
 	versionId string,
@@ -1084,7 +1066,7 @@ func (a *FunctionsAPIService) GetFunctionVersion(
 // Execute executes the request
 //
 //	@return GetFunctionVersion200Response
-func (a *FunctionsAPIService) GetFunctionVersionExecute(
+func (a *FunctionsApiService) GetFunctionVersionExecute(
 	r ApiGetFunctionVersionRequest,
 ) (*GetFunctionVersion200Response, *http.Response, error) {
 	var (
@@ -1096,7 +1078,7 @@ func (a *FunctionsAPIService) GetFunctionVersionExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FunctionsAPIService.GetFunctionVersion",
+		"FunctionsApiService.GetFunctionVersion",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1106,13 +1088,13 @@ func (a *FunctionsAPIService) GetFunctionVersionExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"functionId"+"}",
-		url.PathEscape(parameterValueToString(r.functionId, "functionId")),
+		url.PathEscape(parameterToString(r.functionId, "")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"versionId"+"}",
-		url.PathEscape(parameterValueToString(r.versionId, "versionId")),
+		url.PathEscape(parameterToString(r.versionId, "")),
 		-1,
 	)
 
@@ -1159,9 +1141,9 @@ func (a *FunctionsAPIService) GetFunctionVersionExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1178,7 +1160,6 @@ func (a *FunctionsAPIService) GetFunctionVersionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1189,7 +1170,6 @@ func (a *FunctionsAPIService) GetFunctionVersionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1200,7 +1180,6 @@ func (a *FunctionsAPIService) GetFunctionVersionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1224,7 +1203,7 @@ func (a *FunctionsAPIService) GetFunctionVersionExecute(
 
 type ApiGetInsertFunctionInstanceRequest struct {
 	ctx        context.Context
-	ApiService *FunctionsAPIService
+	ApiService *FunctionsApiService
 	instanceId string
 }
 
@@ -1243,7 +1222,7 @@ Gets an insert Function instance.
 	@param instanceId
 	@return ApiGetInsertFunctionInstanceRequest
 */
-func (a *FunctionsAPIService) GetInsertFunctionInstance(
+func (a *FunctionsApiService) GetInsertFunctionInstance(
 	ctx context.Context,
 	instanceId string,
 ) ApiGetInsertFunctionInstanceRequest {
@@ -1257,7 +1236,7 @@ func (a *FunctionsAPIService) GetInsertFunctionInstance(
 // Execute executes the request
 //
 //	@return GetInsertFunctionInstance200Response
-func (a *FunctionsAPIService) GetInsertFunctionInstanceExecute(
+func (a *FunctionsApiService) GetInsertFunctionInstanceExecute(
 	r ApiGetInsertFunctionInstanceRequest,
 ) (*GetInsertFunctionInstance200Response, *http.Response, error) {
 	var (
@@ -1269,7 +1248,7 @@ func (a *FunctionsAPIService) GetInsertFunctionInstanceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FunctionsAPIService.GetInsertFunctionInstance",
+		"FunctionsApiService.GetInsertFunctionInstance",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1279,7 +1258,7 @@ func (a *FunctionsAPIService) GetInsertFunctionInstanceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"instanceId"+"}",
-		url.PathEscape(parameterValueToString(r.instanceId, "instanceId")),
+		url.PathEscape(parameterToString(r.instanceId, "")),
 		-1,
 	)
 
@@ -1326,9 +1305,9 @@ func (a *FunctionsAPIService) GetInsertFunctionInstanceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1345,7 +1324,6 @@ func (a *FunctionsAPIService) GetInsertFunctionInstanceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1356,7 +1334,6 @@ func (a *FunctionsAPIService) GetInsertFunctionInstanceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1367,7 +1344,6 @@ func (a *FunctionsAPIService) GetInsertFunctionInstanceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1391,7 +1367,7 @@ func (a *FunctionsAPIService) GetInsertFunctionInstanceExecute(
 
 type ApiListFunctionVersionsRequest struct {
 	ctx        context.Context
-	ApiService *FunctionsAPIService
+	ApiService *FunctionsApiService
 	functionId string
 	pagination *PaginationInput
 }
@@ -1419,7 +1395,7 @@ Lists versions for a Function in a Workspace.
 	@param functionId
 	@return ApiListFunctionVersionsRequest
 */
-func (a *FunctionsAPIService) ListFunctionVersions(
+func (a *FunctionsApiService) ListFunctionVersions(
 	ctx context.Context,
 	functionId string,
 ) ApiListFunctionVersionsRequest {
@@ -1433,7 +1409,7 @@ func (a *FunctionsAPIService) ListFunctionVersions(
 // Execute executes the request
 //
 //	@return ListFunctionVersions200Response
-func (a *FunctionsAPIService) ListFunctionVersionsExecute(
+func (a *FunctionsApiService) ListFunctionVersionsExecute(
 	r ApiListFunctionVersionsRequest,
 ) (*ListFunctionVersions200Response, *http.Response, error) {
 	var (
@@ -1445,7 +1421,7 @@ func (a *FunctionsAPIService) ListFunctionVersionsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FunctionsAPIService.ListFunctionVersions",
+		"FunctionsApiService.ListFunctionVersions",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1455,7 +1431,7 @@ func (a *FunctionsAPIService) ListFunctionVersionsExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"functionId"+"}",
-		url.PathEscape(parameterValueToString(r.functionId, "functionId")),
+		url.PathEscape(parameterToString(r.functionId, "")),
 		-1,
 	)
 
@@ -1466,7 +1442,7 @@ func (a *FunctionsAPIService) ListFunctionVersionsExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1506,9 +1482,9 @@ func (a *FunctionsAPIService) ListFunctionVersionsExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1525,7 +1501,6 @@ func (a *FunctionsAPIService) ListFunctionVersionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1536,7 +1511,6 @@ func (a *FunctionsAPIService) ListFunctionVersionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1547,7 +1521,6 @@ func (a *FunctionsAPIService) ListFunctionVersionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1571,7 +1544,7 @@ func (a *FunctionsAPIService) ListFunctionVersionsExecute(
 
 type ApiListFunctionsRequest struct {
 	ctx          context.Context
-	ApiService   *FunctionsAPIService
+	ApiService   *FunctionsApiService
 	pagination   *PaginationInput
 	resourceType *string
 }
@@ -1602,7 +1575,7 @@ Lists all Functions in a Workspace.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListFunctionsRequest
 */
-func (a *FunctionsAPIService) ListFunctions(ctx context.Context) ApiListFunctionsRequest {
+func (a *FunctionsApiService) ListFunctions(ctx context.Context) ApiListFunctionsRequest {
 	return ApiListFunctionsRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1612,7 +1585,7 @@ func (a *FunctionsAPIService) ListFunctions(ctx context.Context) ApiListFunction
 // Execute executes the request
 //
 //	@return ListFunctions200Response
-func (a *FunctionsAPIService) ListFunctionsExecute(
+func (a *FunctionsApiService) ListFunctionsExecute(
 	r ApiListFunctionsRequest,
 ) (*ListFunctions200Response, *http.Response, error) {
 	var (
@@ -1624,7 +1597,7 @@ func (a *FunctionsAPIService) ListFunctionsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FunctionsAPIService.ListFunctions",
+		"FunctionsApiService.ListFunctions",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1644,8 +1617,8 @@ func (a *FunctionsAPIService) ListFunctionsExecute(
 		)
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "resourceType", r.resourceType, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	localVarQueryParams.Add("resourceType", parameterToString(*r.resourceType, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1687,9 +1660,9 @@ func (a *FunctionsAPIService) ListFunctionsExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1706,7 +1679,6 @@ func (a *FunctionsAPIService) ListFunctionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1717,7 +1689,6 @@ func (a *FunctionsAPIService) ListFunctionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1728,7 +1699,6 @@ func (a *FunctionsAPIService) ListFunctionsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1752,7 +1722,7 @@ func (a *FunctionsAPIService) ListFunctionsExecute(
 
 type ApiListInsertFunctionInstancesRequest struct {
 	ctx        context.Context
-	ApiService *FunctionsAPIService
+	ApiService *FunctionsApiService
 	pagination *PaginationInput
 	functionId *string
 }
@@ -1787,7 +1757,7 @@ Lists all insert Function instances connected to the given insert Function.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListInsertFunctionInstancesRequest
 */
-func (a *FunctionsAPIService) ListInsertFunctionInstances(
+func (a *FunctionsApiService) ListInsertFunctionInstances(
 	ctx context.Context,
 ) ApiListInsertFunctionInstancesRequest {
 	return ApiListInsertFunctionInstancesRequest{
@@ -1799,7 +1769,7 @@ func (a *FunctionsAPIService) ListInsertFunctionInstances(
 // Execute executes the request
 //
 //	@return ListInsertFunctionInstances200Response
-func (a *FunctionsAPIService) ListInsertFunctionInstancesExecute(
+func (a *FunctionsApiService) ListInsertFunctionInstancesExecute(
 	r ApiListInsertFunctionInstancesRequest,
 ) (*ListInsertFunctionInstances200Response, *http.Response, error) {
 	var (
@@ -1811,7 +1781,7 @@ func (a *FunctionsAPIService) ListInsertFunctionInstancesExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FunctionsAPIService.ListInsertFunctionInstances",
+		"FunctionsApiService.ListInsertFunctionInstances",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1829,8 +1799,8 @@ func (a *FunctionsAPIService) ListInsertFunctionInstancesExecute(
 		return localVarReturnValue, nil, reportError("functionId is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "functionId", r.functionId, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	localVarQueryParams.Add("functionId", parameterToString(*r.functionId, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1870,9 +1840,9 @@ func (a *FunctionsAPIService) ListInsertFunctionInstancesExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1889,7 +1859,6 @@ func (a *FunctionsAPIService) ListInsertFunctionInstancesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1900,7 +1869,6 @@ func (a *FunctionsAPIService) ListInsertFunctionInstancesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1911,7 +1879,6 @@ func (a *FunctionsAPIService) ListInsertFunctionInstancesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1935,7 +1902,7 @@ func (a *FunctionsAPIService) ListInsertFunctionInstancesExecute(
 
 type ApiRestoreFunctionVersionRequest struct {
 	ctx                              context.Context
-	ApiService                       *FunctionsAPIService
+	ApiService                       *FunctionsApiService
 	functionId                       string
 	restoreFunctionVersionAlphaInput *RestoreFunctionVersionAlphaInput
 }
@@ -1962,7 +1929,7 @@ Restore an old Function version as the latest version.
 	@param functionId
 	@return ApiRestoreFunctionVersionRequest
 */
-func (a *FunctionsAPIService) RestoreFunctionVersion(
+func (a *FunctionsApiService) RestoreFunctionVersion(
 	ctx context.Context,
 	functionId string,
 ) ApiRestoreFunctionVersionRequest {
@@ -1976,7 +1943,7 @@ func (a *FunctionsAPIService) RestoreFunctionVersion(
 // Execute executes the request
 //
 //	@return RestoreFunctionVersion200Response
-func (a *FunctionsAPIService) RestoreFunctionVersionExecute(
+func (a *FunctionsApiService) RestoreFunctionVersionExecute(
 	r ApiRestoreFunctionVersionRequest,
 ) (*RestoreFunctionVersion200Response, *http.Response, error) {
 	var (
@@ -1988,7 +1955,7 @@ func (a *FunctionsAPIService) RestoreFunctionVersionExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FunctionsAPIService.RestoreFunctionVersion",
+		"FunctionsApiService.RestoreFunctionVersion",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1998,7 +1965,7 @@ func (a *FunctionsAPIService) RestoreFunctionVersionExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"functionId"+"}",
-		url.PathEscape(parameterValueToString(r.functionId, "functionId")),
+		url.PathEscape(parameterToString(r.functionId, "")),
 		-1,
 	)
 
@@ -2052,9 +2019,9 @@ func (a *FunctionsAPIService) RestoreFunctionVersionExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -2071,7 +2038,6 @@ func (a *FunctionsAPIService) RestoreFunctionVersionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -2082,7 +2048,6 @@ func (a *FunctionsAPIService) RestoreFunctionVersionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -2093,7 +2058,6 @@ func (a *FunctionsAPIService) RestoreFunctionVersionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -2117,7 +2081,7 @@ func (a *FunctionsAPIService) RestoreFunctionVersionExecute(
 
 type ApiUpdateFunctionRequest struct {
 	ctx                   context.Context
-	ApiService            *FunctionsAPIService
+	ApiService            *FunctionsApiService
 	functionId            string
 	updateFunctionV1Input *UpdateFunctionV1Input
 }
@@ -2147,7 +2111,7 @@ Config API omitted fields:
 	@param functionId
 	@return ApiUpdateFunctionRequest
 */
-func (a *FunctionsAPIService) UpdateFunction(
+func (a *FunctionsApiService) UpdateFunction(
 	ctx context.Context,
 	functionId string,
 ) ApiUpdateFunctionRequest {
@@ -2161,7 +2125,7 @@ func (a *FunctionsAPIService) UpdateFunction(
 // Execute executes the request
 //
 //	@return UpdateFunction200Response
-func (a *FunctionsAPIService) UpdateFunctionExecute(
+func (a *FunctionsApiService) UpdateFunctionExecute(
 	r ApiUpdateFunctionRequest,
 ) (*UpdateFunction200Response, *http.Response, error) {
 	var (
@@ -2173,7 +2137,7 @@ func (a *FunctionsAPIService) UpdateFunctionExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FunctionsAPIService.UpdateFunction",
+		"FunctionsApiService.UpdateFunction",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -2183,7 +2147,7 @@ func (a *FunctionsAPIService) UpdateFunctionExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"functionId"+"}",
-		url.PathEscape(parameterValueToString(r.functionId, "functionId")),
+		url.PathEscape(parameterToString(r.functionId, "")),
 		-1,
 	)
 
@@ -2243,9 +2207,9 @@ func (a *FunctionsAPIService) UpdateFunctionExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -2262,7 +2226,6 @@ func (a *FunctionsAPIService) UpdateFunctionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -2273,7 +2236,6 @@ func (a *FunctionsAPIService) UpdateFunctionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -2284,7 +2246,6 @@ func (a *FunctionsAPIService) UpdateFunctionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -2308,7 +2269,7 @@ func (a *FunctionsAPIService) UpdateFunctionExecute(
 
 type ApiUpdateInsertFunctionInstanceRequest struct {
 	ctx                                    context.Context
-	ApiService                             *FunctionsAPIService
+	ApiService                             *FunctionsApiService
 	instanceId                             string
 	updateInsertFunctionInstanceAlphaInput *UpdateInsertFunctionInstanceAlphaInput
 }
@@ -2335,7 +2296,7 @@ Updates an insert Function instance connected to the given Destination.
 	@param instanceId
 	@return ApiUpdateInsertFunctionInstanceRequest
 */
-func (a *FunctionsAPIService) UpdateInsertFunctionInstance(
+func (a *FunctionsApiService) UpdateInsertFunctionInstance(
 	ctx context.Context,
 	instanceId string,
 ) ApiUpdateInsertFunctionInstanceRequest {
@@ -2349,7 +2310,7 @@ func (a *FunctionsAPIService) UpdateInsertFunctionInstance(
 // Execute executes the request
 //
 //	@return UpdateInsertFunctionInstance200Response
-func (a *FunctionsAPIService) UpdateInsertFunctionInstanceExecute(
+func (a *FunctionsApiService) UpdateInsertFunctionInstanceExecute(
 	r ApiUpdateInsertFunctionInstanceRequest,
 ) (*UpdateInsertFunctionInstance200Response, *http.Response, error) {
 	var (
@@ -2361,7 +2322,7 @@ func (a *FunctionsAPIService) UpdateInsertFunctionInstanceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FunctionsAPIService.UpdateInsertFunctionInstance",
+		"FunctionsApiService.UpdateInsertFunctionInstance",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -2371,7 +2332,7 @@ func (a *FunctionsAPIService) UpdateInsertFunctionInstanceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"instanceId"+"}",
-		url.PathEscape(parameterValueToString(r.instanceId, "instanceId")),
+		url.PathEscape(parameterToString(r.instanceId, "")),
 		-1,
 	)
 
@@ -2425,9 +2386,9 @@ func (a *FunctionsAPIService) UpdateInsertFunctionInstanceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -2444,7 +2405,6 @@ func (a *FunctionsAPIService) UpdateInsertFunctionInstanceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -2455,7 +2415,6 @@ func (a *FunctionsAPIService) UpdateInsertFunctionInstanceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -2466,7 +2425,6 @@ func (a *FunctionsAPIService) UpdateInsertFunctionInstanceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

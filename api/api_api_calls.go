@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,17 +14,17 @@ package api
 import (
 	"bytes"
 	"context"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 )
 
-// APICallsAPIService APICallsAPI service
-type APICallsAPIService service
+// APICallsApiService APICallsApi service
+type APICallsApiService service
 
 type ApiGetDailyPerSourceAPICallsUsageRequest struct {
 	ctx        context.Context
-	ApiService *APICallsAPIService
+	ApiService *APICallsApiService
 	period     *string
 	pagination *PaginationInput
 }
@@ -57,7 +57,7 @@ Provides daily cumulative per-source API call counts for a usage period.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetDailyPerSourceAPICallsUsageRequest
 */
-func (a *APICallsAPIService) GetDailyPerSourceAPICallsUsage(
+func (a *APICallsApiService) GetDailyPerSourceAPICallsUsage(
 	ctx context.Context,
 ) ApiGetDailyPerSourceAPICallsUsageRequest {
 	return ApiGetDailyPerSourceAPICallsUsageRequest{
@@ -69,7 +69,7 @@ func (a *APICallsAPIService) GetDailyPerSourceAPICallsUsage(
 // Execute executes the request
 //
 //	@return GetDailyPerSourceAPICallsUsage200Response
-func (a *APICallsAPIService) GetDailyPerSourceAPICallsUsageExecute(
+func (a *APICallsApiService) GetDailyPerSourceAPICallsUsageExecute(
 	r ApiGetDailyPerSourceAPICallsUsageRequest,
 ) (*GetDailyPerSourceAPICallsUsage200Response, *http.Response, error) {
 	var (
@@ -81,7 +81,7 @@ func (a *APICallsAPIService) GetDailyPerSourceAPICallsUsageExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"APICallsAPIService.GetDailyPerSourceAPICallsUsage",
+		"APICallsApiService.GetDailyPerSourceAPICallsUsage",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -99,8 +99,8 @@ func (a *APICallsAPIService) GetDailyPerSourceAPICallsUsageExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "period", r.period, "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("period", parameterToString(*r.period, ""))
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -142,9 +142,9 @@ func (a *APICallsAPIService) GetDailyPerSourceAPICallsUsageExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -161,7 +161,6 @@ func (a *APICallsAPIService) GetDailyPerSourceAPICallsUsageExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -172,7 +171,6 @@ func (a *APICallsAPIService) GetDailyPerSourceAPICallsUsageExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -183,7 +181,6 @@ func (a *APICallsAPIService) GetDailyPerSourceAPICallsUsageExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -207,7 +204,7 @@ func (a *APICallsAPIService) GetDailyPerSourceAPICallsUsageExecute(
 
 type ApiGetDailyWorkspaceAPICallsUsageRequest struct {
 	ctx        context.Context
-	ApiService *APICallsAPIService
+	ApiService *APICallsApiService
 	period     *string
 	pagination *PaginationInput
 }
@@ -240,7 +237,7 @@ Provides daily cumulative API call counts for a usage period.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetDailyWorkspaceAPICallsUsageRequest
 */
-func (a *APICallsAPIService) GetDailyWorkspaceAPICallsUsage(
+func (a *APICallsApiService) GetDailyWorkspaceAPICallsUsage(
 	ctx context.Context,
 ) ApiGetDailyWorkspaceAPICallsUsageRequest {
 	return ApiGetDailyWorkspaceAPICallsUsageRequest{
@@ -252,7 +249,7 @@ func (a *APICallsAPIService) GetDailyWorkspaceAPICallsUsage(
 // Execute executes the request
 //
 //	@return GetDailyWorkspaceAPICallsUsage200Response
-func (a *APICallsAPIService) GetDailyWorkspaceAPICallsUsageExecute(
+func (a *APICallsApiService) GetDailyWorkspaceAPICallsUsageExecute(
 	r ApiGetDailyWorkspaceAPICallsUsageRequest,
 ) (*GetDailyWorkspaceAPICallsUsage200Response, *http.Response, error) {
 	var (
@@ -264,7 +261,7 @@ func (a *APICallsAPIService) GetDailyWorkspaceAPICallsUsageExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"APICallsAPIService.GetDailyWorkspaceAPICallsUsage",
+		"APICallsApiService.GetDailyWorkspaceAPICallsUsage",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -282,8 +279,8 @@ func (a *APICallsAPIService) GetDailyWorkspaceAPICallsUsageExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "period", r.period, "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("period", parameterToString(*r.period, ""))
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -325,9 +322,9 @@ func (a *APICallsAPIService) GetDailyWorkspaceAPICallsUsageExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -344,7 +341,6 @@ func (a *APICallsAPIService) GetDailyWorkspaceAPICallsUsageExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -355,7 +351,6 @@ func (a *APICallsAPIService) GetDailyWorkspaceAPICallsUsageExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -366,7 +361,6 @@ func (a *APICallsAPIService) GetDailyWorkspaceAPICallsUsageExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

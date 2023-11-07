@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the InsertFunctionInstanceAlpha type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &InsertFunctionInstanceAlpha{}
 
 // InsertFunctionInstanceAlpha struct for InsertFunctionInstanceAlpha
 type InsertFunctionInstanceAlpha struct {
@@ -91,7 +88,7 @@ func (o *InsertFunctionInstanceAlpha) SetId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *InsertFunctionInstanceAlpha) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || o.Name == nil {
 		var ret string
 		return ret
 	}
@@ -101,7 +98,7 @@ func (o *InsertFunctionInstanceAlpha) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *InsertFunctionInstanceAlpha) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || o.Name == nil {
 		return nil, false
 	}
 	return o.Name, true
@@ -109,7 +106,7 @@ func (o *InsertFunctionInstanceAlpha) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *InsertFunctionInstanceAlpha) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name != nil {
 		return true
 	}
 
@@ -255,7 +252,7 @@ func (o *InsertFunctionInstanceAlpha) GetSettings() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *InsertFunctionInstanceAlpha) GetSettingsOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.Settings, true
 }
@@ -279,7 +276,7 @@ func (o *InsertFunctionInstanceAlpha) GetEncryptedSettings() map[string]interfac
 // and a boolean to check if the value has been set.
 func (o *InsertFunctionInstanceAlpha) GetEncryptedSettingsOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.EncryptedSettings, true
 }
@@ -290,27 +287,35 @@ func (o *InsertFunctionInstanceAlpha) SetEncryptedSettings(v map[string]interfac
 }
 
 func (o InsertFunctionInstanceAlpha) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o InsertFunctionInstanceAlpha) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	if !IsNil(o.Name) {
+	if true {
+		toSerialize["id"] = o.Id
+	}
+	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
-	toSerialize["integrationId"] = o.IntegrationId
-	toSerialize["classId"] = o.ClassId
-	toSerialize["enabled"] = o.Enabled
-	toSerialize["createdAt"] = o.CreatedAt
-	toSerialize["updatedAt"] = o.UpdatedAt
-	toSerialize["settings"] = o.Settings
-	toSerialize["encryptedSettings"] = o.EncryptedSettings
-	return toSerialize, nil
+	if true {
+		toSerialize["integrationId"] = o.IntegrationId
+	}
+	if true {
+		toSerialize["classId"] = o.ClassId
+	}
+	if true {
+		toSerialize["enabled"] = o.Enabled
+	}
+	if true {
+		toSerialize["createdAt"] = o.CreatedAt
+	}
+	if true {
+		toSerialize["updatedAt"] = o.UpdatedAt
+	}
+	if true {
+		toSerialize["settings"] = o.Settings
+	}
+	if true {
+		toSerialize["encryptedSettings"] = o.EncryptedSettings
+	}
+	return json.Marshal(toSerialize)
 }
 
 type NullableInsertFunctionInstanceAlpha struct {

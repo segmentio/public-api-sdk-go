@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,12 +15,9 @@ import (
 	"encoding/json"
 )
 
-// checks if the ListDeliveryMetricsSummaryFromDestinationBetaOutput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListDeliveryMetricsSummaryFromDestinationBetaOutput{}
-
 // ListDeliveryMetricsSummaryFromDestinationBetaOutput Output to retrieve event delivery metrics summary for a Destination.
 type ListDeliveryMetricsSummaryFromDestinationBetaOutput struct {
-	DeliveryMetricsSummary DeliveryMetricsSummaryBeta `json:"deliveryMetricsSummary"`
+	DeliveryMetricsSummary DeliveryMetricsSummary `json:"deliveryMetricsSummary"`
 }
 
 // NewListDeliveryMetricsSummaryFromDestinationBetaOutput instantiates a new ListDeliveryMetricsSummaryFromDestinationBetaOutput object
@@ -28,7 +25,7 @@ type ListDeliveryMetricsSummaryFromDestinationBetaOutput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewListDeliveryMetricsSummaryFromDestinationBetaOutput(
-	deliveryMetricsSummary DeliveryMetricsSummaryBeta,
+	deliveryMetricsSummary DeliveryMetricsSummary,
 ) *ListDeliveryMetricsSummaryFromDestinationBetaOutput {
 	this := ListDeliveryMetricsSummaryFromDestinationBetaOutput{}
 	this.DeliveryMetricsSummary = deliveryMetricsSummary
@@ -44,9 +41,9 @@ func NewListDeliveryMetricsSummaryFromDestinationBetaOutputWithDefaults() *ListD
 }
 
 // GetDeliveryMetricsSummary returns the DeliveryMetricsSummary field value
-func (o *ListDeliveryMetricsSummaryFromDestinationBetaOutput) GetDeliveryMetricsSummary() DeliveryMetricsSummaryBeta {
+func (o *ListDeliveryMetricsSummaryFromDestinationBetaOutput) GetDeliveryMetricsSummary() DeliveryMetricsSummary {
 	if o == nil {
-		var ret DeliveryMetricsSummaryBeta
+		var ret DeliveryMetricsSummary
 		return ret
 	}
 
@@ -55,7 +52,7 @@ func (o *ListDeliveryMetricsSummaryFromDestinationBetaOutput) GetDeliveryMetrics
 
 // GetDeliveryMetricsSummaryOk returns a tuple with the DeliveryMetricsSummary field value
 // and a boolean to check if the value has been set.
-func (o *ListDeliveryMetricsSummaryFromDestinationBetaOutput) GetDeliveryMetricsSummaryOk() (*DeliveryMetricsSummaryBeta, bool) {
+func (o *ListDeliveryMetricsSummaryFromDestinationBetaOutput) GetDeliveryMetricsSummaryOk() (*DeliveryMetricsSummary, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,23 +61,17 @@ func (o *ListDeliveryMetricsSummaryFromDestinationBetaOutput) GetDeliveryMetrics
 
 // SetDeliveryMetricsSummary sets field value
 func (o *ListDeliveryMetricsSummaryFromDestinationBetaOutput) SetDeliveryMetricsSummary(
-	v DeliveryMetricsSummaryBeta,
+	v DeliveryMetricsSummary,
 ) {
 	o.DeliveryMetricsSummary = v
 }
 
 func (o ListDeliveryMetricsSummaryFromDestinationBetaOutput) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["deliveryMetricsSummary"] = o.DeliveryMetricsSummary
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o ListDeliveryMetricsSummaryFromDestinationBetaOutput) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["deliveryMetricsSummary"] = o.DeliveryMetricsSummary
-	return toSerialize, nil
 }
 
 type NullableListDeliveryMetricsSummaryFromDestinationBetaOutput struct {

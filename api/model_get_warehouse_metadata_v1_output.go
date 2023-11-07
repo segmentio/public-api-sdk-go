@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,12 +15,9 @@ import (
 	"encoding/json"
 )
 
-// checks if the GetWarehouseMetadataV1Output type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetWarehouseMetadataV1Output{}
-
 // GetWarehouseMetadataV1Output Returns a Warehouse catalog item looked up by id.
 type GetWarehouseMetadataV1Output struct {
-	WarehouseMetadata WarehouseMetadataV1 `json:"warehouseMetadata"`
+	WarehouseMetadata WarehouseMetadata `json:"warehouseMetadata"`
 }
 
 // NewGetWarehouseMetadataV1Output instantiates a new GetWarehouseMetadataV1Output object
@@ -28,7 +25,7 @@ type GetWarehouseMetadataV1Output struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewGetWarehouseMetadataV1Output(
-	warehouseMetadata WarehouseMetadataV1,
+	warehouseMetadata WarehouseMetadata,
 ) *GetWarehouseMetadataV1Output {
 	this := GetWarehouseMetadataV1Output{}
 	this.WarehouseMetadata = warehouseMetadata
@@ -44,9 +41,9 @@ func NewGetWarehouseMetadataV1OutputWithDefaults() *GetWarehouseMetadataV1Output
 }
 
 // GetWarehouseMetadata returns the WarehouseMetadata field value
-func (o *GetWarehouseMetadataV1Output) GetWarehouseMetadata() WarehouseMetadataV1 {
+func (o *GetWarehouseMetadataV1Output) GetWarehouseMetadata() WarehouseMetadata {
 	if o == nil {
-		var ret WarehouseMetadataV1
+		var ret WarehouseMetadata
 		return ret
 	}
 
@@ -55,7 +52,7 @@ func (o *GetWarehouseMetadataV1Output) GetWarehouseMetadata() WarehouseMetadataV
 
 // GetWarehouseMetadataOk returns a tuple with the WarehouseMetadata field value
 // and a boolean to check if the value has been set.
-func (o *GetWarehouseMetadataV1Output) GetWarehouseMetadataOk() (*WarehouseMetadataV1, bool) {
+func (o *GetWarehouseMetadataV1Output) GetWarehouseMetadataOk() (*WarehouseMetadata, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -63,22 +60,16 @@ func (o *GetWarehouseMetadataV1Output) GetWarehouseMetadataOk() (*WarehouseMetad
 }
 
 // SetWarehouseMetadata sets field value
-func (o *GetWarehouseMetadataV1Output) SetWarehouseMetadata(v WarehouseMetadataV1) {
+func (o *GetWarehouseMetadataV1Output) SetWarehouseMetadata(v WarehouseMetadata) {
 	o.WarehouseMetadata = v
 }
 
 func (o GetWarehouseMetadataV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["warehouseMetadata"] = o.WarehouseMetadata
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o GetWarehouseMetadataV1Output) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["warehouseMetadata"] = o.WarehouseMetadata
-	return toSerialize, nil
 }
 
 type NullableGetWarehouseMetadataV1Output struct {

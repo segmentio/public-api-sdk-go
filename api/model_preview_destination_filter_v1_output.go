@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the PreviewDestinationFilterV1Output type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &PreviewDestinationFilterV1Output{}
 
 // PreviewDestinationFilterV1Output Preview output from applying the Destination filter. Segment modifies or nullifies payloads depending on the provided filter actions.
 type PreviewDestinationFilterV1Output struct {
@@ -62,7 +59,7 @@ func (o *PreviewDestinationFilterV1Output) GetInputPayload() map[string]interfac
 // and a boolean to check if the value has been set.
 func (o *PreviewDestinationFilterV1Output) GetInputPayloadOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.InputPayload, true
 }
@@ -87,8 +84,8 @@ func (o *PreviewDestinationFilterV1Output) GetResult() map[string]interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PreviewDestinationFilterV1Output) GetResultOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Result) {
-		return map[string]interface{}{}, false
+	if o == nil || o.Result == nil {
+		return nil, false
 	}
 	return o.Result, true
 }
@@ -99,20 +96,14 @@ func (o *PreviewDestinationFilterV1Output) SetResult(v map[string]interface{}) {
 }
 
 func (o PreviewDestinationFilterV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o PreviewDestinationFilterV1Output) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["inputPayload"] = o.InputPayload
+	if true {
+		toSerialize["inputPayload"] = o.InputPayload
+	}
 	if o.Result != nil {
 		toSerialize["result"] = o.Result
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullablePreviewDestinationFilterV1Output struct {

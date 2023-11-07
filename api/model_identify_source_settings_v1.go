@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the IdentifySourceSettingsV1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &IdentifySourceSettingsV1{}
 
 // IdentifySourceSettingsV1 struct for IdentifySourceSettingsV1
 type IdentifySourceSettingsV1 struct {
@@ -47,7 +44,7 @@ func NewIdentifySourceSettingsV1WithDefaults() *IdentifySourceSettingsV1 {
 
 // GetAllowUnplannedTraits returns the AllowUnplannedTraits field value if set, zero value otherwise.
 func (o *IdentifySourceSettingsV1) GetAllowUnplannedTraits() bool {
-	if o == nil || IsNil(o.AllowUnplannedTraits) {
+	if o == nil || o.AllowUnplannedTraits == nil {
 		var ret bool
 		return ret
 	}
@@ -57,7 +54,7 @@ func (o *IdentifySourceSettingsV1) GetAllowUnplannedTraits() bool {
 // GetAllowUnplannedTraitsOk returns a tuple with the AllowUnplannedTraits field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IdentifySourceSettingsV1) GetAllowUnplannedTraitsOk() (*bool, bool) {
-	if o == nil || IsNil(o.AllowUnplannedTraits) {
+	if o == nil || o.AllowUnplannedTraits == nil {
 		return nil, false
 	}
 	return o.AllowUnplannedTraits, true
@@ -65,7 +62,7 @@ func (o *IdentifySourceSettingsV1) GetAllowUnplannedTraitsOk() (*bool, bool) {
 
 // HasAllowUnplannedTraits returns a boolean if a field has been set.
 func (o *IdentifySourceSettingsV1) HasAllowUnplannedTraits() bool {
-	if o != nil && !IsNil(o.AllowUnplannedTraits) {
+	if o != nil && o.AllowUnplannedTraits != nil {
 		return true
 	}
 
@@ -79,7 +76,7 @@ func (o *IdentifySourceSettingsV1) SetAllowUnplannedTraits(v bool) {
 
 // GetAllowTraitsOnViolations returns the AllowTraitsOnViolations field value if set, zero value otherwise.
 func (o *IdentifySourceSettingsV1) GetAllowTraitsOnViolations() bool {
-	if o == nil || IsNil(o.AllowTraitsOnViolations) {
+	if o == nil || o.AllowTraitsOnViolations == nil {
 		var ret bool
 		return ret
 	}
@@ -89,7 +86,7 @@ func (o *IdentifySourceSettingsV1) GetAllowTraitsOnViolations() bool {
 // GetAllowTraitsOnViolationsOk returns a tuple with the AllowTraitsOnViolations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IdentifySourceSettingsV1) GetAllowTraitsOnViolationsOk() (*bool, bool) {
-	if o == nil || IsNil(o.AllowTraitsOnViolations) {
+	if o == nil || o.AllowTraitsOnViolations == nil {
 		return nil, false
 	}
 	return o.AllowTraitsOnViolations, true
@@ -97,7 +94,7 @@ func (o *IdentifySourceSettingsV1) GetAllowTraitsOnViolationsOk() (*bool, bool) 
 
 // HasAllowTraitsOnViolations returns a boolean if a field has been set.
 func (o *IdentifySourceSettingsV1) HasAllowTraitsOnViolations() bool {
-	if o != nil && !IsNil(o.AllowTraitsOnViolations) {
+	if o != nil && o.AllowTraitsOnViolations != nil {
 		return true
 	}
 
@@ -111,7 +108,7 @@ func (o *IdentifySourceSettingsV1) SetAllowTraitsOnViolations(v bool) {
 
 // GetCommonEventOnViolations returns the CommonEventOnViolations field value if set, zero value otherwise.
 func (o *IdentifySourceSettingsV1) GetCommonEventOnViolations() string {
-	if o == nil || IsNil(o.CommonEventOnViolations) {
+	if o == nil || o.CommonEventOnViolations == nil {
 		var ret string
 		return ret
 	}
@@ -121,7 +118,7 @@ func (o *IdentifySourceSettingsV1) GetCommonEventOnViolations() string {
 // GetCommonEventOnViolationsOk returns a tuple with the CommonEventOnViolations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *IdentifySourceSettingsV1) GetCommonEventOnViolationsOk() (*string, bool) {
-	if o == nil || IsNil(o.CommonEventOnViolations) {
+	if o == nil || o.CommonEventOnViolations == nil {
 		return nil, false
 	}
 	return o.CommonEventOnViolations, true
@@ -129,7 +126,7 @@ func (o *IdentifySourceSettingsV1) GetCommonEventOnViolationsOk() (*string, bool
 
 // HasCommonEventOnViolations returns a boolean if a field has been set.
 func (o *IdentifySourceSettingsV1) HasCommonEventOnViolations() bool {
-	if o != nil && !IsNil(o.CommonEventOnViolations) {
+	if o != nil && o.CommonEventOnViolations != nil {
 		return true
 	}
 
@@ -142,25 +139,17 @@ func (o *IdentifySourceSettingsV1) SetCommonEventOnViolations(v string) {
 }
 
 func (o IdentifySourceSettingsV1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o IdentifySourceSettingsV1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AllowUnplannedTraits) {
+	if o.AllowUnplannedTraits != nil {
 		toSerialize["allowUnplannedTraits"] = o.AllowUnplannedTraits
 	}
-	if !IsNil(o.AllowTraitsOnViolations) {
+	if o.AllowTraitsOnViolations != nil {
 		toSerialize["allowTraitsOnViolations"] = o.AllowTraitsOnViolations
 	}
-	if !IsNil(o.CommonEventOnViolations) {
+	if o.CommonEventOnViolations != nil {
 		toSerialize["commonEventOnViolations"] = o.CommonEventOnViolations
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableIdentifySourceSettingsV1 struct {
