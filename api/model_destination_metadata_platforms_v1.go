@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the DestinationMetadataPlatformsV1 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DestinationMetadataPlatformsV1{}
 
 // DestinationMetadataPlatformsV1 Represents platforms that a given Destination supports.
 type DestinationMetadataPlatformsV1 struct {
@@ -44,7 +47,7 @@ func NewDestinationMetadataPlatformsV1WithDefaults() *DestinationMetadataPlatfor
 
 // GetBrowser returns the Browser field value if set, zero value otherwise.
 func (o *DestinationMetadataPlatformsV1) GetBrowser() bool {
-	if o == nil || o.Browser == nil {
+	if o == nil || IsNil(o.Browser) {
 		var ret bool
 		return ret
 	}
@@ -54,7 +57,7 @@ func (o *DestinationMetadataPlatformsV1) GetBrowser() bool {
 // GetBrowserOk returns a tuple with the Browser field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataPlatformsV1) GetBrowserOk() (*bool, bool) {
-	if o == nil || o.Browser == nil {
+	if o == nil || IsNil(o.Browser) {
 		return nil, false
 	}
 	return o.Browser, true
@@ -62,7 +65,7 @@ func (o *DestinationMetadataPlatformsV1) GetBrowserOk() (*bool, bool) {
 
 // HasBrowser returns a boolean if a field has been set.
 func (o *DestinationMetadataPlatformsV1) HasBrowser() bool {
-	if o != nil && o.Browser != nil {
+	if o != nil && !IsNil(o.Browser) {
 		return true
 	}
 
@@ -76,7 +79,7 @@ func (o *DestinationMetadataPlatformsV1) SetBrowser(v bool) {
 
 // GetServer returns the Server field value if set, zero value otherwise.
 func (o *DestinationMetadataPlatformsV1) GetServer() bool {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server) {
 		var ret bool
 		return ret
 	}
@@ -86,7 +89,7 @@ func (o *DestinationMetadataPlatformsV1) GetServer() bool {
 // GetServerOk returns a tuple with the Server field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataPlatformsV1) GetServerOk() (*bool, bool) {
-	if o == nil || o.Server == nil {
+	if o == nil || IsNil(o.Server) {
 		return nil, false
 	}
 	return o.Server, true
@@ -94,7 +97,7 @@ func (o *DestinationMetadataPlatformsV1) GetServerOk() (*bool, bool) {
 
 // HasServer returns a boolean if a field has been set.
 func (o *DestinationMetadataPlatformsV1) HasServer() bool {
-	if o != nil && o.Server != nil {
+	if o != nil && !IsNil(o.Server) {
 		return true
 	}
 
@@ -108,7 +111,7 @@ func (o *DestinationMetadataPlatformsV1) SetServer(v bool) {
 
 // GetMobile returns the Mobile field value if set, zero value otherwise.
 func (o *DestinationMetadataPlatformsV1) GetMobile() bool {
-	if o == nil || o.Mobile == nil {
+	if o == nil || IsNil(o.Mobile) {
 		var ret bool
 		return ret
 	}
@@ -118,7 +121,7 @@ func (o *DestinationMetadataPlatformsV1) GetMobile() bool {
 // GetMobileOk returns a tuple with the Mobile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataPlatformsV1) GetMobileOk() (*bool, bool) {
-	if o == nil || o.Mobile == nil {
+	if o == nil || IsNil(o.Mobile) {
 		return nil, false
 	}
 	return o.Mobile, true
@@ -126,7 +129,7 @@ func (o *DestinationMetadataPlatformsV1) GetMobileOk() (*bool, bool) {
 
 // HasMobile returns a boolean if a field has been set.
 func (o *DestinationMetadataPlatformsV1) HasMobile() bool {
-	if o != nil && o.Mobile != nil {
+	if o != nil && !IsNil(o.Mobile) {
 		return true
 	}
 
@@ -139,17 +142,25 @@ func (o *DestinationMetadataPlatformsV1) SetMobile(v bool) {
 }
 
 func (o DestinationMetadataPlatformsV1) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Browser != nil {
-		toSerialize["browser"] = o.Browser
-	}
-	if o.Server != nil {
-		toSerialize["server"] = o.Server
-	}
-	if o.Mobile != nil {
-		toSerialize["mobile"] = o.Mobile
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o DestinationMetadataPlatformsV1) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Browser) {
+		toSerialize["browser"] = o.Browser
+	}
+	if !IsNil(o.Server) {
+		toSerialize["server"] = o.Server
+	}
+	if !IsNil(o.Mobile) {
+		toSerialize["mobile"] = o.Mobile
+	}
+	return toSerialize, nil
 }
 
 type NullableDestinationMetadataPlatformsV1 struct {

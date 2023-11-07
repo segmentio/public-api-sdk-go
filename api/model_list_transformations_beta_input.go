@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,16 +15,19 @@ import (
 	"encoding/json"
 )
 
+// checks if the ListTransformationsBetaInput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListTransformationsBetaInput{}
+
 // ListTransformationsBetaInput Lists the Transformations associated with the current Workspace.
 type ListTransformationsBetaInput struct {
-	Pagination Pagination1 `json:"pagination"`
+	Pagination PaginationInput `json:"pagination"`
 }
 
 // NewListTransformationsBetaInput instantiates a new ListTransformationsBetaInput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListTransformationsBetaInput(pagination Pagination1) *ListTransformationsBetaInput {
+func NewListTransformationsBetaInput(pagination PaginationInput) *ListTransformationsBetaInput {
 	this := ListTransformationsBetaInput{}
 	this.Pagination = pagination
 	return &this
@@ -39,9 +42,9 @@ func NewListTransformationsBetaInputWithDefaults() *ListTransformationsBetaInput
 }
 
 // GetPagination returns the Pagination field value
-func (o *ListTransformationsBetaInput) GetPagination() Pagination1 {
+func (o *ListTransformationsBetaInput) GetPagination() PaginationInput {
 	if o == nil {
-		var ret Pagination1
+		var ret PaginationInput
 		return ret
 	}
 
@@ -50,7 +53,7 @@ func (o *ListTransformationsBetaInput) GetPagination() Pagination1 {
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *ListTransformationsBetaInput) GetPaginationOk() (*Pagination1, bool) {
+func (o *ListTransformationsBetaInput) GetPaginationOk() (*PaginationInput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -58,16 +61,22 @@ func (o *ListTransformationsBetaInput) GetPaginationOk() (*Pagination1, bool) {
 }
 
 // SetPagination sets field value
-func (o *ListTransformationsBetaInput) SetPagination(v Pagination1) {
+func (o *ListTransformationsBetaInput) SetPagination(v PaginationInput) {
 	o.Pagination = v
 }
 
 func (o ListTransformationsBetaInput) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["pagination"] = o.Pagination
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ListTransformationsBetaInput) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["pagination"] = o.Pagination
+	return toSerialize, nil
 }
 
 type NullableListTransformationsBetaInput struct {

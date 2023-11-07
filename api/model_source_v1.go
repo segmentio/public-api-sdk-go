@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the SourceV1 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SourceV1{}
+
 // SourceV1 Defines a data Source for Segment data.
 type SourceV1 struct {
 	// The id of the Source.  Config API note: analogous to `name`.
@@ -22,16 +25,16 @@ type SourceV1 struct {
 	// The slug used to identify the Source in the Segment app.  Config API note: equal to `name`.
 	Slug string `json:"slug"`
 	// The name of the Source.  Config API note: equal to `displayName`.
-	Name     *string   `json:"name,omitempty"`
-	Metadata Metadata2 `json:"metadata"`
+	Name     *string          `json:"name,omitempty"`
+	Metadata SourceMetadataV1 `json:"metadata"`
 	// The id of the Workspace that owns the Source.  Config API note: equal to `parent`.
 	WorkspaceId string `json:"workspaceId"`
 	// Enable to receive data from the Source.
 	Enabled bool `json:"enabled"`
 	// The write keys used to send data from the Source. This field is left empty when the current token does not have the 'source admin' permission.
 	WriteKeys []string `json:"writeKeys"`
-	// The settings associated with the Source.
-	Settings NullableModelMap `json:"settings,omitempty"`
+	// A key-value object that contains instance-specific settings for a Source.  The `options` field in the Source metadata defines the schema of this object.
+	Settings map[string]interface{} `json:"settings,omitempty"`
 	// A list of labels applied to the Source.
 	Labels []LabelV1 `json:"labels"`
 }
@@ -43,7 +46,7 @@ type SourceV1 struct {
 func NewSourceV1(
 	id string,
 	slug string,
-	metadata Metadata2,
+	metadata SourceMetadataV1,
 	workspaceId string,
 	enabled bool,
 	writeKeys []string,
@@ -118,7 +121,7 @@ func (o *SourceV1) SetSlug(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *SourceV1) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -128,7 +131,7 @@ func (o *SourceV1) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceV1) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -136,7 +139,7 @@ func (o *SourceV1) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *SourceV1) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -149,9 +152,9 @@ func (o *SourceV1) SetName(v string) {
 }
 
 // GetMetadata returns the Metadata field value
-func (o *SourceV1) GetMetadata() Metadata2 {
+func (o *SourceV1) GetMetadata() SourceMetadataV1 {
 	if o == nil {
-		var ret Metadata2
+		var ret SourceMetadataV1
 		return ret
 	}
 
@@ -160,7 +163,7 @@ func (o *SourceV1) GetMetadata() Metadata2 {
 
 // GetMetadataOk returns a tuple with the Metadata field value
 // and a boolean to check if the value has been set.
-func (o *SourceV1) GetMetadataOk() (*Metadata2, bool) {
+func (o *SourceV1) GetMetadataOk() (*SourceMetadataV1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -168,7 +171,7 @@ func (o *SourceV1) GetMetadataOk() (*Metadata2, bool) {
 }
 
 // SetMetadata sets field value
-func (o *SourceV1) SetMetadata(v Metadata2) {
+func (o *SourceV1) SetMetadata(v SourceMetadataV1) {
 	o.Metadata = v
 }
 
@@ -244,47 +247,36 @@ func (o *SourceV1) SetWriteKeys(v []string) {
 	o.WriteKeys = v
 }
 
-// GetSettings returns the Settings field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SourceV1) GetSettings() ModelMap {
-	if o == nil || o.Settings.Get() == nil {
-		var ret ModelMap
+// GetSettings returns the Settings field value if set, zero value otherwise.
+func (o *SourceV1) GetSettings() map[string]interface{} {
+	if o == nil || IsNil(o.Settings) {
+		var ret map[string]interface{}
 		return ret
 	}
-	return *o.Settings.Get()
+	return o.Settings
 }
 
 // GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SourceV1) GetSettingsOk() (*ModelMap, bool) {
-	if o == nil {
-		return nil, false
+func (o *SourceV1) GetSettingsOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Settings) {
+		return map[string]interface{}{}, false
 	}
-	return o.Settings.Get(), o.Settings.IsSet()
+	return o.Settings, true
 }
 
 // HasSettings returns a boolean if a field has been set.
 func (o *SourceV1) HasSettings() bool {
-	if o != nil && o.Settings.IsSet() {
+	if o != nil && !IsNil(o.Settings) {
 		return true
 	}
 
 	return false
 }
 
-// SetSettings gets a reference to the given NullableModelMap and assigns it to the Settings field.
-func (o *SourceV1) SetSettings(v ModelMap) {
-	o.Settings.Set(&v)
-}
-
-// SetSettingsNil sets the value for Settings to be an explicit nil
-func (o *SourceV1) SetSettingsNil() {
-	o.Settings.Set(nil)
-}
-
-// UnsetSettings ensures that no value is present for Settings, not even an explicit nil
-func (o *SourceV1) UnsetSettings() {
-	o.Settings.Unset()
+// SetSettings gets a reference to the given map[string]interface{} and assigns it to the Settings field.
+func (o *SourceV1) SetSettings(v map[string]interface{}) {
+	o.Settings = v
 }
 
 // GetLabels returns the Labels field value
@@ -312,35 +304,29 @@ func (o *SourceV1) SetLabels(v []LabelV1) {
 }
 
 func (o SourceV1) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["slug"] = o.Slug
-	}
-	if o.Name != nil {
-		toSerialize["name"] = o.Name
-	}
-	if true {
-		toSerialize["metadata"] = o.Metadata
-	}
-	if true {
-		toSerialize["workspaceId"] = o.WorkspaceId
-	}
-	if true {
-		toSerialize["enabled"] = o.Enabled
-	}
-	if true {
-		toSerialize["writeKeys"] = o.WriteKeys
-	}
-	if o.Settings.IsSet() {
-		toSerialize["settings"] = o.Settings.Get()
-	}
-	if true {
-		toSerialize["labels"] = o.Labels
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o SourceV1) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
+	toSerialize["slug"] = o.Slug
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	toSerialize["metadata"] = o.Metadata
+	toSerialize["workspaceId"] = o.WorkspaceId
+	toSerialize["enabled"] = o.Enabled
+	toSerialize["writeKeys"] = o.WriteKeys
+	if !IsNil(o.Settings) {
+		toSerialize["settings"] = o.Settings
+	}
+	toSerialize["labels"] = o.Labels
+	return toSerialize, nil
 }
 
 type NullableSourceV1 struct {

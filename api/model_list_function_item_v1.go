@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the ListFunctionItemV1 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListFunctionItemV1{}
 
 // ListFunctionItemV1 Represents a Function in a list.
 type ListFunctionItemV1 struct {
@@ -54,7 +57,7 @@ func NewListFunctionItemV1WithDefaults() *ListFunctionItemV1 {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *ListFunctionItemV1) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -64,7 +67,7 @@ func (o *ListFunctionItemV1) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListFunctionItemV1) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -72,7 +75,7 @@ func (o *ListFunctionItemV1) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *ListFunctionItemV1) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -86,7 +89,7 @@ func (o *ListFunctionItemV1) SetId(v string) {
 
 // GetResourceType returns the ResourceType field value if set, zero value otherwise.
 func (o *ListFunctionItemV1) GetResourceType() string {
-	if o == nil || o.ResourceType == nil {
+	if o == nil || IsNil(o.ResourceType) {
 		var ret string
 		return ret
 	}
@@ -96,7 +99,7 @@ func (o *ListFunctionItemV1) GetResourceType() string {
 // GetResourceTypeOk returns a tuple with the ResourceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListFunctionItemV1) GetResourceTypeOk() (*string, bool) {
-	if o == nil || o.ResourceType == nil {
+	if o == nil || IsNil(o.ResourceType) {
 		return nil, false
 	}
 	return o.ResourceType, true
@@ -104,7 +107,7 @@ func (o *ListFunctionItemV1) GetResourceTypeOk() (*string, bool) {
 
 // HasResourceType returns a boolean if a field has been set.
 func (o *ListFunctionItemV1) HasResourceType() bool {
-	if o != nil && o.ResourceType != nil {
+	if o != nil && !IsNil(o.ResourceType) {
 		return true
 	}
 
@@ -118,7 +121,7 @@ func (o *ListFunctionItemV1) SetResourceType(v string) {
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *ListFunctionItemV1) GetCreatedAt() string {
-	if o == nil || o.CreatedAt == nil {
+	if o == nil || IsNil(o.CreatedAt) {
 		var ret string
 		return ret
 	}
@@ -128,7 +131,7 @@ func (o *ListFunctionItemV1) GetCreatedAt() string {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListFunctionItemV1) GetCreatedAtOk() (*string, bool) {
-	if o == nil || o.CreatedAt == nil {
+	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -136,7 +139,7 @@ func (o *ListFunctionItemV1) GetCreatedAtOk() (*string, bool) {
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *ListFunctionItemV1) HasCreatedAt() bool {
-	if o != nil && o.CreatedAt != nil {
+	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
 
@@ -150,7 +153,7 @@ func (o *ListFunctionItemV1) SetCreatedAt(v string) {
 
 // GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
 func (o *ListFunctionItemV1) GetCreatedBy() string {
-	if o == nil || o.CreatedBy == nil {
+	if o == nil || IsNil(o.CreatedBy) {
 		var ret string
 		return ret
 	}
@@ -160,7 +163,7 @@ func (o *ListFunctionItemV1) GetCreatedBy() string {
 // GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListFunctionItemV1) GetCreatedByOk() (*string, bool) {
-	if o == nil || o.CreatedBy == nil {
+	if o == nil || IsNil(o.CreatedBy) {
 		return nil, false
 	}
 	return o.CreatedBy, true
@@ -168,7 +171,7 @@ func (o *ListFunctionItemV1) GetCreatedByOk() (*string, bool) {
 
 // HasCreatedBy returns a boolean if a field has been set.
 func (o *ListFunctionItemV1) HasCreatedBy() bool {
-	if o != nil && o.CreatedBy != nil {
+	if o != nil && !IsNil(o.CreatedBy) {
 		return true
 	}
 
@@ -182,7 +185,7 @@ func (o *ListFunctionItemV1) SetCreatedBy(v string) {
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
 func (o *ListFunctionItemV1) GetDisplayName() string {
-	if o == nil || o.DisplayName == nil {
+	if o == nil || IsNil(o.DisplayName) {
 		var ret string
 		return ret
 	}
@@ -192,7 +195,7 @@ func (o *ListFunctionItemV1) GetDisplayName() string {
 // GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListFunctionItemV1) GetDisplayNameOk() (*string, bool) {
-	if o == nil || o.DisplayName == nil {
+	if o == nil || IsNil(o.DisplayName) {
 		return nil, false
 	}
 	return o.DisplayName, true
@@ -200,7 +203,7 @@ func (o *ListFunctionItemV1) GetDisplayNameOk() (*string, bool) {
 
 // HasDisplayName returns a boolean if a field has been set.
 func (o *ListFunctionItemV1) HasDisplayName() bool {
-	if o != nil && o.DisplayName != nil {
+	if o != nil && !IsNil(o.DisplayName) {
 		return true
 	}
 
@@ -214,7 +217,7 @@ func (o *ListFunctionItemV1) SetDisplayName(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *ListFunctionItemV1) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -224,7 +227,7 @@ func (o *ListFunctionItemV1) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListFunctionItemV1) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -232,7 +235,7 @@ func (o *ListFunctionItemV1) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *ListFunctionItemV1) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -246,7 +249,7 @@ func (o *ListFunctionItemV1) SetDescription(v string) {
 
 // GetLogoUrl returns the LogoUrl field value if set, zero value otherwise.
 func (o *ListFunctionItemV1) GetLogoUrl() string {
-	if o == nil || o.LogoUrl == nil {
+	if o == nil || IsNil(o.LogoUrl) {
 		var ret string
 		return ret
 	}
@@ -256,7 +259,7 @@ func (o *ListFunctionItemV1) GetLogoUrl() string {
 // GetLogoUrlOk returns a tuple with the LogoUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListFunctionItemV1) GetLogoUrlOk() (*string, bool) {
-	if o == nil || o.LogoUrl == nil {
+	if o == nil || IsNil(o.LogoUrl) {
 		return nil, false
 	}
 	return o.LogoUrl, true
@@ -264,7 +267,7 @@ func (o *ListFunctionItemV1) GetLogoUrlOk() (*string, bool) {
 
 // HasLogoUrl returns a boolean if a field has been set.
 func (o *ListFunctionItemV1) HasLogoUrl() bool {
-	if o != nil && o.LogoUrl != nil {
+	if o != nil && !IsNil(o.LogoUrl) {
 		return true
 	}
 
@@ -278,7 +281,7 @@ func (o *ListFunctionItemV1) SetLogoUrl(v string) {
 
 // GetCatalogId returns the CatalogId field value if set, zero value otherwise.
 func (o *ListFunctionItemV1) GetCatalogId() string {
-	if o == nil || o.CatalogId == nil {
+	if o == nil || IsNil(o.CatalogId) {
 		var ret string
 		return ret
 	}
@@ -288,7 +291,7 @@ func (o *ListFunctionItemV1) GetCatalogId() string {
 // GetCatalogIdOk returns a tuple with the CatalogId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListFunctionItemV1) GetCatalogIdOk() (*string, bool) {
-	if o == nil || o.CatalogId == nil {
+	if o == nil || IsNil(o.CatalogId) {
 		return nil, false
 	}
 	return o.CatalogId, true
@@ -296,7 +299,7 @@ func (o *ListFunctionItemV1) GetCatalogIdOk() (*string, bool) {
 
 // HasCatalogId returns a boolean if a field has been set.
 func (o *ListFunctionItemV1) HasCatalogId() bool {
-	if o != nil && o.CatalogId != nil {
+	if o != nil && !IsNil(o.CatalogId) {
 		return true
 	}
 
@@ -309,32 +312,40 @@ func (o *ListFunctionItemV1) SetCatalogId(v string) {
 }
 
 func (o ListFunctionItemV1) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
-	}
-	if o.ResourceType != nil {
-		toSerialize["resourceType"] = o.ResourceType
-	}
-	if o.CreatedAt != nil {
-		toSerialize["createdAt"] = o.CreatedAt
-	}
-	if o.CreatedBy != nil {
-		toSerialize["createdBy"] = o.CreatedBy
-	}
-	if o.DisplayName != nil {
-		toSerialize["displayName"] = o.DisplayName
-	}
-	if o.Description != nil {
-		toSerialize["description"] = o.Description
-	}
-	if o.LogoUrl != nil {
-		toSerialize["logoUrl"] = o.LogoUrl
-	}
-	if o.CatalogId != nil {
-		toSerialize["catalogId"] = o.CatalogId
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ListFunctionItemV1) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Id) {
+		toSerialize["id"] = o.Id
+	}
+	if !IsNil(o.ResourceType) {
+		toSerialize["resourceType"] = o.ResourceType
+	}
+	if !IsNil(o.CreatedAt) {
+		toSerialize["createdAt"] = o.CreatedAt
+	}
+	if !IsNil(o.CreatedBy) {
+		toSerialize["createdBy"] = o.CreatedBy
+	}
+	if !IsNil(o.DisplayName) {
+		toSerialize["displayName"] = o.DisplayName
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.LogoUrl) {
+		toSerialize["logoUrl"] = o.LogoUrl
+	}
+	if !IsNil(o.CatalogId) {
+		toSerialize["catalogId"] = o.CatalogId
+	}
+	return toSerialize, nil
 }
 
 type NullableListFunctionItemV1 struct {

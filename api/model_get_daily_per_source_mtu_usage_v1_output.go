@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,11 +15,14 @@ import (
 	"encoding/json"
 )
 
+// checks if the GetDailyPerSourceMTUUsageV1Output type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetDailyPerSourceMTUUsageV1Output{}
+
 // GetDailyPerSourceMTUUsageV1Output Returns a list of daily aggregations of Source level MTU counts.
 type GetDailyPerSourceMTUUsageV1Output struct {
 	// The list of daily per Source MTU count aggregates.
 	DailyPerSourceMTUUsage []UsersPerSourceSnapshotV1 `json:"dailyPerSourceMTUUsage"`
-	Pagination             Pagination                 `json:"pagination"`
+	Pagination             PaginationOutput           `json:"pagination"`
 }
 
 // NewGetDailyPerSourceMTUUsageV1Output instantiates a new GetDailyPerSourceMTUUsageV1Output object
@@ -28,7 +31,7 @@ type GetDailyPerSourceMTUUsageV1Output struct {
 // will change when the set of required properties is changed
 func NewGetDailyPerSourceMTUUsageV1Output(
 	dailyPerSourceMTUUsage []UsersPerSourceSnapshotV1,
-	pagination Pagination,
+	pagination PaginationOutput,
 ) *GetDailyPerSourceMTUUsageV1Output {
 	this := GetDailyPerSourceMTUUsageV1Output{}
 	this.DailyPerSourceMTUUsage = dailyPerSourceMTUUsage
@@ -71,9 +74,9 @@ func (o *GetDailyPerSourceMTUUsageV1Output) SetDailyPerSourceMTUUsage(
 }
 
 // GetPagination returns the Pagination field value
-func (o *GetDailyPerSourceMTUUsageV1Output) GetPagination() Pagination {
+func (o *GetDailyPerSourceMTUUsageV1Output) GetPagination() PaginationOutput {
 	if o == nil {
-		var ret Pagination
+		var ret PaginationOutput
 		return ret
 	}
 
@@ -82,7 +85,7 @@ func (o *GetDailyPerSourceMTUUsageV1Output) GetPagination() Pagination {
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *GetDailyPerSourceMTUUsageV1Output) GetPaginationOk() (*Pagination, bool) {
+func (o *GetDailyPerSourceMTUUsageV1Output) GetPaginationOk() (*PaginationOutput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,19 +93,23 @@ func (o *GetDailyPerSourceMTUUsageV1Output) GetPaginationOk() (*Pagination, bool
 }
 
 // SetPagination sets field value
-func (o *GetDailyPerSourceMTUUsageV1Output) SetPagination(v Pagination) {
+func (o *GetDailyPerSourceMTUUsageV1Output) SetPagination(v PaginationOutput) {
 	o.Pagination = v
 }
 
 func (o GetDailyPerSourceMTUUsageV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["dailyPerSourceMTUUsage"] = o.DailyPerSourceMTUUsage
-	}
-	if true {
-		toSerialize["pagination"] = o.Pagination
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o GetDailyPerSourceMTUUsageV1Output) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["dailyPerSourceMTUUsage"] = o.DailyPerSourceMTUUsage
+	toSerialize["pagination"] = o.Pagination
+	return toSerialize, nil
 }
 
 type NullableGetDailyPerSourceMTUUsageV1Output struct {

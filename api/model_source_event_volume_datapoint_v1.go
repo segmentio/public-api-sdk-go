@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the SourceEventVolumeDatapointV1 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SourceEventVolumeDatapointV1{}
 
 // SourceEventVolumeDatapointV1 SourceEventVolumeDatapoint represents an individual timestamp/event count pair corresponding to a window of time designated by the granularity.
 type SourceEventVolumeDatapointV1 struct {
@@ -91,14 +94,18 @@ func (o *SourceEventVolumeDatapointV1) SetCount(v float32) {
 }
 
 func (o SourceEventVolumeDatapointV1) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["time"] = o.Time
-	}
-	if true {
-		toSerialize["count"] = o.Count
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o SourceEventVolumeDatapointV1) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["time"] = o.Time
+	toSerialize["count"] = o.Count
+	return toSerialize, nil
 }
 
 type NullableSourceEventVolumeDatapointV1 struct {

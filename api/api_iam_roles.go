@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,17 +14,17 @@ package api
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 )
 
-// IAMRolesApiService IAMRolesApi service
-type IAMRolesApiService service
+// IAMRolesAPIService IAMRolesAPI service
+type IAMRolesAPIService service
 
 type ApiListRolesRequest struct {
 	ctx        context.Context
-	ApiService *IAMRolesApiService
+	ApiService *IAMRolesAPIService
 	pagination *PaginationInput
 }
 
@@ -46,7 +46,7 @@ Returns a list of Roles available to apply to permissions for users and/or group
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListRolesRequest
 */
-func (a *IAMRolesApiService) ListRoles(ctx context.Context) ApiListRolesRequest {
+func (a *IAMRolesAPIService) ListRoles(ctx context.Context) ApiListRolesRequest {
 	return ApiListRolesRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -56,7 +56,7 @@ func (a *IAMRolesApiService) ListRoles(ctx context.Context) ApiListRolesRequest 
 // Execute executes the request
 //
 //	@return ListRoles200Response
-func (a *IAMRolesApiService) ListRolesExecute(
+func (a *IAMRolesAPIService) ListRolesExecute(
 	r ApiListRolesRequest,
 ) (*ListRoles200Response, *http.Response, error) {
 	var (
@@ -66,7 +66,7 @@ func (a *IAMRolesApiService) ListRolesExecute(
 		localVarReturnValue *ListRoles200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMRolesApiService.ListRoles")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMRolesAPIService.ListRoles")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -80,7 +80,7 @@ func (a *IAMRolesApiService) ListRolesExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -122,9 +122,9 @@ func (a *IAMRolesApiService) ListRolesExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -141,6 +141,7 @@ func (a *IAMRolesApiService) ListRolesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -151,6 +152,7 @@ func (a *IAMRolesApiService) ListRolesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -161,6 +163,7 @@ func (a *IAMRolesApiService) ListRolesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

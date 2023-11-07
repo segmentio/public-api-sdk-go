@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,9 +15,12 @@ import (
 	"encoding/json"
 )
 
+// checks if the UpdateSubscriptionForDestinationAlphaInput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateSubscriptionForDestinationAlphaInput{}
+
 // UpdateSubscriptionForDestinationAlphaInput The basic input parameters for updating a Destination subscription.
 type UpdateSubscriptionForDestinationAlphaInput struct {
-	Input Input `json:"input"`
+	Input DestinationSubscriptionUpdateInput `json:"input"`
 }
 
 // NewUpdateSubscriptionForDestinationAlphaInput instantiates a new UpdateSubscriptionForDestinationAlphaInput object
@@ -25,7 +28,7 @@ type UpdateSubscriptionForDestinationAlphaInput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewUpdateSubscriptionForDestinationAlphaInput(
-	input Input,
+	input DestinationSubscriptionUpdateInput,
 ) *UpdateSubscriptionForDestinationAlphaInput {
 	this := UpdateSubscriptionForDestinationAlphaInput{}
 	this.Input = input
@@ -41,9 +44,9 @@ func NewUpdateSubscriptionForDestinationAlphaInputWithDefaults() *UpdateSubscrip
 }
 
 // GetInput returns the Input field value
-func (o *UpdateSubscriptionForDestinationAlphaInput) GetInput() Input {
+func (o *UpdateSubscriptionForDestinationAlphaInput) GetInput() DestinationSubscriptionUpdateInput {
 	if o == nil {
-		var ret Input
+		var ret DestinationSubscriptionUpdateInput
 		return ret
 	}
 
@@ -52,7 +55,7 @@ func (o *UpdateSubscriptionForDestinationAlphaInput) GetInput() Input {
 
 // GetInputOk returns a tuple with the Input field value
 // and a boolean to check if the value has been set.
-func (o *UpdateSubscriptionForDestinationAlphaInput) GetInputOk() (*Input, bool) {
+func (o *UpdateSubscriptionForDestinationAlphaInput) GetInputOk() (*DestinationSubscriptionUpdateInput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -60,16 +63,24 @@ func (o *UpdateSubscriptionForDestinationAlphaInput) GetInputOk() (*Input, bool)
 }
 
 // SetInput sets field value
-func (o *UpdateSubscriptionForDestinationAlphaInput) SetInput(v Input) {
+func (o *UpdateSubscriptionForDestinationAlphaInput) SetInput(
+	v DestinationSubscriptionUpdateInput,
+) {
 	o.Input = v
 }
 
 func (o UpdateSubscriptionForDestinationAlphaInput) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["input"] = o.Input
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UpdateSubscriptionForDestinationAlphaInput) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["input"] = o.Input
+	return toSerialize, nil
 }
 
 type NullableUpdateSubscriptionForDestinationAlphaInput struct {
