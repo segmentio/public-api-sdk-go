@@ -38,9 +38,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SelectiveSyncAPI.GetAdvancedSyncScheduleFromWarehouse(ctx).Execute()
+    resp, r, err := apiClient.SelectiveSyncAPI.GetAdvancedSyncScheduleFromWarehouse(ctx, warehouseId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SelectiveSyncAPI.GetAdvancedSyncScheduleFromWarehouse``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -118,9 +118,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SelectiveSyncAPI.ListSelectiveSyncsFromWarehouseAndSource(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.SelectiveSyncAPI.ListSelectiveSyncsFromWarehouseAndSource(ctx, warehouseId, sourceId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SelectiveSyncAPI.ListSelectiveSyncsFromWarehouseAndSource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -200,9 +200,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SelectiveSyncAPI.ListSyncsFromWarehouse(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.SelectiveSyncAPI.ListSyncsFromWarehouse(ctx, warehouseId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SelectiveSyncAPI.ListSyncsFromWarehouse``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -281,9 +281,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SelectiveSyncAPI.ListSyncsFromWarehouseAndSource(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.SelectiveSyncAPI.ListSyncsFromWarehouseAndSource(ctx, warehouseId, sourceId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SelectiveSyncAPI.ListSyncsFromWarehouseAndSource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -363,9 +363,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SelectiveSyncAPI.ReplaceAdvancedSyncScheduleForWarehouse(ctx).ReplaceAdvancedSyncScheduleForWarehouseV1Input(replaceAdvancedSyncScheduleForWarehouseV1Input).Execute()
+    resp, r, err := apiClient.SelectiveSyncAPI.ReplaceAdvancedSyncScheduleForWarehouse(ctx, warehouseId).ReplaceAdvancedSyncScheduleForWarehouseV1Input(replaceAdvancedSyncScheduleForWarehouseV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SelectiveSyncAPI.ReplaceAdvancedSyncScheduleForWarehouse``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -443,9 +443,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SelectiveSyncAPI.UpdateSelectiveSyncForWarehouse(ctx).UpdateSelectiveSyncForWarehouseV1Input(updateSelectiveSyncForWarehouseV1Input).Execute()
+    resp, r, err := apiClient.SelectiveSyncAPI.UpdateSelectiveSyncForWarehouse(ctx, warehouseId).UpdateSelectiveSyncForWarehouseV1Input(updateSelectiveSyncForWarehouseV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SelectiveSyncAPI.UpdateSelectiveSyncForWarehouse``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

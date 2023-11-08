@@ -45,9 +45,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.IAMGroupsAPI.AddPermissionsToUserGroup(ctx).AddPermissionsToUserGroupV1Input(addPermissionsToUserGroupV1Input).Execute()
+    resp, r, err := apiClient.IAMGroupsAPI.AddPermissionsToUserGroup(ctx, userGroupId).AddPermissionsToUserGroupV1Input(addPermissionsToUserGroupV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IAMGroupsAPI.AddPermissionsToUserGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -125,9 +125,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.IAMGroupsAPI.AddUsersToUserGroup(ctx).AddUsersToUserGroupV1Input(addUsersToUserGroupV1Input).Execute()
+    resp, r, err := apiClient.IAMGroupsAPI.AddUsersToUserGroup(ctx, userGroupId).AddUsersToUserGroupV1Input(addUsersToUserGroupV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IAMGroupsAPI.AddUsersToUserGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -204,7 +204,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.CreateUserGroup(ctx).CreateUserGroupV1Input(createUserGroupV1Input).Execute()
     if err != nil {
@@ -278,9 +278,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.IAMGroupsAPI.DeleteUserGroup(ctx).Execute()
+    resp, r, err := apiClient.IAMGroupsAPI.DeleteUserGroup(ctx, userGroupId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IAMGroupsAPI.DeleteUserGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -356,9 +356,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.IAMGroupsAPI.GetUserGroup(ctx).Execute()
+    resp, r, err := apiClient.IAMGroupsAPI.GetUserGroup(ctx, userGroupId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IAMGroupsAPI.GetUserGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -435,9 +435,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.IAMGroupsAPI.ListInvitesFromUserGroup(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.IAMGroupsAPI.ListInvitesFromUserGroup(ctx, userGroupId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IAMGroupsAPI.ListInvitesFromUserGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -514,7 +514,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.ListUserGroups(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -589,9 +589,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.IAMGroupsAPI.ListUsersFromUserGroup(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.IAMGroupsAPI.ListUsersFromUserGroup(ctx, userGroupId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IAMGroupsAPI.ListUsersFromUserGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -669,9 +669,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.IAMGroupsAPI.RemoveUsersFromUserGroup(ctx).Emails(emails).Execute()
+    resp, r, err := apiClient.IAMGroupsAPI.RemoveUsersFromUserGroup(ctx, userGroupId).Emails(emails).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IAMGroupsAPI.RemoveUsersFromUserGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -749,9 +749,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.IAMGroupsAPI.ReplacePermissionsForUserGroup(ctx).ReplacePermissionsForUserGroupV1Input(replacePermissionsForUserGroupV1Input).Execute()
+    resp, r, err := apiClient.IAMGroupsAPI.ReplacePermissionsForUserGroup(ctx, userGroupId).ReplacePermissionsForUserGroupV1Input(replacePermissionsForUserGroupV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IAMGroupsAPI.ReplacePermissionsForUserGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -829,9 +829,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.IAMGroupsAPI.ReplaceUsersInUserGroup(ctx).ReplaceUsersInUserGroupV1Input(replaceUsersInUserGroupV1Input).Execute()
+    resp, r, err := apiClient.IAMGroupsAPI.ReplaceUsersInUserGroup(ctx, userGroupId).ReplaceUsersInUserGroupV1Input(replaceUsersInUserGroupV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IAMGroupsAPI.ReplaceUsersInUserGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -909,9 +909,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.IAMGroupsAPI.UpdateUserGroup(ctx).UpdateUserGroupV1Input(updateUserGroupV1Input).Execute()
+    resp, r, err := apiClient.IAMGroupsAPI.UpdateUserGroup(ctx, userGroupId).UpdateUserGroupV1Input(updateUserGroupV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IAMGroupsAPI.UpdateUserGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

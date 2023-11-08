@@ -39,9 +39,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DestinationFiltersAPI.CreateFilterForDestination(ctx).CreateFilterForDestinationV1Input(createFilterForDestinationV1Input).Execute()
+    resp, r, err := apiClient.DestinationFiltersAPI.CreateFilterForDestination(ctx, destinationId).CreateFilterForDestinationV1Input(createFilterForDestinationV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DestinationFiltersAPI.CreateFilterForDestination``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -119,9 +119,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DestinationFiltersAPI.GetFilterInDestination(ctx).Execute()
+    resp, r, err := apiClient.DestinationFiltersAPI.GetFilterInDestination(ctx, destinationId, filterId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DestinationFiltersAPI.GetFilterInDestination``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -200,9 +200,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DestinationFiltersAPI.ListFiltersFromDestination(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.DestinationFiltersAPI.ListFiltersFromDestination(ctx, destinationId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DestinationFiltersAPI.ListFiltersFromDestination``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -279,7 +279,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationFiltersAPI.PreviewDestinationFilter(ctx).PreviewDestinationFilterV1Input(previewDestinationFilterV1Input).Execute()
     if err != nil {
@@ -354,9 +354,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DestinationFiltersAPI.RemoveFilterFromDestination(ctx).Execute()
+    resp, r, err := apiClient.DestinationFiltersAPI.RemoveFilterFromDestination(ctx, destinationId, filterId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DestinationFiltersAPI.RemoveFilterFromDestination``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -436,9 +436,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DestinationFiltersAPI.UpdateFilterForDestination(ctx).UpdateFilterForDestinationV1Input(updateFilterForDestinationV1Input).Execute()
+    resp, r, err := apiClient.DestinationFiltersAPI.UpdateFilterForDestination(ctx, destinationId, filterId).UpdateFilterForDestinationV1Input(updateFilterForDestinationV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DestinationFiltersAPI.UpdateFilterForDestination``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

@@ -46,7 +46,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.CreateFunction(ctx).CreateFunctionV1Input(createFunctionV1Input).Execute()
     if err != nil {
@@ -120,9 +120,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FunctionsAPI.CreateFunctionDeployment(ctx).Execute()
+    resp, r, err := apiClient.FunctionsAPI.CreateFunctionDeployment(ctx, functionId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAPI.CreateFunctionDeployment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -198,7 +198,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.CreateInsertFunctionInstance(ctx).CreateInsertFunctionInstanceAlphaInput(createInsertFunctionInstanceAlphaInput).Execute()
     if err != nil {
@@ -272,9 +272,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FunctionsAPI.DeleteFunction(ctx).Execute()
+    resp, r, err := apiClient.FunctionsAPI.DeleteFunction(ctx, functionId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAPI.DeleteFunction``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -350,9 +350,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FunctionsAPI.DeleteInsertFunctionInstance(ctx).Execute()
+    resp, r, err := apiClient.FunctionsAPI.DeleteInsertFunctionInstance(ctx, instanceId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAPI.DeleteInsertFunctionInstance``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -428,9 +428,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FunctionsAPI.GetFunction(ctx).Execute()
+    resp, r, err := apiClient.FunctionsAPI.GetFunction(ctx, functionId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAPI.GetFunction``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -507,9 +507,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FunctionsAPI.GetFunctionVersion(ctx).Execute()
+    resp, r, err := apiClient.FunctionsAPI.GetFunctionVersion(ctx, functionId, versionId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAPI.GetFunctionVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -587,9 +587,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FunctionsAPI.GetInsertFunctionInstance(ctx).Execute()
+    resp, r, err := apiClient.FunctionsAPI.GetInsertFunctionInstance(ctx, instanceId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAPI.GetInsertFunctionInstance``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -666,9 +666,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FunctionsAPI.ListFunctionVersions(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.FunctionsAPI.ListFunctionVersions(ctx, functionId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAPI.ListFunctionVersions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -746,7 +746,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.ListFunctions(ctx).Pagination(pagination).ResourceType(resourceType).Execute()
     if err != nil {
@@ -822,7 +822,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.ListInsertFunctionInstances(ctx).Pagination(pagination).FunctionId(functionId).Execute()
     if err != nil {
@@ -898,9 +898,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FunctionsAPI.RestoreFunctionVersion(ctx).RestoreFunctionVersionAlphaInput(restoreFunctionVersionAlphaInput).Execute()
+    resp, r, err := apiClient.FunctionsAPI.RestoreFunctionVersion(ctx, functionId).RestoreFunctionVersionAlphaInput(restoreFunctionVersionAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAPI.RestoreFunctionVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -978,9 +978,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FunctionsAPI.UpdateFunction(ctx).UpdateFunctionV1Input(updateFunctionV1Input).Execute()
+    resp, r, err := apiClient.FunctionsAPI.UpdateFunction(ctx, functionId).UpdateFunctionV1Input(updateFunctionV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAPI.UpdateFunction``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1058,9 +1058,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FunctionsAPI.UpdateInsertFunctionInstance(ctx).UpdateInsertFunctionInstanceAlphaInput(updateInsertFunctionInstanceAlphaInput).Execute()
+    resp, r, err := apiClient.FunctionsAPI.UpdateInsertFunctionInstance(ctx, instanceId).UpdateInsertFunctionInstanceAlphaInput(updateInsertFunctionInstanceAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAPI.UpdateInsertFunctionInstance``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

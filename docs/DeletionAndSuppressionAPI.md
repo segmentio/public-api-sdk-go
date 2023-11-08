@@ -41,9 +41,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DeletionAndSuppressionAPI.CreateCloudSourceRegulation(ctx).CreateCloudSourceRegulationV1Input(createCloudSourceRegulationV1Input).Execute()
+    resp, r, err := apiClient.DeletionAndSuppressionAPI.CreateCloudSourceRegulation(ctx, sourceId).CreateCloudSourceRegulationV1Input(createCloudSourceRegulationV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DeletionAndSuppressionAPI.CreateCloudSourceRegulation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -121,9 +121,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DeletionAndSuppressionAPI.CreateSourceRegulation(ctx).CreateSourceRegulationV1Input(createSourceRegulationV1Input).Execute()
+    resp, r, err := apiClient.DeletionAndSuppressionAPI.CreateSourceRegulation(ctx, sourceId).CreateSourceRegulationV1Input(createSourceRegulationV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DeletionAndSuppressionAPI.CreateSourceRegulation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -200,7 +200,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DeletionAndSuppressionAPI.CreateWorkspaceRegulation(ctx).CreateWorkspaceRegulationV1Input(createWorkspaceRegulationV1Input).Execute()
     if err != nil {
@@ -274,9 +274,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DeletionAndSuppressionAPI.DeleteRegulation(ctx).Execute()
+    resp, r, err := apiClient.DeletionAndSuppressionAPI.DeleteRegulation(ctx, regulateId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DeletionAndSuppressionAPI.DeleteRegulation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -352,9 +352,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DeletionAndSuppressionAPI.GetRegulation(ctx).Execute()
+    resp, r, err := apiClient.DeletionAndSuppressionAPI.GetRegulation(ctx, regulateId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DeletionAndSuppressionAPI.GetRegulation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -433,9 +433,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DeletionAndSuppressionAPI.ListRegulationsFromSource(ctx).Pagination(pagination).Status(status).RegulationTypes(regulationTypes).Execute()
+    resp, r, err := apiClient.DeletionAndSuppressionAPI.ListRegulationsFromSource(ctx, sourceId).Pagination(pagination).Status(status).RegulationTypes(regulationTypes).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DeletionAndSuppressionAPI.ListRegulationsFromSource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -514,7 +514,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DeletionAndSuppressionAPI.ListSuppressions(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -590,7 +590,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DeletionAndSuppressionAPI.ListWorkspaceRegulations(ctx).Pagination(pagination).Status(status).RegulationTypes(regulationTypes).Execute()
     if err != nil {

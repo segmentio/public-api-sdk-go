@@ -37,9 +37,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.GetAudience(ctx).Execute()
+    resp, r, err := apiClient.AudiencesAPI.GetAudience(ctx, spaceId, id).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.GetAudience``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -118,9 +118,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.ListAudiences(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.AudiencesAPI.ListAudiences(ctx, spaceId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.ListAudiences``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -198,9 +198,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.RemoveAudienceFromSpace(ctx).Execute()
+    resp, r, err := apiClient.AudiencesAPI.RemoveAudienceFromSpace(ctx, spaceId, id).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.RemoveAudienceFromSpace``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -280,9 +280,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.UpdateAudienceForSpace(ctx).UpdateAudienceForSpaceInput(updateAudienceForSpaceInput).Execute()
+    resp, r, err := apiClient.AudiencesAPI.UpdateAudienceForSpace(ctx, spaceId, id).UpdateAudienceForSpaceInput(updateAudienceForSpaceInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.UpdateAudienceForSpace``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

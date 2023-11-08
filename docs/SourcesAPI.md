@@ -44,9 +44,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SourcesAPI.AddLabelsToSource(ctx).AddLabelsToSourceV1Input(addLabelsToSourceV1Input).Execute()
+    resp, r, err := apiClient.SourcesAPI.AddLabelsToSource(ctx, sourceId).AddLabelsToSourceV1Input(addLabelsToSourceV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourcesAPI.AddLabelsToSource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -123,7 +123,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SourcesAPI.CreateSource(ctx).CreateSourceV1Input(createSourceV1Input).Execute()
     if err != nil {
@@ -197,9 +197,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SourcesAPI.DeleteSource(ctx).Execute()
+    resp, r, err := apiClient.SourcesAPI.DeleteSource(ctx, sourceId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourcesAPI.DeleteSource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -275,9 +275,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SourcesAPI.GetSource(ctx).Execute()
+    resp, r, err := apiClient.SourcesAPI.GetSource(ctx, sourceId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourcesAPI.GetSource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -354,9 +354,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SourcesAPI.ListConnectedDestinationsFromSource(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.SourcesAPI.ListConnectedDestinationsFromSource(ctx, sourceId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourcesAPI.ListConnectedDestinationsFromSource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -434,9 +434,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SourcesAPI.ListConnectedWarehousesFromSource(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.SourcesAPI.ListConnectedWarehousesFromSource(ctx, sourceId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourcesAPI.ListConnectedWarehousesFromSource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -513,9 +513,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SourcesAPI.ListSchemaSettingsInSource(ctx).Execute()
+    resp, r, err := apiClient.SourcesAPI.ListSchemaSettingsInSource(ctx, sourceId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourcesAPI.ListSchemaSettingsInSource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -591,7 +591,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SourcesAPI.ListSources(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -666,9 +666,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SourcesAPI.ReplaceLabelsInSource(ctx).ReplaceLabelsInSourceV1Input(replaceLabelsInSourceV1Input).Execute()
+    resp, r, err := apiClient.SourcesAPI.ReplaceLabelsInSource(ctx, sourceId).ReplaceLabelsInSourceV1Input(replaceLabelsInSourceV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourcesAPI.ReplaceLabelsInSource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -746,9 +746,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SourcesAPI.UpdateSchemaSettingsInSource(ctx).UpdateSchemaSettingsInSourceV1Input(updateSchemaSettingsInSourceV1Input).Execute()
+    resp, r, err := apiClient.SourcesAPI.UpdateSchemaSettingsInSource(ctx, sourceId).UpdateSchemaSettingsInSourceV1Input(updateSchemaSettingsInSourceV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourcesAPI.UpdateSchemaSettingsInSource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -826,9 +826,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SourcesAPI.UpdateSource(ctx).UpdateSourceV1Input(updateSourceV1Input).Execute()
+    resp, r, err := apiClient.SourcesAPI.UpdateSource(ctx, sourceId).UpdateSourceV1Input(updateSourceV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourcesAPI.UpdateSource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

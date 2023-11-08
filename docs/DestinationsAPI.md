@@ -43,7 +43,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationsAPI.CreateDestination(ctx).CreateDestinationV1Input(createDestinationV1Input).Execute()
     if err != nil {
@@ -118,9 +118,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DestinationsAPI.CreateDestinationSubscription(ctx).CreateDestinationSubscriptionAlphaInput(createDestinationSubscriptionAlphaInput).Execute()
+    resp, r, err := apiClient.DestinationsAPI.CreateDestinationSubscription(ctx, destinationId).CreateDestinationSubscriptionAlphaInput(createDestinationSubscriptionAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DestinationsAPI.CreateDestinationSubscription``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -197,9 +197,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DestinationsAPI.DeleteDestination(ctx).Execute()
+    resp, r, err := apiClient.DestinationsAPI.DeleteDestination(ctx, destinationId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DestinationsAPI.DeleteDestination``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -275,9 +275,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DestinationsAPI.GetDestination(ctx).Execute()
+    resp, r, err := apiClient.DestinationsAPI.GetDestination(ctx, destinationId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DestinationsAPI.GetDestination``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -354,9 +354,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DestinationsAPI.GetSubscriptionFromDestination(ctx).Execute()
+    resp, r, err := apiClient.DestinationsAPI.GetSubscriptionFromDestination(ctx, destinationId, id).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DestinationsAPI.GetSubscriptionFromDestination``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -438,9 +438,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DestinationsAPI.ListDeliveryMetricsSummaryFromDestination(ctx).SourceId(sourceId).StartTime(startTime).EndTime(endTime).Granularity(granularity).Execute()
+    resp, r, err := apiClient.DestinationsAPI.ListDeliveryMetricsSummaryFromDestination(ctx, destinationId).SourceId(sourceId).StartTime(startTime).EndTime(endTime).Granularity(granularity).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DestinationsAPI.ListDeliveryMetricsSummaryFromDestination``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -520,7 +520,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationsAPI.ListDestinations(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -595,9 +595,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DestinationsAPI.ListSubscriptionsFromDestination(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.DestinationsAPI.ListSubscriptionsFromDestination(ctx, destinationId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DestinationsAPI.ListSubscriptionsFromDestination``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -675,9 +675,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DestinationsAPI.RemoveSubscriptionFromDestination(ctx).Execute()
+    resp, r, err := apiClient.DestinationsAPI.RemoveSubscriptionFromDestination(ctx, destinationId, id).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DestinationsAPI.RemoveSubscriptionFromDestination``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -756,9 +756,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DestinationsAPI.UpdateDestination(ctx).UpdateDestinationV1Input(updateDestinationV1Input).Execute()
+    resp, r, err := apiClient.DestinationsAPI.UpdateDestination(ctx, destinationId).UpdateDestinationV1Input(updateDestinationV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DestinationsAPI.UpdateDestination``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -837,9 +837,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DestinationsAPI.UpdateSubscriptionForDestination(ctx).UpdateSubscriptionForDestinationAlphaInput(updateSubscriptionForDestinationAlphaInput).Execute()
+    resp, r, err := apiClient.DestinationsAPI.UpdateSubscriptionForDestination(ctx, destinationId, id).UpdateSubscriptionForDestinationAlphaInput(updateSubscriptionForDestinationAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DestinationsAPI.UpdateSubscriptionForDestination``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

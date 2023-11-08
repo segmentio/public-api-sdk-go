@@ -39,9 +39,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ProfilesSyncAPI.CreateProfilesWarehouse(ctx).CreateProfilesWarehouseAlphaInput(createProfilesWarehouseAlphaInput).Execute()
+    resp, r, err := apiClient.ProfilesSyncAPI.CreateProfilesWarehouse(ctx, spaceId).CreateProfilesWarehouseAlphaInput(createProfilesWarehouseAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProfilesSyncAPI.CreateProfilesWarehouse``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -119,9 +119,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ProfilesSyncAPI.ListProfilesWarehouseInSpace(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.ProfilesSyncAPI.ListProfilesWarehouseInSpace(ctx, spaceId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProfilesSyncAPI.ListProfilesWarehouseInSpace``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -200,9 +200,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ProfilesSyncAPI.ListSelectiveSyncsFromWarehouseAndSpace(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.ProfilesSyncAPI.ListSelectiveSyncsFromWarehouseAndSpace(ctx, spaceId, warehouseId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProfilesSyncAPI.ListSelectiveSyncsFromWarehouseAndSpace``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -282,9 +282,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ProfilesSyncAPI.RemoveProfilesWarehouseFromSpace(ctx).Execute()
+    resp, r, err := apiClient.ProfilesSyncAPI.RemoveProfilesWarehouseFromSpace(ctx, spaceId, warehouseId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProfilesSyncAPI.RemoveProfilesWarehouseFromSpace``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -364,9 +364,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ProfilesSyncAPI.UpdateProfilesWarehouseForSpaceWarehouse(ctx).UpdateProfilesWarehouseForSpaceWarehouseAlphaInput(updateProfilesWarehouseForSpaceWarehouseAlphaInput).Execute()
+    resp, r, err := apiClient.ProfilesSyncAPI.UpdateProfilesWarehouseForSpaceWarehouse(ctx, spaceId, warehouseId).UpdateProfilesWarehouseForSpaceWarehouseAlphaInput(updateProfilesWarehouseForSpaceWarehouseAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProfilesSyncAPI.UpdateProfilesWarehouseForSpaceWarehouse``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -447,9 +447,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ProfilesSyncAPI.UpdateSelectiveSyncForWarehouseAndSpace(ctx).UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput(updateSelectiveSyncForWarehouseAndSpaceAlphaInput).Execute()
+    resp, r, err := apiClient.ProfilesSyncAPI.UpdateSelectiveSyncForWarehouseAndSpace(ctx, spaceId, warehouseId).UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput(updateSelectiveSyncForWarehouseAndSpaceAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ProfilesSyncAPI.UpdateSelectiveSyncForWarehouseAndSpace``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

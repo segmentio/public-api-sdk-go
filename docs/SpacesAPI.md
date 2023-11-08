@@ -36,9 +36,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SpacesAPI.BatchQueryMessagingSubscriptionsForSpace(ctx).BatchQueryMessagingSubscriptionsForSpaceAlphaInput(batchQueryMessagingSubscriptionsForSpaceAlphaInput).Execute()
+    resp, r, err := apiClient.SpacesAPI.BatchQueryMessagingSubscriptionsForSpace(ctx, spaceId).BatchQueryMessagingSubscriptionsForSpaceAlphaInput(batchQueryMessagingSubscriptionsForSpaceAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SpacesAPI.BatchQueryMessagingSubscriptionsForSpace``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -115,9 +115,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SpacesAPI.GetSpace(ctx).Execute()
+    resp, r, err := apiClient.SpacesAPI.GetSpace(ctx, spaceId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SpacesAPI.GetSpace``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -194,9 +194,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SpacesAPI.ReplaceMessagingSubscriptionsInSpaces(ctx).ReplaceMessagingSubscriptionsInSpacesAlphaInput(replaceMessagingSubscriptionsInSpacesAlphaInput).Execute()
+    resp, r, err := apiClient.SpacesAPI.ReplaceMessagingSubscriptionsInSpaces(ctx, spaceId).ReplaceMessagingSubscriptionsInSpacesAlphaInput(replaceMessagingSubscriptionsInSpacesAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SpacesAPI.ReplaceMessagingSubscriptionsInSpaces``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

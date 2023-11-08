@@ -37,7 +37,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ReverseETLAPI.CreateReverseEtlModel(ctx).CreateReverseEtlModelInput(createReverseEtlModelInput).Execute()
     if err != nil {
@@ -111,9 +111,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ReverseETLAPI.DeleteReverseEtlModel(ctx).Execute()
+    resp, r, err := apiClient.ReverseETLAPI.DeleteReverseEtlModel(ctx, modelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReverseETLAPI.DeleteReverseEtlModel``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -189,9 +189,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ReverseETLAPI.GetReverseEtlModel(ctx).Execute()
+    resp, r, err := apiClient.ReverseETLAPI.GetReverseEtlModel(ctx, modelId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReverseETLAPI.GetReverseEtlModel``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -267,7 +267,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ReverseETLAPI.ListReverseEtlModels(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -342,9 +342,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ReverseETLAPI.UpdateReverseEtlModel(ctx).UpdateReverseEtlModelInput(updateReverseEtlModelInput).Execute()
+    resp, r, err := apiClient.ReverseETLAPI.UpdateReverseEtlModel(ctx, modelId).UpdateReverseEtlModelInput(updateReverseEtlModelInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReverseETLAPI.UpdateReverseEtlModel``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

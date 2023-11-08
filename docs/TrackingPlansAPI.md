@@ -45,9 +45,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.TrackingPlansAPI.AddSourceToTrackingPlan(ctx).AddSourceToTrackingPlanV1Input(addSourceToTrackingPlanV1Input).Execute()
+    resp, r, err := apiClient.TrackingPlansAPI.AddSourceToTrackingPlan(ctx, trackingPlanId).AddSourceToTrackingPlanV1Input(addSourceToTrackingPlanV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TrackingPlansAPI.AddSourceToTrackingPlan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -124,7 +124,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TrackingPlansAPI.CreateTrackingPlan(ctx).CreateTrackingPlanV1Input(createTrackingPlanV1Input).Execute()
     if err != nil {
@@ -198,9 +198,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.TrackingPlansAPI.DeleteTrackingPlan(ctx).Execute()
+    resp, r, err := apiClient.TrackingPlansAPI.DeleteTrackingPlan(ctx, trackingPlanId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TrackingPlansAPI.DeleteTrackingPlan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -276,9 +276,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.TrackingPlansAPI.GetTrackingPlan(ctx).Execute()
+    resp, r, err := apiClient.TrackingPlansAPI.GetTrackingPlan(ctx, trackingPlanId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TrackingPlansAPI.GetTrackingPlan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -355,9 +355,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.TrackingPlansAPI.ListRulesFromTrackingPlan(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.TrackingPlansAPI.ListRulesFromTrackingPlan(ctx, trackingPlanId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TrackingPlansAPI.ListRulesFromTrackingPlan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -435,9 +435,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.TrackingPlansAPI.ListSourcesFromTrackingPlan(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.TrackingPlansAPI.ListSourcesFromTrackingPlan(ctx, trackingPlanId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TrackingPlansAPI.ListSourcesFromTrackingPlan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -515,7 +515,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TrackingPlansAPI.ListTrackingPlans(ctx).Pagination(pagination).Type_(type_).Execute()
     if err != nil {
@@ -591,9 +591,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.TrackingPlansAPI.RemoveRulesFromTrackingPlan(ctx).Rules(rules).Execute()
+    resp, r, err := apiClient.TrackingPlansAPI.RemoveRulesFromTrackingPlan(ctx, trackingPlanId).Rules(rules).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TrackingPlansAPI.RemoveRulesFromTrackingPlan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -671,9 +671,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.TrackingPlansAPI.RemoveSourceFromTrackingPlan(ctx).SourceId(sourceId).Execute()
+    resp, r, err := apiClient.TrackingPlansAPI.RemoveSourceFromTrackingPlan(ctx, trackingPlanId).SourceId(sourceId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TrackingPlansAPI.RemoveSourceFromTrackingPlan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -751,9 +751,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.TrackingPlansAPI.ReplaceRulesInTrackingPlan(ctx).ReplaceRulesInTrackingPlanV1Input(replaceRulesInTrackingPlanV1Input).Execute()
+    resp, r, err := apiClient.TrackingPlansAPI.ReplaceRulesInTrackingPlan(ctx, trackingPlanId).ReplaceRulesInTrackingPlanV1Input(replaceRulesInTrackingPlanV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TrackingPlansAPI.ReplaceRulesInTrackingPlan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -831,9 +831,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.TrackingPlansAPI.UpdateRulesInTrackingPlan(ctx).UpdateRulesInTrackingPlanV1Input(updateRulesInTrackingPlanV1Input).Execute()
+    resp, r, err := apiClient.TrackingPlansAPI.UpdateRulesInTrackingPlan(ctx, trackingPlanId).UpdateRulesInTrackingPlanV1Input(updateRulesInTrackingPlanV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TrackingPlansAPI.UpdateRulesInTrackingPlan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -911,9 +911,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.TrackingPlansAPI.UpdateTrackingPlan(ctx).UpdateTrackingPlanV1Input(updateTrackingPlanV1Input).Execute()
+    resp, r, err := apiClient.TrackingPlansAPI.UpdateTrackingPlan(ctx, trackingPlanId).UpdateTrackingPlanV1Input(updateTrackingPlanV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TrackingPlansAPI.UpdateTrackingPlan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

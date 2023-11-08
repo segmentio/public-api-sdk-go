@@ -42,9 +42,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.IAMUsersAPI.AddPermissionsToUser(ctx).AddPermissionsToUserV1Input(addPermissionsToUserV1Input).Execute()
+    resp, r, err := apiClient.IAMUsersAPI.AddPermissionsToUser(ctx, userId).AddPermissionsToUserV1Input(addPermissionsToUserV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IAMUsersAPI.AddPermissionsToUser``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -121,7 +121,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMUsersAPI.CreateInvites(ctx).CreateInvitesV1Input(createInvitesV1Input).Execute()
     if err != nil {
@@ -195,7 +195,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMUsersAPI.DeleteInvites(ctx).Emails(emails).Execute()
     if err != nil {
@@ -269,7 +269,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMUsersAPI.DeleteUsers(ctx).UserIds(userIds).Execute()
     if err != nil {
@@ -343,9 +343,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.IAMUsersAPI.GetUser(ctx).Execute()
+    resp, r, err := apiClient.IAMUsersAPI.GetUser(ctx, userId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IAMUsersAPI.GetUser``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -421,7 +421,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMUsersAPI.ListInvites(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -496,9 +496,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.IAMUsersAPI.ListUserGroupsFromUser(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.IAMUsersAPI.ListUserGroupsFromUser(ctx, userId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IAMUsersAPI.ListUserGroupsFromUser``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -575,7 +575,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMUsersAPI.ListUsers(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -650,9 +650,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.IAMUsersAPI.ReplacePermissionsForUser(ctx).ReplacePermissionsForUserV1Input(replacePermissionsForUserV1Input).Execute()
+    resp, r, err := apiClient.IAMUsersAPI.ReplacePermissionsForUser(ctx, userId).ReplacePermissionsForUserV1Input(replacePermissionsForUserV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `IAMUsersAPI.ReplacePermissionsForUser``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

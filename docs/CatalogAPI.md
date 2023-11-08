@@ -38,9 +38,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.CatalogAPI.GetDestinationMetadata(ctx).Execute()
+    resp, r, err := apiClient.CatalogAPI.GetDestinationMetadata(ctx, destinationMetadataId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CatalogAPI.GetDestinationMetadata``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -116,7 +116,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.CatalogAPI.GetDestinationsCatalog(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -190,9 +190,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.CatalogAPI.GetSourceMetadata(ctx).Execute()
+    resp, r, err := apiClient.CatalogAPI.GetSourceMetadata(ctx, sourceMetadataId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CatalogAPI.GetSourceMetadata``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -268,7 +268,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.CatalogAPI.GetSourcesCatalog(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -342,9 +342,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.CatalogAPI.GetWarehouseMetadata(ctx).Execute()
+    resp, r, err := apiClient.CatalogAPI.GetWarehouseMetadata(ctx, warehouseMetadataId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CatalogAPI.GetWarehouseMetadata``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -420,7 +420,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.CatalogAPI.GetWarehousesCatalog(ctx).Pagination(pagination).Execute()
     if err != nil {

@@ -37,9 +37,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ComputedTraitsAPI.GetComputedTrait(ctx).Execute()
+    resp, r, err := apiClient.ComputedTraitsAPI.GetComputedTrait(ctx, spaceId, id).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ComputedTraitsAPI.GetComputedTrait``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -118,9 +118,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ComputedTraitsAPI.ListComputedTraits(ctx).Pagination(pagination).Execute()
+    resp, r, err := apiClient.ComputedTraitsAPI.ListComputedTraits(ctx, spaceId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ComputedTraitsAPI.ListComputedTraits``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -198,9 +198,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ComputedTraitsAPI.RemoveComputedTraitFromSpace(ctx).Execute()
+    resp, r, err := apiClient.ComputedTraitsAPI.RemoveComputedTraitFromSpace(ctx, spaceId, id).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ComputedTraitsAPI.RemoveComputedTraitFromSpace``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -280,9 +280,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ComputedTraitsAPI.UpdateComputedTraitForSpace(ctx).UpdateComputedTraitForSpaceAlphaInput(updateComputedTraitForSpaceAlphaInput).Execute()
+    resp, r, err := apiClient.ComputedTraitsAPI.UpdateComputedTraitForSpace(ctx, spaceId, id).UpdateComputedTraitForSpaceAlphaInput(updateComputedTraitForSpaceAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ComputedTraitsAPI.UpdateComputedTraitForSpace``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

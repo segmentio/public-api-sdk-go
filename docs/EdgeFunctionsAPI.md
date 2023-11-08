@@ -37,9 +37,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.EdgeFunctionsAPI.CreateEdgeFunctions(ctx).CreateEdgeFunctionsAlphaInput(createEdgeFunctionsAlphaInput).Execute()
+    resp, r, err := apiClient.EdgeFunctionsAPI.CreateEdgeFunctions(ctx, sourceId).CreateEdgeFunctionsAlphaInput(createEdgeFunctionsAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EdgeFunctionsAPI.CreateEdgeFunctions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -116,9 +116,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.EdgeFunctionsAPI.DisableEdgeFunctions(ctx).Execute()
+    resp, r, err := apiClient.EdgeFunctionsAPI.DisableEdgeFunctions(ctx, sourceId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EdgeFunctionsAPI.DisableEdgeFunctions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -194,9 +194,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.EdgeFunctionsAPI.GenerateUploadURLForEdgeFunctions(ctx).Execute()
+    resp, r, err := apiClient.EdgeFunctionsAPI.GenerateUploadURLForEdgeFunctions(ctx, sourceId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EdgeFunctionsAPI.GenerateUploadURLForEdgeFunctions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -272,9 +272,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.EdgeFunctionsAPI.GetLatestFromEdgeFunctions(ctx).Execute()
+    resp, r, err := apiClient.EdgeFunctionsAPI.GetLatestFromEdgeFunctions(ctx, sourceId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EdgeFunctionsAPI.GetLatestFromEdgeFunctions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)

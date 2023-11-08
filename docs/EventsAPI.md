@@ -41,7 +41,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.EventsAPI.GetEventsVolumeFromWorkspace(ctx).Granularity(granularity).StartTime(startTime).EndTime(endTime).GroupBy(groupBy).SourceId(sourceId).EventName(eventName).EventType(eventType).AppVersion(appVersion).Pagination(pagination).Execute()
     if err != nil {

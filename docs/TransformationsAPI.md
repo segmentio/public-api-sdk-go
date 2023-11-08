@@ -37,7 +37,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TransformationsAPI.CreateTransformation(ctx).CreateTransformationV1Input(createTransformationV1Input).Execute()
     if err != nil {
@@ -111,9 +111,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.TransformationsAPI.DeleteTransformation(ctx).Execute()
+    resp, r, err := apiClient.TransformationsAPI.DeleteTransformation(ctx, transformationId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TransformationsAPI.DeleteTransformation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -189,9 +189,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.TransformationsAPI.GetTransformation(ctx).Execute()
+    resp, r, err := apiClient.TransformationsAPI.GetTransformation(ctx, transformationId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TransformationsAPI.GetTransformation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -267,7 +267,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TransformationsAPI.ListTransformations(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -342,9 +342,9 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
+    token := "INSERT BEARER TOKEN HERE"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.TransformationsAPI.UpdateTransformation(ctx).UpdateTransformationV1Input(updateTransformationV1Input).Execute()
+    resp, r, err := apiClient.TransformationsAPI.UpdateTransformation(ctx, transformationId).UpdateTransformationV1Input(updateTransformationV1Input).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TransformationsAPI.UpdateTransformation``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
