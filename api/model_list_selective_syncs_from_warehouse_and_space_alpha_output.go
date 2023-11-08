@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,13 +15,16 @@ import (
 	"encoding/json"
 )
 
+// checks if the ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput{}
+
 // ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput Results containing the Selective Sync configuration for a Space Warehouse Connection.
 type ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput struct {
 	// Represents a list of collections and properties synced to the Warehouse.
 	Items []SpaceWarehouseSelectiveSyncItemAlpha `json:"items"`
 	// Optional. Represents the enabled state of all event tables.
-	EnableEventTables *bool      `json:"enableEventTables,omitempty"`
-	Pagination        Pagination `json:"pagination"`
+	EnableEventTables *bool            `json:"enableEventTables,omitempty"`
+	Pagination        PaginationOutput `json:"pagination"`
 }
 
 // NewListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput instantiates a new ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput object
@@ -30,7 +33,7 @@ type ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput struct {
 // will change when the set of required properties is changed
 func NewListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput(
 	items []SpaceWarehouseSelectiveSyncItemAlpha,
-	pagination Pagination,
+	pagination PaginationOutput,
 ) *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput {
 	this := ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput{}
 	this.Items = items
@@ -74,7 +77,7 @@ func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) SetItems(
 
 // GetEnableEventTables returns the EnableEventTables field value if set, zero value otherwise.
 func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) GetEnableEventTables() bool {
-	if o == nil || o.EnableEventTables == nil {
+	if o == nil || IsNil(o.EnableEventTables) {
 		var ret bool
 		return ret
 	}
@@ -84,7 +87,7 @@ func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) GetEnableEventTable
 // GetEnableEventTablesOk returns a tuple with the EnableEventTables field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) GetEnableEventTablesOk() (*bool, bool) {
-	if o == nil || o.EnableEventTables == nil {
+	if o == nil || IsNil(o.EnableEventTables) {
 		return nil, false
 	}
 	return o.EnableEventTables, true
@@ -92,7 +95,7 @@ func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) GetEnableEventTable
 
 // HasEnableEventTables returns a boolean if a field has been set.
 func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) HasEnableEventTables() bool {
-	if o != nil && o.EnableEventTables != nil {
+	if o != nil && !IsNil(o.EnableEventTables) {
 		return true
 	}
 
@@ -105,9 +108,9 @@ func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) SetEnableEventTable
 }
 
 // GetPagination returns the Pagination field value
-func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) GetPagination() Pagination {
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) GetPagination() PaginationOutput {
 	if o == nil {
-		var ret Pagination
+		var ret PaginationOutput
 		return ret
 	}
 
@@ -116,7 +119,7 @@ func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) GetPagination() Pag
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) GetPaginationOk() (*Pagination, bool) {
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) GetPaginationOk() (*PaginationOutput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -124,22 +127,26 @@ func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) GetPaginationOk() (
 }
 
 // SetPagination sets field value
-func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) SetPagination(v Pagination) {
+func (o *ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) SetPagination(v PaginationOutput) {
 	o.Pagination = v
 }
 
 func (o ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["items"] = o.Items
-	}
-	if o.EnableEventTables != nil {
-		toSerialize["enableEventTables"] = o.EnableEventTables
-	}
-	if true {
-		toSerialize["pagination"] = o.Pagination
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["items"] = o.Items
+	if !IsNil(o.EnableEventTables) {
+		toSerialize["enableEventTables"] = o.EnableEventTables
+	}
+	toSerialize["pagination"] = o.Pagination
+	return toSerialize, nil
 }
 
 type NullableListSelectiveSyncsFromWarehouseAndSpaceAlphaOutput struct {

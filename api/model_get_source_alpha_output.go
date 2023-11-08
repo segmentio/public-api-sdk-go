@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,9 +15,12 @@ import (
 	"encoding/json"
 )
 
+// checks if the GetSourceAlphaOutput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetSourceAlphaOutput{}
+
 // GetSourceAlphaOutput Returns a Source.
 type GetSourceAlphaOutput struct {
-	Source Source1 `json:"source"`
+	Source SourceAlpha `json:"source"`
 	// The id of the Tracking Plan connected to the Source.
 	TrackingPlanId NullableString `json:"trackingPlanId"`
 }
@@ -26,7 +29,10 @@ type GetSourceAlphaOutput struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetSourceAlphaOutput(source Source1, trackingPlanId NullableString) *GetSourceAlphaOutput {
+func NewGetSourceAlphaOutput(
+	source SourceAlpha,
+	trackingPlanId NullableString,
+) *GetSourceAlphaOutput {
 	this := GetSourceAlphaOutput{}
 	this.Source = source
 	this.TrackingPlanId = trackingPlanId
@@ -42,9 +48,9 @@ func NewGetSourceAlphaOutputWithDefaults() *GetSourceAlphaOutput {
 }
 
 // GetSource returns the Source field value
-func (o *GetSourceAlphaOutput) GetSource() Source1 {
+func (o *GetSourceAlphaOutput) GetSource() SourceAlpha {
 	if o == nil {
-		var ret Source1
+		var ret SourceAlpha
 		return ret
 	}
 
@@ -53,7 +59,7 @@ func (o *GetSourceAlphaOutput) GetSource() Source1 {
 
 // GetSourceOk returns a tuple with the Source field value
 // and a boolean to check if the value has been set.
-func (o *GetSourceAlphaOutput) GetSourceOk() (*Source1, bool) {
+func (o *GetSourceAlphaOutput) GetSourceOk() (*SourceAlpha, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -61,7 +67,7 @@ func (o *GetSourceAlphaOutput) GetSourceOk() (*Source1, bool) {
 }
 
 // SetSource sets field value
-func (o *GetSourceAlphaOutput) SetSource(v Source1) {
+func (o *GetSourceAlphaOutput) SetSource(v SourceAlpha) {
 	o.Source = v
 }
 
@@ -92,14 +98,18 @@ func (o *GetSourceAlphaOutput) SetTrackingPlanId(v string) {
 }
 
 func (o GetSourceAlphaOutput) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["source"] = o.Source
-	}
-	if true {
-		toSerialize["trackingPlanId"] = o.TrackingPlanId.Get()
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o GetSourceAlphaOutput) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["source"] = o.Source
+	toSerialize["trackingPlanId"] = o.TrackingPlanId.Get()
+	return toSerialize, nil
 }
 
 type NullableGetSourceAlphaOutput struct {

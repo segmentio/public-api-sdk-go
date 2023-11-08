@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,16 +15,19 @@ import (
 	"encoding/json"
 )
 
+// checks if the CreateLabelV1Input type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateLabelV1Input{}
+
 // CreateLabelV1Input Creates a new label in the current Workspace.
 type CreateLabelV1Input struct {
-	Label Label `json:"label"`
+	Label LabelV1 `json:"label"`
 }
 
 // NewCreateLabelV1Input instantiates a new CreateLabelV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateLabelV1Input(label Label) *CreateLabelV1Input {
+func NewCreateLabelV1Input(label LabelV1) *CreateLabelV1Input {
 	this := CreateLabelV1Input{}
 	this.Label = label
 	return &this
@@ -39,9 +42,9 @@ func NewCreateLabelV1InputWithDefaults() *CreateLabelV1Input {
 }
 
 // GetLabel returns the Label field value
-func (o *CreateLabelV1Input) GetLabel() Label {
+func (o *CreateLabelV1Input) GetLabel() LabelV1 {
 	if o == nil {
-		var ret Label
+		var ret LabelV1
 		return ret
 	}
 
@@ -50,7 +53,7 @@ func (o *CreateLabelV1Input) GetLabel() Label {
 
 // GetLabelOk returns a tuple with the Label field value
 // and a boolean to check if the value has been set.
-func (o *CreateLabelV1Input) GetLabelOk() (*Label, bool) {
+func (o *CreateLabelV1Input) GetLabelOk() (*LabelV1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -58,16 +61,22 @@ func (o *CreateLabelV1Input) GetLabelOk() (*Label, bool) {
 }
 
 // SetLabel sets field value
-func (o *CreateLabelV1Input) SetLabel(v Label) {
+func (o *CreateLabelV1Input) SetLabel(v LabelV1) {
 	o.Label = v
 }
 
 func (o CreateLabelV1Input) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["label"] = o.Label
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o CreateLabelV1Input) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["label"] = o.Label
+	return toSerialize, nil
 }
 
 type NullableCreateLabelV1Input struct {

@@ -10,7 +10,7 @@ All endpoints in the API follow REST conventions and use standard HTTP methods. 
 
 See the next sections for more information on how to use the Segment Public API Go SDK.
 
-Latest API and SDK version: 37.2.0
+Latest API and SDK version: 38.0.0
 
 ## Installation
 
@@ -57,8 +57,8 @@ func main() {
     token := // ...
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
 
-    resp, r, err := apiClient.SourcesApi.ListSources(ctx)
-			.Pagination(&api.PaginationInput{ count: 10 })
+    resp, r, err := apiClient.SourcesAPI.ListSources(ctx)
+			.Pagination(api.PaginationInput{ count: 10 })
 			.Execute()
 
     if err != nil {

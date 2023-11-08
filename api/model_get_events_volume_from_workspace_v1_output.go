@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,14 +15,17 @@ import (
 	"encoding/json"
 )
 
+// checks if the GetEventsVolumeFromWorkspaceV1Output type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetEventsVolumeFromWorkspaceV1Output{}
+
 // GetEventsVolumeFromWorkspaceV1Output GetEventsVolumeFromWorkspaceV1Output represents the results given the input query.
 type GetEventsVolumeFromWorkspaceV1Output struct {
 	// Observability event volume path.
-	Path  string `json:"path"`
-	Query Query  `json:"query"`
+	Path  string                              `json:"path"`
+	Query GetEventsVolumeFromWorkspaceV1Query `json:"query"`
 	// The resultant list of series broken down by the dimensions requested over the time frame requested and ordered by the total count of events in all series. Note: The limit of entries returned is 5000.
 	Result     []SourceEventVolumeV1 `json:"result"`
-	Pagination *Pagination           `json:"pagination,omitempty"`
+	Pagination *PaginationOutput     `json:"pagination,omitempty"`
 }
 
 // NewGetEventsVolumeFromWorkspaceV1Output instantiates a new GetEventsVolumeFromWorkspaceV1Output object
@@ -31,7 +34,7 @@ type GetEventsVolumeFromWorkspaceV1Output struct {
 // will change when the set of required properties is changed
 func NewGetEventsVolumeFromWorkspaceV1Output(
 	path string,
-	query Query,
+	query GetEventsVolumeFromWorkspaceV1Query,
 	result []SourceEventVolumeV1,
 ) *GetEventsVolumeFromWorkspaceV1Output {
 	this := GetEventsVolumeFromWorkspaceV1Output{}
@@ -74,9 +77,9 @@ func (o *GetEventsVolumeFromWorkspaceV1Output) SetPath(v string) {
 }
 
 // GetQuery returns the Query field value
-func (o *GetEventsVolumeFromWorkspaceV1Output) GetQuery() Query {
+func (o *GetEventsVolumeFromWorkspaceV1Output) GetQuery() GetEventsVolumeFromWorkspaceV1Query {
 	if o == nil {
-		var ret Query
+		var ret GetEventsVolumeFromWorkspaceV1Query
 		return ret
 	}
 
@@ -85,7 +88,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Output) GetQuery() Query {
 
 // GetQueryOk returns a tuple with the Query field value
 // and a boolean to check if the value has been set.
-func (o *GetEventsVolumeFromWorkspaceV1Output) GetQueryOk() (*Query, bool) {
+func (o *GetEventsVolumeFromWorkspaceV1Output) GetQueryOk() (*GetEventsVolumeFromWorkspaceV1Query, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +96,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Output) GetQueryOk() (*Query, bool) {
 }
 
 // SetQuery sets field value
-func (o *GetEventsVolumeFromWorkspaceV1Output) SetQuery(v Query) {
+func (o *GetEventsVolumeFromWorkspaceV1Output) SetQuery(v GetEventsVolumeFromWorkspaceV1Query) {
 	o.Query = v
 }
 
@@ -122,9 +125,9 @@ func (o *GetEventsVolumeFromWorkspaceV1Output) SetResult(v []SourceEventVolumeV1
 }
 
 // GetPagination returns the Pagination field value if set, zero value otherwise.
-func (o *GetEventsVolumeFromWorkspaceV1Output) GetPagination() Pagination {
-	if o == nil || o.Pagination == nil {
-		var ret Pagination
+func (o *GetEventsVolumeFromWorkspaceV1Output) GetPagination() PaginationOutput {
+	if o == nil || IsNil(o.Pagination) {
+		var ret PaginationOutput
 		return ret
 	}
 	return *o.Pagination
@@ -132,8 +135,8 @@ func (o *GetEventsVolumeFromWorkspaceV1Output) GetPagination() Pagination {
 
 // GetPaginationOk returns a tuple with the Pagination field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetEventsVolumeFromWorkspaceV1Output) GetPaginationOk() (*Pagination, bool) {
-	if o == nil || o.Pagination == nil {
+func (o *GetEventsVolumeFromWorkspaceV1Output) GetPaginationOk() (*PaginationOutput, bool) {
+	if o == nil || IsNil(o.Pagination) {
 		return nil, false
 	}
 	return o.Pagination, true
@@ -141,33 +144,35 @@ func (o *GetEventsVolumeFromWorkspaceV1Output) GetPaginationOk() (*Pagination, b
 
 // HasPagination returns a boolean if a field has been set.
 func (o *GetEventsVolumeFromWorkspaceV1Output) HasPagination() bool {
-	if o != nil && o.Pagination != nil {
+	if o != nil && !IsNil(o.Pagination) {
 		return true
 	}
 
 	return false
 }
 
-// SetPagination gets a reference to the given Pagination and assigns it to the Pagination field.
-func (o *GetEventsVolumeFromWorkspaceV1Output) SetPagination(v Pagination) {
+// SetPagination gets a reference to the given PaginationOutput and assigns it to the Pagination field.
+func (o *GetEventsVolumeFromWorkspaceV1Output) SetPagination(v PaginationOutput) {
 	o.Pagination = &v
 }
 
 func (o GetEventsVolumeFromWorkspaceV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["path"] = o.Path
-	}
-	if true {
-		toSerialize["query"] = o.Query
-	}
-	if true {
-		toSerialize["result"] = o.Result
-	}
-	if o.Pagination != nil {
-		toSerialize["pagination"] = o.Pagination
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o GetEventsVolumeFromWorkspaceV1Output) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["path"] = o.Path
+	toSerialize["query"] = o.Query
+	toSerialize["result"] = o.Result
+	if !IsNil(o.Pagination) {
+		toSerialize["pagination"] = o.Pagination
+	}
+	return toSerialize, nil
 }
 
 type NullableGetEventsVolumeFromWorkspaceV1Output struct {

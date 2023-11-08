@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the DestinationMetadataV1 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DestinationMetadataV1{}
+
 // DestinationMetadataV1 Represents a Destination within Segment.  A Destination is a target for Segment to forward data to, and represents a tool or storage Destination.
 type DestinationMetadataV1 struct {
 	// The id of the Destination metadata.  Config API note: analogous to `name`.
@@ -24,8 +27,8 @@ type DestinationMetadataV1 struct {
 	// The description of the Destination.
 	Description string `json:"description"`
 	// The slug used to identify the Destination in the Segment app.
-	Slug  string `json:"slug"`
-	Logos Logos  `json:"logos"`
+	Slug  string    `json:"slug"`
+	Logos LogosBeta `json:"logos"`
 	// Options configured for the Destination.
 	Options []IntegrationOptionBeta `json:"options"`
 	// Support status of the Destination.
@@ -38,9 +41,9 @@ type DestinationMetadataV1 struct {
 	Website string `json:"website"`
 	// A list of components this Destination provides.
 	Components         []DestinationMetadataComponentV1 `json:"components"`
-	SupportedFeatures  SupportedFeatures                `json:"supportedFeatures"`
-	SupportedMethods   SupportedMethods                 `json:"supportedMethods"`
-	SupportedPlatforms SupportedPlatforms               `json:"supportedPlatforms"`
+	SupportedFeatures  DestinationMetadataFeaturesV1    `json:"supportedFeatures"`
+	SupportedMethods   DestinationMetadataMethodsV1     `json:"supportedMethods"`
+	SupportedPlatforms DestinationMetadataPlatformsV1   `json:"supportedPlatforms"`
 	// Actions available for the Destination.
 	Actions []DestinationMetadataActionV1 `json:"actions"`
 	// Predefined Destination subscriptions that can optionally be applied when connecting a new instance of the Destination.
@@ -64,16 +67,16 @@ func NewDestinationMetadataV1(
 	name string,
 	description string,
 	slug string,
-	logos Logos,
+	logos LogosBeta,
 	options []IntegrationOptionBeta,
 	status string,
 	previousNames []string,
 	categories []string,
 	website string,
 	components []DestinationMetadataComponentV1,
-	supportedFeatures SupportedFeatures,
-	supportedMethods SupportedMethods,
-	supportedPlatforms SupportedPlatforms,
+	supportedFeatures DestinationMetadataFeaturesV1,
+	supportedMethods DestinationMetadataMethodsV1,
+	supportedPlatforms DestinationMetadataPlatformsV1,
 	actions []DestinationMetadataActionV1,
 	presets []DestinationMetadataSubscriptionPresetV1,
 ) *DestinationMetadataV1 {
@@ -202,9 +205,9 @@ func (o *DestinationMetadataV1) SetSlug(v string) {
 }
 
 // GetLogos returns the Logos field value
-func (o *DestinationMetadataV1) GetLogos() Logos {
+func (o *DestinationMetadataV1) GetLogos() LogosBeta {
 	if o == nil {
-		var ret Logos
+		var ret LogosBeta
 		return ret
 	}
 
@@ -213,7 +216,7 @@ func (o *DestinationMetadataV1) GetLogos() Logos {
 
 // GetLogosOk returns a tuple with the Logos field value
 // and a boolean to check if the value has been set.
-func (o *DestinationMetadataV1) GetLogosOk() (*Logos, bool) {
+func (o *DestinationMetadataV1) GetLogosOk() (*LogosBeta, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -221,7 +224,7 @@ func (o *DestinationMetadataV1) GetLogosOk() (*Logos, bool) {
 }
 
 // SetLogos sets field value
-func (o *DestinationMetadataV1) SetLogos(v Logos) {
+func (o *DestinationMetadataV1) SetLogos(v LogosBeta) {
 	o.Logos = v
 }
 
@@ -370,9 +373,9 @@ func (o *DestinationMetadataV1) SetComponents(v []DestinationMetadataComponentV1
 }
 
 // GetSupportedFeatures returns the SupportedFeatures field value
-func (o *DestinationMetadataV1) GetSupportedFeatures() SupportedFeatures {
+func (o *DestinationMetadataV1) GetSupportedFeatures() DestinationMetadataFeaturesV1 {
 	if o == nil {
-		var ret SupportedFeatures
+		var ret DestinationMetadataFeaturesV1
 		return ret
 	}
 
@@ -381,7 +384,7 @@ func (o *DestinationMetadataV1) GetSupportedFeatures() SupportedFeatures {
 
 // GetSupportedFeaturesOk returns a tuple with the SupportedFeatures field value
 // and a boolean to check if the value has been set.
-func (o *DestinationMetadataV1) GetSupportedFeaturesOk() (*SupportedFeatures, bool) {
+func (o *DestinationMetadataV1) GetSupportedFeaturesOk() (*DestinationMetadataFeaturesV1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -389,14 +392,14 @@ func (o *DestinationMetadataV1) GetSupportedFeaturesOk() (*SupportedFeatures, bo
 }
 
 // SetSupportedFeatures sets field value
-func (o *DestinationMetadataV1) SetSupportedFeatures(v SupportedFeatures) {
+func (o *DestinationMetadataV1) SetSupportedFeatures(v DestinationMetadataFeaturesV1) {
 	o.SupportedFeatures = v
 }
 
 // GetSupportedMethods returns the SupportedMethods field value
-func (o *DestinationMetadataV1) GetSupportedMethods() SupportedMethods {
+func (o *DestinationMetadataV1) GetSupportedMethods() DestinationMetadataMethodsV1 {
 	if o == nil {
-		var ret SupportedMethods
+		var ret DestinationMetadataMethodsV1
 		return ret
 	}
 
@@ -405,7 +408,7 @@ func (o *DestinationMetadataV1) GetSupportedMethods() SupportedMethods {
 
 // GetSupportedMethodsOk returns a tuple with the SupportedMethods field value
 // and a boolean to check if the value has been set.
-func (o *DestinationMetadataV1) GetSupportedMethodsOk() (*SupportedMethods, bool) {
+func (o *DestinationMetadataV1) GetSupportedMethodsOk() (*DestinationMetadataMethodsV1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -413,14 +416,14 @@ func (o *DestinationMetadataV1) GetSupportedMethodsOk() (*SupportedMethods, bool
 }
 
 // SetSupportedMethods sets field value
-func (o *DestinationMetadataV1) SetSupportedMethods(v SupportedMethods) {
+func (o *DestinationMetadataV1) SetSupportedMethods(v DestinationMetadataMethodsV1) {
 	o.SupportedMethods = v
 }
 
 // GetSupportedPlatforms returns the SupportedPlatforms field value
-func (o *DestinationMetadataV1) GetSupportedPlatforms() SupportedPlatforms {
+func (o *DestinationMetadataV1) GetSupportedPlatforms() DestinationMetadataPlatformsV1 {
 	if o == nil {
-		var ret SupportedPlatforms
+		var ret DestinationMetadataPlatformsV1
 		return ret
 	}
 
@@ -429,7 +432,7 @@ func (o *DestinationMetadataV1) GetSupportedPlatforms() SupportedPlatforms {
 
 // GetSupportedPlatformsOk returns a tuple with the SupportedPlatforms field value
 // and a boolean to check if the value has been set.
-func (o *DestinationMetadataV1) GetSupportedPlatformsOk() (*SupportedPlatforms, bool) {
+func (o *DestinationMetadataV1) GetSupportedPlatformsOk() (*DestinationMetadataPlatformsV1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -437,7 +440,7 @@ func (o *DestinationMetadataV1) GetSupportedPlatformsOk() (*SupportedPlatforms, 
 }
 
 // SetSupportedPlatforms sets field value
-func (o *DestinationMetadataV1) SetSupportedPlatforms(v SupportedPlatforms) {
+func (o *DestinationMetadataV1) SetSupportedPlatforms(v DestinationMetadataPlatformsV1) {
 	o.SupportedPlatforms = v
 }
 
@@ -491,7 +494,7 @@ func (o *DestinationMetadataV1) SetPresets(v []DestinationMetadataSubscriptionPr
 
 // GetContacts returns the Contacts field value if set, zero value otherwise.
 func (o *DestinationMetadataV1) GetContacts() []Contact {
-	if o == nil || o.Contacts == nil {
+	if o == nil || IsNil(o.Contacts) {
 		var ret []Contact
 		return ret
 	}
@@ -501,7 +504,7 @@ func (o *DestinationMetadataV1) GetContacts() []Contact {
 // GetContactsOk returns a tuple with the Contacts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataV1) GetContactsOk() ([]Contact, bool) {
-	if o == nil || o.Contacts == nil {
+	if o == nil || IsNil(o.Contacts) {
 		return nil, false
 	}
 	return o.Contacts, true
@@ -509,7 +512,7 @@ func (o *DestinationMetadataV1) GetContactsOk() ([]Contact, bool) {
 
 // HasContacts returns a boolean if a field has been set.
 func (o *DestinationMetadataV1) HasContacts() bool {
-	if o != nil && o.Contacts != nil {
+	if o != nil && !IsNil(o.Contacts) {
 		return true
 	}
 
@@ -523,7 +526,7 @@ func (o *DestinationMetadataV1) SetContacts(v []Contact) {
 
 // GetPartnerOwned returns the PartnerOwned field value if set, zero value otherwise.
 func (o *DestinationMetadataV1) GetPartnerOwned() bool {
-	if o == nil || o.PartnerOwned == nil {
+	if o == nil || IsNil(o.PartnerOwned) {
 		var ret bool
 		return ret
 	}
@@ -533,7 +536,7 @@ func (o *DestinationMetadataV1) GetPartnerOwned() bool {
 // GetPartnerOwnedOk returns a tuple with the PartnerOwned field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataV1) GetPartnerOwnedOk() (*bool, bool) {
-	if o == nil || o.PartnerOwned == nil {
+	if o == nil || IsNil(o.PartnerOwned) {
 		return nil, false
 	}
 	return o.PartnerOwned, true
@@ -541,7 +544,7 @@ func (o *DestinationMetadataV1) GetPartnerOwnedOk() (*bool, bool) {
 
 // HasPartnerOwned returns a boolean if a field has been set.
 func (o *DestinationMetadataV1) HasPartnerOwned() bool {
-	if o != nil && o.PartnerOwned != nil {
+	if o != nil && !IsNil(o.PartnerOwned) {
 		return true
 	}
 
@@ -555,7 +558,7 @@ func (o *DestinationMetadataV1) SetPartnerOwned(v bool) {
 
 // GetSupportedRegions returns the SupportedRegions field value if set, zero value otherwise.
 func (o *DestinationMetadataV1) GetSupportedRegions() []string {
-	if o == nil || o.SupportedRegions == nil {
+	if o == nil || IsNil(o.SupportedRegions) {
 		var ret []string
 		return ret
 	}
@@ -565,7 +568,7 @@ func (o *DestinationMetadataV1) GetSupportedRegions() []string {
 // GetSupportedRegionsOk returns a tuple with the SupportedRegions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataV1) GetSupportedRegionsOk() ([]string, bool) {
-	if o == nil || o.SupportedRegions == nil {
+	if o == nil || IsNil(o.SupportedRegions) {
 		return nil, false
 	}
 	return o.SupportedRegions, true
@@ -573,7 +576,7 @@ func (o *DestinationMetadataV1) GetSupportedRegionsOk() ([]string, bool) {
 
 // HasSupportedRegions returns a boolean if a field has been set.
 func (o *DestinationMetadataV1) HasSupportedRegions() bool {
-	if o != nil && o.SupportedRegions != nil {
+	if o != nil && !IsNil(o.SupportedRegions) {
 		return true
 	}
 
@@ -587,7 +590,7 @@ func (o *DestinationMetadataV1) SetSupportedRegions(v []string) {
 
 // GetRegionEndpoints returns the RegionEndpoints field value if set, zero value otherwise.
 func (o *DestinationMetadataV1) GetRegionEndpoints() []string {
-	if o == nil || o.RegionEndpoints == nil {
+	if o == nil || IsNil(o.RegionEndpoints) {
 		var ret []string
 		return ret
 	}
@@ -597,7 +600,7 @@ func (o *DestinationMetadataV1) GetRegionEndpoints() []string {
 // GetRegionEndpointsOk returns a tuple with the RegionEndpoints field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataV1) GetRegionEndpointsOk() ([]string, bool) {
-	if o == nil || o.RegionEndpoints == nil {
+	if o == nil || IsNil(o.RegionEndpoints) {
 		return nil, false
 	}
 	return o.RegionEndpoints, true
@@ -605,7 +608,7 @@ func (o *DestinationMetadataV1) GetRegionEndpointsOk() ([]string, bool) {
 
 // HasRegionEndpoints returns a boolean if a field has been set.
 func (o *DestinationMetadataV1) HasRegionEndpoints() bool {
-	if o != nil && o.RegionEndpoints != nil {
+	if o != nil && !IsNil(o.RegionEndpoints) {
 		return true
 	}
 
@@ -618,68 +621,44 @@ func (o *DestinationMetadataV1) SetRegionEndpoints(v []string) {
 }
 
 func (o DestinationMetadataV1) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if true {
-		toSerialize["description"] = o.Description
-	}
-	if true {
-		toSerialize["slug"] = o.Slug
-	}
-	if true {
-		toSerialize["logos"] = o.Logos
-	}
-	if true {
-		toSerialize["options"] = o.Options
-	}
-	if true {
-		toSerialize["status"] = o.Status
-	}
-	if true {
-		toSerialize["previousNames"] = o.PreviousNames
-	}
-	if true {
-		toSerialize["categories"] = o.Categories
-	}
-	if true {
-		toSerialize["website"] = o.Website
-	}
-	if true {
-		toSerialize["components"] = o.Components
-	}
-	if true {
-		toSerialize["supportedFeatures"] = o.SupportedFeatures
-	}
-	if true {
-		toSerialize["supportedMethods"] = o.SupportedMethods
-	}
-	if true {
-		toSerialize["supportedPlatforms"] = o.SupportedPlatforms
-	}
-	if true {
-		toSerialize["actions"] = o.Actions
-	}
-	if true {
-		toSerialize["presets"] = o.Presets
-	}
-	if o.Contacts != nil {
-		toSerialize["contacts"] = o.Contacts
-	}
-	if o.PartnerOwned != nil {
-		toSerialize["partnerOwned"] = o.PartnerOwned
-	}
-	if o.SupportedRegions != nil {
-		toSerialize["supportedRegions"] = o.SupportedRegions
-	}
-	if o.RegionEndpoints != nil {
-		toSerialize["regionEndpoints"] = o.RegionEndpoints
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o DestinationMetadataV1) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
+	toSerialize["description"] = o.Description
+	toSerialize["slug"] = o.Slug
+	toSerialize["logos"] = o.Logos
+	toSerialize["options"] = o.Options
+	toSerialize["status"] = o.Status
+	toSerialize["previousNames"] = o.PreviousNames
+	toSerialize["categories"] = o.Categories
+	toSerialize["website"] = o.Website
+	toSerialize["components"] = o.Components
+	toSerialize["supportedFeatures"] = o.SupportedFeatures
+	toSerialize["supportedMethods"] = o.SupportedMethods
+	toSerialize["supportedPlatforms"] = o.SupportedPlatforms
+	toSerialize["actions"] = o.Actions
+	toSerialize["presets"] = o.Presets
+	if !IsNil(o.Contacts) {
+		toSerialize["contacts"] = o.Contacts
+	}
+	if !IsNil(o.PartnerOwned) {
+		toSerialize["partnerOwned"] = o.PartnerOwned
+	}
+	if !IsNil(o.SupportedRegions) {
+		toSerialize["supportedRegions"] = o.SupportedRegions
+	}
+	if !IsNil(o.RegionEndpoints) {
+		toSerialize["regionEndpoints"] = o.RegionEndpoints
+	}
+	return toSerialize, nil
 }
 
 type NullableDestinationMetadataV1 struct {

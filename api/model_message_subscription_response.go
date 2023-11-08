@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the MessageSubscriptionResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MessageSubscriptionResponse{}
 
 // MessageSubscriptionResponse struct for MessageSubscriptionResponse
 type MessageSubscriptionResponse struct {
@@ -98,7 +101,7 @@ func (o *MessageSubscriptionResponse) SetType(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *MessageSubscriptionResponse) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -108,7 +111,7 @@ func (o *MessageSubscriptionResponse) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MessageSubscriptionResponse) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -116,7 +119,7 @@ func (o *MessageSubscriptionResponse) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *MessageSubscriptionResponse) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -130,7 +133,7 @@ func (o *MessageSubscriptionResponse) SetStatus(v string) {
 
 // GetErrors returns the Errors field value if set, zero value otherwise.
 func (o *MessageSubscriptionResponse) GetErrors() []MessageSubscriptionResponseError {
-	if o == nil || o.Errors == nil {
+	if o == nil || IsNil(o.Errors) {
 		var ret []MessageSubscriptionResponseError
 		return ret
 	}
@@ -140,7 +143,7 @@ func (o *MessageSubscriptionResponse) GetErrors() []MessageSubscriptionResponseE
 // GetErrorsOk returns a tuple with the Errors field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MessageSubscriptionResponse) GetErrorsOk() ([]MessageSubscriptionResponseError, bool) {
-	if o == nil || o.Errors == nil {
+	if o == nil || IsNil(o.Errors) {
 		return nil, false
 	}
 	return o.Errors, true
@@ -148,7 +151,7 @@ func (o *MessageSubscriptionResponse) GetErrorsOk() ([]MessageSubscriptionRespon
 
 // HasErrors returns a boolean if a field has been set.
 func (o *MessageSubscriptionResponse) HasErrors() bool {
-	if o != nil && o.Errors != nil {
+	if o != nil && !IsNil(o.Errors) {
 		return true
 	}
 
@@ -162,7 +165,7 @@ func (o *MessageSubscriptionResponse) SetErrors(v []MessageSubscriptionResponseE
 
 // GetGroups returns the Groups field value if set, zero value otherwise.
 func (o *MessageSubscriptionResponse) GetGroups() []UpdateGroupSubscriptionStatusResponse {
-	if o == nil || o.Groups == nil {
+	if o == nil || IsNil(o.Groups) {
 		var ret []UpdateGroupSubscriptionStatusResponse
 		return ret
 	}
@@ -172,7 +175,7 @@ func (o *MessageSubscriptionResponse) GetGroups() []UpdateGroupSubscriptionStatu
 // GetGroupsOk returns a tuple with the Groups field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MessageSubscriptionResponse) GetGroupsOk() ([]UpdateGroupSubscriptionStatusResponse, bool) {
-	if o == nil || o.Groups == nil {
+	if o == nil || IsNil(o.Groups) {
 		return nil, false
 	}
 	return o.Groups, true
@@ -180,7 +183,7 @@ func (o *MessageSubscriptionResponse) GetGroupsOk() ([]UpdateGroupSubscriptionSt
 
 // HasGroups returns a boolean if a field has been set.
 func (o *MessageSubscriptionResponse) HasGroups() bool {
-	if o != nil && o.Groups != nil {
+	if o != nil && !IsNil(o.Groups) {
 		return true
 	}
 
@@ -193,23 +196,27 @@ func (o *MessageSubscriptionResponse) SetGroups(v []UpdateGroupSubscriptionStatu
 }
 
 func (o MessageSubscriptionResponse) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["key"] = o.Key
-	}
-	if true {
-		toSerialize["type"] = o.Type
-	}
-	if o.Status != nil {
-		toSerialize["status"] = o.Status
-	}
-	if o.Errors != nil {
-		toSerialize["errors"] = o.Errors
-	}
-	if o.Groups != nil {
-		toSerialize["groups"] = o.Groups
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o MessageSubscriptionResponse) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["key"] = o.Key
+	toSerialize["type"] = o.Type
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.Errors) {
+		toSerialize["errors"] = o.Errors
+	}
+	if !IsNil(o.Groups) {
+		toSerialize["groups"] = o.Groups
+	}
+	return toSerialize, nil
 }
 
 type NullableMessageSubscriptionResponse struct {

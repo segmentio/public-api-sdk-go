@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -29,20 +29,8 @@ func (c contextKey) String() string {
 }
 
 var (
-	// ContextOAuth2 takes an oauth2.TokenSource as authentication for the request.
-	ContextOAuth2 = contextKey("token")
-
-	// ContextBasicAuth takes BasicAuth as authentication for the request.
-	ContextBasicAuth = contextKey("basic")
-
 	// ContextAccessToken takes a string oauth2 access token as authentication for the request.
 	ContextAccessToken = contextKey("accesstoken")
-
-	// ContextAPIKeys takes a string apikey as authentication for the request
-	ContextAPIKeys = contextKey("apiKeys")
-
-	// ContextHttpSignatureAuth takes HttpSignatureAuth as authentication for the request.
-	ContextHttpSignatureAuth = contextKey("httpsignature")
 
 	// ContextServerIndex uses a server configuration from the index.
 	ContextServerIndex = contextKey("serverIndex")
@@ -102,7 +90,7 @@ type Configuration struct {
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		DefaultHeader: make(map[string]string),
-		UserAgent:     "Public API SDK 37.2.0 (Go)",
+		UserAgent:     "Public API SDK 38.0.0 (Go)",
 		Debug:         false,
 		Servers: ServerConfigurations{
 			{
@@ -127,7 +115,7 @@ func (c *Configuration) AddDefaultHeader(key string, value string) {
 // URL formats template on a index using given variables
 func (sc ServerConfigurations) URL(index int, variables map[string]string) (string, error) {
 	if index < 0 || len(sc) <= index {
-		return "", fmt.Errorf("Index %v out of range %v", index, len(sc)-1)
+		return "", fmt.Errorf("index %v out of range %v", index, len(sc)-1)
 	}
 	server := sc[index]
 	url := server.URL
@@ -143,7 +131,7 @@ func (sc ServerConfigurations) URL(index int, variables map[string]string) (stri
 			}
 			if !found {
 				return "", fmt.Errorf(
-					"The variable %s in the server URL has invalid value %v. Must be %v",
+					"the variable %s in the server URL has invalid value %v. Must be %v",
 					name,
 					value,
 					variable.EnumValues,

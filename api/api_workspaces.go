@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,17 +14,17 @@ package api
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 )
 
-// WorkspacesApiService WorkspacesApi service
-type WorkspacesApiService service
+// WorkspacesAPIService WorkspacesAPI service
+type WorkspacesAPIService service
 
 type ApiGetWorkspaceRequest struct {
 	ctx        context.Context
-	ApiService *WorkspacesApiService
+	ApiService *WorkspacesAPIService
 }
 
 func (r ApiGetWorkspaceRequest) Execute() (*GetWorkspace200Response, *http.Response, error) {
@@ -39,7 +39,7 @@ Returns the Workspace associated with the token used to access this resource.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetWorkspaceRequest
 */
-func (a *WorkspacesApiService) GetWorkspace(ctx context.Context) ApiGetWorkspaceRequest {
+func (a *WorkspacesAPIService) GetWorkspace(ctx context.Context) ApiGetWorkspaceRequest {
 	return ApiGetWorkspaceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -49,7 +49,7 @@ func (a *WorkspacesApiService) GetWorkspace(ctx context.Context) ApiGetWorkspace
 // Execute executes the request
 //
 //	@return GetWorkspace200Response
-func (a *WorkspacesApiService) GetWorkspaceExecute(
+func (a *WorkspacesAPIService) GetWorkspaceExecute(
 	r ApiGetWorkspaceRequest,
 ) (*GetWorkspace200Response, *http.Response, error) {
 	var (
@@ -61,7 +61,7 @@ func (a *WorkspacesApiService) GetWorkspaceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"WorkspacesApiService.GetWorkspace",
+		"WorkspacesAPIService.GetWorkspace",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -114,9 +114,9 @@ func (a *WorkspacesApiService) GetWorkspaceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -133,6 +133,7 @@ func (a *WorkspacesApiService) GetWorkspaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -143,6 +144,7 @@ func (a *WorkspacesApiService) GetWorkspaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -153,6 +155,7 @@ func (a *WorkspacesApiService) GetWorkspaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

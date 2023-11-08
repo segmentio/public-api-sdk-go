@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// DestinationsApiService DestinationsApi service
-type DestinationsApiService service
+// DestinationsAPIService DestinationsAPI service
+type DestinationsAPIService service
 
 type ApiCreateDestinationRequest struct {
 	ctx                      context.Context
-	ApiService               *DestinationsApiService
+	ApiService               *DestinationsAPIService
 	createDestinationV1Input *CreateDestinationV1Input
 }
 
@@ -50,7 +50,7 @@ Creates a new Destination.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateDestinationRequest
 */
-func (a *DestinationsApiService) CreateDestination(
+func (a *DestinationsAPIService) CreateDestination(
 	ctx context.Context,
 ) ApiCreateDestinationRequest {
 	return ApiCreateDestinationRequest{
@@ -62,7 +62,7 @@ func (a *DestinationsApiService) CreateDestination(
 // Execute executes the request
 //
 //	@return CreateDestination200Response
-func (a *DestinationsApiService) CreateDestinationExecute(
+func (a *DestinationsAPIService) CreateDestinationExecute(
 	r ApiCreateDestinationRequest,
 ) (*CreateDestination200Response, *http.Response, error) {
 	var (
@@ -74,7 +74,7 @@ func (a *DestinationsApiService) CreateDestinationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationsApiService.CreateDestination",
+		"DestinationsAPIService.CreateDestination",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -138,9 +138,9 @@ func (a *DestinationsApiService) CreateDestinationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -157,6 +157,7 @@ func (a *DestinationsApiService) CreateDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -167,6 +168,7 @@ func (a *DestinationsApiService) CreateDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -177,6 +179,7 @@ func (a *DestinationsApiService) CreateDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -200,7 +203,7 @@ func (a *DestinationsApiService) CreateDestinationExecute(
 
 type ApiCreateDestinationSubscriptionRequest struct {
 	ctx                                     context.Context
-	ApiService                              *DestinationsApiService
+	ApiService                              *DestinationsAPIService
 	destinationId                           string
 	createDestinationSubscriptionAlphaInput *CreateDestinationSubscriptionAlphaInput
 }
@@ -229,7 +232,7 @@ Creates a new Destination subscription.
 	@param destinationId
 	@return ApiCreateDestinationSubscriptionRequest
 */
-func (a *DestinationsApiService) CreateDestinationSubscription(
+func (a *DestinationsAPIService) CreateDestinationSubscription(
 	ctx context.Context,
 	destinationId string,
 ) ApiCreateDestinationSubscriptionRequest {
@@ -243,7 +246,7 @@ func (a *DestinationsApiService) CreateDestinationSubscription(
 // Execute executes the request
 //
 //	@return CreateDestinationSubscription200Response
-func (a *DestinationsApiService) CreateDestinationSubscriptionExecute(
+func (a *DestinationsAPIService) CreateDestinationSubscriptionExecute(
 	r ApiCreateDestinationSubscriptionRequest,
 ) (*CreateDestinationSubscription200Response, *http.Response, error) {
 	var (
@@ -255,7 +258,7 @@ func (a *DestinationsApiService) CreateDestinationSubscriptionExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationsApiService.CreateDestinationSubscription",
+		"DestinationsAPIService.CreateDestinationSubscription",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -265,7 +268,7 @@ func (a *DestinationsApiService) CreateDestinationSubscriptionExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"destinationId"+"}",
-		url.PathEscape(parameterToString(r.destinationId, "")),
+		url.PathEscape(parameterValueToString(r.destinationId, "destinationId")),
 		-1,
 	)
 
@@ -319,9 +322,9 @@ func (a *DestinationsApiService) CreateDestinationSubscriptionExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -338,6 +341,7 @@ func (a *DestinationsApiService) CreateDestinationSubscriptionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -348,6 +352,7 @@ func (a *DestinationsApiService) CreateDestinationSubscriptionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -358,6 +363,7 @@ func (a *DestinationsApiService) CreateDestinationSubscriptionExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -381,7 +387,7 @@ func (a *DestinationsApiService) CreateDestinationSubscriptionExecute(
 
 type ApiDeleteDestinationRequest struct {
 	ctx           context.Context
-	ApiService    *DestinationsApiService
+	ApiService    *DestinationsAPIService
 	destinationId string
 }
 
@@ -403,7 +409,7 @@ Config API omitted fields:
 	@param destinationId
 	@return ApiDeleteDestinationRequest
 */
-func (a *DestinationsApiService) DeleteDestination(
+func (a *DestinationsAPIService) DeleteDestination(
 	ctx context.Context,
 	destinationId string,
 ) ApiDeleteDestinationRequest {
@@ -417,7 +423,7 @@ func (a *DestinationsApiService) DeleteDestination(
 // Execute executes the request
 //
 //	@return DeleteDestination200Response
-func (a *DestinationsApiService) DeleteDestinationExecute(
+func (a *DestinationsAPIService) DeleteDestinationExecute(
 	r ApiDeleteDestinationRequest,
 ) (*DeleteDestination200Response, *http.Response, error) {
 	var (
@@ -429,7 +435,7 @@ func (a *DestinationsApiService) DeleteDestinationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationsApiService.DeleteDestination",
+		"DestinationsAPIService.DeleteDestination",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -439,7 +445,7 @@ func (a *DestinationsApiService) DeleteDestinationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"destinationId"+"}",
-		url.PathEscape(parameterToString(r.destinationId, "")),
+		url.PathEscape(parameterValueToString(r.destinationId, "destinationId")),
 		-1,
 	)
 
@@ -488,9 +494,9 @@ func (a *DestinationsApiService) DeleteDestinationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -507,6 +513,7 @@ func (a *DestinationsApiService) DeleteDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -517,6 +524,7 @@ func (a *DestinationsApiService) DeleteDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -527,6 +535,7 @@ func (a *DestinationsApiService) DeleteDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -550,7 +559,7 @@ func (a *DestinationsApiService) DeleteDestinationExecute(
 
 type ApiGetDestinationRequest struct {
 	ctx           context.Context
-	ApiService    *DestinationsApiService
+	ApiService    *DestinationsAPIService
 	destinationId string
 }
 
@@ -571,7 +580,7 @@ Returns a Destination by its id.
 	@param destinationId
 	@return ApiGetDestinationRequest
 */
-func (a *DestinationsApiService) GetDestination(
+func (a *DestinationsAPIService) GetDestination(
 	ctx context.Context,
 	destinationId string,
 ) ApiGetDestinationRequest {
@@ -585,7 +594,7 @@ func (a *DestinationsApiService) GetDestination(
 // Execute executes the request
 //
 //	@return GetDestination200Response
-func (a *DestinationsApiService) GetDestinationExecute(
+func (a *DestinationsAPIService) GetDestinationExecute(
 	r ApiGetDestinationRequest,
 ) (*GetDestination200Response, *http.Response, error) {
 	var (
@@ -597,7 +606,7 @@ func (a *DestinationsApiService) GetDestinationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationsApiService.GetDestination",
+		"DestinationsAPIService.GetDestination",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -607,7 +616,7 @@ func (a *DestinationsApiService) GetDestinationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"destinationId"+"}",
-		url.PathEscape(parameterToString(r.destinationId, "")),
+		url.PathEscape(parameterValueToString(r.destinationId, "destinationId")),
 		-1,
 	)
 
@@ -656,9 +665,9 @@ func (a *DestinationsApiService) GetDestinationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -675,6 +684,7 @@ func (a *DestinationsApiService) GetDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -685,6 +695,7 @@ func (a *DestinationsApiService) GetDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -695,6 +706,7 @@ func (a *DestinationsApiService) GetDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -718,7 +730,7 @@ func (a *DestinationsApiService) GetDestinationExecute(
 
 type ApiGetSubscriptionFromDestinationRequest struct {
 	ctx           context.Context
-	ApiService    *DestinationsApiService
+	ApiService    *DestinationsAPIService
 	destinationId string
 	id            string
 }
@@ -741,7 +753,7 @@ Gets a Destination subscription by id.
 	@param id
 	@return ApiGetSubscriptionFromDestinationRequest
 */
-func (a *DestinationsApiService) GetSubscriptionFromDestination(
+func (a *DestinationsAPIService) GetSubscriptionFromDestination(
 	ctx context.Context,
 	destinationId string,
 	id string,
@@ -757,7 +769,7 @@ func (a *DestinationsApiService) GetSubscriptionFromDestination(
 // Execute executes the request
 //
 //	@return GetSubscriptionFromDestination200Response
-func (a *DestinationsApiService) GetSubscriptionFromDestinationExecute(
+func (a *DestinationsAPIService) GetSubscriptionFromDestinationExecute(
 	r ApiGetSubscriptionFromDestinationRequest,
 ) (*GetSubscriptionFromDestination200Response, *http.Response, error) {
 	var (
@@ -769,7 +781,7 @@ func (a *DestinationsApiService) GetSubscriptionFromDestinationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationsApiService.GetSubscriptionFromDestination",
+		"DestinationsAPIService.GetSubscriptionFromDestination",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -779,13 +791,13 @@ func (a *DestinationsApiService) GetSubscriptionFromDestinationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"destinationId"+"}",
-		url.PathEscape(parameterToString(r.destinationId, "")),
+		url.PathEscape(parameterValueToString(r.destinationId, "destinationId")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"id"+"}",
-		url.PathEscape(parameterToString(r.id, "")),
+		url.PathEscape(parameterValueToString(r.id, "id")),
 		-1,
 	)
 
@@ -832,9 +844,9 @@ func (a *DestinationsApiService) GetSubscriptionFromDestinationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -851,6 +863,7 @@ func (a *DestinationsApiService) GetSubscriptionFromDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -861,6 +874,7 @@ func (a *DestinationsApiService) GetSubscriptionFromDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -871,6 +885,7 @@ func (a *DestinationsApiService) GetSubscriptionFromDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -894,7 +909,7 @@ func (a *DestinationsApiService) GetSubscriptionFromDestinationExecute(
 
 type ApiListDeliveryMetricsSummaryFromDestinationRequest struct {
 	ctx           context.Context
-	ApiService    *DestinationsApiService
+	ApiService    *DestinationsAPIService
 	destinationId string
 	sourceId      *string
 	startTime     *string
@@ -963,7 +978,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param destinationId
 	@return ApiListDeliveryMetricsSummaryFromDestinationRequest
 */
-func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestination(
+func (a *DestinationsAPIService) ListDeliveryMetricsSummaryFromDestination(
 	ctx context.Context,
 	destinationId string,
 ) ApiListDeliveryMetricsSummaryFromDestinationRequest {
@@ -977,7 +992,7 @@ func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestination(
 // Execute executes the request
 //
 //	@return ListDeliveryMetricsSummaryFromDestination200Response
-func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestinationExecute(
+func (a *DestinationsAPIService) ListDeliveryMetricsSummaryFromDestinationExecute(
 	r ApiListDeliveryMetricsSummaryFromDestinationRequest,
 ) (*ListDeliveryMetricsSummaryFromDestination200Response, *http.Response, error) {
 	var (
@@ -989,7 +1004,7 @@ func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestinationExecut
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationsApiService.ListDeliveryMetricsSummaryFromDestination",
+		"DestinationsAPIService.ListDeliveryMetricsSummaryFromDestination",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -999,7 +1014,7 @@ func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestinationExecut
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"destinationId"+"}",
-		url.PathEscape(parameterToString(r.destinationId, "")),
+		url.PathEscape(parameterValueToString(r.destinationId, "destinationId")),
 		-1,
 	)
 
@@ -1010,15 +1025,15 @@ func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestinationExecut
 		return localVarReturnValue, nil, reportError("sourceId is required and must be specified")
 	}
 
-	localVarQueryParams.Add("sourceId", parameterToString(*r.sourceId, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
 	if r.startTime != nil {
-		localVarQueryParams.Add("startTime", parameterToString(*r.startTime, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
 	}
 	if r.endTime != nil {
-		localVarQueryParams.Add("endTime", parameterToString(*r.endTime, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "")
 	}
 	if r.granularity != nil {
-		localVarQueryParams.Add("granularity", parameterToString(*r.granularity, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1060,9 +1075,9 @@ func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestinationExecut
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1079,6 +1094,7 @@ func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestinationExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1089,6 +1105,7 @@ func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestinationExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1099,6 +1116,7 @@ func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestinationExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1122,7 +1140,7 @@ func (a *DestinationsApiService) ListDeliveryMetricsSummaryFromDestinationExecut
 
 type ApiListDestinationsRequest struct {
 	ctx        context.Context
-	ApiService *DestinationsApiService
+	ApiService *DestinationsAPIService
 	pagination *PaginationInput
 }
 
@@ -1146,7 +1164,7 @@ Returns a list of Destinations.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListDestinationsRequest
 */
-func (a *DestinationsApiService) ListDestinations(ctx context.Context) ApiListDestinationsRequest {
+func (a *DestinationsAPIService) ListDestinations(ctx context.Context) ApiListDestinationsRequest {
 	return ApiListDestinationsRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1156,7 +1174,7 @@ func (a *DestinationsApiService) ListDestinations(ctx context.Context) ApiListDe
 // Execute executes the request
 //
 //	@return ListDestinations200Response
-func (a *DestinationsApiService) ListDestinationsExecute(
+func (a *DestinationsAPIService) ListDestinationsExecute(
 	r ApiListDestinationsRequest,
 ) (*ListDestinations200Response, *http.Response, error) {
 	var (
@@ -1168,7 +1186,7 @@ func (a *DestinationsApiService) ListDestinationsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationsApiService.ListDestinations",
+		"DestinationsAPIService.ListDestinations",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1183,7 +1201,7 @@ func (a *DestinationsApiService) ListDestinationsExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1225,9 +1243,9 @@ func (a *DestinationsApiService) ListDestinationsExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1244,6 +1262,7 @@ func (a *DestinationsApiService) ListDestinationsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1254,6 +1273,7 @@ func (a *DestinationsApiService) ListDestinationsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1264,6 +1284,7 @@ func (a *DestinationsApiService) ListDestinationsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1287,7 +1308,7 @@ func (a *DestinationsApiService) ListDestinationsExecute(
 
 type ApiListSubscriptionsFromDestinationRequest struct {
 	ctx           context.Context
-	ApiService    *DestinationsApiService
+	ApiService    *DestinationsAPIService
 	destinationId string
 	pagination    *PaginationInput
 }
@@ -1317,7 +1338,7 @@ Lists subscriptions for a Destination.
 	@param destinationId
 	@return ApiListSubscriptionsFromDestinationRequest
 */
-func (a *DestinationsApiService) ListSubscriptionsFromDestination(
+func (a *DestinationsAPIService) ListSubscriptionsFromDestination(
 	ctx context.Context,
 	destinationId string,
 ) ApiListSubscriptionsFromDestinationRequest {
@@ -1331,7 +1352,7 @@ func (a *DestinationsApiService) ListSubscriptionsFromDestination(
 // Execute executes the request
 //
 //	@return ListSubscriptionsFromDestination200Response
-func (a *DestinationsApiService) ListSubscriptionsFromDestinationExecute(
+func (a *DestinationsAPIService) ListSubscriptionsFromDestinationExecute(
 	r ApiListSubscriptionsFromDestinationRequest,
 ) (*ListSubscriptionsFromDestination200Response, *http.Response, error) {
 	var (
@@ -1343,7 +1364,7 @@ func (a *DestinationsApiService) ListSubscriptionsFromDestinationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationsApiService.ListSubscriptionsFromDestination",
+		"DestinationsAPIService.ListSubscriptionsFromDestination",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1353,7 +1374,7 @@ func (a *DestinationsApiService) ListSubscriptionsFromDestinationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"destinationId"+"}",
-		url.PathEscape(parameterToString(r.destinationId, "")),
+		url.PathEscape(parameterValueToString(r.destinationId, "destinationId")),
 		-1,
 	)
 
@@ -1364,7 +1385,7 @@ func (a *DestinationsApiService) ListSubscriptionsFromDestinationExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1404,9 +1425,9 @@ func (a *DestinationsApiService) ListSubscriptionsFromDestinationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1423,6 +1444,7 @@ func (a *DestinationsApiService) ListSubscriptionsFromDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1433,6 +1455,7 @@ func (a *DestinationsApiService) ListSubscriptionsFromDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1443,6 +1466,7 @@ func (a *DestinationsApiService) ListSubscriptionsFromDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1466,7 +1490,7 @@ func (a *DestinationsApiService) ListSubscriptionsFromDestinationExecute(
 
 type ApiRemoveSubscriptionFromDestinationRequest struct {
 	ctx           context.Context
-	ApiService    *DestinationsApiService
+	ApiService    *DestinationsAPIService
 	destinationId string
 	id            string
 }
@@ -1489,7 +1513,7 @@ Deletes an existing Destination subscription.
 	@param id
 	@return ApiRemoveSubscriptionFromDestinationRequest
 */
-func (a *DestinationsApiService) RemoveSubscriptionFromDestination(
+func (a *DestinationsAPIService) RemoveSubscriptionFromDestination(
 	ctx context.Context,
 	destinationId string,
 	id string,
@@ -1505,7 +1529,7 @@ func (a *DestinationsApiService) RemoveSubscriptionFromDestination(
 // Execute executes the request
 //
 //	@return RemoveSubscriptionFromDestination200Response
-func (a *DestinationsApiService) RemoveSubscriptionFromDestinationExecute(
+func (a *DestinationsAPIService) RemoveSubscriptionFromDestinationExecute(
 	r ApiRemoveSubscriptionFromDestinationRequest,
 ) (*RemoveSubscriptionFromDestination200Response, *http.Response, error) {
 	var (
@@ -1517,7 +1541,7 @@ func (a *DestinationsApiService) RemoveSubscriptionFromDestinationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationsApiService.RemoveSubscriptionFromDestination",
+		"DestinationsAPIService.RemoveSubscriptionFromDestination",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1527,13 +1551,13 @@ func (a *DestinationsApiService) RemoveSubscriptionFromDestinationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"destinationId"+"}",
-		url.PathEscape(parameterToString(r.destinationId, "")),
+		url.PathEscape(parameterValueToString(r.destinationId, "destinationId")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"id"+"}",
-		url.PathEscape(parameterToString(r.id, "")),
+		url.PathEscape(parameterValueToString(r.id, "id")),
 		-1,
 	)
 
@@ -1580,9 +1604,9 @@ func (a *DestinationsApiService) RemoveSubscriptionFromDestinationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1599,6 +1623,7 @@ func (a *DestinationsApiService) RemoveSubscriptionFromDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1609,6 +1634,7 @@ func (a *DestinationsApiService) RemoveSubscriptionFromDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1619,6 +1645,7 @@ func (a *DestinationsApiService) RemoveSubscriptionFromDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1642,7 +1669,7 @@ func (a *DestinationsApiService) RemoveSubscriptionFromDestinationExecute(
 
 type ApiUpdateDestinationRequest struct {
 	ctx                      context.Context
-	ApiService               *DestinationsApiService
+	ApiService               *DestinationsAPIService
 	destinationId            string
 	updateDestinationV1Input *UpdateDestinationV1Input
 }
@@ -1678,7 +1705,7 @@ Config API omitted fields:
 	@param destinationId
 	@return ApiUpdateDestinationRequest
 */
-func (a *DestinationsApiService) UpdateDestination(
+func (a *DestinationsAPIService) UpdateDestination(
 	ctx context.Context,
 	destinationId string,
 ) ApiUpdateDestinationRequest {
@@ -1692,7 +1719,7 @@ func (a *DestinationsApiService) UpdateDestination(
 // Execute executes the request
 //
 //	@return UpdateDestination200Response
-func (a *DestinationsApiService) UpdateDestinationExecute(
+func (a *DestinationsAPIService) UpdateDestinationExecute(
 	r ApiUpdateDestinationRequest,
 ) (*UpdateDestination200Response, *http.Response, error) {
 	var (
@@ -1704,7 +1731,7 @@ func (a *DestinationsApiService) UpdateDestinationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationsApiService.UpdateDestination",
+		"DestinationsAPIService.UpdateDestination",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1714,7 +1741,7 @@ func (a *DestinationsApiService) UpdateDestinationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"destinationId"+"}",
-		url.PathEscape(parameterToString(r.destinationId, "")),
+		url.PathEscape(parameterValueToString(r.destinationId, "destinationId")),
 		-1,
 	)
 
@@ -1774,9 +1801,9 @@ func (a *DestinationsApiService) UpdateDestinationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1793,6 +1820,7 @@ func (a *DestinationsApiService) UpdateDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1803,6 +1831,7 @@ func (a *DestinationsApiService) UpdateDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1813,6 +1842,7 @@ func (a *DestinationsApiService) UpdateDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1836,7 +1866,7 @@ func (a *DestinationsApiService) UpdateDestinationExecute(
 
 type ApiUpdateSubscriptionForDestinationRequest struct {
 	ctx                                        context.Context
-	ApiService                                 *DestinationsApiService
+	ApiService                                 *DestinationsAPIService
 	destinationId                              string
 	id                                         string
 	updateSubscriptionForDestinationAlphaInput *UpdateSubscriptionForDestinationAlphaInput
@@ -1867,7 +1897,7 @@ Updates an existing Destination subscription.
 	@param id
 	@return ApiUpdateSubscriptionForDestinationRequest
 */
-func (a *DestinationsApiService) UpdateSubscriptionForDestination(
+func (a *DestinationsAPIService) UpdateSubscriptionForDestination(
 	ctx context.Context,
 	destinationId string,
 	id string,
@@ -1883,7 +1913,7 @@ func (a *DestinationsApiService) UpdateSubscriptionForDestination(
 // Execute executes the request
 //
 //	@return UpdateSubscriptionForDestination200Response
-func (a *DestinationsApiService) UpdateSubscriptionForDestinationExecute(
+func (a *DestinationsAPIService) UpdateSubscriptionForDestinationExecute(
 	r ApiUpdateSubscriptionForDestinationRequest,
 ) (*UpdateSubscriptionForDestination200Response, *http.Response, error) {
 	var (
@@ -1895,7 +1925,7 @@ func (a *DestinationsApiService) UpdateSubscriptionForDestinationExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DestinationsApiService.UpdateSubscriptionForDestination",
+		"DestinationsAPIService.UpdateSubscriptionForDestination",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1905,13 +1935,13 @@ func (a *DestinationsApiService) UpdateSubscriptionForDestinationExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"destinationId"+"}",
-		url.PathEscape(parameterToString(r.destinationId, "")),
+		url.PathEscape(parameterValueToString(r.destinationId, "destinationId")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"id"+"}",
-		url.PathEscape(parameterToString(r.id, "")),
+		url.PathEscape(parameterValueToString(r.id, "id")),
 		-1,
 	)
 
@@ -1965,9 +1995,9 @@ func (a *DestinationsApiService) UpdateSubscriptionForDestinationExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1984,6 +2014,7 @@ func (a *DestinationsApiService) UpdateSubscriptionForDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1994,6 +2025,7 @@ func (a *DestinationsApiService) UpdateSubscriptionForDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -2004,6 +2036,7 @@ func (a *DestinationsApiService) UpdateSubscriptionForDestinationExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

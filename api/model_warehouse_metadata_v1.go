@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the WarehouseMetadataV1 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &WarehouseMetadataV1{}
+
 // WarehouseMetadataV1 The metadata for an instance of Segment’s data Warehouse product.
 type WarehouseMetadataV1 struct {
 	// The id of this object.
@@ -24,8 +27,8 @@ type WarehouseMetadataV1 struct {
 	// A human-readable, unique identifier for object.
 	Slug string `json:"slug"`
 	// A description, in English, of this object.
-	Description string `json:"description"`
-	Logos       Logos2 `json:"logos"`
+	Description string    `json:"description"`
+	Logos       LogosBeta `json:"logos"`
 	// The Integration options for this object.
 	Options []IntegrationOptionBeta `json:"options"`
 }
@@ -39,7 +42,7 @@ func NewWarehouseMetadataV1(
 	name string,
 	slug string,
 	description string,
-	logos Logos2,
+	logos LogosBeta,
 	options []IntegrationOptionBeta,
 ) *WarehouseMetadataV1 {
 	this := WarehouseMetadataV1{}
@@ -157,9 +160,9 @@ func (o *WarehouseMetadataV1) SetDescription(v string) {
 }
 
 // GetLogos returns the Logos field value
-func (o *WarehouseMetadataV1) GetLogos() Logos2 {
+func (o *WarehouseMetadataV1) GetLogos() LogosBeta {
 	if o == nil {
-		var ret Logos2
+		var ret LogosBeta
 		return ret
 	}
 
@@ -168,7 +171,7 @@ func (o *WarehouseMetadataV1) GetLogos() Logos2 {
 
 // GetLogosOk returns a tuple with the Logos field value
 // and a boolean to check if the value has been set.
-func (o *WarehouseMetadataV1) GetLogosOk() (*Logos2, bool) {
+func (o *WarehouseMetadataV1) GetLogosOk() (*LogosBeta, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -176,7 +179,7 @@ func (o *WarehouseMetadataV1) GetLogosOk() (*Logos2, bool) {
 }
 
 // SetLogos sets field value
-func (o *WarehouseMetadataV1) SetLogos(v Logos2) {
+func (o *WarehouseMetadataV1) SetLogos(v LogosBeta) {
 	o.Logos = v
 }
 
@@ -205,26 +208,22 @@ func (o *WarehouseMetadataV1) SetOptions(v []IntegrationOptionBeta) {
 }
 
 func (o WarehouseMetadataV1) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if true {
-		toSerialize["slug"] = o.Slug
-	}
-	if true {
-		toSerialize["description"] = o.Description
-	}
-	if true {
-		toSerialize["logos"] = o.Logos
-	}
-	if true {
-		toSerialize["options"] = o.Options
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o WarehouseMetadataV1) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
+	toSerialize["name"] = o.Name
+	toSerialize["slug"] = o.Slug
+	toSerialize["description"] = o.Description
+	toSerialize["logos"] = o.Logos
+	toSerialize["options"] = o.Options
+	return toSerialize, nil
 }
 
 type NullableWarehouseMetadataV1 struct {

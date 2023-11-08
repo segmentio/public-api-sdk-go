@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,9 +15,12 @@ import (
 	"encoding/json"
 )
 
+// checks if the CreateTransformationBetaOutput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateTransformationBetaOutput{}
+
 // CreateTransformationBetaOutput The output of a created Transformation.
 type CreateTransformationBetaOutput struct {
-	Transformation Transformation2 `json:"transformation"`
+	Transformation TransformationBeta `json:"transformation"`
 }
 
 // NewCreateTransformationBetaOutput instantiates a new CreateTransformationBetaOutput object
@@ -25,7 +28,7 @@ type CreateTransformationBetaOutput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewCreateTransformationBetaOutput(
-	transformation Transformation2,
+	transformation TransformationBeta,
 ) *CreateTransformationBetaOutput {
 	this := CreateTransformationBetaOutput{}
 	this.Transformation = transformation
@@ -41,9 +44,9 @@ func NewCreateTransformationBetaOutputWithDefaults() *CreateTransformationBetaOu
 }
 
 // GetTransformation returns the Transformation field value
-func (o *CreateTransformationBetaOutput) GetTransformation() Transformation2 {
+func (o *CreateTransformationBetaOutput) GetTransformation() TransformationBeta {
 	if o == nil {
-		var ret Transformation2
+		var ret TransformationBeta
 		return ret
 	}
 
@@ -52,7 +55,7 @@ func (o *CreateTransformationBetaOutput) GetTransformation() Transformation2 {
 
 // GetTransformationOk returns a tuple with the Transformation field value
 // and a boolean to check if the value has been set.
-func (o *CreateTransformationBetaOutput) GetTransformationOk() (*Transformation2, bool) {
+func (o *CreateTransformationBetaOutput) GetTransformationOk() (*TransformationBeta, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -60,16 +63,22 @@ func (o *CreateTransformationBetaOutput) GetTransformationOk() (*Transformation2
 }
 
 // SetTransformation sets field value
-func (o *CreateTransformationBetaOutput) SetTransformation(v Transformation2) {
+func (o *CreateTransformationBetaOutput) SetTransformation(v TransformationBeta) {
 	o.Transformation = v
 }
 
 func (o CreateTransformationBetaOutput) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["transformation"] = o.Transformation
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o CreateTransformationBetaOutput) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["transformation"] = o.Transformation
+	return toSerialize, nil
 }
 
 type NullableCreateTransformationBetaOutput struct {

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,11 +15,14 @@ import (
 	"encoding/json"
 )
 
+// checks if the ListRulesFromTrackingPlanV1Output type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListRulesFromTrackingPlanV1Output{}
+
 // ListRulesFromTrackingPlanV1Output Lists a Tracking Plan's rules.
 type ListRulesFromTrackingPlanV1Output struct {
 	// Rules associated with the given Tracking Plan.
-	Rules      []RuleV1   `json:"rules"`
-	Pagination Pagination `json:"pagination"`
+	Rules      []RuleV1         `json:"rules"`
+	Pagination PaginationOutput `json:"pagination"`
 }
 
 // NewListRulesFromTrackingPlanV1Output instantiates a new ListRulesFromTrackingPlanV1Output object
@@ -28,7 +31,7 @@ type ListRulesFromTrackingPlanV1Output struct {
 // will change when the set of required properties is changed
 func NewListRulesFromTrackingPlanV1Output(
 	rules []RuleV1,
-	pagination Pagination,
+	pagination PaginationOutput,
 ) *ListRulesFromTrackingPlanV1Output {
 	this := ListRulesFromTrackingPlanV1Output{}
 	this.Rules = rules
@@ -69,9 +72,9 @@ func (o *ListRulesFromTrackingPlanV1Output) SetRules(v []RuleV1) {
 }
 
 // GetPagination returns the Pagination field value
-func (o *ListRulesFromTrackingPlanV1Output) GetPagination() Pagination {
+func (o *ListRulesFromTrackingPlanV1Output) GetPagination() PaginationOutput {
 	if o == nil {
-		var ret Pagination
+		var ret PaginationOutput
 		return ret
 	}
 
@@ -80,7 +83,7 @@ func (o *ListRulesFromTrackingPlanV1Output) GetPagination() Pagination {
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *ListRulesFromTrackingPlanV1Output) GetPaginationOk() (*Pagination, bool) {
+func (o *ListRulesFromTrackingPlanV1Output) GetPaginationOk() (*PaginationOutput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,19 +91,23 @@ func (o *ListRulesFromTrackingPlanV1Output) GetPaginationOk() (*Pagination, bool
 }
 
 // SetPagination sets field value
-func (o *ListRulesFromTrackingPlanV1Output) SetPagination(v Pagination) {
+func (o *ListRulesFromTrackingPlanV1Output) SetPagination(v PaginationOutput) {
 	o.Pagination = v
 }
 
 func (o ListRulesFromTrackingPlanV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["rules"] = o.Rules
-	}
-	if true {
-		toSerialize["pagination"] = o.Pagination
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ListRulesFromTrackingPlanV1Output) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["rules"] = o.Rules
+	toSerialize["pagination"] = o.Pagination
+	return toSerialize, nil
 }
 
 type NullableListRulesFromTrackingPlanV1Output struct {

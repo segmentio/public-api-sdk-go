@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// WarehousesApiService WarehousesApi service
-type WarehousesApiService service
+// WarehousesAPIService WarehousesAPI service
+type WarehousesAPIService service
 
 type ApiAddConnectionFromSourceToWarehouseRequest struct {
 	ctx         context.Context
-	ApiService  *WarehousesApiService
+	ApiService  *WarehousesAPIService
 	warehouseId string
 	sourceId    string
 }
@@ -46,7 +46,7 @@ Connects a Source to a Warehouse.
 	@param sourceId
 	@return ApiAddConnectionFromSourceToWarehouseRequest
 */
-func (a *WarehousesApiService) AddConnectionFromSourceToWarehouse(
+func (a *WarehousesAPIService) AddConnectionFromSourceToWarehouse(
 	ctx context.Context,
 	warehouseId string,
 	sourceId string,
@@ -62,7 +62,7 @@ func (a *WarehousesApiService) AddConnectionFromSourceToWarehouse(
 // Execute executes the request
 //
 //	@return AddConnectionFromSourceToWarehouse200Response
-func (a *WarehousesApiService) AddConnectionFromSourceToWarehouseExecute(
+func (a *WarehousesAPIService) AddConnectionFromSourceToWarehouseExecute(
 	r ApiAddConnectionFromSourceToWarehouseRequest,
 ) (*AddConnectionFromSourceToWarehouse200Response, *http.Response, error) {
 	var (
@@ -74,7 +74,7 @@ func (a *WarehousesApiService) AddConnectionFromSourceToWarehouseExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"WarehousesApiService.AddConnectionFromSourceToWarehouse",
+		"WarehousesAPIService.AddConnectionFromSourceToWarehouse",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -84,13 +84,13 @@ func (a *WarehousesApiService) AddConnectionFromSourceToWarehouseExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterToString(r.warehouseId, "")),
+		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterToString(r.sourceId, "")),
+		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
 		-1,
 	)
 
@@ -139,9 +139,9 @@ func (a *WarehousesApiService) AddConnectionFromSourceToWarehouseExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -158,6 +158,7 @@ func (a *WarehousesApiService) AddConnectionFromSourceToWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -168,6 +169,7 @@ func (a *WarehousesApiService) AddConnectionFromSourceToWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -178,6 +180,7 @@ func (a *WarehousesApiService) AddConnectionFromSourceToWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -201,7 +204,7 @@ func (a *WarehousesApiService) AddConnectionFromSourceToWarehouseExecute(
 
 type ApiCreateValidationInWarehouseRequest struct {
 	ctx                                context.Context
-	ApiService                         *WarehousesApiService
+	ApiService                         *WarehousesAPIService
 	createValidationInWarehouseV1Input *CreateValidationInWarehouseV1Input
 }
 
@@ -226,7 +229,7 @@ Validates input settings against a Warehouse.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateValidationInWarehouseRequest
 */
-func (a *WarehousesApiService) CreateValidationInWarehouse(
+func (a *WarehousesAPIService) CreateValidationInWarehouse(
 	ctx context.Context,
 ) ApiCreateValidationInWarehouseRequest {
 	return ApiCreateValidationInWarehouseRequest{
@@ -238,7 +241,7 @@ func (a *WarehousesApiService) CreateValidationInWarehouse(
 // Execute executes the request
 //
 //	@return CreateValidationInWarehouse200Response
-func (a *WarehousesApiService) CreateValidationInWarehouseExecute(
+func (a *WarehousesAPIService) CreateValidationInWarehouseExecute(
 	r ApiCreateValidationInWarehouseRequest,
 ) (*CreateValidationInWarehouse200Response, *http.Response, error) {
 	var (
@@ -250,7 +253,7 @@ func (a *WarehousesApiService) CreateValidationInWarehouseExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"WarehousesApiService.CreateValidationInWarehouse",
+		"WarehousesAPIService.CreateValidationInWarehouse",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -314,9 +317,9 @@ func (a *WarehousesApiService) CreateValidationInWarehouseExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -333,6 +336,7 @@ func (a *WarehousesApiService) CreateValidationInWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -343,6 +347,7 @@ func (a *WarehousesApiService) CreateValidationInWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -353,6 +358,7 @@ func (a *WarehousesApiService) CreateValidationInWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -376,7 +382,7 @@ func (a *WarehousesApiService) CreateValidationInWarehouseExecute(
 
 type ApiCreateWarehouseRequest struct {
 	ctx                    context.Context
-	ApiService             *WarehousesApiService
+	ApiService             *WarehousesAPIService
 	createWarehouseV1Input *CreateWarehouseV1Input
 }
 
@@ -401,7 +407,7 @@ Creates a new Warehouse.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateWarehouseRequest
 */
-func (a *WarehousesApiService) CreateWarehouse(ctx context.Context) ApiCreateWarehouseRequest {
+func (a *WarehousesAPIService) CreateWarehouse(ctx context.Context) ApiCreateWarehouseRequest {
 	return ApiCreateWarehouseRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -411,7 +417,7 @@ func (a *WarehousesApiService) CreateWarehouse(ctx context.Context) ApiCreateWar
 // Execute executes the request
 //
 //	@return CreateWarehouse200Response
-func (a *WarehousesApiService) CreateWarehouseExecute(
+func (a *WarehousesAPIService) CreateWarehouseExecute(
 	r ApiCreateWarehouseRequest,
 ) (*CreateWarehouse200Response, *http.Response, error) {
 	var (
@@ -423,7 +429,7 @@ func (a *WarehousesApiService) CreateWarehouseExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"WarehousesApiService.CreateWarehouse",
+		"WarehousesAPIService.CreateWarehouse",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -487,9 +493,9 @@ func (a *WarehousesApiService) CreateWarehouseExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -506,6 +512,7 @@ func (a *WarehousesApiService) CreateWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -516,6 +523,7 @@ func (a *WarehousesApiService) CreateWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -526,6 +534,7 @@ func (a *WarehousesApiService) CreateWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -549,7 +558,7 @@ func (a *WarehousesApiService) CreateWarehouseExecute(
 
 type ApiDeleteWarehouseRequest struct {
 	ctx         context.Context
-	ApiService  *WarehousesApiService
+	ApiService  *WarehousesAPIService
 	warehouseId string
 }
 
@@ -568,7 +577,7 @@ Deletes an existing Warehouse.
 	@param warehouseId
 	@return ApiDeleteWarehouseRequest
 */
-func (a *WarehousesApiService) DeleteWarehouse(
+func (a *WarehousesAPIService) DeleteWarehouse(
 	ctx context.Context,
 	warehouseId string,
 ) ApiDeleteWarehouseRequest {
@@ -582,7 +591,7 @@ func (a *WarehousesApiService) DeleteWarehouse(
 // Execute executes the request
 //
 //	@return DeleteWarehouse200Response
-func (a *WarehousesApiService) DeleteWarehouseExecute(
+func (a *WarehousesAPIService) DeleteWarehouseExecute(
 	r ApiDeleteWarehouseRequest,
 ) (*DeleteWarehouse200Response, *http.Response, error) {
 	var (
@@ -594,7 +603,7 @@ func (a *WarehousesApiService) DeleteWarehouseExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"WarehousesApiService.DeleteWarehouse",
+		"WarehousesAPIService.DeleteWarehouse",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -604,7 +613,7 @@ func (a *WarehousesApiService) DeleteWarehouseExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterToString(r.warehouseId, "")),
+		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
 		-1,
 	)
 
@@ -653,9 +662,9 @@ func (a *WarehousesApiService) DeleteWarehouseExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -672,6 +681,7 @@ func (a *WarehousesApiService) DeleteWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -682,6 +692,7 @@ func (a *WarehousesApiService) DeleteWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -692,6 +703,7 @@ func (a *WarehousesApiService) DeleteWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -715,7 +727,7 @@ func (a *WarehousesApiService) DeleteWarehouseExecute(
 
 type ApiGetConnectionStateFromWarehouseRequest struct {
 	ctx         context.Context
-	ApiService  *WarehousesApiService
+	ApiService  *WarehousesAPIService
 	warehouseId string
 }
 
@@ -734,7 +746,7 @@ The rate limit for this endpoint is 200 requests per minute, which is lower than
 	@param warehouseId
 	@return ApiGetConnectionStateFromWarehouseRequest
 */
-func (a *WarehousesApiService) GetConnectionStateFromWarehouse(
+func (a *WarehousesAPIService) GetConnectionStateFromWarehouse(
 	ctx context.Context,
 	warehouseId string,
 ) ApiGetConnectionStateFromWarehouseRequest {
@@ -748,7 +760,7 @@ func (a *WarehousesApiService) GetConnectionStateFromWarehouse(
 // Execute executes the request
 //
 //	@return GetConnectionStateFromWarehouse200Response
-func (a *WarehousesApiService) GetConnectionStateFromWarehouseExecute(
+func (a *WarehousesAPIService) GetConnectionStateFromWarehouseExecute(
 	r ApiGetConnectionStateFromWarehouseRequest,
 ) (*GetConnectionStateFromWarehouse200Response, *http.Response, error) {
 	var (
@@ -760,7 +772,7 @@ func (a *WarehousesApiService) GetConnectionStateFromWarehouseExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"WarehousesApiService.GetConnectionStateFromWarehouse",
+		"WarehousesAPIService.GetConnectionStateFromWarehouse",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -770,7 +782,7 @@ func (a *WarehousesApiService) GetConnectionStateFromWarehouseExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterToString(r.warehouseId, "")),
+		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
 		-1,
 	)
 
@@ -819,9 +831,9 @@ func (a *WarehousesApiService) GetConnectionStateFromWarehouseExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -838,6 +850,7 @@ func (a *WarehousesApiService) GetConnectionStateFromWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -848,6 +861,7 @@ func (a *WarehousesApiService) GetConnectionStateFromWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -858,6 +872,7 @@ func (a *WarehousesApiService) GetConnectionStateFromWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -881,7 +896,7 @@ func (a *WarehousesApiService) GetConnectionStateFromWarehouseExecute(
 
 type ApiGetWarehouseRequest struct {
 	ctx         context.Context
-	ApiService  *WarehousesApiService
+	ApiService  *WarehousesAPIService
 	warehouseId string
 }
 
@@ -898,7 +913,7 @@ Returns a Warehouse by its id.
 	@param warehouseId
 	@return ApiGetWarehouseRequest
 */
-func (a *WarehousesApiService) GetWarehouse(
+func (a *WarehousesAPIService) GetWarehouse(
 	ctx context.Context,
 	warehouseId string,
 ) ApiGetWarehouseRequest {
@@ -912,7 +927,7 @@ func (a *WarehousesApiService) GetWarehouse(
 // Execute executes the request
 //
 //	@return GetWarehouse200Response
-func (a *WarehousesApiService) GetWarehouseExecute(
+func (a *WarehousesAPIService) GetWarehouseExecute(
 	r ApiGetWarehouseRequest,
 ) (*GetWarehouse200Response, *http.Response, error) {
 	var (
@@ -924,7 +939,7 @@ func (a *WarehousesApiService) GetWarehouseExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"WarehousesApiService.GetWarehouse",
+		"WarehousesAPIService.GetWarehouse",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -934,7 +949,7 @@ func (a *WarehousesApiService) GetWarehouseExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterToString(r.warehouseId, "")),
+		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
 		-1,
 	)
 
@@ -983,9 +998,9 @@ func (a *WarehousesApiService) GetWarehouseExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1002,6 +1017,7 @@ func (a *WarehousesApiService) GetWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1012,6 +1028,7 @@ func (a *WarehousesApiService) GetWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1022,6 +1039,7 @@ func (a *WarehousesApiService) GetWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1045,7 +1063,7 @@ func (a *WarehousesApiService) GetWarehouseExecute(
 
 type ApiListConnectedSourcesFromWarehouseRequest struct {
 	ctx         context.Context
-	ApiService  *WarehousesApiService
+	ApiService  *WarehousesAPIService
 	warehouseId string
 	pagination  *PaginationInput
 }
@@ -1071,7 +1089,7 @@ Returns the list of Sources that are connected to a Warehouse.
 	@param warehouseId
 	@return ApiListConnectedSourcesFromWarehouseRequest
 */
-func (a *WarehousesApiService) ListConnectedSourcesFromWarehouse(
+func (a *WarehousesAPIService) ListConnectedSourcesFromWarehouse(
 	ctx context.Context,
 	warehouseId string,
 ) ApiListConnectedSourcesFromWarehouseRequest {
@@ -1085,7 +1103,7 @@ func (a *WarehousesApiService) ListConnectedSourcesFromWarehouse(
 // Execute executes the request
 //
 //	@return ListConnectedSourcesFromWarehouse200Response
-func (a *WarehousesApiService) ListConnectedSourcesFromWarehouseExecute(
+func (a *WarehousesAPIService) ListConnectedSourcesFromWarehouseExecute(
 	r ApiListConnectedSourcesFromWarehouseRequest,
 ) (*ListConnectedSourcesFromWarehouse200Response, *http.Response, error) {
 	var (
@@ -1097,7 +1115,7 @@ func (a *WarehousesApiService) ListConnectedSourcesFromWarehouseExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"WarehousesApiService.ListConnectedSourcesFromWarehouse",
+		"WarehousesAPIService.ListConnectedSourcesFromWarehouse",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1107,7 +1125,7 @@ func (a *WarehousesApiService) ListConnectedSourcesFromWarehouseExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterToString(r.warehouseId, "")),
+		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
 		-1,
 	)
 
@@ -1118,7 +1136,7 @@ func (a *WarehousesApiService) ListConnectedSourcesFromWarehouseExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1160,9 +1178,9 @@ func (a *WarehousesApiService) ListConnectedSourcesFromWarehouseExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1179,6 +1197,7 @@ func (a *WarehousesApiService) ListConnectedSourcesFromWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1189,6 +1208,7 @@ func (a *WarehousesApiService) ListConnectedSourcesFromWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1199,6 +1219,7 @@ func (a *WarehousesApiService) ListConnectedSourcesFromWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1222,7 +1243,7 @@ func (a *WarehousesApiService) ListConnectedSourcesFromWarehouseExecute(
 
 type ApiListWarehousesRequest struct {
 	ctx        context.Context
-	ApiService *WarehousesApiService
+	ApiService *WarehousesAPIService
 	pagination *PaginationInput
 }
 
@@ -1244,7 +1265,7 @@ Returns a list of Warehouses.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListWarehousesRequest
 */
-func (a *WarehousesApiService) ListWarehouses(ctx context.Context) ApiListWarehousesRequest {
+func (a *WarehousesAPIService) ListWarehouses(ctx context.Context) ApiListWarehousesRequest {
 	return ApiListWarehousesRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1254,7 +1275,7 @@ func (a *WarehousesApiService) ListWarehouses(ctx context.Context) ApiListWareho
 // Execute executes the request
 //
 //	@return ListWarehouses200Response
-func (a *WarehousesApiService) ListWarehousesExecute(
+func (a *WarehousesAPIService) ListWarehousesExecute(
 	r ApiListWarehousesRequest,
 ) (*ListWarehouses200Response, *http.Response, error) {
 	var (
@@ -1266,7 +1287,7 @@ func (a *WarehousesApiService) ListWarehousesExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"WarehousesApiService.ListWarehouses",
+		"WarehousesAPIService.ListWarehouses",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1281,7 +1302,7 @@ func (a *WarehousesApiService) ListWarehousesExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1323,9 +1344,9 @@ func (a *WarehousesApiService) ListWarehousesExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1342,6 +1363,7 @@ func (a *WarehousesApiService) ListWarehousesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1352,6 +1374,7 @@ func (a *WarehousesApiService) ListWarehousesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1362,6 +1385,7 @@ func (a *WarehousesApiService) ListWarehousesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1385,7 +1409,7 @@ func (a *WarehousesApiService) ListWarehousesExecute(
 
 type ApiRemoveSourceConnectionFromWarehouseRequest struct {
 	ctx         context.Context
-	ApiService  *WarehousesApiService
+	ApiService  *WarehousesAPIService
 	warehouseId string
 	sourceId    string
 }
@@ -1404,7 +1428,7 @@ Disconnects a Source from a Warehouse.
 	@param sourceId
 	@return ApiRemoveSourceConnectionFromWarehouseRequest
 */
-func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouse(
+func (a *WarehousesAPIService) RemoveSourceConnectionFromWarehouse(
 	ctx context.Context,
 	warehouseId string,
 	sourceId string,
@@ -1420,7 +1444,7 @@ func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouse(
 // Execute executes the request
 //
 //	@return RemoveSourceConnectionFromWarehouse200Response
-func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouseExecute(
+func (a *WarehousesAPIService) RemoveSourceConnectionFromWarehouseExecute(
 	r ApiRemoveSourceConnectionFromWarehouseRequest,
 ) (*RemoveSourceConnectionFromWarehouse200Response, *http.Response, error) {
 	var (
@@ -1432,7 +1456,7 @@ func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouseExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"WarehousesApiService.RemoveSourceConnectionFromWarehouse",
+		"WarehousesAPIService.RemoveSourceConnectionFromWarehouse",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1442,13 +1466,13 @@ func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouseExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterToString(r.warehouseId, "")),
+		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
-		url.PathEscape(parameterToString(r.sourceId, "")),
+		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
 		-1,
 	)
 
@@ -1497,9 +1521,9 @@ func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouseExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1516,6 +1540,7 @@ func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1526,6 +1551,7 @@ func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1536,6 +1562,7 @@ func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1559,7 +1586,7 @@ func (a *WarehousesApiService) RemoveSourceConnectionFromWarehouseExecute(
 
 type ApiUpdateWarehouseRequest struct {
 	ctx                    context.Context
-	ApiService             *WarehousesApiService
+	ApiService             *WarehousesAPIService
 	warehouseId            string
 	updateWarehouseV1Input *UpdateWarehouseV1Input
 }
@@ -1587,7 +1614,7 @@ Updates an existing Warehouse.
 	@param warehouseId
 	@return ApiUpdateWarehouseRequest
 */
-func (a *WarehousesApiService) UpdateWarehouse(
+func (a *WarehousesAPIService) UpdateWarehouse(
 	ctx context.Context,
 	warehouseId string,
 ) ApiUpdateWarehouseRequest {
@@ -1601,7 +1628,7 @@ func (a *WarehousesApiService) UpdateWarehouse(
 // Execute executes the request
 //
 //	@return UpdateWarehouse200Response
-func (a *WarehousesApiService) UpdateWarehouseExecute(
+func (a *WarehousesAPIService) UpdateWarehouseExecute(
 	r ApiUpdateWarehouseRequest,
 ) (*UpdateWarehouse200Response, *http.Response, error) {
 	var (
@@ -1613,7 +1640,7 @@ func (a *WarehousesApiService) UpdateWarehouseExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"WarehousesApiService.UpdateWarehouse",
+		"WarehousesAPIService.UpdateWarehouse",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1623,7 +1650,7 @@ func (a *WarehousesApiService) UpdateWarehouseExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseId"+"}",
-		url.PathEscape(parameterToString(r.warehouseId, "")),
+		url.PathEscape(parameterValueToString(r.warehouseId, "warehouseId")),
 		-1,
 	)
 
@@ -1683,9 +1710,9 @@ func (a *WarehousesApiService) UpdateWarehouseExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1702,6 +1729,7 @@ func (a *WarehousesApiService) UpdateWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1712,6 +1740,7 @@ func (a *WarehousesApiService) UpdateWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1722,6 +1751,7 @@ func (a *WarehousesApiService) UpdateWarehouseExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
