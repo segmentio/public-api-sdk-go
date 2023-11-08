@@ -37,7 +37,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.AuditTrailAPI.ListAuditEvents(ctx).Pagination(pagination).StartTime(startTime).EndTime(endTime).ResourceId(resourceId).ResourceType(resourceType).Execute()
     if err != nil {

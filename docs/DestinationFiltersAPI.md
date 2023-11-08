@@ -39,7 +39,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationFiltersAPI.CreateFilterForDestination(ctx).CreateFilterForDestinationV1Input(createFilterForDestinationV1Input).Execute()
     if err != nil {
@@ -119,7 +119,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationFiltersAPI.GetFilterInDestination(ctx).Execute()
     if err != nil {
@@ -200,7 +200,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationFiltersAPI.ListFiltersFromDestination(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -279,7 +279,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationFiltersAPI.PreviewDestinationFilter(ctx).PreviewDestinationFilterV1Input(previewDestinationFilterV1Input).Execute()
     if err != nil {
@@ -354,7 +354,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationFiltersAPI.RemoveFilterFromDestination(ctx).Execute()
     if err != nil {
@@ -436,7 +436,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationFiltersAPI.UpdateFilterForDestination(ctx).UpdateFilterForDestinationV1Input(updateFilterForDestinationV1Input).Execute()
     if err != nil {

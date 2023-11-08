@@ -37,7 +37,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ComputedTraitsAPI.GetComputedTrait(ctx).Execute()
     if err != nil {
@@ -118,7 +118,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ComputedTraitsAPI.ListComputedTraits(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -198,7 +198,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ComputedTraitsAPI.RemoveComputedTraitFromSpace(ctx).Execute()
     if err != nil {
@@ -280,7 +280,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ComputedTraitsAPI.UpdateComputedTraitForSpace(ctx).UpdateComputedTraitForSpaceAlphaInput(updateComputedTraitForSpaceAlphaInput).Execute()
     if err != nil {

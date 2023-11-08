@@ -43,7 +43,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.AddConnectionFromSourceToWarehouse(ctx).Execute()
     if err != nil {
@@ -123,7 +123,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.CreateValidationInWarehouse(ctx).CreateValidationInWarehouseV1Input(createValidationInWarehouseV1Input).Execute()
     if err != nil {
@@ -197,7 +197,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.CreateWarehouse(ctx).CreateWarehouseV1Input(createWarehouseV1Input).Execute()
     if err != nil {
@@ -271,7 +271,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.DeleteWarehouse(ctx).Execute()
     if err != nil {
@@ -349,7 +349,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.GetConnectionStateFromWarehouse(ctx).Execute()
     if err != nil {
@@ -427,7 +427,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.GetWarehouse(ctx).Execute()
     if err != nil {
@@ -506,7 +506,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.ListConnectedSourcesFromWarehouse(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -585,7 +585,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.ListWarehouses(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -660,7 +660,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.RemoveSourceConnectionFromWarehouse(ctx).Execute()
     if err != nil {
@@ -741,7 +741,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.UpdateWarehouse(ctx).UpdateWarehouseV1Input(updateWarehouseV1Input).Execute()
     if err != nil {

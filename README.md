@@ -54,12 +54,10 @@ func main() {
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
 
-    token := // ...
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
 
-    resp, r, err := apiClient.SourcesAPI.ListSources(ctx)
-			.Pagination(api.PaginationInput{ count: 10 })
-			.Execute()
+    resp, r, err := apiClient.SourcesAPI.ListSources(ctx).Pagination(api.PaginationInput{ count: 10 }).Execute()
 
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourcesApi.ListSources``: %v\n", err)
@@ -72,7 +70,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 
-    fmt.Fprintf(os.Stdout, "Response from `SourcesApi.ListSources`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `SourcesApi.ListSources`: %v\n", resp.GetData())
 }
 ```
 

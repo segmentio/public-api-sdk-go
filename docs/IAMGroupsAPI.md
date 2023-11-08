@@ -45,7 +45,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.AddPermissionsToUserGroup(ctx).AddPermissionsToUserGroupV1Input(addPermissionsToUserGroupV1Input).Execute()
     if err != nil {
@@ -125,7 +125,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.AddUsersToUserGroup(ctx).AddUsersToUserGroupV1Input(addUsersToUserGroupV1Input).Execute()
     if err != nil {
@@ -204,7 +204,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.CreateUserGroup(ctx).CreateUserGroupV1Input(createUserGroupV1Input).Execute()
     if err != nil {
@@ -278,7 +278,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.DeleteUserGroup(ctx).Execute()
     if err != nil {
@@ -356,7 +356,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.GetUserGroup(ctx).Execute()
     if err != nil {
@@ -435,7 +435,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.ListInvitesFromUserGroup(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -514,7 +514,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.ListUserGroups(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -589,7 +589,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.ListUsersFromUserGroup(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -669,7 +669,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.RemoveUsersFromUserGroup(ctx).Emails(emails).Execute()
     if err != nil {
@@ -749,7 +749,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.ReplacePermissionsForUserGroup(ctx).ReplacePermissionsForUserGroupV1Input(replacePermissionsForUserGroupV1Input).Execute()
     if err != nil {
@@ -829,7 +829,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.ReplaceUsersInUserGroup(ctx).ReplaceUsersInUserGroupV1Input(replaceUsersInUserGroupV1Input).Execute()
     if err != nil {
@@ -909,7 +909,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.UpdateUserGroup(ctx).UpdateUserGroupV1Input(updateUserGroupV1Input).Execute()
     if err != nil {

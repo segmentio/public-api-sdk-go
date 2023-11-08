@@ -36,7 +36,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SpacesAPI.BatchQueryMessagingSubscriptionsForSpace(ctx).BatchQueryMessagingSubscriptionsForSpaceAlphaInput(batchQueryMessagingSubscriptionsForSpaceAlphaInput).Execute()
     if err != nil {
@@ -115,7 +115,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SpacesAPI.GetSpace(ctx).Execute()
     if err != nil {
@@ -194,7 +194,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SpacesAPI.ReplaceMessagingSubscriptionsInSpaces(ctx).ReplaceMessagingSubscriptionsInSpacesAlphaInput(replaceMessagingSubscriptionsInSpacesAlphaInput).Execute()
     if err != nil {

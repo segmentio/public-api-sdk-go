@@ -45,7 +45,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TrackingPlansAPI.AddSourceToTrackingPlan(ctx).AddSourceToTrackingPlanV1Input(addSourceToTrackingPlanV1Input).Execute()
     if err != nil {
@@ -124,7 +124,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TrackingPlansAPI.CreateTrackingPlan(ctx).CreateTrackingPlanV1Input(createTrackingPlanV1Input).Execute()
     if err != nil {
@@ -198,7 +198,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TrackingPlansAPI.DeleteTrackingPlan(ctx).Execute()
     if err != nil {
@@ -276,7 +276,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TrackingPlansAPI.GetTrackingPlan(ctx).Execute()
     if err != nil {
@@ -355,7 +355,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TrackingPlansAPI.ListRulesFromTrackingPlan(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -435,7 +435,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TrackingPlansAPI.ListSourcesFromTrackingPlan(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -515,7 +515,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TrackingPlansAPI.ListTrackingPlans(ctx).Pagination(pagination).Type_(type_).Execute()
     if err != nil {
@@ -591,7 +591,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TrackingPlansAPI.RemoveRulesFromTrackingPlan(ctx).Rules(rules).Execute()
     if err != nil {
@@ -671,7 +671,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TrackingPlansAPI.RemoveSourceFromTrackingPlan(ctx).SourceId(sourceId).Execute()
     if err != nil {
@@ -751,7 +751,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TrackingPlansAPI.ReplaceRulesInTrackingPlan(ctx).ReplaceRulesInTrackingPlanV1Input(replaceRulesInTrackingPlanV1Input).Execute()
     if err != nil {
@@ -831,7 +831,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TrackingPlansAPI.UpdateRulesInTrackingPlan(ctx).UpdateRulesInTrackingPlanV1Input(updateRulesInTrackingPlanV1Input).Execute()
     if err != nil {
@@ -911,7 +911,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TrackingPlansAPI.UpdateTrackingPlan(ctx).UpdateTrackingPlanV1Input(updateTrackingPlanV1Input).Execute()
     if err != nil {

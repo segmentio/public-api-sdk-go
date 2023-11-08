@@ -38,7 +38,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SelectiveSyncAPI.GetAdvancedSyncScheduleFromWarehouse(ctx).Execute()
     if err != nil {
@@ -118,7 +118,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SelectiveSyncAPI.ListSelectiveSyncsFromWarehouseAndSource(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -200,7 +200,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SelectiveSyncAPI.ListSyncsFromWarehouse(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -281,7 +281,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SelectiveSyncAPI.ListSyncsFromWarehouseAndSource(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -363,7 +363,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SelectiveSyncAPI.ReplaceAdvancedSyncScheduleForWarehouse(ctx).ReplaceAdvancedSyncScheduleForWarehouseV1Input(replaceAdvancedSyncScheduleForWarehouseV1Input).Execute()
     if err != nil {
@@ -443,7 +443,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SelectiveSyncAPI.UpdateSelectiveSyncForWarehouse(ctx).UpdateSelectiveSyncForWarehouseV1Input(updateSelectiveSyncForWarehouseV1Input).Execute()
     if err != nil {
