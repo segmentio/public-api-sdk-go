@@ -57,7 +57,7 @@ func main() {
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
 
-    resp, r, err := apiClient.SourcesAPI.ListSources(ctx).Pagination(api.PaginationInput{ count: 10 }).Execute()
+    resp, r, err := apiClient.SourcesAPI.ListSources(ctx).Pagination(api.PaginationInput{ Count: 10 }).Execute()
 
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourcesApi.ListSources``: %v\n", err)
