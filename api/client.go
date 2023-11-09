@@ -259,7 +259,7 @@ func parameterAddToHeaderOrQuery(
 			var lenIndValue = indValue.Len()
 			for i := 0; i < lenIndValue; i++ {
 				var arrayValue = indValue.Index(i)
-				parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, arrayValue.Interface(), collectionType)
+				parameterAddToHeaderOrQuery(headerOrQueryParams, fmt.Sprintf("%s.%d", keyPrefix, i), arrayValue.Interface(), collectionType)
 			}
 			return
 
@@ -300,13 +300,8 @@ func parameterAddToHeaderOrQuery(
 
 	switch valuesMap := headerOrQueryParams.(type) {
 	case url.Values:
-		existingValue := valuesMap.Get(keyPrefix)
-		if collectionType == "csv" && reflect.ValueOf(existingValue).Kind() == reflect.String {
-			if existingValue == "" {
-				valuesMap.Set(keyPrefix, "[\""+value+"\"]")
-			} else {
-				valuesMap.Set(keyPrefix, "["+existingValue[1:len(existingValue)-1]+",\""+value+"\"]")
-			}
+		if collectionType == "csv" && valuesMap.Get(keyPrefix) != "" {
+			valuesMap.Set(keyPrefix, valuesMap.Get(keyPrefix)+","+value)
 		} else {
 			valuesMap.Add(keyPrefix, value)
 		}
