@@ -300,8 +300,13 @@ func parameterAddToHeaderOrQuery(
 
 	switch valuesMap := headerOrQueryParams.(type) {
 	case url.Values:
-		if collectionType == "csv" && valuesMap.Get(keyPrefix) != "" {
-			valuesMap.Set(keyPrefix, valuesMap.Get(keyPrefix)+","+value)
+		existingValue := valuesMap.Get(keyPrefix)
+		if collectionType == "csv" && reflect.ValueOf(existingValue).Kind() == reflect.String {
+			if existingValue == "" {
+				valuesMap.Set(keyPrefix, "[\""+value+"\"]")
+			} else {
+				valuesMap.Set(keyPrefix, "["+existingValue[1:len(existingValue)-1]+",\""+value+"\"]")
+			}
 		} else {
 			valuesMap.Add(keyPrefix, value)
 		}
