@@ -429,7 +429,7 @@ func main() {
     sourceId := "qQEHquLrjRDN9j1ByrChyn" // string | 
     pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination parameters.  This parameter exists in v1.
     status := "status_example" // string | The status on which to filter returned regulations.  This parameter exists in v1. (optional)
-    regulationTypes := []string{[]string{"RegulationTypes_example"}} // []string | The regulation types on which to filter returned regulations.  This parameter exists in v1. (optional)
+    regulationTypes := []string{"RegulationTypes_example"} // []string | The regulation types on which to filter returned regulations.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -469,7 +469,7 @@ Name | Type | Description  | Notes
 
  **pagination** | [**PaginationInput**](PaginationInput.md) | Pagination parameters.  This parameter exists in v1. | 
  **status** | **string** | The status on which to filter returned regulations.  This parameter exists in v1. | 
- **regulationTypes** | **[][]string** | The regulation types on which to filter returned regulations.  This parameter exists in v1. | 
+ **regulationTypes** | **[]string** | The regulation types on which to filter returned regulations.  This parameter exists in v1. | 
 
 ### Return type
 
@@ -586,7 +586,7 @@ import (
 func main() {
     pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination parameters.  This parameter exists in v1.
     status := "status_example" // string | The status on which to filter the returned regulations.  This parameter exists in v1. (optional)
-    regulationTypes := []string{[]string{"RegulationTypes_example"}} // []string | The regulation types on which to filter returned regulations.  This parameter exists in v1. (optional)
+    regulationTypes := []string{"RegulationTypes_example"} // []string | The regulation types on which to filter returned regulations.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -621,7 +621,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pagination** | [**PaginationInput**](PaginationInput.md) | Pagination parameters.  This parameter exists in v1. | 
  **status** | **string** | The status on which to filter the returned regulations.  This parameter exists in v1. | 
- **regulationTypes** | **[][]string** | The regulation types on which to filter returned regulations.  This parameter exists in v1. | 
+ **regulationTypes** | **[]string** | The regulation types on which to filter returned regulations.  This parameter exists in v1. | 
 
 ### Return type
 

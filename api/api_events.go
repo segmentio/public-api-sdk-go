@@ -17,6 +17,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"reflect"
 )
 
 // EventsAPIService EventsAPI service
@@ -173,19 +174,84 @@ func (a *EventsAPIService) GetEventsVolumeFromWorkspaceExecute(
 	parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
 	parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "")
 	if r.groupBy != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "groupBy", r.groupBy, "csv")
+		t := *r.groupBy
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(
+					localVarQueryParams,
+					"groupBy",
+					s.Index(i).Interface(),
+					"multi",
+				)
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "groupBy", t, "multi")
+		}
 	}
 	if r.sourceId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "csv")
+		t := *r.sourceId
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(
+					localVarQueryParams,
+					"sourceId",
+					s.Index(i).Interface(),
+					"multi",
+				)
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", t, "multi")
+		}
 	}
 	if r.eventName != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "eventName", r.eventName, "csv")
+		t := *r.eventName
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(
+					localVarQueryParams,
+					"eventName",
+					s.Index(i).Interface(),
+					"multi",
+				)
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "eventName", t, "multi")
+		}
 	}
 	if r.eventType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "eventType", r.eventType, "csv")
+		t := *r.eventType
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(
+					localVarQueryParams,
+					"eventType",
+					s.Index(i).Interface(),
+					"multi",
+				)
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "eventType", t, "multi")
+		}
 	}
 	if r.appVersion != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "appVersion", r.appVersion, "csv")
+		t := *r.appVersion
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(
+					localVarQueryParams,
+					"appVersion",
+					s.Index(i).Interface(),
+					"multi",
+				)
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "appVersion", t, "multi")
+		}
 	}
 	if r.pagination != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")

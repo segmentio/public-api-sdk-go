@@ -17,6 +17,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strings"
 )
 
@@ -463,7 +464,22 @@ func (a *IAMUsersAPIService) DeleteInvitesExecute(
 		return localVarReturnValue, nil, reportError("emails is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "emails", r.emails, "csv")
+	{
+		t := *r.emails
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(
+					localVarQueryParams,
+					"emails",
+					s.Index(i).Interface(),
+					"multi",
+				)
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "emails", t, "multi")
+		}
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -630,7 +646,22 @@ func (a *IAMUsersAPIService) DeleteUsersExecute(
 		return localVarReturnValue, nil, reportError("userIds is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "userIds", r.userIds, "csv")
+	{
+		t := *r.userIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(
+					localVarQueryParams,
+					"userIds",
+					s.Index(i).Interface(),
+					"multi",
+				)
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "userIds", t, "multi")
+		}
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

@@ -17,6 +17,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strings"
 )
 
@@ -1360,7 +1361,22 @@ func (a *TrackingPlansAPIService) RemoveRulesFromTrackingPlanExecute(
 		return localVarReturnValue, nil, reportError("rules is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "rules", r.rules, "csv")
+	{
+		t := *r.rules
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(
+					localVarQueryParams,
+					"rules",
+					s.Index(i).Interface(),
+					"multi",
+				)
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "rules", t, "multi")
+		}
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

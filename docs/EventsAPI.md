@@ -32,11 +32,11 @@ func main() {
     granularity := "DAY" // string | The size of each bucket in the requested window.  This parameter exists in v1.
     startTime := "2021-10-28T00:00:00Z" // string | The ISO8601 formatted timestamp that corresponds to the beginning of the requested time frame, inclusive.  This parameter exists in v1.
     endTime := "2021-10-29T16:40:00Z" // string | The ISO8601 formatted timestamp that corresponds to the end of the requested time frame, noninclusive. Segment recommends that you lag queries 1 minute behind clock time to reduce the risk for latency to impact the counts.  This parameter exists in v1.
-    groupBy := []string{[]string{"GroupBy_example"}} // []string | A comma-delimited list of strings that represents the dimensions to group the result by. The options are: `eventName`, `eventType` and `source`.  This parameter exists in v1. (optional)
-    sourceId := []string{[]string{"SourceId_example"}} // []string | A list of strings which filters the results to the given SourceIds.  This parameter exists in v1. (optional)
-    eventName := []string{[]string{"EventName_example"}} // []string | A list of strings which filters the results to the given EventNames.  This parameter exists in v1. (optional)
-    eventType := []string{[]string{"EventType_example"}} // []string | A list of strings which filters the results to the given EventTypes.  This parameter exists in v1. (optional)
-    appVersion := []string{[]string{"AppVersion_example"}} // []string | A list of strings which filters the results to the given AppVersions.  This parameter exists in v1. (optional)
+    groupBy := []string{"Inner_example"} // []string | A comma-delimited list of strings that represents the dimensions to group the result by. The options are: `eventName`, `eventType` and `source`.  This parameter exists in v1. (optional)
+    sourceId := []string{"Inner_example"} // []string | A list of strings which filters the results to the given SourceIds.  This parameter exists in v1. (optional)
+    eventName := []string{"Inner_example"} // []string | A list of strings which filters the results to the given EventNames.  This parameter exists in v1. (optional)
+    eventType := []string{"Inner_example"} // []string | A list of strings which filters the results to the given EventTypes.  This parameter exists in v1. (optional)
+    appVersion := []string{"Inner_example"} // []string | A list of strings which filters the results to the given AppVersions.  This parameter exists in v1. (optional)
     pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination input for event volume by Workspace.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
@@ -73,11 +73,11 @@ Name | Type | Description  | Notes
  **granularity** | **string** | The size of each bucket in the requested window.  This parameter exists in v1. | 
  **startTime** | **string** | The ISO8601 formatted timestamp that corresponds to the beginning of the requested time frame, inclusive.  This parameter exists in v1. | 
  **endTime** | **string** | The ISO8601 formatted timestamp that corresponds to the end of the requested time frame, noninclusive. Segment recommends that you lag queries 1 minute behind clock time to reduce the risk for latency to impact the counts.  This parameter exists in v1. | 
- **groupBy** | **[][]string** | A comma-delimited list of strings that represents the dimensions to group the result by. The options are: &#x60;eventName&#x60;, &#x60;eventType&#x60; and &#x60;source&#x60;.  This parameter exists in v1. | 
- **sourceId** | **[][]string** | A list of strings which filters the results to the given SourceIds.  This parameter exists in v1. | 
- **eventName** | **[][]string** | A list of strings which filters the results to the given EventNames.  This parameter exists in v1. | 
- **eventType** | **[][]string** | A list of strings which filters the results to the given EventTypes.  This parameter exists in v1. | 
- **appVersion** | **[][]string** | A list of strings which filters the results to the given AppVersions.  This parameter exists in v1. | 
+ **groupBy** | **[]string** | A comma-delimited list of strings that represents the dimensions to group the result by. The options are: &#x60;eventName&#x60;, &#x60;eventType&#x60; and &#x60;source&#x60;.  This parameter exists in v1. | 
+ **sourceId** | **[]string** | A list of strings which filters the results to the given SourceIds.  This parameter exists in v1. | 
+ **eventName** | **[]string** | A list of strings which filters the results to the given EventNames.  This parameter exists in v1. | 
+ **eventType** | **[]string** | A list of strings which filters the results to the given EventTypes.  This parameter exists in v1. | 
+ **appVersion** | **[]string** | A list of strings which filters the results to the given AppVersions.  This parameter exists in v1. | 
  **pagination** | [**PaginationInput**](PaginationInput.md) | Pagination input for event volume by Workspace.  This parameter exists in v1. | 
 
 ### Return type
