@@ -37,7 +37,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TransformationsAPI.CreateTransformation(ctx).CreateTransformationV1Input(createTransformationV1Input).Execute()
     if err != nil {
@@ -111,7 +111,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TransformationsAPI.DeleteTransformation(ctx, transformationId).Execute()
     if err != nil {
@@ -189,7 +189,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TransformationsAPI.GetTransformation(ctx, transformationId).Execute()
     if err != nil {
@@ -263,11 +263,11 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination options.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination options.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TransformationsAPI.ListTransformations(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -342,7 +342,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TransformationsAPI.UpdateTransformation(ctx, transformationId).UpdateTransformationV1Input(updateTransformationV1Input).Execute()
     if err != nil {

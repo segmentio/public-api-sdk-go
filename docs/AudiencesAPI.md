@@ -37,7 +37,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.AudiencesAPI.GetAudience(ctx, spaceId, id).Execute()
     if err != nil {
@@ -114,11 +114,11 @@ import (
 
 func main() {
     spaceId := "spaceId" // string | 
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Information about the pagination of this response.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Information about the pagination of this response.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.AudiencesAPI.ListAudiences(ctx, spaceId).Pagination(pagination).Execute()
     if err != nil {
@@ -198,7 +198,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.AudiencesAPI.RemoveAudienceFromSpace(ctx, spaceId, id).Execute()
     if err != nil {
@@ -280,7 +280,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.AudiencesAPI.UpdateAudienceForSpace(ctx, spaceId, id).UpdateAudienceForSpaceInput(updateAudienceForSpaceInput).Execute()
     if err != nil {

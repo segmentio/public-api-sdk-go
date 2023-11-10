@@ -43,7 +43,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.AddConnectionFromSourceToWarehouse(ctx, warehouseId, sourceId).Execute()
     if err != nil {
@@ -123,7 +123,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.CreateValidationInWarehouse(ctx).CreateValidationInWarehouseV1Input(createValidationInWarehouseV1Input).Execute()
     if err != nil {
@@ -197,7 +197,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.CreateWarehouse(ctx).CreateWarehouseV1Input(createWarehouseV1Input).Execute()
     if err != nil {
@@ -271,7 +271,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.DeleteWarehouse(ctx, warehouseId).Execute()
     if err != nil {
@@ -349,7 +349,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.GetConnectionStateFromWarehouse(ctx, warehouseId).Execute()
     if err != nil {
@@ -427,7 +427,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.GetWarehouse(ctx, warehouseId).Execute()
     if err != nil {
@@ -502,11 +502,11 @@ import (
 
 func main() {
     warehouseId := "kjU72LCJexvrqL7G4TMHHN" // string | 
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.ListConnectedSourcesFromWarehouse(ctx, warehouseId).Pagination(pagination).Execute()
     if err != nil {
@@ -581,11 +581,11 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.ListWarehouses(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -660,7 +660,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.RemoveSourceConnectionFromWarehouse(ctx, warehouseId, sourceId).Execute()
     if err != nil {
@@ -741,7 +741,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.WarehousesAPI.UpdateWarehouse(ctx, warehouseId).UpdateWarehouseV1Input(updateWarehouseV1Input).Execute()
     if err != nil {

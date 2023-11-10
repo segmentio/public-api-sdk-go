@@ -37,7 +37,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.EdgeFunctionsAPI.CreateEdgeFunctions(ctx, sourceId).CreateEdgeFunctionsAlphaInput(createEdgeFunctionsAlphaInput).Execute()
     if err != nil {
@@ -116,7 +116,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.EdgeFunctionsAPI.DisableEdgeFunctions(ctx, sourceId).Execute()
     if err != nil {
@@ -194,7 +194,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.EdgeFunctionsAPI.GenerateUploadURLForEdgeFunctions(ctx, sourceId).Execute()
     if err != nil {
@@ -272,7 +272,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.EdgeFunctionsAPI.GetLatestFromEdgeFunctions(ctx, sourceId).Execute()
     if err != nil {

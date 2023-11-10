@@ -37,11 +37,11 @@ func main() {
     eventName := []string{"Inner_example"} // []string | A list of strings which filters the results to the given EventNames.  This parameter exists in v1. (optional)
     eventType := []string{"Inner_example"} // []string | A list of strings which filters the results to the given EventTypes.  This parameter exists in v1. (optional)
     appVersion := []string{"Inner_example"} // []string | A list of strings which filters the results to the given AppVersions.  This parameter exists in v1. (optional)
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination input for event volume by Workspace.  This parameter exists in v1. (optional)
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination input for event volume by Workspace.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.EventsAPI.GetEventsVolumeFromWorkspace(ctx).Granularity(granularity).StartTime(startTime).EndTime(endTime).GroupBy(groupBy).SourceId(sourceId).EventName(eventName).EventType(eventType).AppVersion(appVersion).Pagination(pagination).Execute()
     if err != nil {

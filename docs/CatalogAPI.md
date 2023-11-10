@@ -38,7 +38,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.CatalogAPI.GetDestinationMetadata(ctx, destinationMetadataId).Execute()
     if err != nil {
@@ -112,11 +112,11 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Required pagination parameters used to filter the Destinations catalog.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Required pagination parameters used to filter the Destinations catalog.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.CatalogAPI.GetDestinationsCatalog(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -190,7 +190,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.CatalogAPI.GetSourceMetadata(ctx, sourceMetadataId).Execute()
     if err != nil {
@@ -264,11 +264,11 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.CatalogAPI.GetSourcesCatalog(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -342,7 +342,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.CatalogAPI.GetWarehouseMetadata(ctx, warehouseMetadataId).Execute()
     if err != nil {
@@ -416,11 +416,11 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Required pagination params used to filter the Warehouses catalog.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Required pagination params used to filter the Warehouses catalog.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.CatalogAPI.GetWarehousesCatalog(ctx).Pagination(pagination).Execute()
     if err != nil {

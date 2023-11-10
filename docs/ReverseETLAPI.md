@@ -37,7 +37,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ReverseETLAPI.CreateReverseEtlModel(ctx).CreateReverseEtlModelInput(createReverseEtlModelInput).Execute()
     if err != nil {
@@ -111,7 +111,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ReverseETLAPI.DeleteReverseEtlModel(ctx, modelId).Execute()
     if err != nil {
@@ -189,7 +189,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ReverseETLAPI.GetReverseEtlModel(ctx, modelId).Execute()
     if err != nil {
@@ -263,11 +263,11 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ReverseETLAPI.ListReverseEtlModels(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -342,7 +342,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ReverseETLAPI.UpdateReverseEtlModel(ctx, modelId).UpdateReverseEtlModelInput(updateReverseEtlModelInput).Execute()
     if err != nil {

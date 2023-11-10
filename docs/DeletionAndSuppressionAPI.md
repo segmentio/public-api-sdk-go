@@ -41,7 +41,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DeletionAndSuppressionAPI.CreateCloudSourceRegulation(ctx, sourceId).CreateCloudSourceRegulationV1Input(createCloudSourceRegulationV1Input).Execute()
     if err != nil {
@@ -121,7 +121,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DeletionAndSuppressionAPI.CreateSourceRegulation(ctx, sourceId).CreateSourceRegulationV1Input(createSourceRegulationV1Input).Execute()
     if err != nil {
@@ -200,7 +200,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DeletionAndSuppressionAPI.CreateWorkspaceRegulation(ctx).CreateWorkspaceRegulationV1Input(createWorkspaceRegulationV1Input).Execute()
     if err != nil {
@@ -274,7 +274,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DeletionAndSuppressionAPI.DeleteRegulation(ctx, regulateId).Execute()
     if err != nil {
@@ -352,7 +352,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DeletionAndSuppressionAPI.GetRegulation(ctx, regulateId).Execute()
     if err != nil {
@@ -427,13 +427,13 @@ import (
 
 func main() {
     sourceId := "qQEHquLrjRDN9j1ByrChyn" // string | 
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in v1.
     status := "status_example" // string | The status on which to filter returned regulations.  This parameter exists in v1. (optional)
     regulationTypes := []string{"RegulationTypes_example"} // []string | The regulation types on which to filter returned regulations.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DeletionAndSuppressionAPI.ListRegulationsFromSource(ctx, sourceId).Pagination(pagination).Status(status).RegulationTypes(regulationTypes).Execute()
     if err != nil {
@@ -510,11 +510,11 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DeletionAndSuppressionAPI.ListSuppressions(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -584,13 +584,13 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in v1.
     status := "status_example" // string | The status on which to filter the returned regulations.  This parameter exists in v1. (optional)
     regulationTypes := []string{"RegulationTypes_example"} // []string | The regulation types on which to filter returned regulations.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DeletionAndSuppressionAPI.ListWorkspaceRegulations(ctx).Pagination(pagination).Status(status).RegulationTypes(regulationTypes).Execute()
     if err != nil {

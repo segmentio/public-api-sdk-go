@@ -47,7 +47,7 @@ import (
     "context"
     "fmt"
     "os"
-    api "github.com/segmentio/public-api-sdk-go/pkg"
+    "github.com/segmentio/public-api-sdk-go/api"
 )
 
 func main() {

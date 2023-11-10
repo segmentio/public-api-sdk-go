@@ -29,11 +29,11 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination for roles.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination for roles.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMRolesAPI.ListRoles(ctx).Pagination(pagination).Execute()
     if err != nil {

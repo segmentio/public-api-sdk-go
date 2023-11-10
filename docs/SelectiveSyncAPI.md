@@ -38,7 +38,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SelectiveSyncAPI.GetAdvancedSyncScheduleFromWarehouse(ctx, warehouseId).Execute()
     if err != nil {
@@ -114,11 +114,11 @@ import (
 func main() {
     warehouseId := "kjU72LCJexvrqL7G4TMHHN" // string | 
     sourceId := "rh5BDZp6QDHvXFCkibm1pR" // string | 
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SelectiveSyncAPI.ListSelectiveSyncsFromWarehouseAndSource(ctx, warehouseId, sourceId).Pagination(pagination).Execute()
     if err != nil {
@@ -196,11 +196,11 @@ import (
 
 func main() {
     warehouseId := "kjU72LCJexvrqL7G4TMHHN" // string | 
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SelectiveSyncAPI.ListSyncsFromWarehouse(ctx, warehouseId).Pagination(pagination).Execute()
     if err != nil {
@@ -277,11 +277,11 @@ import (
 func main() {
     warehouseId := "kjU72LCJexvrqL7G4TMHHN" // string | 
     sourceId := "rh5BDZp6QDHvXFCkibm1pR" // string | 
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SelectiveSyncAPI.ListSyncsFromWarehouseAndSource(ctx, warehouseId, sourceId).Pagination(pagination).Execute()
     if err != nil {
@@ -363,7 +363,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SelectiveSyncAPI.ReplaceAdvancedSyncScheduleForWarehouse(ctx, warehouseId).ReplaceAdvancedSyncScheduleForWarehouseV1Input(replaceAdvancedSyncScheduleForWarehouseV1Input).Execute()
     if err != nil {
@@ -443,7 +443,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SelectiveSyncAPI.UpdateSelectiveSyncForWarehouse(ctx, warehouseId).UpdateSelectiveSyncForWarehouseV1Input(updateSelectiveSyncForWarehouseV1Input).Execute()
     if err != nil {

@@ -44,7 +44,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SourcesAPI.AddLabelsToSource(ctx, sourceId).AddLabelsToSourceV1Input(addLabelsToSourceV1Input).Execute()
     if err != nil {
@@ -123,7 +123,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SourcesAPI.CreateSource(ctx).CreateSourceV1Input(createSourceV1Input).Execute()
     if err != nil {
@@ -197,7 +197,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SourcesAPI.DeleteSource(ctx, sourceId).Execute()
     if err != nil {
@@ -275,7 +275,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SourcesAPI.GetSource(ctx, sourceId).Execute()
     if err != nil {
@@ -350,11 +350,11 @@ import (
 
 func main() {
     sourceId := "qQEHquLrjRDN9j1ByrChyn" // string | 
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Required pagination params for the request.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Required pagination params for the request.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SourcesAPI.ListConnectedDestinationsFromSource(ctx, sourceId).Pagination(pagination).Execute()
     if err != nil {
@@ -430,11 +430,11 @@ import (
 
 func main() {
     sourceId := "qQEHquLrjRDN9j1ByrChyn" // string | 
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Required pagination params for the request.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Required pagination params for the request.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SourcesAPI.ListConnectedWarehousesFromSource(ctx, sourceId).Pagination(pagination).Execute()
     if err != nil {
@@ -513,7 +513,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SourcesAPI.ListSchemaSettingsInSource(ctx, sourceId).Execute()
     if err != nil {
@@ -587,11 +587,11 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SourcesAPI.ListSources(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -666,7 +666,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SourcesAPI.ReplaceLabelsInSource(ctx, sourceId).ReplaceLabelsInSourceV1Input(replaceLabelsInSourceV1Input).Execute()
     if err != nil {
@@ -746,7 +746,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SourcesAPI.UpdateSchemaSettingsInSource(ctx, sourceId).UpdateSchemaSettingsInSourceV1Input(updateSchemaSettingsInSourceV1Input).Execute()
     if err != nil {
@@ -826,7 +826,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.SourcesAPI.UpdateSource(ctx, sourceId).UpdateSourceV1Input(updateSourceV1Input).Execute()
     if err != nil {

@@ -39,7 +39,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ProfilesSyncAPI.CreateProfilesWarehouse(ctx, spaceId).CreateProfilesWarehouseAlphaInput(createProfilesWarehouseAlphaInput).Execute()
     if err != nil {
@@ -115,11 +115,11 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in alpha. (optional)
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ProfilesSyncAPI.ListProfilesWarehouseInSpace(ctx, spaceId).Pagination(pagination).Execute()
     if err != nil {
@@ -196,11 +196,11 @@ import (
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
     warehouseId := "fQyLbqjfwaqg9mr3hDQ7We" // string | 
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ProfilesSyncAPI.ListSelectiveSyncsFromWarehouseAndSpace(ctx, spaceId, warehouseId).Pagination(pagination).Execute()
     if err != nil {
@@ -282,7 +282,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ProfilesSyncAPI.RemoveProfilesWarehouseFromSpace(ctx, spaceId, warehouseId).Execute()
     if err != nil {
@@ -364,7 +364,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ProfilesSyncAPI.UpdateProfilesWarehouseForSpaceWarehouse(ctx, spaceId, warehouseId).UpdateProfilesWarehouseForSpaceWarehouseAlphaInput(updateProfilesWarehouseForSpaceWarehouseAlphaInput).Execute()
     if err != nil {
@@ -447,7 +447,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.ProfilesSyncAPI.UpdateSelectiveSyncForWarehouseAndSpace(ctx, spaceId, warehouseId).UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput(updateSelectiveSyncForWarehouseAndSpaceAlphaInput).Execute()
     if err != nil {

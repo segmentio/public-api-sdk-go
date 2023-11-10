@@ -45,7 +45,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.AddPermissionsToUserGroup(ctx, userGroupId).AddPermissionsToUserGroupV1Input(addPermissionsToUserGroupV1Input).Execute()
     if err != nil {
@@ -125,7 +125,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.AddUsersToUserGroup(ctx, userGroupId).AddUsersToUserGroupV1Input(addUsersToUserGroupV1Input).Execute()
     if err != nil {
@@ -204,7 +204,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.CreateUserGroup(ctx).CreateUserGroupV1Input(createUserGroupV1Input).Execute()
     if err != nil {
@@ -278,7 +278,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.DeleteUserGroup(ctx, userGroupId).Execute()
     if err != nil {
@@ -356,7 +356,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.GetUserGroup(ctx, userGroupId).Execute()
     if err != nil {
@@ -431,11 +431,11 @@ import (
 
 func main() {
     userGroupId := "bBABwqbaDf2QdwTbW8bNEm" // string | 
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination for invites to the group.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination for invites to the group.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.ListInvitesFromUserGroup(ctx, userGroupId).Pagination(pagination).Execute()
     if err != nil {
@@ -510,11 +510,11 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination for user groups.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination for user groups.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.ListUserGroups(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -585,11 +585,11 @@ import (
 
 func main() {
     userGroupId := "bBABwqbaDf2QdwTbW8bNEm" // string | 
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination for members of a group.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination for members of a group.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.ListUsersFromUserGroup(ctx, userGroupId).Pagination(pagination).Execute()
     if err != nil {
@@ -669,7 +669,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.RemoveUsersFromUserGroup(ctx, userGroupId).Emails(emails).Execute()
     if err != nil {
@@ -749,7 +749,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.ReplacePermissionsForUserGroup(ctx, userGroupId).ReplacePermissionsForUserGroupV1Input(replacePermissionsForUserGroupV1Input).Execute()
     if err != nil {
@@ -829,7 +829,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.ReplaceUsersInUserGroup(ctx, userGroupId).ReplaceUsersInUserGroupV1Input(replaceUsersInUserGroupV1Input).Execute()
     if err != nil {
@@ -909,7 +909,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.IAMGroupsAPI.UpdateUserGroup(ctx, userGroupId).UpdateUserGroupV1Input(updateUserGroupV1Input).Execute()
     if err != nil {

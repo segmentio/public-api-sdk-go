@@ -38,7 +38,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.TestingAPI.Echo(ctx).Message(message).Delay(delay).TriggerError(triggerError).TriggerMultipleErrors(triggerMultipleErrors).TriggerUnexpectedError(triggerUnexpectedError).StatusCode(statusCode).Execute()
     if err != nil {

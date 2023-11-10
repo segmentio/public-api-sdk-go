@@ -46,7 +46,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.CreateFunction(ctx).CreateFunctionV1Input(createFunctionV1Input).Execute()
     if err != nil {
@@ -120,7 +120,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.CreateFunctionDeployment(ctx, functionId).Execute()
     if err != nil {
@@ -198,7 +198,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.CreateInsertFunctionInstance(ctx).CreateInsertFunctionInstanceAlphaInput(createInsertFunctionInstanceAlphaInput).Execute()
     if err != nil {
@@ -272,7 +272,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.DeleteFunction(ctx, functionId).Execute()
     if err != nil {
@@ -350,7 +350,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.DeleteInsertFunctionInstance(ctx, instanceId).Execute()
     if err != nil {
@@ -428,7 +428,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.GetFunction(ctx, functionId).Execute()
     if err != nil {
@@ -507,7 +507,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.GetFunctionVersion(ctx, functionId, versionId).Execute()
     if err != nil {
@@ -587,7 +587,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.GetInsertFunctionInstance(ctx, instanceId).Execute()
     if err != nil {
@@ -662,11 +662,11 @@ import (
 
 func main() {
     functionId := "sfnc_wXzcDGFR3KmjLDrtSawNHf" // string | 
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination parameters.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.ListFunctionVersions(ctx, functionId).Pagination(pagination).Execute()
     if err != nil {
@@ -741,12 +741,12 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in v1.
     resourceType := "SOURCE" // string | The Function type.  Config API note: equal to `type`.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.ListFunctions(ctx).Pagination(pagination).ResourceType(resourceType).Execute()
     if err != nil {
@@ -817,12 +817,12 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination parameters.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in alpha.
     functionId := "76365637324e715a67535831" // string | The insert Function class id to lookup.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.ListInsertFunctionInstances(ctx).Pagination(pagination).FunctionId(functionId).Execute()
     if err != nil {
@@ -898,7 +898,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.RestoreFunctionVersion(ctx, functionId).RestoreFunctionVersionAlphaInput(restoreFunctionVersionAlphaInput).Execute()
     if err != nil {
@@ -978,7 +978,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.UpdateFunction(ctx, functionId).UpdateFunctionV1Input(updateFunctionV1Input).Execute()
     if err != nil {
@@ -1058,7 +1058,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.FunctionsAPI.UpdateInsertFunctionInstance(ctx, instanceId).UpdateInsertFunctionInstanceAlphaInput(updateInsertFunctionInstanceAlphaInput).Execute()
     if err != nil {

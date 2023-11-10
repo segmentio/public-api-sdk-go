@@ -31,11 +31,11 @@ import (
 
 func main() {
     period := "2021-02-01" // string | The start of the usage month in the ISO-8601 format.  This parameter exists in v1.
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination input for per Source API calls counts.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination input for per Source API calls counts.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.APICallsAPI.GetDailyPerSourceAPICallsUsage(ctx).Period(period).Pagination(pagination).Execute()
     if err != nil {
@@ -107,11 +107,11 @@ import (
 
 func main() {
     period := "2021-02-01" // string | The start of the usage month in the ISO-8601 format.  This parameter exists in v1.
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination input for Workspace API call counts.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination input for Workspace API call counts.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.APICallsAPI.GetDailyWorkspaceAPICallsUsage(ctx).Period(period).Pagination(pagination).Execute()
     if err != nil {

@@ -43,7 +43,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationsAPI.CreateDestination(ctx).CreateDestinationV1Input(createDestinationV1Input).Execute()
     if err != nil {
@@ -118,7 +118,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationsAPI.CreateDestinationSubscription(ctx, destinationId).CreateDestinationSubscriptionAlphaInput(createDestinationSubscriptionAlphaInput).Execute()
     if err != nil {
@@ -197,7 +197,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationsAPI.DeleteDestination(ctx, destinationId).Execute()
     if err != nil {
@@ -275,7 +275,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationsAPI.GetDestination(ctx, destinationId).Execute()
     if err != nil {
@@ -354,7 +354,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationsAPI.GetSubscriptionFromDestination(ctx, destinationId, id).Execute()
     if err != nil {
@@ -438,7 +438,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationsAPI.ListDeliveryMetricsSummaryFromDestination(ctx, destinationId).SourceId(sourceId).StartTime(startTime).EndTime(endTime).Granularity(granularity).Execute()
     if err != nil {
@@ -516,11 +516,11 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Required pagination params for the request.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Required pagination params for the request.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationsAPI.ListDestinations(ctx).Pagination(pagination).Execute()
     if err != nil {
@@ -591,11 +591,11 @@ import (
 
 func main() {
     destinationId := "fP7qoQw2HTWt9WdMr718gn" // string | 
-    pagination := *api.NewPaginationInput(float32(123)) // PaginationInput | Pagination options.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination options.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationsAPI.ListSubscriptionsFromDestination(ctx, destinationId).Pagination(pagination).Execute()
     if err != nil {
@@ -675,7 +675,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationsAPI.RemoveSubscriptionFromDestination(ctx, destinationId, id).Execute()
     if err != nil {
@@ -756,7 +756,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationsAPI.UpdateDestination(ctx, destinationId).UpdateDestinationV1Input(updateDestinationV1Input).Execute()
     if err != nil {
@@ -837,7 +837,7 @@ func main() {
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
-    token := "INSERT BEARER TOKEN HERE"
+    token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
     resp, r, err := apiClient.DestinationsAPI.UpdateSubscriptionForDestination(ctx, destinationId, id).UpdateSubscriptionForDestinationAlphaInput(updateSubscriptionForDestinationAlphaInput).Execute()
     if err != nil {
