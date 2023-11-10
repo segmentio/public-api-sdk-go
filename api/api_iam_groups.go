@@ -14,6 +14,7 @@ package api
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -1536,7 +1537,7 @@ func (a *IAMGroupsAPIService) RemoveUsersFromUserGroupExecute(
 			for i := 0; i < s.Len(); i++ {
 				parameterAddToHeaderOrQuery(
 					localVarQueryParams,
-					"emails",
+					fmt.Sprintf("emails.%d", i),
 					s.Index(i).Interface(),
 					"multi",
 				)

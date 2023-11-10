@@ -14,6 +14,7 @@ package api
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -471,7 +472,7 @@ func (a *IAMUsersAPIService) DeleteInvitesExecute(
 			for i := 0; i < s.Len(); i++ {
 				parameterAddToHeaderOrQuery(
 					localVarQueryParams,
-					"emails",
+					fmt.Sprintf("emails.%d", i),
 					s.Index(i).Interface(),
 					"multi",
 				)
@@ -653,7 +654,7 @@ func (a *IAMUsersAPIService) DeleteUsersExecute(
 			for i := 0; i < s.Len(); i++ {
 				parameterAddToHeaderOrQuery(
 					localVarQueryParams,
-					"userIds",
+					fmt.Sprintf("userIds.%d", i),
 					s.Index(i).Interface(),
 					"multi",
 				)

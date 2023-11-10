@@ -14,6 +14,7 @@ package api
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -1032,7 +1033,7 @@ func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSourceExecute(
 			for i := 0; i < s.Len(); i++ {
 				parameterAddToHeaderOrQuery(
 					localVarQueryParams,
-					"regulationTypes",
+					fmt.Sprintf("regulationTypes.%d", i),
 					s.Index(i).Interface(),
 					"multi",
 				)
@@ -1409,7 +1410,7 @@ func (a *DeletionAndSuppressionAPIService) ListWorkspaceRegulationsExecute(
 			for i := 0; i < s.Len(); i++ {
 				parameterAddToHeaderOrQuery(
 					localVarQueryParams,
-					"regulationTypes",
+					fmt.Sprintf("regulationTypes.%d", i),
 					s.Index(i).Interface(),
 					"multi",
 				)

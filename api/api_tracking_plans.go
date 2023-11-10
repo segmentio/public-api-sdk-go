@@ -14,6 +14,7 @@ package api
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -1368,7 +1369,7 @@ func (a *TrackingPlansAPIService) RemoveRulesFromTrackingPlanExecute(
 			for i := 0; i < s.Len(); i++ {
 				parameterAddToHeaderOrQuery(
 					localVarQueryParams,
-					"rules",
+					fmt.Sprintf("rules.%d", i),
 					s.Index(i).Interface(),
 					"multi",
 				)

@@ -14,6 +14,7 @@ package api
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -180,7 +181,7 @@ func (a *EventsAPIService) GetEventsVolumeFromWorkspaceExecute(
 			for i := 0; i < s.Len(); i++ {
 				parameterAddToHeaderOrQuery(
 					localVarQueryParams,
-					"groupBy",
+					fmt.Sprintf("groupBy.%d", i),
 					s.Index(i).Interface(),
 					"multi",
 				)
@@ -196,7 +197,7 @@ func (a *EventsAPIService) GetEventsVolumeFromWorkspaceExecute(
 			for i := 0; i < s.Len(); i++ {
 				parameterAddToHeaderOrQuery(
 					localVarQueryParams,
-					"sourceId",
+					fmt.Sprintf("sourceId.%d", i),
 					s.Index(i).Interface(),
 					"multi",
 				)
@@ -212,7 +213,7 @@ func (a *EventsAPIService) GetEventsVolumeFromWorkspaceExecute(
 			for i := 0; i < s.Len(); i++ {
 				parameterAddToHeaderOrQuery(
 					localVarQueryParams,
-					"eventName",
+					fmt.Sprintf("eventName.%d", i),
 					s.Index(i).Interface(),
 					"multi",
 				)
@@ -228,7 +229,7 @@ func (a *EventsAPIService) GetEventsVolumeFromWorkspaceExecute(
 			for i := 0; i < s.Len(); i++ {
 				parameterAddToHeaderOrQuery(
 					localVarQueryParams,
-					"eventType",
+					fmt.Sprintf("eventType.%d", i),
 					s.Index(i).Interface(),
 					"multi",
 				)
@@ -244,7 +245,7 @@ func (a *EventsAPIService) GetEventsVolumeFromWorkspaceExecute(
 			for i := 0; i < s.Len(); i++ {
 				parameterAddToHeaderOrQuery(
 					localVarQueryParams,
-					"appVersion",
+					fmt.Sprintf("appVersion.%d", i),
 					s.Index(i).Interface(),
 					"multi",
 				)

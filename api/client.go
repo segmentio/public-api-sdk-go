@@ -259,7 +259,7 @@ func parameterAddToHeaderOrQuery(
 			var lenIndValue = indValue.Len()
 			for i := 0; i < lenIndValue; i++ {
 				var arrayValue = indValue.Index(i)
-				parameterAddToHeaderOrQuery(headerOrQueryParams, fmt.Sprintf("%s.%d", keyPrefix, i), arrayValue.Interface(), collectionType)
+				parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, arrayValue.Interface(), collectionType)
 			}
 			return
 
