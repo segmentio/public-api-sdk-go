@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// IAMGroupsApiService IAMGroupsApi service
-type IAMGroupsApiService service
+// IAMGroupsAPIService IAMGroupsAPI service
+type IAMGroupsAPIService service
 
 type ApiAddPermissionsToUserGroupRequest struct {
 	ctx                              context.Context
-	ApiService                       *IAMGroupsApiService
+	ApiService                       *IAMGroupsAPIService
 	userGroupId                      string
 	addPermissionsToUserGroupV1Input *AddPermissionsToUserGroupV1Input
 }
@@ -55,7 +55,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param userGroupId
 	@return ApiAddPermissionsToUserGroupRequest
 */
-func (a *IAMGroupsApiService) AddPermissionsToUserGroup(
+func (a *IAMGroupsAPIService) AddPermissionsToUserGroup(
 	ctx context.Context,
 	userGroupId string,
 ) ApiAddPermissionsToUserGroupRequest {
@@ -69,7 +69,7 @@ func (a *IAMGroupsApiService) AddPermissionsToUserGroup(
 // Execute executes the request
 //
 //	@return AddPermissionsToUserGroup200Response
-func (a *IAMGroupsApiService) AddPermissionsToUserGroupExecute(
+func (a *IAMGroupsAPIService) AddPermissionsToUserGroupExecute(
 	r ApiAddPermissionsToUserGroupRequest,
 ) (*AddPermissionsToUserGroup200Response, *http.Response, error) {
 	var (
@@ -81,7 +81,7 @@ func (a *IAMGroupsApiService) AddPermissionsToUserGroupExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMGroupsApiService.AddPermissionsToUserGroup",
+		"IAMGroupsAPIService.AddPermissionsToUserGroup",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -91,7 +91,7 @@ func (a *IAMGroupsApiService) AddPermissionsToUserGroupExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"userGroupId"+"}",
-		url.PathEscape(parameterToString(r.userGroupId, "")),
+		url.PathEscape(parameterValueToString(r.userGroupId, "userGroupId")),
 		-1,
 	)
 
@@ -151,9 +151,9 @@ func (a *IAMGroupsApiService) AddPermissionsToUserGroupExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -170,6 +170,7 @@ func (a *IAMGroupsApiService) AddPermissionsToUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -180,6 +181,7 @@ func (a *IAMGroupsApiService) AddPermissionsToUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -190,6 +192,7 @@ func (a *IAMGroupsApiService) AddPermissionsToUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -213,7 +216,7 @@ func (a *IAMGroupsApiService) AddPermissionsToUserGroupExecute(
 
 type ApiAddUsersToUserGroupRequest struct {
 	ctx                        context.Context
-	ApiService                 *IAMGroupsApiService
+	ApiService                 *IAMGroupsAPIService
 	userGroupId                string
 	addUsersToUserGroupV1Input *AddUsersToUserGroupV1Input
 }
@@ -243,7 +246,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param userGroupId
 	@return ApiAddUsersToUserGroupRequest
 */
-func (a *IAMGroupsApiService) AddUsersToUserGroup(
+func (a *IAMGroupsAPIService) AddUsersToUserGroup(
 	ctx context.Context,
 	userGroupId string,
 ) ApiAddUsersToUserGroupRequest {
@@ -257,7 +260,7 @@ func (a *IAMGroupsApiService) AddUsersToUserGroup(
 // Execute executes the request
 //
 //	@return AddUsersToUserGroup200Response
-func (a *IAMGroupsApiService) AddUsersToUserGroupExecute(
+func (a *IAMGroupsAPIService) AddUsersToUserGroupExecute(
 	r ApiAddUsersToUserGroupRequest,
 ) (*AddUsersToUserGroup200Response, *http.Response, error) {
 	var (
@@ -269,7 +272,7 @@ func (a *IAMGroupsApiService) AddUsersToUserGroupExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMGroupsApiService.AddUsersToUserGroup",
+		"IAMGroupsAPIService.AddUsersToUserGroup",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -279,7 +282,7 @@ func (a *IAMGroupsApiService) AddUsersToUserGroupExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"userGroupId"+"}",
-		url.PathEscape(parameterToString(r.userGroupId, "")),
+		url.PathEscape(parameterValueToString(r.userGroupId, "userGroupId")),
 		-1,
 	)
 
@@ -339,9 +342,9 @@ func (a *IAMGroupsApiService) AddUsersToUserGroupExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -358,6 +361,7 @@ func (a *IAMGroupsApiService) AddUsersToUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -368,6 +372,7 @@ func (a *IAMGroupsApiService) AddUsersToUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -378,6 +383,7 @@ func (a *IAMGroupsApiService) AddUsersToUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -401,7 +407,7 @@ func (a *IAMGroupsApiService) AddUsersToUserGroupExecute(
 
 type ApiCreateUserGroupRequest struct {
 	ctx                    context.Context
-	ApiService             *IAMGroupsApiService
+	ApiService             *IAMGroupsAPIService
 	createUserGroupV1Input *CreateUserGroupV1Input
 }
 
@@ -429,7 +435,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateUserGroupRequest
 */
-func (a *IAMGroupsApiService) CreateUserGroup(ctx context.Context) ApiCreateUserGroupRequest {
+func (a *IAMGroupsAPIService) CreateUserGroup(ctx context.Context) ApiCreateUserGroupRequest {
 	return ApiCreateUserGroupRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -439,7 +445,7 @@ func (a *IAMGroupsApiService) CreateUserGroup(ctx context.Context) ApiCreateUser
 // Execute executes the request
 //
 //	@return CreateUserGroup200Response
-func (a *IAMGroupsApiService) CreateUserGroupExecute(
+func (a *IAMGroupsAPIService) CreateUserGroupExecute(
 	r ApiCreateUserGroupRequest,
 ) (*CreateUserGroup200Response, *http.Response, error) {
 	var (
@@ -451,7 +457,7 @@ func (a *IAMGroupsApiService) CreateUserGroupExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMGroupsApiService.CreateUserGroup",
+		"IAMGroupsAPIService.CreateUserGroup",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -515,9 +521,9 @@ func (a *IAMGroupsApiService) CreateUserGroupExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -534,6 +540,7 @@ func (a *IAMGroupsApiService) CreateUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -544,6 +551,7 @@ func (a *IAMGroupsApiService) CreateUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -554,6 +562,7 @@ func (a *IAMGroupsApiService) CreateUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -577,7 +586,7 @@ func (a *IAMGroupsApiService) CreateUserGroupExecute(
 
 type ApiDeleteUserGroupRequest struct {
 	ctx         context.Context
-	ApiService  *IAMGroupsApiService
+	ApiService  *IAMGroupsAPIService
 	userGroupId string
 }
 
@@ -598,7 +607,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param userGroupId
 	@return ApiDeleteUserGroupRequest
 */
-func (a *IAMGroupsApiService) DeleteUserGroup(
+func (a *IAMGroupsAPIService) DeleteUserGroup(
 	ctx context.Context,
 	userGroupId string,
 ) ApiDeleteUserGroupRequest {
@@ -612,7 +621,7 @@ func (a *IAMGroupsApiService) DeleteUserGroup(
 // Execute executes the request
 //
 //	@return DeleteUserGroup200Response
-func (a *IAMGroupsApiService) DeleteUserGroupExecute(
+func (a *IAMGroupsAPIService) DeleteUserGroupExecute(
 	r ApiDeleteUserGroupRequest,
 ) (*DeleteUserGroup200Response, *http.Response, error) {
 	var (
@@ -624,7 +633,7 @@ func (a *IAMGroupsApiService) DeleteUserGroupExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMGroupsApiService.DeleteUserGroup",
+		"IAMGroupsAPIService.DeleteUserGroup",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -634,7 +643,7 @@ func (a *IAMGroupsApiService) DeleteUserGroupExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"userGroupId"+"}",
-		url.PathEscape(parameterToString(r.userGroupId, "")),
+		url.PathEscape(parameterValueToString(r.userGroupId, "userGroupId")),
 		-1,
 	)
 
@@ -683,9 +692,9 @@ func (a *IAMGroupsApiService) DeleteUserGroupExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -702,6 +711,7 @@ func (a *IAMGroupsApiService) DeleteUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -712,6 +722,7 @@ func (a *IAMGroupsApiService) DeleteUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -722,6 +733,7 @@ func (a *IAMGroupsApiService) DeleteUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -745,7 +757,7 @@ func (a *IAMGroupsApiService) DeleteUserGroupExecute(
 
 type ApiGetUserGroupRequest struct {
 	ctx         context.Context
-	ApiService  *IAMGroupsApiService
+	ApiService  *IAMGroupsAPIService
 	userGroupId string
 }
 
@@ -762,7 +774,7 @@ Returns a user group.
 	@param userGroupId
 	@return ApiGetUserGroupRequest
 */
-func (a *IAMGroupsApiService) GetUserGroup(
+func (a *IAMGroupsAPIService) GetUserGroup(
 	ctx context.Context,
 	userGroupId string,
 ) ApiGetUserGroupRequest {
@@ -776,7 +788,7 @@ func (a *IAMGroupsApiService) GetUserGroup(
 // Execute executes the request
 //
 //	@return GetUserGroup200Response
-func (a *IAMGroupsApiService) GetUserGroupExecute(
+func (a *IAMGroupsAPIService) GetUserGroupExecute(
 	r ApiGetUserGroupRequest,
 ) (*GetUserGroup200Response, *http.Response, error) {
 	var (
@@ -788,7 +800,7 @@ func (a *IAMGroupsApiService) GetUserGroupExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMGroupsApiService.GetUserGroup",
+		"IAMGroupsAPIService.GetUserGroup",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -798,7 +810,7 @@ func (a *IAMGroupsApiService) GetUserGroupExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"userGroupId"+"}",
-		url.PathEscape(parameterToString(r.userGroupId, "")),
+		url.PathEscape(parameterValueToString(r.userGroupId, "userGroupId")),
 		-1,
 	)
 
@@ -847,9 +859,9 @@ func (a *IAMGroupsApiService) GetUserGroupExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -866,6 +878,7 @@ func (a *IAMGroupsApiService) GetUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -876,6 +889,7 @@ func (a *IAMGroupsApiService) GetUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -886,6 +900,7 @@ func (a *IAMGroupsApiService) GetUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -909,7 +924,7 @@ func (a *IAMGroupsApiService) GetUserGroupExecute(
 
 type ApiListInvitesFromUserGroupRequest struct {
 	ctx         context.Context
-	ApiService  *IAMGroupsApiService
+	ApiService  *IAMGroupsAPIService
 	userGroupId string
 	pagination  *PaginationInput
 }
@@ -935,7 +950,7 @@ Returns the emails of invitees to a user group.
 	@param userGroupId
 	@return ApiListInvitesFromUserGroupRequest
 */
-func (a *IAMGroupsApiService) ListInvitesFromUserGroup(
+func (a *IAMGroupsAPIService) ListInvitesFromUserGroup(
 	ctx context.Context,
 	userGroupId string,
 ) ApiListInvitesFromUserGroupRequest {
@@ -949,7 +964,7 @@ func (a *IAMGroupsApiService) ListInvitesFromUserGroup(
 // Execute executes the request
 //
 //	@return ListInvitesFromUserGroup200Response
-func (a *IAMGroupsApiService) ListInvitesFromUserGroupExecute(
+func (a *IAMGroupsAPIService) ListInvitesFromUserGroupExecute(
 	r ApiListInvitesFromUserGroupRequest,
 ) (*ListInvitesFromUserGroup200Response, *http.Response, error) {
 	var (
@@ -961,7 +976,7 @@ func (a *IAMGroupsApiService) ListInvitesFromUserGroupExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMGroupsApiService.ListInvitesFromUserGroup",
+		"IAMGroupsAPIService.ListInvitesFromUserGroup",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -971,7 +986,7 @@ func (a *IAMGroupsApiService) ListInvitesFromUserGroupExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"userGroupId"+"}",
-		url.PathEscape(parameterToString(r.userGroupId, "")),
+		url.PathEscape(parameterValueToString(r.userGroupId, "userGroupId")),
 		-1,
 	)
 
@@ -982,7 +997,7 @@ func (a *IAMGroupsApiService) ListInvitesFromUserGroupExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1024,9 +1039,9 @@ func (a *IAMGroupsApiService) ListInvitesFromUserGroupExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1043,6 +1058,7 @@ func (a *IAMGroupsApiService) ListInvitesFromUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1053,6 +1069,7 @@ func (a *IAMGroupsApiService) ListInvitesFromUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1063,6 +1080,7 @@ func (a *IAMGroupsApiService) ListInvitesFromUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1086,7 +1104,7 @@ func (a *IAMGroupsApiService) ListInvitesFromUserGroupExecute(
 
 type ApiListUserGroupsRequest struct {
 	ctx        context.Context
-	ApiService *IAMGroupsApiService
+	ApiService *IAMGroupsAPIService
 	pagination *PaginationInput
 }
 
@@ -1108,7 +1126,7 @@ Returns all user groups.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListUserGroupsRequest
 */
-func (a *IAMGroupsApiService) ListUserGroups(ctx context.Context) ApiListUserGroupsRequest {
+func (a *IAMGroupsAPIService) ListUserGroups(ctx context.Context) ApiListUserGroupsRequest {
 	return ApiListUserGroupsRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1118,7 +1136,7 @@ func (a *IAMGroupsApiService) ListUserGroups(ctx context.Context) ApiListUserGro
 // Execute executes the request
 //
 //	@return ListUserGroups200Response
-func (a *IAMGroupsApiService) ListUserGroupsExecute(
+func (a *IAMGroupsAPIService) ListUserGroupsExecute(
 	r ApiListUserGroupsRequest,
 ) (*ListUserGroups200Response, *http.Response, error) {
 	var (
@@ -1130,7 +1148,7 @@ func (a *IAMGroupsApiService) ListUserGroupsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMGroupsApiService.ListUserGroups",
+		"IAMGroupsAPIService.ListUserGroups",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1145,7 +1163,7 @@ func (a *IAMGroupsApiService) ListUserGroupsExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1187,9 +1205,9 @@ func (a *IAMGroupsApiService) ListUserGroupsExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1206,6 +1224,7 @@ func (a *IAMGroupsApiService) ListUserGroupsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1216,6 +1235,7 @@ func (a *IAMGroupsApiService) ListUserGroupsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1226,6 +1246,7 @@ func (a *IAMGroupsApiService) ListUserGroupsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1249,7 +1270,7 @@ func (a *IAMGroupsApiService) ListUserGroupsExecute(
 
 type ApiListUsersFromUserGroupRequest struct {
 	ctx         context.Context
-	ApiService  *IAMGroupsApiService
+	ApiService  *IAMGroupsAPIService
 	userGroupId string
 	pagination  *PaginationInput
 }
@@ -1275,7 +1296,7 @@ Returns users belonging to a user group.
 	@param userGroupId
 	@return ApiListUsersFromUserGroupRequest
 */
-func (a *IAMGroupsApiService) ListUsersFromUserGroup(
+func (a *IAMGroupsAPIService) ListUsersFromUserGroup(
 	ctx context.Context,
 	userGroupId string,
 ) ApiListUsersFromUserGroupRequest {
@@ -1289,7 +1310,7 @@ func (a *IAMGroupsApiService) ListUsersFromUserGroup(
 // Execute executes the request
 //
 //	@return ListUsersFromUserGroup200Response
-func (a *IAMGroupsApiService) ListUsersFromUserGroupExecute(
+func (a *IAMGroupsAPIService) ListUsersFromUserGroupExecute(
 	r ApiListUsersFromUserGroupRequest,
 ) (*ListUsersFromUserGroup200Response, *http.Response, error) {
 	var (
@@ -1301,7 +1322,7 @@ func (a *IAMGroupsApiService) ListUsersFromUserGroupExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMGroupsApiService.ListUsersFromUserGroup",
+		"IAMGroupsAPIService.ListUsersFromUserGroup",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1311,7 +1332,7 @@ func (a *IAMGroupsApiService) ListUsersFromUserGroupExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"userGroupId"+"}",
-		url.PathEscape(parameterToString(r.userGroupId, "")),
+		url.PathEscape(parameterValueToString(r.userGroupId, "userGroupId")),
 		-1,
 	)
 
@@ -1322,7 +1343,7 @@ func (a *IAMGroupsApiService) ListUsersFromUserGroupExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1364,9 +1385,9 @@ func (a *IAMGroupsApiService) ListUsersFromUserGroupExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1383,6 +1404,7 @@ func (a *IAMGroupsApiService) ListUsersFromUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1393,6 +1415,7 @@ func (a *IAMGroupsApiService) ListUsersFromUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1403,6 +1426,7 @@ func (a *IAMGroupsApiService) ListUsersFromUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1426,7 +1450,7 @@ func (a *IAMGroupsApiService) ListUsersFromUserGroupExecute(
 
 type ApiRemoveUsersFromUserGroupRequest struct {
 	ctx         context.Context
-	ApiService  *IAMGroupsApiService
+	ApiService  *IAMGroupsAPIService
 	userGroupId string
 	emails      *[]string
 }
@@ -1457,7 +1481,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param userGroupId
 	@return ApiRemoveUsersFromUserGroupRequest
 */
-func (a *IAMGroupsApiService) RemoveUsersFromUserGroup(
+func (a *IAMGroupsAPIService) RemoveUsersFromUserGroup(
 	ctx context.Context,
 	userGroupId string,
 ) ApiRemoveUsersFromUserGroupRequest {
@@ -1471,7 +1495,7 @@ func (a *IAMGroupsApiService) RemoveUsersFromUserGroup(
 // Execute executes the request
 //
 //	@return RemoveUsersFromUserGroup200Response
-func (a *IAMGroupsApiService) RemoveUsersFromUserGroupExecute(
+func (a *IAMGroupsAPIService) RemoveUsersFromUserGroupExecute(
 	r ApiRemoveUsersFromUserGroupRequest,
 ) (*RemoveUsersFromUserGroup200Response, *http.Response, error) {
 	var (
@@ -1483,7 +1507,7 @@ func (a *IAMGroupsApiService) RemoveUsersFromUserGroupExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMGroupsApiService.RemoveUsersFromUserGroup",
+		"IAMGroupsAPIService.RemoveUsersFromUserGroup",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1493,7 +1517,7 @@ func (a *IAMGroupsApiService) RemoveUsersFromUserGroupExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"userGroupId"+"}",
-		url.PathEscape(parameterToString(r.userGroupId, "")),
+		url.PathEscape(parameterValueToString(r.userGroupId, "userGroupId")),
 		-1,
 	)
 
@@ -1504,7 +1528,7 @@ func (a *IAMGroupsApiService) RemoveUsersFromUserGroupExecute(
 		return localVarReturnValue, nil, reportError("emails is required and must be specified")
 	}
 
-	localVarQueryParams.Add("emails", parameterToString(*r.emails, "csv"))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "emails", r.emails, "csv")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1546,9 +1570,9 @@ func (a *IAMGroupsApiService) RemoveUsersFromUserGroupExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1565,6 +1589,7 @@ func (a *IAMGroupsApiService) RemoveUsersFromUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1575,6 +1600,7 @@ func (a *IAMGroupsApiService) RemoveUsersFromUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1585,6 +1611,7 @@ func (a *IAMGroupsApiService) RemoveUsersFromUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1608,7 +1635,7 @@ func (a *IAMGroupsApiService) RemoveUsersFromUserGroupExecute(
 
 type ApiReplacePermissionsForUserGroupRequest struct {
 	ctx                                   context.Context
-	ApiService                            *IAMGroupsApiService
+	ApiService                            *IAMGroupsAPIService
 	userGroupId                           string
 	replacePermissionsForUserGroupV1Input *ReplacePermissionsForUserGroupV1Input
 }
@@ -1637,7 +1664,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param userGroupId
 	@return ApiReplacePermissionsForUserGroupRequest
 */
-func (a *IAMGroupsApiService) ReplacePermissionsForUserGroup(
+func (a *IAMGroupsAPIService) ReplacePermissionsForUserGroup(
 	ctx context.Context,
 	userGroupId string,
 ) ApiReplacePermissionsForUserGroupRequest {
@@ -1651,7 +1678,7 @@ func (a *IAMGroupsApiService) ReplacePermissionsForUserGroup(
 // Execute executes the request
 //
 //	@return ReplacePermissionsForUserGroup200Response
-func (a *IAMGroupsApiService) ReplacePermissionsForUserGroupExecute(
+func (a *IAMGroupsAPIService) ReplacePermissionsForUserGroupExecute(
 	r ApiReplacePermissionsForUserGroupRequest,
 ) (*ReplacePermissionsForUserGroup200Response, *http.Response, error) {
 	var (
@@ -1663,7 +1690,7 @@ func (a *IAMGroupsApiService) ReplacePermissionsForUserGroupExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMGroupsApiService.ReplacePermissionsForUserGroup",
+		"IAMGroupsAPIService.ReplacePermissionsForUserGroup",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1673,7 +1700,7 @@ func (a *IAMGroupsApiService) ReplacePermissionsForUserGroupExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"userGroupId"+"}",
-		url.PathEscape(parameterToString(r.userGroupId, "")),
+		url.PathEscape(parameterValueToString(r.userGroupId, "userGroupId")),
 		-1,
 	)
 
@@ -1733,9 +1760,9 @@ func (a *IAMGroupsApiService) ReplacePermissionsForUserGroupExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1752,6 +1779,7 @@ func (a *IAMGroupsApiService) ReplacePermissionsForUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1762,6 +1790,7 @@ func (a *IAMGroupsApiService) ReplacePermissionsForUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1772,6 +1801,7 @@ func (a *IAMGroupsApiService) ReplacePermissionsForUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1795,7 +1825,7 @@ func (a *IAMGroupsApiService) ReplacePermissionsForUserGroupExecute(
 
 type ApiReplaceUsersInUserGroupRequest struct {
 	ctx                            context.Context
-	ApiService                     *IAMGroupsApiService
+	ApiService                     *IAMGroupsAPIService
 	userGroupId                    string
 	replaceUsersInUserGroupV1Input *ReplaceUsersInUserGroupV1Input
 }
@@ -1826,7 +1856,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param userGroupId
 	@return ApiReplaceUsersInUserGroupRequest
 */
-func (a *IAMGroupsApiService) ReplaceUsersInUserGroup(
+func (a *IAMGroupsAPIService) ReplaceUsersInUserGroup(
 	ctx context.Context,
 	userGroupId string,
 ) ApiReplaceUsersInUserGroupRequest {
@@ -1840,7 +1870,7 @@ func (a *IAMGroupsApiService) ReplaceUsersInUserGroup(
 // Execute executes the request
 //
 //	@return ReplaceUsersInUserGroup200Response
-func (a *IAMGroupsApiService) ReplaceUsersInUserGroupExecute(
+func (a *IAMGroupsAPIService) ReplaceUsersInUserGroupExecute(
 	r ApiReplaceUsersInUserGroupRequest,
 ) (*ReplaceUsersInUserGroup200Response, *http.Response, error) {
 	var (
@@ -1852,7 +1882,7 @@ func (a *IAMGroupsApiService) ReplaceUsersInUserGroupExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMGroupsApiService.ReplaceUsersInUserGroup",
+		"IAMGroupsAPIService.ReplaceUsersInUserGroup",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1862,7 +1892,7 @@ func (a *IAMGroupsApiService) ReplaceUsersInUserGroupExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"userGroupId"+"}",
-		url.PathEscape(parameterToString(r.userGroupId, "")),
+		url.PathEscape(parameterValueToString(r.userGroupId, "userGroupId")),
 		-1,
 	)
 
@@ -1922,9 +1952,9 @@ func (a *IAMGroupsApiService) ReplaceUsersInUserGroupExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1941,6 +1971,7 @@ func (a *IAMGroupsApiService) ReplaceUsersInUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1951,6 +1982,7 @@ func (a *IAMGroupsApiService) ReplaceUsersInUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1961,6 +1993,7 @@ func (a *IAMGroupsApiService) ReplaceUsersInUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1984,7 +2017,7 @@ func (a *IAMGroupsApiService) ReplaceUsersInUserGroupExecute(
 
 type ApiUpdateUserGroupRequest struct {
 	ctx                    context.Context
-	ApiService             *IAMGroupsApiService
+	ApiService             *IAMGroupsAPIService
 	userGroupId            string
 	updateUserGroupV1Input *UpdateUserGroupV1Input
 }
@@ -2013,7 +2046,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param userGroupId
 	@return ApiUpdateUserGroupRequest
 */
-func (a *IAMGroupsApiService) UpdateUserGroup(
+func (a *IAMGroupsAPIService) UpdateUserGroup(
 	ctx context.Context,
 	userGroupId string,
 ) ApiUpdateUserGroupRequest {
@@ -2027,7 +2060,7 @@ func (a *IAMGroupsApiService) UpdateUserGroup(
 // Execute executes the request
 //
 //	@return UpdateUserGroup200Response
-func (a *IAMGroupsApiService) UpdateUserGroupExecute(
+func (a *IAMGroupsAPIService) UpdateUserGroupExecute(
 	r ApiUpdateUserGroupRequest,
 ) (*UpdateUserGroup200Response, *http.Response, error) {
 	var (
@@ -2039,7 +2072,7 @@ func (a *IAMGroupsApiService) UpdateUserGroupExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMGroupsApiService.UpdateUserGroup",
+		"IAMGroupsAPIService.UpdateUserGroup",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -2049,7 +2082,7 @@ func (a *IAMGroupsApiService) UpdateUserGroupExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"userGroupId"+"}",
-		url.PathEscape(parameterToString(r.userGroupId, "")),
+		url.PathEscape(parameterValueToString(r.userGroupId, "userGroupId")),
 		-1,
 	)
 
@@ -2109,9 +2142,9 @@ func (a *IAMGroupsApiService) UpdateUserGroupExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -2128,6 +2161,7 @@ func (a *IAMGroupsApiService) UpdateUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -2138,6 +2172,7 @@ func (a *IAMGroupsApiService) UpdateUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -2148,6 +2183,7 @@ func (a *IAMGroupsApiService) UpdateUserGroupExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

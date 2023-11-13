@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the EchoV1Output type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EchoV1Output{}
 
 // EchoV1Output Echo response.
 type EchoV1Output struct {
@@ -107,7 +110,7 @@ func (o *EchoV1Output) GetHeaders() map[string]interface{} {
 // and a boolean to check if the value has been set.
 func (o *EchoV1Output) GetHeadersOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]interface{}{}, false
 	}
 	return o.Headers, true
 }
@@ -118,17 +121,19 @@ func (o *EchoV1Output) SetHeaders(v map[string]interface{}) {
 }
 
 func (o EchoV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["method"] = o.Method
-	}
-	if true {
-		toSerialize["message"] = o.Message
-	}
-	if true {
-		toSerialize["headers"] = o.Headers
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o EchoV1Output) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["method"] = o.Method
+	toSerialize["message"] = o.Message
+	toSerialize["headers"] = o.Headers
+	return toSerialize, nil
 }
 
 type NullableEchoV1Output struct {

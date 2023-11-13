@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the Function type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &Function{}
 
 // Function A Function object.
 type Function struct {
@@ -66,7 +69,7 @@ func NewFunctionWithDefaults() *Function {
 
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *Function) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		var ret string
 		return ret
 	}
@@ -76,7 +79,7 @@ func (o *Function) GetId() string {
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Function) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
 	return o.Id, true
@@ -84,7 +87,7 @@ func (o *Function) GetIdOk() (*string, bool) {
 
 // HasId returns a boolean if a field has been set.
 func (o *Function) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && !IsNil(o.Id) {
 		return true
 	}
 
@@ -98,7 +101,7 @@ func (o *Function) SetId(v string) {
 
 // GetResourceType returns the ResourceType field value if set, zero value otherwise.
 func (o *Function) GetResourceType() string {
-	if o == nil || o.ResourceType == nil {
+	if o == nil || IsNil(o.ResourceType) {
 		var ret string
 		return ret
 	}
@@ -108,7 +111,7 @@ func (o *Function) GetResourceType() string {
 // GetResourceTypeOk returns a tuple with the ResourceType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Function) GetResourceTypeOk() (*string, bool) {
-	if o == nil || o.ResourceType == nil {
+	if o == nil || IsNil(o.ResourceType) {
 		return nil, false
 	}
 	return o.ResourceType, true
@@ -116,7 +119,7 @@ func (o *Function) GetResourceTypeOk() (*string, bool) {
 
 // HasResourceType returns a boolean if a field has been set.
 func (o *Function) HasResourceType() bool {
-	if o != nil && o.ResourceType != nil {
+	if o != nil && !IsNil(o.ResourceType) {
 		return true
 	}
 
@@ -130,7 +133,7 @@ func (o *Function) SetResourceType(v string) {
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *Function) GetCreatedAt() string {
-	if o == nil || o.CreatedAt == nil {
+	if o == nil || IsNil(o.CreatedAt) {
 		var ret string
 		return ret
 	}
@@ -140,7 +143,7 @@ func (o *Function) GetCreatedAt() string {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Function) GetCreatedAtOk() (*string, bool) {
-	if o == nil || o.CreatedAt == nil {
+	if o == nil || IsNil(o.CreatedAt) {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -148,7 +151,7 @@ func (o *Function) GetCreatedAtOk() (*string, bool) {
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *Function) HasCreatedAt() bool {
-	if o != nil && o.CreatedAt != nil {
+	if o != nil && !IsNil(o.CreatedAt) {
 		return true
 	}
 
@@ -162,7 +165,7 @@ func (o *Function) SetCreatedAt(v string) {
 
 // GetCreatedBy returns the CreatedBy field value if set, zero value otherwise.
 func (o *Function) GetCreatedBy() string {
-	if o == nil || o.CreatedBy == nil {
+	if o == nil || IsNil(o.CreatedBy) {
 		var ret string
 		return ret
 	}
@@ -172,7 +175,7 @@ func (o *Function) GetCreatedBy() string {
 // GetCreatedByOk returns a tuple with the CreatedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Function) GetCreatedByOk() (*string, bool) {
-	if o == nil || o.CreatedBy == nil {
+	if o == nil || IsNil(o.CreatedBy) {
 		return nil, false
 	}
 	return o.CreatedBy, true
@@ -180,7 +183,7 @@ func (o *Function) GetCreatedByOk() (*string, bool) {
 
 // HasCreatedBy returns a boolean if a field has been set.
 func (o *Function) HasCreatedBy() bool {
-	if o != nil && o.CreatedBy != nil {
+	if o != nil && !IsNil(o.CreatedBy) {
 		return true
 	}
 
@@ -194,7 +197,7 @@ func (o *Function) SetCreatedBy(v string) {
 
 // GetCode returns the Code field value if set, zero value otherwise.
 func (o *Function) GetCode() string {
-	if o == nil || o.Code == nil {
+	if o == nil || IsNil(o.Code) {
 		var ret string
 		return ret
 	}
@@ -204,7 +207,7 @@ func (o *Function) GetCode() string {
 // GetCodeOk returns a tuple with the Code field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Function) GetCodeOk() (*string, bool) {
-	if o == nil || o.Code == nil {
+	if o == nil || IsNil(o.Code) {
 		return nil, false
 	}
 	return o.Code, true
@@ -212,7 +215,7 @@ func (o *Function) GetCodeOk() (*string, bool) {
 
 // HasCode returns a boolean if a field has been set.
 func (o *Function) HasCode() bool {
-	if o != nil && o.Code != nil {
+	if o != nil && !IsNil(o.Code) {
 		return true
 	}
 
@@ -226,7 +229,7 @@ func (o *Function) SetCode(v string) {
 
 // GetDeployedAt returns the DeployedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Function) GetDeployedAt() string {
-	if o == nil || o.DeployedAt.Get() == nil {
+	if o == nil || IsNil(o.DeployedAt.Get()) {
 		var ret string
 		return ret
 	}
@@ -269,7 +272,7 @@ func (o *Function) UnsetDeployedAt() {
 
 // GetSettings returns the Settings field value if set, zero value otherwise.
 func (o *Function) GetSettings() []FunctionSettingV1 {
-	if o == nil || o.Settings == nil {
+	if o == nil || IsNil(o.Settings) {
 		var ret []FunctionSettingV1
 		return ret
 	}
@@ -279,7 +282,7 @@ func (o *Function) GetSettings() []FunctionSettingV1 {
 // GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Function) GetSettingsOk() ([]FunctionSettingV1, bool) {
-	if o == nil || o.Settings == nil {
+	if o == nil || IsNil(o.Settings) {
 		return nil, false
 	}
 	return o.Settings, true
@@ -287,7 +290,7 @@ func (o *Function) GetSettingsOk() ([]FunctionSettingV1, bool) {
 
 // HasSettings returns a boolean if a field has been set.
 func (o *Function) HasSettings() bool {
-	if o != nil && o.Settings != nil {
+	if o != nil && !IsNil(o.Settings) {
 		return true
 	}
 
@@ -301,7 +304,7 @@ func (o *Function) SetSettings(v []FunctionSettingV1) {
 
 // GetDisplayName returns the DisplayName field value if set, zero value otherwise.
 func (o *Function) GetDisplayName() string {
-	if o == nil || o.DisplayName == nil {
+	if o == nil || IsNil(o.DisplayName) {
 		var ret string
 		return ret
 	}
@@ -311,7 +314,7 @@ func (o *Function) GetDisplayName() string {
 // GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Function) GetDisplayNameOk() (*string, bool) {
-	if o == nil || o.DisplayName == nil {
+	if o == nil || IsNil(o.DisplayName) {
 		return nil, false
 	}
 	return o.DisplayName, true
@@ -319,7 +322,7 @@ func (o *Function) GetDisplayNameOk() (*string, bool) {
 
 // HasDisplayName returns a boolean if a field has been set.
 func (o *Function) HasDisplayName() bool {
-	if o != nil && o.DisplayName != nil {
+	if o != nil && !IsNil(o.DisplayName) {
 		return true
 	}
 
@@ -333,7 +336,7 @@ func (o *Function) SetDisplayName(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *Function) GetDescription() string {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
@@ -343,7 +346,7 @@ func (o *Function) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Function) GetDescriptionOk() (*string, bool) {
-	if o == nil || o.Description == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
 	return o.Description, true
@@ -351,7 +354,7 @@ func (o *Function) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *Function) HasDescription() bool {
-	if o != nil && o.Description != nil {
+	if o != nil && !IsNil(o.Description) {
 		return true
 	}
 
@@ -365,7 +368,7 @@ func (o *Function) SetDescription(v string) {
 
 // GetLogoUrl returns the LogoUrl field value if set, zero value otherwise.
 func (o *Function) GetLogoUrl() string {
-	if o == nil || o.LogoUrl == nil {
+	if o == nil || IsNil(o.LogoUrl) {
 		var ret string
 		return ret
 	}
@@ -375,7 +378,7 @@ func (o *Function) GetLogoUrl() string {
 // GetLogoUrlOk returns a tuple with the LogoUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Function) GetLogoUrlOk() (*string, bool) {
-	if o == nil || o.LogoUrl == nil {
+	if o == nil || IsNil(o.LogoUrl) {
 		return nil, false
 	}
 	return o.LogoUrl, true
@@ -383,7 +386,7 @@ func (o *Function) GetLogoUrlOk() (*string, bool) {
 
 // HasLogoUrl returns a boolean if a field has been set.
 func (o *Function) HasLogoUrl() bool {
-	if o != nil && o.LogoUrl != nil {
+	if o != nil && !IsNil(o.LogoUrl) {
 		return true
 	}
 
@@ -397,7 +400,7 @@ func (o *Function) SetLogoUrl(v string) {
 
 // GetPreviewWebhookUrl returns the PreviewWebhookUrl field value if set, zero value otherwise.
 func (o *Function) GetPreviewWebhookUrl() string {
-	if o == nil || o.PreviewWebhookUrl == nil {
+	if o == nil || IsNil(o.PreviewWebhookUrl) {
 		var ret string
 		return ret
 	}
@@ -407,7 +410,7 @@ func (o *Function) GetPreviewWebhookUrl() string {
 // GetPreviewWebhookUrlOk returns a tuple with the PreviewWebhookUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Function) GetPreviewWebhookUrlOk() (*string, bool) {
-	if o == nil || o.PreviewWebhookUrl == nil {
+	if o == nil || IsNil(o.PreviewWebhookUrl) {
 		return nil, false
 	}
 	return o.PreviewWebhookUrl, true
@@ -415,7 +418,7 @@ func (o *Function) GetPreviewWebhookUrlOk() (*string, bool) {
 
 // HasPreviewWebhookUrl returns a boolean if a field has been set.
 func (o *Function) HasPreviewWebhookUrl() bool {
-	if o != nil && o.PreviewWebhookUrl != nil {
+	if o != nil && !IsNil(o.PreviewWebhookUrl) {
 		return true
 	}
 
@@ -429,7 +432,7 @@ func (o *Function) SetPreviewWebhookUrl(v string) {
 
 // GetBatchMaxCount returns the BatchMaxCount field value if set, zero value otherwise.
 func (o *Function) GetBatchMaxCount() float32 {
-	if o == nil || o.BatchMaxCount == nil {
+	if o == nil || IsNil(o.BatchMaxCount) {
 		var ret float32
 		return ret
 	}
@@ -439,7 +442,7 @@ func (o *Function) GetBatchMaxCount() float32 {
 // GetBatchMaxCountOk returns a tuple with the BatchMaxCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Function) GetBatchMaxCountOk() (*float32, bool) {
-	if o == nil || o.BatchMaxCount == nil {
+	if o == nil || IsNil(o.BatchMaxCount) {
 		return nil, false
 	}
 	return o.BatchMaxCount, true
@@ -447,7 +450,7 @@ func (o *Function) GetBatchMaxCountOk() (*float32, bool) {
 
 // HasBatchMaxCount returns a boolean if a field has been set.
 func (o *Function) HasBatchMaxCount() bool {
-	if o != nil && o.BatchMaxCount != nil {
+	if o != nil && !IsNil(o.BatchMaxCount) {
 		return true
 	}
 
@@ -461,7 +464,7 @@ func (o *Function) SetBatchMaxCount(v float32) {
 
 // GetCatalogId returns the CatalogId field value if set, zero value otherwise.
 func (o *Function) GetCatalogId() string {
-	if o == nil || o.CatalogId == nil {
+	if o == nil || IsNil(o.CatalogId) {
 		var ret string
 		return ret
 	}
@@ -471,7 +474,7 @@ func (o *Function) GetCatalogId() string {
 // GetCatalogIdOk returns a tuple with the CatalogId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Function) GetCatalogIdOk() (*string, bool) {
-	if o == nil || o.CatalogId == nil {
+	if o == nil || IsNil(o.CatalogId) {
 		return nil, false
 	}
 	return o.CatalogId, true
@@ -479,7 +482,7 @@ func (o *Function) GetCatalogIdOk() (*string, bool) {
 
 // HasCatalogId returns a boolean if a field has been set.
 func (o *Function) HasCatalogId() bool {
-	if o != nil && o.CatalogId != nil {
+	if o != nil && !IsNil(o.CatalogId) {
 		return true
 	}
 
@@ -493,7 +496,7 @@ func (o *Function) SetCatalogId(v string) {
 
 // GetIsLatestVersion returns the IsLatestVersion field value if set, zero value otherwise.
 func (o *Function) GetIsLatestVersion() bool {
-	if o == nil || o.IsLatestVersion == nil {
+	if o == nil || IsNil(o.IsLatestVersion) {
 		var ret bool
 		return ret
 	}
@@ -503,7 +506,7 @@ func (o *Function) GetIsLatestVersion() bool {
 // GetIsLatestVersionOk returns a tuple with the IsLatestVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Function) GetIsLatestVersionOk() (*bool, bool) {
-	if o == nil || o.IsLatestVersion == nil {
+	if o == nil || IsNil(o.IsLatestVersion) {
 		return nil, false
 	}
 	return o.IsLatestVersion, true
@@ -511,7 +514,7 @@ func (o *Function) GetIsLatestVersionOk() (*bool, bool) {
 
 // HasIsLatestVersion returns a boolean if a field has been set.
 func (o *Function) HasIsLatestVersion() bool {
-	if o != nil && o.IsLatestVersion != nil {
+	if o != nil && !IsNil(o.IsLatestVersion) {
 		return true
 	}
 
@@ -524,50 +527,58 @@ func (o *Function) SetIsLatestVersion(v bool) {
 }
 
 func (o Function) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o Function) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
+	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if o.ResourceType != nil {
+	if !IsNil(o.ResourceType) {
 		toSerialize["resourceType"] = o.ResourceType
 	}
-	if o.CreatedAt != nil {
+	if !IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
 	}
-	if o.CreatedBy != nil {
+	if !IsNil(o.CreatedBy) {
 		toSerialize["createdBy"] = o.CreatedBy
 	}
-	if o.Code != nil {
+	if !IsNil(o.Code) {
 		toSerialize["code"] = o.Code
 	}
 	if o.DeployedAt.IsSet() {
 		toSerialize["deployedAt"] = o.DeployedAt.Get()
 	}
-	if o.Settings != nil {
+	if !IsNil(o.Settings) {
 		toSerialize["settings"] = o.Settings
 	}
-	if o.DisplayName != nil {
+	if !IsNil(o.DisplayName) {
 		toSerialize["displayName"] = o.DisplayName
 	}
-	if o.Description != nil {
+	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
-	if o.LogoUrl != nil {
+	if !IsNil(o.LogoUrl) {
 		toSerialize["logoUrl"] = o.LogoUrl
 	}
-	if o.PreviewWebhookUrl != nil {
+	if !IsNil(o.PreviewWebhookUrl) {
 		toSerialize["previewWebhookUrl"] = o.PreviewWebhookUrl
 	}
-	if o.BatchMaxCount != nil {
+	if !IsNil(o.BatchMaxCount) {
 		toSerialize["batchMaxCount"] = o.BatchMaxCount
 	}
-	if o.CatalogId != nil {
+	if !IsNil(o.CatalogId) {
 		toSerialize["catalogId"] = o.CatalogId
 	}
-	if o.IsLatestVersion != nil {
+	if !IsNil(o.IsLatestVersion) {
 		toSerialize["isLatestVersion"] = o.IsLatestVersion
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableFunction struct {

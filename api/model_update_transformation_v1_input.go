@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the UpdateTransformationV1Input type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateTransformationV1Input{}
 
 // UpdateTransformationV1Input The input to update a Transformation.
 type UpdateTransformationV1Input struct {
@@ -56,7 +59,7 @@ func NewUpdateTransformationV1InputWithDefaults() *UpdateTransformationV1Input {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *UpdateTransformationV1Input) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -66,7 +69,7 @@ func (o *UpdateTransformationV1Input) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateTransformationV1Input) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -74,7 +77,7 @@ func (o *UpdateTransformationV1Input) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *UpdateTransformationV1Input) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -88,7 +91,7 @@ func (o *UpdateTransformationV1Input) SetName(v string) {
 
 // GetSourceId returns the SourceId field value if set, zero value otherwise.
 func (o *UpdateTransformationV1Input) GetSourceId() string {
-	if o == nil || o.SourceId == nil {
+	if o == nil || IsNil(o.SourceId) {
 		var ret string
 		return ret
 	}
@@ -98,7 +101,7 @@ func (o *UpdateTransformationV1Input) GetSourceId() string {
 // GetSourceIdOk returns a tuple with the SourceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateTransformationV1Input) GetSourceIdOk() (*string, bool) {
-	if o == nil || o.SourceId == nil {
+	if o == nil || IsNil(o.SourceId) {
 		return nil, false
 	}
 	return o.SourceId, true
@@ -106,7 +109,7 @@ func (o *UpdateTransformationV1Input) GetSourceIdOk() (*string, bool) {
 
 // HasSourceId returns a boolean if a field has been set.
 func (o *UpdateTransformationV1Input) HasSourceId() bool {
-	if o != nil && o.SourceId != nil {
+	if o != nil && !IsNil(o.SourceId) {
 		return true
 	}
 
@@ -120,7 +123,7 @@ func (o *UpdateTransformationV1Input) SetSourceId(v string) {
 
 // GetDestinationMetadataId returns the DestinationMetadataId field value if set, zero value otherwise.
 func (o *UpdateTransformationV1Input) GetDestinationMetadataId() string {
-	if o == nil || o.DestinationMetadataId == nil {
+	if o == nil || IsNil(o.DestinationMetadataId) {
 		var ret string
 		return ret
 	}
@@ -130,7 +133,7 @@ func (o *UpdateTransformationV1Input) GetDestinationMetadataId() string {
 // GetDestinationMetadataIdOk returns a tuple with the DestinationMetadataId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateTransformationV1Input) GetDestinationMetadataIdOk() (*string, bool) {
-	if o == nil || o.DestinationMetadataId == nil {
+	if o == nil || IsNil(o.DestinationMetadataId) {
 		return nil, false
 	}
 	return o.DestinationMetadataId, true
@@ -138,7 +141,7 @@ func (o *UpdateTransformationV1Input) GetDestinationMetadataIdOk() (*string, boo
 
 // HasDestinationMetadataId returns a boolean if a field has been set.
 func (o *UpdateTransformationV1Input) HasDestinationMetadataId() bool {
-	if o != nil && o.DestinationMetadataId != nil {
+	if o != nil && !IsNil(o.DestinationMetadataId) {
 		return true
 	}
 
@@ -152,7 +155,7 @@ func (o *UpdateTransformationV1Input) SetDestinationMetadataId(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *UpdateTransformationV1Input) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -162,7 +165,7 @@ func (o *UpdateTransformationV1Input) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateTransformationV1Input) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -170,7 +173,7 @@ func (o *UpdateTransformationV1Input) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *UpdateTransformationV1Input) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -184,7 +187,7 @@ func (o *UpdateTransformationV1Input) SetEnabled(v bool) {
 
 // GetIf returns the If field value if set, zero value otherwise.
 func (o *UpdateTransformationV1Input) GetIf() string {
-	if o == nil || o.If == nil {
+	if o == nil || IsNil(o.If) {
 		var ret string
 		return ret
 	}
@@ -194,7 +197,7 @@ func (o *UpdateTransformationV1Input) GetIf() string {
 // GetIfOk returns a tuple with the If field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateTransformationV1Input) GetIfOk() (*string, bool) {
-	if o == nil || o.If == nil {
+	if o == nil || IsNil(o.If) {
 		return nil, false
 	}
 	return o.If, true
@@ -202,7 +205,7 @@ func (o *UpdateTransformationV1Input) GetIfOk() (*string, bool) {
 
 // HasIf returns a boolean if a field has been set.
 func (o *UpdateTransformationV1Input) HasIf() bool {
-	if o != nil && o.If != nil {
+	if o != nil && !IsNil(o.If) {
 		return true
 	}
 
@@ -216,7 +219,7 @@ func (o *UpdateTransformationV1Input) SetIf(v string) {
 
 // GetNewEventName returns the NewEventName field value if set, zero value otherwise.
 func (o *UpdateTransformationV1Input) GetNewEventName() string {
-	if o == nil || o.NewEventName == nil {
+	if o == nil || IsNil(o.NewEventName) {
 		var ret string
 		return ret
 	}
@@ -226,7 +229,7 @@ func (o *UpdateTransformationV1Input) GetNewEventName() string {
 // GetNewEventNameOk returns a tuple with the NewEventName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateTransformationV1Input) GetNewEventNameOk() (*string, bool) {
-	if o == nil || o.NewEventName == nil {
+	if o == nil || IsNil(o.NewEventName) {
 		return nil, false
 	}
 	return o.NewEventName, true
@@ -234,7 +237,7 @@ func (o *UpdateTransformationV1Input) GetNewEventNameOk() (*string, bool) {
 
 // HasNewEventName returns a boolean if a field has been set.
 func (o *UpdateTransformationV1Input) HasNewEventName() bool {
-	if o != nil && o.NewEventName != nil {
+	if o != nil && !IsNil(o.NewEventName) {
 		return true
 	}
 
@@ -248,7 +251,7 @@ func (o *UpdateTransformationV1Input) SetNewEventName(v string) {
 
 // GetPropertyRenames returns the PropertyRenames field value if set, zero value otherwise.
 func (o *UpdateTransformationV1Input) GetPropertyRenames() []PropertyRenameV1 {
-	if o == nil || o.PropertyRenames == nil {
+	if o == nil || IsNil(o.PropertyRenames) {
 		var ret []PropertyRenameV1
 		return ret
 	}
@@ -258,7 +261,7 @@ func (o *UpdateTransformationV1Input) GetPropertyRenames() []PropertyRenameV1 {
 // GetPropertyRenamesOk returns a tuple with the PropertyRenames field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateTransformationV1Input) GetPropertyRenamesOk() ([]PropertyRenameV1, bool) {
-	if o == nil || o.PropertyRenames == nil {
+	if o == nil || IsNil(o.PropertyRenames) {
 		return nil, false
 	}
 	return o.PropertyRenames, true
@@ -266,7 +269,7 @@ func (o *UpdateTransformationV1Input) GetPropertyRenamesOk() ([]PropertyRenameV1
 
 // HasPropertyRenames returns a boolean if a field has been set.
 func (o *UpdateTransformationV1Input) HasPropertyRenames() bool {
-	if o != nil && o.PropertyRenames != nil {
+	if o != nil && !IsNil(o.PropertyRenames) {
 		return true
 	}
 
@@ -280,7 +283,7 @@ func (o *UpdateTransformationV1Input) SetPropertyRenames(v []PropertyRenameV1) {
 
 // GetPropertyValueTransformations returns the PropertyValueTransformations field value if set, zero value otherwise.
 func (o *UpdateTransformationV1Input) GetPropertyValueTransformations() []PropertyValueTransformationV1 {
-	if o == nil || o.PropertyValueTransformations == nil {
+	if o == nil || IsNil(o.PropertyValueTransformations) {
 		var ret []PropertyValueTransformationV1
 		return ret
 	}
@@ -290,7 +293,7 @@ func (o *UpdateTransformationV1Input) GetPropertyValueTransformations() []Proper
 // GetPropertyValueTransformationsOk returns a tuple with the PropertyValueTransformations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateTransformationV1Input) GetPropertyValueTransformationsOk() ([]PropertyValueTransformationV1, bool) {
-	if o == nil || o.PropertyValueTransformations == nil {
+	if o == nil || IsNil(o.PropertyValueTransformations) {
 		return nil, false
 	}
 	return o.PropertyValueTransformations, true
@@ -298,7 +301,7 @@ func (o *UpdateTransformationV1Input) GetPropertyValueTransformationsOk() ([]Pro
 
 // HasPropertyValueTransformations returns a boolean if a field has been set.
 func (o *UpdateTransformationV1Input) HasPropertyValueTransformations() bool {
-	if o != nil && o.PropertyValueTransformations != nil {
+	if o != nil && !IsNil(o.PropertyValueTransformations) {
 		return true
 	}
 
@@ -314,7 +317,7 @@ func (o *UpdateTransformationV1Input) SetPropertyValueTransformations(
 
 // GetFqlDefinedProperties returns the FqlDefinedProperties field value if set, zero value otherwise.
 func (o *UpdateTransformationV1Input) GetFqlDefinedProperties() []FQLDefinedPropertyV1 {
-	if o == nil || o.FqlDefinedProperties == nil {
+	if o == nil || IsNil(o.FqlDefinedProperties) {
 		var ret []FQLDefinedPropertyV1
 		return ret
 	}
@@ -324,7 +327,7 @@ func (o *UpdateTransformationV1Input) GetFqlDefinedProperties() []FQLDefinedProp
 // GetFqlDefinedPropertiesOk returns a tuple with the FqlDefinedProperties field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateTransformationV1Input) GetFqlDefinedPropertiesOk() ([]FQLDefinedPropertyV1, bool) {
-	if o == nil || o.FqlDefinedProperties == nil {
+	if o == nil || IsNil(o.FqlDefinedProperties) {
 		return nil, false
 	}
 	return o.FqlDefinedProperties, true
@@ -332,7 +335,7 @@ func (o *UpdateTransformationV1Input) GetFqlDefinedPropertiesOk() ([]FQLDefinedP
 
 // HasFqlDefinedProperties returns a boolean if a field has been set.
 func (o *UpdateTransformationV1Input) HasFqlDefinedProperties() bool {
-	if o != nil && o.FqlDefinedProperties != nil {
+	if o != nil && !IsNil(o.FqlDefinedProperties) {
 		return true
 	}
 
@@ -345,35 +348,43 @@ func (o *UpdateTransformationV1Input) SetFqlDefinedProperties(v []FQLDefinedProp
 }
 
 func (o UpdateTransformationV1Input) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Name != nil {
-		toSerialize["name"] = o.Name
-	}
-	if o.SourceId != nil {
-		toSerialize["sourceId"] = o.SourceId
-	}
-	if o.DestinationMetadataId != nil {
-		toSerialize["destinationMetadataId"] = o.DestinationMetadataId
-	}
-	if o.Enabled != nil {
-		toSerialize["enabled"] = o.Enabled
-	}
-	if o.If != nil {
-		toSerialize["if"] = o.If
-	}
-	if o.NewEventName != nil {
-		toSerialize["newEventName"] = o.NewEventName
-	}
-	if o.PropertyRenames != nil {
-		toSerialize["propertyRenames"] = o.PropertyRenames
-	}
-	if o.PropertyValueTransformations != nil {
-		toSerialize["propertyValueTransformations"] = o.PropertyValueTransformations
-	}
-	if o.FqlDefinedProperties != nil {
-		toSerialize["fqlDefinedProperties"] = o.FqlDefinedProperties
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UpdateTransformationV1Input) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.SourceId) {
+		toSerialize["sourceId"] = o.SourceId
+	}
+	if !IsNil(o.DestinationMetadataId) {
+		toSerialize["destinationMetadataId"] = o.DestinationMetadataId
+	}
+	if !IsNil(o.Enabled) {
+		toSerialize["enabled"] = o.Enabled
+	}
+	if !IsNil(o.If) {
+		toSerialize["if"] = o.If
+	}
+	if !IsNil(o.NewEventName) {
+		toSerialize["newEventName"] = o.NewEventName
+	}
+	if !IsNil(o.PropertyRenames) {
+		toSerialize["propertyRenames"] = o.PropertyRenames
+	}
+	if !IsNil(o.PropertyValueTransformations) {
+		toSerialize["propertyValueTransformations"] = o.PropertyValueTransformations
+	}
+	if !IsNil(o.FqlDefinedProperties) {
+		toSerialize["fqlDefinedProperties"] = o.FqlDefinedProperties
+	}
+	return toSerialize, nil
 }
 
 type NullableUpdateTransformationV1Input struct {

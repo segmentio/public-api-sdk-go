@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,16 +15,19 @@ import (
 	"encoding/json"
 )
 
+// checks if the GetReverseEtlModelOutput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetReverseEtlModelOutput{}
+
 // GetReverseEtlModelOutput Defines the result of getting a Model.
 type GetReverseEtlModelOutput struct {
-	ReverseEtlModel ReverseEtlModel1 `json:"reverseEtlModel"`
+	ReverseEtlModel ReverseEtlModel `json:"reverseEtlModel"`
 }
 
 // NewGetReverseEtlModelOutput instantiates a new GetReverseEtlModelOutput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetReverseEtlModelOutput(reverseEtlModel ReverseEtlModel1) *GetReverseEtlModelOutput {
+func NewGetReverseEtlModelOutput(reverseEtlModel ReverseEtlModel) *GetReverseEtlModelOutput {
 	this := GetReverseEtlModelOutput{}
 	this.ReverseEtlModel = reverseEtlModel
 	return &this
@@ -39,9 +42,9 @@ func NewGetReverseEtlModelOutputWithDefaults() *GetReverseEtlModelOutput {
 }
 
 // GetReverseEtlModel returns the ReverseEtlModel field value
-func (o *GetReverseEtlModelOutput) GetReverseEtlModel() ReverseEtlModel1 {
+func (o *GetReverseEtlModelOutput) GetReverseEtlModel() ReverseEtlModel {
 	if o == nil {
-		var ret ReverseEtlModel1
+		var ret ReverseEtlModel
 		return ret
 	}
 
@@ -50,7 +53,7 @@ func (o *GetReverseEtlModelOutput) GetReverseEtlModel() ReverseEtlModel1 {
 
 // GetReverseEtlModelOk returns a tuple with the ReverseEtlModel field value
 // and a boolean to check if the value has been set.
-func (o *GetReverseEtlModelOutput) GetReverseEtlModelOk() (*ReverseEtlModel1, bool) {
+func (o *GetReverseEtlModelOutput) GetReverseEtlModelOk() (*ReverseEtlModel, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -58,16 +61,22 @@ func (o *GetReverseEtlModelOutput) GetReverseEtlModelOk() (*ReverseEtlModel1, bo
 }
 
 // SetReverseEtlModel sets field value
-func (o *GetReverseEtlModelOutput) SetReverseEtlModel(v ReverseEtlModel1) {
+func (o *GetReverseEtlModelOutput) SetReverseEtlModel(v ReverseEtlModel) {
 	o.ReverseEtlModel = v
 }
 
 func (o GetReverseEtlModelOutput) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["reverseEtlModel"] = o.ReverseEtlModel
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o GetReverseEtlModelOutput) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["reverseEtlModel"] = o.ReverseEtlModel
+	return toSerialize, nil
 }
 
 type NullableGetReverseEtlModelOutput struct {

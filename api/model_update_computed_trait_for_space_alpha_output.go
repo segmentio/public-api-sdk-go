@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,9 +15,12 @@ import (
 	"encoding/json"
 )
 
+// checks if the UpdateComputedTraitForSpaceAlphaOutput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateComputedTraitForSpaceAlphaOutput{}
+
 // UpdateComputedTraitForSpaceAlphaOutput Computed Trait output for get and update.
 type UpdateComputedTraitForSpaceAlphaOutput struct {
-	ComputedTrait ComputedTrait `json:"computedTrait"`
+	ComputedTrait ComputedTraitSummary `json:"computedTrait"`
 }
 
 // NewUpdateComputedTraitForSpaceAlphaOutput instantiates a new UpdateComputedTraitForSpaceAlphaOutput object
@@ -25,7 +28,7 @@ type UpdateComputedTraitForSpaceAlphaOutput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewUpdateComputedTraitForSpaceAlphaOutput(
-	computedTrait ComputedTrait,
+	computedTrait ComputedTraitSummary,
 ) *UpdateComputedTraitForSpaceAlphaOutput {
 	this := UpdateComputedTraitForSpaceAlphaOutput{}
 	this.ComputedTrait = computedTrait
@@ -41,9 +44,9 @@ func NewUpdateComputedTraitForSpaceAlphaOutputWithDefaults() *UpdateComputedTrai
 }
 
 // GetComputedTrait returns the ComputedTrait field value
-func (o *UpdateComputedTraitForSpaceAlphaOutput) GetComputedTrait() ComputedTrait {
+func (o *UpdateComputedTraitForSpaceAlphaOutput) GetComputedTrait() ComputedTraitSummary {
 	if o == nil {
-		var ret ComputedTrait
+		var ret ComputedTraitSummary
 		return ret
 	}
 
@@ -52,7 +55,7 @@ func (o *UpdateComputedTraitForSpaceAlphaOutput) GetComputedTrait() ComputedTrai
 
 // GetComputedTraitOk returns a tuple with the ComputedTrait field value
 // and a boolean to check if the value has been set.
-func (o *UpdateComputedTraitForSpaceAlphaOutput) GetComputedTraitOk() (*ComputedTrait, bool) {
+func (o *UpdateComputedTraitForSpaceAlphaOutput) GetComputedTraitOk() (*ComputedTraitSummary, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -60,16 +63,22 @@ func (o *UpdateComputedTraitForSpaceAlphaOutput) GetComputedTraitOk() (*Computed
 }
 
 // SetComputedTrait sets field value
-func (o *UpdateComputedTraitForSpaceAlphaOutput) SetComputedTrait(v ComputedTrait) {
+func (o *UpdateComputedTraitForSpaceAlphaOutput) SetComputedTrait(v ComputedTraitSummary) {
 	o.ComputedTrait = v
 }
 
 func (o UpdateComputedTraitForSpaceAlphaOutput) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["computedTrait"] = o.ComputedTrait
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UpdateComputedTraitForSpaceAlphaOutput) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["computedTrait"] = o.ComputedTrait
+	return toSerialize, nil
 }
 
 type NullableUpdateComputedTraitForSpaceAlphaOutput struct {

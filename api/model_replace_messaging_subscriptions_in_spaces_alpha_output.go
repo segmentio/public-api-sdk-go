@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,13 +15,16 @@ import (
 	"encoding/json"
 )
 
+// checks if the ReplaceMessagingSubscriptionsInSpacesAlphaOutput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ReplaceMessagingSubscriptionsInSpacesAlphaOutput{}
+
 // ReplaceMessagingSubscriptionsInSpacesAlphaOutput Output for the endpoint.
 type ReplaceMessagingSubscriptionsInSpacesAlphaOutput struct {
 	// Array of successful subscription status.
 	Successes []MessageSubscriptionResponse `json:"successes"`
 	// Array of failure subscription status.
 	Failures   []MessageSubscriptionResponse `json:"failures"`
-	Pagination *Pagination                   `json:"pagination,omitempty"`
+	Pagination *PaginationOutput             `json:"pagination,omitempty"`
 }
 
 // NewReplaceMessagingSubscriptionsInSpacesAlphaOutput instantiates a new ReplaceMessagingSubscriptionsInSpacesAlphaOutput object
@@ -99,9 +102,9 @@ func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) SetFailures(
 }
 
 // GetPagination returns the Pagination field value if set, zero value otherwise.
-func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) GetPagination() Pagination {
-	if o == nil || o.Pagination == nil {
-		var ret Pagination
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) GetPagination() PaginationOutput {
+	if o == nil || IsNil(o.Pagination) {
+		var ret PaginationOutput
 		return ret
 	}
 	return *o.Pagination
@@ -109,8 +112,8 @@ func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) GetPagination() Pagin
 
 // GetPaginationOk returns a tuple with the Pagination field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) GetPaginationOk() (*Pagination, bool) {
-	if o == nil || o.Pagination == nil {
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) GetPaginationOk() (*PaginationOutput, bool) {
+	if o == nil || IsNil(o.Pagination) {
 		return nil, false
 	}
 	return o.Pagination, true
@@ -118,30 +121,34 @@ func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) GetPaginationOk() (*P
 
 // HasPagination returns a boolean if a field has been set.
 func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) HasPagination() bool {
-	if o != nil && o.Pagination != nil {
+	if o != nil && !IsNil(o.Pagination) {
 		return true
 	}
 
 	return false
 }
 
-// SetPagination gets a reference to the given Pagination and assigns it to the Pagination field.
-func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) SetPagination(v Pagination) {
+// SetPagination gets a reference to the given PaginationOutput and assigns it to the Pagination field.
+func (o *ReplaceMessagingSubscriptionsInSpacesAlphaOutput) SetPagination(v PaginationOutput) {
 	o.Pagination = &v
 }
 
 func (o ReplaceMessagingSubscriptionsInSpacesAlphaOutput) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["successes"] = o.Successes
-	}
-	if true {
-		toSerialize["failures"] = o.Failures
-	}
-	if o.Pagination != nil {
-		toSerialize["pagination"] = o.Pagination
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ReplaceMessagingSubscriptionsInSpacesAlphaOutput) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["successes"] = o.Successes
+	toSerialize["failures"] = o.Failures
+	if !IsNil(o.Pagination) {
+		toSerialize["pagination"] = o.Pagination
+	}
+	return toSerialize, nil
 }
 
 type NullableReplaceMessagingSubscriptionsInSpacesAlphaOutput struct {
