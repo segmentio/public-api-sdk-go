@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the PaginationOutput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &PaginationOutput{}
 
 // PaginationOutput Pagination metadata for a list response.  Responses return this object alongside a list of resources, which provides the necessary metadata for manipulating a paginated collection. In operations that return lists, it's always present, though some of its fields might not be.
 type PaginationOutput struct {
@@ -74,7 +71,7 @@ func (o *PaginationOutput) SetCurrent(v string) {
 
 // GetNext returns the Next field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaginationOutput) GetNext() string {
-	if o == nil || IsNil(o.Next.Get()) {
+	if o == nil || o.Next.Get() == nil {
 		var ret string
 		return ret
 	}
@@ -117,7 +114,7 @@ func (o *PaginationOutput) UnsetNext() {
 
 // GetPrevious returns the Previous field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaginationOutput) GetPrevious() string {
-	if o == nil || IsNil(o.Previous.Get()) {
+	if o == nil || o.Previous.Get() == nil {
 		var ret string
 		return ret
 	}
@@ -160,7 +157,7 @@ func (o *PaginationOutput) UnsetPrevious() {
 
 // GetTotalEntries returns the TotalEntries field value if set, zero value otherwise.
 func (o *PaginationOutput) GetTotalEntries() float32 {
-	if o == nil || IsNil(o.TotalEntries) {
+	if o == nil || o.TotalEntries == nil {
 		var ret float32
 		return ret
 	}
@@ -170,7 +167,7 @@ func (o *PaginationOutput) GetTotalEntries() float32 {
 // GetTotalEntriesOk returns a tuple with the TotalEntries field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PaginationOutput) GetTotalEntriesOk() (*float32, bool) {
-	if o == nil || IsNil(o.TotalEntries) {
+	if o == nil || o.TotalEntries == nil {
 		return nil, false
 	}
 	return o.TotalEntries, true
@@ -178,7 +175,7 @@ func (o *PaginationOutput) GetTotalEntriesOk() (*float32, bool) {
 
 // HasTotalEntries returns a boolean if a field has been set.
 func (o *PaginationOutput) HasTotalEntries() bool {
-	if o != nil && !IsNil(o.TotalEntries) {
+	if o != nil && o.TotalEntries != nil {
 		return true
 	}
 
@@ -191,26 +188,20 @@ func (o *PaginationOutput) SetTotalEntries(v float32) {
 }
 
 func (o PaginationOutput) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o PaginationOutput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["current"] = o.Current
+	if true {
+		toSerialize["current"] = o.Current
+	}
 	if o.Next.IsSet() {
 		toSerialize["next"] = o.Next.Get()
 	}
 	if o.Previous.IsSet() {
 		toSerialize["previous"] = o.Previous.Get()
 	}
-	if !IsNil(o.TotalEntries) {
+	if o.TotalEntries != nil {
 		toSerialize["totalEntries"] = o.TotalEntries
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullablePaginationOutput struct {

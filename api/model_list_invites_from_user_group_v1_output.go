@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,14 +15,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the ListInvitesFromUserGroupV1Output type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListInvitesFromUserGroupV1Output{}
-
 // ListInvitesFromUserGroupV1Output Returns the emails of invitees to a user group with the given group id.
 type ListInvitesFromUserGroupV1Output struct {
 	// The emails of the invitees to the user group.
-	Emails     []string         `json:"emails"`
-	Pagination PaginationOutput `json:"pagination"`
+	Emails     []string   `json:"emails"`
+	Pagination Pagination `json:"pagination"`
 }
 
 // NewListInvitesFromUserGroupV1Output instantiates a new ListInvitesFromUserGroupV1Output object
@@ -31,7 +28,7 @@ type ListInvitesFromUserGroupV1Output struct {
 // will change when the set of required properties is changed
 func NewListInvitesFromUserGroupV1Output(
 	emails []string,
-	pagination PaginationOutput,
+	pagination Pagination,
 ) *ListInvitesFromUserGroupV1Output {
 	this := ListInvitesFromUserGroupV1Output{}
 	this.Emails = emails
@@ -72,9 +69,9 @@ func (o *ListInvitesFromUserGroupV1Output) SetEmails(v []string) {
 }
 
 // GetPagination returns the Pagination field value
-func (o *ListInvitesFromUserGroupV1Output) GetPagination() PaginationOutput {
+func (o *ListInvitesFromUserGroupV1Output) GetPagination() Pagination {
 	if o == nil {
-		var ret PaginationOutput
+		var ret Pagination
 		return ret
 	}
 
@@ -83,7 +80,7 @@ func (o *ListInvitesFromUserGroupV1Output) GetPagination() PaginationOutput {
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *ListInvitesFromUserGroupV1Output) GetPaginationOk() (*PaginationOutput, bool) {
+func (o *ListInvitesFromUserGroupV1Output) GetPaginationOk() (*Pagination, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -91,23 +88,19 @@ func (o *ListInvitesFromUserGroupV1Output) GetPaginationOk() (*PaginationOutput,
 }
 
 // SetPagination sets field value
-func (o *ListInvitesFromUserGroupV1Output) SetPagination(v PaginationOutput) {
+func (o *ListInvitesFromUserGroupV1Output) SetPagination(v Pagination) {
 	o.Pagination = v
 }
 
 func (o ListInvitesFromUserGroupV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["emails"] = o.Emails
+	}
+	if true {
+		toSerialize["pagination"] = o.Pagination
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o ListInvitesFromUserGroupV1Output) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["emails"] = o.Emails
-	toSerialize["pagination"] = o.Pagination
-	return toSerialize, nil
 }
 
 type NullableListInvitesFromUserGroupV1Output struct {

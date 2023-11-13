@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,12 +15,9 @@ import (
 	"encoding/json"
 )
 
-// checks if the SourceEventVolumeV1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &SourceEventVolumeV1{}
-
 // SourceEventVolumeV1 SourceEventVolume represents a time series of event volume for a Workspace broken down by the dimensions which the customer specifies (optional parameters).
 type SourceEventVolumeV1 struct {
-	Source *EventSourceV1 `json:"source,omitempty"`
+	Source *Source `json:"source,omitempty"`
 	// The name of the event, if applicable.
 	EventName *string `json:"eventName,omitempty"`
 	// The event type, if applicable.
@@ -54,9 +51,9 @@ func NewSourceEventVolumeV1WithDefaults() *SourceEventVolumeV1 {
 }
 
 // GetSource returns the Source field value if set, zero value otherwise.
-func (o *SourceEventVolumeV1) GetSource() EventSourceV1 {
-	if o == nil || IsNil(o.Source) {
-		var ret EventSourceV1
+func (o *SourceEventVolumeV1) GetSource() Source {
+	if o == nil || o.Source == nil {
+		var ret Source
 		return ret
 	}
 	return *o.Source
@@ -64,8 +61,8 @@ func (o *SourceEventVolumeV1) GetSource() EventSourceV1 {
 
 // GetSourceOk returns a tuple with the Source field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SourceEventVolumeV1) GetSourceOk() (*EventSourceV1, bool) {
-	if o == nil || IsNil(o.Source) {
+func (o *SourceEventVolumeV1) GetSourceOk() (*Source, bool) {
+	if o == nil || o.Source == nil {
 		return nil, false
 	}
 	return o.Source, true
@@ -73,21 +70,21 @@ func (o *SourceEventVolumeV1) GetSourceOk() (*EventSourceV1, bool) {
 
 // HasSource returns a boolean if a field has been set.
 func (o *SourceEventVolumeV1) HasSource() bool {
-	if o != nil && !IsNil(o.Source) {
+	if o != nil && o.Source != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetSource gets a reference to the given EventSourceV1 and assigns it to the Source field.
-func (o *SourceEventVolumeV1) SetSource(v EventSourceV1) {
+// SetSource gets a reference to the given Source and assigns it to the Source field.
+func (o *SourceEventVolumeV1) SetSource(v Source) {
 	o.Source = &v
 }
 
 // GetEventName returns the EventName field value if set, zero value otherwise.
 func (o *SourceEventVolumeV1) GetEventName() string {
-	if o == nil || IsNil(o.EventName) {
+	if o == nil || o.EventName == nil {
 		var ret string
 		return ret
 	}
@@ -97,7 +94,7 @@ func (o *SourceEventVolumeV1) GetEventName() string {
 // GetEventNameOk returns a tuple with the EventName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceEventVolumeV1) GetEventNameOk() (*string, bool) {
-	if o == nil || IsNil(o.EventName) {
+	if o == nil || o.EventName == nil {
 		return nil, false
 	}
 	return o.EventName, true
@@ -105,7 +102,7 @@ func (o *SourceEventVolumeV1) GetEventNameOk() (*string, bool) {
 
 // HasEventName returns a boolean if a field has been set.
 func (o *SourceEventVolumeV1) HasEventName() bool {
-	if o != nil && !IsNil(o.EventName) {
+	if o != nil && o.EventName != nil {
 		return true
 	}
 
@@ -119,7 +116,7 @@ func (o *SourceEventVolumeV1) SetEventName(v string) {
 
 // GetEventType returns the EventType field value if set, zero value otherwise.
 func (o *SourceEventVolumeV1) GetEventType() string {
-	if o == nil || IsNil(o.EventType) {
+	if o == nil || o.EventType == nil {
 		var ret string
 		return ret
 	}
@@ -129,7 +126,7 @@ func (o *SourceEventVolumeV1) GetEventType() string {
 // GetEventTypeOk returns a tuple with the EventType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceEventVolumeV1) GetEventTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.EventType) {
+	if o == nil || o.EventType == nil {
 		return nil, false
 	}
 	return o.EventType, true
@@ -137,7 +134,7 @@ func (o *SourceEventVolumeV1) GetEventTypeOk() (*string, bool) {
 
 // HasEventType returns a boolean if a field has been set.
 func (o *SourceEventVolumeV1) HasEventType() bool {
-	if o != nil && !IsNil(o.EventType) {
+	if o != nil && o.EventType != nil {
 		return true
 	}
 
@@ -198,27 +195,23 @@ func (o *SourceEventVolumeV1) SetSeries(v []SourceEventVolumeDatapointV1) {
 }
 
 func (o SourceEventVolumeV1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o SourceEventVolumeV1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Source) {
+	if o.Source != nil {
 		toSerialize["source"] = o.Source
 	}
-	if !IsNil(o.EventName) {
+	if o.EventName != nil {
 		toSerialize["eventName"] = o.EventName
 	}
-	if !IsNil(o.EventType) {
+	if o.EventType != nil {
 		toSerialize["eventType"] = o.EventType
 	}
-	toSerialize["total"] = o.Total
-	toSerialize["series"] = o.Series
-	return toSerialize, nil
+	if true {
+		toSerialize["total"] = o.Total
+	}
+	if true {
+		toSerialize["series"] = o.Series
+	}
+	return json.Marshal(toSerialize)
 }
 
 type NullableSourceEventVolumeV1 struct {

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the RestoreFunctionVersion200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &RestoreFunctionVersion200Response{}
 
 // RestoreFunctionVersion200Response struct for RestoreFunctionVersion200Response
 type RestoreFunctionVersion200Response struct {
@@ -42,7 +39,7 @@ func NewRestoreFunctionVersion200ResponseWithDefaults() *RestoreFunctionVersion2
 
 // GetData returns the Data field value if set, zero value otherwise.
 func (o *RestoreFunctionVersion200Response) GetData() RestoreFunctionVersionAlphaOutput {
-	if o == nil || IsNil(o.Data) {
+	if o == nil || o.Data == nil {
 		var ret RestoreFunctionVersionAlphaOutput
 		return ret
 	}
@@ -52,7 +49,7 @@ func (o *RestoreFunctionVersion200Response) GetData() RestoreFunctionVersionAlph
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RestoreFunctionVersion200Response) GetDataOk() (*RestoreFunctionVersionAlphaOutput, bool) {
-	if o == nil || IsNil(o.Data) {
+	if o == nil || o.Data == nil {
 		return nil, false
 	}
 	return o.Data, true
@@ -60,7 +57,7 @@ func (o *RestoreFunctionVersion200Response) GetDataOk() (*RestoreFunctionVersion
 
 // HasData returns a boolean if a field has been set.
 func (o *RestoreFunctionVersion200Response) HasData() bool {
-	if o != nil && !IsNil(o.Data) {
+	if o != nil && o.Data != nil {
 		return true
 	}
 
@@ -73,19 +70,11 @@ func (o *RestoreFunctionVersion200Response) SetData(v RestoreFunctionVersionAlph
 }
 
 func (o RestoreFunctionVersion200Response) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o RestoreFunctionVersion200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Data) {
+	if o.Data != nil {
 		toSerialize["data"] = o.Data
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableRestoreFunctionVersion200Response struct {

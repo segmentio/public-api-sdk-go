@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,12 +15,9 @@ import (
 	"encoding/json"
 )
 
-// checks if the GetDestinationMetadataV1Output type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetDestinationMetadataV1Output{}
-
 // GetDestinationMetadataV1Output Returns a Destination catalog item.
 type GetDestinationMetadataV1Output struct {
-	DestinationMetadata DestinationMetadataV1 `json:"destinationMetadata"`
+	DestinationMetadata DestinationMetadata `json:"destinationMetadata"`
 }
 
 // NewGetDestinationMetadataV1Output instantiates a new GetDestinationMetadataV1Output object
@@ -28,7 +25,7 @@ type GetDestinationMetadataV1Output struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewGetDestinationMetadataV1Output(
-	destinationMetadata DestinationMetadataV1,
+	destinationMetadata DestinationMetadata,
 ) *GetDestinationMetadataV1Output {
 	this := GetDestinationMetadataV1Output{}
 	this.DestinationMetadata = destinationMetadata
@@ -44,9 +41,9 @@ func NewGetDestinationMetadataV1OutputWithDefaults() *GetDestinationMetadataV1Ou
 }
 
 // GetDestinationMetadata returns the DestinationMetadata field value
-func (o *GetDestinationMetadataV1Output) GetDestinationMetadata() DestinationMetadataV1 {
+func (o *GetDestinationMetadataV1Output) GetDestinationMetadata() DestinationMetadata {
 	if o == nil {
-		var ret DestinationMetadataV1
+		var ret DestinationMetadata
 		return ret
 	}
 
@@ -55,7 +52,7 @@ func (o *GetDestinationMetadataV1Output) GetDestinationMetadata() DestinationMet
 
 // GetDestinationMetadataOk returns a tuple with the DestinationMetadata field value
 // and a boolean to check if the value has been set.
-func (o *GetDestinationMetadataV1Output) GetDestinationMetadataOk() (*DestinationMetadataV1, bool) {
+func (o *GetDestinationMetadataV1Output) GetDestinationMetadataOk() (*DestinationMetadata, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -63,22 +60,16 @@ func (o *GetDestinationMetadataV1Output) GetDestinationMetadataOk() (*Destinatio
 }
 
 // SetDestinationMetadata sets field value
-func (o *GetDestinationMetadataV1Output) SetDestinationMetadata(v DestinationMetadataV1) {
+func (o *GetDestinationMetadataV1Output) SetDestinationMetadata(v DestinationMetadata) {
 	o.DestinationMetadata = v
 }
 
 func (o GetDestinationMetadataV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["destinationMetadata"] = o.DestinationMetadata
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o GetDestinationMetadataV1Output) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["destinationMetadata"] = o.DestinationMetadata
-	return toSerialize, nil
 }
 
 type NullableGetDestinationMetadataV1Output struct {

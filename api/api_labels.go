@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// LabelsAPIService LabelsAPI service
-type LabelsAPIService service
+// LabelsApiService LabelsApi service
+type LabelsApiService service
 
 type ApiCreateLabelRequest struct {
 	ctx                context.Context
-	ApiService         *LabelsAPIService
+	ApiService         *LabelsApiService
 	createLabelV1Input *CreateLabelV1Input
 }
 
@@ -52,7 +52,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateLabelRequest
 */
-func (a *LabelsAPIService) CreateLabel(ctx context.Context) ApiCreateLabelRequest {
+func (a *LabelsApiService) CreateLabel(ctx context.Context) ApiCreateLabelRequest {
 	return ApiCreateLabelRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -62,7 +62,7 @@ func (a *LabelsAPIService) CreateLabel(ctx context.Context) ApiCreateLabelReques
 // Execute executes the request
 //
 //	@return CreateLabel200Response
-func (a *LabelsAPIService) CreateLabelExecute(
+func (a *LabelsApiService) CreateLabelExecute(
 	r ApiCreateLabelRequest,
 ) (*CreateLabel200Response, *http.Response, error) {
 	var (
@@ -72,7 +72,7 @@ func (a *LabelsAPIService) CreateLabelExecute(
 		localVarReturnValue *CreateLabel200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LabelsAPIService.CreateLabel")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LabelsApiService.CreateLabel")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -135,9 +135,9 @@ func (a *LabelsAPIService) CreateLabelExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -154,7 +154,6 @@ func (a *LabelsAPIService) CreateLabelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -165,7 +164,6 @@ func (a *LabelsAPIService) CreateLabelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -176,7 +174,6 @@ func (a *LabelsAPIService) CreateLabelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -200,7 +197,7 @@ func (a *LabelsAPIService) CreateLabelExecute(
 
 type ApiDeleteLabelRequest struct {
 	ctx        context.Context
-	ApiService *LabelsAPIService
+	ApiService *LabelsApiService
 	key        string
 	value      string
 }
@@ -223,7 +220,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param value
 	@return ApiDeleteLabelRequest
 */
-func (a *LabelsAPIService) DeleteLabel(
+func (a *LabelsApiService) DeleteLabel(
 	ctx context.Context,
 	key string,
 	value string,
@@ -239,7 +236,7 @@ func (a *LabelsAPIService) DeleteLabel(
 // Execute executes the request
 //
 //	@return DeleteLabel200Response
-func (a *LabelsAPIService) DeleteLabelExecute(
+func (a *LabelsApiService) DeleteLabelExecute(
 	r ApiDeleteLabelRequest,
 ) (*DeleteLabel200Response, *http.Response, error) {
 	var (
@@ -249,7 +246,7 @@ func (a *LabelsAPIService) DeleteLabelExecute(
 		localVarReturnValue *DeleteLabel200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LabelsAPIService.DeleteLabel")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LabelsApiService.DeleteLabel")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -258,13 +255,13 @@ func (a *LabelsAPIService) DeleteLabelExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"key"+"}",
-		url.PathEscape(parameterValueToString(r.key, "key")),
+		url.PathEscape(parameterToString(r.key, "")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"value"+"}",
-		url.PathEscape(parameterValueToString(r.value, "value")),
+		url.PathEscape(parameterToString(r.value, "")),
 		-1,
 	)
 
@@ -313,9 +310,9 @@ func (a *LabelsAPIService) DeleteLabelExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -332,7 +329,6 @@ func (a *LabelsAPIService) DeleteLabelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -343,7 +339,6 @@ func (a *LabelsAPIService) DeleteLabelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -354,7 +349,6 @@ func (a *LabelsAPIService) DeleteLabelExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -378,7 +372,7 @@ func (a *LabelsAPIService) DeleteLabelExecute(
 
 type ApiListLabelsRequest struct {
 	ctx        context.Context
-	ApiService *LabelsAPIService
+	ApiService *LabelsApiService
 }
 
 func (r ApiListLabelsRequest) Execute() (*ListLabels200Response, *http.Response, error) {
@@ -393,7 +387,7 @@ Returns a list of all available labels.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListLabelsRequest
 */
-func (a *LabelsAPIService) ListLabels(ctx context.Context) ApiListLabelsRequest {
+func (a *LabelsApiService) ListLabels(ctx context.Context) ApiListLabelsRequest {
 	return ApiListLabelsRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -403,7 +397,7 @@ func (a *LabelsAPIService) ListLabels(ctx context.Context) ApiListLabelsRequest 
 // Execute executes the request
 //
 //	@return ListLabels200Response
-func (a *LabelsAPIService) ListLabelsExecute(
+func (a *LabelsApiService) ListLabelsExecute(
 	r ApiListLabelsRequest,
 ) (*ListLabels200Response, *http.Response, error) {
 	var (
@@ -413,7 +407,7 @@ func (a *LabelsAPIService) ListLabelsExecute(
 		localVarReturnValue *ListLabels200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LabelsAPIService.ListLabels")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LabelsApiService.ListLabels")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -465,9 +459,9 @@ func (a *LabelsAPIService) ListLabelsExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -484,7 +478,6 @@ func (a *LabelsAPIService) ListLabelsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -495,7 +488,6 @@ func (a *LabelsAPIService) ListLabelsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -506,7 +498,6 @@ func (a *LabelsAPIService) ListLabelsExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

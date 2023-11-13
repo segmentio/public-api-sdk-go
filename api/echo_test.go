@@ -41,7 +41,7 @@ func Test_Echo(t *testing.T) {
 	apiClient := NewAPIClient(configuration)
 
 	t.Run("Test Echo", func(t *testing.T) {
-		resp, httpRes, err := apiClient.TestingAPI.Echo(context.Background()).Message("Hello Go-SDK!").Execute()
+		resp, httpRes, err := apiClient.TestingApi.Echo(context.Background()).Message("Hello Go-SDK!").Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

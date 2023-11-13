@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the RequestError type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &RequestError{}
 
 // RequestError Represents any error that could have occurred while performing a request.
 type RequestError struct {
@@ -76,7 +73,7 @@ func (o *RequestError) SetType(v string) {
 
 // GetMessage returns the Message field value if set, zero value otherwise.
 func (o *RequestError) GetMessage() string {
-	if o == nil || IsNil(o.Message) {
+	if o == nil || o.Message == nil {
 		var ret string
 		return ret
 	}
@@ -86,7 +83,7 @@ func (o *RequestError) GetMessage() string {
 // GetMessageOk returns a tuple with the Message field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RequestError) GetMessageOk() (*string, bool) {
-	if o == nil || IsNil(o.Message) {
+	if o == nil || o.Message == nil {
 		return nil, false
 	}
 	return o.Message, true
@@ -94,7 +91,7 @@ func (o *RequestError) GetMessageOk() (*string, bool) {
 
 // HasMessage returns a boolean if a field has been set.
 func (o *RequestError) HasMessage() bool {
-	if o != nil && !IsNil(o.Message) {
+	if o != nil && o.Message != nil {
 		return true
 	}
 
@@ -108,7 +105,7 @@ func (o *RequestError) SetMessage(v string) {
 
 // GetField returns the Field field value if set, zero value otherwise.
 func (o *RequestError) GetField() string {
-	if o == nil || IsNil(o.Field) {
+	if o == nil || o.Field == nil {
 		var ret string
 		return ret
 	}
@@ -118,7 +115,7 @@ func (o *RequestError) GetField() string {
 // GetFieldOk returns a tuple with the Field field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RequestError) GetFieldOk() (*string, bool) {
-	if o == nil || IsNil(o.Field) {
+	if o == nil || o.Field == nil {
 		return nil, false
 	}
 	return o.Field, true
@@ -126,7 +123,7 @@ func (o *RequestError) GetFieldOk() (*string, bool) {
 
 // HasField returns a boolean if a field has been set.
 func (o *RequestError) HasField() bool {
-	if o != nil && !IsNil(o.Field) {
+	if o != nil && o.Field != nil {
 		return true
 	}
 
@@ -151,7 +148,7 @@ func (o *RequestError) GetData() interface{} {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RequestError) GetDataOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Data) {
+	if o == nil || o.Data == nil {
 		return nil, false
 	}
 	return &o.Data, true
@@ -159,7 +156,7 @@ func (o *RequestError) GetDataOk() (*interface{}, bool) {
 
 // HasData returns a boolean if a field has been set.
 func (o *RequestError) HasData() bool {
-	if o != nil && IsNil(o.Data) {
+	if o != nil && o.Data != nil {
 		return true
 	}
 
@@ -173,7 +170,7 @@ func (o *RequestError) SetData(v interface{}) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *RequestError) GetStatus() float32 {
-	if o == nil || IsNil(o.Status) {
+	if o == nil || o.Status == nil {
 		var ret float32
 		return ret
 	}
@@ -183,7 +180,7 @@ func (o *RequestError) GetStatus() float32 {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RequestError) GetStatusOk() (*float32, bool) {
-	if o == nil || IsNil(o.Status) {
+	if o == nil || o.Status == nil {
 		return nil, false
 	}
 	return o.Status, true
@@ -191,7 +188,7 @@ func (o *RequestError) GetStatusOk() (*float32, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *RequestError) HasStatus() bool {
-	if o != nil && !IsNil(o.Status) {
+	if o != nil && o.Status != nil {
 		return true
 	}
 
@@ -204,29 +201,23 @@ func (o *RequestError) SetStatus(v float32) {
 }
 
 func (o RequestError) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o RequestError) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["type"] = o.Type
-	if !IsNil(o.Message) {
+	if true {
+		toSerialize["type"] = o.Type
+	}
+	if o.Message != nil {
 		toSerialize["message"] = o.Message
 	}
-	if !IsNil(o.Field) {
+	if o.Field != nil {
 		toSerialize["field"] = o.Field
 	}
 	if o.Data != nil {
 		toSerialize["data"] = o.Data
 	}
-	if !IsNil(o.Status) {
+	if o.Status != nil {
 		toSerialize["status"] = o.Status
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableRequestError struct {

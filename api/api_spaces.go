@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// SpacesAPIService SpacesAPI service
-type SpacesAPIService service
+// SpacesApiService SpacesApi service
+type SpacesApiService service
 
 type ApiBatchQueryMessagingSubscriptionsForSpaceRequest struct {
 	ctx                                                context.Context
-	ApiService                                         *SpacesAPIService
+	ApiService                                         *SpacesApiService
 	spaceId                                            string
 	batchQueryMessagingSubscriptionsForSpaceAlphaInput *BatchQueryMessagingSubscriptionsForSpaceAlphaInput
 }
@@ -54,7 +54,7 @@ Get Messaging Subscriptions for space.
 	@param spaceId
 	@return ApiBatchQueryMessagingSubscriptionsForSpaceRequest
 */
-func (a *SpacesAPIService) BatchQueryMessagingSubscriptionsForSpace(
+func (a *SpacesApiService) BatchQueryMessagingSubscriptionsForSpace(
 	ctx context.Context,
 	spaceId string,
 ) ApiBatchQueryMessagingSubscriptionsForSpaceRequest {
@@ -68,7 +68,7 @@ func (a *SpacesAPIService) BatchQueryMessagingSubscriptionsForSpace(
 // Execute executes the request
 //
 //	@return BatchQueryMessagingSubscriptionsForSpace200Response
-func (a *SpacesAPIService) BatchQueryMessagingSubscriptionsForSpaceExecute(
+func (a *SpacesApiService) BatchQueryMessagingSubscriptionsForSpaceExecute(
 	r ApiBatchQueryMessagingSubscriptionsForSpaceRequest,
 ) (*BatchQueryMessagingSubscriptionsForSpace200Response, *http.Response, error) {
 	var (
@@ -80,7 +80,7 @@ func (a *SpacesAPIService) BatchQueryMessagingSubscriptionsForSpaceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SpacesAPIService.BatchQueryMessagingSubscriptionsForSpace",
+		"SpacesApiService.BatchQueryMessagingSubscriptionsForSpace",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -90,7 +90,7 @@ func (a *SpacesAPIService) BatchQueryMessagingSubscriptionsForSpaceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 
@@ -144,9 +144,9 @@ func (a *SpacesAPIService) BatchQueryMessagingSubscriptionsForSpaceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -163,7 +163,6 @@ func (a *SpacesAPIService) BatchQueryMessagingSubscriptionsForSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -174,7 +173,6 @@ func (a *SpacesAPIService) BatchQueryMessagingSubscriptionsForSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -185,7 +183,6 @@ func (a *SpacesAPIService) BatchQueryMessagingSubscriptionsForSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -209,7 +206,7 @@ func (a *SpacesAPIService) BatchQueryMessagingSubscriptionsForSpaceExecute(
 
 type ApiGetSpaceRequest struct {
 	ctx        context.Context
-	ApiService *SpacesAPIService
+	ApiService *SpacesApiService
 	spaceId    string
 }
 
@@ -230,7 +227,7 @@ Returns the Space by id.
 	@param spaceId
 	@return ApiGetSpaceRequest
 */
-func (a *SpacesAPIService) GetSpace(ctx context.Context, spaceId string) ApiGetSpaceRequest {
+func (a *SpacesApiService) GetSpace(ctx context.Context, spaceId string) ApiGetSpaceRequest {
 	return ApiGetSpaceRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -241,7 +238,7 @@ func (a *SpacesAPIService) GetSpace(ctx context.Context, spaceId string) ApiGetS
 // Execute executes the request
 //
 //	@return GetSpace200Response
-func (a *SpacesAPIService) GetSpaceExecute(
+func (a *SpacesApiService) GetSpaceExecute(
 	r ApiGetSpaceRequest,
 ) (*GetSpace200Response, *http.Response, error) {
 	var (
@@ -251,7 +248,7 @@ func (a *SpacesAPIService) GetSpaceExecute(
 		localVarReturnValue *GetSpace200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SpacesAPIService.GetSpace")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SpacesApiService.GetSpace")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -260,7 +257,7 @@ func (a *SpacesAPIService) GetSpaceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 
@@ -307,9 +304,9 @@ func (a *SpacesAPIService) GetSpaceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -326,7 +323,6 @@ func (a *SpacesAPIService) GetSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -337,7 +333,6 @@ func (a *SpacesAPIService) GetSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -348,7 +343,6 @@ func (a *SpacesAPIService) GetSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -372,7 +366,7 @@ func (a *SpacesAPIService) GetSpaceExecute(
 
 type ApiReplaceMessagingSubscriptionsInSpacesRequest struct {
 	ctx                                             context.Context
-	ApiService                                      *SpacesAPIService
+	ApiService                                      *SpacesApiService
 	spaceId                                         string
 	replaceMessagingSubscriptionsInSpacesAlphaInput *ReplaceMessagingSubscriptionsInSpacesAlphaInput
 }
@@ -403,7 +397,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param spaceId
 	@return ApiReplaceMessagingSubscriptionsInSpacesRequest
 */
-func (a *SpacesAPIService) ReplaceMessagingSubscriptionsInSpaces(
+func (a *SpacesApiService) ReplaceMessagingSubscriptionsInSpaces(
 	ctx context.Context,
 	spaceId string,
 ) ApiReplaceMessagingSubscriptionsInSpacesRequest {
@@ -417,7 +411,7 @@ func (a *SpacesAPIService) ReplaceMessagingSubscriptionsInSpaces(
 // Execute executes the request
 //
 //	@return ReplaceMessagingSubscriptionsInSpaces200Response
-func (a *SpacesAPIService) ReplaceMessagingSubscriptionsInSpacesExecute(
+func (a *SpacesApiService) ReplaceMessagingSubscriptionsInSpacesExecute(
 	r ApiReplaceMessagingSubscriptionsInSpacesRequest,
 ) (*ReplaceMessagingSubscriptionsInSpaces200Response, *http.Response, error) {
 	var (
@@ -429,7 +423,7 @@ func (a *SpacesAPIService) ReplaceMessagingSubscriptionsInSpacesExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SpacesAPIService.ReplaceMessagingSubscriptionsInSpaces",
+		"SpacesApiService.ReplaceMessagingSubscriptionsInSpaces",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -439,7 +433,7 @@ func (a *SpacesAPIService) ReplaceMessagingSubscriptionsInSpacesExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 
@@ -493,9 +487,9 @@ func (a *SpacesAPIService) ReplaceMessagingSubscriptionsInSpacesExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -512,7 +506,6 @@ func (a *SpacesAPIService) ReplaceMessagingSubscriptionsInSpacesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -523,7 +516,6 @@ func (a *SpacesAPIService) ReplaceMessagingSubscriptionsInSpacesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -534,7 +526,6 @@ func (a *SpacesAPIService) ReplaceMessagingSubscriptionsInSpacesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,9 +15,6 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateDestinationSubscriptionAlphaInput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateDestinationSubscriptionAlphaInput{}
-
 // CreateDestinationSubscriptionAlphaInput The basic input parameters for creating a Destination subscription.
 type CreateDestinationSubscriptionAlphaInput struct {
 	// A user-defined name for the subscription.
@@ -28,8 +25,8 @@ type CreateDestinationSubscriptionAlphaInput struct {
 	Trigger string `json:"trigger"`
 	// Is the subscription enabled.
 	Enabled bool `json:"enabled"`
-	// Represents settings used to configure an action subscription.
-	Settings map[string]interface{} `json:"settings,omitempty"`
+	// The fields used for configuring this action.
+	Settings NullableModelMap `json:"settings,omitempty"`
 	// When creating a Reverse ETL connection, indicates the Model being used to extract data.
 	ModelId *string `json:"modelId,omitempty"`
 }
@@ -156,41 +153,52 @@ func (o *CreateDestinationSubscriptionAlphaInput) SetEnabled(v bool) {
 	o.Enabled = v
 }
 
-// GetSettings returns the Settings field value if set, zero value otherwise.
-func (o *CreateDestinationSubscriptionAlphaInput) GetSettings() map[string]interface{} {
-	if o == nil || IsNil(o.Settings) {
-		var ret map[string]interface{}
+// GetSettings returns the Settings field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateDestinationSubscriptionAlphaInput) GetSettings() ModelMap {
+	if o == nil || o.Settings.Get() == nil {
+		var ret ModelMap
 		return ret
 	}
-	return o.Settings
+	return *o.Settings.Get()
 }
 
 // GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateDestinationSubscriptionAlphaInput) GetSettingsOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Settings) {
-		return map[string]interface{}{}, false
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateDestinationSubscriptionAlphaInput) GetSettingsOk() (*ModelMap, bool) {
+	if o == nil {
+		return nil, false
 	}
-	return o.Settings, true
+	return o.Settings.Get(), o.Settings.IsSet()
 }
 
 // HasSettings returns a boolean if a field has been set.
 func (o *CreateDestinationSubscriptionAlphaInput) HasSettings() bool {
-	if o != nil && !IsNil(o.Settings) {
+	if o != nil && o.Settings.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSettings gets a reference to the given map[string]interface{} and assigns it to the Settings field.
-func (o *CreateDestinationSubscriptionAlphaInput) SetSettings(v map[string]interface{}) {
-	o.Settings = v
+// SetSettings gets a reference to the given NullableModelMap and assigns it to the Settings field.
+func (o *CreateDestinationSubscriptionAlphaInput) SetSettings(v ModelMap) {
+	o.Settings.Set(&v)
+}
+
+// SetSettingsNil sets the value for Settings to be an explicit nil
+func (o *CreateDestinationSubscriptionAlphaInput) SetSettingsNil() {
+	o.Settings.Set(nil)
+}
+
+// UnsetSettings ensures that no value is present for Settings, not even an explicit nil
+func (o *CreateDestinationSubscriptionAlphaInput) UnsetSettings() {
+	o.Settings.Unset()
 }
 
 // GetModelId returns the ModelId field value if set, zero value otherwise.
 func (o *CreateDestinationSubscriptionAlphaInput) GetModelId() string {
-	if o == nil || IsNil(o.ModelId) {
+	if o == nil || o.ModelId == nil {
 		var ret string
 		return ret
 	}
@@ -200,7 +208,7 @@ func (o *CreateDestinationSubscriptionAlphaInput) GetModelId() string {
 // GetModelIdOk returns a tuple with the ModelId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateDestinationSubscriptionAlphaInput) GetModelIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ModelId) {
+	if o == nil || o.ModelId == nil {
 		return nil, false
 	}
 	return o.ModelId, true
@@ -208,7 +216,7 @@ func (o *CreateDestinationSubscriptionAlphaInput) GetModelIdOk() (*string, bool)
 
 // HasModelId returns a boolean if a field has been set.
 func (o *CreateDestinationSubscriptionAlphaInput) HasModelId() bool {
-	if o != nil && !IsNil(o.ModelId) {
+	if o != nil && o.ModelId != nil {
 		return true
 	}
 
@@ -221,26 +229,26 @@ func (o *CreateDestinationSubscriptionAlphaInput) SetModelId(v string) {
 }
 
 func (o CreateDestinationSubscriptionAlphaInput) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o CreateDestinationSubscriptionAlphaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["name"] = o.Name
-	toSerialize["actionId"] = o.ActionId
-	toSerialize["trigger"] = o.Trigger
-	toSerialize["enabled"] = o.Enabled
-	if !IsNil(o.Settings) {
-		toSerialize["settings"] = o.Settings
+	if true {
+		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.ModelId) {
+	if true {
+		toSerialize["actionId"] = o.ActionId
+	}
+	if true {
+		toSerialize["trigger"] = o.Trigger
+	}
+	if true {
+		toSerialize["enabled"] = o.Enabled
+	}
+	if o.Settings.IsSet() {
+		toSerialize["settings"] = o.Settings.Get()
+	}
+	if o.ModelId != nil {
 		toSerialize["modelId"] = o.ModelId
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableCreateDestinationSubscriptionAlphaInput struct {

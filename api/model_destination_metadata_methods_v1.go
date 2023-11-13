@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the DestinationMetadataMethodsV1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &DestinationMetadataMethodsV1{}
 
 // DestinationMetadataMethodsV1 Represents methods that a given Destination supports.
 type DestinationMetadataMethodsV1 struct {
@@ -51,7 +48,7 @@ func NewDestinationMetadataMethodsV1WithDefaults() *DestinationMetadataMethodsV1
 
 // GetPageview returns the Pageview field value if set, zero value otherwise.
 func (o *DestinationMetadataMethodsV1) GetPageview() bool {
-	if o == nil || IsNil(o.Pageview) {
+	if o == nil || o.Pageview == nil {
 		var ret bool
 		return ret
 	}
@@ -61,7 +58,7 @@ func (o *DestinationMetadataMethodsV1) GetPageview() bool {
 // GetPageviewOk returns a tuple with the Pageview field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataMethodsV1) GetPageviewOk() (*bool, bool) {
-	if o == nil || IsNil(o.Pageview) {
+	if o == nil || o.Pageview == nil {
 		return nil, false
 	}
 	return o.Pageview, true
@@ -69,7 +66,7 @@ func (o *DestinationMetadataMethodsV1) GetPageviewOk() (*bool, bool) {
 
 // HasPageview returns a boolean if a field has been set.
 func (o *DestinationMetadataMethodsV1) HasPageview() bool {
-	if o != nil && !IsNil(o.Pageview) {
+	if o != nil && o.Pageview != nil {
 		return true
 	}
 
@@ -83,7 +80,7 @@ func (o *DestinationMetadataMethodsV1) SetPageview(v bool) {
 
 // GetIdentify returns the Identify field value if set, zero value otherwise.
 func (o *DestinationMetadataMethodsV1) GetIdentify() bool {
-	if o == nil || IsNil(o.Identify) {
+	if o == nil || o.Identify == nil {
 		var ret bool
 		return ret
 	}
@@ -93,7 +90,7 @@ func (o *DestinationMetadataMethodsV1) GetIdentify() bool {
 // GetIdentifyOk returns a tuple with the Identify field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataMethodsV1) GetIdentifyOk() (*bool, bool) {
-	if o == nil || IsNil(o.Identify) {
+	if o == nil || o.Identify == nil {
 		return nil, false
 	}
 	return o.Identify, true
@@ -101,7 +98,7 @@ func (o *DestinationMetadataMethodsV1) GetIdentifyOk() (*bool, bool) {
 
 // HasIdentify returns a boolean if a field has been set.
 func (o *DestinationMetadataMethodsV1) HasIdentify() bool {
-	if o != nil && !IsNil(o.Identify) {
+	if o != nil && o.Identify != nil {
 		return true
 	}
 
@@ -115,7 +112,7 @@ func (o *DestinationMetadataMethodsV1) SetIdentify(v bool) {
 
 // GetAlias returns the Alias field value if set, zero value otherwise.
 func (o *DestinationMetadataMethodsV1) GetAlias() bool {
-	if o == nil || IsNil(o.Alias) {
+	if o == nil || o.Alias == nil {
 		var ret bool
 		return ret
 	}
@@ -125,7 +122,7 @@ func (o *DestinationMetadataMethodsV1) GetAlias() bool {
 // GetAliasOk returns a tuple with the Alias field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataMethodsV1) GetAliasOk() (*bool, bool) {
-	if o == nil || IsNil(o.Alias) {
+	if o == nil || o.Alias == nil {
 		return nil, false
 	}
 	return o.Alias, true
@@ -133,7 +130,7 @@ func (o *DestinationMetadataMethodsV1) GetAliasOk() (*bool, bool) {
 
 // HasAlias returns a boolean if a field has been set.
 func (o *DestinationMetadataMethodsV1) HasAlias() bool {
-	if o != nil && !IsNil(o.Alias) {
+	if o != nil && o.Alias != nil {
 		return true
 	}
 
@@ -147,7 +144,7 @@ func (o *DestinationMetadataMethodsV1) SetAlias(v bool) {
 
 // GetTrack returns the Track field value if set, zero value otherwise.
 func (o *DestinationMetadataMethodsV1) GetTrack() bool {
-	if o == nil || IsNil(o.Track) {
+	if o == nil || o.Track == nil {
 		var ret bool
 		return ret
 	}
@@ -157,7 +154,7 @@ func (o *DestinationMetadataMethodsV1) GetTrack() bool {
 // GetTrackOk returns a tuple with the Track field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataMethodsV1) GetTrackOk() (*bool, bool) {
-	if o == nil || IsNil(o.Track) {
+	if o == nil || o.Track == nil {
 		return nil, false
 	}
 	return o.Track, true
@@ -165,7 +162,7 @@ func (o *DestinationMetadataMethodsV1) GetTrackOk() (*bool, bool) {
 
 // HasTrack returns a boolean if a field has been set.
 func (o *DestinationMetadataMethodsV1) HasTrack() bool {
-	if o != nil && !IsNil(o.Track) {
+	if o != nil && o.Track != nil {
 		return true
 	}
 
@@ -179,7 +176,7 @@ func (o *DestinationMetadataMethodsV1) SetTrack(v bool) {
 
 // GetGroup returns the Group field value if set, zero value otherwise.
 func (o *DestinationMetadataMethodsV1) GetGroup() bool {
-	if o == nil || IsNil(o.Group) {
+	if o == nil || o.Group == nil {
 		var ret bool
 		return ret
 	}
@@ -189,7 +186,7 @@ func (o *DestinationMetadataMethodsV1) GetGroup() bool {
 // GetGroupOk returns a tuple with the Group field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataMethodsV1) GetGroupOk() (*bool, bool) {
-	if o == nil || IsNil(o.Group) {
+	if o == nil || o.Group == nil {
 		return nil, false
 	}
 	return o.Group, true
@@ -197,7 +194,7 @@ func (o *DestinationMetadataMethodsV1) GetGroupOk() (*bool, bool) {
 
 // HasGroup returns a boolean if a field has been set.
 func (o *DestinationMetadataMethodsV1) HasGroup() bool {
-	if o != nil && !IsNil(o.Group) {
+	if o != nil && o.Group != nil {
 		return true
 	}
 
@@ -210,31 +207,23 @@ func (o *DestinationMetadataMethodsV1) SetGroup(v bool) {
 }
 
 func (o DestinationMetadataMethodsV1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o DestinationMetadataMethodsV1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Pageview) {
+	if o.Pageview != nil {
 		toSerialize["pageview"] = o.Pageview
 	}
-	if !IsNil(o.Identify) {
+	if o.Identify != nil {
 		toSerialize["identify"] = o.Identify
 	}
-	if !IsNil(o.Alias) {
+	if o.Alias != nil {
 		toSerialize["alias"] = o.Alias
 	}
-	if !IsNil(o.Track) {
+	if o.Track != nil {
 		toSerialize["track"] = o.Track
 	}
-	if !IsNil(o.Group) {
+	if o.Group != nil {
 		toSerialize["group"] = o.Group
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableDestinationMetadataMethodsV1 struct {

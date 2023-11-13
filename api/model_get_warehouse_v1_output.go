@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,19 +15,16 @@ import (
 	"encoding/json"
 )
 
-// checks if the GetWarehouseV1Output type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetWarehouseV1Output{}
-
 // GetWarehouseV1Output Returns a Warehouse.
 type GetWarehouseV1Output struct {
-	Warehouse WarehouseV1 `json:"warehouse"`
+	Warehouse Warehouse `json:"warehouse"`
 }
 
 // NewGetWarehouseV1Output instantiates a new GetWarehouseV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetWarehouseV1Output(warehouse WarehouseV1) *GetWarehouseV1Output {
+func NewGetWarehouseV1Output(warehouse Warehouse) *GetWarehouseV1Output {
 	this := GetWarehouseV1Output{}
 	this.Warehouse = warehouse
 	return &this
@@ -42,9 +39,9 @@ func NewGetWarehouseV1OutputWithDefaults() *GetWarehouseV1Output {
 }
 
 // GetWarehouse returns the Warehouse field value
-func (o *GetWarehouseV1Output) GetWarehouse() WarehouseV1 {
+func (o *GetWarehouseV1Output) GetWarehouse() Warehouse {
 	if o == nil {
-		var ret WarehouseV1
+		var ret Warehouse
 		return ret
 	}
 
@@ -53,7 +50,7 @@ func (o *GetWarehouseV1Output) GetWarehouse() WarehouseV1 {
 
 // GetWarehouseOk returns a tuple with the Warehouse field value
 // and a boolean to check if the value has been set.
-func (o *GetWarehouseV1Output) GetWarehouseOk() (*WarehouseV1, bool) {
+func (o *GetWarehouseV1Output) GetWarehouseOk() (*Warehouse, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -61,22 +58,16 @@ func (o *GetWarehouseV1Output) GetWarehouseOk() (*WarehouseV1, bool) {
 }
 
 // SetWarehouse sets field value
-func (o *GetWarehouseV1Output) SetWarehouse(v WarehouseV1) {
+func (o *GetWarehouseV1Output) SetWarehouse(v Warehouse) {
 	o.Warehouse = v
 }
 
 func (o GetWarehouseV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["warehouse"] = o.Warehouse
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o GetWarehouseV1Output) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["warehouse"] = o.Warehouse
-	return toSerialize, nil
 }
 
 type NullableGetWarehouseV1Output struct {

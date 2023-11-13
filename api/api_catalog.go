@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// CatalogAPIService CatalogAPI service
-type CatalogAPIService service
+// CatalogApiService CatalogApi service
+type CatalogApiService service
 
 type ApiGetDestinationMetadataRequest struct {
 	ctx                   context.Context
-	ApiService            *CatalogAPIService
+	ApiService            *CatalogApiService
 	destinationMetadataId string
 }
 
@@ -42,7 +42,7 @@ Returns a Destination catalog item by its id.
 	@param destinationMetadataId
 	@return ApiGetDestinationMetadataRequest
 */
-func (a *CatalogAPIService) GetDestinationMetadata(
+func (a *CatalogApiService) GetDestinationMetadata(
 	ctx context.Context,
 	destinationMetadataId string,
 ) ApiGetDestinationMetadataRequest {
@@ -56,7 +56,7 @@ func (a *CatalogAPIService) GetDestinationMetadata(
 // Execute executes the request
 //
 //	@return GetDestinationMetadata200Response
-func (a *CatalogAPIService) GetDestinationMetadataExecute(
+func (a *CatalogApiService) GetDestinationMetadataExecute(
 	r ApiGetDestinationMetadataRequest,
 ) (*GetDestinationMetadata200Response, *http.Response, error) {
 	var (
@@ -68,7 +68,7 @@ func (a *CatalogAPIService) GetDestinationMetadataExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"CatalogAPIService.GetDestinationMetadata",
+		"CatalogApiService.GetDestinationMetadata",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -78,7 +78,7 @@ func (a *CatalogAPIService) GetDestinationMetadataExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"destinationMetadataId"+"}",
-		url.PathEscape(parameterValueToString(r.destinationMetadataId, "destinationMetadataId")),
+		url.PathEscape(parameterToString(r.destinationMetadataId, "")),
 		-1,
 	)
 
@@ -127,9 +127,9 @@ func (a *CatalogAPIService) GetDestinationMetadataExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -146,7 +146,6 @@ func (a *CatalogAPIService) GetDestinationMetadataExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -157,7 +156,6 @@ func (a *CatalogAPIService) GetDestinationMetadataExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -168,7 +166,6 @@ func (a *CatalogAPIService) GetDestinationMetadataExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -192,7 +189,7 @@ func (a *CatalogAPIService) GetDestinationMetadataExecute(
 
 type ApiGetDestinationsCatalogRequest struct {
 	ctx        context.Context
-	ApiService *CatalogAPIService
+	ApiService *CatalogApiService
 	pagination *PaginationInput
 }
 
@@ -216,7 +213,7 @@ Returns a list of all available Destinations in the Segment catalog.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetDestinationsCatalogRequest
 */
-func (a *CatalogAPIService) GetDestinationsCatalog(
+func (a *CatalogApiService) GetDestinationsCatalog(
 	ctx context.Context,
 ) ApiGetDestinationsCatalogRequest {
 	return ApiGetDestinationsCatalogRequest{
@@ -228,7 +225,7 @@ func (a *CatalogAPIService) GetDestinationsCatalog(
 // Execute executes the request
 //
 //	@return GetDestinationsCatalog200Response
-func (a *CatalogAPIService) GetDestinationsCatalogExecute(
+func (a *CatalogApiService) GetDestinationsCatalogExecute(
 	r ApiGetDestinationsCatalogRequest,
 ) (*GetDestinationsCatalog200Response, *http.Response, error) {
 	var (
@@ -240,7 +237,7 @@ func (a *CatalogAPIService) GetDestinationsCatalogExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"CatalogAPIService.GetDestinationsCatalog",
+		"CatalogApiService.GetDestinationsCatalog",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -255,7 +252,7 @@ func (a *CatalogAPIService) GetDestinationsCatalogExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -297,9 +294,9 @@ func (a *CatalogAPIService) GetDestinationsCatalogExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -316,7 +313,6 @@ func (a *CatalogAPIService) GetDestinationsCatalogExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -327,7 +323,6 @@ func (a *CatalogAPIService) GetDestinationsCatalogExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -338,7 +333,6 @@ func (a *CatalogAPIService) GetDestinationsCatalogExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -362,7 +356,7 @@ func (a *CatalogAPIService) GetDestinationsCatalogExecute(
 
 type ApiGetSourceMetadataRequest struct {
 	ctx              context.Context
-	ApiService       *CatalogAPIService
+	ApiService       *CatalogApiService
 	sourceMetadataId string
 }
 
@@ -379,7 +373,7 @@ Returns a Source catalog item by its id.
 	@param sourceMetadataId
 	@return ApiGetSourceMetadataRequest
 */
-func (a *CatalogAPIService) GetSourceMetadata(
+func (a *CatalogApiService) GetSourceMetadata(
 	ctx context.Context,
 	sourceMetadataId string,
 ) ApiGetSourceMetadataRequest {
@@ -393,7 +387,7 @@ func (a *CatalogAPIService) GetSourceMetadata(
 // Execute executes the request
 //
 //	@return GetSourceMetadata200Response
-func (a *CatalogAPIService) GetSourceMetadataExecute(
+func (a *CatalogApiService) GetSourceMetadataExecute(
 	r ApiGetSourceMetadataRequest,
 ) (*GetSourceMetadata200Response, *http.Response, error) {
 	var (
@@ -405,7 +399,7 @@ func (a *CatalogAPIService) GetSourceMetadataExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"CatalogAPIService.GetSourceMetadata",
+		"CatalogApiService.GetSourceMetadata",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -415,7 +409,7 @@ func (a *CatalogAPIService) GetSourceMetadataExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceMetadataId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceMetadataId, "sourceMetadataId")),
+		url.PathEscape(parameterToString(r.sourceMetadataId, "")),
 		-1,
 	)
 
@@ -464,9 +458,9 @@ func (a *CatalogAPIService) GetSourceMetadataExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -483,7 +477,6 @@ func (a *CatalogAPIService) GetSourceMetadataExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -494,7 +487,6 @@ func (a *CatalogAPIService) GetSourceMetadataExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -505,7 +497,6 @@ func (a *CatalogAPIService) GetSourceMetadataExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -529,7 +520,7 @@ func (a *CatalogAPIService) GetSourceMetadataExecute(
 
 type ApiGetSourcesCatalogRequest struct {
 	ctx        context.Context
-	ApiService *CatalogAPIService
+	ApiService *CatalogApiService
 	pagination *PaginationInput
 }
 
@@ -553,7 +544,7 @@ Returns a list of all available Sources in the Segment catalog.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetSourcesCatalogRequest
 */
-func (a *CatalogAPIService) GetSourcesCatalog(ctx context.Context) ApiGetSourcesCatalogRequest {
+func (a *CatalogApiService) GetSourcesCatalog(ctx context.Context) ApiGetSourcesCatalogRequest {
 	return ApiGetSourcesCatalogRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -563,7 +554,7 @@ func (a *CatalogAPIService) GetSourcesCatalog(ctx context.Context) ApiGetSources
 // Execute executes the request
 //
 //	@return GetSourcesCatalog200Response
-func (a *CatalogAPIService) GetSourcesCatalogExecute(
+func (a *CatalogApiService) GetSourcesCatalogExecute(
 	r ApiGetSourcesCatalogRequest,
 ) (*GetSourcesCatalog200Response, *http.Response, error) {
 	var (
@@ -575,7 +566,7 @@ func (a *CatalogAPIService) GetSourcesCatalogExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"CatalogAPIService.GetSourcesCatalog",
+		"CatalogApiService.GetSourcesCatalog",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -590,7 +581,7 @@ func (a *CatalogAPIService) GetSourcesCatalogExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -632,9 +623,9 @@ func (a *CatalogAPIService) GetSourcesCatalogExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -651,7 +642,6 @@ func (a *CatalogAPIService) GetSourcesCatalogExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -662,7 +652,6 @@ func (a *CatalogAPIService) GetSourcesCatalogExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -673,7 +662,6 @@ func (a *CatalogAPIService) GetSourcesCatalogExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -697,7 +685,7 @@ func (a *CatalogAPIService) GetSourcesCatalogExecute(
 
 type ApiGetWarehouseMetadataRequest struct {
 	ctx                 context.Context
-	ApiService          *CatalogAPIService
+	ApiService          *CatalogApiService
 	warehouseMetadataId string
 }
 
@@ -714,7 +702,7 @@ Returns a Warehouse catalog item by its id.
 	@param warehouseMetadataId
 	@return ApiGetWarehouseMetadataRequest
 */
-func (a *CatalogAPIService) GetWarehouseMetadata(
+func (a *CatalogApiService) GetWarehouseMetadata(
 	ctx context.Context,
 	warehouseMetadataId string,
 ) ApiGetWarehouseMetadataRequest {
@@ -728,7 +716,7 @@ func (a *CatalogAPIService) GetWarehouseMetadata(
 // Execute executes the request
 //
 //	@return GetWarehouseMetadata200Response
-func (a *CatalogAPIService) GetWarehouseMetadataExecute(
+func (a *CatalogApiService) GetWarehouseMetadataExecute(
 	r ApiGetWarehouseMetadataRequest,
 ) (*GetWarehouseMetadata200Response, *http.Response, error) {
 	var (
@@ -740,7 +728,7 @@ func (a *CatalogAPIService) GetWarehouseMetadataExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"CatalogAPIService.GetWarehouseMetadata",
+		"CatalogApiService.GetWarehouseMetadata",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -750,7 +738,7 @@ func (a *CatalogAPIService) GetWarehouseMetadataExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"warehouseMetadataId"+"}",
-		url.PathEscape(parameterValueToString(r.warehouseMetadataId, "warehouseMetadataId")),
+		url.PathEscape(parameterToString(r.warehouseMetadataId, "")),
 		-1,
 	)
 
@@ -799,9 +787,9 @@ func (a *CatalogAPIService) GetWarehouseMetadataExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -818,7 +806,6 @@ func (a *CatalogAPIService) GetWarehouseMetadataExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -829,7 +816,6 @@ func (a *CatalogAPIService) GetWarehouseMetadataExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -840,7 +826,6 @@ func (a *CatalogAPIService) GetWarehouseMetadataExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -864,7 +849,7 @@ func (a *CatalogAPIService) GetWarehouseMetadataExecute(
 
 type ApiGetWarehousesCatalogRequest struct {
 	ctx        context.Context
-	ApiService *CatalogAPIService
+	ApiService *CatalogApiService
 	pagination *PaginationInput
 }
 
@@ -888,7 +873,7 @@ Returns a list of all available Warehouses in the Segment catalog.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetWarehousesCatalogRequest
 */
-func (a *CatalogAPIService) GetWarehousesCatalog(
+func (a *CatalogApiService) GetWarehousesCatalog(
 	ctx context.Context,
 ) ApiGetWarehousesCatalogRequest {
 	return ApiGetWarehousesCatalogRequest{
@@ -900,7 +885,7 @@ func (a *CatalogAPIService) GetWarehousesCatalog(
 // Execute executes the request
 //
 //	@return GetWarehousesCatalog200Response
-func (a *CatalogAPIService) GetWarehousesCatalogExecute(
+func (a *CatalogApiService) GetWarehousesCatalogExecute(
 	r ApiGetWarehousesCatalogRequest,
 ) (*GetWarehousesCatalog200Response, *http.Response, error) {
 	var (
@@ -912,7 +897,7 @@ func (a *CatalogAPIService) GetWarehousesCatalogExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"CatalogAPIService.GetWarehousesCatalog",
+		"CatalogApiService.GetWarehousesCatalog",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -927,7 +912,7 @@ func (a *CatalogAPIService) GetWarehousesCatalogExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -969,9 +954,9 @@ func (a *CatalogAPIService) GetWarehousesCatalogExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -988,7 +973,6 @@ func (a *CatalogAPIService) GetWarehousesCatalogExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -999,7 +983,6 @@ func (a *CatalogAPIService) GetWarehousesCatalogExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1010,7 +993,6 @@ func (a *CatalogAPIService) GetWarehousesCatalogExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

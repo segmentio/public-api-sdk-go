@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the UpdateFilterForDestinationV1Input type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateFilterForDestinationV1Input{}
 
 // UpdateFilterForDestinationV1Input Input for UpdateDestinationFilterV1.
 type UpdateFilterForDestinationV1Input struct {
@@ -51,7 +48,7 @@ func NewUpdateFilterForDestinationV1InputWithDefaults() *UpdateFilterForDestinat
 
 // GetIf returns the If field value if set, zero value otherwise.
 func (o *UpdateFilterForDestinationV1Input) GetIf() string {
-	if o == nil || IsNil(o.If) {
+	if o == nil || o.If == nil {
 		var ret string
 		return ret
 	}
@@ -61,7 +58,7 @@ func (o *UpdateFilterForDestinationV1Input) GetIf() string {
 // GetIfOk returns a tuple with the If field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateFilterForDestinationV1Input) GetIfOk() (*string, bool) {
-	if o == nil || IsNil(o.If) {
+	if o == nil || o.If == nil {
 		return nil, false
 	}
 	return o.If, true
@@ -69,7 +66,7 @@ func (o *UpdateFilterForDestinationV1Input) GetIfOk() (*string, bool) {
 
 // HasIf returns a boolean if a field has been set.
 func (o *UpdateFilterForDestinationV1Input) HasIf() bool {
-	if o != nil && !IsNil(o.If) {
+	if o != nil && o.If != nil {
 		return true
 	}
 
@@ -83,7 +80,7 @@ func (o *UpdateFilterForDestinationV1Input) SetIf(v string) {
 
 // GetActions returns the Actions field value if set, zero value otherwise.
 func (o *UpdateFilterForDestinationV1Input) GetActions() []DestinationFilterActionV1 {
-	if o == nil || IsNil(o.Actions) {
+	if o == nil || o.Actions == nil {
 		var ret []DestinationFilterActionV1
 		return ret
 	}
@@ -93,7 +90,7 @@ func (o *UpdateFilterForDestinationV1Input) GetActions() []DestinationFilterActi
 // GetActionsOk returns a tuple with the Actions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateFilterForDestinationV1Input) GetActionsOk() ([]DestinationFilterActionV1, bool) {
-	if o == nil || IsNil(o.Actions) {
+	if o == nil || o.Actions == nil {
 		return nil, false
 	}
 	return o.Actions, true
@@ -101,7 +98,7 @@ func (o *UpdateFilterForDestinationV1Input) GetActionsOk() ([]DestinationFilterA
 
 // HasActions returns a boolean if a field has been set.
 func (o *UpdateFilterForDestinationV1Input) HasActions() bool {
-	if o != nil && !IsNil(o.Actions) {
+	if o != nil && o.Actions != nil {
 		return true
 	}
 
@@ -115,7 +112,7 @@ func (o *UpdateFilterForDestinationV1Input) SetActions(v []DestinationFilterActi
 
 // GetTitle returns the Title field value if set, zero value otherwise.
 func (o *UpdateFilterForDestinationV1Input) GetTitle() string {
-	if o == nil || IsNil(o.Title) {
+	if o == nil || o.Title == nil {
 		var ret string
 		return ret
 	}
@@ -125,7 +122,7 @@ func (o *UpdateFilterForDestinationV1Input) GetTitle() string {
 // GetTitleOk returns a tuple with the Title field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateFilterForDestinationV1Input) GetTitleOk() (*string, bool) {
-	if o == nil || IsNil(o.Title) {
+	if o == nil || o.Title == nil {
 		return nil, false
 	}
 	return o.Title, true
@@ -133,7 +130,7 @@ func (o *UpdateFilterForDestinationV1Input) GetTitleOk() (*string, bool) {
 
 // HasTitle returns a boolean if a field has been set.
 func (o *UpdateFilterForDestinationV1Input) HasTitle() bool {
-	if o != nil && !IsNil(o.Title) {
+	if o != nil && o.Title != nil {
 		return true
 	}
 
@@ -147,7 +144,7 @@ func (o *UpdateFilterForDestinationV1Input) SetTitle(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdateFilterForDestinationV1Input) GetDescription() string {
-	if o == nil || IsNil(o.Description.Get()) {
+	if o == nil || o.Description.Get() == nil {
 		var ret string
 		return ret
 	}
@@ -190,7 +187,7 @@ func (o *UpdateFilterForDestinationV1Input) UnsetDescription() {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *UpdateFilterForDestinationV1Input) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil || o.Enabled == nil {
 		var ret bool
 		return ret
 	}
@@ -200,7 +197,7 @@ func (o *UpdateFilterForDestinationV1Input) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateFilterForDestinationV1Input) GetEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil || o.Enabled == nil {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -208,7 +205,7 @@ func (o *UpdateFilterForDestinationV1Input) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *UpdateFilterForDestinationV1Input) HasEnabled() bool {
-	if o != nil && !IsNil(o.Enabled) {
+	if o != nil && o.Enabled != nil {
 		return true
 	}
 
@@ -221,31 +218,23 @@ func (o *UpdateFilterForDestinationV1Input) SetEnabled(v bool) {
 }
 
 func (o UpdateFilterForDestinationV1Input) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o UpdateFilterForDestinationV1Input) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.If) {
+	if o.If != nil {
 		toSerialize["if"] = o.If
 	}
-	if !IsNil(o.Actions) {
+	if o.Actions != nil {
 		toSerialize["actions"] = o.Actions
 	}
-	if !IsNil(o.Title) {
+	if o.Title != nil {
 		toSerialize["title"] = o.Title
 	}
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
 	}
-	if !IsNil(o.Enabled) {
+	if o.Enabled != nil {
 		toSerialize["enabled"] = o.Enabled
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableUpdateFilterForDestinationV1Input struct {

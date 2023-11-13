@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the RemoveRuleV1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &RemoveRuleV1{}
 
 // RemoveRuleV1 Represents the parameters needed to identify a rule on the backend-side.
 type RemoveRuleV1 struct {
@@ -73,7 +70,7 @@ func (o *RemoveRuleV1) SetType(v string) {
 
 // GetKey returns the Key field value if set, zero value otherwise.
 func (o *RemoveRuleV1) GetKey() string {
-	if o == nil || IsNil(o.Key) {
+	if o == nil || o.Key == nil {
 		var ret string
 		return ret
 	}
@@ -83,7 +80,7 @@ func (o *RemoveRuleV1) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *RemoveRuleV1) GetKeyOk() (*string, bool) {
-	if o == nil || IsNil(o.Key) {
+	if o == nil || o.Key == nil {
 		return nil, false
 	}
 	return o.Key, true
@@ -91,7 +88,7 @@ func (o *RemoveRuleV1) GetKeyOk() (*string, bool) {
 
 // HasKey returns a boolean if a field has been set.
 func (o *RemoveRuleV1) HasKey() bool {
-	if o != nil && !IsNil(o.Key) {
+	if o != nil && o.Key != nil {
 		return true
 	}
 
@@ -128,21 +125,17 @@ func (o *RemoveRuleV1) SetVersion(v float32) {
 }
 
 func (o RemoveRuleV1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o RemoveRuleV1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["type"] = o.Type
-	if !IsNil(o.Key) {
+	if true {
+		toSerialize["type"] = o.Type
+	}
+	if o.Key != nil {
 		toSerialize["key"] = o.Key
 	}
-	toSerialize["version"] = o.Version
-	return toSerialize, nil
+	if true {
+		toSerialize["version"] = o.Version
+	}
+	return json.Marshal(toSerialize)
 }
 
 type NullableRemoveRuleV1 struct {

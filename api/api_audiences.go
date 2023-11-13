@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// AudiencesAPIService AudiencesAPI service
-type AudiencesAPIService service
+// AudiencesApiService AudiencesApi service
+type AudiencesApiService service
 
 type ApiGetAudienceRequest struct {
 	ctx        context.Context
-	ApiService *AudiencesAPIService
+	ApiService *AudiencesApiService
 	spaceId    string
 	id         string
 }
@@ -50,7 +50,7 @@ The rate limit for this endpoint is 100 requests per minute, which is lower than
 	@param id
 	@return ApiGetAudienceRequest
 */
-func (a *AudiencesAPIService) GetAudience(
+func (a *AudiencesApiService) GetAudience(
 	ctx context.Context,
 	spaceId string,
 	id string,
@@ -66,7 +66,7 @@ func (a *AudiencesAPIService) GetAudience(
 // Execute executes the request
 //
 //	@return GetAudience200Response
-func (a *AudiencesAPIService) GetAudienceExecute(
+func (a *AudiencesApiService) GetAudienceExecute(
 	r ApiGetAudienceRequest,
 ) (*GetAudience200Response, *http.Response, error) {
 	var (
@@ -78,7 +78,7 @@ func (a *AudiencesAPIService) GetAudienceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"AudiencesAPIService.GetAudience",
+		"AudiencesApiService.GetAudience",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -88,13 +88,13 @@ func (a *AudiencesAPIService) GetAudienceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"id"+"}",
-		url.PathEscape(parameterValueToString(r.id, "id")),
+		url.PathEscape(parameterToString(r.id, "")),
 		-1,
 	)
 
@@ -141,9 +141,9 @@ func (a *AudiencesAPIService) GetAudienceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -160,7 +160,6 @@ func (a *AudiencesAPIService) GetAudienceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -171,7 +170,6 @@ func (a *AudiencesAPIService) GetAudienceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -182,7 +180,6 @@ func (a *AudiencesAPIService) GetAudienceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -206,7 +203,7 @@ func (a *AudiencesAPIService) GetAudienceExecute(
 
 type ApiListAudiencesRequest struct {
 	ctx        context.Context
-	ApiService *AudiencesAPIService
+	ApiService *AudiencesApiService
 	spaceId    string
 	pagination *PaginationInput
 }
@@ -236,7 +233,7 @@ The rate limit for this endpoint is 25 requests per minute, which is lower than 
 	@param spaceId
 	@return ApiListAudiencesRequest
 */
-func (a *AudiencesAPIService) ListAudiences(
+func (a *AudiencesApiService) ListAudiences(
 	ctx context.Context,
 	spaceId string,
 ) ApiListAudiencesRequest {
@@ -250,7 +247,7 @@ func (a *AudiencesAPIService) ListAudiences(
 // Execute executes the request
 //
 //	@return ListAudiences200Response
-func (a *AudiencesAPIService) ListAudiencesExecute(
+func (a *AudiencesApiService) ListAudiencesExecute(
 	r ApiListAudiencesRequest,
 ) (*ListAudiences200Response, *http.Response, error) {
 	var (
@@ -262,7 +259,7 @@ func (a *AudiencesAPIService) ListAudiencesExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"AudiencesAPIService.ListAudiences",
+		"AudiencesApiService.ListAudiences",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -272,7 +269,7 @@ func (a *AudiencesAPIService) ListAudiencesExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 
@@ -283,7 +280,7 @@ func (a *AudiencesAPIService) ListAudiencesExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -323,9 +320,9 @@ func (a *AudiencesAPIService) ListAudiencesExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -342,7 +339,6 @@ func (a *AudiencesAPIService) ListAudiencesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -353,7 +349,6 @@ func (a *AudiencesAPIService) ListAudiencesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -364,7 +359,6 @@ func (a *AudiencesAPIService) ListAudiencesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -388,7 +382,7 @@ func (a *AudiencesAPIService) ListAudiencesExecute(
 
 type ApiRemoveAudienceFromSpaceRequest struct {
 	ctx        context.Context
-	ApiService *AudiencesAPIService
+	ApiService *AudiencesApiService
 	spaceId    string
 	id         string
 }
@@ -415,7 +409,7 @@ The rate limit for this endpoint is 20 requests per minute, which is lower than 
 	@param id
 	@return ApiRemoveAudienceFromSpaceRequest
 */
-func (a *AudiencesAPIService) RemoveAudienceFromSpace(
+func (a *AudiencesApiService) RemoveAudienceFromSpace(
 	ctx context.Context,
 	spaceId string,
 	id string,
@@ -431,7 +425,7 @@ func (a *AudiencesAPIService) RemoveAudienceFromSpace(
 // Execute executes the request
 //
 //	@return RemoveAudienceFromSpace200Response
-func (a *AudiencesAPIService) RemoveAudienceFromSpaceExecute(
+func (a *AudiencesApiService) RemoveAudienceFromSpaceExecute(
 	r ApiRemoveAudienceFromSpaceRequest,
 ) (*RemoveAudienceFromSpace200Response, *http.Response, error) {
 	var (
@@ -443,7 +437,7 @@ func (a *AudiencesAPIService) RemoveAudienceFromSpaceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"AudiencesAPIService.RemoveAudienceFromSpace",
+		"AudiencesApiService.RemoveAudienceFromSpace",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -453,13 +447,13 @@ func (a *AudiencesAPIService) RemoveAudienceFromSpaceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"id"+"}",
-		url.PathEscape(parameterValueToString(r.id, "id")),
+		url.PathEscape(parameterToString(r.id, "")),
 		-1,
 	)
 
@@ -506,9 +500,9 @@ func (a *AudiencesAPIService) RemoveAudienceFromSpaceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -525,7 +519,6 @@ func (a *AudiencesAPIService) RemoveAudienceFromSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -536,7 +529,6 @@ func (a *AudiencesAPIService) RemoveAudienceFromSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -547,7 +539,6 @@ func (a *AudiencesAPIService) RemoveAudienceFromSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -571,7 +562,7 @@ func (a *AudiencesAPIService) RemoveAudienceFromSpaceExecute(
 
 type ApiUpdateAudienceForSpaceRequest struct {
 	ctx                         context.Context
-	ApiService                  *AudiencesAPIService
+	ApiService                  *AudiencesApiService
 	spaceId                     string
 	id                          string
 	updateAudienceForSpaceInput *UpdateAudienceForSpaceInput
@@ -608,7 +599,7 @@ The rate limit for this endpoint is 10 requests per minute, which is lower than 
 	@param id
 	@return ApiUpdateAudienceForSpaceRequest
 */
-func (a *AudiencesAPIService) UpdateAudienceForSpace(
+func (a *AudiencesApiService) UpdateAudienceForSpace(
 	ctx context.Context,
 	spaceId string,
 	id string,
@@ -624,7 +615,7 @@ func (a *AudiencesAPIService) UpdateAudienceForSpace(
 // Execute executes the request
 //
 //	@return UpdateAudienceForSpace200Response
-func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
+func (a *AudiencesApiService) UpdateAudienceForSpaceExecute(
 	r ApiUpdateAudienceForSpaceRequest,
 ) (*UpdateAudienceForSpace200Response, *http.Response, error) {
 	var (
@@ -636,7 +627,7 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"AudiencesAPIService.UpdateAudienceForSpace",
+		"AudiencesApiService.UpdateAudienceForSpace",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -646,13 +637,13 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		url.PathEscape(parameterToString(r.spaceId, "")),
 		-1,
 	)
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"id"+"}",
-		url.PathEscape(parameterValueToString(r.id, "id")),
+		url.PathEscape(parameterToString(r.id, "")),
 		-1,
 	)
 
@@ -706,9 +697,9 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -725,7 +716,6 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -736,7 +726,6 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -747,7 +736,6 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

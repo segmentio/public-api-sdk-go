@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the DestinationFilterActionV1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &DestinationFilterActionV1{}
 
 // DestinationFilterActionV1 Represents a Destination filter action.
 type DestinationFilterActionV1 struct {
@@ -74,7 +71,7 @@ func (o *DestinationFilterActionV1) SetType(v string) {
 
 // GetFields returns the Fields field value if set, zero value otherwise.
 func (o *DestinationFilterActionV1) GetFields() map[string]interface{} {
-	if o == nil || IsNil(o.Fields) {
+	if o == nil || o.Fields == nil {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -84,15 +81,15 @@ func (o *DestinationFilterActionV1) GetFields() map[string]interface{} {
 // GetFieldsOk returns a tuple with the Fields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationFilterActionV1) GetFieldsOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Fields) {
-		return map[string]interface{}{}, false
+	if o == nil || o.Fields == nil {
+		return nil, false
 	}
 	return o.Fields, true
 }
 
 // HasFields returns a boolean if a field has been set.
 func (o *DestinationFilterActionV1) HasFields() bool {
-	if o != nil && !IsNil(o.Fields) {
+	if o != nil && o.Fields != nil {
 		return true
 	}
 
@@ -106,7 +103,7 @@ func (o *DestinationFilterActionV1) SetFields(v map[string]interface{}) {
 
 // GetPercent returns the Percent field value if set, zero value otherwise.
 func (o *DestinationFilterActionV1) GetPercent() float32 {
-	if o == nil || IsNil(o.Percent) {
+	if o == nil || o.Percent == nil {
 		var ret float32
 		return ret
 	}
@@ -116,7 +113,7 @@ func (o *DestinationFilterActionV1) GetPercent() float32 {
 // GetPercentOk returns a tuple with the Percent field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationFilterActionV1) GetPercentOk() (*float32, bool) {
-	if o == nil || IsNil(o.Percent) {
+	if o == nil || o.Percent == nil {
 		return nil, false
 	}
 	return o.Percent, true
@@ -124,7 +121,7 @@ func (o *DestinationFilterActionV1) GetPercentOk() (*float32, bool) {
 
 // HasPercent returns a boolean if a field has been set.
 func (o *DestinationFilterActionV1) HasPercent() bool {
-	if o != nil && !IsNil(o.Percent) {
+	if o != nil && o.Percent != nil {
 		return true
 	}
 
@@ -138,7 +135,7 @@ func (o *DestinationFilterActionV1) SetPercent(v float32) {
 
 // GetPath returns the Path field value if set, zero value otherwise.
 func (o *DestinationFilterActionV1) GetPath() string {
-	if o == nil || IsNil(o.Path) {
+	if o == nil || o.Path == nil {
 		var ret string
 		return ret
 	}
@@ -148,7 +145,7 @@ func (o *DestinationFilterActionV1) GetPath() string {
 // GetPathOk returns a tuple with the Path field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationFilterActionV1) GetPathOk() (*string, bool) {
-	if o == nil || IsNil(o.Path) {
+	if o == nil || o.Path == nil {
 		return nil, false
 	}
 	return o.Path, true
@@ -156,7 +153,7 @@ func (o *DestinationFilterActionV1) GetPathOk() (*string, bool) {
 
 // HasPath returns a boolean if a field has been set.
 func (o *DestinationFilterActionV1) HasPath() bool {
-	if o != nil && !IsNil(o.Path) {
+	if o != nil && o.Path != nil {
 		return true
 	}
 
@@ -169,26 +166,20 @@ func (o *DestinationFilterActionV1) SetPath(v string) {
 }
 
 func (o DestinationFilterActionV1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o DestinationFilterActionV1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["type"] = o.Type
-	if !IsNil(o.Fields) {
+	if true {
+		toSerialize["type"] = o.Type
+	}
+	if o.Fields != nil {
 		toSerialize["fields"] = o.Fields
 	}
-	if !IsNil(o.Percent) {
+	if o.Percent != nil {
 		toSerialize["percent"] = o.Percent
 	}
-	if !IsNil(o.Path) {
+	if o.Path != nil {
 		toSerialize["path"] = o.Path
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableDestinationFilterActionV1 struct {

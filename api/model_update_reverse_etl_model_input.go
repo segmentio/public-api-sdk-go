@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,9 +15,6 @@ import (
 	"encoding/json"
 )
 
-// checks if the UpdateReverseEtlModelInput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateReverseEtlModelInput{}
-
 // UpdateReverseEtlModelInput Defines how to update an existing Model.
 type UpdateReverseEtlModelInput struct {
 	// A short, human-readable description of the Model.
@@ -28,8 +25,8 @@ type UpdateReverseEtlModelInput struct {
 	Enabled *bool `json:"enabled,omitempty"`
 	// Determines the strategy used for triggering syncs, which will be used in conjunction with scheduleConfig.
 	ScheduleStrategy *string `json:"scheduleStrategy,omitempty"`
-	// Defines a configuration object used for scheduling, which can vary depending on the configured strategy, but must always be an object with at least 1 level of keys.
-	ScheduleConfig map[string]interface{} `json:"scheduleConfig,omitempty"`
+	// Depending on the chosen strategy, configures the schedule for this model.
+	ScheduleConfig NullableModelMap `json:"scheduleConfig,omitempty"`
 	// The SQL query that will be executed to extract data from the connected Source.
 	Query *string `json:"query,omitempty"`
 	// Indicates the column named in `query` that should be used to uniquely identify the extracted records.
@@ -55,7 +52,7 @@ func NewUpdateReverseEtlModelInputWithDefaults() *UpdateReverseEtlModelInput {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *UpdateReverseEtlModelInput) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || o.Name == nil {
 		var ret string
 		return ret
 	}
@@ -65,7 +62,7 @@ func (o *UpdateReverseEtlModelInput) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateReverseEtlModelInput) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || o.Name == nil {
 		return nil, false
 	}
 	return o.Name, true
@@ -73,7 +70,7 @@ func (o *UpdateReverseEtlModelInput) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *UpdateReverseEtlModelInput) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name != nil {
 		return true
 	}
 
@@ -87,7 +84,7 @@ func (o *UpdateReverseEtlModelInput) SetName(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *UpdateReverseEtlModelInput) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || o.Description == nil {
 		var ret string
 		return ret
 	}
@@ -97,7 +94,7 @@ func (o *UpdateReverseEtlModelInput) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateReverseEtlModelInput) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || o.Description == nil {
 		return nil, false
 	}
 	return o.Description, true
@@ -105,7 +102,7 @@ func (o *UpdateReverseEtlModelInput) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *UpdateReverseEtlModelInput) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
+	if o != nil && o.Description != nil {
 		return true
 	}
 
@@ -119,7 +116,7 @@ func (o *UpdateReverseEtlModelInput) SetDescription(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *UpdateReverseEtlModelInput) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil || o.Enabled == nil {
 		var ret bool
 		return ret
 	}
@@ -129,7 +126,7 @@ func (o *UpdateReverseEtlModelInput) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateReverseEtlModelInput) GetEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil || o.Enabled == nil {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -137,7 +134,7 @@ func (o *UpdateReverseEtlModelInput) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *UpdateReverseEtlModelInput) HasEnabled() bool {
-	if o != nil && !IsNil(o.Enabled) {
+	if o != nil && o.Enabled != nil {
 		return true
 	}
 
@@ -151,7 +148,7 @@ func (o *UpdateReverseEtlModelInput) SetEnabled(v bool) {
 
 // GetScheduleStrategy returns the ScheduleStrategy field value if set, zero value otherwise.
 func (o *UpdateReverseEtlModelInput) GetScheduleStrategy() string {
-	if o == nil || IsNil(o.ScheduleStrategy) {
+	if o == nil || o.ScheduleStrategy == nil {
 		var ret string
 		return ret
 	}
@@ -161,7 +158,7 @@ func (o *UpdateReverseEtlModelInput) GetScheduleStrategy() string {
 // GetScheduleStrategyOk returns a tuple with the ScheduleStrategy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateReverseEtlModelInput) GetScheduleStrategyOk() (*string, bool) {
-	if o == nil || IsNil(o.ScheduleStrategy) {
+	if o == nil || o.ScheduleStrategy == nil {
 		return nil, false
 	}
 	return o.ScheduleStrategy, true
@@ -169,7 +166,7 @@ func (o *UpdateReverseEtlModelInput) GetScheduleStrategyOk() (*string, bool) {
 
 // HasScheduleStrategy returns a boolean if a field has been set.
 func (o *UpdateReverseEtlModelInput) HasScheduleStrategy() bool {
-	if o != nil && !IsNil(o.ScheduleStrategy) {
+	if o != nil && o.ScheduleStrategy != nil {
 		return true
 	}
 
@@ -181,41 +178,52 @@ func (o *UpdateReverseEtlModelInput) SetScheduleStrategy(v string) {
 	o.ScheduleStrategy = &v
 }
 
-// GetScheduleConfig returns the ScheduleConfig field value if set, zero value otherwise.
-func (o *UpdateReverseEtlModelInput) GetScheduleConfig() map[string]interface{} {
-	if o == nil || IsNil(o.ScheduleConfig) {
-		var ret map[string]interface{}
+// GetScheduleConfig returns the ScheduleConfig field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdateReverseEtlModelInput) GetScheduleConfig() ModelMap {
+	if o == nil || o.ScheduleConfig.Get() == nil {
+		var ret ModelMap
 		return ret
 	}
-	return o.ScheduleConfig
+	return *o.ScheduleConfig.Get()
 }
 
 // GetScheduleConfigOk returns a tuple with the ScheduleConfig field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateReverseEtlModelInput) GetScheduleConfigOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.ScheduleConfig) {
-		return map[string]interface{}{}, false
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdateReverseEtlModelInput) GetScheduleConfigOk() (*ModelMap, bool) {
+	if o == nil {
+		return nil, false
 	}
-	return o.ScheduleConfig, true
+	return o.ScheduleConfig.Get(), o.ScheduleConfig.IsSet()
 }
 
 // HasScheduleConfig returns a boolean if a field has been set.
 func (o *UpdateReverseEtlModelInput) HasScheduleConfig() bool {
-	if o != nil && !IsNil(o.ScheduleConfig) {
+	if o != nil && o.ScheduleConfig.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetScheduleConfig gets a reference to the given map[string]interface{} and assigns it to the ScheduleConfig field.
-func (o *UpdateReverseEtlModelInput) SetScheduleConfig(v map[string]interface{}) {
-	o.ScheduleConfig = v
+// SetScheduleConfig gets a reference to the given NullableModelMap and assigns it to the ScheduleConfig field.
+func (o *UpdateReverseEtlModelInput) SetScheduleConfig(v ModelMap) {
+	o.ScheduleConfig.Set(&v)
+}
+
+// SetScheduleConfigNil sets the value for ScheduleConfig to be an explicit nil
+func (o *UpdateReverseEtlModelInput) SetScheduleConfigNil() {
+	o.ScheduleConfig.Set(nil)
+}
+
+// UnsetScheduleConfig ensures that no value is present for ScheduleConfig, not even an explicit nil
+func (o *UpdateReverseEtlModelInput) UnsetScheduleConfig() {
+	o.ScheduleConfig.Unset()
 }
 
 // GetQuery returns the Query field value if set, zero value otherwise.
 func (o *UpdateReverseEtlModelInput) GetQuery() string {
-	if o == nil || IsNil(o.Query) {
+	if o == nil || o.Query == nil {
 		var ret string
 		return ret
 	}
@@ -225,7 +233,7 @@ func (o *UpdateReverseEtlModelInput) GetQuery() string {
 // GetQueryOk returns a tuple with the Query field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateReverseEtlModelInput) GetQueryOk() (*string, bool) {
-	if o == nil || IsNil(o.Query) {
+	if o == nil || o.Query == nil {
 		return nil, false
 	}
 	return o.Query, true
@@ -233,7 +241,7 @@ func (o *UpdateReverseEtlModelInput) GetQueryOk() (*string, bool) {
 
 // HasQuery returns a boolean if a field has been set.
 func (o *UpdateReverseEtlModelInput) HasQuery() bool {
-	if o != nil && !IsNil(o.Query) {
+	if o != nil && o.Query != nil {
 		return true
 	}
 
@@ -247,7 +255,7 @@ func (o *UpdateReverseEtlModelInput) SetQuery(v string) {
 
 // GetQueryIdentifierColumn returns the QueryIdentifierColumn field value if set, zero value otherwise.
 func (o *UpdateReverseEtlModelInput) GetQueryIdentifierColumn() string {
-	if o == nil || IsNil(o.QueryIdentifierColumn) {
+	if o == nil || o.QueryIdentifierColumn == nil {
 		var ret string
 		return ret
 	}
@@ -257,7 +265,7 @@ func (o *UpdateReverseEtlModelInput) GetQueryIdentifierColumn() string {
 // GetQueryIdentifierColumnOk returns a tuple with the QueryIdentifierColumn field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateReverseEtlModelInput) GetQueryIdentifierColumnOk() (*string, bool) {
-	if o == nil || IsNil(o.QueryIdentifierColumn) {
+	if o == nil || o.QueryIdentifierColumn == nil {
 		return nil, false
 	}
 	return o.QueryIdentifierColumn, true
@@ -265,7 +273,7 @@ func (o *UpdateReverseEtlModelInput) GetQueryIdentifierColumnOk() (*string, bool
 
 // HasQueryIdentifierColumn returns a boolean if a field has been set.
 func (o *UpdateReverseEtlModelInput) HasQueryIdentifierColumn() bool {
-	if o != nil && !IsNil(o.QueryIdentifierColumn) {
+	if o != nil && o.QueryIdentifierColumn != nil {
 		return true
 	}
 
@@ -278,37 +286,29 @@ func (o *UpdateReverseEtlModelInput) SetQueryIdentifierColumn(v string) {
 }
 
 func (o UpdateReverseEtlModelInput) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o UpdateReverseEtlModelInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
+	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.Description) {
+	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
-	if !IsNil(o.Enabled) {
+	if o.Enabled != nil {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if !IsNil(o.ScheduleStrategy) {
+	if o.ScheduleStrategy != nil {
 		toSerialize["scheduleStrategy"] = o.ScheduleStrategy
 	}
-	if !IsNil(o.ScheduleConfig) {
-		toSerialize["scheduleConfig"] = o.ScheduleConfig
+	if o.ScheduleConfig.IsSet() {
+		toSerialize["scheduleConfig"] = o.ScheduleConfig.Get()
 	}
-	if !IsNil(o.Query) {
+	if o.Query != nil {
 		toSerialize["query"] = o.Query
 	}
-	if !IsNil(o.QueryIdentifierColumn) {
+	if o.QueryIdentifierColumn != nil {
 		toSerialize["queryIdentifierColumn"] = o.QueryIdentifierColumn
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableUpdateReverseEtlModelInput struct {

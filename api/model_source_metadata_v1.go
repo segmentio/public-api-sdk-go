@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,9 +15,6 @@ import (
 	"encoding/json"
 )
 
-// checks if the SourceMetadataV1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &SourceMetadataV1{}
-
 // SourceMetadataV1 A website, server library, mobile SDK, or cloud application which can send data into Segment.
 type SourceMetadataV1 struct {
 	// The id for this Source metadata in the Segment catalog.  Config API note: analogous to `name`.
@@ -27,8 +24,8 @@ type SourceMetadataV1 struct {
 	// The slug that identifies this Source in the Segment app.  Config API note: equal to `name`.
 	Slug string `json:"slug"`
 	// The description of this Source.
-	Description string    `json:"description"`
-	Logos       LogosBeta `json:"logos"`
+	Description string `json:"description"`
+	Logos       Logos1 `json:"logos"`
 	// Options for this Source.
 	Options []IntegrationOptionBeta `json:"options"`
 	// A list of categories this Source belongs to.
@@ -46,7 +43,7 @@ func NewSourceMetadataV1(
 	name string,
 	slug string,
 	description string,
-	logos LogosBeta,
+	logos Logos1,
 	options []IntegrationOptionBeta,
 	categories []string,
 	isCloudEventSource bool,
@@ -168,9 +165,9 @@ func (o *SourceMetadataV1) SetDescription(v string) {
 }
 
 // GetLogos returns the Logos field value
-func (o *SourceMetadataV1) GetLogos() LogosBeta {
+func (o *SourceMetadataV1) GetLogos() Logos1 {
 	if o == nil {
-		var ret LogosBeta
+		var ret Logos1
 		return ret
 	}
 
@@ -179,7 +176,7 @@ func (o *SourceMetadataV1) GetLogos() LogosBeta {
 
 // GetLogosOk returns a tuple with the Logos field value
 // and a boolean to check if the value has been set.
-func (o *SourceMetadataV1) GetLogosOk() (*LogosBeta, bool) {
+func (o *SourceMetadataV1) GetLogosOk() (*Logos1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -187,7 +184,7 @@ func (o *SourceMetadataV1) GetLogosOk() (*LogosBeta, bool) {
 }
 
 // SetLogos sets field value
-func (o *SourceMetadataV1) SetLogos(v LogosBeta) {
+func (o *SourceMetadataV1) SetLogos(v Logos1) {
 	o.Logos = v
 }
 
@@ -264,24 +261,32 @@ func (o *SourceMetadataV1) SetIsCloudEventSource(v bool) {
 }
 
 func (o SourceMetadataV1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["id"] = o.Id
+	}
+	if true {
+		toSerialize["name"] = o.Name
+	}
+	if true {
+		toSerialize["slug"] = o.Slug
+	}
+	if true {
+		toSerialize["description"] = o.Description
+	}
+	if true {
+		toSerialize["logos"] = o.Logos
+	}
+	if true {
+		toSerialize["options"] = o.Options
+	}
+	if true {
+		toSerialize["categories"] = o.Categories
+	}
+	if true {
+		toSerialize["isCloudEventSource"] = o.IsCloudEventSource
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o SourceMetadataV1) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["name"] = o.Name
-	toSerialize["slug"] = o.Slug
-	toSerialize["description"] = o.Description
-	toSerialize["logos"] = o.Logos
-	toSerialize["options"] = o.Options
-	toSerialize["categories"] = o.Categories
-	toSerialize["isCloudEventSource"] = o.IsCloudEventSource
-	return toSerialize, nil
 }
 
 type NullableSourceMetadataV1 struct {

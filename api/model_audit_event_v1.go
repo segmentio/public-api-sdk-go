@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the AuditEventV1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AuditEventV1{}
 
 // AuditEventV1 Represents an Audit Trail event.
 type AuditEventV1 struct {
@@ -237,23 +234,29 @@ func (o *AuditEventV1) SetResourceName(v string) {
 }
 
 func (o AuditEventV1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["id"] = o.Id
+	}
+	if true {
+		toSerialize["timestamp"] = o.Timestamp
+	}
+	if true {
+		toSerialize["type"] = o.Type
+	}
+	if true {
+		toSerialize["actor"] = o.Actor
+	}
+	if true {
+		toSerialize["resourceId"] = o.ResourceId
+	}
+	if true {
+		toSerialize["resourceType"] = o.ResourceType
+	}
+	if true {
+		toSerialize["resourceName"] = o.ResourceName
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o AuditEventV1) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["timestamp"] = o.Timestamp
-	toSerialize["type"] = o.Type
-	toSerialize["actor"] = o.Actor
-	toSerialize["resourceId"] = o.ResourceId
-	toSerialize["resourceType"] = o.ResourceType
-	toSerialize["resourceName"] = o.ResourceName
-	return toSerialize, nil
 }
 
 type NullableAuditEventV1 struct {

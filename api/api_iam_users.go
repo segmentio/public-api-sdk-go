@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// IAMUsersAPIService IAMUsersAPI service
-type IAMUsersAPIService service
+// IAMUsersApiService IAMUsersApi service
+type IAMUsersApiService service
 
 type ApiAddPermissionsToUserRequest struct {
 	ctx                         context.Context
-	ApiService                  *IAMUsersAPIService
+	ApiService                  *IAMUsersApiService
 	userId                      string
 	addPermissionsToUserV1Input *AddPermissionsToUserV1Input
 }
@@ -55,7 +55,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param userId
 	@return ApiAddPermissionsToUserRequest
 */
-func (a *IAMUsersAPIService) AddPermissionsToUser(
+func (a *IAMUsersApiService) AddPermissionsToUser(
 	ctx context.Context,
 	userId string,
 ) ApiAddPermissionsToUserRequest {
@@ -69,7 +69,7 @@ func (a *IAMUsersAPIService) AddPermissionsToUser(
 // Execute executes the request
 //
 //	@return AddPermissionsToUser200Response
-func (a *IAMUsersAPIService) AddPermissionsToUserExecute(
+func (a *IAMUsersApiService) AddPermissionsToUserExecute(
 	r ApiAddPermissionsToUserRequest,
 ) (*AddPermissionsToUser200Response, *http.Response, error) {
 	var (
@@ -81,7 +81,7 @@ func (a *IAMUsersAPIService) AddPermissionsToUserExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMUsersAPIService.AddPermissionsToUser",
+		"IAMUsersApiService.AddPermissionsToUser",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -91,7 +91,7 @@ func (a *IAMUsersAPIService) AddPermissionsToUserExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"userId"+"}",
-		url.PathEscape(parameterValueToString(r.userId, "userId")),
+		url.PathEscape(parameterToString(r.userId, "")),
 		-1,
 	)
 
@@ -151,9 +151,9 @@ func (a *IAMUsersAPIService) AddPermissionsToUserExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -170,7 +170,6 @@ func (a *IAMUsersAPIService) AddPermissionsToUserExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -181,7 +180,6 @@ func (a *IAMUsersAPIService) AddPermissionsToUserExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -192,7 +190,6 @@ func (a *IAMUsersAPIService) AddPermissionsToUserExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -216,7 +213,7 @@ func (a *IAMUsersAPIService) AddPermissionsToUserExecute(
 
 type ApiCreateInvitesRequest struct {
 	ctx                  context.Context
-	ApiService           *IAMUsersAPIService
+	ApiService           *IAMUsersApiService
 	createInvitesV1Input *CreateInvitesV1Input
 }
 
@@ -248,7 +245,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateInvitesRequest
 */
-func (a *IAMUsersAPIService) CreateInvites(ctx context.Context) ApiCreateInvitesRequest {
+func (a *IAMUsersApiService) CreateInvites(ctx context.Context) ApiCreateInvitesRequest {
 	return ApiCreateInvitesRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -258,7 +255,7 @@ func (a *IAMUsersAPIService) CreateInvites(ctx context.Context) ApiCreateInvites
 // Execute executes the request
 //
 //	@return CreateInvites200Response
-func (a *IAMUsersAPIService) CreateInvitesExecute(
+func (a *IAMUsersApiService) CreateInvitesExecute(
 	r ApiCreateInvitesRequest,
 ) (*CreateInvites200Response, *http.Response, error) {
 	var (
@@ -270,7 +267,7 @@ func (a *IAMUsersAPIService) CreateInvitesExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMUsersAPIService.CreateInvites",
+		"IAMUsersApiService.CreateInvites",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -334,9 +331,9 @@ func (a *IAMUsersAPIService) CreateInvitesExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -353,7 +350,6 @@ func (a *IAMUsersAPIService) CreateInvitesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -364,7 +360,6 @@ func (a *IAMUsersAPIService) CreateInvitesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -375,7 +370,6 @@ func (a *IAMUsersAPIService) CreateInvitesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -399,7 +393,7 @@ func (a *IAMUsersAPIService) CreateInvitesExecute(
 
 type ApiDeleteInvitesRequest struct {
 	ctx        context.Context
-	ApiService *IAMUsersAPIService
+	ApiService *IAMUsersApiService
 	emails     *[]string
 }
 
@@ -426,7 +420,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiDeleteInvitesRequest
 */
-func (a *IAMUsersAPIService) DeleteInvites(ctx context.Context) ApiDeleteInvitesRequest {
+func (a *IAMUsersApiService) DeleteInvites(ctx context.Context) ApiDeleteInvitesRequest {
 	return ApiDeleteInvitesRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -436,7 +430,7 @@ func (a *IAMUsersAPIService) DeleteInvites(ctx context.Context) ApiDeleteInvites
 // Execute executes the request
 //
 //	@return DeleteInvites200Response
-func (a *IAMUsersAPIService) DeleteInvitesExecute(
+func (a *IAMUsersApiService) DeleteInvitesExecute(
 	r ApiDeleteInvitesRequest,
 ) (*DeleteInvites200Response, *http.Response, error) {
 	var (
@@ -448,7 +442,7 @@ func (a *IAMUsersAPIService) DeleteInvitesExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMUsersAPIService.DeleteInvites",
+		"IAMUsersApiService.DeleteInvites",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -463,7 +457,7 @@ func (a *IAMUsersAPIService) DeleteInvitesExecute(
 		return localVarReturnValue, nil, reportError("emails is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "emails", r.emails, "csv")
+	localVarQueryParams.Add("emails", parameterToString(*r.emails, "csv"))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -505,9 +499,9 @@ func (a *IAMUsersAPIService) DeleteInvitesExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -524,7 +518,6 @@ func (a *IAMUsersAPIService) DeleteInvitesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -535,7 +528,6 @@ func (a *IAMUsersAPIService) DeleteInvitesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -546,7 +538,6 @@ func (a *IAMUsersAPIService) DeleteInvitesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -570,7 +561,7 @@ func (a *IAMUsersAPIService) DeleteInvitesExecute(
 
 type ApiDeleteUsersRequest struct {
 	ctx        context.Context
-	ApiService *IAMUsersAPIService
+	ApiService *IAMUsersApiService
 	userIds    *[]string
 }
 
@@ -596,7 +587,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiDeleteUsersRequest
 */
-func (a *IAMUsersAPIService) DeleteUsers(ctx context.Context) ApiDeleteUsersRequest {
+func (a *IAMUsersApiService) DeleteUsers(ctx context.Context) ApiDeleteUsersRequest {
 	return ApiDeleteUsersRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -606,7 +597,7 @@ func (a *IAMUsersAPIService) DeleteUsers(ctx context.Context) ApiDeleteUsersRequ
 // Execute executes the request
 //
 //	@return DeleteUsers200Response
-func (a *IAMUsersAPIService) DeleteUsersExecute(
+func (a *IAMUsersApiService) DeleteUsersExecute(
 	r ApiDeleteUsersRequest,
 ) (*DeleteUsers200Response, *http.Response, error) {
 	var (
@@ -616,7 +607,7 @@ func (a *IAMUsersAPIService) DeleteUsersExecute(
 		localVarReturnValue *DeleteUsers200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersAPIService.DeleteUsers")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersApiService.DeleteUsers")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -630,7 +621,7 @@ func (a *IAMUsersAPIService) DeleteUsersExecute(
 		return localVarReturnValue, nil, reportError("userIds is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "userIds", r.userIds, "csv")
+	localVarQueryParams.Add("userIds", parameterToString(*r.userIds, "csv"))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -672,9 +663,9 @@ func (a *IAMUsersAPIService) DeleteUsersExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -691,7 +682,6 @@ func (a *IAMUsersAPIService) DeleteUsersExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -702,7 +692,6 @@ func (a *IAMUsersAPIService) DeleteUsersExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -713,7 +702,6 @@ func (a *IAMUsersAPIService) DeleteUsersExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -737,7 +725,7 @@ func (a *IAMUsersAPIService) DeleteUsersExecute(
 
 type ApiGetUserRequest struct {
 	ctx        context.Context
-	ApiService *IAMUsersAPIService
+	ApiService *IAMUsersApiService
 	userId     string
 }
 
@@ -754,7 +742,7 @@ Returns a user given their id.
 	@param userId
 	@return ApiGetUserRequest
 */
-func (a *IAMUsersAPIService) GetUser(ctx context.Context, userId string) ApiGetUserRequest {
+func (a *IAMUsersApiService) GetUser(ctx context.Context, userId string) ApiGetUserRequest {
 	return ApiGetUserRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -765,7 +753,7 @@ func (a *IAMUsersAPIService) GetUser(ctx context.Context, userId string) ApiGetU
 // Execute executes the request
 //
 //	@return GetUser200Response
-func (a *IAMUsersAPIService) GetUserExecute(
+func (a *IAMUsersApiService) GetUserExecute(
 	r ApiGetUserRequest,
 ) (*GetUser200Response, *http.Response, error) {
 	var (
@@ -775,7 +763,7 @@ func (a *IAMUsersAPIService) GetUserExecute(
 		localVarReturnValue *GetUser200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersAPIService.GetUser")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersApiService.GetUser")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -784,7 +772,7 @@ func (a *IAMUsersAPIService) GetUserExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"userId"+"}",
-		url.PathEscape(parameterValueToString(r.userId, "userId")),
+		url.PathEscape(parameterToString(r.userId, "")),
 		-1,
 	)
 
@@ -833,9 +821,9 @@ func (a *IAMUsersAPIService) GetUserExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -852,7 +840,6 @@ func (a *IAMUsersAPIService) GetUserExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -863,7 +850,6 @@ func (a *IAMUsersAPIService) GetUserExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -874,7 +860,6 @@ func (a *IAMUsersAPIService) GetUserExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -898,7 +883,7 @@ func (a *IAMUsersAPIService) GetUserExecute(
 
 type ApiListInvitesRequest struct {
 	ctx        context.Context
-	ApiService *IAMUsersAPIService
+	ApiService *IAMUsersApiService
 	pagination *PaginationInput
 }
 
@@ -923,7 +908,7 @@ Config API omitted fields:
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListInvitesRequest
 */
-func (a *IAMUsersAPIService) ListInvites(ctx context.Context) ApiListInvitesRequest {
+func (a *IAMUsersApiService) ListInvites(ctx context.Context) ApiListInvitesRequest {
 	return ApiListInvitesRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -933,7 +918,7 @@ func (a *IAMUsersAPIService) ListInvites(ctx context.Context) ApiListInvitesRequ
 // Execute executes the request
 //
 //	@return ListInvites200Response
-func (a *IAMUsersAPIService) ListInvitesExecute(
+func (a *IAMUsersApiService) ListInvitesExecute(
 	r ApiListInvitesRequest,
 ) (*ListInvites200Response, *http.Response, error) {
 	var (
@@ -943,7 +928,7 @@ func (a *IAMUsersAPIService) ListInvitesExecute(
 		localVarReturnValue *ListInvites200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersAPIService.ListInvites")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersApiService.ListInvites")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -957,7 +942,7 @@ func (a *IAMUsersAPIService) ListInvitesExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -999,9 +984,9 @@ func (a *IAMUsersAPIService) ListInvitesExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1018,7 +1003,6 @@ func (a *IAMUsersAPIService) ListInvitesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1029,7 +1013,6 @@ func (a *IAMUsersAPIService) ListInvitesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1040,7 +1023,6 @@ func (a *IAMUsersAPIService) ListInvitesExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1064,7 +1046,7 @@ func (a *IAMUsersAPIService) ListInvitesExecute(
 
 type ApiListUserGroupsFromUserRequest struct {
 	ctx        context.Context
-	ApiService *IAMUsersAPIService
+	ApiService *IAMUsersApiService
 	userId     string
 	pagination *PaginationInput
 }
@@ -1090,7 +1072,7 @@ Returns all groups a user belongs to.
 	@param userId
 	@return ApiListUserGroupsFromUserRequest
 */
-func (a *IAMUsersAPIService) ListUserGroupsFromUser(
+func (a *IAMUsersApiService) ListUserGroupsFromUser(
 	ctx context.Context,
 	userId string,
 ) ApiListUserGroupsFromUserRequest {
@@ -1104,7 +1086,7 @@ func (a *IAMUsersAPIService) ListUserGroupsFromUser(
 // Execute executes the request
 //
 //	@return ListUserGroupsFromUser200Response
-func (a *IAMUsersAPIService) ListUserGroupsFromUserExecute(
+func (a *IAMUsersApiService) ListUserGroupsFromUserExecute(
 	r ApiListUserGroupsFromUserRequest,
 ) (*ListUserGroupsFromUser200Response, *http.Response, error) {
 	var (
@@ -1116,7 +1098,7 @@ func (a *IAMUsersAPIService) ListUserGroupsFromUserExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMUsersAPIService.ListUserGroupsFromUser",
+		"IAMUsersApiService.ListUserGroupsFromUser",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1126,7 +1108,7 @@ func (a *IAMUsersAPIService) ListUserGroupsFromUserExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"userId"+"}",
-		url.PathEscape(parameterValueToString(r.userId, "userId")),
+		url.PathEscape(parameterToString(r.userId, "")),
 		-1,
 	)
 
@@ -1137,7 +1119,7 @@ func (a *IAMUsersAPIService) ListUserGroupsFromUserExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1179,9 +1161,9 @@ func (a *IAMUsersAPIService) ListUserGroupsFromUserExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1198,7 +1180,6 @@ func (a *IAMUsersAPIService) ListUserGroupsFromUserExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1209,7 +1190,6 @@ func (a *IAMUsersAPIService) ListUserGroupsFromUserExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1220,7 +1200,6 @@ func (a *IAMUsersAPIService) ListUserGroupsFromUserExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1244,7 +1223,7 @@ func (a *IAMUsersAPIService) ListUserGroupsFromUserExecute(
 
 type ApiListUsersRequest struct {
 	ctx        context.Context
-	ApiService *IAMUsersAPIService
+	ApiService *IAMUsersApiService
 	pagination *PaginationInput
 }
 
@@ -1266,7 +1245,7 @@ Returns a list of users with access to the Workspace.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListUsersRequest
 */
-func (a *IAMUsersAPIService) ListUsers(ctx context.Context) ApiListUsersRequest {
+func (a *IAMUsersApiService) ListUsers(ctx context.Context) ApiListUsersRequest {
 	return ApiListUsersRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -1276,7 +1255,7 @@ func (a *IAMUsersAPIService) ListUsers(ctx context.Context) ApiListUsersRequest 
 // Execute executes the request
 //
 //	@return ListUsers200Response
-func (a *IAMUsersAPIService) ListUsersExecute(
+func (a *IAMUsersApiService) ListUsersExecute(
 	r ApiListUsersRequest,
 ) (*ListUsers200Response, *http.Response, error) {
 	var (
@@ -1286,7 +1265,7 @@ func (a *IAMUsersAPIService) ListUsersExecute(
 		localVarReturnValue *ListUsers200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersAPIService.ListUsers")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IAMUsersApiService.ListUsers")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1300,7 +1279,7 @@ func (a *IAMUsersAPIService) ListUsersExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1342,9 +1321,9 @@ func (a *IAMUsersAPIService) ListUsersExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1361,7 +1340,6 @@ func (a *IAMUsersAPIService) ListUsersExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1372,7 +1350,6 @@ func (a *IAMUsersAPIService) ListUsersExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1383,7 +1360,6 @@ func (a *IAMUsersAPIService) ListUsersExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1407,7 +1383,7 @@ func (a *IAMUsersAPIService) ListUsersExecute(
 
 type ApiReplacePermissionsForUserRequest struct {
 	ctx                              context.Context
-	ApiService                       *IAMUsersAPIService
+	ApiService                       *IAMUsersApiService
 	userId                           string
 	replacePermissionsForUserV1Input *ReplacePermissionsForUserV1Input
 }
@@ -1436,7 +1412,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param userId
 	@return ApiReplacePermissionsForUserRequest
 */
-func (a *IAMUsersAPIService) ReplacePermissionsForUser(
+func (a *IAMUsersApiService) ReplacePermissionsForUser(
 	ctx context.Context,
 	userId string,
 ) ApiReplacePermissionsForUserRequest {
@@ -1450,7 +1426,7 @@ func (a *IAMUsersAPIService) ReplacePermissionsForUser(
 // Execute executes the request
 //
 //	@return ReplacePermissionsForUser200Response
-func (a *IAMUsersAPIService) ReplacePermissionsForUserExecute(
+func (a *IAMUsersApiService) ReplacePermissionsForUserExecute(
 	r ApiReplacePermissionsForUserRequest,
 ) (*ReplacePermissionsForUser200Response, *http.Response, error) {
 	var (
@@ -1462,7 +1438,7 @@ func (a *IAMUsersAPIService) ReplacePermissionsForUserExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"IAMUsersAPIService.ReplacePermissionsForUser",
+		"IAMUsersApiService.ReplacePermissionsForUser",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1472,7 +1448,7 @@ func (a *IAMUsersAPIService) ReplacePermissionsForUserExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"userId"+"}",
-		url.PathEscape(parameterValueToString(r.userId, "userId")),
+		url.PathEscape(parameterToString(r.userId, "")),
 		-1,
 	)
 
@@ -1532,9 +1508,9 @@ func (a *IAMUsersAPIService) ReplacePermissionsForUserExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1551,7 +1527,6 @@ func (a *IAMUsersAPIService) ReplacePermissionsForUserExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1562,7 +1537,6 @@ func (a *IAMUsersAPIService) ReplacePermissionsForUserExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1573,7 +1547,6 @@ func (a *IAMUsersAPIService) ReplacePermissionsForUserExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

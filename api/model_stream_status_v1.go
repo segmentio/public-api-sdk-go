@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the StreamStatusV1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &StreamStatusV1{}
 
 // StreamStatusV1 StreamStatus represents status of each stream including all the Destinations corresponding to the stream.
 type StreamStatusV1 struct {
@@ -92,18 +89,14 @@ func (o *StreamStatusV1) SetDestinationStatus(v []DestinationStatusV1) {
 }
 
 func (o StreamStatusV1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["id"] = o.Id
+	}
+	if true {
+		toSerialize["destinationStatus"] = o.DestinationStatus
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o StreamStatusV1) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["destinationStatus"] = o.DestinationStatus
-	return toSerialize, nil
 }
 
 type NullableStreamStatusV1 struct {

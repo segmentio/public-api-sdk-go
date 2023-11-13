@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,10 +15,7 @@ import (
 	"encoding/json"
 )
 
-// checks if the Version type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Version{}
-
-// Version Represents a Function Version in a list.
+// Version Functions version.
 type Version struct {
 	// An identifier for this version.
 	Id string `json:"id"`
@@ -81,7 +78,7 @@ func (o *Version) SetId(v string) {
 
 // GetAuthor returns the Author field value if set, zero value otherwise.
 func (o *Version) GetAuthor() string {
-	if o == nil || IsNil(o.Author) {
+	if o == nil || o.Author == nil {
 		var ret string
 		return ret
 	}
@@ -91,7 +88,7 @@ func (o *Version) GetAuthor() string {
 // GetAuthorOk returns a tuple with the Author field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Version) GetAuthorOk() (*string, bool) {
-	if o == nil || IsNil(o.Author) {
+	if o == nil || o.Author == nil {
 		return nil, false
 	}
 	return o.Author, true
@@ -99,7 +96,7 @@ func (o *Version) GetAuthorOk() (*string, bool) {
 
 // HasAuthor returns a boolean if a field has been set.
 func (o *Version) HasAuthor() bool {
-	if o != nil && !IsNil(o.Author) {
+	if o != nil && o.Author != nil {
 		return true
 	}
 
@@ -137,7 +134,7 @@ func (o *Version) SetCode(v string) {
 
 // GetIsDeployed returns the IsDeployed field value if set, zero value otherwise.
 func (o *Version) GetIsDeployed() bool {
-	if o == nil || IsNil(o.IsDeployed) {
+	if o == nil || o.IsDeployed == nil {
 		var ret bool
 		return ret
 	}
@@ -147,7 +144,7 @@ func (o *Version) GetIsDeployed() bool {
 // GetIsDeployedOk returns a tuple with the IsDeployed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Version) GetIsDeployedOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsDeployed) {
+	if o == nil || o.IsDeployed == nil {
 		return nil, false
 	}
 	return o.IsDeployed, true
@@ -155,7 +152,7 @@ func (o *Version) GetIsDeployedOk() (*bool, bool) {
 
 // HasIsDeployed returns a boolean if a field has been set.
 func (o *Version) HasIsDeployed() bool {
-	if o != nil && !IsNil(o.IsDeployed) {
+	if o != nil && o.IsDeployed != nil {
 		return true
 	}
 
@@ -169,7 +166,7 @@ func (o *Version) SetIsDeployed(v bool) {
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *Version) GetCreatedAt() string {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil || o.CreatedAt == nil {
 		var ret string
 		return ret
 	}
@@ -179,7 +176,7 @@ func (o *Version) GetCreatedAt() string {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Version) GetCreatedAtOk() (*string, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil || o.CreatedAt == nil {
 		return nil, false
 	}
 	return o.CreatedAt, true
@@ -187,7 +184,7 @@ func (o *Version) GetCreatedAtOk() (*string, bool) {
 
 // HasCreatedAt returns a boolean if a field has been set.
 func (o *Version) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
+	if o != nil && o.CreatedAt != nil {
 		return true
 	}
 
@@ -201,7 +198,7 @@ func (o *Version) SetCreatedAt(v string) {
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *Version) GetUpdatedAt() string {
-	if o == nil || IsNil(o.UpdatedAt) {
+	if o == nil || o.UpdatedAt == nil {
 		var ret string
 		return ret
 	}
@@ -211,7 +208,7 @@ func (o *Version) GetUpdatedAt() string {
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Version) GetUpdatedAtOk() (*string, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
+	if o == nil || o.UpdatedAt == nil {
 		return nil, false
 	}
 	return o.UpdatedAt, true
@@ -219,7 +216,7 @@ func (o *Version) GetUpdatedAtOk() (*string, bool) {
 
 // HasUpdatedAt returns a boolean if a field has been set.
 func (o *Version) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
+	if o != nil && o.UpdatedAt != nil {
 		return true
 	}
 
@@ -233,7 +230,7 @@ func (o *Version) SetUpdatedAt(v string) {
 
 // GetDeployedAt returns the DeployedAt field value if set, zero value otherwise.
 func (o *Version) GetDeployedAt() string {
-	if o == nil || IsNil(o.DeployedAt) {
+	if o == nil || o.DeployedAt == nil {
 		var ret string
 		return ret
 	}
@@ -243,7 +240,7 @@ func (o *Version) GetDeployedAt() string {
 // GetDeployedAtOk returns a tuple with the DeployedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Version) GetDeployedAtOk() (*string, bool) {
-	if o == nil || IsNil(o.DeployedAt) {
+	if o == nil || o.DeployedAt == nil {
 		return nil, false
 	}
 	return o.DeployedAt, true
@@ -251,7 +248,7 @@ func (o *Version) GetDeployedAtOk() (*string, bool) {
 
 // HasDeployedAt returns a boolean if a field has been set.
 func (o *Version) HasDeployedAt() bool {
-	if o != nil && !IsNil(o.DeployedAt) {
+	if o != nil && o.DeployedAt != nil {
 		return true
 	}
 
@@ -264,33 +261,29 @@ func (o *Version) SetDeployedAt(v string) {
 }
 
 func (o Version) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o Version) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	if !IsNil(o.Author) {
+	if true {
+		toSerialize["id"] = o.Id
+	}
+	if o.Author != nil {
 		toSerialize["author"] = o.Author
 	}
-	toSerialize["code"] = o.Code
-	if !IsNil(o.IsDeployed) {
+	if true {
+		toSerialize["code"] = o.Code
+	}
+	if o.IsDeployed != nil {
 		toSerialize["isDeployed"] = o.IsDeployed
 	}
-	if !IsNil(o.CreatedAt) {
+	if o.CreatedAt != nil {
 		toSerialize["createdAt"] = o.CreatedAt
 	}
-	if !IsNil(o.UpdatedAt) {
+	if o.UpdatedAt != nil {
 		toSerialize["updatedAt"] = o.UpdatedAt
 	}
-	if !IsNil(o.DeployedAt) {
+	if o.DeployedAt != nil {
 		toSerialize["deployedAt"] = o.DeployedAt
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableVersion struct {

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the TransformationBeta type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &TransformationBeta{}
 
 // TransformationBeta Represents a Transformation.
 type TransformationBeta struct {
@@ -142,7 +139,7 @@ func (o *TransformationBeta) SetSourceId(v string) {
 
 // GetDestinationMetadataId returns the DestinationMetadataId field value if set, zero value otherwise.
 func (o *TransformationBeta) GetDestinationMetadataId() string {
-	if o == nil || IsNil(o.DestinationMetadataId) {
+	if o == nil || o.DestinationMetadataId == nil {
 		var ret string
 		return ret
 	}
@@ -152,7 +149,7 @@ func (o *TransformationBeta) GetDestinationMetadataId() string {
 // GetDestinationMetadataIdOk returns a tuple with the DestinationMetadataId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TransformationBeta) GetDestinationMetadataIdOk() (*string, bool) {
-	if o == nil || IsNil(o.DestinationMetadataId) {
+	if o == nil || o.DestinationMetadataId == nil {
 		return nil, false
 	}
 	return o.DestinationMetadataId, true
@@ -160,7 +157,7 @@ func (o *TransformationBeta) GetDestinationMetadataIdOk() (*string, bool) {
 
 // HasDestinationMetadataId returns a boolean if a field has been set.
 func (o *TransformationBeta) HasDestinationMetadataId() bool {
-	if o != nil && !IsNil(o.DestinationMetadataId) {
+	if o != nil && o.DestinationMetadataId != nil {
 		return true
 	}
 
@@ -222,7 +219,7 @@ func (o *TransformationBeta) SetIf(v string) {
 
 // GetNewEventName returns the NewEventName field value if set, zero value otherwise.
 func (o *TransformationBeta) GetNewEventName() string {
-	if o == nil || IsNil(o.NewEventName) {
+	if o == nil || o.NewEventName == nil {
 		var ret string
 		return ret
 	}
@@ -232,7 +229,7 @@ func (o *TransformationBeta) GetNewEventName() string {
 // GetNewEventNameOk returns a tuple with the NewEventName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TransformationBeta) GetNewEventNameOk() (*string, bool) {
-	if o == nil || IsNil(o.NewEventName) {
+	if o == nil || o.NewEventName == nil {
 		return nil, false
 	}
 	return o.NewEventName, true
@@ -240,7 +237,7 @@ func (o *TransformationBeta) GetNewEventNameOk() (*string, bool) {
 
 // HasNewEventName returns a boolean if a field has been set.
 func (o *TransformationBeta) HasNewEventName() bool {
-	if o != nil && !IsNil(o.NewEventName) {
+	if o != nil && o.NewEventName != nil {
 		return true
 	}
 
@@ -254,7 +251,7 @@ func (o *TransformationBeta) SetNewEventName(v string) {
 
 // GetPropertyRenames returns the PropertyRenames field value if set, zero value otherwise.
 func (o *TransformationBeta) GetPropertyRenames() []PropertyRenameBeta {
-	if o == nil || IsNil(o.PropertyRenames) {
+	if o == nil || o.PropertyRenames == nil {
 		var ret []PropertyRenameBeta
 		return ret
 	}
@@ -264,7 +261,7 @@ func (o *TransformationBeta) GetPropertyRenames() []PropertyRenameBeta {
 // GetPropertyRenamesOk returns a tuple with the PropertyRenames field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TransformationBeta) GetPropertyRenamesOk() ([]PropertyRenameBeta, bool) {
-	if o == nil || IsNil(o.PropertyRenames) {
+	if o == nil || o.PropertyRenames == nil {
 		return nil, false
 	}
 	return o.PropertyRenames, true
@@ -272,7 +269,7 @@ func (o *TransformationBeta) GetPropertyRenamesOk() ([]PropertyRenameBeta, bool)
 
 // HasPropertyRenames returns a boolean if a field has been set.
 func (o *TransformationBeta) HasPropertyRenames() bool {
-	if o != nil && !IsNil(o.PropertyRenames) {
+	if o != nil && o.PropertyRenames != nil {
 		return true
 	}
 
@@ -286,7 +283,7 @@ func (o *TransformationBeta) SetPropertyRenames(v []PropertyRenameBeta) {
 
 // GetPropertyValueTransformations returns the PropertyValueTransformations field value if set, zero value otherwise.
 func (o *TransformationBeta) GetPropertyValueTransformations() []PropertyValueTransformationBeta {
-	if o == nil || IsNil(o.PropertyValueTransformations) {
+	if o == nil || o.PropertyValueTransformations == nil {
 		var ret []PropertyValueTransformationBeta
 		return ret
 	}
@@ -296,7 +293,7 @@ func (o *TransformationBeta) GetPropertyValueTransformations() []PropertyValueTr
 // GetPropertyValueTransformationsOk returns a tuple with the PropertyValueTransformations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *TransformationBeta) GetPropertyValueTransformationsOk() ([]PropertyValueTransformationBeta, bool) {
-	if o == nil || IsNil(o.PropertyValueTransformations) {
+	if o == nil || o.PropertyValueTransformations == nil {
 		return nil, false
 	}
 	return o.PropertyValueTransformations, true
@@ -304,7 +301,7 @@ func (o *TransformationBeta) GetPropertyValueTransformationsOk() ([]PropertyValu
 
 // HasPropertyValueTransformations returns a boolean if a field has been set.
 func (o *TransformationBeta) HasPropertyValueTransformations() bool {
-	if o != nil && !IsNil(o.PropertyValueTransformations) {
+	if o != nil && o.PropertyValueTransformations != nil {
 		return true
 	}
 
@@ -317,33 +314,35 @@ func (o *TransformationBeta) SetPropertyValueTransformations(v []PropertyValueTr
 }
 
 func (o TransformationBeta) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o TransformationBeta) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["name"] = o.Name
-	toSerialize["sourceId"] = o.SourceId
-	if !IsNil(o.DestinationMetadataId) {
+	if true {
+		toSerialize["id"] = o.Id
+	}
+	if true {
+		toSerialize["name"] = o.Name
+	}
+	if true {
+		toSerialize["sourceId"] = o.SourceId
+	}
+	if o.DestinationMetadataId != nil {
 		toSerialize["destinationMetadataId"] = o.DestinationMetadataId
 	}
-	toSerialize["enabled"] = o.Enabled
-	toSerialize["if"] = o.If
-	if !IsNil(o.NewEventName) {
+	if true {
+		toSerialize["enabled"] = o.Enabled
+	}
+	if true {
+		toSerialize["if"] = o.If
+	}
+	if o.NewEventName != nil {
 		toSerialize["newEventName"] = o.NewEventName
 	}
-	if !IsNil(o.PropertyRenames) {
+	if o.PropertyRenames != nil {
 		toSerialize["propertyRenames"] = o.PropertyRenames
 	}
-	if !IsNil(o.PropertyValueTransformations) {
+	if o.PropertyValueTransformations != nil {
 		toSerialize["propertyValueTransformations"] = o.PropertyValueTransformations
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableTransformationBeta struct {

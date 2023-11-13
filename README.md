@@ -10,7 +10,7 @@ All endpoints in the API follow REST conventions and use standard HTTP methods. 
 
 See the next sections for more information on how to use the Segment Public API Go SDK.
 
-Latest API and SDK version: 38.0.0
+Latest API and SDK version: 37.2.0
 
 ## Installation
 
@@ -47,17 +47,19 @@ import (
     "context"
     "fmt"
     "os"
-    "github.com/segmentio/public-api-sdk-go/api"
+    api "github.com/segmentio/public-api-sdk-go/pkg"
 )
 
 func main() {
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
 
-    token := "<BEARER_TOKEN>"
+    token := // ...
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
 
-    resp, r, err := apiClient.SourcesAPI.ListSources(ctx).Pagination(api.PaginationInput{ Count: 10 }).Execute()
+    resp, r, err := apiClient.SourcesApi.ListSources(ctx)
+			.Pagination(&api.PaginationInput{ count: 10 })
+			.Execute()
 
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SourcesApi.ListSources``: %v\n", err)
@@ -70,7 +72,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 
-    fmt.Fprintf(os.Stdout, "Response from `SourcesApi.ListSources`: %v\n", resp.GetData())
+    fmt.Fprintf(os.Stdout, "Response from `SourcesApi.ListSources`: %v\n", resp)
 }
 ```
 

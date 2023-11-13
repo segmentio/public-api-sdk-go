@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the Contact type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &Contact{}
 
 // Contact The contact info for Integration Owners.
 type Contact struct {
@@ -50,7 +47,7 @@ func NewContactWithDefaults() *Contact {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *Contact) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || o.Name == nil {
 		var ret string
 		return ret
 	}
@@ -60,7 +57,7 @@ func (o *Contact) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Contact) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || o.Name == nil {
 		return nil, false
 	}
 	return o.Name, true
@@ -68,7 +65,7 @@ func (o *Contact) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *Contact) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name != nil {
 		return true
 	}
 
@@ -106,7 +103,7 @@ func (o *Contact) SetEmail(v string) {
 
 // GetRole returns the Role field value if set, zero value otherwise.
 func (o *Contact) GetRole() string {
-	if o == nil || IsNil(o.Role) {
+	if o == nil || o.Role == nil {
 		var ret string
 		return ret
 	}
@@ -116,7 +113,7 @@ func (o *Contact) GetRole() string {
 // GetRoleOk returns a tuple with the Role field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Contact) GetRoleOk() (*string, bool) {
-	if o == nil || IsNil(o.Role) {
+	if o == nil || o.Role == nil {
 		return nil, false
 	}
 	return o.Role, true
@@ -124,7 +121,7 @@ func (o *Contact) GetRoleOk() (*string, bool) {
 
 // HasRole returns a boolean if a field has been set.
 func (o *Contact) HasRole() bool {
-	if o != nil && !IsNil(o.Role) {
+	if o != nil && o.Role != nil {
 		return true
 	}
 
@@ -138,7 +135,7 @@ func (o *Contact) SetRole(v string) {
 
 // GetIsPrimary returns the IsPrimary field value if set, zero value otherwise.
 func (o *Contact) GetIsPrimary() bool {
-	if o == nil || IsNil(o.IsPrimary) {
+	if o == nil || o.IsPrimary == nil {
 		var ret bool
 		return ret
 	}
@@ -148,7 +145,7 @@ func (o *Contact) GetIsPrimary() bool {
 // GetIsPrimaryOk returns a tuple with the IsPrimary field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Contact) GetIsPrimaryOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsPrimary) {
+	if o == nil || o.IsPrimary == nil {
 		return nil, false
 	}
 	return o.IsPrimary, true
@@ -156,7 +153,7 @@ func (o *Contact) GetIsPrimaryOk() (*bool, bool) {
 
 // HasIsPrimary returns a boolean if a field has been set.
 func (o *Contact) HasIsPrimary() bool {
-	if o != nil && !IsNil(o.IsPrimary) {
+	if o != nil && o.IsPrimary != nil {
 		return true
 	}
 
@@ -169,26 +166,20 @@ func (o *Contact) SetIsPrimary(v bool) {
 }
 
 func (o Contact) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o Contact) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
+	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
-	toSerialize["email"] = o.Email
-	if !IsNil(o.Role) {
+	if true {
+		toSerialize["email"] = o.Email
+	}
+	if o.Role != nil {
 		toSerialize["role"] = o.Role
 	}
-	if !IsNil(o.IsPrimary) {
+	if o.IsPrimary != nil {
 		toSerialize["isPrimary"] = o.IsPrimary
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableContact struct {

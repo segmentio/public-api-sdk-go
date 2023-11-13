@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the GetEventsVolumeFromWorkspaceV1Query type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetEventsVolumeFromWorkspaceV1Query{}
 
 // GetEventsVolumeFromWorkspaceV1Query GetEventVolumeOutputQuery represents the input query sent to output.
 type GetEventsVolumeFromWorkspaceV1Query struct {
@@ -166,7 +163,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) SetEndTime(v string) {
 
 // GetGroupBy returns the GroupBy field value if set, zero value otherwise.
 func (o *GetEventsVolumeFromWorkspaceV1Query) GetGroupBy() []string {
-	if o == nil || IsNil(o.GroupBy) {
+	if o == nil || o.GroupBy == nil {
 		var ret []string
 		return ret
 	}
@@ -176,7 +173,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) GetGroupBy() []string {
 // GetGroupByOk returns a tuple with the GroupBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetEventsVolumeFromWorkspaceV1Query) GetGroupByOk() ([]string, bool) {
-	if o == nil || IsNil(o.GroupBy) {
+	if o == nil || o.GroupBy == nil {
 		return nil, false
 	}
 	return o.GroupBy, true
@@ -184,7 +181,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) GetGroupByOk() ([]string, bool) {
 
 // HasGroupBy returns a boolean if a field has been set.
 func (o *GetEventsVolumeFromWorkspaceV1Query) HasGroupBy() bool {
-	if o != nil && !IsNil(o.GroupBy) {
+	if o != nil && o.GroupBy != nil {
 		return true
 	}
 
@@ -198,7 +195,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) SetGroupBy(v []string) {
 
 // GetSourceId returns the SourceId field value if set, zero value otherwise.
 func (o *GetEventsVolumeFromWorkspaceV1Query) GetSourceId() []string {
-	if o == nil || IsNil(o.SourceId) {
+	if o == nil || o.SourceId == nil {
 		var ret []string
 		return ret
 	}
@@ -208,7 +205,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) GetSourceId() []string {
 // GetSourceIdOk returns a tuple with the SourceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetEventsVolumeFromWorkspaceV1Query) GetSourceIdOk() ([]string, bool) {
-	if o == nil || IsNil(o.SourceId) {
+	if o == nil || o.SourceId == nil {
 		return nil, false
 	}
 	return o.SourceId, true
@@ -216,7 +213,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) GetSourceIdOk() ([]string, bool) {
 
 // HasSourceId returns a boolean if a field has been set.
 func (o *GetEventsVolumeFromWorkspaceV1Query) HasSourceId() bool {
-	if o != nil && !IsNil(o.SourceId) {
+	if o != nil && o.SourceId != nil {
 		return true
 	}
 
@@ -230,7 +227,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) SetSourceId(v []string) {
 
 // GetEventName returns the EventName field value if set, zero value otherwise.
 func (o *GetEventsVolumeFromWorkspaceV1Query) GetEventName() []string {
-	if o == nil || IsNil(o.EventName) {
+	if o == nil || o.EventName == nil {
 		var ret []string
 		return ret
 	}
@@ -240,7 +237,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) GetEventName() []string {
 // GetEventNameOk returns a tuple with the EventName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetEventsVolumeFromWorkspaceV1Query) GetEventNameOk() ([]string, bool) {
-	if o == nil || IsNil(o.EventName) {
+	if o == nil || o.EventName == nil {
 		return nil, false
 	}
 	return o.EventName, true
@@ -248,7 +245,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) GetEventNameOk() ([]string, bool) 
 
 // HasEventName returns a boolean if a field has been set.
 func (o *GetEventsVolumeFromWorkspaceV1Query) HasEventName() bool {
-	if o != nil && !IsNil(o.EventName) {
+	if o != nil && o.EventName != nil {
 		return true
 	}
 
@@ -262,7 +259,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) SetEventName(v []string) {
 
 // GetEventType returns the EventType field value if set, zero value otherwise.
 func (o *GetEventsVolumeFromWorkspaceV1Query) GetEventType() []string {
-	if o == nil || IsNil(o.EventType) {
+	if o == nil || o.EventType == nil {
 		var ret []string
 		return ret
 	}
@@ -272,7 +269,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) GetEventType() []string {
 // GetEventTypeOk returns a tuple with the EventType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetEventsVolumeFromWorkspaceV1Query) GetEventTypeOk() ([]string, bool) {
-	if o == nil || IsNil(o.EventType) {
+	if o == nil || o.EventType == nil {
 		return nil, false
 	}
 	return o.EventType, true
@@ -280,7 +277,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) GetEventTypeOk() ([]string, bool) 
 
 // HasEventType returns a boolean if a field has been set.
 func (o *GetEventsVolumeFromWorkspaceV1Query) HasEventType() bool {
-	if o != nil && !IsNil(o.EventType) {
+	if o != nil && o.EventType != nil {
 		return true
 	}
 
@@ -294,7 +291,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) SetEventType(v []string) {
 
 // GetAppVersion returns the AppVersion field value if set, zero value otherwise.
 func (o *GetEventsVolumeFromWorkspaceV1Query) GetAppVersion() []string {
-	if o == nil || IsNil(o.AppVersion) {
+	if o == nil || o.AppVersion == nil {
 		var ret []string
 		return ret
 	}
@@ -304,7 +301,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) GetAppVersion() []string {
 // GetAppVersionOk returns a tuple with the AppVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetEventsVolumeFromWorkspaceV1Query) GetAppVersionOk() ([]string, bool) {
-	if o == nil || IsNil(o.AppVersion) {
+	if o == nil || o.AppVersion == nil {
 		return nil, false
 	}
 	return o.AppVersion, true
@@ -312,7 +309,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) GetAppVersionOk() ([]string, bool)
 
 // HasAppVersion returns a boolean if a field has been set.
 func (o *GetEventsVolumeFromWorkspaceV1Query) HasAppVersion() bool {
-	if o != nil && !IsNil(o.AppVersion) {
+	if o != nil && o.AppVersion != nil {
 		return true
 	}
 
@@ -326,7 +323,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) SetAppVersion(v []string) {
 
 // GetLimit returns the Limit field value if set, zero value otherwise.
 func (o *GetEventsVolumeFromWorkspaceV1Query) GetLimit() float32 {
-	if o == nil || IsNil(o.Limit) {
+	if o == nil || o.Limit == nil {
 		var ret float32
 		return ret
 	}
@@ -336,7 +333,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) GetLimit() float32 {
 // GetLimitOk returns a tuple with the Limit field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetEventsVolumeFromWorkspaceV1Query) GetLimitOk() (*float32, bool) {
-	if o == nil || IsNil(o.Limit) {
+	if o == nil || o.Limit == nil {
 		return nil, false
 	}
 	return o.Limit, true
@@ -344,7 +341,7 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) GetLimitOk() (*float32, bool) {
 
 // HasLimit returns a boolean if a field has been set.
 func (o *GetEventsVolumeFromWorkspaceV1Query) HasLimit() bool {
-	if o != nil && !IsNil(o.Limit) {
+	if o != nil && o.Limit != nil {
 		return true
 	}
 
@@ -357,38 +354,38 @@ func (o *GetEventsVolumeFromWorkspaceV1Query) SetLimit(v float32) {
 }
 
 func (o GetEventsVolumeFromWorkspaceV1Query) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o GetEventsVolumeFromWorkspaceV1Query) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["workspaceId"] = o.WorkspaceId
-	toSerialize["granularity"] = o.Granularity
-	toSerialize["startTime"] = o.StartTime
-	toSerialize["endTime"] = o.EndTime
-	if !IsNil(o.GroupBy) {
+	if true {
+		toSerialize["workspaceId"] = o.WorkspaceId
+	}
+	if true {
+		toSerialize["granularity"] = o.Granularity
+	}
+	if true {
+		toSerialize["startTime"] = o.StartTime
+	}
+	if true {
+		toSerialize["endTime"] = o.EndTime
+	}
+	if o.GroupBy != nil {
 		toSerialize["groupBy"] = o.GroupBy
 	}
-	if !IsNil(o.SourceId) {
+	if o.SourceId != nil {
 		toSerialize["sourceId"] = o.SourceId
 	}
-	if !IsNil(o.EventName) {
+	if o.EventName != nil {
 		toSerialize["eventName"] = o.EventName
 	}
-	if !IsNil(o.EventType) {
+	if o.EventType != nil {
 		toSerialize["eventType"] = o.EventType
 	}
-	if !IsNil(o.AppVersion) {
+	if o.AppVersion != nil {
 		toSerialize["appVersion"] = o.AppVersion
 	}
-	if !IsNil(o.Limit) {
+	if o.Limit != nil {
 		toSerialize["limit"] = o.Limit
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableGetEventsVolumeFromWorkspaceV1Query struct {

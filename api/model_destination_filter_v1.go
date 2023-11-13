@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the DestinationFilterV1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &DestinationFilterV1{}
 
 // DestinationFilterV1 Represents a Destination filter.
 type DestinationFilterV1 struct {
@@ -224,7 +221,7 @@ func (o *DestinationFilterV1) SetTitle(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *DestinationFilterV1) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || o.Description == nil {
 		var ret string
 		return ret
 	}
@@ -234,7 +231,7 @@ func (o *DestinationFilterV1) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationFilterV1) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || o.Description == nil {
 		return nil, false
 	}
 	return o.Description, true
@@ -242,7 +239,7 @@ func (o *DestinationFilterV1) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *DestinationFilterV1) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
+	if o != nil && o.Description != nil {
 		return true
 	}
 
@@ -327,28 +324,38 @@ func (o *DestinationFilterV1) SetUpdatedAt(v string) {
 }
 
 func (o DestinationFilterV1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o DestinationFilterV1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["sourceId"] = o.SourceId
-	toSerialize["destinationId"] = o.DestinationId
-	toSerialize["if"] = o.If
-	toSerialize["actions"] = o.Actions
-	toSerialize["title"] = o.Title
-	if !IsNil(o.Description) {
+	if true {
+		toSerialize["id"] = o.Id
+	}
+	if true {
+		toSerialize["sourceId"] = o.SourceId
+	}
+	if true {
+		toSerialize["destinationId"] = o.DestinationId
+	}
+	if true {
+		toSerialize["if"] = o.If
+	}
+	if true {
+		toSerialize["actions"] = o.Actions
+	}
+	if true {
+		toSerialize["title"] = o.Title
+	}
+	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
-	toSerialize["enabled"] = o.Enabled
-	toSerialize["createdAt"] = o.CreatedAt
-	toSerialize["updatedAt"] = o.UpdatedAt
-	return toSerialize, nil
+	if true {
+		toSerialize["enabled"] = o.Enabled
+	}
+	if true {
+		toSerialize["createdAt"] = o.CreatedAt
+	}
+	if true {
+		toSerialize["updatedAt"] = o.UpdatedAt
+	}
+	return json.Marshal(toSerialize)
 }
 
 type NullableDestinationFilterV1 struct {

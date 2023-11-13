@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,19 +15,16 @@ import (
 	"encoding/json"
 )
 
-// checks if the UpdateFunctionV1Output type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateFunctionV1Output{}
-
 // UpdateFunctionV1Output Create a Function.
 type UpdateFunctionV1Output struct {
-	Function FunctionV1 `json:"function"`
+	Function Function2 `json:"function"`
 }
 
 // NewUpdateFunctionV1Output instantiates a new UpdateFunctionV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateFunctionV1Output(function FunctionV1) *UpdateFunctionV1Output {
+func NewUpdateFunctionV1Output(function Function2) *UpdateFunctionV1Output {
 	this := UpdateFunctionV1Output{}
 	this.Function = function
 	return &this
@@ -42,9 +39,9 @@ func NewUpdateFunctionV1OutputWithDefaults() *UpdateFunctionV1Output {
 }
 
 // GetFunction returns the Function field value
-func (o *UpdateFunctionV1Output) GetFunction() FunctionV1 {
+func (o *UpdateFunctionV1Output) GetFunction() Function2 {
 	if o == nil {
-		var ret FunctionV1
+		var ret Function2
 		return ret
 	}
 
@@ -53,7 +50,7 @@ func (o *UpdateFunctionV1Output) GetFunction() FunctionV1 {
 
 // GetFunctionOk returns a tuple with the Function field value
 // and a boolean to check if the value has been set.
-func (o *UpdateFunctionV1Output) GetFunctionOk() (*FunctionV1, bool) {
+func (o *UpdateFunctionV1Output) GetFunctionOk() (*Function2, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -61,22 +58,16 @@ func (o *UpdateFunctionV1Output) GetFunctionOk() (*FunctionV1, bool) {
 }
 
 // SetFunction sets field value
-func (o *UpdateFunctionV1Output) SetFunction(v FunctionV1) {
+func (o *UpdateFunctionV1Output) SetFunction(v Function2) {
 	o.Function = v
 }
 
 func (o UpdateFunctionV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["function"] = o.Function
 	}
 	return json.Marshal(toSerialize)
-}
-
-func (o UpdateFunctionV1Output) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["function"] = o.Function
-	return toSerialize, nil
 }
 
 type NullableUpdateFunctionV1Output struct {

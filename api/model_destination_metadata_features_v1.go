@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the DestinationMetadataFeaturesV1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &DestinationMetadataFeaturesV1{}
 
 // DestinationMetadataFeaturesV1 Represents features that a given Destination supports.
 type DestinationMetadataFeaturesV1 struct {
@@ -51,7 +48,7 @@ func NewDestinationMetadataFeaturesV1WithDefaults() *DestinationMetadataFeatures
 
 // GetCloudModeInstances returns the CloudModeInstances field value if set, zero value otherwise.
 func (o *DestinationMetadataFeaturesV1) GetCloudModeInstances() string {
-	if o == nil || IsNil(o.CloudModeInstances) {
+	if o == nil || o.CloudModeInstances == nil {
 		var ret string
 		return ret
 	}
@@ -61,7 +58,7 @@ func (o *DestinationMetadataFeaturesV1) GetCloudModeInstances() string {
 // GetCloudModeInstancesOk returns a tuple with the CloudModeInstances field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataFeaturesV1) GetCloudModeInstancesOk() (*string, bool) {
-	if o == nil || IsNil(o.CloudModeInstances) {
+	if o == nil || o.CloudModeInstances == nil {
 		return nil, false
 	}
 	return o.CloudModeInstances, true
@@ -69,7 +66,7 @@ func (o *DestinationMetadataFeaturesV1) GetCloudModeInstancesOk() (*string, bool
 
 // HasCloudModeInstances returns a boolean if a field has been set.
 func (o *DestinationMetadataFeaturesV1) HasCloudModeInstances() bool {
-	if o != nil && !IsNil(o.CloudModeInstances) {
+	if o != nil && o.CloudModeInstances != nil {
 		return true
 	}
 
@@ -83,7 +80,7 @@ func (o *DestinationMetadataFeaturesV1) SetCloudModeInstances(v string) {
 
 // GetDeviceModeInstances returns the DeviceModeInstances field value if set, zero value otherwise.
 func (o *DestinationMetadataFeaturesV1) GetDeviceModeInstances() string {
-	if o == nil || IsNil(o.DeviceModeInstances) {
+	if o == nil || o.DeviceModeInstances == nil {
 		var ret string
 		return ret
 	}
@@ -93,7 +90,7 @@ func (o *DestinationMetadataFeaturesV1) GetDeviceModeInstances() string {
 // GetDeviceModeInstancesOk returns a tuple with the DeviceModeInstances field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataFeaturesV1) GetDeviceModeInstancesOk() (*string, bool) {
-	if o == nil || IsNil(o.DeviceModeInstances) {
+	if o == nil || o.DeviceModeInstances == nil {
 		return nil, false
 	}
 	return o.DeviceModeInstances, true
@@ -101,7 +98,7 @@ func (o *DestinationMetadataFeaturesV1) GetDeviceModeInstancesOk() (*string, boo
 
 // HasDeviceModeInstances returns a boolean if a field has been set.
 func (o *DestinationMetadataFeaturesV1) HasDeviceModeInstances() bool {
-	if o != nil && !IsNil(o.DeviceModeInstances) {
+	if o != nil && o.DeviceModeInstances != nil {
 		return true
 	}
 
@@ -115,7 +112,7 @@ func (o *DestinationMetadataFeaturesV1) SetDeviceModeInstances(v string) {
 
 // GetReplay returns the Replay field value if set, zero value otherwise.
 func (o *DestinationMetadataFeaturesV1) GetReplay() bool {
-	if o == nil || IsNil(o.Replay) {
+	if o == nil || o.Replay == nil {
 		var ret bool
 		return ret
 	}
@@ -125,7 +122,7 @@ func (o *DestinationMetadataFeaturesV1) GetReplay() bool {
 // GetReplayOk returns a tuple with the Replay field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataFeaturesV1) GetReplayOk() (*bool, bool) {
-	if o == nil || IsNil(o.Replay) {
+	if o == nil || o.Replay == nil {
 		return nil, false
 	}
 	return o.Replay, true
@@ -133,7 +130,7 @@ func (o *DestinationMetadataFeaturesV1) GetReplayOk() (*bool, bool) {
 
 // HasReplay returns a boolean if a field has been set.
 func (o *DestinationMetadataFeaturesV1) HasReplay() bool {
-	if o != nil && !IsNil(o.Replay) {
+	if o != nil && o.Replay != nil {
 		return true
 	}
 
@@ -147,7 +144,7 @@ func (o *DestinationMetadataFeaturesV1) SetReplay(v bool) {
 
 // GetBrowserUnbundling returns the BrowserUnbundling field value if set, zero value otherwise.
 func (o *DestinationMetadataFeaturesV1) GetBrowserUnbundling() bool {
-	if o == nil || IsNil(o.BrowserUnbundling) {
+	if o == nil || o.BrowserUnbundling == nil {
 		var ret bool
 		return ret
 	}
@@ -157,7 +154,7 @@ func (o *DestinationMetadataFeaturesV1) GetBrowserUnbundling() bool {
 // GetBrowserUnbundlingOk returns a tuple with the BrowserUnbundling field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataFeaturesV1) GetBrowserUnbundlingOk() (*bool, bool) {
-	if o == nil || IsNil(o.BrowserUnbundling) {
+	if o == nil || o.BrowserUnbundling == nil {
 		return nil, false
 	}
 	return o.BrowserUnbundling, true
@@ -165,7 +162,7 @@ func (o *DestinationMetadataFeaturesV1) GetBrowserUnbundlingOk() (*bool, bool) {
 
 // HasBrowserUnbundling returns a boolean if a field has been set.
 func (o *DestinationMetadataFeaturesV1) HasBrowserUnbundling() bool {
-	if o != nil && !IsNil(o.BrowserUnbundling) {
+	if o != nil && o.BrowserUnbundling != nil {
 		return true
 	}
 
@@ -179,7 +176,7 @@ func (o *DestinationMetadataFeaturesV1) SetBrowserUnbundling(v bool) {
 
 // GetBrowserUnbundlingPublic returns the BrowserUnbundlingPublic field value if set, zero value otherwise.
 func (o *DestinationMetadataFeaturesV1) GetBrowserUnbundlingPublic() bool {
-	if o == nil || IsNil(o.BrowserUnbundlingPublic) {
+	if o == nil || o.BrowserUnbundlingPublic == nil {
 		var ret bool
 		return ret
 	}
@@ -189,7 +186,7 @@ func (o *DestinationMetadataFeaturesV1) GetBrowserUnbundlingPublic() bool {
 // GetBrowserUnbundlingPublicOk returns a tuple with the BrowserUnbundlingPublic field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *DestinationMetadataFeaturesV1) GetBrowserUnbundlingPublicOk() (*bool, bool) {
-	if o == nil || IsNil(o.BrowserUnbundlingPublic) {
+	if o == nil || o.BrowserUnbundlingPublic == nil {
 		return nil, false
 	}
 	return o.BrowserUnbundlingPublic, true
@@ -197,7 +194,7 @@ func (o *DestinationMetadataFeaturesV1) GetBrowserUnbundlingPublicOk() (*bool, b
 
 // HasBrowserUnbundlingPublic returns a boolean if a field has been set.
 func (o *DestinationMetadataFeaturesV1) HasBrowserUnbundlingPublic() bool {
-	if o != nil && !IsNil(o.BrowserUnbundlingPublic) {
+	if o != nil && o.BrowserUnbundlingPublic != nil {
 		return true
 	}
 
@@ -210,31 +207,23 @@ func (o *DestinationMetadataFeaturesV1) SetBrowserUnbundlingPublic(v bool) {
 }
 
 func (o DestinationMetadataFeaturesV1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o DestinationMetadataFeaturesV1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CloudModeInstances) {
+	if o.CloudModeInstances != nil {
 		toSerialize["cloudModeInstances"] = o.CloudModeInstances
 	}
-	if !IsNil(o.DeviceModeInstances) {
+	if o.DeviceModeInstances != nil {
 		toSerialize["deviceModeInstances"] = o.DeviceModeInstances
 	}
-	if !IsNil(o.Replay) {
+	if o.Replay != nil {
 		toSerialize["replay"] = o.Replay
 	}
-	if !IsNil(o.BrowserUnbundling) {
+	if o.BrowserUnbundling != nil {
 		toSerialize["browserUnbundling"] = o.BrowserUnbundling
 	}
-	if !IsNil(o.BrowserUnbundlingPublic) {
+	if o.BrowserUnbundlingPublic != nil {
 		toSerialize["browserUnbundlingPublic"] = o.BrowserUnbundlingPublic
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableDestinationMetadataFeaturesV1 struct {

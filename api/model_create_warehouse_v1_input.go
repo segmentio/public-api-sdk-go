@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,9 +15,6 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateWarehouseV1Input type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateWarehouseV1Input{}
-
 // CreateWarehouseV1Input Create a new Warehouse based on a set of parameters.
 type CreateWarehouseV1Input struct {
 	// The Warehouse metadata to use.
@@ -26,8 +23,8 @@ type CreateWarehouseV1Input struct {
 	Name *string `json:"name,omitempty"`
 	// Enable to allow this Warehouse to receive data. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty"`
-	// A key-value object that contains instance-specific Warehouse settings.
-	Settings map[string]interface{} `json:"settings"`
+	// A key-value object that contains instance-specific settings for a Warehouse.  Different kinds of Warehouses require different settings. The required and optional settings for a Warehouse are described in the `options` object of the associated Warehouse metadata.  You can find the full list of Warehouse metadata and related settings information in the `/catalog/warehouses` endpoint.
+	Settings NullableModelMap `json:"settings"`
 }
 
 // NewCreateWarehouseV1Input instantiates a new CreateWarehouseV1Input object
@@ -36,7 +33,7 @@ type CreateWarehouseV1Input struct {
 // will change when the set of required properties is changed
 func NewCreateWarehouseV1Input(
 	metadataId string,
-	settings map[string]interface{},
+	settings NullableModelMap,
 ) *CreateWarehouseV1Input {
 	this := CreateWarehouseV1Input{}
 	this.MetadataId = metadataId
@@ -78,7 +75,7 @@ func (o *CreateWarehouseV1Input) SetMetadataId(v string) {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *CreateWarehouseV1Input) GetName() string {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || o.Name == nil {
 		var ret string
 		return ret
 	}
@@ -88,7 +85,7 @@ func (o *CreateWarehouseV1Input) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateWarehouseV1Input) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
+	if o == nil || o.Name == nil {
 		return nil, false
 	}
 	return o.Name, true
@@ -96,7 +93,7 @@ func (o *CreateWarehouseV1Input) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *CreateWarehouseV1Input) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
+	if o != nil && o.Name != nil {
 		return true
 	}
 
@@ -110,7 +107,7 @@ func (o *CreateWarehouseV1Input) SetName(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *CreateWarehouseV1Input) GetEnabled() bool {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil || o.Enabled == nil {
 		var ret bool
 		return ret
 	}
@@ -120,7 +117,7 @@ func (o *CreateWarehouseV1Input) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateWarehouseV1Input) GetEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.Enabled) {
+	if o == nil || o.Enabled == nil {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -128,7 +125,7 @@ func (o *CreateWarehouseV1Input) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *CreateWarehouseV1Input) HasEnabled() bool {
-	if o != nil && !IsNil(o.Enabled) {
+	if o != nil && o.Enabled != nil {
 		return true
 	}
 
@@ -141,48 +138,46 @@ func (o *CreateWarehouseV1Input) SetEnabled(v bool) {
 }
 
 // GetSettings returns the Settings field value
-func (o *CreateWarehouseV1Input) GetSettings() map[string]interface{} {
-	if o == nil {
-		var ret map[string]interface{}
+// If the value is explicit nil, the zero value for ModelMap will be returned
+func (o *CreateWarehouseV1Input) GetSettings() ModelMap {
+	if o == nil || o.Settings.Get() == nil {
+		var ret ModelMap
 		return ret
 	}
 
-	return o.Settings
+	return *o.Settings.Get()
 }
 
 // GetSettingsOk returns a tuple with the Settings field value
 // and a boolean to check if the value has been set.
-func (o *CreateWarehouseV1Input) GetSettingsOk() (map[string]interface{}, bool) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateWarehouseV1Input) GetSettingsOk() (*ModelMap, bool) {
 	if o == nil {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
-	return o.Settings, true
+	return o.Settings.Get(), o.Settings.IsSet()
 }
 
 // SetSettings sets field value
-func (o *CreateWarehouseV1Input) SetSettings(v map[string]interface{}) {
-	o.Settings = v
+func (o *CreateWarehouseV1Input) SetSettings(v ModelMap) {
+	o.Settings.Set(&v)
 }
 
 func (o CreateWarehouseV1Input) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o CreateWarehouseV1Input) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["metadataId"] = o.MetadataId
-	if !IsNil(o.Name) {
+	if true {
+		toSerialize["metadataId"] = o.MetadataId
+	}
+	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
-	if !IsNil(o.Enabled) {
+	if o.Enabled != nil {
 		toSerialize["enabled"] = o.Enabled
 	}
-	toSerialize["settings"] = o.Settings
-	return toSerialize, nil
+	if true {
+		toSerialize["settings"] = o.Settings.Get()
+	}
+	return json.Marshal(toSerialize)
 }
 
 type NullableCreateWarehouseV1Input struct {

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -15,14 +15,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the SourceSettingsOutputV1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &SourceSettingsOutputV1{}
-
 // SourceSettingsOutputV1 The output of Source settings.
 type SourceSettingsOutputV1 struct {
-	Track    *TrackSourceSettingsV1    `json:"track,omitempty"`
-	Identify *IdentifySourceSettingsV1 `json:"identify,omitempty"`
-	Group    *GroupSourceSettingsV1    `json:"group,omitempty"`
+	Track    *Track    `json:"track,omitempty"`
+	Identify *Identify `json:"identify,omitempty"`
+	Group    *Group    `json:"group,omitempty"`
 	// SourceId to forward violations to.
 	ForwardingViolationsTo *string `json:"forwardingViolationsTo,omitempty"`
 	// SourceId to forward blocked events to.
@@ -47,9 +44,9 @@ func NewSourceSettingsOutputV1WithDefaults() *SourceSettingsOutputV1 {
 }
 
 // GetTrack returns the Track field value if set, zero value otherwise.
-func (o *SourceSettingsOutputV1) GetTrack() TrackSourceSettingsV1 {
-	if o == nil || IsNil(o.Track) {
-		var ret TrackSourceSettingsV1
+func (o *SourceSettingsOutputV1) GetTrack() Track {
+	if o == nil || o.Track == nil {
+		var ret Track
 		return ret
 	}
 	return *o.Track
@@ -57,8 +54,8 @@ func (o *SourceSettingsOutputV1) GetTrack() TrackSourceSettingsV1 {
 
 // GetTrackOk returns a tuple with the Track field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SourceSettingsOutputV1) GetTrackOk() (*TrackSourceSettingsV1, bool) {
-	if o == nil || IsNil(o.Track) {
+func (o *SourceSettingsOutputV1) GetTrackOk() (*Track, bool) {
+	if o == nil || o.Track == nil {
 		return nil, false
 	}
 	return o.Track, true
@@ -66,22 +63,22 @@ func (o *SourceSettingsOutputV1) GetTrackOk() (*TrackSourceSettingsV1, bool) {
 
 // HasTrack returns a boolean if a field has been set.
 func (o *SourceSettingsOutputV1) HasTrack() bool {
-	if o != nil && !IsNil(o.Track) {
+	if o != nil && o.Track != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetTrack gets a reference to the given TrackSourceSettingsV1 and assigns it to the Track field.
-func (o *SourceSettingsOutputV1) SetTrack(v TrackSourceSettingsV1) {
+// SetTrack gets a reference to the given Track and assigns it to the Track field.
+func (o *SourceSettingsOutputV1) SetTrack(v Track) {
 	o.Track = &v
 }
 
 // GetIdentify returns the Identify field value if set, zero value otherwise.
-func (o *SourceSettingsOutputV1) GetIdentify() IdentifySourceSettingsV1 {
-	if o == nil || IsNil(o.Identify) {
-		var ret IdentifySourceSettingsV1
+func (o *SourceSettingsOutputV1) GetIdentify() Identify {
+	if o == nil || o.Identify == nil {
+		var ret Identify
 		return ret
 	}
 	return *o.Identify
@@ -89,8 +86,8 @@ func (o *SourceSettingsOutputV1) GetIdentify() IdentifySourceSettingsV1 {
 
 // GetIdentifyOk returns a tuple with the Identify field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SourceSettingsOutputV1) GetIdentifyOk() (*IdentifySourceSettingsV1, bool) {
-	if o == nil || IsNil(o.Identify) {
+func (o *SourceSettingsOutputV1) GetIdentifyOk() (*Identify, bool) {
+	if o == nil || o.Identify == nil {
 		return nil, false
 	}
 	return o.Identify, true
@@ -98,22 +95,22 @@ func (o *SourceSettingsOutputV1) GetIdentifyOk() (*IdentifySourceSettingsV1, boo
 
 // HasIdentify returns a boolean if a field has been set.
 func (o *SourceSettingsOutputV1) HasIdentify() bool {
-	if o != nil && !IsNil(o.Identify) {
+	if o != nil && o.Identify != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetIdentify gets a reference to the given IdentifySourceSettingsV1 and assigns it to the Identify field.
-func (o *SourceSettingsOutputV1) SetIdentify(v IdentifySourceSettingsV1) {
+// SetIdentify gets a reference to the given Identify and assigns it to the Identify field.
+func (o *SourceSettingsOutputV1) SetIdentify(v Identify) {
 	o.Identify = &v
 }
 
 // GetGroup returns the Group field value if set, zero value otherwise.
-func (o *SourceSettingsOutputV1) GetGroup() GroupSourceSettingsV1 {
-	if o == nil || IsNil(o.Group) {
-		var ret GroupSourceSettingsV1
+func (o *SourceSettingsOutputV1) GetGroup() Group {
+	if o == nil || o.Group == nil {
+		var ret Group
 		return ret
 	}
 	return *o.Group
@@ -121,8 +118,8 @@ func (o *SourceSettingsOutputV1) GetGroup() GroupSourceSettingsV1 {
 
 // GetGroupOk returns a tuple with the Group field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SourceSettingsOutputV1) GetGroupOk() (*GroupSourceSettingsV1, bool) {
-	if o == nil || IsNil(o.Group) {
+func (o *SourceSettingsOutputV1) GetGroupOk() (*Group, bool) {
+	if o == nil || o.Group == nil {
 		return nil, false
 	}
 	return o.Group, true
@@ -130,21 +127,21 @@ func (o *SourceSettingsOutputV1) GetGroupOk() (*GroupSourceSettingsV1, bool) {
 
 // HasGroup returns a boolean if a field has been set.
 func (o *SourceSettingsOutputV1) HasGroup() bool {
-	if o != nil && !IsNil(o.Group) {
+	if o != nil && o.Group != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetGroup gets a reference to the given GroupSourceSettingsV1 and assigns it to the Group field.
-func (o *SourceSettingsOutputV1) SetGroup(v GroupSourceSettingsV1) {
+// SetGroup gets a reference to the given Group and assigns it to the Group field.
+func (o *SourceSettingsOutputV1) SetGroup(v Group) {
 	o.Group = &v
 }
 
 // GetForwardingViolationsTo returns the ForwardingViolationsTo field value if set, zero value otherwise.
 func (o *SourceSettingsOutputV1) GetForwardingViolationsTo() string {
-	if o == nil || IsNil(o.ForwardingViolationsTo) {
+	if o == nil || o.ForwardingViolationsTo == nil {
 		var ret string
 		return ret
 	}
@@ -154,7 +151,7 @@ func (o *SourceSettingsOutputV1) GetForwardingViolationsTo() string {
 // GetForwardingViolationsToOk returns a tuple with the ForwardingViolationsTo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceSettingsOutputV1) GetForwardingViolationsToOk() (*string, bool) {
-	if o == nil || IsNil(o.ForwardingViolationsTo) {
+	if o == nil || o.ForwardingViolationsTo == nil {
 		return nil, false
 	}
 	return o.ForwardingViolationsTo, true
@@ -162,7 +159,7 @@ func (o *SourceSettingsOutputV1) GetForwardingViolationsToOk() (*string, bool) {
 
 // HasForwardingViolationsTo returns a boolean if a field has been set.
 func (o *SourceSettingsOutputV1) HasForwardingViolationsTo() bool {
-	if o != nil && !IsNil(o.ForwardingViolationsTo) {
+	if o != nil && o.ForwardingViolationsTo != nil {
 		return true
 	}
 
@@ -176,7 +173,7 @@ func (o *SourceSettingsOutputV1) SetForwardingViolationsTo(v string) {
 
 // GetForwardingBlockedEventsTo returns the ForwardingBlockedEventsTo field value if set, zero value otherwise.
 func (o *SourceSettingsOutputV1) GetForwardingBlockedEventsTo() string {
-	if o == nil || IsNil(o.ForwardingBlockedEventsTo) {
+	if o == nil || o.ForwardingBlockedEventsTo == nil {
 		var ret string
 		return ret
 	}
@@ -186,7 +183,7 @@ func (o *SourceSettingsOutputV1) GetForwardingBlockedEventsTo() string {
 // GetForwardingBlockedEventsToOk returns a tuple with the ForwardingBlockedEventsTo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SourceSettingsOutputV1) GetForwardingBlockedEventsToOk() (*string, bool) {
-	if o == nil || IsNil(o.ForwardingBlockedEventsTo) {
+	if o == nil || o.ForwardingBlockedEventsTo == nil {
 		return nil, false
 	}
 	return o.ForwardingBlockedEventsTo, true
@@ -194,7 +191,7 @@ func (o *SourceSettingsOutputV1) GetForwardingBlockedEventsToOk() (*string, bool
 
 // HasForwardingBlockedEventsTo returns a boolean if a field has been set.
 func (o *SourceSettingsOutputV1) HasForwardingBlockedEventsTo() bool {
-	if o != nil && !IsNil(o.ForwardingBlockedEventsTo) {
+	if o != nil && o.ForwardingBlockedEventsTo != nil {
 		return true
 	}
 
@@ -207,31 +204,23 @@ func (o *SourceSettingsOutputV1) SetForwardingBlockedEventsTo(v string) {
 }
 
 func (o SourceSettingsOutputV1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o SourceSettingsOutputV1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Track) {
+	if o.Track != nil {
 		toSerialize["track"] = o.Track
 	}
-	if !IsNil(o.Identify) {
+	if o.Identify != nil {
 		toSerialize["identify"] = o.Identify
 	}
-	if !IsNil(o.Group) {
+	if o.Group != nil {
 		toSerialize["group"] = o.Group
 	}
-	if !IsNil(o.ForwardingViolationsTo) {
+	if o.ForwardingViolationsTo != nil {
 		toSerialize["forwardingViolationsTo"] = o.ForwardingViolationsTo
 	}
-	if !IsNil(o.ForwardingBlockedEventsTo) {
+	if o.ForwardingBlockedEventsTo != nil {
 		toSerialize["forwardingBlockedEventsTo"] = o.ForwardingBlockedEventsTo
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableSourceSettingsOutputV1 struct {

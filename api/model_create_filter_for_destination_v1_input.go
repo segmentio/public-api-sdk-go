@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the CreateFilterForDestinationV1Input type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateFilterForDestinationV1Input{}
 
 // CreateFilterForDestinationV1Input Input for CreateDestinationFilterV1.
 type CreateFilterForDestinationV1Input struct {
@@ -160,7 +157,7 @@ func (o *CreateFilterForDestinationV1Input) SetTitle(v string) {
 
 // GetDescription returns the Description field value if set, zero value otherwise.
 func (o *CreateFilterForDestinationV1Input) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || o.Description == nil {
 		var ret string
 		return ret
 	}
@@ -170,7 +167,7 @@ func (o *CreateFilterForDestinationV1Input) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateFilterForDestinationV1Input) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || o.Description == nil {
 		return nil, false
 	}
 	return o.Description, true
@@ -178,7 +175,7 @@ func (o *CreateFilterForDestinationV1Input) GetDescriptionOk() (*string, bool) {
 
 // HasDescription returns a boolean if a field has been set.
 func (o *CreateFilterForDestinationV1Input) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
+	if o != nil && o.Description != nil {
 		return true
 	}
 
@@ -215,24 +212,26 @@ func (o *CreateFilterForDestinationV1Input) SetEnabled(v bool) {
 }
 
 func (o CreateFilterForDestinationV1Input) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o CreateFilterForDestinationV1Input) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["sourceId"] = o.SourceId
-	toSerialize["if"] = o.If
-	toSerialize["actions"] = o.Actions
-	toSerialize["title"] = o.Title
-	if !IsNil(o.Description) {
+	if true {
+		toSerialize["sourceId"] = o.SourceId
+	}
+	if true {
+		toSerialize["if"] = o.If
+	}
+	if true {
+		toSerialize["actions"] = o.Actions
+	}
+	if true {
+		toSerialize["title"] = o.Title
+	}
+	if o.Description != nil {
 		toSerialize["description"] = o.Description
 	}
-	toSerialize["enabled"] = o.Enabled
-	return toSerialize, nil
+	if true {
+		toSerialize["enabled"] = o.Enabled
+	}
+	return json.Marshal(toSerialize)
 }
 
 type NullableCreateFilterForDestinationV1Input struct {

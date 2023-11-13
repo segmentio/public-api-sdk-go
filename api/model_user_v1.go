@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 37.2.0
 Contact: friends@segment.com
 */
 
@@ -14,9 +14,6 @@ package api
 import (
 	"encoding/json"
 )
-
-// checks if the UserV1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UserV1{}
 
 // UserV1 A user belonging to a Segment Workspace.
 type UserV1 struct {
@@ -124,7 +121,7 @@ func (o *UserV1) SetEmail(v string) {
 
 // GetPermissions returns the Permissions field value if set, zero value otherwise.
 func (o *UserV1) GetPermissions() []PermissionV1 {
-	if o == nil || IsNil(o.Permissions) {
+	if o == nil || o.Permissions == nil {
 		var ret []PermissionV1
 		return ret
 	}
@@ -134,7 +131,7 @@ func (o *UserV1) GetPermissions() []PermissionV1 {
 // GetPermissionsOk returns a tuple with the Permissions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UserV1) GetPermissionsOk() ([]PermissionV1, bool) {
-	if o == nil || IsNil(o.Permissions) {
+	if o == nil || o.Permissions == nil {
 		return nil, false
 	}
 	return o.Permissions, true
@@ -142,7 +139,7 @@ func (o *UserV1) GetPermissionsOk() ([]PermissionV1, bool) {
 
 // HasPermissions returns a boolean if a field has been set.
 func (o *UserV1) HasPermissions() bool {
-	if o != nil && !IsNil(o.Permissions) {
+	if o != nil && o.Permissions != nil {
 		return true
 	}
 
@@ -155,22 +152,20 @@ func (o *UserV1) SetPermissions(v []PermissionV1) {
 }
 
 func (o UserV1) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o UserV1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
-	toSerialize["name"] = o.Name
-	toSerialize["email"] = o.Email
-	if !IsNil(o.Permissions) {
+	if true {
+		toSerialize["id"] = o.Id
+	}
+	if true {
+		toSerialize["name"] = o.Name
+	}
+	if true {
+		toSerialize["email"] = o.Email
+	}
+	if o.Permissions != nil {
 		toSerialize["permissions"] = o.Permissions
 	}
-	return toSerialize, nil
+	return json.Marshal(toSerialize)
 }
 
 type NullableUserV1 struct {
