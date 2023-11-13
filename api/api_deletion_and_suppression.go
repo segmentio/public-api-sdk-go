@@ -14,11 +14,9 @@ package api
 import (
 	"bytes"
 	"context"
-	"fmt"
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
 )
 
@@ -1027,20 +1025,12 @@ func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSourceExecute(
 		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "")
 	}
 	if r.regulationTypes != nil {
-		t := *r.regulationTypes
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(
-					localVarQueryParams,
-					fmt.Sprintf("regulationTypes.%d", i),
-					s.Index(i).Interface(),
-					"multi",
-				)
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "regulationTypes", t, "multi")
-		}
+		parameterAddToHeaderOrQuery(
+			localVarQueryParams,
+			"regulationTypes",
+			r.regulationTypes,
+			"csv",
+		)
 	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
@@ -1404,20 +1394,12 @@ func (a *DeletionAndSuppressionAPIService) ListWorkspaceRegulationsExecute(
 		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "")
 	}
 	if r.regulationTypes != nil {
-		t := *r.regulationTypes
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(
-					localVarQueryParams,
-					fmt.Sprintf("regulationTypes.%d", i),
-					s.Index(i).Interface(),
-					"multi",
-				)
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "regulationTypes", t, "multi")
-		}
+		parameterAddToHeaderOrQuery(
+			localVarQueryParams,
+			"regulationTypes",
+			r.regulationTypes,
+			"csv",
+		)
 	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header

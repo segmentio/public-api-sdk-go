@@ -191,7 +191,7 @@ import (
 )
 
 func main() {
-    emails := []string{"Inner_example"} // []string | The list of emails to delete invites for.  This parameter exists in v1.
+    emails := []string{[]string{"Emails_example"}} // []string | The list of emails to delete invites for.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -224,7 +224,7 @@ Other parameters are passed through a pointer to a apiDeleteInvitesRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **emails** | **[]string** | The list of emails to delete invites for.  This parameter exists in v1. | 
+ **emails** | **[][]string** | The list of emails to delete invites for.  This parameter exists in v1. | 
 
 ### Return type
 
@@ -265,7 +265,7 @@ import (
 )
 
 func main() {
-    userIds := []string{"Inner_example"} // []string | The ids of the users to remove.  This parameter exists in v1.
+    userIds := []string{[]string{"UserIds_example"}} // []string | The ids of the users to remove.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -298,7 +298,7 @@ Other parameters are passed through a pointer to a apiDeleteUsersRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **userIds** | **[]string** | The ids of the users to remove.  This parameter exists in v1. | 
+ **userIds** | **[][]string** | The ids of the users to remove.  This parameter exists in v1. | 
 
 ### Return type
 
