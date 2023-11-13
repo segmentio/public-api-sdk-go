@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,6 +15,9 @@ import (
 	"encoding/json"
 )
 
+// checks if the UpdateSourceV1Input type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateSourceV1Input{}
+
 // UpdateSourceV1Input Updates an existing Source based on a set of parameters.
 type UpdateSourceV1Input struct {
 	// An optional human-readable name to associate with the Source.  Config API note: equal to `displayName`.
@@ -23,8 +26,8 @@ type UpdateSourceV1Input struct {
 	Enabled *bool `json:"enabled,omitempty"`
 	// The slug that identifies the Source.  Config API note: equal to `name`.
 	Slug *string `json:"slug,omitempty"`
-	// A key-value object that contains instance-specific settings for the Source.  Different kinds of Sources require different kinds of input. The settings input for a Source comes from the `options` object associated with this instance of a Source.  You can find the full list of required settings by accessing the Sources catalog endpoint under `/catalog/sources`.
-	Settings NullableModelMap `json:"settings,omitempty"`
+	// A key-value object that contains instance-specific settings for a Source.  The `options` field in the Source metadata defines the schema of this object.
+	Settings map[string]interface{} `json:"settings,omitempty"`
 }
 
 // NewUpdateSourceV1Input instantiates a new UpdateSourceV1Input object
@@ -46,7 +49,7 @@ func NewUpdateSourceV1InputWithDefaults() *UpdateSourceV1Input {
 
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *UpdateSourceV1Input) GetName() string {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
@@ -56,7 +59,7 @@ func (o *UpdateSourceV1Input) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateSourceV1Input) GetNameOk() (*string, bool) {
-	if o == nil || o.Name == nil {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
 	return o.Name, true
@@ -64,7 +67,7 @@ func (o *UpdateSourceV1Input) GetNameOk() (*string, bool) {
 
 // HasName returns a boolean if a field has been set.
 func (o *UpdateSourceV1Input) HasName() bool {
-	if o != nil && o.Name != nil {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
@@ -78,7 +81,7 @@ func (o *UpdateSourceV1Input) SetName(v string) {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *UpdateSourceV1Input) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -88,7 +91,7 @@ func (o *UpdateSourceV1Input) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateSourceV1Input) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -96,7 +99,7 @@ func (o *UpdateSourceV1Input) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *UpdateSourceV1Input) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -110,7 +113,7 @@ func (o *UpdateSourceV1Input) SetEnabled(v bool) {
 
 // GetSlug returns the Slug field value if set, zero value otherwise.
 func (o *UpdateSourceV1Input) GetSlug() string {
-	if o == nil || o.Slug == nil {
+	if o == nil || IsNil(o.Slug) {
 		var ret string
 		return ret
 	}
@@ -120,7 +123,7 @@ func (o *UpdateSourceV1Input) GetSlug() string {
 // GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateSourceV1Input) GetSlugOk() (*string, bool) {
-	if o == nil || o.Slug == nil {
+	if o == nil || IsNil(o.Slug) {
 		return nil, false
 	}
 	return o.Slug, true
@@ -128,7 +131,7 @@ func (o *UpdateSourceV1Input) GetSlugOk() (*string, bool) {
 
 // HasSlug returns a boolean if a field has been set.
 func (o *UpdateSourceV1Input) HasSlug() bool {
-	if o != nil && o.Slug != nil {
+	if o != nil && !IsNil(o.Slug) {
 		return true
 	}
 
@@ -140,64 +143,61 @@ func (o *UpdateSourceV1Input) SetSlug(v string) {
 	o.Slug = &v
 }
 
-// GetSettings returns the Settings field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UpdateSourceV1Input) GetSettings() ModelMap {
-	if o == nil || o.Settings.Get() == nil {
-		var ret ModelMap
+// GetSettings returns the Settings field value if set, zero value otherwise.
+func (o *UpdateSourceV1Input) GetSettings() map[string]interface{} {
+	if o == nil || IsNil(o.Settings) {
+		var ret map[string]interface{}
 		return ret
 	}
-	return *o.Settings.Get()
+	return o.Settings
 }
 
 // GetSettingsOk returns a tuple with the Settings field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdateSourceV1Input) GetSettingsOk() (*ModelMap, bool) {
-	if o == nil {
-		return nil, false
+func (o *UpdateSourceV1Input) GetSettingsOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Settings) {
+		return map[string]interface{}{}, false
 	}
-	return o.Settings.Get(), o.Settings.IsSet()
+	return o.Settings, true
 }
 
 // HasSettings returns a boolean if a field has been set.
 func (o *UpdateSourceV1Input) HasSettings() bool {
-	if o != nil && o.Settings.IsSet() {
+	if o != nil && !IsNil(o.Settings) {
 		return true
 	}
 
 	return false
 }
 
-// SetSettings gets a reference to the given NullableModelMap and assigns it to the Settings field.
-func (o *UpdateSourceV1Input) SetSettings(v ModelMap) {
-	o.Settings.Set(&v)
-}
-
-// SetSettingsNil sets the value for Settings to be an explicit nil
-func (o *UpdateSourceV1Input) SetSettingsNil() {
-	o.Settings.Set(nil)
-}
-
-// UnsetSettings ensures that no value is present for Settings, not even an explicit nil
-func (o *UpdateSourceV1Input) UnsetSettings() {
-	o.Settings.Unset()
+// SetSettings gets a reference to the given map[string]interface{} and assigns it to the Settings field.
+func (o *UpdateSourceV1Input) SetSettings(v map[string]interface{}) {
+	o.Settings = v
 }
 
 func (o UpdateSourceV1Input) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Name != nil {
-		toSerialize["name"] = o.Name
-	}
-	if o.Enabled != nil {
-		toSerialize["enabled"] = o.Enabled
-	}
-	if o.Slug != nil {
-		toSerialize["slug"] = o.Slug
-	}
-	if o.Settings.IsSet() {
-		toSerialize["settings"] = o.Settings.Get()
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UpdateSourceV1Input) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Enabled) {
+		toSerialize["enabled"] = o.Enabled
+	}
+	if !IsNil(o.Slug) {
+		toSerialize["slug"] = o.Slug
+	}
+	if !IsNil(o.Settings) {
+		toSerialize["settings"] = o.Settings
+	}
+	return toSerialize, nil
 }
 
 type NullableUpdateSourceV1Input struct {

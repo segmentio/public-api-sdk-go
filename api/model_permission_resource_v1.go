@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the PermissionResourceV1 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PermissionResourceV1{}
 
 // PermissionResourceV1 The most basic representation of a resource belonging to a set of permissions.
 type PermissionResourceV1 struct {
@@ -94,7 +97,7 @@ func (o *PermissionResourceV1) SetType(v string) {
 
 // GetLabels returns the Labels field value if set, zero value otherwise.
 func (o *PermissionResourceV1) GetLabels() []AllowedLabelBeta {
-	if o == nil || o.Labels == nil {
+	if o == nil || IsNil(o.Labels) {
 		var ret []AllowedLabelBeta
 		return ret
 	}
@@ -104,7 +107,7 @@ func (o *PermissionResourceV1) GetLabels() []AllowedLabelBeta {
 // GetLabelsOk returns a tuple with the Labels field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PermissionResourceV1) GetLabelsOk() ([]AllowedLabelBeta, bool) {
-	if o == nil || o.Labels == nil {
+	if o == nil || IsNil(o.Labels) {
 		return nil, false
 	}
 	return o.Labels, true
@@ -112,7 +115,7 @@ func (o *PermissionResourceV1) GetLabelsOk() ([]AllowedLabelBeta, bool) {
 
 // HasLabels returns a boolean if a field has been set.
 func (o *PermissionResourceV1) HasLabels() bool {
-	if o != nil && o.Labels != nil {
+	if o != nil && !IsNil(o.Labels) {
 		return true
 	}
 
@@ -125,17 +128,21 @@ func (o *PermissionResourceV1) SetLabels(v []AllowedLabelBeta) {
 }
 
 func (o PermissionResourceV1) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["type"] = o.Type
-	}
-	if o.Labels != nil {
-		toSerialize["labels"] = o.Labels
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o PermissionResourceV1) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
+	toSerialize["type"] = o.Type
+	if !IsNil(o.Labels) {
+		toSerialize["labels"] = o.Labels
+	}
+	return toSerialize, nil
 }
 
 type NullablePermissionResourceV1 struct {

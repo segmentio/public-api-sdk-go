@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput{}
 
 // UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput Updates the schema for a Space Warehouse connection.
 type UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput struct {
@@ -42,7 +45,7 @@ func NewUpdateSelectiveSyncForWarehouseAndSpaceAlphaInputWithDefaults() *UpdateS
 
 // GetSyncOverrides returns the SyncOverrides field value if set, zero value otherwise.
 func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput) GetSyncOverrides() []SpaceWarehouseSchemaOverride {
-	if o == nil || o.SyncOverrides == nil {
+	if o == nil || IsNil(o.SyncOverrides) {
 		var ret []SpaceWarehouseSchemaOverride
 		return ret
 	}
@@ -52,7 +55,7 @@ func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput) GetSyncOverrides() [
 // GetSyncOverridesOk returns a tuple with the SyncOverrides field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput) GetSyncOverridesOk() ([]SpaceWarehouseSchemaOverride, bool) {
-	if o == nil || o.SyncOverrides == nil {
+	if o == nil || IsNil(o.SyncOverrides) {
 		return nil, false
 	}
 	return o.SyncOverrides, true
@@ -60,7 +63,7 @@ func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput) GetSyncOverridesOk()
 
 // HasSyncOverrides returns a boolean if a field has been set.
 func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput) HasSyncOverrides() bool {
-	if o != nil && o.SyncOverrides != nil {
+	if o != nil && !IsNil(o.SyncOverrides) {
 		return true
 	}
 
@@ -76,7 +79,7 @@ func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput) SetSyncOverrides(
 
 // GetEnableEventTables returns the EnableEventTables field value if set, zero value otherwise.
 func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput) GetEnableEventTables() bool {
-	if o == nil || o.EnableEventTables == nil {
+	if o == nil || IsNil(o.EnableEventTables) {
 		var ret bool
 		return ret
 	}
@@ -86,7 +89,7 @@ func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput) GetEnableEventTables
 // GetEnableEventTablesOk returns a tuple with the EnableEventTables field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput) GetEnableEventTablesOk() (*bool, bool) {
-	if o == nil || o.EnableEventTables == nil {
+	if o == nil || IsNil(o.EnableEventTables) {
 		return nil, false
 	}
 	return o.EnableEventTables, true
@@ -94,7 +97,7 @@ func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput) GetEnableEventTables
 
 // HasEnableEventTables returns a boolean if a field has been set.
 func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput) HasEnableEventTables() bool {
-	if o != nil && o.EnableEventTables != nil {
+	if o != nil && !IsNil(o.EnableEventTables) {
 		return true
 	}
 
@@ -107,14 +110,22 @@ func (o *UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput) SetEnableEventTables
 }
 
 func (o UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.SyncOverrides != nil {
-		toSerialize["syncOverrides"] = o.SyncOverrides
-	}
-	if o.EnableEventTables != nil {
-		toSerialize["enableEventTables"] = o.EnableEventTables
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.SyncOverrides) {
+		toSerialize["syncOverrides"] = o.SyncOverrides
+	}
+	if !IsNil(o.EnableEventTables) {
+		toSerialize["enableEventTables"] = o.EnableEventTables
+	}
+	return toSerialize, nil
 }
 
 type NullableUpdateSelectiveSyncForWarehouseAndSpaceAlphaInput struct {

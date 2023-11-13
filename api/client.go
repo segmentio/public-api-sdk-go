@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -19,7 +19,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"mime/multipart"
 	"net/http"
@@ -33,16 +32,16 @@ import (
 	"strings"
 	"time"
 	"unicode/utf8"
-
-	"golang.org/x/oauth2"
 )
 
 var (
-	jsonCheck = regexp.MustCompile(`(?i:(?:application|text)/(?:vnd\.[^;]+\+)?json)`)
-	xmlCheck  = regexp.MustCompile(`(?i:(?:application|text)/xml)`)
+	JsonCheck       = regexp.MustCompile(`(?i:(?:application|text)/(?:[^;]+\+)?json)`)
+	XmlCheck        = regexp.MustCompile(`(?i:(?:application|text)/(?:[^;]+\+)?xml)`)
+	queryParamSplit = regexp.MustCompile(`(^|&)([^&]+)`)
+	queryDescape    = strings.NewReplacer("%5B", "[", "%5D", "]")
 )
 
-// APIClient manages communication with the Segment Public API API v37.2.0
+// APIClient manages communication with the Segment Public API API v38.0.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -50,57 +49,57 @@ type APIClient struct {
 
 	// API Services
 
-	APICallsApi *APICallsApiService
+	APICallsAPI *APICallsAPIService
 
-	AudiencesApi *AudiencesApiService
+	AudiencesAPI *AudiencesAPIService
 
-	AuditTrailApi *AuditTrailApiService
+	AuditTrailAPI *AuditTrailAPIService
 
-	CatalogApi *CatalogApiService
+	CatalogAPI *CatalogAPIService
 
-	ComputedTraitsApi *ComputedTraitsApiService
+	ComputedTraitsAPI *ComputedTraitsAPIService
 
-	DeletionAndSuppressionApi *DeletionAndSuppressionApiService
+	DeletionAndSuppressionAPI *DeletionAndSuppressionAPIService
 
-	DestinationFiltersApi *DestinationFiltersApiService
+	DestinationFiltersAPI *DestinationFiltersAPIService
 
-	DestinationsApi *DestinationsApiService
+	DestinationsAPI *DestinationsAPIService
 
-	EdgeFunctionsApi *EdgeFunctionsApiService
+	EdgeFunctionsAPI *EdgeFunctionsAPIService
 
-	EventsApi *EventsApiService
+	EventsAPI *EventsAPIService
 
-	FunctionsApi *FunctionsApiService
+	FunctionsAPI *FunctionsAPIService
 
-	IAMGroupsApi *IAMGroupsApiService
+	IAMGroupsAPI *IAMGroupsAPIService
 
-	IAMRolesApi *IAMRolesApiService
+	IAMRolesAPI *IAMRolesAPIService
 
-	IAMUsersApi *IAMUsersApiService
+	IAMUsersAPI *IAMUsersAPIService
 
-	LabelsApi *LabelsApiService
+	LabelsAPI *LabelsAPIService
 
-	MonthlyTrackedUsersApi *MonthlyTrackedUsersApiService
+	MonthlyTrackedUsersAPI *MonthlyTrackedUsersAPIService
 
-	ProfilesSyncApi *ProfilesSyncApiService
+	ProfilesSyncAPI *ProfilesSyncAPIService
 
-	ReverseETLApi *ReverseETLApiService
+	ReverseETLAPI *ReverseETLAPIService
 
-	SelectiveSyncApi *SelectiveSyncApiService
+	SelectiveSyncAPI *SelectiveSyncAPIService
 
-	SourcesApi *SourcesApiService
+	SourcesAPI *SourcesAPIService
 
-	SpacesApi *SpacesApiService
+	SpacesAPI *SpacesAPIService
 
-	TestingApi *TestingApiService
+	TestingAPI *TestingAPIService
 
-	TrackingPlansApi *TrackingPlansApiService
+	TrackingPlansAPI *TrackingPlansAPIService
 
-	TransformationsApi *TransformationsApiService
+	TransformationsAPI *TransformationsAPIService
 
-	WarehousesApi *WarehousesApiService
+	WarehousesAPI *WarehousesAPIService
 
-	WorkspacesApi *WorkspacesApiService
+	WorkspacesAPI *WorkspacesAPIService
 }
 
 type service struct {
@@ -119,32 +118,32 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
-	c.APICallsApi = (*APICallsApiService)(&c.common)
-	c.AudiencesApi = (*AudiencesApiService)(&c.common)
-	c.AuditTrailApi = (*AuditTrailApiService)(&c.common)
-	c.CatalogApi = (*CatalogApiService)(&c.common)
-	c.ComputedTraitsApi = (*ComputedTraitsApiService)(&c.common)
-	c.DeletionAndSuppressionApi = (*DeletionAndSuppressionApiService)(&c.common)
-	c.DestinationFiltersApi = (*DestinationFiltersApiService)(&c.common)
-	c.DestinationsApi = (*DestinationsApiService)(&c.common)
-	c.EdgeFunctionsApi = (*EdgeFunctionsApiService)(&c.common)
-	c.EventsApi = (*EventsApiService)(&c.common)
-	c.FunctionsApi = (*FunctionsApiService)(&c.common)
-	c.IAMGroupsApi = (*IAMGroupsApiService)(&c.common)
-	c.IAMRolesApi = (*IAMRolesApiService)(&c.common)
-	c.IAMUsersApi = (*IAMUsersApiService)(&c.common)
-	c.LabelsApi = (*LabelsApiService)(&c.common)
-	c.MonthlyTrackedUsersApi = (*MonthlyTrackedUsersApiService)(&c.common)
-	c.ProfilesSyncApi = (*ProfilesSyncApiService)(&c.common)
-	c.ReverseETLApi = (*ReverseETLApiService)(&c.common)
-	c.SelectiveSyncApi = (*SelectiveSyncApiService)(&c.common)
-	c.SourcesApi = (*SourcesApiService)(&c.common)
-	c.SpacesApi = (*SpacesApiService)(&c.common)
-	c.TestingApi = (*TestingApiService)(&c.common)
-	c.TrackingPlansApi = (*TrackingPlansApiService)(&c.common)
-	c.TransformationsApi = (*TransformationsApiService)(&c.common)
-	c.WarehousesApi = (*WarehousesApiService)(&c.common)
-	c.WorkspacesApi = (*WorkspacesApiService)(&c.common)
+	c.APICallsAPI = (*APICallsAPIService)(&c.common)
+	c.AudiencesAPI = (*AudiencesAPIService)(&c.common)
+	c.AuditTrailAPI = (*AuditTrailAPIService)(&c.common)
+	c.CatalogAPI = (*CatalogAPIService)(&c.common)
+	c.ComputedTraitsAPI = (*ComputedTraitsAPIService)(&c.common)
+	c.DeletionAndSuppressionAPI = (*DeletionAndSuppressionAPIService)(&c.common)
+	c.DestinationFiltersAPI = (*DestinationFiltersAPIService)(&c.common)
+	c.DestinationsAPI = (*DestinationsAPIService)(&c.common)
+	c.EdgeFunctionsAPI = (*EdgeFunctionsAPIService)(&c.common)
+	c.EventsAPI = (*EventsAPIService)(&c.common)
+	c.FunctionsAPI = (*FunctionsAPIService)(&c.common)
+	c.IAMGroupsAPI = (*IAMGroupsAPIService)(&c.common)
+	c.IAMRolesAPI = (*IAMRolesAPIService)(&c.common)
+	c.IAMUsersAPI = (*IAMUsersAPIService)(&c.common)
+	c.LabelsAPI = (*LabelsAPIService)(&c.common)
+	c.MonthlyTrackedUsersAPI = (*MonthlyTrackedUsersAPIService)(&c.common)
+	c.ProfilesSyncAPI = (*ProfilesSyncAPIService)(&c.common)
+	c.ReverseETLAPI = (*ReverseETLAPIService)(&c.common)
+	c.SelectiveSyncAPI = (*SelectiveSyncAPIService)(&c.common)
+	c.SourcesAPI = (*SourcesAPIService)(&c.common)
+	c.SpacesAPI = (*SpacesAPIService)(&c.common)
+	c.TestingAPI = (*TestingAPIService)(&c.common)
+	c.TrackingPlansAPI = (*TrackingPlansAPIService)(&c.common)
+	c.TransformationsAPI = (*TransformationsAPIService)(&c.common)
+	c.WarehousesAPI = (*WarehousesAPIService)(&c.common)
+	c.WorkspacesAPI = (*WorkspacesAPIService)(&c.common)
 
 	return c
 }
@@ -158,11 +157,9 @@ func selectHeaderContentType(contentTypes []string) string {
 	if len(contentTypes) == 0 {
 		return ""
 	}
-
 	if contains(contentTypes, "application/json") {
 		return "application/json"
 	}
-
 	return contentTypes[0] // use the first content type specified in 'consumes'
 }
 
@@ -179,14 +176,13 @@ func selectHeaderAccept(accepts []string) string {
 	return strings.Join(accepts, ",")
 }
 
-// contains is a case-insensitive match, finding needle in a haystack
+// contains is a case insensitive match, finding needle in a haystack
 func contains(haystack []string, needle string) bool {
 	for _, a := range haystack {
 		if strings.EqualFold(a, needle) {
 			return true
 		}
 	}
-
 	return false
 }
 
@@ -200,30 +196,120 @@ func typeCheckParameter(obj interface{}, expected string, name string) error {
 	// Check the type is as expected.
 	if reflect.TypeOf(obj).String() != expected {
 		return fmt.Errorf(
-			"Expected %s to be of type %s but received %s.",
+			"expected %s to be of type %s but received %s",
 			name,
 			expected,
 			reflect.TypeOf(obj).String(),
 		)
 	}
-
 	return nil
 }
 
-// parameterToString convert interface{} parameters to string, using a delimiter if format is provided.
-func parameterToString(obj interface{}, collectionFormat string) string {
-	if t, ok := obj.(time.Time); ok {
-		return t.Format(time.RFC3339)
-	} else if reflect.TypeOf(obj).Kind() == reflect.String {
+func parameterValueToString(obj interface{}, key string) string {
+	if reflect.TypeOf(obj).Kind() != reflect.Ptr {
 		return fmt.Sprintf("%v", obj)
 	}
-
-	objJson, err := parameterToJson(obj)
+	var param, ok = obj.(MappedNullable)
+	if !ok {
+		return ""
+	}
+	dataMap, err := param.ToMap()
 	if err != nil {
-		return fmt.Sprintf("%v", obj)
+		return ""
+	}
+	return fmt.Sprintf("%v", dataMap[key])
+}
+
+// parameterAddToHeaderOrQuery adds the provided object to the request header or url query
+// supporting deep object syntax
+func parameterAddToHeaderOrQuery(
+	headerOrQueryParams interface{},
+	keyPrefix string,
+	obj interface{},
+	collectionType string,
+) {
+	var v = reflect.ValueOf(obj)
+	var value = ""
+	if v == reflect.ValueOf(nil) {
+		value = "null"
+	} else {
+		switch v.Kind() {
+		case reflect.Invalid:
+			value = "invalid"
+
+		case reflect.Struct:
+			if t, ok := obj.(MappedNullable); ok {
+				dataMap, err := t.ToMap()
+				if err != nil {
+					return
+				}
+				parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, dataMap, collectionType)
+				return
+			}
+			if t, ok := obj.(time.Time); ok {
+				parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, t.Format(time.RFC3339), collectionType)
+				return
+			}
+			value = v.Type().String() + " value"
+		case reflect.Slice:
+			var indValue = reflect.ValueOf(obj)
+			if indValue == reflect.ValueOf(nil) {
+				return
+			}
+			var lenIndValue = indValue.Len()
+			for i := 0; i < lenIndValue; i++ {
+				var arrayValue = indValue.Index(i)
+				parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, arrayValue.Interface(), collectionType)
+			}
+			return
+
+		case reflect.Map:
+			var indValue = reflect.ValueOf(obj)
+			if indValue == reflect.ValueOf(nil) {
+				return
+			}
+			iter := indValue.MapRange()
+			for iter.Next() {
+				k, v := iter.Key(), iter.Value()
+				parameterAddToHeaderOrQuery(headerOrQueryParams, fmt.Sprintf("%s[%s]", keyPrefix, k.String()), v.Interface(), collectionType)
+			}
+			return
+
+		case reflect.Interface:
+			fallthrough
+		case reflect.Ptr:
+			parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, v.Elem().Interface(), collectionType)
+			return
+
+		case reflect.Int, reflect.Int8, reflect.Int16,
+			reflect.Int32, reflect.Int64:
+			value = strconv.FormatInt(v.Int(), 10)
+		case reflect.Uint, reflect.Uint8, reflect.Uint16,
+			reflect.Uint32, reflect.Uint64, reflect.Uintptr:
+			value = strconv.FormatUint(v.Uint(), 10)
+		case reflect.Float32, reflect.Float64:
+			value = strconv.FormatFloat(v.Float(), 'g', -1, 32)
+		case reflect.Bool:
+			value = strconv.FormatBool(v.Bool())
+		case reflect.String:
+			value = v.String()
+		default:
+			value = v.Type().String() + " value"
+		}
 	}
 
-	return objJson
+	switch valuesMap := headerOrQueryParams.(type) {
+	case url.Values:
+		if collectionType == "csv" && valuesMap.Get(keyPrefix) != "" {
+			valuesMap.Set(keyPrefix, valuesMap.Get(keyPrefix)+","+value)
+		} else {
+			valuesMap.Add(keyPrefix, value)
+		}
+		break
+	case map[string]string:
+		valuesMap[keyPrefix] = value
+		break
+	}
 }
 
 // helper for converting interface{} parameters to json strings
@@ -232,7 +318,6 @@ func parameterToJson(obj interface{}) (string, error) {
 	if err != nil {
 		return "", err
 	}
-
 	return string(jsonBuf), err
 }
 
@@ -243,7 +328,6 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 		if err != nil {
 			return nil, err
 		}
-
 		log.Printf("\n%s\n", string(dump))
 	}
 
@@ -257,10 +341,8 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 		if err != nil {
 			return resp, err
 		}
-
 		log.Printf("\n%s\n", string(dump))
 	}
-
 	return resp, err
 }
 
@@ -309,7 +391,6 @@ func (c *APIClient) prepareRequest(
 		if body != nil {
 			return nil, errors.New("Cannot specify postBody and multipart form at the same time.")
 		}
-
 		body = &bytes.Buffer{}
 		w := multipart.NewWriter(body)
 
@@ -325,7 +406,6 @@ func (c *APIClient) prepareRequest(
 				}
 			}
 		}
-
 		for _, formFile := range formFiles {
 			if len(formFile.fileBytes) > 0 && formFile.fileName != "" {
 				w.Boundary()
@@ -389,7 +469,11 @@ func (c *APIClient) prepareRequest(
 	}
 
 	// Encode the parameters.
-	url.RawQuery = query.Encode()
+	url.RawQuery = queryParamSplit.ReplaceAllStringFunc(query.Encode(), func(s string) string {
+		pieces := strings.Split(s, "=")
+		pieces[0] = queryDescape.Replace(pieces[0])
+		return strings.Join(pieces, "=")
+	})
 
 	// Generate a new request
 	if body != nil {
@@ -397,7 +481,6 @@ func (c *APIClient) prepareRequest(
 	} else {
 		localVarRequest, err = http.NewRequest(method, url.String(), nil)
 	}
-
 	if err != nil {
 		return nil, err
 	}
@@ -420,22 +503,6 @@ func (c *APIClient) prepareRequest(
 
 		// Walk through any authentication.
 
-		// OAuth2 authentication
-		if tok, ok := ctx.Value(ContextOAuth2).(oauth2.TokenSource); ok {
-			// We were able to grab an oauth2 token from the context
-			var latestToken *oauth2.Token
-			if latestToken, err = tok.Token(); err != nil {
-				return nil, err
-			}
-
-			latestToken.SetAuthHeader(localVarRequest)
-		}
-
-		// Basic HTTP Authentication
-		if auth, ok := ctx.Value(ContextBasicAuth).(BasicAuth); ok {
-			localVarRequest.SetBasicAuth(auth.UserName, auth.Password)
-		}
-
 		// AccessToken Authentication
 		if auth, ok := ctx.Value(ContextAccessToken).(string); ok {
 			localVarRequest.Header.Add("Authorization", "Bearer "+auth)
@@ -453,14 +520,24 @@ func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err err
 	if len(b) == 0 {
 		return nil
 	}
-
 	if s, ok := v.(*string); ok {
 		*s = string(b)
 		return nil
 	}
-
+	if f, ok := v.(*os.File); ok {
+		f, err = os.CreateTemp("", "HttpClientFile")
+		if err != nil {
+			return
+		}
+		_, err = f.Write(b)
+		if err != nil {
+			return
+		}
+		_, err = f.Seek(0, io.SeekStart)
+		return
+	}
 	if f, ok := v.(**os.File); ok {
-		*f, err = ioutil.TempFile("", "HttpClientFile")
+		*f, err = os.CreateTemp("", "HttpClientFile")
 		if err != nil {
 			return
 		}
@@ -471,15 +548,13 @@ func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err err
 		_, err = (*f).Seek(0, io.SeekStart)
 		return
 	}
-
-	if xmlCheck.MatchString(contentType) {
+	if XmlCheck.MatchString(contentType) {
 		if err = xml.Unmarshal(b, v); err != nil {
 			return err
 		}
 		return nil
 	}
-
-	if jsonCheck.MatchString(contentType) {
+	if JsonCheck.MatchString(contentType) {
 		if actualObj, ok := v.(interface{ GetActualInstance() interface{} }); ok { // oneOf, anyOf schemas
 			if unmarshalObj, ok := actualObj.(interface{ UnmarshalJSON([]byte) error }); ok { // make sure it has UnmarshalJSON defined
 				if err = unmarshalObj.UnmarshalJSON(b); err != nil {
@@ -491,10 +566,8 @@ func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err err
 		} else if err = json.Unmarshal(b, v); err != nil { // simple model
 			return err
 		}
-
 		return nil
 	}
-
 	return errors.New("undefined response type")
 }
 
@@ -504,7 +577,6 @@ func addFile(w *multipart.Writer, fieldName, path string) error {
 	if err != nil {
 		return err
 	}
-
 	err = file.Close()
 	if err != nil {
 		return err
@@ -539,18 +611,22 @@ func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err e
 
 	if reader, ok := body.(io.Reader); ok {
 		_, err = bodyBuf.ReadFrom(reader)
-	} else if fp, ok := body.(**os.File); ok {
-		_, err = bodyBuf.ReadFrom(*fp)
+	} else if fp, ok := body.(*os.File); ok {
+		_, err = bodyBuf.ReadFrom(fp)
 	} else if b, ok := body.([]byte); ok {
 		_, err = bodyBuf.Write(b)
 	} else if s, ok := body.(string); ok {
 		_, err = bodyBuf.WriteString(s)
 	} else if s, ok := body.(*string); ok {
 		_, err = bodyBuf.WriteString(*s)
-	} else if jsonCheck.MatchString(contentType) {
+	} else if JsonCheck.MatchString(contentType) {
 		err = json.NewEncoder(bodyBuf).Encode(body)
-	} else if xmlCheck.MatchString(contentType) {
-		err = xml.NewEncoder(bodyBuf).Encode(body)
+	} else if XmlCheck.MatchString(contentType) {
+		var bs []byte
+		bs, err = xml.Marshal(body)
+		if err == nil {
+			bodyBuf.Write(bs)
+		}
 	}
 
 	if err != nil {
@@ -558,10 +634,9 @@ func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err e
 	}
 
 	if bodyBuf.Len() == 0 {
-		err = fmt.Errorf("Invalid body type %s\n", contentType)
+		err = fmt.Errorf("invalid body type %s\n", contentType)
 		return nil, err
 	}
-
 	return bodyBuf, nil
 }
 
@@ -592,13 +667,11 @@ type cacheControl map[string]string
 func parseCacheControl(headers http.Header) cacheControl {
 	cc := cacheControl{}
 	ccHeader := headers.Get("Cache-Control")
-
 	for _, part := range strings.Split(ccHeader, ",") {
 		part = strings.Trim(part, " ")
 		if part == "" {
 			continue
 		}
-
 		if strings.ContainsRune(part, '=') {
 			keyval := strings.Split(part, "=")
 			cc[strings.Trim(keyval[0], " ")] = strings.Trim(keyval[1], ",")
@@ -606,7 +679,6 @@ func parseCacheControl(headers http.Header) cacheControl {
 			cc[part] = ""
 		}
 	}
-
 	return cc
 }
 
@@ -618,7 +690,6 @@ func CacheExpires(r *http.Response) time.Time {
 	if err != nil {
 		return time.Now()
 	}
-
 	respCacheControl := parseCacheControl(r.Header)
 
 	if maxAge, ok := respCacheControl["max-age"]; ok {
@@ -637,7 +708,6 @@ func CacheExpires(r *http.Response) time.Time {
 			}
 		}
 	}
-
 	return expires
 }
 
@@ -665,4 +735,24 @@ func (e GenericOpenAPIError) Body() []byte {
 // Model returns the unpacked model of the error
 func (e GenericOpenAPIError) Model() interface{} {
 	return e.model
+}
+
+// format error message using title and detail when model implements rfc7807
+func formatErrorMessage(status string, v interface{}) string {
+	str := ""
+	metaValue := reflect.ValueOf(v).Elem()
+
+	if metaValue.Kind() == reflect.Struct {
+		field := metaValue.FieldByName("Title")
+		if field != (reflect.Value{}) {
+			str = fmt.Sprintf("%s", field.Interface())
+		}
+
+		field = metaValue.FieldByName("Detail")
+		if field != (reflect.Value{}) {
+			str = fmt.Sprintf("%s (%s)", str, field.Interface())
+		}
+	}
+
+	return strings.TrimSpace(fmt.Sprintf("%s %s", status, str))
 }

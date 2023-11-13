@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the MetricBeta type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MetricBeta{}
 
 // MetricBeta The event delivery metric.
 type MetricBeta struct {
@@ -94,7 +97,7 @@ func (o *MetricBeta) SetTotal(v float32) {
 
 // GetBreakdown returns the Breakdown field value if set, zero value otherwise.
 func (o *MetricBeta) GetBreakdown() []BreakdownBeta {
-	if o == nil || o.Breakdown == nil {
+	if o == nil || IsNil(o.Breakdown) {
 		var ret []BreakdownBeta
 		return ret
 	}
@@ -104,7 +107,7 @@ func (o *MetricBeta) GetBreakdown() []BreakdownBeta {
 // GetBreakdownOk returns a tuple with the Breakdown field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MetricBeta) GetBreakdownOk() ([]BreakdownBeta, bool) {
-	if o == nil || o.Breakdown == nil {
+	if o == nil || IsNil(o.Breakdown) {
 		return nil, false
 	}
 	return o.Breakdown, true
@@ -112,7 +115,7 @@ func (o *MetricBeta) GetBreakdownOk() ([]BreakdownBeta, bool) {
 
 // HasBreakdown returns a boolean if a field has been set.
 func (o *MetricBeta) HasBreakdown() bool {
-	if o != nil && o.Breakdown != nil {
+	if o != nil && !IsNil(o.Breakdown) {
 		return true
 	}
 
@@ -125,17 +128,21 @@ func (o *MetricBeta) SetBreakdown(v []BreakdownBeta) {
 }
 
 func (o MetricBeta) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["metricName"] = o.MetricName
-	}
-	if true {
-		toSerialize["total"] = o.Total
-	}
-	if o.Breakdown != nil {
-		toSerialize["breakdown"] = o.Breakdown
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o MetricBeta) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["metricName"] = o.MetricName
+	toSerialize["total"] = o.Total
+	if !IsNil(o.Breakdown) {
+		toSerialize["breakdown"] = o.Breakdown
+	}
+	return toSerialize, nil
 }
 
 type NullableMetricBeta struct {

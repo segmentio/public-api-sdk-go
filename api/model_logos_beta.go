@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the LogosBeta type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &LogosBeta{}
 
 // LogosBeta Represents a logo.
 type LogosBeta struct {
@@ -69,7 +72,7 @@ func (o *LogosBeta) SetDefault(v string) {
 
 // GetMark returns the Mark field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *LogosBeta) GetMark() string {
-	if o == nil || o.Mark.Get() == nil {
+	if o == nil || IsNil(o.Mark.Get()) {
 		var ret string
 		return ret
 	}
@@ -112,7 +115,7 @@ func (o *LogosBeta) UnsetMark() {
 
 // GetAlt returns the Alt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *LogosBeta) GetAlt() string {
-	if o == nil || o.Alt.Get() == nil {
+	if o == nil || IsNil(o.Alt.Get()) {
 		var ret string
 		return ret
 	}
@@ -154,17 +157,23 @@ func (o *LogosBeta) UnsetAlt() {
 }
 
 func (o LogosBeta) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["default"] = o.Default
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
+	return json.Marshal(toSerialize)
+}
+
+func (o LogosBeta) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["default"] = o.Default
 	if o.Mark.IsSet() {
 		toSerialize["mark"] = o.Mark.Get()
 	}
 	if o.Alt.IsSet() {
 		toSerialize["alt"] = o.Alt.Get()
 	}
-	return json.Marshal(toSerialize)
+	return toSerialize, nil
 }
 
 type NullableLogosBeta struct {

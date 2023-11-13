@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,11 +15,14 @@ import (
 	"encoding/json"
 )
 
+// checks if the GetDailyWorkspaceAPICallsUsageV1Output type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetDailyWorkspaceAPICallsUsageV1Output{}
+
 // GetDailyWorkspaceAPICallsUsageV1Output Returns a list of daily aggregations of Workspace MTU counts.
 type GetDailyWorkspaceAPICallsUsageV1Output struct {
 	// The list of daily Workspace API calls count aggregates.
 	DailyWorkspaceAPICallsUsage []APICallSnapshotV1 `json:"dailyWorkspaceAPICallsUsage"`
-	Pagination                  Pagination          `json:"pagination"`
+	Pagination                  PaginationOutput    `json:"pagination"`
 }
 
 // NewGetDailyWorkspaceAPICallsUsageV1Output instantiates a new GetDailyWorkspaceAPICallsUsageV1Output object
@@ -28,7 +31,7 @@ type GetDailyWorkspaceAPICallsUsageV1Output struct {
 // will change when the set of required properties is changed
 func NewGetDailyWorkspaceAPICallsUsageV1Output(
 	dailyWorkspaceAPICallsUsage []APICallSnapshotV1,
-	pagination Pagination,
+	pagination PaginationOutput,
 ) *GetDailyWorkspaceAPICallsUsageV1Output {
 	this := GetDailyWorkspaceAPICallsUsageV1Output{}
 	this.DailyWorkspaceAPICallsUsage = dailyWorkspaceAPICallsUsage
@@ -71,9 +74,9 @@ func (o *GetDailyWorkspaceAPICallsUsageV1Output) SetDailyWorkspaceAPICallsUsage(
 }
 
 // GetPagination returns the Pagination field value
-func (o *GetDailyWorkspaceAPICallsUsageV1Output) GetPagination() Pagination {
+func (o *GetDailyWorkspaceAPICallsUsageV1Output) GetPagination() PaginationOutput {
 	if o == nil {
-		var ret Pagination
+		var ret PaginationOutput
 		return ret
 	}
 
@@ -82,7 +85,7 @@ func (o *GetDailyWorkspaceAPICallsUsageV1Output) GetPagination() Pagination {
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *GetDailyWorkspaceAPICallsUsageV1Output) GetPaginationOk() (*Pagination, bool) {
+func (o *GetDailyWorkspaceAPICallsUsageV1Output) GetPaginationOk() (*PaginationOutput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,19 +93,23 @@ func (o *GetDailyWorkspaceAPICallsUsageV1Output) GetPaginationOk() (*Pagination,
 }
 
 // SetPagination sets field value
-func (o *GetDailyWorkspaceAPICallsUsageV1Output) SetPagination(v Pagination) {
+func (o *GetDailyWorkspaceAPICallsUsageV1Output) SetPagination(v PaginationOutput) {
 	o.Pagination = v
 }
 
 func (o GetDailyWorkspaceAPICallsUsageV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["dailyWorkspaceAPICallsUsage"] = o.DailyWorkspaceAPICallsUsage
-	}
-	if true {
-		toSerialize["pagination"] = o.Pagination
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o GetDailyWorkspaceAPICallsUsageV1Output) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["dailyWorkspaceAPICallsUsage"] = o.DailyWorkspaceAPICallsUsage
+	toSerialize["pagination"] = o.Pagination
+	return toSerialize, nil
 }
 
 type NullableGetDailyWorkspaceAPICallsUsageV1Output struct {

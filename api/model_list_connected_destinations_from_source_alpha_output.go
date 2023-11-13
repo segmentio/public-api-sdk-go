@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,11 +15,14 @@ import (
 	"encoding/json"
 )
 
+// checks if the ListConnectedDestinationsFromSourceAlphaOutput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListConnectedDestinationsFromSourceAlphaOutput{}
+
 // ListConnectedDestinationsFromSourceAlphaOutput Returns a list of Destinations connected to a Source.
 type ListConnectedDestinationsFromSourceAlphaOutput struct {
 	// A list that contains the Destinations connected to the Source.
-	Destinations []DestinationV1 `json:"destinations"`
-	Pagination   Pagination      `json:"pagination"`
+	Destinations []DestinationV1  `json:"destinations"`
+	Pagination   PaginationOutput `json:"pagination"`
 }
 
 // NewListConnectedDestinationsFromSourceAlphaOutput instantiates a new ListConnectedDestinationsFromSourceAlphaOutput object
@@ -28,7 +31,7 @@ type ListConnectedDestinationsFromSourceAlphaOutput struct {
 // will change when the set of required properties is changed
 func NewListConnectedDestinationsFromSourceAlphaOutput(
 	destinations []DestinationV1,
-	pagination Pagination,
+	pagination PaginationOutput,
 ) *ListConnectedDestinationsFromSourceAlphaOutput {
 	this := ListConnectedDestinationsFromSourceAlphaOutput{}
 	this.Destinations = destinations
@@ -69,9 +72,9 @@ func (o *ListConnectedDestinationsFromSourceAlphaOutput) SetDestinations(v []Des
 }
 
 // GetPagination returns the Pagination field value
-func (o *ListConnectedDestinationsFromSourceAlphaOutput) GetPagination() Pagination {
+func (o *ListConnectedDestinationsFromSourceAlphaOutput) GetPagination() PaginationOutput {
 	if o == nil {
-		var ret Pagination
+		var ret PaginationOutput
 		return ret
 	}
 
@@ -80,7 +83,7 @@ func (o *ListConnectedDestinationsFromSourceAlphaOutput) GetPagination() Paginat
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *ListConnectedDestinationsFromSourceAlphaOutput) GetPaginationOk() (*Pagination, bool) {
+func (o *ListConnectedDestinationsFromSourceAlphaOutput) GetPaginationOk() (*PaginationOutput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,19 +91,23 @@ func (o *ListConnectedDestinationsFromSourceAlphaOutput) GetPaginationOk() (*Pag
 }
 
 // SetPagination sets field value
-func (o *ListConnectedDestinationsFromSourceAlphaOutput) SetPagination(v Pagination) {
+func (o *ListConnectedDestinationsFromSourceAlphaOutput) SetPagination(v PaginationOutput) {
 	o.Pagination = v
 }
 
 func (o ListConnectedDestinationsFromSourceAlphaOutput) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["destinations"] = o.Destinations
-	}
-	if true {
-		toSerialize["pagination"] = o.Pagination
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ListConnectedDestinationsFromSourceAlphaOutput) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["destinations"] = o.Destinations
+	toSerialize["pagination"] = o.Pagination
+	return toSerialize, nil
 }
 
 type NullableListConnectedDestinationsFromSourceAlphaOutput struct {

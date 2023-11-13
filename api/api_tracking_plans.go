@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,18 +14,18 @@ package api
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
 )
 
-// TrackingPlansApiService TrackingPlansApi service
-type TrackingPlansApiService service
+// TrackingPlansAPIService TrackingPlansAPI service
+type TrackingPlansAPIService service
 
 type ApiAddSourceToTrackingPlanRequest struct {
 	ctx                            context.Context
-	ApiService                     *TrackingPlansApiService
+	ApiService                     *TrackingPlansAPIService
 	trackingPlanId                 string
 	addSourceToTrackingPlanV1Input *AddSourceToTrackingPlanV1Input
 }
@@ -54,7 +54,7 @@ Connects a Source to a Tracking Plan.
 	@param trackingPlanId
 	@return ApiAddSourceToTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) AddSourceToTrackingPlan(
+func (a *TrackingPlansAPIService) AddSourceToTrackingPlan(
 	ctx context.Context,
 	trackingPlanId string,
 ) ApiAddSourceToTrackingPlanRequest {
@@ -68,7 +68,7 @@ func (a *TrackingPlansApiService) AddSourceToTrackingPlan(
 // Execute executes the request
 //
 //	@return AddSourceToTrackingPlan200Response
-func (a *TrackingPlansApiService) AddSourceToTrackingPlanExecute(
+func (a *TrackingPlansAPIService) AddSourceToTrackingPlanExecute(
 	r ApiAddSourceToTrackingPlanRequest,
 ) (*AddSourceToTrackingPlan200Response, *http.Response, error) {
 	var (
@@ -80,7 +80,7 @@ func (a *TrackingPlansApiService) AddSourceToTrackingPlanExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TrackingPlansApiService.AddSourceToTrackingPlan",
+		"TrackingPlansAPIService.AddSourceToTrackingPlan",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -90,7 +90,7 @@ func (a *TrackingPlansApiService) AddSourceToTrackingPlanExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"trackingPlanId"+"}",
-		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		url.PathEscape(parameterValueToString(r.trackingPlanId, "trackingPlanId")),
 		-1,
 	)
 
@@ -150,9 +150,9 @@ func (a *TrackingPlansApiService) AddSourceToTrackingPlanExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -169,6 +169,7 @@ func (a *TrackingPlansApiService) AddSourceToTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -179,6 +180,7 @@ func (a *TrackingPlansApiService) AddSourceToTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -189,6 +191,7 @@ func (a *TrackingPlansApiService) AddSourceToTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -212,7 +215,7 @@ func (a *TrackingPlansApiService) AddSourceToTrackingPlanExecute(
 
 type ApiCreateTrackingPlanRequest struct {
 	ctx                       context.Context
-	ApiService                *TrackingPlansApiService
+	ApiService                *TrackingPlansAPIService
 	createTrackingPlanV1Input *CreateTrackingPlanV1Input
 }
 
@@ -237,7 +240,7 @@ Creates a Tracking Plan.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) CreateTrackingPlan(
+func (a *TrackingPlansAPIService) CreateTrackingPlan(
 	ctx context.Context,
 ) ApiCreateTrackingPlanRequest {
 	return ApiCreateTrackingPlanRequest{
@@ -249,7 +252,7 @@ func (a *TrackingPlansApiService) CreateTrackingPlan(
 // Execute executes the request
 //
 //	@return CreateTrackingPlan200Response
-func (a *TrackingPlansApiService) CreateTrackingPlanExecute(
+func (a *TrackingPlansAPIService) CreateTrackingPlanExecute(
 	r ApiCreateTrackingPlanRequest,
 ) (*CreateTrackingPlan200Response, *http.Response, error) {
 	var (
@@ -261,7 +264,7 @@ func (a *TrackingPlansApiService) CreateTrackingPlanExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TrackingPlansApiService.CreateTrackingPlan",
+		"TrackingPlansAPIService.CreateTrackingPlan",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -325,9 +328,9 @@ func (a *TrackingPlansApiService) CreateTrackingPlanExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -344,6 +347,7 @@ func (a *TrackingPlansApiService) CreateTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -354,6 +358,7 @@ func (a *TrackingPlansApiService) CreateTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -364,6 +369,7 @@ func (a *TrackingPlansApiService) CreateTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -387,7 +393,7 @@ func (a *TrackingPlansApiService) CreateTrackingPlanExecute(
 
 type ApiDeleteTrackingPlanRequest struct {
 	ctx            context.Context
-	ApiService     *TrackingPlansApiService
+	ApiService     *TrackingPlansAPIService
 	trackingPlanId string
 }
 
@@ -406,7 +412,7 @@ Deletes a Tracking Plan.
 	@param trackingPlanId
 	@return ApiDeleteTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) DeleteTrackingPlan(
+func (a *TrackingPlansAPIService) DeleteTrackingPlan(
 	ctx context.Context,
 	trackingPlanId string,
 ) ApiDeleteTrackingPlanRequest {
@@ -420,7 +426,7 @@ func (a *TrackingPlansApiService) DeleteTrackingPlan(
 // Execute executes the request
 //
 //	@return DeleteTrackingPlan200Response
-func (a *TrackingPlansApiService) DeleteTrackingPlanExecute(
+func (a *TrackingPlansAPIService) DeleteTrackingPlanExecute(
 	r ApiDeleteTrackingPlanRequest,
 ) (*DeleteTrackingPlan200Response, *http.Response, error) {
 	var (
@@ -432,7 +438,7 @@ func (a *TrackingPlansApiService) DeleteTrackingPlanExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TrackingPlansApiService.DeleteTrackingPlan",
+		"TrackingPlansAPIService.DeleteTrackingPlan",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -442,7 +448,7 @@ func (a *TrackingPlansApiService) DeleteTrackingPlanExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"trackingPlanId"+"}",
-		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		url.PathEscape(parameterValueToString(r.trackingPlanId, "trackingPlanId")),
 		-1,
 	)
 
@@ -491,9 +497,9 @@ func (a *TrackingPlansApiService) DeleteTrackingPlanExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -510,6 +516,7 @@ func (a *TrackingPlansApiService) DeleteTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -520,6 +527,7 @@ func (a *TrackingPlansApiService) DeleteTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -530,6 +538,7 @@ func (a *TrackingPlansApiService) DeleteTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -553,7 +562,7 @@ func (a *TrackingPlansApiService) DeleteTrackingPlanExecute(
 
 type ApiGetTrackingPlanRequest struct {
 	ctx            context.Context
-	ApiService     *TrackingPlansApiService
+	ApiService     *TrackingPlansAPIService
 	trackingPlanId string
 }
 
@@ -572,7 +581,7 @@ Returns a Tracking Plan.
 	@param trackingPlanId
 	@return ApiGetTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) GetTrackingPlan(
+func (a *TrackingPlansAPIService) GetTrackingPlan(
 	ctx context.Context,
 	trackingPlanId string,
 ) ApiGetTrackingPlanRequest {
@@ -586,7 +595,7 @@ func (a *TrackingPlansApiService) GetTrackingPlan(
 // Execute executes the request
 //
 //	@return GetTrackingPlan200Response
-func (a *TrackingPlansApiService) GetTrackingPlanExecute(
+func (a *TrackingPlansAPIService) GetTrackingPlanExecute(
 	r ApiGetTrackingPlanRequest,
 ) (*GetTrackingPlan200Response, *http.Response, error) {
 	var (
@@ -598,7 +607,7 @@ func (a *TrackingPlansApiService) GetTrackingPlanExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TrackingPlansApiService.GetTrackingPlan",
+		"TrackingPlansAPIService.GetTrackingPlan",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -608,7 +617,7 @@ func (a *TrackingPlansApiService) GetTrackingPlanExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"trackingPlanId"+"}",
-		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		url.PathEscape(parameterValueToString(r.trackingPlanId, "trackingPlanId")),
 		-1,
 	)
 
@@ -657,9 +666,9 @@ func (a *TrackingPlansApiService) GetTrackingPlanExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -676,6 +685,7 @@ func (a *TrackingPlansApiService) GetTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -686,6 +696,7 @@ func (a *TrackingPlansApiService) GetTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -696,6 +707,7 @@ func (a *TrackingPlansApiService) GetTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -719,7 +731,7 @@ func (a *TrackingPlansApiService) GetTrackingPlanExecute(
 
 type ApiListRulesFromTrackingPlanRequest struct {
 	ctx            context.Context
-	ApiService     *TrackingPlansApiService
+	ApiService     *TrackingPlansAPIService
 	trackingPlanId string
 	pagination     *PaginationInput
 }
@@ -749,7 +761,7 @@ The rate limit for this endpoint is 200 requests per minute, which is lower than
 	@param trackingPlanId
 	@return ApiListRulesFromTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) ListRulesFromTrackingPlan(
+func (a *TrackingPlansAPIService) ListRulesFromTrackingPlan(
 	ctx context.Context,
 	trackingPlanId string,
 ) ApiListRulesFromTrackingPlanRequest {
@@ -763,7 +775,7 @@ func (a *TrackingPlansApiService) ListRulesFromTrackingPlan(
 // Execute executes the request
 //
 //	@return ListRulesFromTrackingPlan200Response
-func (a *TrackingPlansApiService) ListRulesFromTrackingPlanExecute(
+func (a *TrackingPlansAPIService) ListRulesFromTrackingPlanExecute(
 	r ApiListRulesFromTrackingPlanRequest,
 ) (*ListRulesFromTrackingPlan200Response, *http.Response, error) {
 	var (
@@ -775,7 +787,7 @@ func (a *TrackingPlansApiService) ListRulesFromTrackingPlanExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TrackingPlansApiService.ListRulesFromTrackingPlan",
+		"TrackingPlansAPIService.ListRulesFromTrackingPlan",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -785,7 +797,7 @@ func (a *TrackingPlansApiService) ListRulesFromTrackingPlanExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"trackingPlanId"+"}",
-		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		url.PathEscape(parameterValueToString(r.trackingPlanId, "trackingPlanId")),
 		-1,
 	)
 
@@ -796,7 +808,7 @@ func (a *TrackingPlansApiService) ListRulesFromTrackingPlanExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -838,9 +850,9 @@ func (a *TrackingPlansApiService) ListRulesFromTrackingPlanExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -857,6 +869,7 @@ func (a *TrackingPlansApiService) ListRulesFromTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -867,6 +880,7 @@ func (a *TrackingPlansApiService) ListRulesFromTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -877,6 +891,7 @@ func (a *TrackingPlansApiService) ListRulesFromTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -900,7 +915,7 @@ func (a *TrackingPlansApiService) ListRulesFromTrackingPlanExecute(
 
 type ApiListSourcesFromTrackingPlanRequest struct {
 	ctx            context.Context
-	ApiService     *TrackingPlansApiService
+	ApiService     *TrackingPlansAPIService
 	trackingPlanId string
 	pagination     *PaginationInput
 }
@@ -934,7 +949,7 @@ This endpoint requires the user to have at least the following permission(s):
     @param trackingPlanId
     @return ApiListSourcesFromTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) ListSourcesFromTrackingPlan(
+func (a *TrackingPlansAPIService) ListSourcesFromTrackingPlan(
 	ctx context.Context,
 	trackingPlanId string,
 ) ApiListSourcesFromTrackingPlanRequest {
@@ -948,7 +963,7 @@ func (a *TrackingPlansApiService) ListSourcesFromTrackingPlan(
 // Execute executes the request
 //
 //	@return ListSourcesFromTrackingPlan200Response
-func (a *TrackingPlansApiService) ListSourcesFromTrackingPlanExecute(
+func (a *TrackingPlansAPIService) ListSourcesFromTrackingPlanExecute(
 	r ApiListSourcesFromTrackingPlanRequest,
 ) (*ListSourcesFromTrackingPlan200Response, *http.Response, error) {
 	var (
@@ -960,7 +975,7 @@ func (a *TrackingPlansApiService) ListSourcesFromTrackingPlanExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TrackingPlansApiService.ListSourcesFromTrackingPlan",
+		"TrackingPlansAPIService.ListSourcesFromTrackingPlan",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -970,7 +985,7 @@ func (a *TrackingPlansApiService) ListSourcesFromTrackingPlanExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"trackingPlanId"+"}",
-		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		url.PathEscape(parameterValueToString(r.trackingPlanId, "trackingPlanId")),
 		-1,
 	)
 
@@ -981,7 +996,7 @@ func (a *TrackingPlansApiService) ListSourcesFromTrackingPlanExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1023,9 +1038,9 @@ func (a *TrackingPlansApiService) ListSourcesFromTrackingPlanExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1042,6 +1057,7 @@ func (a *TrackingPlansApiService) ListSourcesFromTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1052,6 +1068,7 @@ func (a *TrackingPlansApiService) ListSourcesFromTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1062,6 +1079,7 @@ func (a *TrackingPlansApiService) ListSourcesFromTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1085,7 +1103,7 @@ func (a *TrackingPlansApiService) ListSourcesFromTrackingPlanExecute(
 
 type ApiListTrackingPlansRequest struct {
 	ctx        context.Context
-	ApiService *TrackingPlansApiService
+	ApiService *TrackingPlansAPIService
 	pagination *PaginationInput
 	type_      *string
 }
@@ -1118,7 +1136,7 @@ Returns a list of Tracking Plans.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListTrackingPlansRequest
 */
-func (a *TrackingPlansApiService) ListTrackingPlans(
+func (a *TrackingPlansAPIService) ListTrackingPlans(
 	ctx context.Context,
 ) ApiListTrackingPlansRequest {
 	return ApiListTrackingPlansRequest{
@@ -1130,7 +1148,7 @@ func (a *TrackingPlansApiService) ListTrackingPlans(
 // Execute executes the request
 //
 //	@return ListTrackingPlans200Response
-func (a *TrackingPlansApiService) ListTrackingPlansExecute(
+func (a *TrackingPlansAPIService) ListTrackingPlansExecute(
 	r ApiListTrackingPlansRequest,
 ) (*ListTrackingPlans200Response, *http.Response, error) {
 	var (
@@ -1142,7 +1160,7 @@ func (a *TrackingPlansApiService) ListTrackingPlansExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TrackingPlansApiService.ListTrackingPlans",
+		"TrackingPlansAPIService.ListTrackingPlans",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1158,9 +1176,9 @@ func (a *TrackingPlansApiService) ListTrackingPlansExecute(
 	}
 
 	if r.type_ != nil {
-		localVarQueryParams.Add("type", parameterToString(*r.type_, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "")
 	}
-	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1202,9 +1220,9 @@ func (a *TrackingPlansApiService) ListTrackingPlansExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1221,6 +1239,7 @@ func (a *TrackingPlansApiService) ListTrackingPlansExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1231,6 +1250,7 @@ func (a *TrackingPlansApiService) ListTrackingPlansExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1241,6 +1261,7 @@ func (a *TrackingPlansApiService) ListTrackingPlansExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1264,7 +1285,7 @@ func (a *TrackingPlansApiService) ListTrackingPlansExecute(
 
 type ApiRemoveRulesFromTrackingPlanRequest struct {
 	ctx            context.Context
-	ApiService     *TrackingPlansApiService
+	ApiService     *TrackingPlansAPIService
 	trackingPlanId string
 	rules          *[]RemoveRuleV1
 }
@@ -1292,7 +1313,7 @@ Deletes Tracking Plan rules.
 	@param trackingPlanId
 	@return ApiRemoveRulesFromTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlan(
+func (a *TrackingPlansAPIService) RemoveRulesFromTrackingPlan(
 	ctx context.Context,
 	trackingPlanId string,
 ) ApiRemoveRulesFromTrackingPlanRequest {
@@ -1306,7 +1327,7 @@ func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlan(
 // Execute executes the request
 //
 //	@return RemoveRulesFromTrackingPlan200Response
-func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlanExecute(
+func (a *TrackingPlansAPIService) RemoveRulesFromTrackingPlanExecute(
 	r ApiRemoveRulesFromTrackingPlanRequest,
 ) (*RemoveRulesFromTrackingPlan200Response, *http.Response, error) {
 	var (
@@ -1318,7 +1339,7 @@ func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlanExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TrackingPlansApiService.RemoveRulesFromTrackingPlan",
+		"TrackingPlansAPIService.RemoveRulesFromTrackingPlan",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1328,7 +1349,7 @@ func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlanExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"trackingPlanId"+"}",
-		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		url.PathEscape(parameterValueToString(r.trackingPlanId, "trackingPlanId")),
 		-1,
 	)
 
@@ -1339,7 +1360,7 @@ func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlanExecute(
 		return localVarReturnValue, nil, reportError("rules is required and must be specified")
 	}
 
-	localVarQueryParams.Add("rules", parameterToString(*r.rules, "csv"))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "rules", r.rules, "csv")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1381,9 +1402,9 @@ func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlanExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1400,6 +1421,7 @@ func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1410,6 +1432,7 @@ func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1420,6 +1443,7 @@ func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1443,7 +1467,7 @@ func (a *TrackingPlansApiService) RemoveRulesFromTrackingPlanExecute(
 
 type ApiRemoveSourceFromTrackingPlanRequest struct {
 	ctx            context.Context
-	ApiService     *TrackingPlansApiService
+	ApiService     *TrackingPlansAPIService
 	trackingPlanId string
 	sourceId       *string
 }
@@ -1473,7 +1497,7 @@ Disconnects a Source from a Tracking Plan.
 	@param trackingPlanId
 	@return ApiRemoveSourceFromTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlan(
+func (a *TrackingPlansAPIService) RemoveSourceFromTrackingPlan(
 	ctx context.Context,
 	trackingPlanId string,
 ) ApiRemoveSourceFromTrackingPlanRequest {
@@ -1487,7 +1511,7 @@ func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlan(
 // Execute executes the request
 //
 //	@return RemoveSourceFromTrackingPlan200Response
-func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlanExecute(
+func (a *TrackingPlansAPIService) RemoveSourceFromTrackingPlanExecute(
 	r ApiRemoveSourceFromTrackingPlanRequest,
 ) (*RemoveSourceFromTrackingPlan200Response, *http.Response, error) {
 	var (
@@ -1499,7 +1523,7 @@ func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlanExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TrackingPlansApiService.RemoveSourceFromTrackingPlan",
+		"TrackingPlansAPIService.RemoveSourceFromTrackingPlan",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1509,7 +1533,7 @@ func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlanExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"trackingPlanId"+"}",
-		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		url.PathEscape(parameterValueToString(r.trackingPlanId, "trackingPlanId")),
 		-1,
 	)
 
@@ -1520,7 +1544,7 @@ func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlanExecute(
 		return localVarReturnValue, nil, reportError("sourceId is required and must be specified")
 	}
 
-	localVarQueryParams.Add("sourceId", parameterToString(*r.sourceId, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1562,9 +1586,9 @@ func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlanExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1581,6 +1605,7 @@ func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1591,6 +1616,7 @@ func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1601,6 +1627,7 @@ func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1624,7 +1651,7 @@ func (a *TrackingPlansApiService) RemoveSourceFromTrackingPlanExecute(
 
 type ApiReplaceRulesInTrackingPlanRequest struct {
 	ctx                               context.Context
-	ApiService                        *TrackingPlansApiService
+	ApiService                        *TrackingPlansAPIService
 	trackingPlanId                    string
 	replaceRulesInTrackingPlanV1Input *ReplaceRulesInTrackingPlanV1Input
 }
@@ -1651,7 +1678,7 @@ Replaces Tracking Plan rules.
 	@param trackingPlanId
 	@return ApiReplaceRulesInTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlan(
+func (a *TrackingPlansAPIService) ReplaceRulesInTrackingPlan(
 	ctx context.Context,
 	trackingPlanId string,
 ) ApiReplaceRulesInTrackingPlanRequest {
@@ -1665,7 +1692,7 @@ func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlan(
 // Execute executes the request
 //
 //	@return ReplaceRulesInTrackingPlan200Response
-func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlanExecute(
+func (a *TrackingPlansAPIService) ReplaceRulesInTrackingPlanExecute(
 	r ApiReplaceRulesInTrackingPlanRequest,
 ) (*ReplaceRulesInTrackingPlan200Response, *http.Response, error) {
 	var (
@@ -1677,7 +1704,7 @@ func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlanExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TrackingPlansApiService.ReplaceRulesInTrackingPlan",
+		"TrackingPlansAPIService.ReplaceRulesInTrackingPlan",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1687,7 +1714,7 @@ func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlanExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"trackingPlanId"+"}",
-		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		url.PathEscape(parameterValueToString(r.trackingPlanId, "trackingPlanId")),
 		-1,
 	)
 
@@ -1747,9 +1774,9 @@ func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlanExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1766,6 +1793,7 @@ func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1776,6 +1804,7 @@ func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1786,6 +1815,7 @@ func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1809,7 +1839,7 @@ func (a *TrackingPlansApiService) ReplaceRulesInTrackingPlanExecute(
 
 type ApiUpdateRulesInTrackingPlanRequest struct {
 	ctx                              context.Context
-	ApiService                       *TrackingPlansApiService
+	ApiService                       *TrackingPlansAPIService
 	trackingPlanId                   string
 	updateRulesInTrackingPlanV1Input *UpdateRulesInTrackingPlanV1Input
 }
@@ -1836,7 +1866,7 @@ Updates Tracking Plan rules.
 	@param trackingPlanId
 	@return ApiUpdateRulesInTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) UpdateRulesInTrackingPlan(
+func (a *TrackingPlansAPIService) UpdateRulesInTrackingPlan(
 	ctx context.Context,
 	trackingPlanId string,
 ) ApiUpdateRulesInTrackingPlanRequest {
@@ -1850,7 +1880,7 @@ func (a *TrackingPlansApiService) UpdateRulesInTrackingPlan(
 // Execute executes the request
 //
 //	@return UpdateRulesInTrackingPlan200Response
-func (a *TrackingPlansApiService) UpdateRulesInTrackingPlanExecute(
+func (a *TrackingPlansAPIService) UpdateRulesInTrackingPlanExecute(
 	r ApiUpdateRulesInTrackingPlanRequest,
 ) (*UpdateRulesInTrackingPlan200Response, *http.Response, error) {
 	var (
@@ -1862,7 +1892,7 @@ func (a *TrackingPlansApiService) UpdateRulesInTrackingPlanExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TrackingPlansApiService.UpdateRulesInTrackingPlan",
+		"TrackingPlansAPIService.UpdateRulesInTrackingPlan",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1872,7 +1902,7 @@ func (a *TrackingPlansApiService) UpdateRulesInTrackingPlanExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"trackingPlanId"+"}",
-		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		url.PathEscape(parameterValueToString(r.trackingPlanId, "trackingPlanId")),
 		-1,
 	)
 
@@ -1932,9 +1962,9 @@ func (a *TrackingPlansApiService) UpdateRulesInTrackingPlanExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -1951,6 +1981,7 @@ func (a *TrackingPlansApiService) UpdateRulesInTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1961,6 +1992,7 @@ func (a *TrackingPlansApiService) UpdateRulesInTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -1971,6 +2003,7 @@ func (a *TrackingPlansApiService) UpdateRulesInTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -1994,7 +2027,7 @@ func (a *TrackingPlansApiService) UpdateRulesInTrackingPlanExecute(
 
 type ApiUpdateTrackingPlanRequest struct {
 	ctx                       context.Context
-	ApiService                *TrackingPlansApiService
+	ApiService                *TrackingPlansAPIService
 	trackingPlanId            string
 	updateTrackingPlanV1Input *UpdateTrackingPlanV1Input
 }
@@ -2024,7 +2057,7 @@ Config API omitted fields:
 	@param trackingPlanId
 	@return ApiUpdateTrackingPlanRequest
 */
-func (a *TrackingPlansApiService) UpdateTrackingPlan(
+func (a *TrackingPlansAPIService) UpdateTrackingPlan(
 	ctx context.Context,
 	trackingPlanId string,
 ) ApiUpdateTrackingPlanRequest {
@@ -2038,7 +2071,7 @@ func (a *TrackingPlansApiService) UpdateTrackingPlan(
 // Execute executes the request
 //
 //	@return UpdateTrackingPlan200Response
-func (a *TrackingPlansApiService) UpdateTrackingPlanExecute(
+func (a *TrackingPlansAPIService) UpdateTrackingPlanExecute(
 	r ApiUpdateTrackingPlanRequest,
 ) (*UpdateTrackingPlan200Response, *http.Response, error) {
 	var (
@@ -2050,7 +2083,7 @@ func (a *TrackingPlansApiService) UpdateTrackingPlanExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"TrackingPlansApiService.UpdateTrackingPlan",
+		"TrackingPlansAPIService.UpdateTrackingPlan",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -2060,7 +2093,7 @@ func (a *TrackingPlansApiService) UpdateTrackingPlanExecute(
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"trackingPlanId"+"}",
-		url.PathEscape(parameterToString(r.trackingPlanId, "")),
+		url.PathEscape(parameterValueToString(r.trackingPlanId, "trackingPlanId")),
 		-1,
 	)
 
@@ -2120,9 +2153,9 @@ func (a *TrackingPlansApiService) UpdateTrackingPlanExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -2139,6 +2172,7 @@ func (a *TrackingPlansApiService) UpdateTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -2149,6 +2183,7 @@ func (a *TrackingPlansApiService) UpdateTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -2159,6 +2194,7 @@ func (a *TrackingPlansApiService) UpdateTrackingPlanExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

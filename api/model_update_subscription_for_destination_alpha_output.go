@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,9 +15,12 @@ import (
 	"encoding/json"
 )
 
+// checks if the UpdateSubscriptionForDestinationAlphaOutput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateSubscriptionForDestinationAlphaOutput{}
+
 // UpdateSubscriptionForDestinationAlphaOutput Returns the updated Destination subscription.
 type UpdateSubscriptionForDestinationAlphaOutput struct {
-	Subscription Subscription `json:"subscription"`
+	Subscription DestinationSubscription `json:"subscription"`
 }
 
 // NewUpdateSubscriptionForDestinationAlphaOutput instantiates a new UpdateSubscriptionForDestinationAlphaOutput object
@@ -25,7 +28,7 @@ type UpdateSubscriptionForDestinationAlphaOutput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewUpdateSubscriptionForDestinationAlphaOutput(
-	subscription Subscription,
+	subscription DestinationSubscription,
 ) *UpdateSubscriptionForDestinationAlphaOutput {
 	this := UpdateSubscriptionForDestinationAlphaOutput{}
 	this.Subscription = subscription
@@ -41,9 +44,9 @@ func NewUpdateSubscriptionForDestinationAlphaOutputWithDefaults() *UpdateSubscri
 }
 
 // GetSubscription returns the Subscription field value
-func (o *UpdateSubscriptionForDestinationAlphaOutput) GetSubscription() Subscription {
+func (o *UpdateSubscriptionForDestinationAlphaOutput) GetSubscription() DestinationSubscription {
 	if o == nil {
-		var ret Subscription
+		var ret DestinationSubscription
 		return ret
 	}
 
@@ -52,7 +55,7 @@ func (o *UpdateSubscriptionForDestinationAlphaOutput) GetSubscription() Subscrip
 
 // GetSubscriptionOk returns a tuple with the Subscription field value
 // and a boolean to check if the value has been set.
-func (o *UpdateSubscriptionForDestinationAlphaOutput) GetSubscriptionOk() (*Subscription, bool) {
+func (o *UpdateSubscriptionForDestinationAlphaOutput) GetSubscriptionOk() (*DestinationSubscription, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -60,16 +63,22 @@ func (o *UpdateSubscriptionForDestinationAlphaOutput) GetSubscriptionOk() (*Subs
 }
 
 // SetSubscription sets field value
-func (o *UpdateSubscriptionForDestinationAlphaOutput) SetSubscription(v Subscription) {
+func (o *UpdateSubscriptionForDestinationAlphaOutput) SetSubscription(v DestinationSubscription) {
 	o.Subscription = v
 }
 
 func (o UpdateSubscriptionForDestinationAlphaOutput) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["subscription"] = o.Subscription
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UpdateSubscriptionForDestinationAlphaOutput) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["subscription"] = o.Subscription
+	return toSerialize, nil
 }
 
 type NullableUpdateSubscriptionForDestinationAlphaOutput struct {
