@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,9 +15,12 @@ import (
 	"encoding/json"
 )
 
+// checks if the UpdateInsertFunctionInstanceAlphaOutput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateInsertFunctionInstanceAlphaOutput{}
+
 // UpdateInsertFunctionInstanceAlphaOutput Returns the updated insert Function instance.
 type UpdateInsertFunctionInstanceAlphaOutput struct {
-	InsertFunctionInstance InsertFunctionInstance1 `json:"insertFunctionInstance"`
+	InsertFunctionInstance InsertFunctionInstanceAlpha `json:"insertFunctionInstance"`
 }
 
 // NewUpdateInsertFunctionInstanceAlphaOutput instantiates a new UpdateInsertFunctionInstanceAlphaOutput object
@@ -25,7 +28,7 @@ type UpdateInsertFunctionInstanceAlphaOutput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewUpdateInsertFunctionInstanceAlphaOutput(
-	insertFunctionInstance InsertFunctionInstance1,
+	insertFunctionInstance InsertFunctionInstanceAlpha,
 ) *UpdateInsertFunctionInstanceAlphaOutput {
 	this := UpdateInsertFunctionInstanceAlphaOutput{}
 	this.InsertFunctionInstance = insertFunctionInstance
@@ -41,9 +44,9 @@ func NewUpdateInsertFunctionInstanceAlphaOutputWithDefaults() *UpdateInsertFunct
 }
 
 // GetInsertFunctionInstance returns the InsertFunctionInstance field value
-func (o *UpdateInsertFunctionInstanceAlphaOutput) GetInsertFunctionInstance() InsertFunctionInstance1 {
+func (o *UpdateInsertFunctionInstanceAlphaOutput) GetInsertFunctionInstance() InsertFunctionInstanceAlpha {
 	if o == nil {
-		var ret InsertFunctionInstance1
+		var ret InsertFunctionInstanceAlpha
 		return ret
 	}
 
@@ -52,7 +55,7 @@ func (o *UpdateInsertFunctionInstanceAlphaOutput) GetInsertFunctionInstance() In
 
 // GetInsertFunctionInstanceOk returns a tuple with the InsertFunctionInstance field value
 // and a boolean to check if the value has been set.
-func (o *UpdateInsertFunctionInstanceAlphaOutput) GetInsertFunctionInstanceOk() (*InsertFunctionInstance1, bool) {
+func (o *UpdateInsertFunctionInstanceAlphaOutput) GetInsertFunctionInstanceOk() (*InsertFunctionInstanceAlpha, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -61,17 +64,23 @@ func (o *UpdateInsertFunctionInstanceAlphaOutput) GetInsertFunctionInstanceOk() 
 
 // SetInsertFunctionInstance sets field value
 func (o *UpdateInsertFunctionInstanceAlphaOutput) SetInsertFunctionInstance(
-	v InsertFunctionInstance1,
+	v InsertFunctionInstanceAlpha,
 ) {
 	o.InsertFunctionInstance = v
 }
 
 func (o UpdateInsertFunctionInstanceAlphaOutput) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["insertFunctionInstance"] = o.InsertFunctionInstance
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o UpdateInsertFunctionInstanceAlphaOutput) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["insertFunctionInstance"] = o.InsertFunctionInstance
+	return toSerialize, nil
 }
 
 type NullableUpdateInsertFunctionInstanceAlphaOutput struct {

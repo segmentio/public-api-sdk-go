@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,11 +15,14 @@ import (
 	"encoding/json"
 )
 
+// checks if the ListReverseEtlModelsOutput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListReverseEtlModelsOutput{}
+
 // ListReverseEtlModelsOutput Defines the result of listing Models.
 type ListReverseEtlModelsOutput struct {
 	// A list of Models that belong to the Workspace.
 	Models     []ReverseEtlModel `json:"models"`
-	Pagination Pagination        `json:"pagination"`
+	Pagination PaginationOutput  `json:"pagination"`
 }
 
 // NewListReverseEtlModelsOutput instantiates a new ListReverseEtlModelsOutput object
@@ -28,7 +31,7 @@ type ListReverseEtlModelsOutput struct {
 // will change when the set of required properties is changed
 func NewListReverseEtlModelsOutput(
 	models []ReverseEtlModel,
-	pagination Pagination,
+	pagination PaginationOutput,
 ) *ListReverseEtlModelsOutput {
 	this := ListReverseEtlModelsOutput{}
 	this.Models = models
@@ -69,9 +72,9 @@ func (o *ListReverseEtlModelsOutput) SetModels(v []ReverseEtlModel) {
 }
 
 // GetPagination returns the Pagination field value
-func (o *ListReverseEtlModelsOutput) GetPagination() Pagination {
+func (o *ListReverseEtlModelsOutput) GetPagination() PaginationOutput {
 	if o == nil {
-		var ret Pagination
+		var ret PaginationOutput
 		return ret
 	}
 
@@ -80,7 +83,7 @@ func (o *ListReverseEtlModelsOutput) GetPagination() Pagination {
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *ListReverseEtlModelsOutput) GetPaginationOk() (*Pagination, bool) {
+func (o *ListReverseEtlModelsOutput) GetPaginationOk() (*PaginationOutput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,19 +91,23 @@ func (o *ListReverseEtlModelsOutput) GetPaginationOk() (*Pagination, bool) {
 }
 
 // SetPagination sets field value
-func (o *ListReverseEtlModelsOutput) SetPagination(v Pagination) {
+func (o *ListReverseEtlModelsOutput) SetPagination(v PaginationOutput) {
 	o.Pagination = v
 }
 
 func (o ListReverseEtlModelsOutput) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["models"] = o.Models
-	}
-	if true {
-		toSerialize["pagination"] = o.Pagination
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ListReverseEtlModelsOutput) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["models"] = o.Models
+	toSerialize["pagination"] = o.Pagination
+	return toSerialize, nil
 }
 
 type NullableListReverseEtlModelsOutput struct {

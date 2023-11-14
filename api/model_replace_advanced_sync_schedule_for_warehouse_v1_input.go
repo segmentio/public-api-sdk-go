@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,11 +15,14 @@ import (
 	"encoding/json"
 )
 
+// checks if the ReplaceAdvancedSyncScheduleForWarehouseV1Input type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ReplaceAdvancedSyncScheduleForWarehouseV1Input{}
+
 // ReplaceAdvancedSyncScheduleForWarehouseV1Input Replaces the advanced sync schedule for a Warehouse.
 type ReplaceAdvancedSyncScheduleForWarehouseV1Input struct {
 	// Enable to turn on an advanced sync schedule for the Warehouse.
-	Enabled  bool       `json:"enabled"`
-	Schedule *Schedule1 `json:"schedule,omitempty"`
+	Enabled  bool                                  `json:"enabled"`
+	Schedule *AdvancedWarehouseSyncScheduleV1Input `json:"schedule,omitempty"`
 }
 
 // NewReplaceAdvancedSyncScheduleForWarehouseV1Input instantiates a new ReplaceAdvancedSyncScheduleForWarehouseV1Input object
@@ -67,9 +70,9 @@ func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Input) SetEnabled(v bool) {
 }
 
 // GetSchedule returns the Schedule field value if set, zero value otherwise.
-func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Input) GetSchedule() Schedule1 {
-	if o == nil || o.Schedule == nil {
-		var ret Schedule1
+func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Input) GetSchedule() AdvancedWarehouseSyncScheduleV1Input {
+	if o == nil || IsNil(o.Schedule) {
+		var ret AdvancedWarehouseSyncScheduleV1Input
 		return ret
 	}
 	return *o.Schedule
@@ -77,8 +80,8 @@ func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Input) GetSchedule() Schedule1
 
 // GetScheduleOk returns a tuple with the Schedule field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Input) GetScheduleOk() (*Schedule1, bool) {
-	if o == nil || o.Schedule == nil {
+func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Input) GetScheduleOk() (*AdvancedWarehouseSyncScheduleV1Input, bool) {
+	if o == nil || IsNil(o.Schedule) {
 		return nil, false
 	}
 	return o.Schedule, true
@@ -86,27 +89,35 @@ func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Input) GetScheduleOk() (*Sched
 
 // HasSchedule returns a boolean if a field has been set.
 func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Input) HasSchedule() bool {
-	if o != nil && o.Schedule != nil {
+	if o != nil && !IsNil(o.Schedule) {
 		return true
 	}
 
 	return false
 }
 
-// SetSchedule gets a reference to the given Schedule1 and assigns it to the Schedule field.
-func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Input) SetSchedule(v Schedule1) {
+// SetSchedule gets a reference to the given AdvancedWarehouseSyncScheduleV1Input and assigns it to the Schedule field.
+func (o *ReplaceAdvancedSyncScheduleForWarehouseV1Input) SetSchedule(
+	v AdvancedWarehouseSyncScheduleV1Input,
+) {
 	o.Schedule = &v
 }
 
 func (o ReplaceAdvancedSyncScheduleForWarehouseV1Input) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["enabled"] = o.Enabled
-	}
-	if o.Schedule != nil {
-		toSerialize["schedule"] = o.Schedule
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ReplaceAdvancedSyncScheduleForWarehouseV1Input) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["enabled"] = o.Enabled
+	if !IsNil(o.Schedule) {
+		toSerialize["schedule"] = o.Schedule
+	}
+	return toSerialize, nil
 }
 
 type NullableReplaceAdvancedSyncScheduleForWarehouseV1Input struct {

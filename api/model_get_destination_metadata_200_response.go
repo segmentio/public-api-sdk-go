@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the GetDestinationMetadata200Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GetDestinationMetadata200Response{}
 
 // GetDestinationMetadata200Response struct for GetDestinationMetadata200Response
 type GetDestinationMetadata200Response struct {
@@ -39,7 +42,7 @@ func NewGetDestinationMetadata200ResponseWithDefaults() *GetDestinationMetadata2
 
 // GetData returns the Data field value if set, zero value otherwise.
 func (o *GetDestinationMetadata200Response) GetData() GetDestinationMetadataV1Output {
-	if o == nil || o.Data == nil {
+	if o == nil || IsNil(o.Data) {
 		var ret GetDestinationMetadataV1Output
 		return ret
 	}
@@ -49,7 +52,7 @@ func (o *GetDestinationMetadata200Response) GetData() GetDestinationMetadataV1Ou
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetDestinationMetadata200Response) GetDataOk() (*GetDestinationMetadataV1Output, bool) {
-	if o == nil || o.Data == nil {
+	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
 	return o.Data, true
@@ -57,7 +60,7 @@ func (o *GetDestinationMetadata200Response) GetDataOk() (*GetDestinationMetadata
 
 // HasData returns a boolean if a field has been set.
 func (o *GetDestinationMetadata200Response) HasData() bool {
-	if o != nil && o.Data != nil {
+	if o != nil && !IsNil(o.Data) {
 		return true
 	}
 
@@ -70,11 +73,19 @@ func (o *GetDestinationMetadata200Response) SetData(v GetDestinationMetadataV1Ou
 }
 
 func (o GetDestinationMetadata200Response) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Data != nil {
-		toSerialize["data"] = o.Data
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o GetDestinationMetadata200Response) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Data) {
+		toSerialize["data"] = o.Data
+	}
+	return toSerialize, nil
 }
 
 type NullableGetDestinationMetadata200Response struct {

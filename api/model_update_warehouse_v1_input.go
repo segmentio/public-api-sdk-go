@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,21 +15,24 @@ import (
 	"encoding/json"
 )
 
+// checks if the UpdateWarehouseV1Input type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateWarehouseV1Input{}
+
 // UpdateWarehouseV1Input Updates an existing Warehouse based on a set of parameters.
 type UpdateWarehouseV1Input struct {
 	// An optional human-readable name to associate with this Warehouse.
 	Name NullableString `json:"name,omitempty"`
 	// Enable to allow this Warehouse to receive data.
 	Enabled *bool `json:"enabled,omitempty"`
-	// A key-value object that contains instance-specific settings for a Warehouse.  Different kinds of Warehouses require different settings. The required and optional settings for a Warehouse are described in the `options` object of the associated Warehouse metadata.  You can find the full list of Warehouse metadata and related settings information in the `/catalog/warehouses` endpoint.
-	Settings NullableModelMap `json:"settings"`
+	// A key-value object that contains instance-specific Warehouse settings.
+	Settings map[string]interface{} `json:"settings"`
 }
 
 // NewUpdateWarehouseV1Input instantiates a new UpdateWarehouseV1Input object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateWarehouseV1Input(settings NullableModelMap) *UpdateWarehouseV1Input {
+func NewUpdateWarehouseV1Input(settings map[string]interface{}) *UpdateWarehouseV1Input {
 	this := UpdateWarehouseV1Input{}
 	this.Settings = settings
 	return &this
@@ -45,7 +48,7 @@ func NewUpdateWarehouseV1InputWithDefaults() *UpdateWarehouseV1Input {
 
 // GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdateWarehouseV1Input) GetName() string {
-	if o == nil || o.Name.Get() == nil {
+	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
@@ -88,7 +91,7 @@ func (o *UpdateWarehouseV1Input) UnsetName() {
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *UpdateWarehouseV1Input) GetEnabled() bool {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
@@ -98,7 +101,7 @@ func (o *UpdateWarehouseV1Input) GetEnabled() bool {
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateWarehouseV1Input) GetEnabledOk() (*bool, bool) {
-	if o == nil || o.Enabled == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
 	return o.Enabled, true
@@ -106,7 +109,7 @@ func (o *UpdateWarehouseV1Input) GetEnabledOk() (*bool, bool) {
 
 // HasEnabled returns a boolean if a field has been set.
 func (o *UpdateWarehouseV1Input) HasEnabled() bool {
-	if o != nil && o.Enabled != nil {
+	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
 
@@ -119,43 +122,47 @@ func (o *UpdateWarehouseV1Input) SetEnabled(v bool) {
 }
 
 // GetSettings returns the Settings field value
-// If the value is explicit nil, the zero value for ModelMap will be returned
-func (o *UpdateWarehouseV1Input) GetSettings() ModelMap {
-	if o == nil || o.Settings.Get() == nil {
-		var ret ModelMap
+func (o *UpdateWarehouseV1Input) GetSettings() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
 		return ret
 	}
 
-	return *o.Settings.Get()
+	return o.Settings
 }
 
 // GetSettingsOk returns a tuple with the Settings field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdateWarehouseV1Input) GetSettingsOk() (*ModelMap, bool) {
+func (o *UpdateWarehouseV1Input) GetSettingsOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]interface{}{}, false
 	}
-	return o.Settings.Get(), o.Settings.IsSet()
+	return o.Settings, true
 }
 
 // SetSettings sets field value
-func (o *UpdateWarehouseV1Input) SetSettings(v ModelMap) {
-	o.Settings.Set(&v)
+func (o *UpdateWarehouseV1Input) SetSettings(v map[string]interface{}) {
+	o.Settings = v
 }
 
 func (o UpdateWarehouseV1Input) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o UpdateWarehouseV1Input) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Name.IsSet() {
 		toSerialize["name"] = o.Name.Get()
 	}
-	if o.Enabled != nil {
+	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if true {
-		toSerialize["settings"] = o.Settings.Get()
-	}
-	return json.Marshal(toSerialize)
+	toSerialize["settings"] = o.Settings
+	return toSerialize, nil
 }
 
 type NullableUpdateWarehouseV1Input struct {
