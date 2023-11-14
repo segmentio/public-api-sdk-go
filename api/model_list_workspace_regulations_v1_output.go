@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,11 +15,14 @@ import (
 	"encoding/json"
 )
 
+// checks if the ListWorkspaceRegulationsV1Output type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListWorkspaceRegulationsV1Output{}
+
 // ListWorkspaceRegulationsV1Output Output of all Workspace-scoped regulations in a given Workspace.
 type ListWorkspaceRegulationsV1Output struct {
 	// List of Workspace-scoped regulations with statuses.
 	Regulations []RegulationListEntryV1 `json:"regulations"`
-	Pagination  Pagination              `json:"pagination"`
+	Pagination  PaginationOutput        `json:"pagination"`
 }
 
 // NewListWorkspaceRegulationsV1Output instantiates a new ListWorkspaceRegulationsV1Output object
@@ -28,7 +31,7 @@ type ListWorkspaceRegulationsV1Output struct {
 // will change when the set of required properties is changed
 func NewListWorkspaceRegulationsV1Output(
 	regulations []RegulationListEntryV1,
-	pagination Pagination,
+	pagination PaginationOutput,
 ) *ListWorkspaceRegulationsV1Output {
 	this := ListWorkspaceRegulationsV1Output{}
 	this.Regulations = regulations
@@ -69,9 +72,9 @@ func (o *ListWorkspaceRegulationsV1Output) SetRegulations(v []RegulationListEntr
 }
 
 // GetPagination returns the Pagination field value
-func (o *ListWorkspaceRegulationsV1Output) GetPagination() Pagination {
+func (o *ListWorkspaceRegulationsV1Output) GetPagination() PaginationOutput {
 	if o == nil {
-		var ret Pagination
+		var ret PaginationOutput
 		return ret
 	}
 
@@ -80,7 +83,7 @@ func (o *ListWorkspaceRegulationsV1Output) GetPagination() Pagination {
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *ListWorkspaceRegulationsV1Output) GetPaginationOk() (*Pagination, bool) {
+func (o *ListWorkspaceRegulationsV1Output) GetPaginationOk() (*PaginationOutput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,19 +91,23 @@ func (o *ListWorkspaceRegulationsV1Output) GetPaginationOk() (*Pagination, bool)
 }
 
 // SetPagination sets field value
-func (o *ListWorkspaceRegulationsV1Output) SetPagination(v Pagination) {
+func (o *ListWorkspaceRegulationsV1Output) SetPagination(v PaginationOutput) {
 	o.Pagination = v
 }
 
 func (o ListWorkspaceRegulationsV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["regulations"] = o.Regulations
-	}
-	if true {
-		toSerialize["pagination"] = o.Pagination
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ListWorkspaceRegulationsV1Output) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["regulations"] = o.Regulations
+	toSerialize["pagination"] = o.Pagination
+	return toSerialize, nil
 }
 
 type NullableListWorkspaceRegulationsV1Output struct {

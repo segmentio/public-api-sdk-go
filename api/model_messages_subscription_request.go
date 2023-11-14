@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the MessagesSubscriptionRequest type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &MessagesSubscriptionRequest{}
 
 // MessagesSubscriptionRequest struct for MessagesSubscriptionRequest
 type MessagesSubscriptionRequest struct {
@@ -96,7 +99,7 @@ func (o *MessagesSubscriptionRequest) SetType(v string) {
 
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *MessagesSubscriptionRequest) GetStatus() string {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		var ret string
 		return ret
 	}
@@ -106,7 +109,7 @@ func (o *MessagesSubscriptionRequest) GetStatus() string {
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MessagesSubscriptionRequest) GetStatusOk() (*string, bool) {
-	if o == nil || o.Status == nil {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
 	return o.Status, true
@@ -114,7 +117,7 @@ func (o *MessagesSubscriptionRequest) GetStatusOk() (*string, bool) {
 
 // HasStatus returns a boolean if a field has been set.
 func (o *MessagesSubscriptionRequest) HasStatus() bool {
-	if o != nil && o.Status != nil {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
@@ -128,7 +131,7 @@ func (o *MessagesSubscriptionRequest) SetStatus(v string) {
 
 // GetGroups returns the Groups field value if set, zero value otherwise.
 func (o *MessagesSubscriptionRequest) GetGroups() []GroupSubscriptionStatus {
-	if o == nil || o.Groups == nil {
+	if o == nil || IsNil(o.Groups) {
 		var ret []GroupSubscriptionStatus
 		return ret
 	}
@@ -138,7 +141,7 @@ func (o *MessagesSubscriptionRequest) GetGroups() []GroupSubscriptionStatus {
 // GetGroupsOk returns a tuple with the Groups field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *MessagesSubscriptionRequest) GetGroupsOk() ([]GroupSubscriptionStatus, bool) {
-	if o == nil || o.Groups == nil {
+	if o == nil || IsNil(o.Groups) {
 		return nil, false
 	}
 	return o.Groups, true
@@ -146,7 +149,7 @@ func (o *MessagesSubscriptionRequest) GetGroupsOk() ([]GroupSubscriptionStatus, 
 
 // HasGroups returns a boolean if a field has been set.
 func (o *MessagesSubscriptionRequest) HasGroups() bool {
-	if o != nil && o.Groups != nil {
+	if o != nil && !IsNil(o.Groups) {
 		return true
 	}
 
@@ -159,20 +162,24 @@ func (o *MessagesSubscriptionRequest) SetGroups(v []GroupSubscriptionStatus) {
 }
 
 func (o MessagesSubscriptionRequest) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["key"] = o.Key
-	}
-	if true {
-		toSerialize["type"] = o.Type
-	}
-	if o.Status != nil {
-		toSerialize["status"] = o.Status
-	}
-	if o.Groups != nil {
-		toSerialize["groups"] = o.Groups
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o MessagesSubscriptionRequest) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["key"] = o.Key
+	toSerialize["type"] = o.Type
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.Groups) {
+		toSerialize["groups"] = o.Groups
+	}
+	return toSerialize, nil
 }
 
 type NullableMessagesSubscriptionRequest struct {

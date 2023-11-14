@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,12 +15,15 @@ import (
 	"encoding/json"
 )
 
+// checks if the CreateValidationInWarehouseV1Input type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateValidationInWarehouseV1Input{}
+
 // CreateValidationInWarehouseV1Input Verifies a set of Warehouse credentials by attempting to connect to it.
 type CreateValidationInWarehouseV1Input struct {
 	// The id of the Warehouse metadata type.
 	MetadataId string `json:"metadataId"`
-	// The settings to check.
-	Settings NullableModelMap `json:"settings"`
+	// A key-value object that contains instance-specific Warehouse settings.
+	Settings map[string]interface{} `json:"settings"`
 }
 
 // NewCreateValidationInWarehouseV1Input instantiates a new CreateValidationInWarehouseV1Input object
@@ -29,7 +32,7 @@ type CreateValidationInWarehouseV1Input struct {
 // will change when the set of required properties is changed
 func NewCreateValidationInWarehouseV1Input(
 	metadataId string,
-	settings NullableModelMap,
+	settings map[string]interface{},
 ) *CreateValidationInWarehouseV1Input {
 	this := CreateValidationInWarehouseV1Input{}
 	this.MetadataId = metadataId
@@ -70,40 +73,42 @@ func (o *CreateValidationInWarehouseV1Input) SetMetadataId(v string) {
 }
 
 // GetSettings returns the Settings field value
-// If the value is explicit nil, the zero value for ModelMap will be returned
-func (o *CreateValidationInWarehouseV1Input) GetSettings() ModelMap {
-	if o == nil || o.Settings.Get() == nil {
-		var ret ModelMap
+func (o *CreateValidationInWarehouseV1Input) GetSettings() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
 		return ret
 	}
 
-	return *o.Settings.Get()
+	return o.Settings
 }
 
 // GetSettingsOk returns a tuple with the Settings field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CreateValidationInWarehouseV1Input) GetSettingsOk() (*ModelMap, bool) {
+func (o *CreateValidationInWarehouseV1Input) GetSettingsOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]interface{}{}, false
 	}
-	return o.Settings.Get(), o.Settings.IsSet()
+	return o.Settings, true
 }
 
 // SetSettings sets field value
-func (o *CreateValidationInWarehouseV1Input) SetSettings(v ModelMap) {
-	o.Settings.Set(&v)
+func (o *CreateValidationInWarehouseV1Input) SetSettings(v map[string]interface{}) {
+	o.Settings = v
 }
 
 func (o CreateValidationInWarehouseV1Input) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["metadataId"] = o.MetadataId
-	}
-	if true {
-		toSerialize["settings"] = o.Settings.Get()
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o CreateValidationInWarehouseV1Input) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["metadataId"] = o.MetadataId
+	toSerialize["settings"] = o.Settings
+	return toSerialize, nil
 }
 
 type NullableCreateValidationInWarehouseV1Input struct {

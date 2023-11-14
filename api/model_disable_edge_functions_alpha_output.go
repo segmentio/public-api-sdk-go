@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,9 +15,12 @@ import (
 	"encoding/json"
 )
 
+// checks if the DisableEdgeFunctionsAlphaOutput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DisableEdgeFunctionsAlphaOutput{}
+
 // DisableEdgeFunctionsAlphaOutput Output for DisableEdgeFunctions.
 type DisableEdgeFunctionsAlphaOutput struct {
-	EdgeFunctions EdgeFunctions1 `json:"edgeFunctions"`
+	EdgeFunctions EdgeFunctionsAlpha `json:"edgeFunctions"`
 }
 
 // NewDisableEdgeFunctionsAlphaOutput instantiates a new DisableEdgeFunctionsAlphaOutput object
@@ -25,7 +28,7 @@ type DisableEdgeFunctionsAlphaOutput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewDisableEdgeFunctionsAlphaOutput(
-	edgeFunctions EdgeFunctions1,
+	edgeFunctions EdgeFunctionsAlpha,
 ) *DisableEdgeFunctionsAlphaOutput {
 	this := DisableEdgeFunctionsAlphaOutput{}
 	this.EdgeFunctions = edgeFunctions
@@ -41,9 +44,9 @@ func NewDisableEdgeFunctionsAlphaOutputWithDefaults() *DisableEdgeFunctionsAlpha
 }
 
 // GetEdgeFunctions returns the EdgeFunctions field value
-func (o *DisableEdgeFunctionsAlphaOutput) GetEdgeFunctions() EdgeFunctions1 {
+func (o *DisableEdgeFunctionsAlphaOutput) GetEdgeFunctions() EdgeFunctionsAlpha {
 	if o == nil {
-		var ret EdgeFunctions1
+		var ret EdgeFunctionsAlpha
 		return ret
 	}
 
@@ -52,7 +55,7 @@ func (o *DisableEdgeFunctionsAlphaOutput) GetEdgeFunctions() EdgeFunctions1 {
 
 // GetEdgeFunctionsOk returns a tuple with the EdgeFunctions field value
 // and a boolean to check if the value has been set.
-func (o *DisableEdgeFunctionsAlphaOutput) GetEdgeFunctionsOk() (*EdgeFunctions1, bool) {
+func (o *DisableEdgeFunctionsAlphaOutput) GetEdgeFunctionsOk() (*EdgeFunctionsAlpha, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -60,16 +63,22 @@ func (o *DisableEdgeFunctionsAlphaOutput) GetEdgeFunctionsOk() (*EdgeFunctions1,
 }
 
 // SetEdgeFunctions sets field value
-func (o *DisableEdgeFunctionsAlphaOutput) SetEdgeFunctions(v EdgeFunctions1) {
+func (o *DisableEdgeFunctionsAlphaOutput) SetEdgeFunctions(v EdgeFunctionsAlpha) {
 	o.EdgeFunctions = v
 }
 
 func (o DisableEdgeFunctionsAlphaOutput) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["edgeFunctions"] = o.EdgeFunctions
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o DisableEdgeFunctionsAlphaOutput) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["edgeFunctions"] = o.EdgeFunctions
+	return toSerialize, nil
 }
 
 type NullableDisableEdgeFunctionsAlphaOutput struct {

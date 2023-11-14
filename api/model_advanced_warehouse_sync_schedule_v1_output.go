@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the AdvancedWarehouseSyncScheduleV1Output type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AdvancedWarehouseSyncScheduleV1Output{}
 
 // AdvancedWarehouseSyncScheduleV1Output Defines the advanced sync schedule for a Warehouse.
 type AdvancedWarehouseSyncScheduleV1Output struct {
@@ -42,7 +45,7 @@ func NewAdvancedWarehouseSyncScheduleV1OutputWithDefaults() *AdvancedWarehouseSy
 
 // GetTimes returns the Times field value if set, zero value otherwise.
 func (o *AdvancedWarehouseSyncScheduleV1Output) GetTimes() []WarehouseAdvancedSyncV1 {
-	if o == nil || o.Times == nil {
+	if o == nil || IsNil(o.Times) {
 		var ret []WarehouseAdvancedSyncV1
 		return ret
 	}
@@ -52,7 +55,7 @@ func (o *AdvancedWarehouseSyncScheduleV1Output) GetTimes() []WarehouseAdvancedSy
 // GetTimesOk returns a tuple with the Times field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdvancedWarehouseSyncScheduleV1Output) GetTimesOk() ([]WarehouseAdvancedSyncV1, bool) {
-	if o == nil || o.Times == nil {
+	if o == nil || IsNil(o.Times) {
 		return nil, false
 	}
 	return o.Times, true
@@ -60,7 +63,7 @@ func (o *AdvancedWarehouseSyncScheduleV1Output) GetTimesOk() ([]WarehouseAdvance
 
 // HasTimes returns a boolean if a field has been set.
 func (o *AdvancedWarehouseSyncScheduleV1Output) HasTimes() bool {
-	if o != nil && o.Times != nil {
+	if o != nil && !IsNil(o.Times) {
 		return true
 	}
 
@@ -74,7 +77,7 @@ func (o *AdvancedWarehouseSyncScheduleV1Output) SetTimes(v []WarehouseAdvancedSy
 
 // GetTimezone returns the Timezone field value if set, zero value otherwise.
 func (o *AdvancedWarehouseSyncScheduleV1Output) GetTimezone() string {
-	if o == nil || o.Timezone == nil {
+	if o == nil || IsNil(o.Timezone) {
 		var ret string
 		return ret
 	}
@@ -84,7 +87,7 @@ func (o *AdvancedWarehouseSyncScheduleV1Output) GetTimezone() string {
 // GetTimezoneOk returns a tuple with the Timezone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AdvancedWarehouseSyncScheduleV1Output) GetTimezoneOk() (*string, bool) {
-	if o == nil || o.Timezone == nil {
+	if o == nil || IsNil(o.Timezone) {
 		return nil, false
 	}
 	return o.Timezone, true
@@ -92,7 +95,7 @@ func (o *AdvancedWarehouseSyncScheduleV1Output) GetTimezoneOk() (*string, bool) 
 
 // HasTimezone returns a boolean if a field has been set.
 func (o *AdvancedWarehouseSyncScheduleV1Output) HasTimezone() bool {
-	if o != nil && o.Timezone != nil {
+	if o != nil && !IsNil(o.Timezone) {
 		return true
 	}
 
@@ -105,14 +108,22 @@ func (o *AdvancedWarehouseSyncScheduleV1Output) SetTimezone(v string) {
 }
 
 func (o AdvancedWarehouseSyncScheduleV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if o.Times != nil {
-		toSerialize["times"] = o.Times
-	}
-	if o.Timezone != nil {
-		toSerialize["timezone"] = o.Timezone
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o AdvancedWarehouseSyncScheduleV1Output) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Times) {
+		toSerialize["times"] = o.Times
+	}
+	if !IsNil(o.Timezone) {
+		toSerialize["timezone"] = o.Timezone
+	}
+	return toSerialize, nil
 }
 
 type NullableAdvancedWarehouseSyncScheduleV1Output struct {

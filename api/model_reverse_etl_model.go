@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,7 +15,10 @@ import (
 	"encoding/json"
 )
 
-// ReverseEtlModel The created Model.
+// checks if the ReverseEtlModel type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ReverseEtlModel{}
+
+// ReverseEtlModel Defines a Reverse ETL Model.
 type ReverseEtlModel struct {
 	// The id of the Model.
 	Id string `json:"id"`
@@ -29,8 +32,8 @@ type ReverseEtlModel struct {
 	Enabled bool `json:"enabled"`
 	// Determines the strategy used for triggering syncs, which will be used in conjunction with scheduleConfig.  Possible values: \"manual\", \"periodic\", \"specific_days\".
 	ScheduleStrategy string `json:"scheduleStrategy"`
-	// Depending on the chosen strategy, configures the schedule for this model.
-	ScheduleConfig NullableModelMap `json:"scheduleConfig"`
+	// Defines a configuration object used for scheduling, which can vary depending on the configured strategy, but must always be an object with at least 1 level of keys.
+	ScheduleConfig map[string]interface{} `json:"scheduleConfig"`
 	// The SQL query that will be executed to extract data from the connected Source.
 	Query string `json:"query"`
 	// Indicates the column named in `query` that should be used to uniquely identify the extracted records.
@@ -48,7 +51,7 @@ func NewReverseEtlModel(
 	description string,
 	enabled bool,
 	scheduleStrategy string,
-	scheduleConfig NullableModelMap,
+	scheduleConfig map[string]interface{},
 	query string,
 	queryIdentifierColumn string,
 ) *ReverseEtlModel {
@@ -218,29 +221,27 @@ func (o *ReverseEtlModel) SetScheduleStrategy(v string) {
 }
 
 // GetScheduleConfig returns the ScheduleConfig field value
-// If the value is explicit nil, the zero value for ModelMap will be returned
-func (o *ReverseEtlModel) GetScheduleConfig() ModelMap {
-	if o == nil || o.ScheduleConfig.Get() == nil {
-		var ret ModelMap
+func (o *ReverseEtlModel) GetScheduleConfig() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
 		return ret
 	}
 
-	return *o.ScheduleConfig.Get()
+	return o.ScheduleConfig
 }
 
 // GetScheduleConfigOk returns a tuple with the ScheduleConfig field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ReverseEtlModel) GetScheduleConfigOk() (*ModelMap, bool) {
+func (o *ReverseEtlModel) GetScheduleConfigOk() (map[string]interface{}, bool) {
 	if o == nil {
-		return nil, false
+		return map[string]interface{}{}, false
 	}
-	return o.ScheduleConfig.Get(), o.ScheduleConfig.IsSet()
+	return o.ScheduleConfig, true
 }
 
 // SetScheduleConfig sets field value
-func (o *ReverseEtlModel) SetScheduleConfig(v ModelMap) {
-	o.ScheduleConfig.Set(&v)
+func (o *ReverseEtlModel) SetScheduleConfig(v map[string]interface{}) {
+	o.ScheduleConfig = v
 }
 
 // GetQuery returns the Query field value
@@ -292,35 +293,25 @@ func (o *ReverseEtlModel) SetQueryIdentifierColumn(v string) {
 }
 
 func (o ReverseEtlModel) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if true {
-		toSerialize["sourceId"] = o.SourceId
-	}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if true {
-		toSerialize["description"] = o.Description
-	}
-	if true {
-		toSerialize["enabled"] = o.Enabled
-	}
-	if true {
-		toSerialize["scheduleStrategy"] = o.ScheduleStrategy
-	}
-	if true {
-		toSerialize["scheduleConfig"] = o.ScheduleConfig.Get()
-	}
-	if true {
-		toSerialize["query"] = o.Query
-	}
-	if true {
-		toSerialize["queryIdentifierColumn"] = o.QueryIdentifierColumn
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ReverseEtlModel) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
+	toSerialize["sourceId"] = o.SourceId
+	toSerialize["name"] = o.Name
+	toSerialize["description"] = o.Description
+	toSerialize["enabled"] = o.Enabled
+	toSerialize["scheduleStrategy"] = o.ScheduleStrategy
+	toSerialize["scheduleConfig"] = o.ScheduleConfig
+	toSerialize["query"] = o.Query
+	toSerialize["queryIdentifierColumn"] = o.QueryIdentifierColumn
+	return toSerialize, nil
 }
 
 type NullableReverseEtlModel struct {

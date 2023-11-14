@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,17 +14,17 @@ package api
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 )
 
-// EventsApiService EventsApi service
-type EventsApiService service
+// EventsAPIService EventsAPI service
+type EventsAPIService service
 
 type ApiGetEventsVolumeFromWorkspaceRequest struct {
 	ctx         context.Context
-	ApiService  *EventsApiService
+	ApiService  *EventsAPIService
 	granularity *string
 	startTime   *string
 	endTime     *string
@@ -122,7 +122,7 @@ The rate limit for this endpoint is 60 requests per minute, which is lower than 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetEventsVolumeFromWorkspaceRequest
 */
-func (a *EventsApiService) GetEventsVolumeFromWorkspace(
+func (a *EventsAPIService) GetEventsVolumeFromWorkspace(
 	ctx context.Context,
 ) ApiGetEventsVolumeFromWorkspaceRequest {
 	return ApiGetEventsVolumeFromWorkspaceRequest{
@@ -134,7 +134,7 @@ func (a *EventsApiService) GetEventsVolumeFromWorkspace(
 // Execute executes the request
 //
 //	@return GetEventsVolumeFromWorkspace200Response
-func (a *EventsApiService) GetEventsVolumeFromWorkspaceExecute(
+func (a *EventsAPIService) GetEventsVolumeFromWorkspaceExecute(
 	r ApiGetEventsVolumeFromWorkspaceRequest,
 ) (*GetEventsVolumeFromWorkspace200Response, *http.Response, error) {
 	var (
@@ -146,7 +146,7 @@ func (a *EventsApiService) GetEventsVolumeFromWorkspaceExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"EventsApiService.GetEventsVolumeFromWorkspace",
+		"EventsAPIService.GetEventsVolumeFromWorkspace",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -169,26 +169,26 @@ func (a *EventsApiService) GetEventsVolumeFromWorkspaceExecute(
 		return localVarReturnValue, nil, reportError("endTime is required and must be specified")
 	}
 
-	localVarQueryParams.Add("granularity", parameterToString(*r.granularity, ""))
-	localVarQueryParams.Add("startTime", parameterToString(*r.startTime, ""))
-	localVarQueryParams.Add("endTime", parameterToString(*r.endTime, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "")
 	if r.groupBy != nil {
-		localVarQueryParams.Add("groupBy", parameterToString(*r.groupBy, "csv"))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "groupBy", r.groupBy, "csv")
 	}
 	if r.sourceId != nil {
-		localVarQueryParams.Add("sourceId", parameterToString(*r.sourceId, "csv"))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "csv")
 	}
 	if r.eventName != nil {
-		localVarQueryParams.Add("eventName", parameterToString(*r.eventName, "csv"))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "eventName", r.eventName, "csv")
 	}
 	if r.eventType != nil {
-		localVarQueryParams.Add("eventType", parameterToString(*r.eventType, "csv"))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "eventType", r.eventType, "csv")
 	}
 	if r.appVersion != nil {
-		localVarQueryParams.Add("appVersion", parameterToString(*r.appVersion, "csv"))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "appVersion", r.appVersion, "csv")
 	}
 	if r.pagination != nil {
-		localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -231,9 +231,9 @@ func (a *EventsApiService) GetEventsVolumeFromWorkspaceExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -250,6 +250,7 @@ func (a *EventsApiService) GetEventsVolumeFromWorkspaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -260,6 +261,7 @@ func (a *EventsApiService) GetEventsVolumeFromWorkspaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -270,6 +272,7 @@ func (a *EventsApiService) GetEventsVolumeFromWorkspaceExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

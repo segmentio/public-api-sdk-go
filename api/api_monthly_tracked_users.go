@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,17 +14,17 @@ package api
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 )
 
-// MonthlyTrackedUsersApiService MonthlyTrackedUsersApi service
-type MonthlyTrackedUsersApiService service
+// MonthlyTrackedUsersAPIService MonthlyTrackedUsersAPI service
+type MonthlyTrackedUsersAPIService service
 
 type ApiGetDailyPerSourceMTUUsageRequest struct {
 	ctx        context.Context
-	ApiService *MonthlyTrackedUsersApiService
+	ApiService *MonthlyTrackedUsersAPIService
 	period     *string
 	pagination *PaginationInput
 }
@@ -57,7 +57,7 @@ Provides daily cumulative per-source MTU counts for a usage period.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetDailyPerSourceMTUUsageRequest
 */
-func (a *MonthlyTrackedUsersApiService) GetDailyPerSourceMTUUsage(
+func (a *MonthlyTrackedUsersAPIService) GetDailyPerSourceMTUUsage(
 	ctx context.Context,
 ) ApiGetDailyPerSourceMTUUsageRequest {
 	return ApiGetDailyPerSourceMTUUsageRequest{
@@ -69,7 +69,7 @@ func (a *MonthlyTrackedUsersApiService) GetDailyPerSourceMTUUsage(
 // Execute executes the request
 //
 //	@return GetDailyPerSourceMTUUsage200Response
-func (a *MonthlyTrackedUsersApiService) GetDailyPerSourceMTUUsageExecute(
+func (a *MonthlyTrackedUsersAPIService) GetDailyPerSourceMTUUsageExecute(
 	r ApiGetDailyPerSourceMTUUsageRequest,
 ) (*GetDailyPerSourceMTUUsage200Response, *http.Response, error) {
 	var (
@@ -81,7 +81,7 @@ func (a *MonthlyTrackedUsersApiService) GetDailyPerSourceMTUUsageExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"MonthlyTrackedUsersApiService.GetDailyPerSourceMTUUsage",
+		"MonthlyTrackedUsersAPIService.GetDailyPerSourceMTUUsage",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -99,8 +99,8 @@ func (a *MonthlyTrackedUsersApiService) GetDailyPerSourceMTUUsageExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	localVarQueryParams.Add("period", parameterToString(*r.period, ""))
-	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "period", r.period, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -142,9 +142,9 @@ func (a *MonthlyTrackedUsersApiService) GetDailyPerSourceMTUUsageExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -161,6 +161,7 @@ func (a *MonthlyTrackedUsersApiService) GetDailyPerSourceMTUUsageExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -171,6 +172,7 @@ func (a *MonthlyTrackedUsersApiService) GetDailyPerSourceMTUUsageExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -181,6 +183,7 @@ func (a *MonthlyTrackedUsersApiService) GetDailyPerSourceMTUUsageExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
@@ -204,7 +207,7 @@ func (a *MonthlyTrackedUsersApiService) GetDailyPerSourceMTUUsageExecute(
 
 type ApiGetDailyWorkspaceMTUUsageRequest struct {
 	ctx        context.Context
-	ApiService *MonthlyTrackedUsersApiService
+	ApiService *MonthlyTrackedUsersAPIService
 	period     *string
 	pagination *PaginationInput
 }
@@ -237,7 +240,7 @@ Provides daily cumulative MTU counts for a usage period.
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetDailyWorkspaceMTUUsageRequest
 */
-func (a *MonthlyTrackedUsersApiService) GetDailyWorkspaceMTUUsage(
+func (a *MonthlyTrackedUsersAPIService) GetDailyWorkspaceMTUUsage(
 	ctx context.Context,
 ) ApiGetDailyWorkspaceMTUUsageRequest {
 	return ApiGetDailyWorkspaceMTUUsageRequest{
@@ -249,7 +252,7 @@ func (a *MonthlyTrackedUsersApiService) GetDailyWorkspaceMTUUsage(
 // Execute executes the request
 //
 //	@return GetDailyWorkspaceMTUUsage200Response
-func (a *MonthlyTrackedUsersApiService) GetDailyWorkspaceMTUUsageExecute(
+func (a *MonthlyTrackedUsersAPIService) GetDailyWorkspaceMTUUsageExecute(
 	r ApiGetDailyWorkspaceMTUUsageRequest,
 ) (*GetDailyWorkspaceMTUUsage200Response, *http.Response, error) {
 	var (
@@ -261,7 +264,7 @@ func (a *MonthlyTrackedUsersApiService) GetDailyWorkspaceMTUUsageExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"MonthlyTrackedUsersApiService.GetDailyWorkspaceMTUUsage",
+		"MonthlyTrackedUsersAPIService.GetDailyWorkspaceMTUUsage",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -279,8 +282,8 @@ func (a *MonthlyTrackedUsersApiService) GetDailyWorkspaceMTUUsageExecute(
 		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
 	}
 
-	localVarQueryParams.Add("period", parameterToString(*r.period, ""))
-	localVarQueryParams.Add("pagination", parameterToString(*r.pagination, ""))
+	parameterAddToHeaderOrQuery(localVarQueryParams, "period", r.period, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -322,9 +325,9 @@ func (a *MonthlyTrackedUsersApiService) GetDailyWorkspaceMTUUsageExecute(
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
@@ -341,6 +344,7 @@ func (a *MonthlyTrackedUsersApiService) GetDailyWorkspaceMTUUsageExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -351,6 +355,7 @@ func (a *MonthlyTrackedUsersApiService) GetDailyWorkspaceMTUUsageExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
@@ -361,6 +366,7 @@ func (a *MonthlyTrackedUsersApiService) GetDailyWorkspaceMTUUsageExecute(
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
 			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr

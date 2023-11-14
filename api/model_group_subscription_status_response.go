@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -14,6 +14,9 @@ package api
 import (
 	"encoding/json"
 )
+
+// checks if the GroupSubscriptionStatusResponse type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &GroupSubscriptionStatusResponse{}
 
 // GroupSubscriptionStatusResponse struct for GroupSubscriptionStatusResponse
 type GroupSubscriptionStatusResponse struct {
@@ -125,7 +128,7 @@ func (o *GroupSubscriptionStatusResponse) SetId(v string) {
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *GroupSubscriptionStatusResponse) GetUpdatedAt() string {
-	if o == nil || o.UpdatedAt == nil {
+	if o == nil || IsNil(o.UpdatedAt) {
 		var ret string
 		return ret
 	}
@@ -135,7 +138,7 @@ func (o *GroupSubscriptionStatusResponse) GetUpdatedAt() string {
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GroupSubscriptionStatusResponse) GetUpdatedAtOk() (*string, bool) {
-	if o == nil || o.UpdatedAt == nil {
+	if o == nil || IsNil(o.UpdatedAt) {
 		return nil, false
 	}
 	return o.UpdatedAt, true
@@ -143,7 +146,7 @@ func (o *GroupSubscriptionStatusResponse) GetUpdatedAtOk() (*string, bool) {
 
 // HasUpdatedAt returns a boolean if a field has been set.
 func (o *GroupSubscriptionStatusResponse) HasUpdatedAt() bool {
-	if o != nil && o.UpdatedAt != nil {
+	if o != nil && !IsNil(o.UpdatedAt) {
 		return true
 	}
 
@@ -156,20 +159,22 @@ func (o *GroupSubscriptionStatusResponse) SetUpdatedAt(v string) {
 }
 
 func (o GroupSubscriptionStatusResponse) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["name"] = o.Name
-	}
-	if true {
-		toSerialize["status"] = o.Status
-	}
-	if true {
-		toSerialize["id"] = o.Id
-	}
-	if o.UpdatedAt != nil {
-		toSerialize["updatedAt"] = o.UpdatedAt
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o GroupSubscriptionStatusResponse) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["name"] = o.Name
+	toSerialize["status"] = o.Status
+	toSerialize["id"] = o.Id
+	if !IsNil(o.UpdatedAt) {
+		toSerialize["updatedAt"] = o.UpdatedAt
+	}
+	return toSerialize, nil
 }
 
 type NullableGroupSubscriptionStatusResponse struct {

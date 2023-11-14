@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 37.2.0
+API version: 38.0.0
 Contact: friends@segment.com
 */
 
@@ -15,18 +15,21 @@ import (
 	"encoding/json"
 )
 
+// checks if the ListRolesV1Output type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListRolesV1Output{}
+
 // ListRolesV1Output Returns the list of roles.
 type ListRolesV1Output struct {
 	// The list of roles.
-	Roles      []RoleV1   `json:"roles"`
-	Pagination Pagination `json:"pagination"`
+	Roles      []RoleV1         `json:"roles"`
+	Pagination PaginationOutput `json:"pagination"`
 }
 
 // NewListRolesV1Output instantiates a new ListRolesV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListRolesV1Output(roles []RoleV1, pagination Pagination) *ListRolesV1Output {
+func NewListRolesV1Output(roles []RoleV1, pagination PaginationOutput) *ListRolesV1Output {
 	this := ListRolesV1Output{}
 	this.Roles = roles
 	this.Pagination = pagination
@@ -66,9 +69,9 @@ func (o *ListRolesV1Output) SetRoles(v []RoleV1) {
 }
 
 // GetPagination returns the Pagination field value
-func (o *ListRolesV1Output) GetPagination() Pagination {
+func (o *ListRolesV1Output) GetPagination() PaginationOutput {
 	if o == nil {
-		var ret Pagination
+		var ret PaginationOutput
 		return ret
 	}
 
@@ -77,7 +80,7 @@ func (o *ListRolesV1Output) GetPagination() Pagination {
 
 // GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
-func (o *ListRolesV1Output) GetPaginationOk() (*Pagination, bool) {
+func (o *ListRolesV1Output) GetPaginationOk() (*PaginationOutput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -85,19 +88,23 @@ func (o *ListRolesV1Output) GetPaginationOk() (*Pagination, bool) {
 }
 
 // SetPagination sets field value
-func (o *ListRolesV1Output) SetPagination(v Pagination) {
+func (o *ListRolesV1Output) SetPagination(v PaginationOutput) {
 	o.Pagination = v
 }
 
 func (o ListRolesV1Output) MarshalJSON() ([]byte, error) {
-	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["roles"] = o.Roles
-	}
-	if true {
-		toSerialize["pagination"] = o.Pagination
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
 	}
 	return json.Marshal(toSerialize)
+}
+
+func (o ListRolesV1Output) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["roles"] = o.Roles
+	toSerialize["pagination"] = o.Pagination
+	return toSerialize, nil
 }
 
 type NullableListRolesV1Output struct {
