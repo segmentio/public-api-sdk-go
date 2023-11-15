@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.0.0
+API version: 38.1.0
 Contact: friends@segment.com
 */
 
@@ -23,14 +23,14 @@ type PaginationInput struct {
 	// The page to request.  Acceptable values to use here are in PaginationOutput objects, in the `current`, `next`, and `previous` keys.  Consumers of the API must treat this value as opaque.
 	Cursor *string `json:"cursor,omitempty"`
 	// The number of items to retrieve in a page, between 1 and 200.
-	Count float32 `json:"count"`
+	Count int32 `json:"count"`
 }
 
 // NewPaginationInput instantiates a new PaginationInput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaginationInput(count float32) *PaginationInput {
+func NewPaginationInput(count int32) *PaginationInput {
 	this := PaginationInput{}
 	this.Count = count
 	return &this
@@ -77,9 +77,9 @@ func (o *PaginationInput) SetCursor(v string) {
 }
 
 // GetCount returns the Count field value
-func (o *PaginationInput) GetCount() float32 {
+func (o *PaginationInput) GetCount() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -88,7 +88,7 @@ func (o *PaginationInput) GetCount() float32 {
 
 // GetCountOk returns a tuple with the Count field value
 // and a boolean to check if the value has been set.
-func (o *PaginationInput) GetCountOk() (*float32, bool) {
+func (o *PaginationInput) GetCountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -96,7 +96,7 @@ func (o *PaginationInput) GetCountOk() (*float32, bool) {
 }
 
 // SetCount sets field value
-func (o *PaginationInput) SetCount(v float32) {
+func (o *PaginationInput) SetCount(v int32) {
 	o.Count = v
 }
 
