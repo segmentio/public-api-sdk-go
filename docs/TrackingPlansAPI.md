@@ -351,7 +351,7 @@ import (
 
 func main() {
     trackingPlanId := "tp_sprout_rVGCC6WdrNxjCf6JpCHP" // string | 
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination options.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Pagination options.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -431,7 +431,7 @@ import (
 
 func main() {
     trackingPlanId := "tp_sprout_rVGCC6WdrNxjCf6JpCHP" // string | 
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination options.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Pagination options.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -510,7 +510,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination options.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Pagination options.  This parameter exists in v1.
     type_ := "LIVE" // string | Requests Tracking Plans of a certain type. If omitted, lists all types.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()

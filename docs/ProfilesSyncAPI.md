@@ -115,7 +115,7 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in alpha. (optional)
+    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -196,7 +196,7 @@ import (
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
     warehouseId := "fQyLbqjfwaqg9mr3hDQ7We" // string | 
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)

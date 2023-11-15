@@ -427,7 +427,7 @@ import (
 
 func main() {
     sourceId := "qQEHquLrjRDN9j1ByrChyn" // string | 
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Pagination parameters.  This parameter exists in v1.
     status := "status_example" // string | The status on which to filter returned regulations.  This parameter exists in v1. (optional)
     regulationTypes := []string{[]string{"RegulationTypes_example"}} // []string | The regulation types on which to filter returned regulations.  This parameter exists in v1. (optional)
 
@@ -510,7 +510,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Pagination parameters.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -584,7 +584,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Pagination parameters.  This parameter exists in v1.
     status := "status_example" // string | The status on which to filter the returned regulations.  This parameter exists in v1. (optional)
     regulationTypes := []string{[]string{"RegulationTypes_example"}} // []string | The regulation types on which to filter returned regulations.  This parameter exists in v1. (optional)
 

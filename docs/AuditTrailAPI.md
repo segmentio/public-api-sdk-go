@@ -29,7 +29,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
     startTime := "startTime_example" // string | Filter response to events that happened after this time.  This parameter exists in v1. (optional)
     endTime := "endTime_example" // string | Filter response to events that happened before this time. Defaults to the current time, or the end time from the pagination cursor.  This parameter exists in v1. (optional)
     resourceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | Filter response to events that affect a specific resource, for example, a single Source.  This parameter exists in v1. (optional)

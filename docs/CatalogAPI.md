@@ -112,7 +112,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Required pagination parameters used to filter the Destinations catalog.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Required pagination parameters used to filter the Destinations catalog.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -264,7 +264,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -416,7 +416,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Required pagination params used to filter the Warehouses catalog.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Required pagination params used to filter the Warehouses catalog.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
