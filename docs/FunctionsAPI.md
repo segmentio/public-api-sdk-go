@@ -662,7 +662,7 @@ import (
 
 func main() {
     functionId := "sfnc_wXzcDGFR3KmjLDrtSawNHf" // string | 
-    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Pagination parameters.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -741,7 +741,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in v1.
     resourceType := "SOURCE" // string | The Function type.  Config API note: equal to `type`.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
@@ -817,7 +817,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Pagination parameters.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in alpha.
     functionId := "76365637324e715a67535831" // string | The insert Function class id to lookup.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()

@@ -114,7 +114,7 @@ import (
 func main() {
     warehouseId := "kjU72LCJexvrqL7G4TMHHN" // string | 
     sourceId := "rh5BDZp6QDHvXFCkibm1pR" // string | 
-    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -196,7 +196,7 @@ import (
 
 func main() {
     warehouseId := "kjU72LCJexvrqL7G4TMHHN" // string | 
-    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -277,7 +277,7 @@ import (
 func main() {
     warehouseId := "kjU72LCJexvrqL7G4TMHHN" // string | 
     sourceId := "rh5BDZp6QDHvXFCkibm1pR" // string | 
-    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)

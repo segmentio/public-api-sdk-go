@@ -37,7 +37,7 @@ func main() {
     eventName := []string{[]string{"EventName_example"}} // []string | A list of strings which filters the results to the given EventNames.  This parameter exists in v1. (optional)
     eventType := []string{[]string{"EventType_example"}} // []string | A list of strings which filters the results to the given EventTypes.  This parameter exists in v1. (optional)
     appVersion := []string{[]string{"AppVersion_example"}} // []string | A list of strings which filters the results to the given AppVersions.  This parameter exists in v1. (optional)
-    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Pagination input for event volume by Workspace.  This parameter exists in v1. (optional)
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination input for event volume by Workspace.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)

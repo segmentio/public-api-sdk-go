@@ -431,7 +431,7 @@ import (
 
 func main() {
     userGroupId := "bBABwqbaDf2QdwTbW8bNEm" // string | 
-    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Pagination for invites to the group.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination for invites to the group.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -510,7 +510,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Pagination for user groups.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination for user groups.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -585,7 +585,7 @@ import (
 
 func main() {
     userGroupId := "bBABwqbaDf2QdwTbW8bNEm" // string | 
-    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Pagination for members of a group.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination for members of a group.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)

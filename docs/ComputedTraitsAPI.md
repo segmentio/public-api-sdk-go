@@ -114,7 +114,7 @@ import (
 
 func main() {
     spaceId := "spaceId" // string | 
-    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Information about the pagination of this response.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Information about the pagination of this response.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)

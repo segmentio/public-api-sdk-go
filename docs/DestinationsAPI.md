@@ -516,7 +516,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Required pagination params for the request.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Required pagination params for the request.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -591,7 +591,7 @@ import (
 
 func main() {
     destinationId := "fP7qoQw2HTWt9WdMr718gn" // string | 
-    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Pagination options.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination options.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)

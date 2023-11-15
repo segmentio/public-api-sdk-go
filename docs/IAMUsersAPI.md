@@ -417,7 +417,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -492,7 +492,7 @@ import (
 
 func main() {
     userId := "sgJDWk3K21k6LE3tLU9nRK" // string | 
-    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Pagination for groups.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination for groups.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -571,7 +571,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(int32(123)) // PaginationInput | Pagination for users.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination for users.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
