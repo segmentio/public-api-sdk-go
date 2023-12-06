@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.2.0
+API version: 38.3.0
 Contact: friends@segment.com
 */
 
@@ -28,7 +28,7 @@ type CreateTransformationV1Input struct {
 	DestinationMetadataId *string `json:"destinationMetadataId,omitempty"`
 	// If the Transformation should be enabled.
 	Enabled bool `json:"enabled"`
-	// If statement ([FQL](https://segment.com/docs/config-api/fql/)) to match events.  For standard event matchers, use the following:   Track -\\> \"event='\\<eventName\\>'\"   Identify -\\> \"type='identify'\"   Group -\\> \"type='group'\"
+	// If statement ([FQL](https://segment.com/docs/config-api/fql/)) to match events.  For standard event matchers, use the following:  Track -\\> \"event='\\<eventName\\>'\"  Identify -\\> \"type='identify'\"  Group -\\> \"type='group'\"
 	If string `json:"if"`
 	// Optional new event name for renaming events. Works only for 'track' event type.
 	NewEventName *string `json:"newEventName,omitempty"`
