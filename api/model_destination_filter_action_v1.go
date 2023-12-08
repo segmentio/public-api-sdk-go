@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.3.0
+API version: 38.5.0
 Contact: friends@segment.com
 */
 
@@ -22,7 +22,7 @@ var _ MappedNullable = &DestinationFilterActionV1{}
 type DestinationFilterActionV1 struct {
 	// The kind of Transformation to apply to any matched properties.
 	Type string `json:"type"`
-	// A dictionary of paths to object keys that this filter applies to.   The literal string '' represents the top level of the object.
+	// A dictionary of paths to object keys that this filter applies to.  The literal string '' represents the top level of the object.
 	Fields map[string]interface{} `json:"fields,omitempty"`
 	// A decimal between 0 and 1 used for 'sample' type events and influences the likelihood of sampling to occur.
 	Percent *float32 `json:"percent,omitempty"`
