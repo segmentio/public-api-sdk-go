@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.2.0
+API version: 38.3.0
 Contact: friends@segment.com
 */
 
@@ -38,6 +38,9 @@ type CreateTransformationV1Input struct {
 	PropertyValueTransformations []PropertyValueTransformationV1 `json:"propertyValueTransformations,omitempty"`
 	// Optional array for defining new properties in [FQL](https://segment.com/docs/config-api/fql/). Currently limited to 1 property.
 	FqlDefinedProperties []FQLDefinedPropertyV1 `json:"fqlDefinedProperties,omitempty"`
+	// Optional array for allowing properties from your events.
+	AllowProperties             []string                     `json:"allowProperties,omitempty"`
+	HashPropertiesConfiguration *HashPropertiesConfiguration `json:"hashPropertiesConfiguration,omitempty"`
 }
 
 // NewCreateTransformationV1Input instantiates a new CreateTransformationV1Input object
@@ -324,6 +327,72 @@ func (o *CreateTransformationV1Input) SetFqlDefinedProperties(v []FQLDefinedProp
 	o.FqlDefinedProperties = v
 }
 
+// GetAllowProperties returns the AllowProperties field value if set, zero value otherwise.
+func (o *CreateTransformationV1Input) GetAllowProperties() []string {
+	if o == nil || IsNil(o.AllowProperties) {
+		var ret []string
+		return ret
+	}
+	return o.AllowProperties
+}
+
+// GetAllowPropertiesOk returns a tuple with the AllowProperties field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateTransformationV1Input) GetAllowPropertiesOk() ([]string, bool) {
+	if o == nil || IsNil(o.AllowProperties) {
+		return nil, false
+	}
+	return o.AllowProperties, true
+}
+
+// HasAllowProperties returns a boolean if a field has been set.
+func (o *CreateTransformationV1Input) HasAllowProperties() bool {
+	if o != nil && !IsNil(o.AllowProperties) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowProperties gets a reference to the given []string and assigns it to the AllowProperties field.
+func (o *CreateTransformationV1Input) SetAllowProperties(v []string) {
+	o.AllowProperties = v
+}
+
+// GetHashPropertiesConfiguration returns the HashPropertiesConfiguration field value if set, zero value otherwise.
+func (o *CreateTransformationV1Input) GetHashPropertiesConfiguration() HashPropertiesConfiguration {
+	if o == nil || IsNil(o.HashPropertiesConfiguration) {
+		var ret HashPropertiesConfiguration
+		return ret
+	}
+	return *o.HashPropertiesConfiguration
+}
+
+// GetHashPropertiesConfigurationOk returns a tuple with the HashPropertiesConfiguration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateTransformationV1Input) GetHashPropertiesConfigurationOk() (*HashPropertiesConfiguration, bool) {
+	if o == nil || IsNil(o.HashPropertiesConfiguration) {
+		return nil, false
+	}
+	return o.HashPropertiesConfiguration, true
+}
+
+// HasHashPropertiesConfiguration returns a boolean if a field has been set.
+func (o *CreateTransformationV1Input) HasHashPropertiesConfiguration() bool {
+	if o != nil && !IsNil(o.HashPropertiesConfiguration) {
+		return true
+	}
+
+	return false
+}
+
+// SetHashPropertiesConfiguration gets a reference to the given HashPropertiesConfiguration and assigns it to the HashPropertiesConfiguration field.
+func (o *CreateTransformationV1Input) SetHashPropertiesConfiguration(
+	v HashPropertiesConfiguration,
+) {
+	o.HashPropertiesConfiguration = &v
+}
+
 func (o CreateTransformationV1Input) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -352,6 +421,12 @@ func (o CreateTransformationV1Input) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.FqlDefinedProperties) {
 		toSerialize["fqlDefinedProperties"] = o.FqlDefinedProperties
+	}
+	if !IsNil(o.AllowProperties) {
+		toSerialize["allowProperties"] = o.AllowProperties
+	}
+	if !IsNil(o.HashPropertiesConfiguration) {
+		toSerialize["hashPropertiesConfiguration"] = o.HashPropertiesConfiguration
 	}
 	return toSerialize, nil
 }
