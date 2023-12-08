@@ -38,6 +38,9 @@ type UpdateTransformationV1Input struct {
 	PropertyValueTransformations []PropertyValueTransformationV1 `json:"propertyValueTransformations,omitempty"`
 	// Optional array for updating properties defined in [FQL](https://segment.com/docs/config-api/fql/). Currently limited to 1 property.
 	FqlDefinedProperties []FQLDefinedPropertyV1 `json:"fqlDefinedProperties,omitempty"`
+	// Optional array for allowing properties from your events.
+	AllowProperties             []string                     `json:"allowProperties,omitempty"`
+	HashPropertiesConfiguration *HashPropertiesConfiguration `json:"hashPropertiesConfiguration,omitempty"`
 }
 
 // NewUpdateTransformationV1Input instantiates a new UpdateTransformationV1Input object
@@ -347,6 +350,72 @@ func (o *UpdateTransformationV1Input) SetFqlDefinedProperties(v []FQLDefinedProp
 	o.FqlDefinedProperties = v
 }
 
+// GetAllowProperties returns the AllowProperties field value if set, zero value otherwise.
+func (o *UpdateTransformationV1Input) GetAllowProperties() []string {
+	if o == nil || IsNil(o.AllowProperties) {
+		var ret []string
+		return ret
+	}
+	return o.AllowProperties
+}
+
+// GetAllowPropertiesOk returns a tuple with the AllowProperties field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateTransformationV1Input) GetAllowPropertiesOk() ([]string, bool) {
+	if o == nil || IsNil(o.AllowProperties) {
+		return nil, false
+	}
+	return o.AllowProperties, true
+}
+
+// HasAllowProperties returns a boolean if a field has been set.
+func (o *UpdateTransformationV1Input) HasAllowProperties() bool {
+	if o != nil && !IsNil(o.AllowProperties) {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowProperties gets a reference to the given []string and assigns it to the AllowProperties field.
+func (o *UpdateTransformationV1Input) SetAllowProperties(v []string) {
+	o.AllowProperties = v
+}
+
+// GetHashPropertiesConfiguration returns the HashPropertiesConfiguration field value if set, zero value otherwise.
+func (o *UpdateTransformationV1Input) GetHashPropertiesConfiguration() HashPropertiesConfiguration {
+	if o == nil || IsNil(o.HashPropertiesConfiguration) {
+		var ret HashPropertiesConfiguration
+		return ret
+	}
+	return *o.HashPropertiesConfiguration
+}
+
+// GetHashPropertiesConfigurationOk returns a tuple with the HashPropertiesConfiguration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateTransformationV1Input) GetHashPropertiesConfigurationOk() (*HashPropertiesConfiguration, bool) {
+	if o == nil || IsNil(o.HashPropertiesConfiguration) {
+		return nil, false
+	}
+	return o.HashPropertiesConfiguration, true
+}
+
+// HasHashPropertiesConfiguration returns a boolean if a field has been set.
+func (o *UpdateTransformationV1Input) HasHashPropertiesConfiguration() bool {
+	if o != nil && !IsNil(o.HashPropertiesConfiguration) {
+		return true
+	}
+
+	return false
+}
+
+// SetHashPropertiesConfiguration gets a reference to the given HashPropertiesConfiguration and assigns it to the HashPropertiesConfiguration field.
+func (o *UpdateTransformationV1Input) SetHashPropertiesConfiguration(
+	v HashPropertiesConfiguration,
+) {
+	o.HashPropertiesConfiguration = &v
+}
+
 func (o UpdateTransformationV1Input) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -383,6 +452,12 @@ func (o UpdateTransformationV1Input) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.FqlDefinedProperties) {
 		toSerialize["fqlDefinedProperties"] = o.FqlDefinedProperties
+	}
+	if !IsNil(o.AllowProperties) {
+		toSerialize["allowProperties"] = o.AllowProperties
+	}
+	if !IsNil(o.HashPropertiesConfiguration) {
+		toSerialize["hashPropertiesConfiguration"] = o.HashPropertiesConfiguration
 	}
 	return toSerialize, nil
 }
