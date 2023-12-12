@@ -31,7 +31,10 @@ type ComputedTraitSummary struct {
 	// Key for the computed trait.
 	Key string `json:"key"`
 	// Enabled/disabled status for the computed trait.
-	Enabled bool `json:"enabled"`
+	Enabled    bool               `json:"enabled"`
+	Definition NullableDefinition `json:"definition"`
+	// Status for the computed trait.  Possible values: Backfilling, Computing, Failed, Live, Awaiting Destinations, Disabled.
+	Status *string `json:"status,omitempty"`
 	// User id who created the computed trait.
 	CreatedBy string `json:"createdBy"`
 	// User id who last updated the computed trait.
@@ -53,6 +56,7 @@ func NewComputedTraitSummary(
 	description string,
 	key string,
 	enabled bool,
+	definition NullableDefinition,
 	createdBy string,
 	updatedBy string,
 	createdAt string,
@@ -65,6 +69,7 @@ func NewComputedTraitSummary(
 	this.Description = description
 	this.Key = key
 	this.Enabled = enabled
+	this.Definition = definition
 	this.CreatedBy = createdBy
 	this.UpdatedBy = updatedBy
 	this.CreatedAt = createdAt
@@ -224,6 +229,64 @@ func (o *ComputedTraitSummary) SetEnabled(v bool) {
 	o.Enabled = v
 }
 
+// GetDefinition returns the Definition field value
+// If the value is explicit nil, the zero value for Definition will be returned
+func (o *ComputedTraitSummary) GetDefinition() Definition {
+	if o == nil || o.Definition.Get() == nil {
+		var ret Definition
+		return ret
+	}
+
+	return *o.Definition.Get()
+}
+
+// GetDefinitionOk returns a tuple with the Definition field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ComputedTraitSummary) GetDefinitionOk() (*Definition, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Definition.Get(), o.Definition.IsSet()
+}
+
+// SetDefinition sets field value
+func (o *ComputedTraitSummary) SetDefinition(v Definition) {
+	o.Definition.Set(&v)
+}
+
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *ComputedTraitSummary) GetStatus() string {
+	if o == nil || IsNil(o.Status) {
+		var ret string
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputedTraitSummary) GetStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.Status) {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *ComputedTraitSummary) HasStatus() bool {
+	if o != nil && !IsNil(o.Status) {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given string and assigns it to the Status field.
+func (o *ComputedTraitSummary) SetStatus(v string) {
+	o.Status = &v
+}
+
 // GetCreatedBy returns the CreatedBy field value
 func (o *ComputedTraitSummary) GetCreatedBy() string {
 	if o == nil {
@@ -336,6 +399,10 @@ func (o ComputedTraitSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize["description"] = o.Description
 	toSerialize["key"] = o.Key
 	toSerialize["enabled"] = o.Enabled
+	toSerialize["definition"] = o.Definition.Get()
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
+	}
 	toSerialize["createdBy"] = o.CreatedBy
 	toSerialize["updatedBy"] = o.UpdatedBy
 	toSerialize["createdAt"] = o.CreatedAt
