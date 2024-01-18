@@ -972,8 +972,6 @@ Based on the granularity chosen, there are restrictions on the time range you ca
 - Max time range: 14 days
 - Oldest possible start time: 14 days in the past
 
-The rate limit for this endpoint is 60 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
-
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param destinationId
 	@return ApiListDeliveryMetricsSummaryFromDestinationRequest
