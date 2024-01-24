@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 38.5.0
+API version: 39.0.0
 Contact: friends@segment.com
 */
 
@@ -26,6 +26,10 @@ type DestinationMetadataPlatformsV1 struct {
 	Server *bool `json:"server,omitempty"`
 	// Whether this Destination supports mobile events.
 	Mobile *bool `json:"mobile,omitempty"`
+	// Whether this Destination supports Warehouse events.
+	Warehouse *bool `json:"warehouse,omitempty"`
+	// Whether this Destination supports cloud app object events.
+	CloudAppObject *bool `json:"cloudAppObject,omitempty"`
 }
 
 // NewDestinationMetadataPlatformsV1 instantiates a new DestinationMetadataPlatformsV1 object
@@ -141,6 +145,70 @@ func (o *DestinationMetadataPlatformsV1) SetMobile(v bool) {
 	o.Mobile = &v
 }
 
+// GetWarehouse returns the Warehouse field value if set, zero value otherwise.
+func (o *DestinationMetadataPlatformsV1) GetWarehouse() bool {
+	if o == nil || IsNil(o.Warehouse) {
+		var ret bool
+		return ret
+	}
+	return *o.Warehouse
+}
+
+// GetWarehouseOk returns a tuple with the Warehouse field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DestinationMetadataPlatformsV1) GetWarehouseOk() (*bool, bool) {
+	if o == nil || IsNil(o.Warehouse) {
+		return nil, false
+	}
+	return o.Warehouse, true
+}
+
+// HasWarehouse returns a boolean if a field has been set.
+func (o *DestinationMetadataPlatformsV1) HasWarehouse() bool {
+	if o != nil && !IsNil(o.Warehouse) {
+		return true
+	}
+
+	return false
+}
+
+// SetWarehouse gets a reference to the given bool and assigns it to the Warehouse field.
+func (o *DestinationMetadataPlatformsV1) SetWarehouse(v bool) {
+	o.Warehouse = &v
+}
+
+// GetCloudAppObject returns the CloudAppObject field value if set, zero value otherwise.
+func (o *DestinationMetadataPlatformsV1) GetCloudAppObject() bool {
+	if o == nil || IsNil(o.CloudAppObject) {
+		var ret bool
+		return ret
+	}
+	return *o.CloudAppObject
+}
+
+// GetCloudAppObjectOk returns a tuple with the CloudAppObject field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DestinationMetadataPlatformsV1) GetCloudAppObjectOk() (*bool, bool) {
+	if o == nil || IsNil(o.CloudAppObject) {
+		return nil, false
+	}
+	return o.CloudAppObject, true
+}
+
+// HasCloudAppObject returns a boolean if a field has been set.
+func (o *DestinationMetadataPlatformsV1) HasCloudAppObject() bool {
+	if o != nil && !IsNil(o.CloudAppObject) {
+		return true
+	}
+
+	return false
+}
+
+// SetCloudAppObject gets a reference to the given bool and assigns it to the CloudAppObject field.
+func (o *DestinationMetadataPlatformsV1) SetCloudAppObject(v bool) {
+	o.CloudAppObject = &v
+}
+
 func (o DestinationMetadataPlatformsV1) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -159,6 +227,12 @@ func (o DestinationMetadataPlatformsV1) ToMap() (map[string]interface{}, error) 
 	}
 	if !IsNil(o.Mobile) {
 		toSerialize["mobile"] = o.Mobile
+	}
+	if !IsNil(o.Warehouse) {
+		toSerialize["warehouse"] = o.Warehouse
+	}
+	if !IsNil(o.CloudAppObject) {
+		toSerialize["cloudAppObject"] = o.CloudAppObject
 	}
 	return toSerialize, nil
 }
