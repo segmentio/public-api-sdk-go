@@ -103,8 +103,8 @@ func (a *SourcesAPIService) AddLabelsToSourceExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -277,8 +277,8 @@ func (a *SourcesAPIService) CreateSourceExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -1481,8 +1481,8 @@ func (a *SourcesAPIService) ReplaceLabelsInSourceExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -1672,8 +1672,8 @@ func (a *SourcesAPIService) UpdateSchemaSettingsInSourceExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -1864,8 +1864,8 @@ func (a *SourcesAPIService) UpdateSourceExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}

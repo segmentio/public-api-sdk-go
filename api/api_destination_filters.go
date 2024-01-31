@@ -103,8 +103,8 @@ func (a *DestinationFiltersAPIService) CreateFilterForDestinationExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -637,8 +637,8 @@ func (a *DestinationFiltersAPIService) PreviewDestinationFilterExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -1016,8 +1016,8 @@ func (a *DestinationFiltersAPIService) UpdateFilterForDestinationExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}

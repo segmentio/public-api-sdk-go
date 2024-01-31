@@ -106,8 +106,8 @@ func (a *IAMGroupsAPIService) AddPermissionsToUserGroupExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -298,8 +298,8 @@ func (a *IAMGroupsAPIService) AddUsersToUserGroupExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -478,8 +478,8 @@ func (a *IAMGroupsAPIService) CreateUserGroupExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -1718,8 +1718,8 @@ func (a *IAMGroupsAPIService) ReplacePermissionsForUserGroupExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -1911,8 +1911,8 @@ func (a *IAMGroupsAPIService) ReplaceUsersInUserGroupExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -2102,8 +2102,8 @@ func (a *IAMGroupsAPIService) UpdateUserGroupExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
