@@ -106,8 +106,8 @@ func (a *IAMUsersAPIService) AddPermissionsToUserExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -290,8 +290,8 @@ func (a *IAMUsersAPIService) CreateInvitesExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -1489,8 +1489,8 @@ func (a *IAMUsersAPIService) ReplacePermissionsForUserExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
