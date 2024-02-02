@@ -20,9 +20,9 @@ var _ MappedNullable = &Definition1{}
 
 // Definition1 Query language definition and type.
 type Definition1 struct {
-	// The query language string defining the computed trait aggregation criteria.
+	// The query language string defining the audience segmentation criteria.
 	Query string `json:"query"`
-	// The underlying data type being aggregated for this computed trait.  Possible values: users, accounts.
+	// The underlying data type being segmented for this audience.  Possible values: users, accounts.
 	Type string `json:"type"`
 }
 
