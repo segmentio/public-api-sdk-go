@@ -193,7 +193,7 @@ import (
 )
 
 func main() {
-    destinationId := "6424a4a5b03b3d8fe288f000" // string | 
+    destinationId := "65c2bdbede6f2d8297f943db" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -350,7 +350,7 @@ import (
 
 func main() {
     destinationId := "fP7qoQw2HTWt9WdMr718gn" // string | 
-    id := "iUyx2UdPSvp4uJtYAhjTup" // string | 
+    id := "kyMKN6LUgMvF8dwRMEz3cX" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -671,7 +671,7 @@ import (
 
 func main() {
     destinationId := "fP7qoQw2HTWt9WdMr718gn" // string | 
-    id := "bXbWrgh8vAeWioqx6Kg5vb" // string | 
+    id := "zXCqmEMHJojkD45GcBAPt" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -832,7 +832,7 @@ import (
 
 func main() {
     destinationId := "fP7qoQw2HTWt9WdMr718gn" // string | 
-    id := "mAdhWCVCmFadguoGcqP3vN" // string | 
+    id := "3ELMSracBm5MMikXBYfo1c" // string | 
     updateSubscriptionForDestinationAlphaInput := *api.NewUpdateSubscriptionForDestinationAlphaInput(*api.NewDestinationSubscriptionUpdateInput()) // UpdateSubscriptionForDestinationAlphaInput | 
 
     configuration := api.NewConfiguration()

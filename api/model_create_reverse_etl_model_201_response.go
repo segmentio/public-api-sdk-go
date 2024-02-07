@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 40.0.0
+API version: 41.0.0
 Contact: friends@segment.com
 */
 
@@ -15,33 +15,33 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateReverseEtlModel200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateReverseEtlModel200Response{}
+// checks if the CreateReverseEtlModel201Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateReverseEtlModel201Response{}
 
-// CreateReverseEtlModel200Response struct for CreateReverseEtlModel200Response
-type CreateReverseEtlModel200Response struct {
+// CreateReverseEtlModel201Response struct for CreateReverseEtlModel201Response
+type CreateReverseEtlModel201Response struct {
 	Data *CreateReverseEtlModelOutput `json:"data,omitempty"`
 }
 
-// NewCreateReverseEtlModel200Response instantiates a new CreateReverseEtlModel200Response object
+// NewCreateReverseEtlModel201Response instantiates a new CreateReverseEtlModel201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateReverseEtlModel200Response() *CreateReverseEtlModel200Response {
-	this := CreateReverseEtlModel200Response{}
+func NewCreateReverseEtlModel201Response() *CreateReverseEtlModel201Response {
+	this := CreateReverseEtlModel201Response{}
 	return &this
 }
 
-// NewCreateReverseEtlModel200ResponseWithDefaults instantiates a new CreateReverseEtlModel200Response object
+// NewCreateReverseEtlModel201ResponseWithDefaults instantiates a new CreateReverseEtlModel201Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateReverseEtlModel200ResponseWithDefaults() *CreateReverseEtlModel200Response {
-	this := CreateReverseEtlModel200Response{}
+func NewCreateReverseEtlModel201ResponseWithDefaults() *CreateReverseEtlModel201Response {
+	this := CreateReverseEtlModel201Response{}
 	return &this
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *CreateReverseEtlModel200Response) GetData() CreateReverseEtlModelOutput {
+func (o *CreateReverseEtlModel201Response) GetData() CreateReverseEtlModelOutput {
 	if o == nil || IsNil(o.Data) {
 		var ret CreateReverseEtlModelOutput
 		return ret
@@ -51,7 +51,7 @@ func (o *CreateReverseEtlModel200Response) GetData() CreateReverseEtlModelOutput
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateReverseEtlModel200Response) GetDataOk() (*CreateReverseEtlModelOutput, bool) {
+func (o *CreateReverseEtlModel201Response) GetDataOk() (*CreateReverseEtlModelOutput, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -59,7 +59,7 @@ func (o *CreateReverseEtlModel200Response) GetDataOk() (*CreateReverseEtlModelOu
 }
 
 // HasData returns a boolean if a field has been set.
-func (o *CreateReverseEtlModel200Response) HasData() bool {
+func (o *CreateReverseEtlModel201Response) HasData() bool {
 	if o != nil && !IsNil(o.Data) {
 		return true
 	}
@@ -68,11 +68,11 @@ func (o *CreateReverseEtlModel200Response) HasData() bool {
 }
 
 // SetData gets a reference to the given CreateReverseEtlModelOutput and assigns it to the Data field.
-func (o *CreateReverseEtlModel200Response) SetData(v CreateReverseEtlModelOutput) {
+func (o *CreateReverseEtlModel201Response) SetData(v CreateReverseEtlModelOutput) {
 	o.Data = &v
 }
 
-func (o CreateReverseEtlModel200Response) MarshalJSON() ([]byte, error) {
+func (o CreateReverseEtlModel201Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -80,7 +80,7 @@ func (o CreateReverseEtlModel200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateReverseEtlModel200Response) ToMap() (map[string]interface{}, error) {
+func (o CreateReverseEtlModel201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
@@ -88,40 +88,40 @@ func (o CreateReverseEtlModel200Response) ToMap() (map[string]interface{}, error
 	return toSerialize, nil
 }
 
-type NullableCreateReverseEtlModel200Response struct {
-	value *CreateReverseEtlModel200Response
+type NullableCreateReverseEtlModel201Response struct {
+	value *CreateReverseEtlModel201Response
 	isSet bool
 }
 
-func (v NullableCreateReverseEtlModel200Response) Get() *CreateReverseEtlModel200Response {
+func (v NullableCreateReverseEtlModel201Response) Get() *CreateReverseEtlModel201Response {
 	return v.value
 }
 
-func (v *NullableCreateReverseEtlModel200Response) Set(val *CreateReverseEtlModel200Response) {
+func (v *NullableCreateReverseEtlModel201Response) Set(val *CreateReverseEtlModel201Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateReverseEtlModel200Response) IsSet() bool {
+func (v NullableCreateReverseEtlModel201Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateReverseEtlModel200Response) Unset() {
+func (v *NullableCreateReverseEtlModel201Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateReverseEtlModel200Response(
-	val *CreateReverseEtlModel200Response,
-) *NullableCreateReverseEtlModel200Response {
-	return &NullableCreateReverseEtlModel200Response{value: val, isSet: true}
+func NewNullableCreateReverseEtlModel201Response(
+	val *CreateReverseEtlModel201Response,
+) *NullableCreateReverseEtlModel201Response {
+	return &NullableCreateReverseEtlModel201Response{value: val, isSet: true}
 }
 
-func (v NullableCreateReverseEtlModel200Response) MarshalJSON() ([]byte, error) {
+func (v NullableCreateReverseEtlModel201Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateReverseEtlModel200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateReverseEtlModel201Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

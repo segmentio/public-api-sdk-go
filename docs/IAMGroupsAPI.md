@@ -274,7 +274,7 @@ import (
 )
 
 func main() {
-    userGroupId := "2Nhj3GVumKbR0cjDly4nCdGo6cT" // string | 
+    userGroupId := "2c0vZc1kXJ9Nf9wIJ1Gb7JzORGf" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)

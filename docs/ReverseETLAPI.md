@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 
 ## Operation: CreateReverseEtlModel
 
-> CreateReverseEtlModel200Response CreateReverseEtlModel(ctx).CreateReverseEtlModelInput(createReverseEtlModelInput).Execute()
+> CreateReverseEtlModel201Response CreateReverseEtlModel(ctx).CreateReverseEtlModelInput(createReverseEtlModelInput).Execute()
 
 Create Reverse Etl Model
 
@@ -125,7 +125,7 @@ func main() {
             }
         }
     }
-    // response from `CreateReverseEtlModel`: CreateReverseEtlModel200Response
+    // response from `CreateReverseEtlModel`: CreateReverseEtlModel201Response
     fmt.Fprintf(os.Stdout, "Response from `ReverseETLAPI.CreateReverseEtlModel`: %v\n", resp.GetData())
 }
 ```
@@ -145,7 +145,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateReverseEtlModel200Response**](CreateReverseEtlModel200Response.md)
+[**CreateReverseEtlModel201Response**](CreateReverseEtlModel201Response.md)
 
 ### Authorization
 
@@ -182,7 +182,7 @@ import (
 )
 
 func main() {
-    modelId := "aow61ZsjXFRsUqB5wWmZES" // string | 
+    modelId := "fxXMc5bLdKnDfEgBpDbV11" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -260,7 +260,7 @@ import (
 )
 
 func main() {
-    modelId := "MaAeg9yDd1UZTBeEYDiVw" // string | 
+    modelId := "dY1JLx4HgWHKUNsB76tEU" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -412,7 +412,7 @@ import (
 )
 
 func main() {
-    modelId := "37YCmBXayzqG4sit63P5pH" // string | 
+    modelId := "gFBTkmP2ENiu6BQRmdHBkr" // string | 
     updateReverseEtlModelInput := *api.NewUpdateReverseEtlModelInput() // UpdateReverseEtlModelInput | 
 
     configuration := api.NewConfiguration()

@@ -350,7 +350,7 @@ import (
 
 func main() {
     destinationId := "fP7qoQw2HTWt9WdMr718gn" // string | 
-    filterId := "2DrXi3N7S85LobhzPphZz0uFzJ4" // string | 
+    filterId := "2c0vbGYWOBwbKszg0F0CoLSS01b" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)

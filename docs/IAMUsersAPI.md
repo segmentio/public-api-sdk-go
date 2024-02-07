@@ -98,7 +98,7 @@ Name | Type | Description  | Notes
 
 ## Operation: CreateInvites
 
-> CreateInvites200Response CreateInvites(ctx).CreateInvitesV1Input(createInvitesV1Input).Execute()
+> CreateInvites201Response CreateInvites(ctx).CreateInvitesV1Input(createInvitesV1Input).Execute()
 
 Create Invites
 
@@ -134,7 +134,7 @@ func main() {
             }
         }
     }
-    // response from `CreateInvites`: CreateInvites200Response
+    // response from `CreateInvites`: CreateInvites201Response
     fmt.Fprintf(os.Stdout, "Response from `IAMUsersAPI.CreateInvites`: %v\n", resp.GetData())
 }
 ```
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateInvites200Response**](CreateInvites200Response.md)
+[**CreateInvites201Response**](CreateInvites201Response.md)
 
 ### Authorization
 

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 40.0.0
+API version: 41.0.0
 Contact: friends@segment.com
 */
 
@@ -15,35 +15,35 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateInvites200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateInvites200Response{}
+// checks if the CreateWarehouse201Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateWarehouse201Response{}
 
-// CreateInvites200Response struct for CreateInvites200Response
-type CreateInvites200Response struct {
-	Data *CreateInvitesV1Output `json:"data,omitempty"`
+// CreateWarehouse201Response struct for CreateWarehouse201Response
+type CreateWarehouse201Response struct {
+	Data *CreateWarehouseV1Output `json:"data,omitempty"`
 }
 
-// NewCreateInvites200Response instantiates a new CreateInvites200Response object
+// NewCreateWarehouse201Response instantiates a new CreateWarehouse201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateInvites200Response() *CreateInvites200Response {
-	this := CreateInvites200Response{}
+func NewCreateWarehouse201Response() *CreateWarehouse201Response {
+	this := CreateWarehouse201Response{}
 	return &this
 }
 
-// NewCreateInvites200ResponseWithDefaults instantiates a new CreateInvites200Response object
+// NewCreateWarehouse201ResponseWithDefaults instantiates a new CreateWarehouse201Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateInvites200ResponseWithDefaults() *CreateInvites200Response {
-	this := CreateInvites200Response{}
+func NewCreateWarehouse201ResponseWithDefaults() *CreateWarehouse201Response {
+	this := CreateWarehouse201Response{}
 	return &this
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *CreateInvites200Response) GetData() CreateInvitesV1Output {
+func (o *CreateWarehouse201Response) GetData() CreateWarehouseV1Output {
 	if o == nil || IsNil(o.Data) {
-		var ret CreateInvitesV1Output
+		var ret CreateWarehouseV1Output
 		return ret
 	}
 	return *o.Data
@@ -51,7 +51,7 @@ func (o *CreateInvites200Response) GetData() CreateInvitesV1Output {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateInvites200Response) GetDataOk() (*CreateInvitesV1Output, bool) {
+func (o *CreateWarehouse201Response) GetDataOk() (*CreateWarehouseV1Output, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -59,7 +59,7 @@ func (o *CreateInvites200Response) GetDataOk() (*CreateInvitesV1Output, bool) {
 }
 
 // HasData returns a boolean if a field has been set.
-func (o *CreateInvites200Response) HasData() bool {
+func (o *CreateWarehouse201Response) HasData() bool {
 	if o != nil && !IsNil(o.Data) {
 		return true
 	}
@@ -67,12 +67,12 @@ func (o *CreateInvites200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given CreateInvitesV1Output and assigns it to the Data field.
-func (o *CreateInvites200Response) SetData(v CreateInvitesV1Output) {
+// SetData gets a reference to the given CreateWarehouseV1Output and assigns it to the Data field.
+func (o *CreateWarehouse201Response) SetData(v CreateWarehouseV1Output) {
 	o.Data = &v
 }
 
-func (o CreateInvites200Response) MarshalJSON() ([]byte, error) {
+func (o CreateWarehouse201Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -80,7 +80,7 @@ func (o CreateInvites200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateInvites200Response) ToMap() (map[string]interface{}, error) {
+func (o CreateWarehouse201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
@@ -88,40 +88,40 @@ func (o CreateInvites200Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableCreateInvites200Response struct {
-	value *CreateInvites200Response
+type NullableCreateWarehouse201Response struct {
+	value *CreateWarehouse201Response
 	isSet bool
 }
 
-func (v NullableCreateInvites200Response) Get() *CreateInvites200Response {
+func (v NullableCreateWarehouse201Response) Get() *CreateWarehouse201Response {
 	return v.value
 }
 
-func (v *NullableCreateInvites200Response) Set(val *CreateInvites200Response) {
+func (v *NullableCreateWarehouse201Response) Set(val *CreateWarehouse201Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateInvites200Response) IsSet() bool {
+func (v NullableCreateWarehouse201Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateInvites200Response) Unset() {
+func (v *NullableCreateWarehouse201Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateInvites200Response(
-	val *CreateInvites200Response,
-) *NullableCreateInvites200Response {
-	return &NullableCreateInvites200Response{value: val, isSet: true}
+func NewNullableCreateWarehouse201Response(
+	val *CreateWarehouse201Response,
+) *NullableCreateWarehouse201Response {
+	return &NullableCreateWarehouse201Response{value: val, isSet: true}
 }
 
-func (v NullableCreateInvites200Response) MarshalJSON() ([]byte, error) {
+func (v NullableCreateWarehouse201Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateInvites200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateWarehouse201Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

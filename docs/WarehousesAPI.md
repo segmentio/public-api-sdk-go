@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 ## Operation: AddConnectionFromSourceToWarehouse
 
-> AddConnectionFromSourceToWarehouse200Response AddConnectionFromSourceToWarehouse(ctx, warehouseId, sourceId).Execute()
+> AddConnectionFromSourceToWarehouse201Response AddConnectionFromSourceToWarehouse(ctx, warehouseId, sourceId).Execute()
 
 Add Connection from Source to Warehouse
 
@@ -56,7 +56,7 @@ func main() {
             }
         }
     }
-    // response from `AddConnectionFromSourceToWarehouse`: AddConnectionFromSourceToWarehouse200Response
+    // response from `AddConnectionFromSourceToWarehouse`: AddConnectionFromSourceToWarehouse201Response
     fmt.Fprintf(os.Stdout, "Response from `WarehousesAPI.AddConnectionFromSourceToWarehouse`: %v\n", resp.GetData())
 }
 ```
@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AddConnectionFromSourceToWarehouse200Response**](AddConnectionFromSourceToWarehouse200Response.md)
+[**AddConnectionFromSourceToWarehouse201Response**](AddConnectionFromSourceToWarehouse201Response.md)
 
 ### Authorization
 
@@ -174,7 +174,7 @@ Name | Type | Description  | Notes
 
 ## Operation: CreateWarehouse
 
-> CreateWarehouse200Response CreateWarehouse(ctx).CreateWarehouseV1Input(createWarehouseV1Input).Execute()
+> CreateWarehouse201Response CreateWarehouse(ctx).CreateWarehouseV1Input(createWarehouseV1Input).Execute()
 
 Create Warehouse
 
@@ -210,7 +210,7 @@ func main() {
             }
         }
     }
-    // response from `CreateWarehouse`: CreateWarehouse200Response
+    // response from `CreateWarehouse`: CreateWarehouse201Response
     fmt.Fprintf(os.Stdout, "Response from `WarehousesAPI.CreateWarehouse`: %v\n", resp.GetData())
 }
 ```
@@ -230,7 +230,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateWarehouse200Response**](CreateWarehouse200Response.md)
+[**CreateWarehouse201Response**](CreateWarehouse201Response.md)
 
 ### Authorization
 
@@ -267,7 +267,7 @@ import (
 )
 
 func main() {
-    warehouseId := "8VW6ytH4hKYCoTtfQ7Xbkd" // string | 
+    warehouseId := "tmiTtiPi58udvDAjcxKUJY" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)

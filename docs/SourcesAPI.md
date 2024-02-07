@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 
 ## Operation: CreateSource
 
-> CreateSource200Response CreateSource(ctx).CreateSourceV1Input(createSourceV1Input).Execute()
+> CreateSource201Response CreateSource(ctx).CreateSourceV1Input(createSourceV1Input).Execute()
 
 Create Source
 
@@ -136,7 +136,7 @@ func main() {
             }
         }
     }
-    // response from `CreateSource`: CreateSource200Response
+    // response from `CreateSource`: CreateSource201Response
     fmt.Fprintf(os.Stdout, "Response from `SourcesAPI.CreateSource`: %v\n", resp.GetData())
 }
 ```
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateSource200Response**](CreateSource200Response.md)
+[**CreateSource201Response**](CreateSource201Response.md)
 
 ### Authorization
 
@@ -193,7 +193,7 @@ import (
 )
 
 func main() {
-    sourceId := "48EFjyXH4zdbKWx4vKiLuE" // string | 
+    sourceId := "rYxTjyaPtAELCjnFE5EYfM" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -821,7 +821,7 @@ import (
 )
 
 func main() {
-    sourceId := "piTVHEYNrRgBMM1uQGCPbK" // string | 
+    sourceId := "87jXXk8QSLFPfMDGa6mtS3" // string | 
     updateSourceV1Input := *api.NewUpdateSourceV1Input() // UpdateSourceV1Input | 
 
     configuration := api.NewConfiguration()
