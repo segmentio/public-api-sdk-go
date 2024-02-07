@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 39.0.0
+API version: 41.0.0
 Contact: friends@segment.com
 */
 
@@ -26,6 +26,8 @@ type WarehouseSelectiveSyncItemV1 struct {
 	Collection string `json:"collection"`
 	// The id of the Warehouse this sync belongs to.
 	WarehouseId string `json:"warehouseId"`
+	// Whether this Selective Sync item is enabled.
+	Enabled bool `json:"enabled"`
 	// A map that contains the properties within the collection to which the Warehouse should sync.
 	Properties map[string]interface{} `json:"properties"`
 }
@@ -38,12 +40,14 @@ func NewWarehouseSelectiveSyncItemV1(
 	sourceId string,
 	collection string,
 	warehouseId string,
+	enabled bool,
 	properties map[string]interface{},
 ) *WarehouseSelectiveSyncItemV1 {
 	this := WarehouseSelectiveSyncItemV1{}
 	this.SourceId = sourceId
 	this.Collection = collection
 	this.WarehouseId = warehouseId
+	this.Enabled = enabled
 	this.Properties = properties
 	return &this
 }
@@ -128,6 +132,30 @@ func (o *WarehouseSelectiveSyncItemV1) SetWarehouseId(v string) {
 	o.WarehouseId = v
 }
 
+// GetEnabled returns the Enabled field value
+func (o *WarehouseSelectiveSyncItemV1) GetEnabled() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Enabled
+}
+
+// GetEnabledOk returns a tuple with the Enabled field value
+// and a boolean to check if the value has been set.
+func (o *WarehouseSelectiveSyncItemV1) GetEnabledOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Enabled, true
+}
+
+// SetEnabled sets field value
+func (o *WarehouseSelectiveSyncItemV1) SetEnabled(v bool) {
+	o.Enabled = v
+}
+
 // GetProperties returns the Properties field value
 func (o *WarehouseSelectiveSyncItemV1) GetProperties() map[string]interface{} {
 	if o == nil {
@@ -165,6 +193,7 @@ func (o WarehouseSelectiveSyncItemV1) ToMap() (map[string]interface{}, error) {
 	toSerialize["sourceId"] = o.SourceId
 	toSerialize["collection"] = o.Collection
 	toSerialize["warehouseId"] = o.WarehouseId
+	toSerialize["enabled"] = o.Enabled
 	toSerialize["properties"] = o.Properties
 	return toSerialize, nil
 }

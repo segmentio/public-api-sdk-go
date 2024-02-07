@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+- **Content-Type**: application/json, application/vnd.segment.v1+json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 - **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -107,7 +107,7 @@ import (
 )
 
 func main() {
-    transformationId := "2NhipGGSZWdzI7YrXHELB7pVXqR" // string | 
+    transformationId := "2c0vVuRdDmJ3UQkVjd5WxaA3dar" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -388,7 +388,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+- **Content-Type**: application/json, application/vnd.segment.v1+json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 - **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

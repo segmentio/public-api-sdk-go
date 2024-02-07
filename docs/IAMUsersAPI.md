@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+- **Content-Type**: application/json, application/vnd.segment.v1+json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 - **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -98,7 +98,7 @@ Name | Type | Description  | Notes
 
 ## Operation: CreateInvites
 
-> CreateInvites200Response CreateInvites(ctx).CreateInvitesV1Input(createInvitesV1Input).Execute()
+> CreateInvites201Response CreateInvites(ctx).CreateInvitesV1Input(createInvitesV1Input).Execute()
 
 Create Invites
 
@@ -134,7 +134,7 @@ func main() {
             }
         }
     }
-    // response from `CreateInvites`: CreateInvites200Response
+    // response from `CreateInvites`: CreateInvites201Response
     fmt.Fprintf(os.Stdout, "Response from `IAMUsersAPI.CreateInvites`: %v\n", resp.GetData())
 }
 ```
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateInvites200Response**](CreateInvites200Response.md)
+[**CreateInvites201Response**](CreateInvites201Response.md)
 
 ### Authorization
 
@@ -162,7 +162,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+- **Content-Type**: application/json, application/vnd.segment.v1+json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 - **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -696,7 +696,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+- **Content-Type**: application/json, application/vnd.segment.v1+json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 - **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

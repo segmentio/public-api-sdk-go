@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## Operation: CreateLabel
 
-> CreateLabel200Response CreateLabel(ctx).CreateLabelV1Input(createLabelV1Input).Execute()
+> CreateLabel201Response CreateLabel(ctx).CreateLabelV1Input(createLabelV1Input).Execute()
 
 Create Label
 
@@ -48,7 +48,7 @@ func main() {
             }
         }
     }
-    // response from `CreateLabel`: CreateLabel200Response
+    // response from `CreateLabel`: CreateLabel201Response
     fmt.Fprintf(os.Stdout, "Response from `LabelsAPI.CreateLabel`: %v\n", resp.GetData())
 }
 ```
@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateLabel200Response**](CreateLabel200Response.md)
+[**CreateLabel201Response**](CreateLabel201Response.md)
 
 ### Authorization
 
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+- **Content-Type**: application/json, application/vnd.segment.v1+json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 - **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

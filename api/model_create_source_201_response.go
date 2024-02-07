@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 39.0.0
+API version: 41.0.0
 Contact: friends@segment.com
 */
 
@@ -15,35 +15,35 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateSource200Response1 type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateSource200Response1{}
+// checks if the CreateSource201Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateSource201Response{}
 
-// CreateSource200Response1 struct for CreateSource200Response1
-type CreateSource200Response1 struct {
-	Data *CreateSourceAlphaOutput `json:"data,omitempty"`
+// CreateSource201Response struct for CreateSource201Response
+type CreateSource201Response struct {
+	Data *CreateSourceV1Output `json:"data,omitempty"`
 }
 
-// NewCreateSource200Response1 instantiates a new CreateSource200Response1 object
+// NewCreateSource201Response instantiates a new CreateSource201Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateSource200Response1() *CreateSource200Response1 {
-	this := CreateSource200Response1{}
+func NewCreateSource201Response() *CreateSource201Response {
+	this := CreateSource201Response{}
 	return &this
 }
 
-// NewCreateSource200Response1WithDefaults instantiates a new CreateSource200Response1 object
+// NewCreateSource201ResponseWithDefaults instantiates a new CreateSource201Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateSource200Response1WithDefaults() *CreateSource200Response1 {
-	this := CreateSource200Response1{}
+func NewCreateSource201ResponseWithDefaults() *CreateSource201Response {
+	this := CreateSource201Response{}
 	return &this
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *CreateSource200Response1) GetData() CreateSourceAlphaOutput {
+func (o *CreateSource201Response) GetData() CreateSourceV1Output {
 	if o == nil || IsNil(o.Data) {
-		var ret CreateSourceAlphaOutput
+		var ret CreateSourceV1Output
 		return ret
 	}
 	return *o.Data
@@ -51,7 +51,7 @@ func (o *CreateSource200Response1) GetData() CreateSourceAlphaOutput {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateSource200Response1) GetDataOk() (*CreateSourceAlphaOutput, bool) {
+func (o *CreateSource201Response) GetDataOk() (*CreateSourceV1Output, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -59,7 +59,7 @@ func (o *CreateSource200Response1) GetDataOk() (*CreateSourceAlphaOutput, bool) 
 }
 
 // HasData returns a boolean if a field has been set.
-func (o *CreateSource200Response1) HasData() bool {
+func (o *CreateSource201Response) HasData() bool {
 	if o != nil && !IsNil(o.Data) {
 		return true
 	}
@@ -67,12 +67,12 @@ func (o *CreateSource200Response1) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given CreateSourceAlphaOutput and assigns it to the Data field.
-func (o *CreateSource200Response1) SetData(v CreateSourceAlphaOutput) {
+// SetData gets a reference to the given CreateSourceV1Output and assigns it to the Data field.
+func (o *CreateSource201Response) SetData(v CreateSourceV1Output) {
 	o.Data = &v
 }
 
-func (o CreateSource200Response1) MarshalJSON() ([]byte, error) {
+func (o CreateSource201Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -80,7 +80,7 @@ func (o CreateSource200Response1) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateSource200Response1) ToMap() (map[string]interface{}, error) {
+func (o CreateSource201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
@@ -88,40 +88,40 @@ func (o CreateSource200Response1) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableCreateSource200Response1 struct {
-	value *CreateSource200Response1
+type NullableCreateSource201Response struct {
+	value *CreateSource201Response
 	isSet bool
 }
 
-func (v NullableCreateSource200Response1) Get() *CreateSource200Response1 {
+func (v NullableCreateSource201Response) Get() *CreateSource201Response {
 	return v.value
 }
 
-func (v *NullableCreateSource200Response1) Set(val *CreateSource200Response1) {
+func (v *NullableCreateSource201Response) Set(val *CreateSource201Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateSource200Response1) IsSet() bool {
+func (v NullableCreateSource201Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateSource200Response1) Unset() {
+func (v *NullableCreateSource201Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateSource200Response1(
-	val *CreateSource200Response1,
-) *NullableCreateSource200Response1 {
-	return &NullableCreateSource200Response1{value: val, isSet: true}
+func NewNullableCreateSource201Response(
+	val *CreateSource201Response,
+) *NullableCreateSource201Response {
+	return &NullableCreateSource201Response{value: val, isSet: true}
 }
 
-func (v NullableCreateSource200Response1) MarshalJSON() ([]byte, error) {
+func (v NullableCreateSource201Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateSource200Response1) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateSource201Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

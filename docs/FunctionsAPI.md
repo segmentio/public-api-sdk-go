@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+- **Content-Type**: application/json, application/vnd.segment.v1+json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 - **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -346,7 +346,7 @@ import (
 )
 
 func main() {
-    instanceId := "64edfa5ac43ed978ee4f2b7f" // string | 
+    instanceId := "65c2bdbdde6f2d8297f943da" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -583,7 +583,7 @@ import (
 )
 
 func main() {
-    instanceId := "65414b1bf05ef7ecfd8b6736" // string | 
+    instanceId := "65c2bdbcde6f2d8297f943d7" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -1024,7 +1024,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+- **Content-Type**: application/json, application/vnd.segment.v1+json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 - **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -1053,7 +1053,7 @@ import (
 )
 
 func main() {
-    instanceId := "64edfa58c43ed978ee4f2b7e" // string | 
+    instanceId := "65c2bdbcde6f2d8297f943d8" // string | 
     updateInsertFunctionInstanceAlphaInput := *api.NewUpdateInsertFunctionInstanceAlphaInput(map[string]interface{}{"key": interface{}(123)}) // UpdateInsertFunctionInstanceAlphaInput | 
 
     configuration := api.NewConfiguration()

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 39.0.0
+API version: 41.0.0
 Contact: friends@segment.com
 */
 
@@ -103,8 +103,8 @@ func (a *SourcesAPIService) AddLabelsToSourceExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -225,7 +225,7 @@ func (r ApiCreateSourceRequest) CreateSourceV1Input(
 	return r
 }
 
-func (r ApiCreateSourceRequest) Execute() (*CreateSource200Response, *http.Response, error) {
+func (r ApiCreateSourceRequest) Execute() (*CreateSource201Response, *http.Response, error) {
 	return r.ApiService.CreateSourceExecute(r)
 }
 
@@ -248,15 +248,15 @@ func (a *SourcesAPIService) CreateSource(ctx context.Context) ApiCreateSourceReq
 
 // Execute executes the request
 //
-//	@return CreateSource200Response
+//	@return CreateSource201Response
 func (a *SourcesAPIService) CreateSourceExecute(
 	r ApiCreateSourceRequest,
-) (*CreateSource200Response, *http.Response, error) {
+) (*CreateSource201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateSource200Response
+		localVarReturnValue *CreateSource201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SourcesAPIService.CreateSource")
@@ -277,8 +277,8 @@ func (a *SourcesAPIService) CreateSourceExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -1481,8 +1481,8 @@ func (a *SourcesAPIService) ReplaceLabelsInSourceExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -1672,8 +1672,8 @@ func (a *SourcesAPIService) UpdateSchemaSettingsInSourceExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -1864,8 +1864,8 @@ func (a *SourcesAPIService) UpdateSourceExecute(
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
-		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}

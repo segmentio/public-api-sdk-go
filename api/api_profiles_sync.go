@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 39.0.0
+API version: 41.0.0
 Contact: friends@segment.com
 */
 
@@ -37,7 +37,7 @@ func (r ApiCreateProfilesWarehouseRequest) CreateProfilesWarehouseAlphaInput(
 	return r
 }
 
-func (r ApiCreateProfilesWarehouseRequest) Execute() (*CreateProfilesWarehouse200Response, *http.Response, error) {
+func (r ApiCreateProfilesWarehouseRequest) Execute() (*CreateProfilesWarehouse201Response, *http.Response, error) {
 	return r.ApiService.CreateProfilesWarehouseExecute(r)
 }
 
@@ -65,15 +65,15 @@ func (a *ProfilesSyncAPIService) CreateProfilesWarehouse(
 
 // Execute executes the request
 //
-//	@return CreateProfilesWarehouse200Response
+//	@return CreateProfilesWarehouse201Response
 func (a *ProfilesSyncAPIService) CreateProfilesWarehouseExecute(
 	r ApiCreateProfilesWarehouseRequest,
-) (*CreateProfilesWarehouse200Response, *http.Response, error) {
+) (*CreateProfilesWarehouse201Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateProfilesWarehouse200Response
+		localVarReturnValue *CreateProfilesWarehouse201Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(

@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## Operation: CreateProfilesWarehouse
 
-> CreateProfilesWarehouse200Response CreateProfilesWarehouse(ctx, spaceId).CreateProfilesWarehouseAlphaInput(createProfilesWarehouseAlphaInput).Execute()
+> CreateProfilesWarehouse201Response CreateProfilesWarehouse(ctx, spaceId).CreateProfilesWarehouseAlphaInput(createProfilesWarehouseAlphaInput).Execute()
 
 Create Profiles Warehouse
 
@@ -52,7 +52,7 @@ func main() {
             }
         }
     }
-    // response from `CreateProfilesWarehouse`: CreateProfilesWarehouse200Response
+    // response from `CreateProfilesWarehouse`: CreateProfilesWarehouse201Response
     fmt.Fprintf(os.Stdout, "Response from `ProfilesSyncAPI.CreateProfilesWarehouse`: %v\n", resp.GetData())
 }
 ```
@@ -77,7 +77,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateProfilesWarehouse200Response**](CreateProfilesWarehouse200Response.md)
+[**CreateProfilesWarehouse201Response**](CreateProfilesWarehouse201Response.md)
 
 ### Authorization
 
@@ -278,7 +278,7 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    warehouseId := "kjU72LCJexvrqL7G4TMHHN" // string | 
+    warehouseId := "qABd3NVTPfTLQ3kXWoBhgi" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -359,7 +359,7 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    warehouseId := "eSrwSWY9u6JisZvHhZeK8o" // string | 
+    warehouseId := "3eadBBqVMQD2DEtaWXSkqA" // string | 
     updateProfilesWarehouseForSpaceWarehouseAlphaInput := *api.NewUpdateProfilesWarehouseForSpaceWarehouseAlphaInput(map[string]interface{}{"key": interface{}(123)}) // UpdateProfilesWarehouseForSpaceWarehouseAlphaInput | 
 
     configuration := api.NewConfiguration()
@@ -441,8 +441,8 @@ import (
 )
 
 func main() {
-    spaceId := "space_123" // string | 
-    warehouseId := "kjU72LCJexvrqL7G4TMHHN" // string | 
+    spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
+    warehouseId := "qABd3NVTPfTLQ3kXWoBhgi" // string | 
     updateSelectiveSyncForWarehouseAndSpaceAlphaInput := *api.NewUpdateSelectiveSyncForWarehouseAndSpaceAlphaInput() // UpdateSelectiveSyncForWarehouseAndSpaceAlphaInput | 
 
     configuration := api.NewConfiguration()
