@@ -20,12 +20,20 @@ var _ MappedNullable = &RegulationListEntryV1{}
 
 // RegulationListEntryV1 struct for RegulationListEntryV1
 type RegulationListEntryV1 struct {
-	Id          string   `json:"id"`
-	SubjectType string   `json:"subjectType"`
-	Subjects    []string `json:"subjects"`
-	Status      string   `json:"status"`
-	CreatedAt   string   `json:"createdAt"`
-	FinishedAt  *string  `json:"finishedAt,omitempty"`
+	// The id of the regulate request.
+	Id string `json:"id"`
+	// The subject type.
+	SubjectType string `json:"subjectType"`
+	// The list of `userId` or `objectId` values of the subjects to regulate.
+	Subjects []string `json:"subjects"`
+	// The current status of the regulate request.
+	Status string `json:"status"`
+	// The timestamp of the creation of the request.
+	CreatedAt string `json:"createdAt"`
+	// The regulation type.
+	RegulationType string `json:"regulationType"`
+	// The timestamp of when the request finished.
+	FinishedAt *string `json:"finishedAt,omitempty"`
 }
 
 // NewRegulationListEntryV1 instantiates a new RegulationListEntryV1 object
@@ -38,6 +46,7 @@ func NewRegulationListEntryV1(
 	subjects []string,
 	status string,
 	createdAt string,
+	regulationType string,
 ) *RegulationListEntryV1 {
 	this := RegulationListEntryV1{}
 	this.Id = id
@@ -45,6 +54,7 @@ func NewRegulationListEntryV1(
 	this.Subjects = subjects
 	this.Status = status
 	this.CreatedAt = createdAt
+	this.RegulationType = regulationType
 	return &this
 }
 
@@ -176,6 +186,30 @@ func (o *RegulationListEntryV1) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
+// GetRegulationType returns the RegulationType field value
+func (o *RegulationListEntryV1) GetRegulationType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.RegulationType
+}
+
+// GetRegulationTypeOk returns a tuple with the RegulationType field value
+// and a boolean to check if the value has been set.
+func (o *RegulationListEntryV1) GetRegulationTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RegulationType, true
+}
+
+// SetRegulationType sets field value
+func (o *RegulationListEntryV1) SetRegulationType(v string) {
+	o.RegulationType = v
+}
+
 // GetFinishedAt returns the FinishedAt field value if set, zero value otherwise.
 func (o *RegulationListEntryV1) GetFinishedAt() string {
 	if o == nil || IsNil(o.FinishedAt) {
@@ -223,6 +257,7 @@ func (o RegulationListEntryV1) ToMap() (map[string]interface{}, error) {
 	toSerialize["subjects"] = o.Subjects
 	toSerialize["status"] = o.Status
 	toSerialize["createdAt"] = o.CreatedAt
+	toSerialize["regulationType"] = o.RegulationType
 	if !IsNil(o.FinishedAt) {
 		toSerialize["finishedAt"] = o.FinishedAt
 	}
