@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 42.0.0
+API version: 43.0.0
 Contact: friends@segment.com
 */
 
@@ -28,6 +28,8 @@ type WarehouseSelectiveSyncItemV1 struct {
 	WarehouseId string `json:"warehouseId"`
 	// Whether this Selective Sync item is enabled.
 	Enabled bool `json:"enabled"`
+	// Source id attached to this sync.
+	Source *string `json:"source,omitempty"`
 	// A map that contains the properties within the collection to which the Warehouse should sync.
 	Properties map[string]interface{} `json:"properties"`
 }
@@ -156,6 +158,38 @@ func (o *WarehouseSelectiveSyncItemV1) SetEnabled(v bool) {
 	o.Enabled = v
 }
 
+// GetSource returns the Source field value if set, zero value otherwise.
+func (o *WarehouseSelectiveSyncItemV1) GetSource() string {
+	if o == nil || IsNil(o.Source) {
+		var ret string
+		return ret
+	}
+	return *o.Source
+}
+
+// GetSourceOk returns a tuple with the Source field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WarehouseSelectiveSyncItemV1) GetSourceOk() (*string, bool) {
+	if o == nil || IsNil(o.Source) {
+		return nil, false
+	}
+	return o.Source, true
+}
+
+// HasSource returns a boolean if a field has been set.
+func (o *WarehouseSelectiveSyncItemV1) HasSource() bool {
+	if o != nil && !IsNil(o.Source) {
+		return true
+	}
+
+	return false
+}
+
+// SetSource gets a reference to the given string and assigns it to the Source field.
+func (o *WarehouseSelectiveSyncItemV1) SetSource(v string) {
+	o.Source = &v
+}
+
 // GetProperties returns the Properties field value
 func (o *WarehouseSelectiveSyncItemV1) GetProperties() map[string]interface{} {
 	if o == nil {
@@ -194,6 +228,9 @@ func (o WarehouseSelectiveSyncItemV1) ToMap() (map[string]interface{}, error) {
 	toSerialize["collection"] = o.Collection
 	toSerialize["warehouseId"] = o.WarehouseId
 	toSerialize["enabled"] = o.Enabled
+	if !IsNil(o.Source) {
+		toSerialize["source"] = o.Source
+	}
 	toSerialize["properties"] = o.Properties
 	return toSerialize, nil
 }
