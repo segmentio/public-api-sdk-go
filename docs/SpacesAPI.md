@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**BatchQueryMessagingSubscriptionsForSpace**](SpacesAPI.md#BatchQueryMessagingSubscriptionsForSpace) | **Post** /spaces/{spaceId}/messaging-subscriptions/batch | Batch Query Messaging Subscriptions for Space
 [**GetSpace**](SpacesAPI.md#GetSpace) | **Get** /spaces/{spaceId} | Get Space
+[**ListSpaces**](SpacesAPI.md#ListSpaces) | **Get** /spaces | List Spaces
 [**ReplaceMessagingSubscriptionsInSpaces**](SpacesAPI.md#ReplaceMessagingSubscriptionsInSpaces) | **Put** /spaces/{spaceId}/messaging-subscriptions | Replace Messaging Subscriptions in Spaces
 
 
@@ -153,6 +154,80 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetSpace200Response**](GetSpace200Response.md)
+
+### Authorization
+
+[token](../README.md#token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Operation: ListSpaces
+
+> ListSpaces200Response ListSpaces(ctx).Pagination(pagination).Execute()
+
+List Spaces
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    api "github.com/segmentio/public-api-sdk-go"
+)
+
+func main() {
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination params  This parameter exists in alpha.
+
+    configuration := api.NewConfiguration()
+    apiClient := api.NewAPIClient(configuration)
+    token := "<BEARER_TOKEN>"
+    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
+    resp, r, err := apiClient.SpacesAPI.ListSpaces(ctx).Pagination(pagination).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SpacesAPI.ListSpaces``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+        responseErrors := api.UnwrapFullErrors(err)
+        if responseErrors != nil {
+            for _, responseError := range responseErrors.Errors {
+                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
+            }
+        }
+    }
+    // response from `ListSpaces`: ListSpaces200Response
+    fmt.Fprintf(os.Stdout, "Response from `SpacesAPI.ListSpaces`: %v\n", resp.GetData())
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListSpacesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **pagination** | [**PaginationInput**](PaginationInput.md) | Pagination params  This parameter exists in alpha. | 
+
+### Return type
+
+[**ListSpaces200Response**](ListSpaces200Response.md)
 
 ### Authorization
 
