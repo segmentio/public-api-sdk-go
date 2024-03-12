@@ -21,16 +21,15 @@ var _ MappedNullable = &UpdateComputedTraitForSpaceAlphaInput{}
 // UpdateComputedTraitForSpaceAlphaInput Input to update a computed trait.
 type UpdateComputedTraitForSpaceAlphaInput struct {
 	// Enabled/disabled status for the computed trait.
-	Enabled bool `json:"enabled"`
+	Enabled *bool `json:"enabled,omitempty"`
 }
 
 // NewUpdateComputedTraitForSpaceAlphaInput instantiates a new UpdateComputedTraitForSpaceAlphaInput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateComputedTraitForSpaceAlphaInput(enabled bool) *UpdateComputedTraitForSpaceAlphaInput {
+func NewUpdateComputedTraitForSpaceAlphaInput() *UpdateComputedTraitForSpaceAlphaInput {
 	this := UpdateComputedTraitForSpaceAlphaInput{}
-	this.Enabled = enabled
 	return &this
 }
 
@@ -42,28 +41,36 @@ func NewUpdateComputedTraitForSpaceAlphaInputWithDefaults() *UpdateComputedTrait
 	return &this
 }
 
-// GetEnabled returns the Enabled field value
+// GetEnabled returns the Enabled field value if set, zero value otherwise.
 func (o *UpdateComputedTraitForSpaceAlphaInput) GetEnabled() bool {
-	if o == nil {
+	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
 	}
-
-	return o.Enabled
+	return *o.Enabled
 }
 
-// GetEnabledOk returns a tuple with the Enabled field value
+// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *UpdateComputedTraitForSpaceAlphaInput) GetEnabledOk() (*bool, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
-	return &o.Enabled, true
+	return o.Enabled, true
 }
 
-// SetEnabled sets field value
+// HasEnabled returns a boolean if a field has been set.
+func (o *UpdateComputedTraitForSpaceAlphaInput) HasEnabled() bool {
+	if o != nil && !IsNil(o.Enabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
 func (o *UpdateComputedTraitForSpaceAlphaInput) SetEnabled(v bool) {
-	o.Enabled = v
+	o.Enabled = &v
 }
 
 func (o UpdateComputedTraitForSpaceAlphaInput) MarshalJSON() ([]byte, error) {
@@ -76,7 +83,9 @@ func (o UpdateComputedTraitForSpaceAlphaInput) MarshalJSON() ([]byte, error) {
 
 func (o UpdateComputedTraitForSpaceAlphaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["enabled"] = o.Enabled
+	if !IsNil(o.Enabled) {
+		toSerialize["enabled"] = o.Enabled
+	}
 	return toSerialize, nil
 }
 
