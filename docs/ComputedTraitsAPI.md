@@ -276,7 +276,7 @@ import (
 func main() {
     spaceId := "spaceId" // string | 
     id := "id" // string | 
-    updateComputedTraitForSpaceAlphaInput := *api.NewUpdateComputedTraitForSpaceAlphaInput(false) // UpdateComputedTraitForSpaceAlphaInput | 
+    updateComputedTraitForSpaceAlphaInput := *api.NewUpdateComputedTraitForSpaceAlphaInput() // UpdateComputedTraitForSpaceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
