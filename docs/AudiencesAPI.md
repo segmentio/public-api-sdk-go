@@ -276,7 +276,7 @@ import (
 func main() {
     spaceId := "spaceId" // string | 
     id := "id" // string | 
-    updateAudienceForSpaceInput := *api.NewUpdateAudienceForSpaceInput(false) // UpdateAudienceForSpaceInput | 
+    updateAudienceForSpaceInput := *api.NewUpdateAudienceForSpaceInput() // UpdateAudienceForSpaceInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
