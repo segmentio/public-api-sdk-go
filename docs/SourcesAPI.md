@@ -6,12 +6,14 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddLabelsToSource**](SourcesAPI.md#AddLabelsToSource) | **Post** /sources/{sourceId}/labels | Add Labels to Source
 [**CreateSource**](SourcesAPI.md#CreateSource) | **Post** /sources | Create Source
+[**CreateWriteKeyForSource**](SourcesAPI.md#CreateWriteKeyForSource) | **Post** /sources/{sourceId}/writekey | Create Write Key for Source
 [**DeleteSource**](SourcesAPI.md#DeleteSource) | **Delete** /sources/{sourceId} | Delete Source
 [**GetSource**](SourcesAPI.md#GetSource) | **Get** /sources/{sourceId} | Get Source
 [**ListConnectedDestinationsFromSource**](SourcesAPI.md#ListConnectedDestinationsFromSource) | **Get** /sources/{sourceId}/connected-destinations | List Connected Destinations from Source
 [**ListConnectedWarehousesFromSource**](SourcesAPI.md#ListConnectedWarehousesFromSource) | **Get** /sources/{sourceId}/connected-warehouses | List Connected Warehouses from Source
 [**ListSchemaSettingsInSource**](SourcesAPI.md#ListSchemaSettingsInSource) | **Get** /sources/{sourceId}/settings | List Schema Settings in Source
 [**ListSources**](SourcesAPI.md#ListSources) | **Get** /sources | List Sources
+[**RemoveWriteKeyFromSource**](SourcesAPI.md#RemoveWriteKeyFromSource) | **Delete** /sources/{sourceId}/writekey/{writeKey} | Remove Write Key from Source
 [**ReplaceLabelsInSource**](SourcesAPI.md#ReplaceLabelsInSource) | **Put** /sources/{sourceId}/labels | Replace Labels in Source
 [**UpdateSchemaSettingsInSource**](SourcesAPI.md#UpdateSchemaSettingsInSource) | **Patch** /sources/{sourceId}/settings | Update Schema Settings in Source
 [**UpdateSource**](SourcesAPI.md#UpdateSource) | **Patch** /sources/{sourceId} | Update Source
@@ -166,6 +168,84 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json, application/vnd.segment.v1+json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 - **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Operation: CreateWriteKeyForSource
+
+> CreateWriteKeyForSource200Response CreateWriteKeyForSource(ctx, sourceId).Execute()
+
+Create Write Key for Source
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    api "github.com/segmentio/public-api-sdk-go"
+)
+
+func main() {
+    sourceId := "idR4zzU9iGcGJgoAX891nf" // string | 
+
+    configuration := api.NewConfiguration()
+    apiClient := api.NewAPIClient(configuration)
+    token := "<BEARER_TOKEN>"
+    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
+    resp, r, err := apiClient.SourcesAPI.CreateWriteKeyForSource(ctx, sourceId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SourcesAPI.CreateWriteKeyForSource``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+        responseErrors := api.UnwrapFullErrors(err)
+        if responseErrors != nil {
+            for _, responseError := range responseErrors.Errors {
+                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
+            }
+        }
+    }
+    // response from `CreateWriteKeyForSource`: CreateWriteKeyForSource200Response
+    fmt.Fprintf(os.Stdout, "Response from `SourcesAPI.CreateWriteKeyForSource`: %v\n", resp.GetData())
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**sourceId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateWriteKeyForSourceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**CreateWriteKeyForSource200Response**](CreateWriteKeyForSource200Response.md)
+
+### Authorization
+
+[token](../README.md#token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -634,6 +714,87 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Operation: RemoveWriteKeyFromSource
+
+> RemoveWriteKeyFromSource200Response RemoveWriteKeyFromSource(ctx, sourceId, writeKey).Execute()
+
+Remove Write Key from Source
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    api "github.com/segmentio/public-api-sdk-go"
+)
+
+func main() {
+    sourceId := "idR4zzU9iGcGJgoAX891nf" // string | 
+    writeKey := "wk123" // string | 
+
+    configuration := api.NewConfiguration()
+    apiClient := api.NewAPIClient(configuration)
+    token := "<BEARER_TOKEN>"
+    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
+    resp, r, err := apiClient.SourcesAPI.RemoveWriteKeyFromSource(ctx, sourceId, writeKey).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SourcesAPI.RemoveWriteKeyFromSource``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+        responseErrors := api.UnwrapFullErrors(err)
+        if responseErrors != nil {
+            for _, responseError := range responseErrors.Errors {
+                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
+            }
+        }
+    }
+    // response from `RemoveWriteKeyFromSource`: RemoveWriteKeyFromSource200Response
+    fmt.Fprintf(os.Stdout, "Response from `SourcesAPI.RemoveWriteKeyFromSource`: %v\n", resp.GetData())
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**sourceId** | **string** |  | 
+**writeKey** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRemoveWriteKeyFromSourceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**RemoveWriteKeyFromSource200Response**](RemoveWriteKeyFromSource200Response.md)
+
+### Authorization
+
+[token](../README.md#token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
