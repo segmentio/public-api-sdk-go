@@ -31,8 +31,8 @@ type ComputedTraitSummary struct {
 	// Key for the computed trait.
 	Key string `json:"key"`
 	// Enabled/disabled status for the computed trait.
-	Enabled    bool                `json:"enabled"`
-	Definition NullableDefinition1 `json:"definition"`
+	Enabled    bool               `json:"enabled"`
+	Definition NullableDefinition `json:"definition"`
 	// Status for the computed trait.  Possible values: Backfilling, Computing, Failed, Live, Awaiting Destinations, Disabled.
 	Status *string `json:"status,omitempty"`
 	// User id who created the computed trait.
@@ -56,7 +56,7 @@ func NewComputedTraitSummary(
 	description string,
 	key string,
 	enabled bool,
-	definition NullableDefinition1,
+	definition NullableDefinition,
 	createdBy string,
 	updatedBy string,
 	createdAt string,
@@ -230,10 +230,10 @@ func (o *ComputedTraitSummary) SetEnabled(v bool) {
 }
 
 // GetDefinition returns the Definition field value
-// If the value is explicit nil, the zero value for Definition1 will be returned
-func (o *ComputedTraitSummary) GetDefinition() Definition1 {
+// If the value is explicit nil, the zero value for Definition will be returned
+func (o *ComputedTraitSummary) GetDefinition() Definition {
 	if o == nil || o.Definition.Get() == nil {
-		var ret Definition1
+		var ret Definition
 		return ret
 	}
 
@@ -243,7 +243,7 @@ func (o *ComputedTraitSummary) GetDefinition() Definition1 {
 // GetDefinitionOk returns a tuple with the Definition field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ComputedTraitSummary) GetDefinitionOk() (*Definition1, bool) {
+func (o *ComputedTraitSummary) GetDefinitionOk() (*Definition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -251,7 +251,7 @@ func (o *ComputedTraitSummary) GetDefinitionOk() (*Definition1, bool) {
 }
 
 // SetDefinition sets field value
-func (o *ComputedTraitSummary) SetDefinition(v Definition1) {
+func (o *ComputedTraitSummary) SetDefinition(v Definition) {
 	o.Definition.Set(&v)
 }
 

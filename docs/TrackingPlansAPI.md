@@ -587,7 +587,7 @@ import (
 
 func main() {
     trackingPlanId := "tp_sprout_rVGCC6WdrNxjCf6JpCHP" // string | 
-    rules := []api.RemoveRuleV1{[]api.RemoveRuleV1{*api.NewRemoveRuleV1("Type_example", float32(123))}} // []RemoveRuleV1 | Rules to delete.  This parameter exists in v1.
+    rules := []api.RemoveRuleV1{*api.NewRemoveRuleV1("Type_example", float32(123))} // []RemoveRuleV1 | Rules to delete.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -625,7 +625,7 @@ Other parameters are passed through a pointer to a apiRemoveRulesFromTrackingPla
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **rules** | [**[][]RemoveRuleV1**](array.md) | Rules to delete.  This parameter exists in v1. | 
+ **rules** | [**[]RemoveRuleV1**](RemoveRuleV1.md) | Rules to delete.  This parameter exists in v1. | 
 
 ### Return type
 

@@ -14,9 +14,11 @@ package api
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
+	"reflect"
 )
 
 // DeliveryOverviewAPIService DeliveryOverviewAPI service
@@ -188,7 +190,20 @@ func (a *DeliveryOverviewAPIService) GetEgressFailedMetricsFromDeliveryOverviewE
 	parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
 	parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "")
 	if r.groupBy != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "groupBy", r.groupBy, "csv")
+		t := *r.groupBy
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(
+					localVarQueryParams,
+					fmt.Sprintf("groupBy.%d", i),
+					s.Index(i).Interface(),
+					"multi",
+				)
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "groupBy", t, "multi")
+		}
 	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
 	if r.filter != nil {
@@ -773,7 +788,20 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtSourceMetricsFromDeliveryOverv
 	parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
 	parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "")
 	if r.groupBy != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "groupBy", r.groupBy, "csv")
+		t := *r.groupBy
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(
+					localVarQueryParams,
+					fmt.Sprintf("groupBy.%d", i),
+					s.Index(i).Interface(),
+					"multi",
+				)
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "groupBy", t, "multi")
+		}
 	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
 	if r.filter != nil {

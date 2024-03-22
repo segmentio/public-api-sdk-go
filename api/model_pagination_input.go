@@ -22,7 +22,7 @@ var _ MappedNullable = &PaginationInput{}
 type PaginationInput struct {
 	// The page to request.  Acceptable values to use here are in PaginationOutput objects, in the `current`, `next`, and `previous` keys.  Consumers of the API must treat this value as opaque.
 	Cursor *string `json:"cursor,omitempty"`
-	// The number of items to retrieve in a page, between 1 and 200.
+	// The number of items to retrieve in a page, between 1 and 1000.
 	Count int32 `json:"count"`
 }
 

@@ -665,7 +665,7 @@ import (
 
 func main() {
     userGroupId := "bBABwqbaDf2QdwTbW8bNEm" // string | 
-    emails := []string{[]string{"Emails_example"}} // []string | The list of emails to remove from the user group.  This parameter exists in v1.
+    emails := []string{"Inner_example"} // []string | The list of emails to remove from the user group.  This parameter exists in v1.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -703,7 +703,7 @@ Other parameters are passed through a pointer to a apiRemoveUsersFromUserGroupRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **emails** | **[][]string** | The list of emails to remove from the user group.  This parameter exists in v1. | 
+ **emails** | **[]string** | The list of emails to remove from the user group.  This parameter exists in v1. | 
 
 ### Return type
 
