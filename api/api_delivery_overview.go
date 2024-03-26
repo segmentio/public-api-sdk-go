@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 46.0.0
+API version: 47.0.0
 Contact: friends@segment.com
 */
 
@@ -38,7 +38,7 @@ type ApiGetEgressFailedMetricsFromDeliveryOverviewRequest struct {
 	subscriptionId      *string
 }
 
-// The sourceId for the workspace.  This parameter exists in alpha.
+// The sourceId for the Workspace.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) SourceId(
 	sourceId string,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -46,7 +46,7 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) SourceId(
 	return r
 }
 
-// The ID tied to a workspace destination. DestinationConfigId is required for Filtered at Destination, Failed Delivery, and Successful Delivery steps.  This parameter exists in alpha.
+// The id tied to a Workspace Destination.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) DestinationConfigId(
 	destinationConfigId string,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -54,7 +54,7 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) DestinationConfigI
 	return r
 }
 
-// The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in alpha.
+// The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) StartTime(
 	startTime string,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -62,7 +62,7 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) StartTime(
 	return r
 }
 
-// The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in alpha.
+// The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) EndTime(
 	endTime string,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -70,7 +70,7 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) EndTime(
 	return r
 }
 
-// The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in alpha.
+// The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Granularity(
 	granularity string,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -78,7 +78,7 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// Params to specify the page cursor and count.  This parameter exists in alpha.
+// Params to specify the page cursor and count.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Pagination(
 	pagination PaginationInput,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -86,7 +86,7 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Pagination(
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in alpha.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -94,7 +94,7 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. Example: &#x60;filter: {discardReason: [&#39;discard1&#39;], eventName: [&#39;name1&#39;, &#39;name2&#39;], eventType: [&#39;type1&#39;]}&#x60;.  This parameter exists in alpha.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewFilterBy,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -102,7 +102,7 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Filter(
 	return r
 }
 
-// An optional filter for actions destinations, to filter by a specific action.  This parameter exists in alpha.
+// An optional filter for actions destinations, to filter by a specific action.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) SubscriptionId(
 	subscriptionId string,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -223,10 +223,7 @@ func (a *DeliveryOverviewAPIService) GetEgressFailedMetricsFromDeliveryOverviewE
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{
-		"application/vnd.segment.v1alpha+json",
-		"application/json",
-	}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -316,8 +313,89 @@ func (a *DeliveryOverviewAPIService) GetEgressFailedMetricsFromDeliveryOverviewE
 }
 
 type ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest struct {
-	ctx        context.Context
-	ApiService *DeliveryOverviewAPIService
+	ctx                 context.Context
+	ApiService          *DeliveryOverviewAPIService
+	sourceId            *string
+	destinationConfigId *string
+	startTime           *string
+	endTime             *string
+	granularity         *string
+	pagination          *PaginationInput
+	groupBy             *[]string
+	filter              *DeliveryOverviewFilterBy
+	subscriptionId      *string
+}
+
+// The sourceId for the Workspace.  This parameter exists in beta.
+func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) SourceId(
+	sourceId string,
+) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
+	r.sourceId = &sourceId
+	return r
+}
+
+// The id tied to a Workspace Destination.  This parameter exists in beta.
+func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) DestinationConfigId(
+	destinationConfigId string,
+) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
+	r.destinationConfigId = &destinationConfigId
+	return r
+}
+
+// The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
+func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) StartTime(
+	startTime string,
+) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
+	r.startTime = &startTime
+	return r
+}
+
+// The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
+func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) EndTime(
+	endTime string,
+) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
+	r.endTime = &endTime
+	return r
+}
+
+// The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
+func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) Granularity(
+	granularity string,
+) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
+	r.granularity = &granularity
+	return r
+}
+
+// Params to specify the page cursor and count.  This parameter exists in beta.
+func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
+	r.pagination = &pagination
+	return r
+}
+
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
+func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
+	groupBy []string,
+) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
+	r.groupBy = &groupBy
+	return r
+}
+
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. If you would like to view retry attempts for a successful delivery, you can filter &#x60;discardReason&#x60; from &#x60;successes.attempt.1&#x60; through &#x60;successes.attempt.10&#x60;.  This parameter exists in beta.
+func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) Filter(
+	filter DeliveryOverviewFilterBy,
+) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
+	r.filter = &filter
+	return r
+}
+
+// An optional filter for actions destinations, to filter by a specific action.  This parameter exists in beta.
+func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) SubscriptionId(
+	subscriptionId string,
+) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
+	r.subscriptionId = &subscriptionId
+	return r
 }
 
 func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) Execute() (*GetEgressFailedMetricsFromDeliveryOverview200Response, *http.Response, error) {
@@ -367,7 +445,62 @@ func (a *DeliveryOverviewAPIService) GetEgressSuccessMetricsFromDeliveryOverview
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.sourceId == nil {
+		return localVarReturnValue, nil, reportError("sourceId is required and must be specified")
+	}
+	if r.destinationConfigId == nil {
+		return localVarReturnValue, nil, reportError(
+			"destinationConfigId is required and must be specified",
+		)
+	}
+	if r.startTime == nil {
+		return localVarReturnValue, nil, reportError("startTime is required and must be specified")
+	}
+	if r.endTime == nil {
+		return localVarReturnValue, nil, reportError("endTime is required and must be specified")
+	}
+	if r.granularity == nil {
+		return localVarReturnValue, nil, reportError(
+			"granularity is required and must be specified",
+		)
+	}
+	if r.pagination == nil {
+		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
+	}
 
+	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
+	parameterAddToHeaderOrQuery(
+		localVarQueryParams,
+		"destinationConfigId",
+		r.destinationConfigId,
+		"",
+	)
+	parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "")
+	if r.groupBy != nil {
+		t := *r.groupBy
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(
+					localVarQueryParams,
+					fmt.Sprintf("groupBy.%d", i),
+					s.Index(i).Interface(),
+					"multi",
+				)
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "groupBy", t, "multi")
+		}
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+	if r.filter != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.subscriptionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "subscriptionId", r.subscriptionId, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -378,10 +511,7 @@ func (a *DeliveryOverviewAPIService) GetEgressSuccessMetricsFromDeliveryOverview
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{
-		"application/vnd.segment.v1alpha+json",
-		"application/json",
-	}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -471,8 +601,89 @@ func (a *DeliveryOverviewAPIService) GetEgressSuccessMetricsFromDeliveryOverview
 }
 
 type ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest struct {
-	ctx        context.Context
-	ApiService *DeliveryOverviewAPIService
+	ctx                 context.Context
+	ApiService          *DeliveryOverviewAPIService
+	sourceId            *string
+	destinationConfigId *string
+	startTime           *string
+	endTime             *string
+	granularity         *string
+	pagination          *PaginationInput
+	groupBy             *[]string
+	filter              *DeliveryOverviewFilterBy
+	subscriptionId      *string
+}
+
+// The sourceId for the Workspace.  This parameter exists in beta.
+func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) SourceId(
+	sourceId string,
+) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
+	r.sourceId = &sourceId
+	return r
+}
+
+// The id tied to a Workspace Destination.  This parameter exists in beta.
+func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) DestinationConfigId(
+	destinationConfigId string,
+) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
+	r.destinationConfigId = &destinationConfigId
+	return r
+}
+
+// The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
+func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) StartTime(
+	startTime string,
+) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
+	r.startTime = &startTime
+	return r
+}
+
+// The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
+func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) EndTime(
+	endTime string,
+) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
+	r.endTime = &endTime
+	return r
+}
+
+// The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
+func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Granularity(
+	granularity string,
+) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
+	r.granularity = &granularity
+	return r
+}
+
+// Params to specify the page cursor and count.  This parameter exists in beta.
+func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
+	r.pagination = &pagination
+	return r
+}
+
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
+func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) GroupBy(
+	groupBy []string,
+) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
+	r.groupBy = &groupBy
+	return r
+}
+
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
+func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Filter(
+	filter DeliveryOverviewFilterBy,
+) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
+	r.filter = &filter
+	return r
+}
+
+// An optional filter for actions destinations, to filter by a specific action.  This parameter exists in beta.
+func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) SubscriptionId(
+	subscriptionId string,
+) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
+	r.subscriptionId = &subscriptionId
+	return r
 }
 
 func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Execute() (*GetEgressFailedMetricsFromDeliveryOverview200Response, *http.Response, error) {
@@ -522,7 +733,62 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtDestinationMetricsFromDelivery
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.sourceId == nil {
+		return localVarReturnValue, nil, reportError("sourceId is required and must be specified")
+	}
+	if r.destinationConfigId == nil {
+		return localVarReturnValue, nil, reportError(
+			"destinationConfigId is required and must be specified",
+		)
+	}
+	if r.startTime == nil {
+		return localVarReturnValue, nil, reportError("startTime is required and must be specified")
+	}
+	if r.endTime == nil {
+		return localVarReturnValue, nil, reportError("endTime is required and must be specified")
+	}
+	if r.granularity == nil {
+		return localVarReturnValue, nil, reportError(
+			"granularity is required and must be specified",
+		)
+	}
+	if r.pagination == nil {
+		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
+	}
 
+	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
+	parameterAddToHeaderOrQuery(
+		localVarQueryParams,
+		"destinationConfigId",
+		r.destinationConfigId,
+		"",
+	)
+	parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "")
+	if r.groupBy != nil {
+		t := *r.groupBy
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(
+					localVarQueryParams,
+					fmt.Sprintf("groupBy.%d", i),
+					s.Index(i).Interface(),
+					"multi",
+				)
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "groupBy", t, "multi")
+		}
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+	if r.filter != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.subscriptionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "subscriptionId", r.subscriptionId, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -533,10 +799,7 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtDestinationMetricsFromDelivery
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{
-		"application/vnd.segment.v1alpha+json",
-		"application/json",
-	}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -626,20 +889,18 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtDestinationMetricsFromDelivery
 }
 
 type ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest struct {
-	ctx                 context.Context
-	ApiService          *DeliveryOverviewAPIService
-	sourceId            *string
-	startTime           *string
-	endTime             *string
-	granularity         *string
-	pagination          *PaginationInput
-	destinationConfigId *string
-	groupBy             *[]string
-	filter              *DeliveryOverviewFilterBy
-	subscriptionId      *string
+	ctx         context.Context
+	ApiService  *DeliveryOverviewAPIService
+	sourceId    *string
+	startTime   *string
+	endTime     *string
+	granularity *string
+	pagination  *PaginationInput
+	groupBy     *[]string
+	filter      *DeliveryOverviewFilterBy
 }
 
-// The sourceId for the workspace.  This parameter exists in alpha.
+// The sourceId for the Workspace.  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) SourceId(
 	sourceId string,
 ) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
@@ -647,7 +908,7 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) SourceId(
 	return r
 }
 
-// The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in alpha.
+// The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) StartTime(
 	startTime string,
 ) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
@@ -655,7 +916,7 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) StartTime(
 	return r
 }
 
-// The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in alpha.
+// The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) EndTime(
 	endTime string,
 ) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
@@ -663,7 +924,7 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) EndTime(
 	return r
 }
 
-// The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in alpha.
+// The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) Granularity(
 	granularity string,
 ) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
@@ -671,7 +932,7 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// Optional params to specify the page cursor and count.  This parameter exists in alpha.
+// Optional params to specify the page cursor and count.  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) Pagination(
 	pagination PaginationInput,
 ) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
@@ -679,15 +940,7 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) Pagination(
 	return r
 }
 
-// The ID tied to a workspace destination.  This parameter exists in alpha.
-func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) DestinationConfigId(
-	destinationConfigId string,
-) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
-	r.destinationConfigId = &destinationConfigId
-	return r
-}
-
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in alpha.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
@@ -695,19 +948,11 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. Example: &#x60;filter: {discardReason: [&#39;discard1&#39;], eventName: [&#39;name1&#39;, &#39;name2&#39;], eventType: [&#39;type1&#39;]}&#x60;.  This parameter exists in alpha.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewFilterBy,
 ) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
-	return r
-}
-
-// An optional filter for actions destinations, to filter by a specific action.  This parameter exists in alpha.
-func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) SubscriptionId(
-	subscriptionId string,
-) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
-	r.subscriptionId = &subscriptionId
 	return r
 }
 
@@ -777,14 +1022,6 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtSourceMetricsFromDeliveryOverv
 	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
-	if r.destinationConfigId != nil {
-		parameterAddToHeaderOrQuery(
-			localVarQueryParams,
-			"destinationConfigId",
-			r.destinationConfigId,
-			"",
-		)
-	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
 	parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "")
 	if r.groupBy != nil {
@@ -808,9 +1045,6 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtSourceMetricsFromDeliveryOverv
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
 	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
-	if r.subscriptionId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "subscriptionId", r.subscriptionId, "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -821,10 +1055,7 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtSourceMetricsFromDeliveryOverv
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{
-		"application/vnd.segment.v1alpha+json",
-		"application/json",
-	}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -914,8 +1145,71 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtSourceMetricsFromDeliveryOverv
 }
 
 type ApiGetIngressFailedMetricsFromDeliveryOverviewRequest struct {
-	ctx        context.Context
-	ApiService *DeliveryOverviewAPIService
+	ctx         context.Context
+	ApiService  *DeliveryOverviewAPIService
+	sourceId    *string
+	startTime   *string
+	endTime     *string
+	granularity *string
+	pagination  *PaginationInput
+	groupBy     *[]string
+	filter      *DeliveryOverviewFilterBy
+}
+
+// The sourceId for the Workspace.  This parameter exists in beta.
+func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) SourceId(
+	sourceId string,
+) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
+	r.sourceId = &sourceId
+	return r
+}
+
+// The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
+func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) StartTime(
+	startTime string,
+) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
+	r.startTime = &startTime
+	return r
+}
+
+// The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
+func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) EndTime(
+	endTime string,
+) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
+	r.endTime = &endTime
+	return r
+}
+
+// The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
+func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) Granularity(
+	granularity string,
+) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
+	r.granularity = &granularity
+	return r
+}
+
+// Optional params to specify the page cursor and count.  This parameter exists in beta.
+func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
+	r.pagination = &pagination
+	return r
+}
+
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
+func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
+	groupBy []string,
+) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
+	r.groupBy = &groupBy
+	return r
+}
+
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
+func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) Filter(
+	filter DeliveryOverviewFilterBy,
+) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
+	r.filter = &filter
+	return r
 }
 
 func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) Execute() (*GetEgressFailedMetricsFromDeliveryOverview200Response, *http.Response, error) {
@@ -965,7 +1259,48 @@ func (a *DeliveryOverviewAPIService) GetIngressFailedMetricsFromDeliveryOverview
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.sourceId == nil {
+		return localVarReturnValue, nil, reportError("sourceId is required and must be specified")
+	}
+	if r.startTime == nil {
+		return localVarReturnValue, nil, reportError("startTime is required and must be specified")
+	}
+	if r.endTime == nil {
+		return localVarReturnValue, nil, reportError("endTime is required and must be specified")
+	}
+	if r.granularity == nil {
+		return localVarReturnValue, nil, reportError(
+			"granularity is required and must be specified",
+		)
+	}
+	if r.pagination == nil {
+		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
+	}
 
+	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "")
+	if r.groupBy != nil {
+		t := *r.groupBy
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(
+					localVarQueryParams,
+					fmt.Sprintf("groupBy.%d", i),
+					s.Index(i).Interface(),
+					"multi",
+				)
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "groupBy", t, "multi")
+		}
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+	if r.filter != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -976,10 +1311,7 @@ func (a *DeliveryOverviewAPIService) GetIngressFailedMetricsFromDeliveryOverview
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{
-		"application/vnd.segment.v1alpha+json",
-		"application/json",
-	}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1069,8 +1401,71 @@ func (a *DeliveryOverviewAPIService) GetIngressFailedMetricsFromDeliveryOverview
 }
 
 type ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest struct {
-	ctx        context.Context
-	ApiService *DeliveryOverviewAPIService
+	ctx         context.Context
+	ApiService  *DeliveryOverviewAPIService
+	sourceId    *string
+	startTime   *string
+	endTime     *string
+	granularity *string
+	pagination  *PaginationInput
+	groupBy     *[]string
+	filter      *DeliveryOverviewFilterBy
+}
+
+// The sourceId for the Workspace.  This parameter exists in beta.
+func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) SourceId(
+	sourceId string,
+) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
+	r.sourceId = &sourceId
+	return r
+}
+
+// The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
+func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) StartTime(
+	startTime string,
+) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
+	r.startTime = &startTime
+	return r
+}
+
+// The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
+func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) EndTime(
+	endTime string,
+) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
+	r.endTime = &endTime
+	return r
+}
+
+// The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
+func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) Granularity(
+	granularity string,
+) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
+	r.granularity = &granularity
+	return r
+}
+
+// Optional params to specify the page cursor and count.  This parameter exists in beta.
+func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
+	r.pagination = &pagination
+	return r
+}
+
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
+func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
+	groupBy []string,
+) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
+	r.groupBy = &groupBy
+	return r
+}
+
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
+func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) Filter(
+	filter DeliveryOverviewFilterBy,
+) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
+	r.filter = &filter
+	return r
 }
 
 func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) Execute() (*GetEgressFailedMetricsFromDeliveryOverview200Response, *http.Response, error) {
@@ -1120,7 +1515,48 @@ func (a *DeliveryOverviewAPIService) GetIngressSuccessMetricsFromDeliveryOvervie
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.sourceId == nil {
+		return localVarReturnValue, nil, reportError("sourceId is required and must be specified")
+	}
+	if r.startTime == nil {
+		return localVarReturnValue, nil, reportError("startTime is required and must be specified")
+	}
+	if r.endTime == nil {
+		return localVarReturnValue, nil, reportError("endTime is required and must be specified")
+	}
+	if r.granularity == nil {
+		return localVarReturnValue, nil, reportError(
+			"granularity is required and must be specified",
+		)
+	}
+	if r.pagination == nil {
+		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
+	}
 
+	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "")
+	if r.groupBy != nil {
+		t := *r.groupBy
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(
+					localVarQueryParams,
+					fmt.Sprintf("groupBy.%d", i),
+					s.Index(i).Interface(),
+					"multi",
+				)
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "groupBy", t, "multi")
+		}
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+	if r.filter != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1131,10 +1567,7 @@ func (a *DeliveryOverviewAPIService) GetIngressSuccessMetricsFromDeliveryOvervie
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{
-		"application/vnd.segment.v1alpha+json",
-		"application/json",
-	}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
