@@ -94,7 +94,7 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. Example: &#x60;filter: {discardReason: [&#39;discard1&#39;], eventName: [&#39;name1&#39;, &#39;name2&#39;], eventType: [&#39;type1&#39;]}&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewFilterBy,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -382,7 +382,7 @@ func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. Example: &#x60;filter: {discardReason: [&#39;discard1&#39;], eventName: [&#39;name1&#39;, &#39;name2&#39;], eventType: [&#39;type1&#39;]}&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. If you would like to view retry attempts for a successful delivery, you can filter &#x60;discardReason&#x60; from &#x60;successes.attempt.1&#x60; through &#x60;successes.attempt.10&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewFilterBy,
 ) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
@@ -670,7 +670,7 @@ func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. Example: &#x60;filter: {discardReason: [&#39;discard1&#39;], eventName: [&#39;name1&#39;, &#39;name2&#39;], eventType: [&#39;type1&#39;]}&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewFilterBy,
 ) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
@@ -899,7 +899,6 @@ type ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest struct {
 	destinationConfigId *string
 	groupBy             *[]string
 	filter              *DeliveryOverviewFilterBy
-	subscriptionId      *string
 }
 
 // The sourceId for the Workspace.  This parameter exists in beta.
@@ -958,19 +957,11 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. Example: &#x60;filter: {discardReason: [&#39;discard1&#39;], eventName: [&#39;name1&#39;, &#39;name2&#39;], eventType: [&#39;type1&#39;]}&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewFilterBy,
 ) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
-	return r
-}
-
-// An optional filter for actions destinations, to filter by a specific action.  This parameter exists in beta.
-func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) SubscriptionId(
-	subscriptionId string,
-) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
-	r.subscriptionId = &subscriptionId
 	return r
 }
 
@@ -1071,9 +1062,6 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtSourceMetricsFromDeliveryOverv
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
 	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
-	if r.subscriptionId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "subscriptionId", r.subscriptionId, "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1184,7 +1172,6 @@ type ApiGetIngressFailedMetricsFromDeliveryOverviewRequest struct {
 	destinationConfigId *string
 	groupBy             *[]string
 	filter              *DeliveryOverviewFilterBy
-	subscriptionId      *string
 }
 
 // The sourceId for the Workspace.  This parameter exists in beta.
@@ -1243,19 +1230,11 @@ func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. Example: &#x60;filter: {discardReason: [&#39;discard1&#39;], eventName: [&#39;name1&#39;, &#39;name2&#39;], eventType: [&#39;type1&#39;]}&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewFilterBy,
 ) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
-	return r
-}
-
-// An optional filter for actions destinations, to filter by a specific action.  This parameter exists in beta.
-func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) SubscriptionId(
-	subscriptionId string,
-) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
-	r.subscriptionId = &subscriptionId
 	return r
 }
 
@@ -1356,9 +1335,6 @@ func (a *DeliveryOverviewAPIService) GetIngressFailedMetricsFromDeliveryOverview
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
 	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
-	if r.subscriptionId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "subscriptionId", r.subscriptionId, "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1469,7 +1445,6 @@ type ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest struct {
 	destinationConfigId *string
 	groupBy             *[]string
 	filter              *DeliveryOverviewFilterBy
-	subscriptionId      *string
 }
 
 // The sourceId for the Workspace.  This parameter exists in beta.
@@ -1520,7 +1495,7 @@ func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) DestinationConfi
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
@@ -1528,19 +1503,11 @@ func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. Example: &#x60;filter: {discardReason: [&#39;discard1&#39;], eventName: [&#39;name1&#39;, &#39;name2&#39;], eventType: [&#39;type1&#39;]}&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewFilterBy,
 ) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
-	return r
-}
-
-// An optional filter for actions destinations, to filter by a specific action.  This parameter exists in beta.
-func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) SubscriptionId(
-	subscriptionId string,
-) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
-	r.subscriptionId = &subscriptionId
 	return r
 }
 
@@ -1641,9 +1608,6 @@ func (a *DeliveryOverviewAPIService) GetIngressSuccessMetricsFromDeliveryOvervie
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
 	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
-	if r.subscriptionId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "subscriptionId", r.subscriptionId, "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
