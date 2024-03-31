@@ -31,8 +31,8 @@ type AudienceSummary struct {
 	// Key for the audience.
 	Key string `json:"key"`
 	// Enabled/disabled status for the audience.
-	Enabled    bool               `json:"enabled"`
-	Definition NullableDefinition `json:"definition"`
+	Enabled    bool                `json:"enabled"`
+	Definition NullableDefinition1 `json:"definition"`
 	// Status for the audience.  Possible values: Backfilling, Computing, Failed, Live, Awaiting Destinations, Disabled.
 	Status *string `json:"status,omitempty"`
 	// User id who created the audience.
@@ -56,7 +56,7 @@ func NewAudienceSummary(
 	description string,
 	key string,
 	enabled bool,
-	definition NullableDefinition,
+	definition NullableDefinition1,
 	createdBy string,
 	updatedBy string,
 	createdAt string,
@@ -230,10 +230,10 @@ func (o *AudienceSummary) SetEnabled(v bool) {
 }
 
 // GetDefinition returns the Definition field value
-// If the value is explicit nil, the zero value for Definition will be returned
-func (o *AudienceSummary) GetDefinition() Definition {
+// If the value is explicit nil, the zero value for Definition1 will be returned
+func (o *AudienceSummary) GetDefinition() Definition1 {
 	if o == nil || o.Definition.Get() == nil {
-		var ret Definition
+		var ret Definition1
 		return ret
 	}
 
@@ -243,7 +243,7 @@ func (o *AudienceSummary) GetDefinition() Definition {
 // GetDefinitionOk returns a tuple with the Definition field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AudienceSummary) GetDefinitionOk() (*Definition, bool) {
+func (o *AudienceSummary) GetDefinitionOk() (*Definition1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -251,7 +251,7 @@ func (o *AudienceSummary) GetDefinitionOk() (*Definition, bool) {
 }
 
 // SetDefinition sets field value
-func (o *AudienceSummary) SetDefinition(v Definition) {
+func (o *AudienceSummary) SetDefinition(v Definition1) {
 	o.Definition.Set(&v)
 }
 
