@@ -34,8 +34,7 @@ type ApiGetEgressFailedMetricsFromDeliveryOverviewRequest struct {
 	granularity         *string
 	pagination          *PaginationInput
 	groupBy             *[]string
-	filter              *DeliveryOverviewFilterBy
-	subscriptionId      *string
+	filter              *DeliveryOverviewDestinationFilterBy
 }
 
 // The sourceId for the Workspace.  This parameter exists in beta.
@@ -86,7 +85,7 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Pagination(
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and &#x60;subscriptionId&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -94,19 +93,11 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and/or &#x60;subscriptionId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Filter(
-	filter DeliveryOverviewFilterBy,
+	filter DeliveryOverviewDestinationFilterBy,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
-	return r
-}
-
-// An optional filter for actions destinations, to filter by a specific action.  This parameter exists in beta.
-func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) SubscriptionId(
-	subscriptionId string,
-) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
-	r.subscriptionId = &subscriptionId
 	return r
 }
 
@@ -210,9 +201,6 @@ func (a *DeliveryOverviewAPIService) GetEgressFailedMetricsFromDeliveryOverviewE
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
 	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
-	if r.subscriptionId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "subscriptionId", r.subscriptionId, "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -322,8 +310,7 @@ type ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest struct {
 	granularity         *string
 	pagination          *PaginationInput
 	groupBy             *[]string
-	filter              *DeliveryOverviewFilterBy
-	subscriptionId      *string
+	filter              *DeliveryOverviewDestinationFilterBy
 }
 
 // The sourceId for the Workspace.  This parameter exists in beta.
@@ -374,7 +361,7 @@ func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) Pagination(
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and &#x60;subscriptionId&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
@@ -382,19 +369,11 @@ func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. If you would like to view retry attempts for a successful delivery, you can filter &#x60;discardReason&#x60; from &#x60;successes.attempt.1&#x60; through &#x60;successes.attempt.10&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and/or &#x60;subscriptionId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. If you would like to view retry attempts for a successful delivery, you can filter &#x60;discardReason&#x60; from &#x60;successes.attempt.1&#x60; through &#x60;successes.attempt.10&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) Filter(
-	filter DeliveryOverviewFilterBy,
+	filter DeliveryOverviewDestinationFilterBy,
 ) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
-	return r
-}
-
-// An optional filter for actions destinations, to filter by a specific action.  This parameter exists in beta.
-func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) SubscriptionId(
-	subscriptionId string,
-) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
-	r.subscriptionId = &subscriptionId
 	return r
 }
 
@@ -498,9 +477,6 @@ func (a *DeliveryOverviewAPIService) GetEgressSuccessMetricsFromDeliveryOverview
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
 	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
-	if r.subscriptionId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "subscriptionId", r.subscriptionId, "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -610,7 +586,7 @@ type ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest struct {
 	granularity         *string
 	pagination          *PaginationInput
 	groupBy             *[]string
-	filter              *DeliveryOverviewFilterBy
+	filter              *DeliveryOverviewDestinationFilterBy
 	subscriptionId      *string
 }
 
@@ -662,7 +638,7 @@ func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Paginatio
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and &#x60;subscriptionId&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
@@ -670,9 +646,9 @@ func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and/or &#x60;subscriptionId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Filter(
-	filter DeliveryOverviewFilterBy,
+	filter DeliveryOverviewDestinationFilterBy,
 ) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
 	return r
@@ -889,16 +865,15 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtDestinationMetricsFromDelivery
 }
 
 type ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest struct {
-	ctx                 context.Context
-	ApiService          *DeliveryOverviewAPIService
-	sourceId            *string
-	startTime           *string
-	endTime             *string
-	granularity         *string
-	pagination          *PaginationInput
-	destinationConfigId *string
-	groupBy             *[]string
-	filter              *DeliveryOverviewFilterBy
+	ctx         context.Context
+	ApiService  *DeliveryOverviewAPIService
+	sourceId    *string
+	startTime   *string
+	endTime     *string
+	granularity *string
+	pagination  *PaginationInput
+	groupBy     *[]string
+	filter      *DeliveryOverviewSourceFilterBy
 }
 
 // The sourceId for the Workspace.  This parameter exists in beta.
@@ -941,14 +916,6 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) Pagination(
 	return r
 }
 
-// The id tied to a Workspace Destination.  This parameter exists in beta.
-func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) DestinationConfigId(
-	destinationConfigId string,
-) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
-	r.destinationConfigId = &destinationConfigId
-	return r
-}
-
 // A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
@@ -959,7 +926,7 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) GroupBy(
 
 // An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) Filter(
-	filter DeliveryOverviewFilterBy,
+	filter DeliveryOverviewSourceFilterBy,
 ) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
 	return r
@@ -1031,14 +998,6 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtSourceMetricsFromDeliveryOverv
 	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
-	if r.destinationConfigId != nil {
-		parameterAddToHeaderOrQuery(
-			localVarQueryParams,
-			"destinationConfigId",
-			r.destinationConfigId,
-			"",
-		)
-	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
 	parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "")
 	if r.groupBy != nil {
@@ -1162,16 +1121,15 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtSourceMetricsFromDeliveryOverv
 }
 
 type ApiGetIngressFailedMetricsFromDeliveryOverviewRequest struct {
-	ctx                 context.Context
-	ApiService          *DeliveryOverviewAPIService
-	sourceId            *string
-	startTime           *string
-	endTime             *string
-	granularity         *string
-	pagination          *PaginationInput
-	destinationConfigId *string
-	groupBy             *[]string
-	filter              *DeliveryOverviewFilterBy
+	ctx         context.Context
+	ApiService  *DeliveryOverviewAPIService
+	sourceId    *string
+	startTime   *string
+	endTime     *string
+	granularity *string
+	pagination  *PaginationInput
+	groupBy     *[]string
+	filter      *DeliveryOverviewSourceFilterBy
 }
 
 // The sourceId for the Workspace.  This parameter exists in beta.
@@ -1214,14 +1172,6 @@ func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) Pagination(
 	return r
 }
 
-// The id tied to a Workspace Destination.  This parameter exists in beta.
-func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) DestinationConfigId(
-	destinationConfigId string,
-) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
-	r.destinationConfigId = &destinationConfigId
-	return r
-}
-
 // A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
@@ -1232,7 +1182,7 @@ func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 
 // An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) Filter(
-	filter DeliveryOverviewFilterBy,
+	filter DeliveryOverviewSourceFilterBy,
 ) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
 	return r
@@ -1304,14 +1254,6 @@ func (a *DeliveryOverviewAPIService) GetIngressFailedMetricsFromDeliveryOverview
 	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
-	if r.destinationConfigId != nil {
-		parameterAddToHeaderOrQuery(
-			localVarQueryParams,
-			"destinationConfigId",
-			r.destinationConfigId,
-			"",
-		)
-	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
 	parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "")
 	if r.groupBy != nil {
@@ -1435,16 +1377,15 @@ func (a *DeliveryOverviewAPIService) GetIngressFailedMetricsFromDeliveryOverview
 }
 
 type ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest struct {
-	ctx                 context.Context
-	ApiService          *DeliveryOverviewAPIService
-	sourceId            *string
-	startTime           *string
-	endTime             *string
-	granularity         *string
-	pagination          *PaginationInput
-	destinationConfigId *string
-	groupBy             *[]string
-	filter              *DeliveryOverviewFilterBy
+	ctx         context.Context
+	ApiService  *DeliveryOverviewAPIService
+	sourceId    *string
+	startTime   *string
+	endTime     *string
+	granularity *string
+	pagination  *PaginationInput
+	groupBy     *[]string
+	filter      *DeliveryOverviewSourceFilterBy
 }
 
 // The sourceId for the Workspace.  This parameter exists in beta.
@@ -1487,14 +1428,6 @@ func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) Pagination(
 	return r
 }
 
-// The id tied to a Workspace Destination.  This parameter exists in beta.
-func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) DestinationConfigId(
-	destinationConfigId string,
-) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
-	r.destinationConfigId = &destinationConfigId
-	return r
-}
-
 // A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
@@ -1505,7 +1438,7 @@ func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 
 // An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) Filter(
-	filter DeliveryOverviewFilterBy,
+	filter DeliveryOverviewSourceFilterBy,
 ) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
 	return r
@@ -1577,14 +1510,6 @@ func (a *DeliveryOverviewAPIService) GetIngressSuccessMetricsFromDeliveryOvervie
 	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
-	if r.destinationConfigId != nil {
-		parameterAddToHeaderOrQuery(
-			localVarQueryParams,
-			"destinationConfigId",
-			r.destinationConfigId,
-			"",
-		)
-	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
 	parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "")
 	if r.groupBy != nil {
