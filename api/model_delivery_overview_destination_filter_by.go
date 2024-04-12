@@ -20,7 +20,7 @@ var _ MappedNullable = &DeliveryOverviewDestinationFilterBy{}
 
 // DeliveryOverviewDestinationFilterBy The `DeliveryOverviewDestinationFilterBy` object is a map of the filterable fields and their values.
 type DeliveryOverviewDestinationFilterBy struct {
-	// A list of strings of discard reasons. Can be used to filter all Delivery Overview steps, except for Successfully Received.  See [Discard Record Documentation](https://segment.com/docs/connections/delivery-overview/#troubleshooting) for valid error codes.
+	// A list of strings of discard reasons.  See [Discard Record Documentation](https://segment.com/docs/connections/delivery-overview/#troubleshooting) for valid error codes.
 	DiscardReason []string `json:"discardReason,omitempty"`
 	// A list of strings of event names.
 	EventName []string `json:"eventName,omitempty"`
@@ -28,7 +28,7 @@ type DeliveryOverviewDestinationFilterBy struct {
 	EventType []string `json:"eventType,omitempty"`
 	// A list of strings of app versions.
 	AppVersion []string `json:"appVersion,omitempty"`
-	// A list of strings of subscriptionIDs.
+	// A list of strings of subscriptionIDs for Actions Destinations.
 	SubscriptionId []string `json:"subscriptionId,omitempty"`
 }
 
