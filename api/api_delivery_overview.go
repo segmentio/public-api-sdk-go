@@ -1385,7 +1385,7 @@ type ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest struct {
 	granularity *string
 	pagination  *PaginationInput
 	groupBy     *[]string
-	filter      *DeliveryOverviewSourceFilterBy
+	filter      *DeliveryOverviewSuccessfullyReceivedFilterBy
 }
 
 // The sourceId for the Workspace.  This parameter exists in beta.
@@ -1438,7 +1438,7 @@ func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 
 // An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) Filter(
-	filter DeliveryOverviewSourceFilterBy,
+	filter DeliveryOverviewSuccessfullyReceivedFilterBy,
 ) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
 	return r
