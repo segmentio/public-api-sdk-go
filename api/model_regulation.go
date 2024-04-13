@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 47.0.0
+API version: 48.0.0
 Contact: friends@segment.com
 */
 
@@ -27,7 +27,7 @@ type Regulation struct {
 	// The current status of the regulate request.
 	OverallStatus string `json:"overallStatus"`
 	// The timestamp of when the request finished.
-	FinishedAt string `json:"finishedAt"`
+	FinishedAt *string `json:"finishedAt,omitempty"`
 	// The timestamp of the creation of the request.
 	CreatedAt string `json:"createdAt"`
 	// The status of each stream including all the Destinations that correspond to the stream.
@@ -42,7 +42,6 @@ func NewRegulation(
 	id string,
 	workspaceId string,
 	overallStatus string,
-	finishedAt string,
 	createdAt string,
 	streamStatus []StreamStatusV1,
 ) *Regulation {
@@ -50,7 +49,6 @@ func NewRegulation(
 	this.Id = id
 	this.WorkspaceId = workspaceId
 	this.OverallStatus = overallStatus
-	this.FinishedAt = finishedAt
 	this.CreatedAt = createdAt
 	this.StreamStatus = streamStatus
 	return &this
@@ -136,28 +134,36 @@ func (o *Regulation) SetOverallStatus(v string) {
 	o.OverallStatus = v
 }
 
-// GetFinishedAt returns the FinishedAt field value
+// GetFinishedAt returns the FinishedAt field value if set, zero value otherwise.
 func (o *Regulation) GetFinishedAt() string {
-	if o == nil {
+	if o == nil || IsNil(o.FinishedAt) {
 		var ret string
 		return ret
 	}
-
-	return o.FinishedAt
+	return *o.FinishedAt
 }
 
-// GetFinishedAtOk returns a tuple with the FinishedAt field value
+// GetFinishedAtOk returns a tuple with the FinishedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Regulation) GetFinishedAtOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.FinishedAt) {
 		return nil, false
 	}
-	return &o.FinishedAt, true
+	return o.FinishedAt, true
 }
 
-// SetFinishedAt sets field value
+// HasFinishedAt returns a boolean if a field has been set.
+func (o *Regulation) HasFinishedAt() bool {
+	if o != nil && !IsNil(o.FinishedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetFinishedAt gets a reference to the given string and assigns it to the FinishedAt field.
 func (o *Regulation) SetFinishedAt(v string) {
-	o.FinishedAt = v
+	o.FinishedAt = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value
@@ -221,7 +227,9 @@ func (o Regulation) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["workspaceId"] = o.WorkspaceId
 	toSerialize["overallStatus"] = o.OverallStatus
-	toSerialize["finishedAt"] = o.FinishedAt
+	if !IsNil(o.FinishedAt) {
+		toSerialize["finishedAt"] = o.FinishedAt
+	}
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["streamStatus"] = o.StreamStatus
 	return toSerialize, nil
