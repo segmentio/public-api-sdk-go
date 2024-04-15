@@ -15,13 +15,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the DeliveryOverviewFilterBy type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &DeliveryOverviewFilterBy{}
+// checks if the DeliveryOverviewSuccessfullyReceivedFilterBy type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DeliveryOverviewSuccessfullyReceivedFilterBy{}
 
-// DeliveryOverviewFilterBy The `DeliveryOverviewFilterBy` object is a map of the filterable fields and their values.
-type DeliveryOverviewFilterBy struct {
-	// A list of strings of discard reasons. Can be used to filter all Source and Destination steps, except for Successfully Received.  See [Discard Record Documentation](https://segment.com/docs/connections/delivery-overview/#troubleshooting) for valid error codes.
-	DiscardReason []string `json:"discardReason,omitempty"`
+// DeliveryOverviewSuccessfullyReceivedFilterBy The `DeliveryOverviewSuccessfullyReceivedFilterBy` object is a map of the filterable fields and their values for the Successfully Received pipeline step.
+type DeliveryOverviewSuccessfullyReceivedFilterBy struct {
 	// A list of strings of event names.
 	EventName []string `json:"eventName,omitempty"`
 	// A list of strings of event types. Valid options are: `alias`, `group`, `identify`, `page`, `screen`, and `track`.
@@ -30,57 +28,25 @@ type DeliveryOverviewFilterBy struct {
 	AppVersion []string `json:"appVersion,omitempty"`
 }
 
-// NewDeliveryOverviewFilterBy instantiates a new DeliveryOverviewFilterBy object
+// NewDeliveryOverviewSuccessfullyReceivedFilterBy instantiates a new DeliveryOverviewSuccessfullyReceivedFilterBy object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeliveryOverviewFilterBy() *DeliveryOverviewFilterBy {
-	this := DeliveryOverviewFilterBy{}
+func NewDeliveryOverviewSuccessfullyReceivedFilterBy() *DeliveryOverviewSuccessfullyReceivedFilterBy {
+	this := DeliveryOverviewSuccessfullyReceivedFilterBy{}
 	return &this
 }
 
-// NewDeliveryOverviewFilterByWithDefaults instantiates a new DeliveryOverviewFilterBy object
+// NewDeliveryOverviewSuccessfullyReceivedFilterByWithDefaults instantiates a new DeliveryOverviewSuccessfullyReceivedFilterBy object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewDeliveryOverviewFilterByWithDefaults() *DeliveryOverviewFilterBy {
-	this := DeliveryOverviewFilterBy{}
+func NewDeliveryOverviewSuccessfullyReceivedFilterByWithDefaults() *DeliveryOverviewSuccessfullyReceivedFilterBy {
+	this := DeliveryOverviewSuccessfullyReceivedFilterBy{}
 	return &this
-}
-
-// GetDiscardReason returns the DiscardReason field value if set, zero value otherwise.
-func (o *DeliveryOverviewFilterBy) GetDiscardReason() []string {
-	if o == nil || IsNil(o.DiscardReason) {
-		var ret []string
-		return ret
-	}
-	return o.DiscardReason
-}
-
-// GetDiscardReasonOk returns a tuple with the DiscardReason field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DeliveryOverviewFilterBy) GetDiscardReasonOk() ([]string, bool) {
-	if o == nil || IsNil(o.DiscardReason) {
-		return nil, false
-	}
-	return o.DiscardReason, true
-}
-
-// HasDiscardReason returns a boolean if a field has been set.
-func (o *DeliveryOverviewFilterBy) HasDiscardReason() bool {
-	if o != nil && !IsNil(o.DiscardReason) {
-		return true
-	}
-
-	return false
-}
-
-// SetDiscardReason gets a reference to the given []string and assigns it to the DiscardReason field.
-func (o *DeliveryOverviewFilterBy) SetDiscardReason(v []string) {
-	o.DiscardReason = v
 }
 
 // GetEventName returns the EventName field value if set, zero value otherwise.
-func (o *DeliveryOverviewFilterBy) GetEventName() []string {
+func (o *DeliveryOverviewSuccessfullyReceivedFilterBy) GetEventName() []string {
 	if o == nil || IsNil(o.EventName) {
 		var ret []string
 		return ret
@@ -90,7 +56,7 @@ func (o *DeliveryOverviewFilterBy) GetEventName() []string {
 
 // GetEventNameOk returns a tuple with the EventName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DeliveryOverviewFilterBy) GetEventNameOk() ([]string, bool) {
+func (o *DeliveryOverviewSuccessfullyReceivedFilterBy) GetEventNameOk() ([]string, bool) {
 	if o == nil || IsNil(o.EventName) {
 		return nil, false
 	}
@@ -98,7 +64,7 @@ func (o *DeliveryOverviewFilterBy) GetEventNameOk() ([]string, bool) {
 }
 
 // HasEventName returns a boolean if a field has been set.
-func (o *DeliveryOverviewFilterBy) HasEventName() bool {
+func (o *DeliveryOverviewSuccessfullyReceivedFilterBy) HasEventName() bool {
 	if o != nil && !IsNil(o.EventName) {
 		return true
 	}
@@ -107,12 +73,12 @@ func (o *DeliveryOverviewFilterBy) HasEventName() bool {
 }
 
 // SetEventName gets a reference to the given []string and assigns it to the EventName field.
-func (o *DeliveryOverviewFilterBy) SetEventName(v []string) {
+func (o *DeliveryOverviewSuccessfullyReceivedFilterBy) SetEventName(v []string) {
 	o.EventName = v
 }
 
 // GetEventType returns the EventType field value if set, zero value otherwise.
-func (o *DeliveryOverviewFilterBy) GetEventType() []string {
+func (o *DeliveryOverviewSuccessfullyReceivedFilterBy) GetEventType() []string {
 	if o == nil || IsNil(o.EventType) {
 		var ret []string
 		return ret
@@ -122,7 +88,7 @@ func (o *DeliveryOverviewFilterBy) GetEventType() []string {
 
 // GetEventTypeOk returns a tuple with the EventType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DeliveryOverviewFilterBy) GetEventTypeOk() ([]string, bool) {
+func (o *DeliveryOverviewSuccessfullyReceivedFilterBy) GetEventTypeOk() ([]string, bool) {
 	if o == nil || IsNil(o.EventType) {
 		return nil, false
 	}
@@ -130,7 +96,7 @@ func (o *DeliveryOverviewFilterBy) GetEventTypeOk() ([]string, bool) {
 }
 
 // HasEventType returns a boolean if a field has been set.
-func (o *DeliveryOverviewFilterBy) HasEventType() bool {
+func (o *DeliveryOverviewSuccessfullyReceivedFilterBy) HasEventType() bool {
 	if o != nil && !IsNil(o.EventType) {
 		return true
 	}
@@ -139,12 +105,12 @@ func (o *DeliveryOverviewFilterBy) HasEventType() bool {
 }
 
 // SetEventType gets a reference to the given []string and assigns it to the EventType field.
-func (o *DeliveryOverviewFilterBy) SetEventType(v []string) {
+func (o *DeliveryOverviewSuccessfullyReceivedFilterBy) SetEventType(v []string) {
 	o.EventType = v
 }
 
 // GetAppVersion returns the AppVersion field value if set, zero value otherwise.
-func (o *DeliveryOverviewFilterBy) GetAppVersion() []string {
+func (o *DeliveryOverviewSuccessfullyReceivedFilterBy) GetAppVersion() []string {
 	if o == nil || IsNil(o.AppVersion) {
 		var ret []string
 		return ret
@@ -154,7 +120,7 @@ func (o *DeliveryOverviewFilterBy) GetAppVersion() []string {
 
 // GetAppVersionOk returns a tuple with the AppVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DeliveryOverviewFilterBy) GetAppVersionOk() ([]string, bool) {
+func (o *DeliveryOverviewSuccessfullyReceivedFilterBy) GetAppVersionOk() ([]string, bool) {
 	if o == nil || IsNil(o.AppVersion) {
 		return nil, false
 	}
@@ -162,7 +128,7 @@ func (o *DeliveryOverviewFilterBy) GetAppVersionOk() ([]string, bool) {
 }
 
 // HasAppVersion returns a boolean if a field has been set.
-func (o *DeliveryOverviewFilterBy) HasAppVersion() bool {
+func (o *DeliveryOverviewSuccessfullyReceivedFilterBy) HasAppVersion() bool {
 	if o != nil && !IsNil(o.AppVersion) {
 		return true
 	}
@@ -171,11 +137,11 @@ func (o *DeliveryOverviewFilterBy) HasAppVersion() bool {
 }
 
 // SetAppVersion gets a reference to the given []string and assigns it to the AppVersion field.
-func (o *DeliveryOverviewFilterBy) SetAppVersion(v []string) {
+func (o *DeliveryOverviewSuccessfullyReceivedFilterBy) SetAppVersion(v []string) {
 	o.AppVersion = v
 }
 
-func (o DeliveryOverviewFilterBy) MarshalJSON() ([]byte, error) {
+func (o DeliveryOverviewSuccessfullyReceivedFilterBy) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -183,11 +149,8 @@ func (o DeliveryOverviewFilterBy) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DeliveryOverviewFilterBy) ToMap() (map[string]interface{}, error) {
+func (o DeliveryOverviewSuccessfullyReceivedFilterBy) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.DiscardReason) {
-		toSerialize["discardReason"] = o.DiscardReason
-	}
 	if !IsNil(o.EventName) {
 		toSerialize["eventName"] = o.EventName
 	}
@@ -200,40 +163,42 @@ func (o DeliveryOverviewFilterBy) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableDeliveryOverviewFilterBy struct {
-	value *DeliveryOverviewFilterBy
+type NullableDeliveryOverviewSuccessfullyReceivedFilterBy struct {
+	value *DeliveryOverviewSuccessfullyReceivedFilterBy
 	isSet bool
 }
 
-func (v NullableDeliveryOverviewFilterBy) Get() *DeliveryOverviewFilterBy {
+func (v NullableDeliveryOverviewSuccessfullyReceivedFilterBy) Get() *DeliveryOverviewSuccessfullyReceivedFilterBy {
 	return v.value
 }
 
-func (v *NullableDeliveryOverviewFilterBy) Set(val *DeliveryOverviewFilterBy) {
+func (v *NullableDeliveryOverviewSuccessfullyReceivedFilterBy) Set(
+	val *DeliveryOverviewSuccessfullyReceivedFilterBy,
+) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableDeliveryOverviewFilterBy) IsSet() bool {
+func (v NullableDeliveryOverviewSuccessfullyReceivedFilterBy) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableDeliveryOverviewFilterBy) Unset() {
+func (v *NullableDeliveryOverviewSuccessfullyReceivedFilterBy) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableDeliveryOverviewFilterBy(
-	val *DeliveryOverviewFilterBy,
-) *NullableDeliveryOverviewFilterBy {
-	return &NullableDeliveryOverviewFilterBy{value: val, isSet: true}
+func NewNullableDeliveryOverviewSuccessfullyReceivedFilterBy(
+	val *DeliveryOverviewSuccessfullyReceivedFilterBy,
+) *NullableDeliveryOverviewSuccessfullyReceivedFilterBy {
+	return &NullableDeliveryOverviewSuccessfullyReceivedFilterBy{value: val, isSet: true}
 }
 
-func (v NullableDeliveryOverviewFilterBy) MarshalJSON() ([]byte, error) {
+func (v NullableDeliveryOverviewSuccessfullyReceivedFilterBy) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableDeliveryOverviewFilterBy) UnmarshalJSON(src []byte) error {
+func (v *NullableDeliveryOverviewSuccessfullyReceivedFilterBy) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## Operation: GetEgressFailedMetricsFromDeliveryOverview
 
-> GetEgressFailedMetricsFromDeliveryOverview200Response GetEgressFailedMetricsFromDeliveryOverview(ctx).SourceId(sourceId).DestinationConfigId(destinationConfigId).StartTime(startTime).EndTime(endTime).Granularity(granularity).Pagination(pagination).GroupBy(groupBy).Filter(filter).SubscriptionId(subscriptionId).Execute()
+> GetEgressFailedMetricsFromDeliveryOverview200Response GetEgressFailedMetricsFromDeliveryOverview(ctx).SourceId(sourceId).DestinationConfigId(destinationConfigId).StartTime(startTime).EndTime(endTime).Granularity(granularity).Pagination(pagination).GroupBy(groupBy).Filter(filter).Execute()
 
 Get Egress Failed Metrics from Delivery Overview
 
@@ -38,17 +38,16 @@ func main() {
     destinationConfigId := "fP7qoQw2HTWt9WdMr718gn" // string | The id tied to a Workspace Destination.  This parameter exists in beta.
     startTime := "2024-01-01T00:00:00Z" // string | The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
     endTime := "2024-01-03T00:00:00Z" // string | The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
-    granularity := "day" // string | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
+    granularity := "DAY" // string | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
     pagination := *api.NewPaginationInput(10) // PaginationInput | Params to specify the page cursor and count.  This parameter exists in beta.
-    groupBy := []string{"Inner_example"} // []string | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: `eventName`, `eventType`, `discardReason`, and `appVersion`.  This parameter exists in beta. (optional)
-    filter := *api.NewDeliveryOverviewFilterBy() // DeliveryOverviewFilterBy | An optional filter for `eventName`, `eventType`, `discardReason`, and/or `appVersion` that can be applied in addition to a `groupBy`.  This parameter exists in beta. (optional)
-    subscriptionId := "subscriptionId_example" // string | An optional filter for actions destinations, to filter by a specific action.  This parameter exists in beta. (optional)
+    groupBy := []string{"Inner_example"} // []string | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: `eventName`, `eventType`, `discardReason`, `appVersion`, and `subscriptionId`.  This parameter exists in beta. (optional)
+    filter := *api.NewDeliveryOverviewDestinationFilterBy() // DeliveryOverviewDestinationFilterBy | An optional filter for `eventName`, `eventType`, `discardReason`, `appVersion`, and/or `subscriptionId` that can be applied in addition to a `groupBy`.  This parameter exists in beta. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DeliveryOverviewAPI.GetEgressFailedMetricsFromDeliveryOverview(ctx).SourceId(sourceId).DestinationConfigId(destinationConfigId).StartTime(startTime).EndTime(endTime).Granularity(granularity).Pagination(pagination).GroupBy(groupBy).Filter(filter).SubscriptionId(subscriptionId).Execute()
+    resp, r, err := apiClient.DeliveryOverviewAPI.GetEgressFailedMetricsFromDeliveryOverview(ctx).SourceId(sourceId).DestinationConfigId(destinationConfigId).StartTime(startTime).EndTime(endTime).Granularity(granularity).Pagination(pagination).GroupBy(groupBy).Filter(filter).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DeliveryOverviewAPI.GetEgressFailedMetricsFromDeliveryOverview``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -81,9 +80,8 @@ Name | Type | Description  | Notes
  **endTime** | **string** | The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta. | 
  **granularity** | **string** | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta. | 
  **pagination** | [**PaginationInput**](PaginationInput.md) | Params to specify the page cursor and count.  This parameter exists in beta. | 
- **groupBy** | **[]string** | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta. | 
- **filter** | [**DeliveryOverviewFilterBy**](DeliveryOverviewFilterBy.md) | An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta. | 
- **subscriptionId** | **string** | An optional filter for actions destinations, to filter by a specific action.  This parameter exists in beta. | 
+ **groupBy** | **[]string** | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and &#x60;subscriptionId&#x60;.  This parameter exists in beta. | 
+ **filter** | [**DeliveryOverviewDestinationFilterBy**](DeliveryOverviewDestinationFilterBy.md) | An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and/or &#x60;subscriptionId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta. | 
 
 ### Return type
 
@@ -105,7 +103,7 @@ Name | Type | Description  | Notes
 
 ## Operation: GetEgressSuccessMetricsFromDeliveryOverview
 
-> GetEgressFailedMetricsFromDeliveryOverview200Response GetEgressSuccessMetricsFromDeliveryOverview(ctx).SourceId(sourceId).DestinationConfigId(destinationConfigId).StartTime(startTime).EndTime(endTime).Granularity(granularity).Pagination(pagination).GroupBy(groupBy).Filter(filter).SubscriptionId(subscriptionId).Execute()
+> GetEgressFailedMetricsFromDeliveryOverview200Response GetEgressSuccessMetricsFromDeliveryOverview(ctx).SourceId(sourceId).DestinationConfigId(destinationConfigId).StartTime(startTime).EndTime(endTime).Granularity(granularity).Pagination(pagination).GroupBy(groupBy).Filter(filter).Execute()
 
 Get Egress Success Metrics from Delivery Overview
 
@@ -128,17 +126,16 @@ func main() {
     destinationConfigId := "fP7qoQw2HTWt9WdMr718gn" // string | The id tied to a Workspace Destination.  This parameter exists in beta.
     startTime := "2024-01-01T00:00:00Z" // string | The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
     endTime := "2024-01-03T00:00:00Z" // string | The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
-    granularity := "day" // string | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
+    granularity := "DAY" // string | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
     pagination := *api.NewPaginationInput(10) // PaginationInput | Params to specify the page cursor and count.  This parameter exists in beta.
-    groupBy := []string{"Inner_example"} // []string | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: `eventName`, `eventType`, `discardReason`, and `appVersion`.  This parameter exists in beta. (optional)
-    filter := *api.NewDeliveryOverviewFilterBy() // DeliveryOverviewFilterBy | An optional filter for `eventName`, `eventType`, `discardReason`, and/or `appVersion` that can be applied in addition to a `groupBy`. If you would like to view retry attempts for a successful delivery, you can filter `discardReason` from `successes.attempt.1` through `successes.attempt.10`.  This parameter exists in beta. (optional)
-    subscriptionId := "subscriptionId_example" // string | An optional filter for actions destinations, to filter by a specific action.  This parameter exists in beta. (optional)
+    groupBy := []string{"Inner_example"} // []string | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: `eventName`, `eventType`, `discardReason`, `appVersion`, and `subscriptionId`.  This parameter exists in beta. (optional)
+    filter := *api.NewDeliveryOverviewDestinationFilterBy() // DeliveryOverviewDestinationFilterBy | An optional filter for `eventName`, `eventType`, `discardReason`, `appVersion`, and/or `subscriptionId` that can be applied in addition to a `groupBy`. If you would like to view retry attempts for a successful delivery, you can filter `discardReason` from `successes.attempt.1` through `successes.attempt.10`.  This parameter exists in beta. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DeliveryOverviewAPI.GetEgressSuccessMetricsFromDeliveryOverview(ctx).SourceId(sourceId).DestinationConfigId(destinationConfigId).StartTime(startTime).EndTime(endTime).Granularity(granularity).Pagination(pagination).GroupBy(groupBy).Filter(filter).SubscriptionId(subscriptionId).Execute()
+    resp, r, err := apiClient.DeliveryOverviewAPI.GetEgressSuccessMetricsFromDeliveryOverview(ctx).SourceId(sourceId).DestinationConfigId(destinationConfigId).StartTime(startTime).EndTime(endTime).Granularity(granularity).Pagination(pagination).GroupBy(groupBy).Filter(filter).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DeliveryOverviewAPI.GetEgressSuccessMetricsFromDeliveryOverview``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -171,9 +168,8 @@ Name | Type | Description  | Notes
  **endTime** | **string** | The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta. | 
  **granularity** | **string** | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta. | 
  **pagination** | [**PaginationInput**](PaginationInput.md) | Params to specify the page cursor and count.  This parameter exists in beta. | 
- **groupBy** | **[]string** | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta. | 
- **filter** | [**DeliveryOverviewFilterBy**](DeliveryOverviewFilterBy.md) | An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. If you would like to view retry attempts for a successful delivery, you can filter &#x60;discardReason&#x60; from &#x60;successes.attempt.1&#x60; through &#x60;successes.attempt.10&#x60;.  This parameter exists in beta. | 
- **subscriptionId** | **string** | An optional filter for actions destinations, to filter by a specific action.  This parameter exists in beta. | 
+ **groupBy** | **[]string** | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and &#x60;subscriptionId&#x60;.  This parameter exists in beta. | 
+ **filter** | [**DeliveryOverviewDestinationFilterBy**](DeliveryOverviewDestinationFilterBy.md) | An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and/or &#x60;subscriptionId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. If you would like to view retry attempts for a successful delivery, you can filter &#x60;discardReason&#x60; from &#x60;successes.attempt.1&#x60; through &#x60;successes.attempt.10&#x60;.  This parameter exists in beta. | 
 
 ### Return type
 
@@ -218,10 +214,10 @@ func main() {
     destinationConfigId := "fP7qoQw2HTWt9WdMr718gn" // string | The id tied to a Workspace Destination.  This parameter exists in beta.
     startTime := "2024-01-01T00:00:00Z" // string | The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
     endTime := "2024-01-03T00:00:00Z" // string | The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
-    granularity := "day" // string | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
+    granularity := "DAY" // string | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
     pagination := *api.NewPaginationInput(10) // PaginationInput | Params to specify the page cursor and count.  This parameter exists in beta.
-    groupBy := []string{"Inner_example"} // []string | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: `eventName`, `eventType`, `discardReason`, and `appVersion`.  This parameter exists in beta. (optional)
-    filter := *api.NewDeliveryOverviewFilterBy() // DeliveryOverviewFilterBy | An optional filter for `eventName`, `eventType`, `discardReason`, and/or `appVersion` that can be applied in addition to a `groupBy`.  This parameter exists in beta. (optional)
+    groupBy := []string{"Inner_example"} // []string | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: `eventName`, `eventType`, `discardReason`, `appVersion`, and `subscriptionId`.  This parameter exists in beta. (optional)
+    filter := *api.NewDeliveryOverviewDestinationFilterBy() // DeliveryOverviewDestinationFilterBy | An optional filter for `eventName`, `eventType`, `discardReason`, `appVersion`, and/or `subscriptionId` that can be applied in addition to a `groupBy`.  This parameter exists in beta. (optional)
     subscriptionId := "subscriptionId_example" // string | An optional filter for actions destinations, to filter by a specific action.  This parameter exists in beta. (optional)
 
     configuration := api.NewConfiguration()
@@ -261,8 +257,8 @@ Name | Type | Description  | Notes
  **endTime** | **string** | The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta. | 
  **granularity** | **string** | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta. | 
  **pagination** | [**PaginationInput**](PaginationInput.md) | Params to specify the page cursor and count.  This parameter exists in beta. | 
- **groupBy** | **[]string** | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta. | 
- **filter** | [**DeliveryOverviewFilterBy**](DeliveryOverviewFilterBy.md) | An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta. | 
+ **groupBy** | **[]string** | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and &#x60;subscriptionId&#x60;.  This parameter exists in beta. | 
+ **filter** | [**DeliveryOverviewDestinationFilterBy**](DeliveryOverviewDestinationFilterBy.md) | An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and/or &#x60;subscriptionId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta. | 
  **subscriptionId** | **string** | An optional filter for actions destinations, to filter by a specific action.  This parameter exists in beta. | 
 
 ### Return type
@@ -307,10 +303,10 @@ func main() {
     sourceId := "rh5BDZp6QDHvXFCkibm1pR" // string | The sourceId for the Workspace.  This parameter exists in beta.
     startTime := "2024-01-01T00:00:00Z" // string | The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
     endTime := "2024-01-03T00:00:00Z" // string | The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
-    granularity := "day" // string | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
+    granularity := "DAY" // string | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
     pagination := *api.NewPaginationInput(10) // PaginationInput | Optional params to specify the page cursor and count.  This parameter exists in beta.
     groupBy := []string{"Inner_example"} // []string | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: `eventName`, `eventType`, `discardReason`, and `appVersion`.  This parameter exists in beta. (optional)
-    filter := *api.NewDeliveryOverviewFilterBy() // DeliveryOverviewFilterBy | An optional filter for `eventName`, `eventType`, `discardReason`, and/or `appVersion` that can be applied in addition to a `groupBy`.  This parameter exists in beta. (optional)
+    filter := *api.NewDeliveryOverviewSourceFilterBy() // DeliveryOverviewSourceFilterBy | An optional filter for `eventName`, `eventType`, `discardReason`, and/or `appVersion` that can be applied in addition to a `groupBy`.  This parameter exists in beta. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -349,7 +345,7 @@ Name | Type | Description  | Notes
  **granularity** | **string** | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta. | 
  **pagination** | [**PaginationInput**](PaginationInput.md) | Optional params to specify the page cursor and count.  This parameter exists in beta. | 
  **groupBy** | **[]string** | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta. | 
- **filter** | [**DeliveryOverviewFilterBy**](DeliveryOverviewFilterBy.md) | An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta. | 
+ **filter** | [**DeliveryOverviewSourceFilterBy**](DeliveryOverviewSourceFilterBy.md) | An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta. | 
 
 ### Return type
 
@@ -393,10 +389,10 @@ func main() {
     sourceId := "rh5BDZp6QDHvXFCkibm1pR" // string | The sourceId for the Workspace.  This parameter exists in beta.
     startTime := "2024-01-01T00:00:00Z" // string | The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
     endTime := "2024-01-03T00:00:00Z" // string | The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
-    granularity := "day" // string | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
+    granularity := "DAY" // string | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
     pagination := *api.NewPaginationInput(10) // PaginationInput | Optional params to specify the page cursor and count.  This parameter exists in beta.
     groupBy := []string{"Inner_example"} // []string | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: `eventName`, `eventType`, `discardReason`, and `appVersion`.  This parameter exists in beta. (optional)
-    filter := *api.NewDeliveryOverviewFilterBy() // DeliveryOverviewFilterBy | An optional filter for `eventName`, `eventType`, `discardReason`, and/or `appVersion` that can be applied in addition to a `groupBy`.  This parameter exists in beta. (optional)
+    filter := *api.NewDeliveryOverviewSourceFilterBy() // DeliveryOverviewSourceFilterBy | An optional filter for `eventName`, `eventType`, `discardReason`, and/or `appVersion` that can be applied in addition to a `groupBy`.  This parameter exists in beta. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -435,7 +431,7 @@ Name | Type | Description  | Notes
  **granularity** | **string** | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta. | 
  **pagination** | [**PaginationInput**](PaginationInput.md) | Optional params to specify the page cursor and count.  This parameter exists in beta. | 
  **groupBy** | **[]string** | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta. | 
- **filter** | [**DeliveryOverviewFilterBy**](DeliveryOverviewFilterBy.md) | An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta. | 
+ **filter** | [**DeliveryOverviewSourceFilterBy**](DeliveryOverviewSourceFilterBy.md) | An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta. | 
 
 ### Return type
 
@@ -479,10 +475,10 @@ func main() {
     sourceId := "rh5BDZp6QDHvXFCkibm1pR" // string | The sourceId for the Workspace.  This parameter exists in beta.
     startTime := "2024-01-01T00:00:00Z" // string | The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
     endTime := "2024-01-03T00:00:00Z" // string | The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
-    granularity := "day" // string | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
+    granularity := "DAY" // string | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
     pagination := *api.NewPaginationInput(10) // PaginationInput | Optional params to specify the page cursor and count.  This parameter exists in beta.
     groupBy := []string{"Inner_example"} // []string | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: `eventName`, `eventType`, and `appVersion`.  This parameter exists in beta. (optional)
-    filter := *api.NewDeliveryOverviewFilterBy() // DeliveryOverviewFilterBy | An optional filter for `eventName`, `eventType`, and/or `appVersion` that can be applied in addition to a `groupBy`.  This parameter exists in beta. (optional)
+    filter := *api.NewDeliveryOverviewSuccessfullyReceivedFilterBy() // DeliveryOverviewSuccessfullyReceivedFilterBy | An optional filter for `eventName`, `eventType`, and/or `appVersion` that can be applied in addition to a `groupBy`.  This parameter exists in beta. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -521,7 +517,7 @@ Name | Type | Description  | Notes
  **granularity** | **string** | The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta. | 
  **pagination** | [**PaginationInput**](PaginationInput.md) | Optional params to specify the page cursor and count.  This parameter exists in beta. | 
  **groupBy** | **[]string** | A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta. | 
- **filter** | [**DeliveryOverviewFilterBy**](DeliveryOverviewFilterBy.md) | An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta. | 
+ **filter** | [**DeliveryOverviewSuccessfullyReceivedFilterBy**](DeliveryOverviewSuccessfullyReceivedFilterBy.md) | An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta. | 
 
 ### Return type
 
