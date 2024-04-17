@@ -534,35 +534,35 @@ func (a *ReverseETLAPIService) DeleteReverseEtlModelExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReverseETLSyncFromModelRequest struct {
+type ApiGetReverseETLSyncStatusRequest struct {
 	ctx        context.Context
 	ApiService *ReverseETLAPIService
 	modelId    string
 	syncId     string
 }
 
-func (r ApiGetReverseETLSyncFromModelRequest) Execute() (*GetReverseETLSyncFromModel200Response, *http.Response, error) {
-	return r.ApiService.GetReverseETLSyncFromModelExecute(r)
+func (r ApiGetReverseETLSyncStatusRequest) Execute() (*GetReverseETLSyncStatus200Response, *http.Response, error) {
+	return r.ApiService.GetReverseETLSyncStatusExecute(r)
 }
 
 /*
-GetReverseETLSyncFromModel Get Reverse ETL Sync from Model
+GetReverseETLSyncStatus Get Reverse ETL Sync Status
 
-Get the sync status for a Reverse ETL sync.
+Get the sync status for a Reverse ETL sync. The sync status includes all detailed information about the sync, like sync status, duration, details about the extract and load phase if applicable, etc...
 
 The rate limit for this endpoint is 250 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param modelId
 	@param syncId
-	@return ApiGetReverseETLSyncFromModelRequest
+	@return ApiGetReverseETLSyncStatusRequest
 */
-func (a *ReverseETLAPIService) GetReverseETLSyncFromModel(
+func (a *ReverseETLAPIService) GetReverseETLSyncStatus(
 	ctx context.Context,
 	modelId string,
 	syncId string,
-) ApiGetReverseETLSyncFromModelRequest {
-	return ApiGetReverseETLSyncFromModelRequest{
+) ApiGetReverseETLSyncStatusRequest {
+	return ApiGetReverseETLSyncStatusRequest{
 		ApiService: a,
 		ctx:        ctx,
 		modelId:    modelId,
@@ -572,20 +572,20 @@ func (a *ReverseETLAPIService) GetReverseETLSyncFromModel(
 
 // Execute executes the request
 //
-//	@return GetReverseETLSyncFromModel200Response
-func (a *ReverseETLAPIService) GetReverseETLSyncFromModelExecute(
-	r ApiGetReverseETLSyncFromModelRequest,
-) (*GetReverseETLSyncFromModel200Response, *http.Response, error) {
+//	@return GetReverseETLSyncStatus200Response
+func (a *ReverseETLAPIService) GetReverseETLSyncStatusExecute(
+	r ApiGetReverseETLSyncStatusRequest,
+) (*GetReverseETLSyncStatus200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetReverseETLSyncFromModel200Response
+		localVarReturnValue *GetReverseETLSyncStatus200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ReverseETLAPIService.GetReverseETLSyncFromModel",
+		"ReverseETLAPIService.GetReverseETLSyncStatus",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}

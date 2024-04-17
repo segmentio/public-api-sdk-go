@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**CreateReverseETLManualSync**](ReverseETLAPI.md#CreateReverseETLManualSync) | **Post** /reverse-etl-syncs | Create Reverse ETL Manual Sync
 [**CreateReverseEtlModel**](ReverseETLAPI.md#CreateReverseEtlModel) | **Post** /reverse-etl-models | Create Reverse Etl Model
 [**DeleteReverseEtlModel**](ReverseETLAPI.md#DeleteReverseEtlModel) | **Delete** /reverse-etl-models/{modelId} | Delete Reverse Etl Model
-[**GetReverseETLSyncFromModel**](ReverseETLAPI.md#GetReverseETLSyncFromModel) | **Get** /reverse-etl-models/{modelId}/syncs/{syncId} | Get Reverse ETL Sync from Model
+[**GetReverseETLSyncStatus**](ReverseETLAPI.md#GetReverseETLSyncStatus) | **Get** /reverse-etl-models/{modelId}/syncs/{syncId} | Get Reverse ETL Sync Status
 [**GetReverseEtlModel**](ReverseETLAPI.md#GetReverseEtlModel) | **Get** /reverse-etl-models/{modelId} | Get Reverse Etl Model
 [**ListReverseEtlModels**](ReverseETLAPI.md#ListReverseEtlModels) | **Get** /reverse-etl-models | List Reverse Etl Models
 [**UpdateReverseEtlModel**](ReverseETLAPI.md#UpdateReverseEtlModel) | **Patch** /reverse-etl-models/{modelId} | Update Reverse Etl Model
@@ -240,11 +240,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## Operation: GetReverseETLSyncFromModel
+## Operation: GetReverseETLSyncStatus
 
-> GetReverseETLSyncFromModel200Response GetReverseETLSyncFromModel(ctx, modelId, syncId).Execute()
+> GetReverseETLSyncStatus200Response GetReverseETLSyncStatus(ctx, modelId, syncId).Execute()
 
-Get Reverse ETL Sync from Model
+Get Reverse ETL Sync Status
 
 
 
@@ -268,9 +268,9 @@ func main() {
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ReverseETLAPI.GetReverseETLSyncFromModel(ctx, modelId, syncId).Execute()
+    resp, r, err := apiClient.ReverseETLAPI.GetReverseETLSyncStatus(ctx, modelId, syncId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReverseETLAPI.GetReverseETLSyncFromModel``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `ReverseETLAPI.GetReverseETLSyncStatus``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -279,8 +279,8 @@ func main() {
             }
         }
     }
-    // response from `GetReverseETLSyncFromModel`: GetReverseETLSyncFromModel200Response
-    fmt.Fprintf(os.Stdout, "Response from `ReverseETLAPI.GetReverseETLSyncFromModel`: %v\n", resp.GetData())
+    // response from `GetReverseETLSyncStatus`: GetReverseETLSyncStatus200Response
+    fmt.Fprintf(os.Stdout, "Response from `ReverseETLAPI.GetReverseETLSyncStatus`: %v\n", resp.GetData())
 }
 ```
 
@@ -295,7 +295,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetReverseETLSyncFromModelRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetReverseETLSyncStatusRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetReverseETLSyncFromModel200Response**](GetReverseETLSyncFromModel200Response.md)
+[**GetReverseETLSyncStatus200Response**](GetReverseETLSyncStatus200Response.md)
 
 ### Authorization
 
