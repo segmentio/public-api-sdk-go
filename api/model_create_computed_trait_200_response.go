@@ -15,33 +15,33 @@ import (
 	"encoding/json"
 )
 
-// checks if the GetComputedTrait200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &GetComputedTrait200Response{}
+// checks if the CreateComputedTrait200Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateComputedTrait200Response{}
 
-// GetComputedTrait200Response struct for GetComputedTrait200Response
-type GetComputedTrait200Response struct {
+// CreateComputedTrait200Response struct for CreateComputedTrait200Response
+type CreateComputedTrait200Response struct {
 	Data *GetComputedTraitAlphaOutput `json:"data,omitempty"`
 }
 
-// NewGetComputedTrait200Response instantiates a new GetComputedTrait200Response object
+// NewCreateComputedTrait200Response instantiates a new CreateComputedTrait200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetComputedTrait200Response() *GetComputedTrait200Response {
-	this := GetComputedTrait200Response{}
+func NewCreateComputedTrait200Response() *CreateComputedTrait200Response {
+	this := CreateComputedTrait200Response{}
 	return &this
 }
 
-// NewGetComputedTrait200ResponseWithDefaults instantiates a new GetComputedTrait200Response object
+// NewCreateComputedTrait200ResponseWithDefaults instantiates a new CreateComputedTrait200Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewGetComputedTrait200ResponseWithDefaults() *GetComputedTrait200Response {
-	this := GetComputedTrait200Response{}
+func NewCreateComputedTrait200ResponseWithDefaults() *CreateComputedTrait200Response {
+	this := CreateComputedTrait200Response{}
 	return &this
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *GetComputedTrait200Response) GetData() GetComputedTraitAlphaOutput {
+func (o *CreateComputedTrait200Response) GetData() GetComputedTraitAlphaOutput {
 	if o == nil || IsNil(o.Data) {
 		var ret GetComputedTraitAlphaOutput
 		return ret
@@ -51,7 +51,7 @@ func (o *GetComputedTrait200Response) GetData() GetComputedTraitAlphaOutput {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetComputedTrait200Response) GetDataOk() (*GetComputedTraitAlphaOutput, bool) {
+func (o *CreateComputedTrait200Response) GetDataOk() (*GetComputedTraitAlphaOutput, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -59,7 +59,7 @@ func (o *GetComputedTrait200Response) GetDataOk() (*GetComputedTraitAlphaOutput,
 }
 
 // HasData returns a boolean if a field has been set.
-func (o *GetComputedTrait200Response) HasData() bool {
+func (o *CreateComputedTrait200Response) HasData() bool {
 	if o != nil && !IsNil(o.Data) {
 		return true
 	}
@@ -68,11 +68,11 @@ func (o *GetComputedTrait200Response) HasData() bool {
 }
 
 // SetData gets a reference to the given GetComputedTraitAlphaOutput and assigns it to the Data field.
-func (o *GetComputedTrait200Response) SetData(v GetComputedTraitAlphaOutput) {
+func (o *CreateComputedTrait200Response) SetData(v GetComputedTraitAlphaOutput) {
 	o.Data = &v
 }
 
-func (o GetComputedTrait200Response) MarshalJSON() ([]byte, error) {
+func (o CreateComputedTrait200Response) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -80,7 +80,7 @@ func (o GetComputedTrait200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetComputedTrait200Response) ToMap() (map[string]interface{}, error) {
+func (o CreateComputedTrait200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
@@ -88,40 +88,40 @@ func (o GetComputedTrait200Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableGetComputedTrait200Response struct {
-	value *GetComputedTrait200Response
+type NullableCreateComputedTrait200Response struct {
+	value *CreateComputedTrait200Response
 	isSet bool
 }
 
-func (v NullableGetComputedTrait200Response) Get() *GetComputedTrait200Response {
+func (v NullableCreateComputedTrait200Response) Get() *CreateComputedTrait200Response {
 	return v.value
 }
 
-func (v *NullableGetComputedTrait200Response) Set(val *GetComputedTrait200Response) {
+func (v *NullableCreateComputedTrait200Response) Set(val *CreateComputedTrait200Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableGetComputedTrait200Response) IsSet() bool {
+func (v NullableCreateComputedTrait200Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableGetComputedTrait200Response) Unset() {
+func (v *NullableCreateComputedTrait200Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableGetComputedTrait200Response(
-	val *GetComputedTrait200Response,
-) *NullableGetComputedTrait200Response {
-	return &NullableGetComputedTrait200Response{value: val, isSet: true}
+func NewNullableCreateComputedTrait200Response(
+	val *CreateComputedTrait200Response,
+) *NullableCreateComputedTrait200Response {
+	return &NullableCreateComputedTrait200Response{value: val, isSet: true}
 }
 
-func (v NullableGetComputedTrait200Response) MarshalJSON() ([]byte, error) {
+func (v NullableCreateComputedTrait200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableGetComputedTrait200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateComputedTrait200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

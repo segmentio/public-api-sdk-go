@@ -4,6 +4,7 @@ All URIs are relative to *https://api.segmentapis.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateComputedTrait**](ComputedTraitsAPI.md#CreateComputedTrait) | **Post** /spaces/{spaceId}/computed-traits | Create Computed Trait
 [**GetComputedTrait**](ComputedTraitsAPI.md#GetComputedTrait) | **Get** /spaces/{spaceId}/computed-traits/{id} | Get Computed Trait
 [**ListComputedTraits**](ComputedTraitsAPI.md#ListComputedTraits) | **Get** /spaces/{spaceId}/computed-traits | List Computed Traits
 [**RemoveComputedTraitFromSpace**](ComputedTraitsAPI.md#RemoveComputedTraitFromSpace) | **Delete** /spaces/{spaceId}/computed-traits/{id} | Remove Computed Trait from Space
@@ -11,9 +12,89 @@ Method | HTTP request | Description
 
 
 
+## Operation: CreateComputedTrait
+
+> CreateComputedTrait200Response CreateComputedTrait(ctx, spaceId).CreateTraitAlphaInput(createTraitAlphaInput).Execute()
+
+Create Computed Trait
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    api "github.com/segmentio/public-api-sdk-go"
+)
+
+func main() {
+    spaceId := "spaceId" // string | 
+    createTraitAlphaInput := *api.NewCreateTraitAlphaInput("Name_example", "Description_example", *api.NewTraitDefinition("Type_example", "Query_example")) // CreateTraitAlphaInput | 
+
+    configuration := api.NewConfiguration()
+    apiClient := api.NewAPIClient(configuration)
+    token := "<BEARER_TOKEN>"
+    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
+    resp, r, err := apiClient.ComputedTraitsAPI.CreateComputedTrait(ctx, spaceId).CreateTraitAlphaInput(createTraitAlphaInput).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ComputedTraitsAPI.CreateComputedTrait``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+        responseErrors := api.UnwrapFullErrors(err)
+        if responseErrors != nil {
+            for _, responseError := range responseErrors.Errors {
+                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
+            }
+        }
+    }
+    // response from `CreateComputedTrait`: CreateComputedTrait200Response
+    fmt.Fprintf(os.Stdout, "Response from `ComputedTraitsAPI.CreateComputedTrait`: %v\n", resp.GetData())
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**spaceId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateComputedTraitRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **createTraitAlphaInput** | [**CreateTraitAlphaInput**](CreateTraitAlphaInput.md) |  | 
+
+### Return type
+
+[**CreateComputedTrait200Response**](CreateComputedTrait200Response.md)
+
+### Authorization
+
+[token](../README.md#token)
+
+### HTTP request headers
+
+- **Content-Type**: application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## Operation: GetComputedTrait
 
-> GetComputedTrait200Response GetComputedTrait(ctx, spaceId, id).Execute()
+> CreateComputedTrait200Response GetComputedTrait(ctx, spaceId, id).Execute()
 
 Get Computed Trait
 
@@ -50,7 +131,7 @@ func main() {
             }
         }
     }
-    // response from `GetComputedTrait`: GetComputedTrait200Response
+    // response from `GetComputedTrait`: CreateComputedTrait200Response
     fmt.Fprintf(os.Stdout, "Response from `ComputedTraitsAPI.GetComputedTrait`: %v\n", resp.GetData())
 }
 ```
@@ -76,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetComputedTrait200Response**](GetComputedTrait200Response.md)
+[**CreateComputedTrait200Response**](CreateComputedTrait200Response.md)
 
 ### Authorization
 
