@@ -24,16 +24,16 @@ import (
 type ComputedTraitsAPIService service
 
 type ApiCreateComputedTraitRequest struct {
-	ctx                   context.Context
-	ApiService            *ComputedTraitsAPIService
-	spaceId               string
-	createTraitAlphaInput *CreateTraitAlphaInput
+	ctx                           context.Context
+	ApiService                    *ComputedTraitsAPIService
+	spaceId                       string
+	createComputedTraitAlphaInput *CreateComputedTraitAlphaInput
 }
 
-func (r ApiCreateComputedTraitRequest) CreateTraitAlphaInput(
-	createTraitAlphaInput CreateTraitAlphaInput,
+func (r ApiCreateComputedTraitRequest) CreateComputedTraitAlphaInput(
+	createComputedTraitAlphaInput CreateComputedTraitAlphaInput,
 ) ApiCreateComputedTraitRequest {
-	r.createTraitAlphaInput = &createTraitAlphaInput
+	r.createComputedTraitAlphaInput = &createComputedTraitAlphaInput
 	return r
 }
 
@@ -97,9 +97,9 @@ func (a *ComputedTraitsAPIService) CreateComputedTraitExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createTraitAlphaInput == nil {
+	if r.createComputedTraitAlphaInput == nil {
 		return localVarReturnValue, nil, reportError(
-			"createTraitAlphaInput is required and must be specified",
+			"createComputedTraitAlphaInput is required and must be specified",
 		)
 	}
 
@@ -124,7 +124,7 @@ func (a *ComputedTraitsAPIService) CreateComputedTraitExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createTraitAlphaInput
+	localVarPostBody = r.createComputedTraitAlphaInput
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,

@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## Operation: CreateComputedTrait
 
-> CreateComputedTrait200Response CreateComputedTrait(ctx, spaceId).CreateTraitAlphaInput(createTraitAlphaInput).Execute()
+> CreateComputedTrait200Response CreateComputedTrait(ctx, spaceId).CreateComputedTraitAlphaInput(createComputedTraitAlphaInput).Execute()
 
 Create Computed Trait
 
@@ -34,13 +34,13 @@ import (
 
 func main() {
     spaceId := "spaceId" // string | 
-    createTraitAlphaInput := *api.NewCreateTraitAlphaInput("Name_example", "Description_example", *api.NewTraitDefinition("Type_example", "Query_example")) // CreateTraitAlphaInput | 
+    createComputedTraitAlphaInput := *api.NewCreateComputedTraitAlphaInput("Name_example", "Description_example", *api.NewTraitDefinition("Type_example", "Query_example")) // CreateComputedTraitAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ComputedTraitsAPI.CreateComputedTrait(ctx, spaceId).CreateTraitAlphaInput(createTraitAlphaInput).Execute()
+    resp, r, err := apiClient.ComputedTraitsAPI.CreateComputedTrait(ctx, spaceId).CreateComputedTraitAlphaInput(createComputedTraitAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ComputedTraitsAPI.CreateComputedTrait``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -72,7 +72,7 @@ Other parameters are passed through a pointer to a apiCreateComputedTraitRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createTraitAlphaInput** | [**CreateTraitAlphaInput**](CreateTraitAlphaInput.md) |  | 
+ **createComputedTraitAlphaInput** | [**CreateComputedTraitAlphaInput**](CreateComputedTraitAlphaInput.md) |  | 
 
 ### Return type
 

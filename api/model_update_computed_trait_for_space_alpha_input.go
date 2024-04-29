@@ -22,9 +22,9 @@ var _ MappedNullable = &UpdateComputedTraitForSpaceAlphaInput{}
 type UpdateComputedTraitForSpaceAlphaInput struct {
 	// Enabled/disabled status for the computed trait.
 	Enabled *bool `json:"enabled,omitempty"`
-	// The name of the computation
+	// The name of the computation.
 	Name *string `json:"name,omitempty"`
-	// The description of the computation
+	// The description of the computation.
 	Description *string          `json:"description,omitempty"`
 	Definition  *TraitDefinition `json:"definition,omitempty"`
 }

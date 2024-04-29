@@ -22,9 +22,9 @@ var _ MappedNullable = &UpdateAudienceForSpaceInput{}
 type UpdateAudienceForSpaceInput struct {
 	// Enabled/disabled status for the audience.
 	Enabled *bool `json:"enabled,omitempty"`
-	// The name of the computation
+	// The name of the computation.
 	Name *string `json:"name,omitempty"`
-	// The description of the computation
+	// The description of the computation.
 	Description *string                        `json:"description,omitempty"`
 	Definition  *AudienceComputationDefinition `json:"definition,omitempty"`
 }

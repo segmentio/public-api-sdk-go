@@ -15,44 +15,44 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateTraitAlphaInput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateTraitAlphaInput{}
+// checks if the CreateComputedTraitAlphaInput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateComputedTraitAlphaInput{}
 
-// CreateTraitAlphaInput Input to create an audience.
-type CreateTraitAlphaInput struct {
-	// The name of the computation
+// CreateComputedTraitAlphaInput Input to create a trait.
+type CreateComputedTraitAlphaInput struct {
+	// The name of the computation.
 	Name string `json:"name"`
-	// The description of the computation
+	// The description of the computation.
 	Description string          `json:"description"`
 	Definition  TraitDefinition `json:"definition"`
 }
 
-// NewCreateTraitAlphaInput instantiates a new CreateTraitAlphaInput object
+// NewCreateComputedTraitAlphaInput instantiates a new CreateComputedTraitAlphaInput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateTraitAlphaInput(
+func NewCreateComputedTraitAlphaInput(
 	name string,
 	description string,
 	definition TraitDefinition,
-) *CreateTraitAlphaInput {
-	this := CreateTraitAlphaInput{}
+) *CreateComputedTraitAlphaInput {
+	this := CreateComputedTraitAlphaInput{}
 	this.Name = name
 	this.Description = description
 	this.Definition = definition
 	return &this
 }
 
-// NewCreateTraitAlphaInputWithDefaults instantiates a new CreateTraitAlphaInput object
+// NewCreateComputedTraitAlphaInputWithDefaults instantiates a new CreateComputedTraitAlphaInput object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateTraitAlphaInputWithDefaults() *CreateTraitAlphaInput {
-	this := CreateTraitAlphaInput{}
+func NewCreateComputedTraitAlphaInputWithDefaults() *CreateComputedTraitAlphaInput {
+	this := CreateComputedTraitAlphaInput{}
 	return &this
 }
 
 // GetName returns the Name field value
-func (o *CreateTraitAlphaInput) GetName() string {
+func (o *CreateComputedTraitAlphaInput) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -63,7 +63,7 @@ func (o *CreateTraitAlphaInput) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *CreateTraitAlphaInput) GetNameOk() (*string, bool) {
+func (o *CreateComputedTraitAlphaInput) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -71,12 +71,12 @@ func (o *CreateTraitAlphaInput) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *CreateTraitAlphaInput) SetName(v string) {
+func (o *CreateComputedTraitAlphaInput) SetName(v string) {
 	o.Name = v
 }
 
 // GetDescription returns the Description field value
-func (o *CreateTraitAlphaInput) GetDescription() string {
+func (o *CreateComputedTraitAlphaInput) GetDescription() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -87,7 +87,7 @@ func (o *CreateTraitAlphaInput) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
-func (o *CreateTraitAlphaInput) GetDescriptionOk() (*string, bool) {
+func (o *CreateComputedTraitAlphaInput) GetDescriptionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -95,12 +95,12 @@ func (o *CreateTraitAlphaInput) GetDescriptionOk() (*string, bool) {
 }
 
 // SetDescription sets field value
-func (o *CreateTraitAlphaInput) SetDescription(v string) {
+func (o *CreateComputedTraitAlphaInput) SetDescription(v string) {
 	o.Description = v
 }
 
 // GetDefinition returns the Definition field value
-func (o *CreateTraitAlphaInput) GetDefinition() TraitDefinition {
+func (o *CreateComputedTraitAlphaInput) GetDefinition() TraitDefinition {
 	if o == nil {
 		var ret TraitDefinition
 		return ret
@@ -111,7 +111,7 @@ func (o *CreateTraitAlphaInput) GetDefinition() TraitDefinition {
 
 // GetDefinitionOk returns a tuple with the Definition field value
 // and a boolean to check if the value has been set.
-func (o *CreateTraitAlphaInput) GetDefinitionOk() (*TraitDefinition, bool) {
+func (o *CreateComputedTraitAlphaInput) GetDefinitionOk() (*TraitDefinition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -119,11 +119,11 @@ func (o *CreateTraitAlphaInput) GetDefinitionOk() (*TraitDefinition, bool) {
 }
 
 // SetDefinition sets field value
-func (o *CreateTraitAlphaInput) SetDefinition(v TraitDefinition) {
+func (o *CreateComputedTraitAlphaInput) SetDefinition(v TraitDefinition) {
 	o.Definition = v
 }
 
-func (o CreateTraitAlphaInput) MarshalJSON() ([]byte, error) {
+func (o CreateComputedTraitAlphaInput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -131,7 +131,7 @@ func (o CreateTraitAlphaInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateTraitAlphaInput) ToMap() (map[string]interface{}, error) {
+func (o CreateComputedTraitAlphaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
 	toSerialize["description"] = o.Description
@@ -139,38 +139,40 @@ func (o CreateTraitAlphaInput) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableCreateTraitAlphaInput struct {
-	value *CreateTraitAlphaInput
+type NullableCreateComputedTraitAlphaInput struct {
+	value *CreateComputedTraitAlphaInput
 	isSet bool
 }
 
-func (v NullableCreateTraitAlphaInput) Get() *CreateTraitAlphaInput {
+func (v NullableCreateComputedTraitAlphaInput) Get() *CreateComputedTraitAlphaInput {
 	return v.value
 }
 
-func (v *NullableCreateTraitAlphaInput) Set(val *CreateTraitAlphaInput) {
+func (v *NullableCreateComputedTraitAlphaInput) Set(val *CreateComputedTraitAlphaInput) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateTraitAlphaInput) IsSet() bool {
+func (v NullableCreateComputedTraitAlphaInput) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateTraitAlphaInput) Unset() {
+func (v *NullableCreateComputedTraitAlphaInput) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateTraitAlphaInput(val *CreateTraitAlphaInput) *NullableCreateTraitAlphaInput {
-	return &NullableCreateTraitAlphaInput{value: val, isSet: true}
+func NewNullableCreateComputedTraitAlphaInput(
+	val *CreateComputedTraitAlphaInput,
+) *NullableCreateComputedTraitAlphaInput {
+	return &NullableCreateComputedTraitAlphaInput{value: val, isSet: true}
 }
 
-func (v NullableCreateTraitAlphaInput) MarshalJSON() ([]byte, error) {
+func (v NullableCreateComputedTraitAlphaInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateTraitAlphaInput) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateComputedTraitAlphaInput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
