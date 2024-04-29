@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 
 ## Operation: GetAudience
 
-> CreateAudience200Response GetAudience(ctx, spaceId, id).Execute()
+> GetAudience200Response GetAudience(ctx, spaceId, id).Execute()
 
 Get Audience
 
@@ -131,7 +131,7 @@ func main() {
             }
         }
     }
-    // response from `GetAudience`: CreateAudience200Response
+    // response from `GetAudience`: GetAudience200Response
     fmt.Fprintf(os.Stdout, "Response from `AudiencesAPI.GetAudience`: %v\n", resp.GetData())
 }
 ```
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateAudience200Response**](CreateAudience200Response.md)
+[**GetAudience200Response**](GetAudience200Response.md)
 
 ### Authorization
 

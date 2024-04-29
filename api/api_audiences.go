@@ -214,7 +214,7 @@ type ApiGetAudienceRequest struct {
 	id         string
 }
 
-func (r ApiGetAudienceRequest) Execute() (*CreateAudience200Response, *http.Response, error) {
+func (r ApiGetAudienceRequest) Execute() (*GetAudience200Response, *http.Response, error) {
 	return r.ApiService.GetAudienceExecute(r)
 }
 
@@ -249,15 +249,15 @@ func (a *AudiencesAPIService) GetAudience(
 
 // Execute executes the request
 //
-//	@return CreateAudience200Response
+//	@return GetAudience200Response
 func (a *AudiencesAPIService) GetAudienceExecute(
 	r ApiGetAudienceRequest,
-) (*CreateAudience200Response, *http.Response, error) {
+) (*GetAudience200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateAudience200Response
+		localVarReturnValue *GetAudience200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(

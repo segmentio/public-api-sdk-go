@@ -15,36 +15,34 @@ import (
 	"encoding/json"
 )
 
-// checks if the UpdateAudienceForSpaceAlphaOutput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateAudienceForSpaceAlphaOutput{}
+// checks if the CreateAudienceAlphaOutput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAudienceAlphaOutput{}
 
-// UpdateAudienceForSpaceAlphaOutput Audience output for update.
-type UpdateAudienceForSpaceAlphaOutput struct {
+// CreateAudienceAlphaOutput Audience output for create.
+type CreateAudienceAlphaOutput struct {
 	Audience AudienceSummary `json:"audience"`
 }
 
-// NewUpdateAudienceForSpaceAlphaOutput instantiates a new UpdateAudienceForSpaceAlphaOutput object
+// NewCreateAudienceAlphaOutput instantiates a new CreateAudienceAlphaOutput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateAudienceForSpaceAlphaOutput(
-	audience AudienceSummary,
-) *UpdateAudienceForSpaceAlphaOutput {
-	this := UpdateAudienceForSpaceAlphaOutput{}
+func NewCreateAudienceAlphaOutput(audience AudienceSummary) *CreateAudienceAlphaOutput {
+	this := CreateAudienceAlphaOutput{}
 	this.Audience = audience
 	return &this
 }
 
-// NewUpdateAudienceForSpaceAlphaOutputWithDefaults instantiates a new UpdateAudienceForSpaceAlphaOutput object
+// NewCreateAudienceAlphaOutputWithDefaults instantiates a new CreateAudienceAlphaOutput object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUpdateAudienceForSpaceAlphaOutputWithDefaults() *UpdateAudienceForSpaceAlphaOutput {
-	this := UpdateAudienceForSpaceAlphaOutput{}
+func NewCreateAudienceAlphaOutputWithDefaults() *CreateAudienceAlphaOutput {
+	this := CreateAudienceAlphaOutput{}
 	return &this
 }
 
 // GetAudience returns the Audience field value
-func (o *UpdateAudienceForSpaceAlphaOutput) GetAudience() AudienceSummary {
+func (o *CreateAudienceAlphaOutput) GetAudience() AudienceSummary {
 	if o == nil {
 		var ret AudienceSummary
 		return ret
@@ -55,7 +53,7 @@ func (o *UpdateAudienceForSpaceAlphaOutput) GetAudience() AudienceSummary {
 
 // GetAudienceOk returns a tuple with the Audience field value
 // and a boolean to check if the value has been set.
-func (o *UpdateAudienceForSpaceAlphaOutput) GetAudienceOk() (*AudienceSummary, bool) {
+func (o *CreateAudienceAlphaOutput) GetAudienceOk() (*AudienceSummary, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -63,11 +61,11 @@ func (o *UpdateAudienceForSpaceAlphaOutput) GetAudienceOk() (*AudienceSummary, b
 }
 
 // SetAudience sets field value
-func (o *UpdateAudienceForSpaceAlphaOutput) SetAudience(v AudienceSummary) {
+func (o *CreateAudienceAlphaOutput) SetAudience(v AudienceSummary) {
 	o.Audience = v
 }
 
-func (o UpdateAudienceForSpaceAlphaOutput) MarshalJSON() ([]byte, error) {
+func (o CreateAudienceAlphaOutput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -75,46 +73,46 @@ func (o UpdateAudienceForSpaceAlphaOutput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateAudienceForSpaceAlphaOutput) ToMap() (map[string]interface{}, error) {
+func (o CreateAudienceAlphaOutput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["audience"] = o.Audience
 	return toSerialize, nil
 }
 
-type NullableUpdateAudienceForSpaceAlphaOutput struct {
-	value *UpdateAudienceForSpaceAlphaOutput
+type NullableCreateAudienceAlphaOutput struct {
+	value *CreateAudienceAlphaOutput
 	isSet bool
 }
 
-func (v NullableUpdateAudienceForSpaceAlphaOutput) Get() *UpdateAudienceForSpaceAlphaOutput {
+func (v NullableCreateAudienceAlphaOutput) Get() *CreateAudienceAlphaOutput {
 	return v.value
 }
 
-func (v *NullableUpdateAudienceForSpaceAlphaOutput) Set(val *UpdateAudienceForSpaceAlphaOutput) {
+func (v *NullableCreateAudienceAlphaOutput) Set(val *CreateAudienceAlphaOutput) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUpdateAudienceForSpaceAlphaOutput) IsSet() bool {
+func (v NullableCreateAudienceAlphaOutput) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUpdateAudienceForSpaceAlphaOutput) Unset() {
+func (v *NullableCreateAudienceAlphaOutput) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUpdateAudienceForSpaceAlphaOutput(
-	val *UpdateAudienceForSpaceAlphaOutput,
-) *NullableUpdateAudienceForSpaceAlphaOutput {
-	return &NullableUpdateAudienceForSpaceAlphaOutput{value: val, isSet: true}
+func NewNullableCreateAudienceAlphaOutput(
+	val *CreateAudienceAlphaOutput,
+) *NullableCreateAudienceAlphaOutput {
+	return &NullableCreateAudienceAlphaOutput{value: val, isSet: true}
 }
 
-func (v NullableUpdateAudienceForSpaceAlphaOutput) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAudienceAlphaOutput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUpdateAudienceForSpaceAlphaOutput) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAudienceAlphaOutput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateComputedTrait200Response{}
 
 // CreateComputedTrait200Response struct for CreateComputedTrait200Response
 type CreateComputedTrait200Response struct {
-	Data *GetComputedTraitAlphaOutput `json:"data,omitempty"`
+	Data *CreateComputedTraitAlphaOutput `json:"data,omitempty"`
 }
 
 // NewCreateComputedTrait200Response instantiates a new CreateComputedTrait200Response object
@@ -41,9 +41,9 @@ func NewCreateComputedTrait200ResponseWithDefaults() *CreateComputedTrait200Resp
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *CreateComputedTrait200Response) GetData() GetComputedTraitAlphaOutput {
+func (o *CreateComputedTrait200Response) GetData() CreateComputedTraitAlphaOutput {
 	if o == nil || IsNil(o.Data) {
-		var ret GetComputedTraitAlphaOutput
+		var ret CreateComputedTraitAlphaOutput
 		return ret
 	}
 	return *o.Data
@@ -51,7 +51,7 @@ func (o *CreateComputedTrait200Response) GetData() GetComputedTraitAlphaOutput {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateComputedTrait200Response) GetDataOk() (*GetComputedTraitAlphaOutput, bool) {
+func (o *CreateComputedTrait200Response) GetDataOk() (*CreateComputedTraitAlphaOutput, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *CreateComputedTrait200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given GetComputedTraitAlphaOutput and assigns it to the Data field.
-func (o *CreateComputedTrait200Response) SetData(v GetComputedTraitAlphaOutput) {
+// SetData gets a reference to the given CreateComputedTraitAlphaOutput and assigns it to the Data field.
+func (o *CreateComputedTrait200Response) SetData(v CreateComputedTraitAlphaOutput) {
 	o.Data = &v
 }
 

@@ -214,7 +214,7 @@ type ApiGetComputedTraitRequest struct {
 	id         string
 }
 
-func (r ApiGetComputedTraitRequest) Execute() (*CreateComputedTrait200Response, *http.Response, error) {
+func (r ApiGetComputedTraitRequest) Execute() (*GetComputedTrait200Response, *http.Response, error) {
 	return r.ApiService.GetComputedTraitExecute(r)
 }
 
@@ -249,15 +249,15 @@ func (a *ComputedTraitsAPIService) GetComputedTrait(
 
 // Execute executes the request
 //
-//	@return CreateComputedTrait200Response
+//	@return GetComputedTrait200Response
 func (a *ComputedTraitsAPIService) GetComputedTraitExecute(
 	r ApiGetComputedTraitRequest,
-) (*CreateComputedTrait200Response, *http.Response, error) {
+) (*GetComputedTrait200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateComputedTrait200Response
+		localVarReturnValue *GetComputedTrait200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(

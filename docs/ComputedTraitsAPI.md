@@ -94,7 +94,7 @@ Name | Type | Description  | Notes
 
 ## Operation: GetComputedTrait
 
-> CreateComputedTrait200Response GetComputedTrait(ctx, spaceId, id).Execute()
+> GetComputedTrait200Response GetComputedTrait(ctx, spaceId, id).Execute()
 
 Get Computed Trait
 
@@ -131,7 +131,7 @@ func main() {
             }
         }
     }
-    // response from `GetComputedTrait`: CreateComputedTrait200Response
+    // response from `GetComputedTrait`: GetComputedTrait200Response
     fmt.Fprintf(os.Stdout, "Response from `ComputedTraitsAPI.GetComputedTrait`: %v\n", resp.GetData())
 }
 ```
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**CreateComputedTrait200Response**](CreateComputedTrait200Response.md)
+[**GetComputedTrait200Response**](GetComputedTrait200Response.md)
 
 ### Authorization
 
