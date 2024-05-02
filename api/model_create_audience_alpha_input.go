@@ -25,6 +25,7 @@ type CreateAudienceAlphaInput struct {
 	// The description of the computation.
 	Description string                        `json:"description"`
 	Definition  AudienceComputationDefinition `json:"definition"`
+	Options     *AudienceCreateOptions        `json:"options,omitempty"`
 }
 
 // NewCreateAudienceAlphaInput instantiates a new CreateAudienceAlphaInput object
@@ -123,6 +124,38 @@ func (o *CreateAudienceAlphaInput) SetDefinition(v AudienceComputationDefinition
 	o.Definition = v
 }
 
+// GetOptions returns the Options field value if set, zero value otherwise.
+func (o *CreateAudienceAlphaInput) GetOptions() AudienceCreateOptions {
+	if o == nil || IsNil(o.Options) {
+		var ret AudienceCreateOptions
+		return ret
+	}
+	return *o.Options
+}
+
+// GetOptionsOk returns a tuple with the Options field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAudienceAlphaInput) GetOptionsOk() (*AudienceCreateOptions, bool) {
+	if o == nil || IsNil(o.Options) {
+		return nil, false
+	}
+	return o.Options, true
+}
+
+// HasOptions returns a boolean if a field has been set.
+func (o *CreateAudienceAlphaInput) HasOptions() bool {
+	if o != nil && !IsNil(o.Options) {
+		return true
+	}
+
+	return false
+}
+
+// SetOptions gets a reference to the given AudienceCreateOptions and assigns it to the Options field.
+func (o *CreateAudienceAlphaInput) SetOptions(v AudienceCreateOptions) {
+	o.Options = &v
+}
+
 func (o CreateAudienceAlphaInput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -136,6 +169,9 @@ func (o CreateAudienceAlphaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["description"] = o.Description
 	toSerialize["definition"] = o.Definition
+	if !IsNil(o.Options) {
+		toSerialize["options"] = o.Options
+	}
 	return toSerialize, nil
 }
 
