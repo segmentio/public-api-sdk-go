@@ -23,8 +23,9 @@ type CreateComputedTraitAlphaInput struct {
 	// The name of the computation.
 	Name string `json:"name"`
 	// The description of the computation.
-	Description string          `json:"description"`
-	Definition  TraitDefinition `json:"definition"`
+	Description string              `json:"description"`
+	Definition  TraitDefinition     `json:"definition"`
+	Options     *TraitCreateOptions `json:"options,omitempty"`
 }
 
 // NewCreateComputedTraitAlphaInput instantiates a new CreateComputedTraitAlphaInput object
@@ -123,6 +124,38 @@ func (o *CreateComputedTraitAlphaInput) SetDefinition(v TraitDefinition) {
 	o.Definition = v
 }
 
+// GetOptions returns the Options field value if set, zero value otherwise.
+func (o *CreateComputedTraitAlphaInput) GetOptions() TraitCreateOptions {
+	if o == nil || IsNil(o.Options) {
+		var ret TraitCreateOptions
+		return ret
+	}
+	return *o.Options
+}
+
+// GetOptionsOk returns a tuple with the Options field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateComputedTraitAlphaInput) GetOptionsOk() (*TraitCreateOptions, bool) {
+	if o == nil || IsNil(o.Options) {
+		return nil, false
+	}
+	return o.Options, true
+}
+
+// HasOptions returns a boolean if a field has been set.
+func (o *CreateComputedTraitAlphaInput) HasOptions() bool {
+	if o != nil && !IsNil(o.Options) {
+		return true
+	}
+
+	return false
+}
+
+// SetOptions gets a reference to the given TraitCreateOptions and assigns it to the Options field.
+func (o *CreateComputedTraitAlphaInput) SetOptions(v TraitCreateOptions) {
+	o.Options = &v
+}
+
 func (o CreateComputedTraitAlphaInput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -136,6 +169,9 @@ func (o CreateComputedTraitAlphaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["description"] = o.Description
 	toSerialize["definition"] = o.Definition
+	if !IsNil(o.Options) {
+		toSerialize["options"] = o.Options
+	}
 	return toSerialize, nil
 }
 
