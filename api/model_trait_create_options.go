@@ -20,8 +20,8 @@ var _ MappedNullable = &TraitCreateOptions{}
 
 // TraitCreateOptions struct for TraitCreateOptions
 type TraitCreateOptions struct {
-	IncludeHistorical *bool `json:"includeHistorical,omitempty"`
-	IncludeAnonymous  *bool `json:"includeAnonymous,omitempty"`
+	IncludeHistoricalData *bool `json:"includeHistoricalData,omitempty"`
+	IncludeAnonymousUsers *bool `json:"includeAnonymousUsers,omitempty"`
 }
 
 // NewTraitCreateOptions instantiates a new TraitCreateOptions object
@@ -41,68 +41,68 @@ func NewTraitCreateOptionsWithDefaults() *TraitCreateOptions {
 	return &this
 }
 
-// GetIncludeHistorical returns the IncludeHistorical field value if set, zero value otherwise.
-func (o *TraitCreateOptions) GetIncludeHistorical() bool {
-	if o == nil || IsNil(o.IncludeHistorical) {
+// GetIncludeHistoricalData returns the IncludeHistoricalData field value if set, zero value otherwise.
+func (o *TraitCreateOptions) GetIncludeHistoricalData() bool {
+	if o == nil || IsNil(o.IncludeHistoricalData) {
 		var ret bool
 		return ret
 	}
-	return *o.IncludeHistorical
+	return *o.IncludeHistoricalData
 }
 
-// GetIncludeHistoricalOk returns a tuple with the IncludeHistorical field value if set, nil otherwise
+// GetIncludeHistoricalDataOk returns a tuple with the IncludeHistoricalData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TraitCreateOptions) GetIncludeHistoricalOk() (*bool, bool) {
-	if o == nil || IsNil(o.IncludeHistorical) {
+func (o *TraitCreateOptions) GetIncludeHistoricalDataOk() (*bool, bool) {
+	if o == nil || IsNil(o.IncludeHistoricalData) {
 		return nil, false
 	}
-	return o.IncludeHistorical, true
+	return o.IncludeHistoricalData, true
 }
 
-// HasIncludeHistorical returns a boolean if a field has been set.
-func (o *TraitCreateOptions) HasIncludeHistorical() bool {
-	if o != nil && !IsNil(o.IncludeHistorical) {
+// HasIncludeHistoricalData returns a boolean if a field has been set.
+func (o *TraitCreateOptions) HasIncludeHistoricalData() bool {
+	if o != nil && !IsNil(o.IncludeHistoricalData) {
 		return true
 	}
 
 	return false
 }
 
-// SetIncludeHistorical gets a reference to the given bool and assigns it to the IncludeHistorical field.
-func (o *TraitCreateOptions) SetIncludeHistorical(v bool) {
-	o.IncludeHistorical = &v
+// SetIncludeHistoricalData gets a reference to the given bool and assigns it to the IncludeHistoricalData field.
+func (o *TraitCreateOptions) SetIncludeHistoricalData(v bool) {
+	o.IncludeHistoricalData = &v
 }
 
-// GetIncludeAnonymous returns the IncludeAnonymous field value if set, zero value otherwise.
-func (o *TraitCreateOptions) GetIncludeAnonymous() bool {
-	if o == nil || IsNil(o.IncludeAnonymous) {
+// GetIncludeAnonymousUsers returns the IncludeAnonymousUsers field value if set, zero value otherwise.
+func (o *TraitCreateOptions) GetIncludeAnonymousUsers() bool {
+	if o == nil || IsNil(o.IncludeAnonymousUsers) {
 		var ret bool
 		return ret
 	}
-	return *o.IncludeAnonymous
+	return *o.IncludeAnonymousUsers
 }
 
-// GetIncludeAnonymousOk returns a tuple with the IncludeAnonymous field value if set, nil otherwise
+// GetIncludeAnonymousUsersOk returns a tuple with the IncludeAnonymousUsers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TraitCreateOptions) GetIncludeAnonymousOk() (*bool, bool) {
-	if o == nil || IsNil(o.IncludeAnonymous) {
+func (o *TraitCreateOptions) GetIncludeAnonymousUsersOk() (*bool, bool) {
+	if o == nil || IsNil(o.IncludeAnonymousUsers) {
 		return nil, false
 	}
-	return o.IncludeAnonymous, true
+	return o.IncludeAnonymousUsers, true
 }
 
-// HasIncludeAnonymous returns a boolean if a field has been set.
-func (o *TraitCreateOptions) HasIncludeAnonymous() bool {
-	if o != nil && !IsNil(o.IncludeAnonymous) {
+// HasIncludeAnonymousUsers returns a boolean if a field has been set.
+func (o *TraitCreateOptions) HasIncludeAnonymousUsers() bool {
+	if o != nil && !IsNil(o.IncludeAnonymousUsers) {
 		return true
 	}
 
 	return false
 }
 
-// SetIncludeAnonymous gets a reference to the given bool and assigns it to the IncludeAnonymous field.
-func (o *TraitCreateOptions) SetIncludeAnonymous(v bool) {
-	o.IncludeAnonymous = &v
+// SetIncludeAnonymousUsers gets a reference to the given bool and assigns it to the IncludeAnonymousUsers field.
+func (o *TraitCreateOptions) SetIncludeAnonymousUsers(v bool) {
+	o.IncludeAnonymousUsers = &v
 }
 
 func (o TraitCreateOptions) MarshalJSON() ([]byte, error) {
@@ -115,11 +115,11 @@ func (o TraitCreateOptions) MarshalJSON() ([]byte, error) {
 
 func (o TraitCreateOptions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.IncludeHistorical) {
-		toSerialize["includeHistorical"] = o.IncludeHistorical
+	if !IsNil(o.IncludeHistoricalData) {
+		toSerialize["includeHistoricalData"] = o.IncludeHistoricalData
 	}
-	if !IsNil(o.IncludeAnonymous) {
-		toSerialize["includeAnonymous"] = o.IncludeAnonymous
+	if !IsNil(o.IncludeAnonymousUsers) {
+		toSerialize["includeAnonymousUsers"] = o.IncludeAnonymousUsers
 	}
 	return toSerialize, nil
 }

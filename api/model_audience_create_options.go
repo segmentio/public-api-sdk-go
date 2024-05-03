@@ -20,8 +20,8 @@ var _ MappedNullable = &AudienceCreateOptions{}
 
 // AudienceCreateOptions struct for AudienceCreateOptions
 type AudienceCreateOptions struct {
-	IncludeHistorical *bool `json:"includeHistorical,omitempty"`
-	IncludeAnonymous  *bool `json:"includeAnonymous,omitempty"`
+	IncludeHistoricalData *bool `json:"includeHistoricalData,omitempty"`
+	IncludeAnonymousUsers *bool `json:"includeAnonymousUsers,omitempty"`
 }
 
 // NewAudienceCreateOptions instantiates a new AudienceCreateOptions object
@@ -41,68 +41,68 @@ func NewAudienceCreateOptionsWithDefaults() *AudienceCreateOptions {
 	return &this
 }
 
-// GetIncludeHistorical returns the IncludeHistorical field value if set, zero value otherwise.
-func (o *AudienceCreateOptions) GetIncludeHistorical() bool {
-	if o == nil || IsNil(o.IncludeHistorical) {
+// GetIncludeHistoricalData returns the IncludeHistoricalData field value if set, zero value otherwise.
+func (o *AudienceCreateOptions) GetIncludeHistoricalData() bool {
+	if o == nil || IsNil(o.IncludeHistoricalData) {
 		var ret bool
 		return ret
 	}
-	return *o.IncludeHistorical
+	return *o.IncludeHistoricalData
 }
 
-// GetIncludeHistoricalOk returns a tuple with the IncludeHistorical field value if set, nil otherwise
+// GetIncludeHistoricalDataOk returns a tuple with the IncludeHistoricalData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AudienceCreateOptions) GetIncludeHistoricalOk() (*bool, bool) {
-	if o == nil || IsNil(o.IncludeHistorical) {
+func (o *AudienceCreateOptions) GetIncludeHistoricalDataOk() (*bool, bool) {
+	if o == nil || IsNil(o.IncludeHistoricalData) {
 		return nil, false
 	}
-	return o.IncludeHistorical, true
+	return o.IncludeHistoricalData, true
 }
 
-// HasIncludeHistorical returns a boolean if a field has been set.
-func (o *AudienceCreateOptions) HasIncludeHistorical() bool {
-	if o != nil && !IsNil(o.IncludeHistorical) {
+// HasIncludeHistoricalData returns a boolean if a field has been set.
+func (o *AudienceCreateOptions) HasIncludeHistoricalData() bool {
+	if o != nil && !IsNil(o.IncludeHistoricalData) {
 		return true
 	}
 
 	return false
 }
 
-// SetIncludeHistorical gets a reference to the given bool and assigns it to the IncludeHistorical field.
-func (o *AudienceCreateOptions) SetIncludeHistorical(v bool) {
-	o.IncludeHistorical = &v
+// SetIncludeHistoricalData gets a reference to the given bool and assigns it to the IncludeHistoricalData field.
+func (o *AudienceCreateOptions) SetIncludeHistoricalData(v bool) {
+	o.IncludeHistoricalData = &v
 }
 
-// GetIncludeAnonymous returns the IncludeAnonymous field value if set, zero value otherwise.
-func (o *AudienceCreateOptions) GetIncludeAnonymous() bool {
-	if o == nil || IsNil(o.IncludeAnonymous) {
+// GetIncludeAnonymousUsers returns the IncludeAnonymousUsers field value if set, zero value otherwise.
+func (o *AudienceCreateOptions) GetIncludeAnonymousUsers() bool {
+	if o == nil || IsNil(o.IncludeAnonymousUsers) {
 		var ret bool
 		return ret
 	}
-	return *o.IncludeAnonymous
+	return *o.IncludeAnonymousUsers
 }
 
-// GetIncludeAnonymousOk returns a tuple with the IncludeAnonymous field value if set, nil otherwise
+// GetIncludeAnonymousUsersOk returns a tuple with the IncludeAnonymousUsers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AudienceCreateOptions) GetIncludeAnonymousOk() (*bool, bool) {
-	if o == nil || IsNil(o.IncludeAnonymous) {
+func (o *AudienceCreateOptions) GetIncludeAnonymousUsersOk() (*bool, bool) {
+	if o == nil || IsNil(o.IncludeAnonymousUsers) {
 		return nil, false
 	}
-	return o.IncludeAnonymous, true
+	return o.IncludeAnonymousUsers, true
 }
 
-// HasIncludeAnonymous returns a boolean if a field has been set.
-func (o *AudienceCreateOptions) HasIncludeAnonymous() bool {
-	if o != nil && !IsNil(o.IncludeAnonymous) {
+// HasIncludeAnonymousUsers returns a boolean if a field has been set.
+func (o *AudienceCreateOptions) HasIncludeAnonymousUsers() bool {
+	if o != nil && !IsNil(o.IncludeAnonymousUsers) {
 		return true
 	}
 
 	return false
 }
 
-// SetIncludeAnonymous gets a reference to the given bool and assigns it to the IncludeAnonymous field.
-func (o *AudienceCreateOptions) SetIncludeAnonymous(v bool) {
-	o.IncludeAnonymous = &v
+// SetIncludeAnonymousUsers gets a reference to the given bool and assigns it to the IncludeAnonymousUsers field.
+func (o *AudienceCreateOptions) SetIncludeAnonymousUsers(v bool) {
+	o.IncludeAnonymousUsers = &v
 }
 
 func (o AudienceCreateOptions) MarshalJSON() ([]byte, error) {
@@ -115,11 +115,11 @@ func (o AudienceCreateOptions) MarshalJSON() ([]byte, error) {
 
 func (o AudienceCreateOptions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.IncludeHistorical) {
-		toSerialize["includeHistorical"] = o.IncludeHistorical
+	if !IsNil(o.IncludeHistoricalData) {
+		toSerialize["includeHistoricalData"] = o.IncludeHistoricalData
 	}
-	if !IsNil(o.IncludeAnonymous) {
-		toSerialize["includeAnonymous"] = o.IncludeAnonymous
+	if !IsNil(o.IncludeAnonymousUsers) {
+		toSerialize["includeAnonymousUsers"] = o.IncludeAnonymousUsers
 	}
 	return toSerialize, nil
 }
