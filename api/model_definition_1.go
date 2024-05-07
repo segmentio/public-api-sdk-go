@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 49.1.0
+API version: 50.0.0
 Contact: friends@segment.com
 */
 
@@ -20,9 +20,9 @@ var _ MappedNullable = &Definition1{}
 
 // Definition1 Query language definition and type.
 type Definition1 struct {
-	// The query language string defining the audience segmentation criteria.
+	// The query language string defining the computed trait aggregation criteria.
 	Query string `json:"query"`
-	// The underlying data type being segmented for this audience.  Possible values: users, accounts.
+	// The underlying data type being aggregated for this computed trait.  Possible values: users, accounts.
 	Type string `json:"type"`
 }
 
