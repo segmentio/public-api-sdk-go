@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 50.1.0
+API version: 50.0.0
 Contact: friends@segment.com
 */
 
@@ -937,17 +937,9 @@ type ApiListRegulationsFromSourceRequest struct {
 	ctx             context.Context
 	ApiService      *DeletionAndSuppressionAPIService
 	sourceId        string
-	pagination      *PaginationInput
 	status          *string
 	regulationTypes *[]string
-}
-
-// Pagination parameters.  This parameter exists in v1.
-func (r ApiListRegulationsFromSourceRequest) Pagination(
-	pagination PaginationInput,
-) ApiListRegulationsFromSourceRequest {
-	r.pagination = &pagination
-	return r
+	pagination      *PaginationInput
 }
 
 // The status on which to filter returned regulations.  This parameter exists in v1.
@@ -963,6 +955,14 @@ func (r ApiListRegulationsFromSourceRequest) RegulationTypes(
 	regulationTypes []string,
 ) ApiListRegulationsFromSourceRequest {
 	r.regulationTypes = &regulationTypes
+	return r
+}
+
+// Pagination parameters.  This parameter exists in v1.
+func (r ApiListRegulationsFromSourceRequest) Pagination(
+	pagination PaginationInput,
+) ApiListRegulationsFromSourceRequest {
+	r.pagination = &pagination
 	return r
 }
 
@@ -1022,9 +1022,6 @@ func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSourceExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
 	if r.status != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "")
@@ -1045,7 +1042,9 @@ func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSourceExecute(
 			parameterAddToHeaderOrQuery(localVarQueryParams, "regulationTypes", t, "multi")
 		}
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1211,11 +1210,10 @@ func (a *DeletionAndSuppressionAPIService) ListSuppressionsExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1323,17 +1321,9 @@ func (a *DeletionAndSuppressionAPIService) ListSuppressionsExecute(
 type ApiListWorkspaceRegulationsRequest struct {
 	ctx             context.Context
 	ApiService      *DeletionAndSuppressionAPIService
-	pagination      *PaginationInput
 	status          *string
 	regulationTypes *[]string
-}
-
-// Pagination parameters.  This parameter exists in v1.
-func (r ApiListWorkspaceRegulationsRequest) Pagination(
-	pagination PaginationInput,
-) ApiListWorkspaceRegulationsRequest {
-	r.pagination = &pagination
-	return r
+	pagination      *PaginationInput
 }
 
 // The status on which to filter the returned regulations.  This parameter exists in v1.
@@ -1349,6 +1339,14 @@ func (r ApiListWorkspaceRegulationsRequest) RegulationTypes(
 	regulationTypes []string,
 ) ApiListWorkspaceRegulationsRequest {
 	r.regulationTypes = &regulationTypes
+	return r
+}
+
+// Pagination parameters.  This parameter exists in v1.
+func (r ApiListWorkspaceRegulationsRequest) Pagination(
+	pagination PaginationInput,
+) ApiListWorkspaceRegulationsRequest {
+	r.pagination = &pagination
 	return r
 }
 
@@ -1399,9 +1397,6 @@ func (a *DeletionAndSuppressionAPIService) ListWorkspaceRegulationsExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
 	if r.status != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "")
@@ -1422,7 +1417,9 @@ func (a *DeletionAndSuppressionAPIService) ListWorkspaceRegulationsExecute(
 			parameterAddToHeaderOrQuery(localVarQueryParams, "regulationTypes", t, "multi")
 		}
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

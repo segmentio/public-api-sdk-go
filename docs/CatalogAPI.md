@@ -112,7 +112,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Required pagination parameters used to filter the Destinations catalog.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Required pagination parameters used to filter the Destinations catalog.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)

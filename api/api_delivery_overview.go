@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 50.1.0
+API version: 50.0.0
 Contact: friends@segment.com
 */
 
@@ -32,9 +32,9 @@ type ApiGetEgressFailedMetricsFromDeliveryOverviewRequest struct {
 	startTime           *string
 	endTime             *string
 	granularity         *string
-	pagination          *PaginationInput
 	groupBy             *[]string
 	filter              *DeliveryOverviewDestinationFilterBy
+	pagination          *PaginationInput
 }
 
 // The sourceId for the Workspace.  This parameter exists in beta.
@@ -77,14 +77,6 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// Params to specify the page cursor and count.  This parameter exists in beta.
-func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Pagination(
-	pagination PaginationInput,
-) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
-	r.pagination = &pagination
-	return r
-}
-
 // A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and &#x60;subscriptionId&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
@@ -98,6 +90,14 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewDestinationFilterBy,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
+	return r
+}
+
+// Params to specify the page cursor and count.  This parameter exists in beta.
+func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
+	r.pagination = &pagination
 	return r
 }
 
@@ -167,9 +167,6 @@ func (a *DeliveryOverviewAPIService) GetEgressFailedMetricsFromDeliveryOverviewE
 			"granularity is required and must be specified",
 		)
 	}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
 	parameterAddToHeaderOrQuery(
@@ -200,7 +197,9 @@ func (a *DeliveryOverviewAPIService) GetEgressFailedMetricsFromDeliveryOverviewE
 	if r.filter != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -308,9 +307,9 @@ type ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest struct {
 	startTime           *string
 	endTime             *string
 	granularity         *string
-	pagination          *PaginationInput
 	groupBy             *[]string
 	filter              *DeliveryOverviewDestinationFilterBy
+	pagination          *PaginationInput
 }
 
 // The sourceId for the Workspace.  This parameter exists in beta.
@@ -353,14 +352,6 @@ func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// Params to specify the page cursor and count.  This parameter exists in beta.
-func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) Pagination(
-	pagination PaginationInput,
-) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
-	r.pagination = &pagination
-	return r
-}
-
 // A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and &#x60;subscriptionId&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
@@ -374,6 +365,14 @@ func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewDestinationFilterBy,
 ) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
+	return r
+}
+
+// Params to specify the page cursor and count.  This parameter exists in beta.
+func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
+	r.pagination = &pagination
 	return r
 }
 
@@ -443,9 +442,6 @@ func (a *DeliveryOverviewAPIService) GetEgressSuccessMetricsFromDeliveryOverview
 			"granularity is required and must be specified",
 		)
 	}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
 	parameterAddToHeaderOrQuery(
@@ -476,7 +472,9 @@ func (a *DeliveryOverviewAPIService) GetEgressSuccessMetricsFromDeliveryOverview
 	if r.filter != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -584,9 +582,9 @@ type ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest struct {
 	startTime           *string
 	endTime             *string
 	granularity         *string
-	pagination          *PaginationInput
 	groupBy             *[]string
 	filter              *DeliveryOverviewDestinationFilterBy
+	pagination          *PaginationInput
 	subscriptionId      *string
 }
 
@@ -630,14 +628,6 @@ func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Granulari
 	return r
 }
 
-// Params to specify the page cursor and count.  This parameter exists in beta.
-func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Pagination(
-	pagination PaginationInput,
-) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
-	r.pagination = &pagination
-	return r
-}
-
 // A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and &#x60;subscriptionId&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
@@ -651,6 +641,14 @@ func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewDestinationFilterBy,
 ) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
+	return r
+}
+
+// Params to specify the page cursor and count.  This parameter exists in beta.
+func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
+	r.pagination = &pagination
 	return r
 }
 
@@ -728,9 +726,6 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtDestinationMetricsFromDelivery
 			"granularity is required and must be specified",
 		)
 	}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
 	parameterAddToHeaderOrQuery(
@@ -761,7 +756,9 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtDestinationMetricsFromDelivery
 	if r.filter != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	if r.subscriptionId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "subscriptionId", r.subscriptionId, "")
 	}
@@ -871,9 +868,9 @@ type ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest struct {
 	startTime   *string
 	endTime     *string
 	granularity *string
-	pagination  *PaginationInput
 	groupBy     *[]string
 	filter      *DeliveryOverviewSourceFilterBy
+	pagination  *PaginationInput
 }
 
 // The sourceId for the Workspace.  This parameter exists in beta.
@@ -908,14 +905,6 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// Optional params to specify the page cursor and count.  This parameter exists in beta.
-func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) Pagination(
-	pagination PaginationInput,
-) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
-	r.pagination = &pagination
-	return r
-}
-
 // A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
@@ -929,6 +918,14 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewSourceFilterBy,
 ) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
+	return r
+}
+
+// Optional params to specify the page cursor and count.  This parameter exists in beta.
+func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
+	r.pagination = &pagination
 	return r
 }
 
@@ -993,9 +990,6 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtSourceMetricsFromDeliveryOverv
 			"granularity is required and must be specified",
 		)
 	}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
 	parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
@@ -1020,7 +1014,9 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtSourceMetricsFromDeliveryOverv
 	if r.filter != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1127,9 +1123,9 @@ type ApiGetIngressFailedMetricsFromDeliveryOverviewRequest struct {
 	startTime   *string
 	endTime     *string
 	granularity *string
-	pagination  *PaginationInput
 	groupBy     *[]string
 	filter      *DeliveryOverviewSourceFilterBy
+	pagination  *PaginationInput
 }
 
 // The sourceId for the Workspace.  This parameter exists in beta.
@@ -1164,14 +1160,6 @@ func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// Optional params to specify the page cursor and count.  This parameter exists in beta.
-func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) Pagination(
-	pagination PaginationInput,
-) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
-	r.pagination = &pagination
-	return r
-}
-
 // A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
@@ -1185,6 +1173,14 @@ func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewSourceFilterBy,
 ) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
+	return r
+}
+
+// Optional params to specify the page cursor and count.  This parameter exists in beta.
+func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
+	r.pagination = &pagination
 	return r
 }
 
@@ -1249,9 +1245,6 @@ func (a *DeliveryOverviewAPIService) GetIngressFailedMetricsFromDeliveryOverview
 			"granularity is required and must be specified",
 		)
 	}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
 	parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
@@ -1276,7 +1269,9 @@ func (a *DeliveryOverviewAPIService) GetIngressFailedMetricsFromDeliveryOverview
 	if r.filter != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1383,9 +1378,9 @@ type ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest struct {
 	startTime   *string
 	endTime     *string
 	granularity *string
-	pagination  *PaginationInput
 	groupBy     *[]string
 	filter      *DeliveryOverviewSuccessfullyReceivedFilterBy
+	pagination  *PaginationInput
 }
 
 // The sourceId for the Workspace.  This parameter exists in beta.
@@ -1420,14 +1415,6 @@ func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// Optional params to specify the page cursor and count.  This parameter exists in beta.
-func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) Pagination(
-	pagination PaginationInput,
-) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
-	r.pagination = &pagination
-	return r
-}
-
 // A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
@@ -1441,6 +1428,14 @@ func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewSuccessfullyReceivedFilterBy,
 ) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
 	r.filter = &filter
+	return r
+}
+
+// Optional params to specify the page cursor and count.  This parameter exists in beta.
+func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
+	r.pagination = &pagination
 	return r
 }
 
@@ -1505,9 +1500,6 @@ func (a *DeliveryOverviewAPIService) GetIngressSuccessMetricsFromDeliveryOvervie
 			"granularity is required and must be specified",
 		)
 	}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
 	parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
@@ -1532,7 +1524,9 @@ func (a *DeliveryOverviewAPIService) GetIngressSuccessMetricsFromDeliveryOvervie
 	if r.filter != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
