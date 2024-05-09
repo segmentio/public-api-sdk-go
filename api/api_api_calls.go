@@ -95,12 +95,11 @@ func (a *APICallsAPIService) GetDailyPerSourceAPICallsUsageExecute(
 	if r.period == nil {
 		return localVarReturnValue, nil, reportError("period is required and must be specified")
 	}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "period", r.period, "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -278,12 +277,11 @@ func (a *APICallsAPIService) GetDailyWorkspaceAPICallsUsageExecute(
 	if r.period == nil {
 		return localVarReturnValue, nil, reportError("period is required and must be specified")
 	}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "period", r.period, "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

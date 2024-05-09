@@ -808,11 +808,10 @@ func (a *TrackingPlansAPIService) ListRulesFromTrackingPlanExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -996,11 +995,10 @@ func (a *TrackingPlansAPIService) ListSourcesFromTrackingPlanExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1108,8 +1106,14 @@ func (a *TrackingPlansAPIService) ListSourcesFromTrackingPlanExecute(
 type ApiListTrackingPlansRequest struct {
 	ctx        context.Context
 	ApiService *TrackingPlansAPIService
-	pagination *PaginationInput
 	type_      *string
+	pagination *PaginationInput
+}
+
+// Requests Tracking Plans of a certain type. If omitted, lists all types.  This parameter exists in v1.
+func (r ApiListTrackingPlansRequest) Type_(type_ string) ApiListTrackingPlansRequest {
+	r.type_ = &type_
+	return r
 }
 
 // Pagination options.  This parameter exists in v1.
@@ -1117,12 +1121,6 @@ func (r ApiListTrackingPlansRequest) Pagination(
 	pagination PaginationInput,
 ) ApiListTrackingPlansRequest {
 	r.pagination = &pagination
-	return r
-}
-
-// Requests Tracking Plans of a certain type. If omitted, lists all types.  This parameter exists in v1.
-func (r ApiListTrackingPlansRequest) Type_(type_ string) ApiListTrackingPlansRequest {
-	r.type_ = &type_
 	return r
 }
 
@@ -1175,14 +1173,13 @@ func (a *TrackingPlansAPIService) ListTrackingPlansExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
 	if r.type_ != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "")
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
