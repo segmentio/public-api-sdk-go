@@ -190,7 +190,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination params  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination params  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)

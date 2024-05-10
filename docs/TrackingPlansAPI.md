@@ -351,7 +351,7 @@ import (
 
 func main() {
     trackingPlanId := "tp_sprout_rVGCC6WdrNxjCf6JpCHP" // string | 
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination options.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination options.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -431,7 +431,7 @@ import (
 
 func main() {
     trackingPlanId := "tp_sprout_rVGCC6WdrNxjCf6JpCHP" // string | 
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination options.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination options.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -491,7 +491,7 @@ Name | Type | Description  | Notes
 
 ## Operation: ListTrackingPlans
 
-> ListTrackingPlans200Response ListTrackingPlans(ctx).Pagination(pagination).Type_(type_).Execute()
+> ListTrackingPlans200Response ListTrackingPlans(ctx).Type_(type_).Pagination(pagination).Execute()
 
 List Tracking Plans
 
@@ -510,14 +510,14 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination options.  This parameter exists in v1.
     type_ := "LIVE" // string | Requests Tracking Plans of a certain type. If omitted, lists all types.  This parameter exists in v1. (optional)
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination options.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.TrackingPlansAPI.ListTrackingPlans(ctx).Pagination(pagination).Type_(type_).Execute()
+    resp, r, err := apiClient.TrackingPlansAPI.ListTrackingPlans(ctx).Type_(type_).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TrackingPlansAPI.ListTrackingPlans``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -544,8 +544,8 @@ Other parameters are passed through a pointer to a apiListTrackingPlansRequest s
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pagination** | [**PaginationInput**](PaginationInput.md) | Pagination options.  This parameter exists in v1. | 
  **type_** | **string** | Requests Tracking Plans of a certain type. If omitted, lists all types.  This parameter exists in v1. | 
+ **pagination** | [**PaginationInput**](PaginationInput.md) | Pagination options.  This parameter exists in v1. | 
 
 ### Return type
 

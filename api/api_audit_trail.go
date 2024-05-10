@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 49.2.0
+API version: 50.0.0
 Contact: friends@segment.com
 */
 
@@ -25,19 +25,11 @@ type AuditTrailAPIService service
 type ApiListAuditEventsRequest struct {
 	ctx          context.Context
 	ApiService   *AuditTrailAPIService
-	pagination   *PaginationInput
 	startTime    *string
 	endTime      *string
 	resourceId   *string
 	resourceType *string
-}
-
-// Defines the pagination parameters.  This parameter exists in v1.
-func (r ApiListAuditEventsRequest) Pagination(
-	pagination PaginationInput,
-) ApiListAuditEventsRequest {
-	r.pagination = &pagination
-	return r
+	pagination   *PaginationInput
 }
 
 // Filter response to events that happened after this time.  This parameter exists in v1.
@@ -61,6 +53,14 @@ func (r ApiListAuditEventsRequest) ResourceId(resourceId string) ApiListAuditEve
 // Filter response to events that affect a specific type, for example, Sources, Warehouses, and Tracking Plans.  This parameter exists in v1.
 func (r ApiListAuditEventsRequest) ResourceType(resourceType string) ApiListAuditEventsRequest {
 	r.resourceType = &resourceType
+	return r
+}
+
+// Defines the pagination parameters.  This parameter exists in v1.
+func (r ApiListAuditEventsRequest) Pagination(
+	pagination PaginationInput,
+) ApiListAuditEventsRequest {
+	r.pagination = &pagination
 	return r
 }
 
@@ -109,9 +109,6 @@ func (a *AuditTrailAPIService) ListAuditEventsExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
 	if r.startTime != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
@@ -125,7 +122,9 @@ func (a *AuditTrailAPIService) ListAuditEventsExecute(
 	if r.resourceType != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "resourceType", r.resourceType, "")
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

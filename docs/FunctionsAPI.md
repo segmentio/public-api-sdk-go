@@ -662,7 +662,7 @@ import (
 
 func main() {
     functionId := "sfnc_wXzcDGFR3KmjLDrtSawNHf" // string | 
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -722,7 +722,7 @@ Name | Type | Description  | Notes
 
 ## Operation: ListFunctions
 
-> ListFunctions200Response ListFunctions(ctx).Pagination(pagination).ResourceType(resourceType).Execute()
+> ListFunctions200Response ListFunctions(ctx).ResourceType(resourceType).Pagination(pagination).Execute()
 
 List Functions
 
@@ -741,14 +741,14 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in v1.
     resourceType := "SOURCE" // string | The Function type.  Config API note: equal to `type`.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FunctionsAPI.ListFunctions(ctx).Pagination(pagination).ResourceType(resourceType).Execute()
+    resp, r, err := apiClient.FunctionsAPI.ListFunctions(ctx).ResourceType(resourceType).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAPI.ListFunctions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -775,8 +775,8 @@ Other parameters are passed through a pointer to a apiListFunctionsRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pagination** | [**PaginationInput**](PaginationInput.md) | Pagination parameters.  This parameter exists in v1. | 
  **resourceType** | **string** | The Function type.  Config API note: equal to &#x60;type&#x60;.  This parameter exists in v1. | 
+ **pagination** | [**PaginationInput**](PaginationInput.md) | Pagination parameters.  This parameter exists in v1. | 
 
 ### Return type
 
@@ -798,7 +798,7 @@ Name | Type | Description  | Notes
 
 ## Operation: ListInsertFunctionInstances
 
-> ListInsertFunctionInstances200Response ListInsertFunctionInstances(ctx).Pagination(pagination).FunctionId(functionId).Execute()
+> ListInsertFunctionInstances200Response ListInsertFunctionInstances(ctx).FunctionId(functionId).Pagination(pagination).Execute()
 
 List Insert Function Instances
 
@@ -817,14 +817,14 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in alpha.
     functionId := "76365637324e715a67535831" // string | The insert Function class id to lookup.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FunctionsAPI.ListInsertFunctionInstances(ctx).Pagination(pagination).FunctionId(functionId).Execute()
+    resp, r, err := apiClient.FunctionsAPI.ListInsertFunctionInstances(ctx).FunctionId(functionId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAPI.ListInsertFunctionInstances``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -851,8 +851,8 @@ Other parameters are passed through a pointer to a apiListInsertFunctionInstance
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pagination** | [**PaginationInput**](PaginationInput.md) | Pagination parameters.  This parameter exists in alpha. | 
  **functionId** | **string** | The insert Function class id to lookup.  This parameter exists in alpha. | 
+ **pagination** | [**PaginationInput**](PaginationInput.md) | Pagination parameters.  This parameter exists in alpha. | 
 
 ### Return type
 
