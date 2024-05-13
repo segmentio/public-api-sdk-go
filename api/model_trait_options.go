@@ -15,34 +15,34 @@ import (
 	"encoding/json"
 )
 
-// checks if the TraitCreateOptions type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &TraitCreateOptions{}
+// checks if the TraitOptions type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &TraitOptions{}
 
-// TraitCreateOptions struct for TraitCreateOptions
-type TraitCreateOptions struct {
+// TraitOptions struct for TraitOptions
+type TraitOptions struct {
 	IncludeHistoricalData *bool `json:"includeHistoricalData,omitempty"`
 	IncludeAnonymousUsers *bool `json:"includeAnonymousUsers,omitempty"`
 }
 
-// NewTraitCreateOptions instantiates a new TraitCreateOptions object
+// NewTraitOptions instantiates a new TraitOptions object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTraitCreateOptions() *TraitCreateOptions {
-	this := TraitCreateOptions{}
+func NewTraitOptions() *TraitOptions {
+	this := TraitOptions{}
 	return &this
 }
 
-// NewTraitCreateOptionsWithDefaults instantiates a new TraitCreateOptions object
+// NewTraitOptionsWithDefaults instantiates a new TraitOptions object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTraitCreateOptionsWithDefaults() *TraitCreateOptions {
-	this := TraitCreateOptions{}
+func NewTraitOptionsWithDefaults() *TraitOptions {
+	this := TraitOptions{}
 	return &this
 }
 
 // GetIncludeHistoricalData returns the IncludeHistoricalData field value if set, zero value otherwise.
-func (o *TraitCreateOptions) GetIncludeHistoricalData() bool {
+func (o *TraitOptions) GetIncludeHistoricalData() bool {
 	if o == nil || IsNil(o.IncludeHistoricalData) {
 		var ret bool
 		return ret
@@ -52,7 +52,7 @@ func (o *TraitCreateOptions) GetIncludeHistoricalData() bool {
 
 // GetIncludeHistoricalDataOk returns a tuple with the IncludeHistoricalData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TraitCreateOptions) GetIncludeHistoricalDataOk() (*bool, bool) {
+func (o *TraitOptions) GetIncludeHistoricalDataOk() (*bool, bool) {
 	if o == nil || IsNil(o.IncludeHistoricalData) {
 		return nil, false
 	}
@@ -60,7 +60,7 @@ func (o *TraitCreateOptions) GetIncludeHistoricalDataOk() (*bool, bool) {
 }
 
 // HasIncludeHistoricalData returns a boolean if a field has been set.
-func (o *TraitCreateOptions) HasIncludeHistoricalData() bool {
+func (o *TraitOptions) HasIncludeHistoricalData() bool {
 	if o != nil && !IsNil(o.IncludeHistoricalData) {
 		return true
 	}
@@ -69,12 +69,12 @@ func (o *TraitCreateOptions) HasIncludeHistoricalData() bool {
 }
 
 // SetIncludeHistoricalData gets a reference to the given bool and assigns it to the IncludeHistoricalData field.
-func (o *TraitCreateOptions) SetIncludeHistoricalData(v bool) {
+func (o *TraitOptions) SetIncludeHistoricalData(v bool) {
 	o.IncludeHistoricalData = &v
 }
 
 // GetIncludeAnonymousUsers returns the IncludeAnonymousUsers field value if set, zero value otherwise.
-func (o *TraitCreateOptions) GetIncludeAnonymousUsers() bool {
+func (o *TraitOptions) GetIncludeAnonymousUsers() bool {
 	if o == nil || IsNil(o.IncludeAnonymousUsers) {
 		var ret bool
 		return ret
@@ -84,7 +84,7 @@ func (o *TraitCreateOptions) GetIncludeAnonymousUsers() bool {
 
 // GetIncludeAnonymousUsersOk returns a tuple with the IncludeAnonymousUsers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TraitCreateOptions) GetIncludeAnonymousUsersOk() (*bool, bool) {
+func (o *TraitOptions) GetIncludeAnonymousUsersOk() (*bool, bool) {
 	if o == nil || IsNil(o.IncludeAnonymousUsers) {
 		return nil, false
 	}
@@ -92,7 +92,7 @@ func (o *TraitCreateOptions) GetIncludeAnonymousUsersOk() (*bool, bool) {
 }
 
 // HasIncludeAnonymousUsers returns a boolean if a field has been set.
-func (o *TraitCreateOptions) HasIncludeAnonymousUsers() bool {
+func (o *TraitOptions) HasIncludeAnonymousUsers() bool {
 	if o != nil && !IsNil(o.IncludeAnonymousUsers) {
 		return true
 	}
@@ -101,11 +101,11 @@ func (o *TraitCreateOptions) HasIncludeAnonymousUsers() bool {
 }
 
 // SetIncludeAnonymousUsers gets a reference to the given bool and assigns it to the IncludeAnonymousUsers field.
-func (o *TraitCreateOptions) SetIncludeAnonymousUsers(v bool) {
+func (o *TraitOptions) SetIncludeAnonymousUsers(v bool) {
 	o.IncludeAnonymousUsers = &v
 }
 
-func (o TraitCreateOptions) MarshalJSON() ([]byte, error) {
+func (o TraitOptions) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -113,7 +113,7 @@ func (o TraitCreateOptions) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TraitCreateOptions) ToMap() (map[string]interface{}, error) {
+func (o TraitOptions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.IncludeHistoricalData) {
 		toSerialize["includeHistoricalData"] = o.IncludeHistoricalData
@@ -124,38 +124,38 @@ func (o TraitCreateOptions) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableTraitCreateOptions struct {
-	value *TraitCreateOptions
+type NullableTraitOptions struct {
+	value *TraitOptions
 	isSet bool
 }
 
-func (v NullableTraitCreateOptions) Get() *TraitCreateOptions {
+func (v NullableTraitOptions) Get() *TraitOptions {
 	return v.value
 }
 
-func (v *NullableTraitCreateOptions) Set(val *TraitCreateOptions) {
+func (v *NullableTraitOptions) Set(val *TraitOptions) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTraitCreateOptions) IsSet() bool {
+func (v NullableTraitOptions) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTraitCreateOptions) Unset() {
+func (v *NullableTraitOptions) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTraitCreateOptions(val *TraitCreateOptions) *NullableTraitCreateOptions {
-	return &NullableTraitCreateOptions{value: val, isSet: true}
+func NewNullableTraitOptions(val *TraitOptions) *NullableTraitOptions {
+	return &NullableTraitOptions{value: val, isSet: true}
 }
 
-func (v NullableTraitCreateOptions) MarshalJSON() ([]byte, error) {
+func (v NullableTraitOptions) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTraitCreateOptions) UnmarshalJSON(src []byte) error {
+func (v *NullableTraitOptions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

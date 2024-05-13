@@ -15,34 +15,34 @@ import (
 	"encoding/json"
 )
 
-// checks if the AudienceCreateOptions type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AudienceCreateOptions{}
+// checks if the AudienceOptions type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AudienceOptions{}
 
-// AudienceCreateOptions struct for AudienceCreateOptions
-type AudienceCreateOptions struct {
+// AudienceOptions struct for AudienceOptions
+type AudienceOptions struct {
 	IncludeHistoricalData *bool `json:"includeHistoricalData,omitempty"`
 	IncludeAnonymousUsers *bool `json:"includeAnonymousUsers,omitempty"`
 }
 
-// NewAudienceCreateOptions instantiates a new AudienceCreateOptions object
+// NewAudienceOptions instantiates a new AudienceOptions object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAudienceCreateOptions() *AudienceCreateOptions {
-	this := AudienceCreateOptions{}
+func NewAudienceOptions() *AudienceOptions {
+	this := AudienceOptions{}
 	return &this
 }
 
-// NewAudienceCreateOptionsWithDefaults instantiates a new AudienceCreateOptions object
+// NewAudienceOptionsWithDefaults instantiates a new AudienceOptions object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAudienceCreateOptionsWithDefaults() *AudienceCreateOptions {
-	this := AudienceCreateOptions{}
+func NewAudienceOptionsWithDefaults() *AudienceOptions {
+	this := AudienceOptions{}
 	return &this
 }
 
 // GetIncludeHistoricalData returns the IncludeHistoricalData field value if set, zero value otherwise.
-func (o *AudienceCreateOptions) GetIncludeHistoricalData() bool {
+func (o *AudienceOptions) GetIncludeHistoricalData() bool {
 	if o == nil || IsNil(o.IncludeHistoricalData) {
 		var ret bool
 		return ret
@@ -52,7 +52,7 @@ func (o *AudienceCreateOptions) GetIncludeHistoricalData() bool {
 
 // GetIncludeHistoricalDataOk returns a tuple with the IncludeHistoricalData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AudienceCreateOptions) GetIncludeHistoricalDataOk() (*bool, bool) {
+func (o *AudienceOptions) GetIncludeHistoricalDataOk() (*bool, bool) {
 	if o == nil || IsNil(o.IncludeHistoricalData) {
 		return nil, false
 	}
@@ -60,7 +60,7 @@ func (o *AudienceCreateOptions) GetIncludeHistoricalDataOk() (*bool, bool) {
 }
 
 // HasIncludeHistoricalData returns a boolean if a field has been set.
-func (o *AudienceCreateOptions) HasIncludeHistoricalData() bool {
+func (o *AudienceOptions) HasIncludeHistoricalData() bool {
 	if o != nil && !IsNil(o.IncludeHistoricalData) {
 		return true
 	}
@@ -69,12 +69,12 @@ func (o *AudienceCreateOptions) HasIncludeHistoricalData() bool {
 }
 
 // SetIncludeHistoricalData gets a reference to the given bool and assigns it to the IncludeHistoricalData field.
-func (o *AudienceCreateOptions) SetIncludeHistoricalData(v bool) {
+func (o *AudienceOptions) SetIncludeHistoricalData(v bool) {
 	o.IncludeHistoricalData = &v
 }
 
 // GetIncludeAnonymousUsers returns the IncludeAnonymousUsers field value if set, zero value otherwise.
-func (o *AudienceCreateOptions) GetIncludeAnonymousUsers() bool {
+func (o *AudienceOptions) GetIncludeAnonymousUsers() bool {
 	if o == nil || IsNil(o.IncludeAnonymousUsers) {
 		var ret bool
 		return ret
@@ -84,7 +84,7 @@ func (o *AudienceCreateOptions) GetIncludeAnonymousUsers() bool {
 
 // GetIncludeAnonymousUsersOk returns a tuple with the IncludeAnonymousUsers field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AudienceCreateOptions) GetIncludeAnonymousUsersOk() (*bool, bool) {
+func (o *AudienceOptions) GetIncludeAnonymousUsersOk() (*bool, bool) {
 	if o == nil || IsNil(o.IncludeAnonymousUsers) {
 		return nil, false
 	}
@@ -92,7 +92,7 @@ func (o *AudienceCreateOptions) GetIncludeAnonymousUsersOk() (*bool, bool) {
 }
 
 // HasIncludeAnonymousUsers returns a boolean if a field has been set.
-func (o *AudienceCreateOptions) HasIncludeAnonymousUsers() bool {
+func (o *AudienceOptions) HasIncludeAnonymousUsers() bool {
 	if o != nil && !IsNil(o.IncludeAnonymousUsers) {
 		return true
 	}
@@ -101,11 +101,11 @@ func (o *AudienceCreateOptions) HasIncludeAnonymousUsers() bool {
 }
 
 // SetIncludeAnonymousUsers gets a reference to the given bool and assigns it to the IncludeAnonymousUsers field.
-func (o *AudienceCreateOptions) SetIncludeAnonymousUsers(v bool) {
+func (o *AudienceOptions) SetIncludeAnonymousUsers(v bool) {
 	o.IncludeAnonymousUsers = &v
 }
 
-func (o AudienceCreateOptions) MarshalJSON() ([]byte, error) {
+func (o AudienceOptions) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -113,7 +113,7 @@ func (o AudienceCreateOptions) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AudienceCreateOptions) ToMap() (map[string]interface{}, error) {
+func (o AudienceOptions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.IncludeHistoricalData) {
 		toSerialize["includeHistoricalData"] = o.IncludeHistoricalData
@@ -124,38 +124,38 @@ func (o AudienceCreateOptions) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableAudienceCreateOptions struct {
-	value *AudienceCreateOptions
+type NullableAudienceOptions struct {
+	value *AudienceOptions
 	isSet bool
 }
 
-func (v NullableAudienceCreateOptions) Get() *AudienceCreateOptions {
+func (v NullableAudienceOptions) Get() *AudienceOptions {
 	return v.value
 }
 
-func (v *NullableAudienceCreateOptions) Set(val *AudienceCreateOptions) {
+func (v *NullableAudienceOptions) Set(val *AudienceOptions) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAudienceCreateOptions) IsSet() bool {
+func (v NullableAudienceOptions) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAudienceCreateOptions) Unset() {
+func (v *NullableAudienceOptions) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAudienceCreateOptions(val *AudienceCreateOptions) *NullableAudienceCreateOptions {
-	return &NullableAudienceCreateOptions{value: val, isSet: true}
+func NewNullableAudienceOptions(val *AudienceOptions) *NullableAudienceOptions {
+	return &NullableAudienceOptions{value: val, isSet: true}
 }
 
-func (v NullableAudienceCreateOptions) MarshalJSON() ([]byte, error) {
+func (v NullableAudienceOptions) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAudienceCreateOptions) UnmarshalJSON(src []byte) error {
+func (v *NullableAudienceOptions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

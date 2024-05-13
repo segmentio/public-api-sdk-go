@@ -25,7 +25,7 @@ type CreateAudienceAlphaInput struct {
 	// The description of the computation.
 	Description string                        `json:"description"`
 	Definition  AudienceComputationDefinition `json:"definition"`
-	Options     *AudienceCreateOptions        `json:"options,omitempty"`
+	Options     *AudienceOptions              `json:"options,omitempty"`
 }
 
 // NewCreateAudienceAlphaInput instantiates a new CreateAudienceAlphaInput object
@@ -125,9 +125,9 @@ func (o *CreateAudienceAlphaInput) SetDefinition(v AudienceComputationDefinition
 }
 
 // GetOptions returns the Options field value if set, zero value otherwise.
-func (o *CreateAudienceAlphaInput) GetOptions() AudienceCreateOptions {
+func (o *CreateAudienceAlphaInput) GetOptions() AudienceOptions {
 	if o == nil || IsNil(o.Options) {
-		var ret AudienceCreateOptions
+		var ret AudienceOptions
 		return ret
 	}
 	return *o.Options
@@ -135,7 +135,7 @@ func (o *CreateAudienceAlphaInput) GetOptions() AudienceCreateOptions {
 
 // GetOptionsOk returns a tuple with the Options field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAudienceAlphaInput) GetOptionsOk() (*AudienceCreateOptions, bool) {
+func (o *CreateAudienceAlphaInput) GetOptionsOk() (*AudienceOptions, bool) {
 	if o == nil || IsNil(o.Options) {
 		return nil, false
 	}
@@ -151,8 +151,8 @@ func (o *CreateAudienceAlphaInput) HasOptions() bool {
 	return false
 }
 
-// SetOptions gets a reference to the given AudienceCreateOptions and assigns it to the Options field.
-func (o *CreateAudienceAlphaInput) SetOptions(v AudienceCreateOptions) {
+// SetOptions gets a reference to the given AudienceOptions and assigns it to the Options field.
+func (o *CreateAudienceAlphaInput) SetOptions(v AudienceOptions) {
 	o.Options = &v
 }
 

@@ -23,9 +23,9 @@ type CreateComputedTraitAlphaInput struct {
 	// The name of the computation.
 	Name string `json:"name"`
 	// The description of the computation.
-	Description string              `json:"description"`
-	Definition  TraitDefinition     `json:"definition"`
-	Options     *TraitCreateOptions `json:"options,omitempty"`
+	Description string          `json:"description"`
+	Definition  TraitDefinition `json:"definition"`
+	Options     *TraitOptions   `json:"options,omitempty"`
 }
 
 // NewCreateComputedTraitAlphaInput instantiates a new CreateComputedTraitAlphaInput object
@@ -125,9 +125,9 @@ func (o *CreateComputedTraitAlphaInput) SetDefinition(v TraitDefinition) {
 }
 
 // GetOptions returns the Options field value if set, zero value otherwise.
-func (o *CreateComputedTraitAlphaInput) GetOptions() TraitCreateOptions {
+func (o *CreateComputedTraitAlphaInput) GetOptions() TraitOptions {
 	if o == nil || IsNil(o.Options) {
-		var ret TraitCreateOptions
+		var ret TraitOptions
 		return ret
 	}
 	return *o.Options
@@ -135,7 +135,7 @@ func (o *CreateComputedTraitAlphaInput) GetOptions() TraitCreateOptions {
 
 // GetOptionsOk returns a tuple with the Options field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateComputedTraitAlphaInput) GetOptionsOk() (*TraitCreateOptions, bool) {
+func (o *CreateComputedTraitAlphaInput) GetOptionsOk() (*TraitOptions, bool) {
 	if o == nil || IsNil(o.Options) {
 		return nil, false
 	}
@@ -151,8 +151,8 @@ func (o *CreateComputedTraitAlphaInput) HasOptions() bool {
 	return false
 }
 
-// SetOptions gets a reference to the given TraitCreateOptions and assigns it to the Options field.
-func (o *CreateComputedTraitAlphaInput) SetOptions(v TraitCreateOptions) {
+// SetOptions gets a reference to the given TraitOptions and assigns it to the Options field.
+func (o *CreateComputedTraitAlphaInput) SetOptions(v TraitOptions) {
 	o.Options = &v
 }
 
