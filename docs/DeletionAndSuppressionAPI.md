@@ -407,7 +407,7 @@ Name | Type | Description  | Notes
 
 ## Operation: ListRegulationsFromSource
 
-> ListRegulationsFromSource200Response ListRegulationsFromSource(ctx, sourceId).Pagination(pagination).Status(status).RegulationTypes(regulationTypes).Execute()
+> ListRegulationsFromSource200Response ListRegulationsFromSource(ctx, sourceId).Status(status).RegulationTypes(regulationTypes).Pagination(pagination).Execute()
 
 List Regulations from Source
 
@@ -427,15 +427,15 @@ import (
 
 func main() {
     sourceId := "qQEHquLrjRDN9j1ByrChyn" // string | 
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in v1.
     status := "status_example" // string | The status on which to filter returned regulations.  This parameter exists in v1. (optional)
     regulationTypes := []string{"RegulationTypes_example"} // []string | The regulation types on which to filter returned regulations.  This parameter exists in v1. (optional)
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DeletionAndSuppressionAPI.ListRegulationsFromSource(ctx, sourceId).Pagination(pagination).Status(status).RegulationTypes(regulationTypes).Execute()
+    resp, r, err := apiClient.DeletionAndSuppressionAPI.ListRegulationsFromSource(ctx, sourceId).Status(status).RegulationTypes(regulationTypes).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DeletionAndSuppressionAPI.ListRegulationsFromSource``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -467,9 +467,9 @@ Other parameters are passed through a pointer to a apiListRegulationsFromSourceR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **pagination** | [**PaginationInput**](PaginationInput.md) | Pagination parameters.  This parameter exists in v1. | 
  **status** | **string** | The status on which to filter returned regulations.  This parameter exists in v1. | 
  **regulationTypes** | **[]string** | The regulation types on which to filter returned regulations.  This parameter exists in v1. | 
+ **pagination** | [**PaginationInput**](PaginationInput.md) | Pagination parameters.  This parameter exists in v1. | 
 
 ### Return type
 
@@ -510,7 +510,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -565,7 +565,7 @@ Name | Type | Description  | Notes
 
 ## Operation: ListWorkspaceRegulations
 
-> ListWorkspaceRegulations200Response ListWorkspaceRegulations(ctx).Pagination(pagination).Status(status).RegulationTypes(regulationTypes).Execute()
+> ListWorkspaceRegulations200Response ListWorkspaceRegulations(ctx).Status(status).RegulationTypes(regulationTypes).Pagination(pagination).Execute()
 
 List Workspace Regulations
 
@@ -584,15 +584,15 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in v1.
     status := "status_example" // string | The status on which to filter the returned regulations.  This parameter exists in v1. (optional)
     regulationTypes := []string{"RegulationTypes_example"} // []string | The regulation types on which to filter returned regulations.  This parameter exists in v1. (optional)
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DeletionAndSuppressionAPI.ListWorkspaceRegulations(ctx).Pagination(pagination).Status(status).RegulationTypes(regulationTypes).Execute()
+    resp, r, err := apiClient.DeletionAndSuppressionAPI.ListWorkspaceRegulations(ctx).Status(status).RegulationTypes(regulationTypes).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DeletionAndSuppressionAPI.ListWorkspaceRegulations``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -619,9 +619,9 @@ Other parameters are passed through a pointer to a apiListWorkspaceRegulationsRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pagination** | [**PaginationInput**](PaginationInput.md) | Pagination parameters.  This parameter exists in v1. | 
  **status** | **string** | The status on which to filter the returned regulations.  This parameter exists in v1. | 
  **regulationTypes** | **[]string** | The regulation types on which to filter returned regulations.  This parameter exists in v1. | 
+ **pagination** | [**PaginationInput**](PaginationInput.md) | Pagination parameters.  This parameter exists in v1. | 
 
 ### Return type
 

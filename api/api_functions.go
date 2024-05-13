@@ -1463,11 +1463,10 @@ func (a *FunctionsAPIService) ListFunctionVersionsExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1573,19 +1572,19 @@ func (a *FunctionsAPIService) ListFunctionVersionsExecute(
 type ApiListFunctionsRequest struct {
 	ctx          context.Context
 	ApiService   *FunctionsAPIService
-	pagination   *PaginationInput
 	resourceType *string
-}
-
-// Pagination parameters.  This parameter exists in v1.
-func (r ApiListFunctionsRequest) Pagination(pagination PaginationInput) ApiListFunctionsRequest {
-	r.pagination = &pagination
-	return r
+	pagination   *PaginationInput
 }
 
 // The Function type.  Config API note: equal to &#x60;type&#x60;.  This parameter exists in v1.
 func (r ApiListFunctionsRequest) ResourceType(resourceType string) ApiListFunctionsRequest {
 	r.resourceType = &resourceType
+	return r
+}
+
+// Pagination parameters.  This parameter exists in v1.
+func (r ApiListFunctionsRequest) Pagination(pagination PaginationInput) ApiListFunctionsRequest {
+	r.pagination = &pagination
 	return r
 }
 
@@ -1636,16 +1635,15 @@ func (a *FunctionsAPIService) ListFunctionsExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 	if r.resourceType == nil {
 		return localVarReturnValue, nil, reportError(
 			"resourceType is required and must be specified",
 		)
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "resourceType", r.resourceType, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1754,16 +1752,8 @@ func (a *FunctionsAPIService) ListFunctionsExecute(
 type ApiListInsertFunctionInstancesRequest struct {
 	ctx        context.Context
 	ApiService *FunctionsAPIService
-	pagination *PaginationInput
 	functionId *string
-}
-
-// Pagination parameters.  This parameter exists in alpha.
-func (r ApiListInsertFunctionInstancesRequest) Pagination(
-	pagination PaginationInput,
-) ApiListInsertFunctionInstancesRequest {
-	r.pagination = &pagination
-	return r
+	pagination *PaginationInput
 }
 
 // The insert Function class id to lookup.  This parameter exists in alpha.
@@ -1771,6 +1761,14 @@ func (r ApiListInsertFunctionInstancesRequest) FunctionId(
 	functionId string,
 ) ApiListInsertFunctionInstancesRequest {
 	r.functionId = &functionId
+	return r
+}
+
+// Pagination parameters.  This parameter exists in alpha.
+func (r ApiListInsertFunctionInstancesRequest) Pagination(
+	pagination PaginationInput,
+) ApiListInsertFunctionInstancesRequest {
+	r.pagination = &pagination
 	return r
 }
 
@@ -1823,14 +1821,13 @@ func (a *FunctionsAPIService) ListInsertFunctionInstancesExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 	if r.functionId == nil {
 		return localVarReturnValue, nil, reportError("functionId is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	parameterAddToHeaderOrQuery(localVarQueryParams, "functionId", r.functionId, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -20,16 +20,15 @@ var _ MappedNullable = &ListTransformationsBetaInput{}
 
 // ListTransformationsBetaInput Lists the Transformations associated with the current Workspace.
 type ListTransformationsBetaInput struct {
-	Pagination PaginationInput `json:"pagination"`
+	Pagination *PaginationInput `json:"pagination,omitempty"`
 }
 
 // NewListTransformationsBetaInput instantiates a new ListTransformationsBetaInput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListTransformationsBetaInput(pagination PaginationInput) *ListTransformationsBetaInput {
+func NewListTransformationsBetaInput() *ListTransformationsBetaInput {
 	this := ListTransformationsBetaInput{}
-	this.Pagination = pagination
 	return &this
 }
 
@@ -41,28 +40,36 @@ func NewListTransformationsBetaInputWithDefaults() *ListTransformationsBetaInput
 	return &this
 }
 
-// GetPagination returns the Pagination field value
+// GetPagination returns the Pagination field value if set, zero value otherwise.
 func (o *ListTransformationsBetaInput) GetPagination() PaginationInput {
-	if o == nil {
+	if o == nil || IsNil(o.Pagination) {
 		var ret PaginationInput
 		return ret
 	}
-
-	return o.Pagination
+	return *o.Pagination
 }
 
-// GetPaginationOk returns a tuple with the Pagination field value
+// GetPaginationOk returns a tuple with the Pagination field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ListTransformationsBetaInput) GetPaginationOk() (*PaginationInput, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Pagination) {
 		return nil, false
 	}
-	return &o.Pagination, true
+	return o.Pagination, true
 }
 
-// SetPagination sets field value
+// HasPagination returns a boolean if a field has been set.
+func (o *ListTransformationsBetaInput) HasPagination() bool {
+	if o != nil && !IsNil(o.Pagination) {
+		return true
+	}
+
+	return false
+}
+
+// SetPagination gets a reference to the given PaginationInput and assigns it to the Pagination field.
 func (o *ListTransformationsBetaInput) SetPagination(v PaginationInput) {
-	o.Pagination = v
+	o.Pagination = &v
 }
 
 func (o ListTransformationsBetaInput) MarshalJSON() ([]byte, error) {
@@ -75,7 +82,9 @@ func (o ListTransformationsBetaInput) MarshalJSON() ([]byte, error) {
 
 func (o ListTransformationsBetaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["pagination"] = o.Pagination
+	if !IsNil(o.Pagination) {
+		toSerialize["pagination"] = o.Pagination
+	}
 	return toSerialize, nil
 }
 

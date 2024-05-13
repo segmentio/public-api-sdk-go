@@ -937,17 +937,9 @@ type ApiListRegulationsFromSourceRequest struct {
 	ctx             context.Context
 	ApiService      *DeletionAndSuppressionAPIService
 	sourceId        string
-	pagination      *PaginationInput
 	status          *string
 	regulationTypes *[]string
-}
-
-// Pagination parameters.  This parameter exists in v1.
-func (r ApiListRegulationsFromSourceRequest) Pagination(
-	pagination PaginationInput,
-) ApiListRegulationsFromSourceRequest {
-	r.pagination = &pagination
-	return r
+	pagination      *PaginationInput
 }
 
 // The status on which to filter returned regulations.  This parameter exists in v1.
@@ -963,6 +955,14 @@ func (r ApiListRegulationsFromSourceRequest) RegulationTypes(
 	regulationTypes []string,
 ) ApiListRegulationsFromSourceRequest {
 	r.regulationTypes = &regulationTypes
+	return r
+}
+
+// Pagination parameters.  This parameter exists in v1.
+func (r ApiListRegulationsFromSourceRequest) Pagination(
+	pagination PaginationInput,
+) ApiListRegulationsFromSourceRequest {
+	r.pagination = &pagination
 	return r
 }
 
@@ -1022,9 +1022,6 @@ func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSourceExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
 	if r.status != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "")
@@ -1045,7 +1042,9 @@ func (a *DeletionAndSuppressionAPIService) ListRegulationsFromSourceExecute(
 			parameterAddToHeaderOrQuery(localVarQueryParams, "regulationTypes", t, "multi")
 		}
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1211,11 +1210,10 @@ func (a *DeletionAndSuppressionAPIService) ListSuppressionsExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1323,17 +1321,9 @@ func (a *DeletionAndSuppressionAPIService) ListSuppressionsExecute(
 type ApiListWorkspaceRegulationsRequest struct {
 	ctx             context.Context
 	ApiService      *DeletionAndSuppressionAPIService
-	pagination      *PaginationInput
 	status          *string
 	regulationTypes *[]string
-}
-
-// Pagination parameters.  This parameter exists in v1.
-func (r ApiListWorkspaceRegulationsRequest) Pagination(
-	pagination PaginationInput,
-) ApiListWorkspaceRegulationsRequest {
-	r.pagination = &pagination
-	return r
+	pagination      *PaginationInput
 }
 
 // The status on which to filter the returned regulations.  This parameter exists in v1.
@@ -1349,6 +1339,14 @@ func (r ApiListWorkspaceRegulationsRequest) RegulationTypes(
 	regulationTypes []string,
 ) ApiListWorkspaceRegulationsRequest {
 	r.regulationTypes = &regulationTypes
+	return r
+}
+
+// Pagination parameters.  This parameter exists in v1.
+func (r ApiListWorkspaceRegulationsRequest) Pagination(
+	pagination PaginationInput,
+) ApiListWorkspaceRegulationsRequest {
+	r.pagination = &pagination
 	return r
 }
 
@@ -1399,9 +1397,6 @@ func (a *DeletionAndSuppressionAPIService) ListWorkspaceRegulationsExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.pagination == nil {
-		return localVarReturnValue, nil, reportError("pagination is required and must be specified")
-	}
 
 	if r.status != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "")
@@ -1422,7 +1417,9 @@ func (a *DeletionAndSuppressionAPIService) ListWorkspaceRegulationsExecute(
 			parameterAddToHeaderOrQuery(localVarQueryParams, "regulationTypes", t, "multi")
 		}
 	}
-	parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

@@ -112,7 +112,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Required pagination parameters used to filter the Destinations catalog.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Required pagination parameters used to filter the Destinations catalog.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -264,7 +264,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Defines the pagination parameters.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -416,7 +416,7 @@ import (
 )
 
 func main() {
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Required pagination params used to filter the Warehouses catalog.  This parameter exists in v1.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Optional pagination params used to filter the Warehouses catalog.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -449,7 +449,7 @@ Other parameters are passed through a pointer to a apiGetWarehousesCatalogReques
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **pagination** | [**PaginationInput**](PaginationInput.md) | Required pagination params used to filter the Warehouses catalog.  This parameter exists in v1. | 
+ **pagination** | [**PaginationInput**](PaginationInput.md) | Optional pagination params used to filter the Warehouses catalog.  This parameter exists in v1. | 
 
 ### Return type
 
