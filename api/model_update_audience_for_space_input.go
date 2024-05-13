@@ -22,11 +22,6 @@ var _ MappedNullable = &UpdateAudienceForSpaceInput{}
 type UpdateAudienceForSpaceInput struct {
 	// Enabled/disabled status for the audience.
 	Enabled *bool `json:"enabled,omitempty"`
-	// The name of the computation.
-	Name *string `json:"name,omitempty"`
-	// The description of the computation.
-	Description *string                        `json:"description,omitempty"`
-	Definition  *AudienceComputationDefinition `json:"definition,omitempty"`
 }
 
 // NewUpdateAudienceForSpaceInput instantiates a new UpdateAudienceForSpaceInput object
@@ -78,102 +73,6 @@ func (o *UpdateAudienceForSpaceInput) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *UpdateAudienceForSpaceInput) GetName() string {
-	if o == nil || IsNil(o.Name) {
-		var ret string
-		return ret
-	}
-	return *o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateAudienceForSpaceInput) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
-
-// HasName returns a boolean if a field has been set.
-func (o *UpdateAudienceForSpaceInput) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *UpdateAudienceForSpaceInput) SetName(v string) {
-	o.Name = &v
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise.
-func (o *UpdateAudienceForSpaceInput) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
-		var ret string
-		return ret
-	}
-	return *o.Description
-}
-
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateAudienceForSpaceInput) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
-		return nil, false
-	}
-	return o.Description, true
-}
-
-// HasDescription returns a boolean if a field has been set.
-func (o *UpdateAudienceForSpaceInput) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *UpdateAudienceForSpaceInput) SetDescription(v string) {
-	o.Description = &v
-}
-
-// GetDefinition returns the Definition field value if set, zero value otherwise.
-func (o *UpdateAudienceForSpaceInput) GetDefinition() AudienceComputationDefinition {
-	if o == nil || IsNil(o.Definition) {
-		var ret AudienceComputationDefinition
-		return ret
-	}
-	return *o.Definition
-}
-
-// GetDefinitionOk returns a tuple with the Definition field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateAudienceForSpaceInput) GetDefinitionOk() (*AudienceComputationDefinition, bool) {
-	if o == nil || IsNil(o.Definition) {
-		return nil, false
-	}
-	return o.Definition, true
-}
-
-// HasDefinition returns a boolean if a field has been set.
-func (o *UpdateAudienceForSpaceInput) HasDefinition() bool {
-	if o != nil && !IsNil(o.Definition) {
-		return true
-	}
-
-	return false
-}
-
-// SetDefinition gets a reference to the given AudienceComputationDefinition and assigns it to the Definition field.
-func (o *UpdateAudienceForSpaceInput) SetDefinition(v AudienceComputationDefinition) {
-	o.Definition = &v
-}
-
 func (o UpdateAudienceForSpaceInput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -186,15 +85,6 @@ func (o UpdateAudienceForSpaceInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
-	}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if !IsNil(o.Definition) {
-		toSerialize["definition"] = o.Definition
 	}
 	return toSerialize, nil
 }

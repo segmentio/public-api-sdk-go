@@ -18,7 +18,7 @@ import (
 // checks if the GetAudienceAlphaOutput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetAudienceAlphaOutput{}
 
-// GetAudienceAlphaOutput Audience output for get.
+// GetAudienceAlphaOutput Audience output for update.
 type GetAudienceAlphaOutput struct {
 	Audience AudienceSummary `json:"audience"`
 }
