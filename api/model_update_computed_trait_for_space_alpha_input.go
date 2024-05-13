@@ -22,6 +22,11 @@ var _ MappedNullable = &UpdateComputedTraitForSpaceAlphaInput{}
 type UpdateComputedTraitForSpaceAlphaInput struct {
 	// Enabled/disabled status for the computed trait.
 	Enabled *bool `json:"enabled,omitempty"`
+	// The name of the computation.
+	Name *string `json:"name,omitempty"`
+	// The description of the computation.
+	Description *string          `json:"description,omitempty"`
+	Definition  *TraitDefinition `json:"definition,omitempty"`
 }
 
 // NewUpdateComputedTraitForSpaceAlphaInput instantiates a new UpdateComputedTraitForSpaceAlphaInput object
@@ -73,6 +78,102 @@ func (o *UpdateComputedTraitForSpaceAlphaInput) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *UpdateComputedTraitForSpaceAlphaInput) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateComputedTraitForSpaceAlphaInput) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *UpdateComputedTraitForSpaceAlphaInput) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *UpdateComputedTraitForSpaceAlphaInput) SetName(v string) {
+	o.Name = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *UpdateComputedTraitForSpaceAlphaInput) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateComputedTraitForSpaceAlphaInput) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *UpdateComputedTraitForSpaceAlphaInput) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *UpdateComputedTraitForSpaceAlphaInput) SetDescription(v string) {
+	o.Description = &v
+}
+
+// GetDefinition returns the Definition field value if set, zero value otherwise.
+func (o *UpdateComputedTraitForSpaceAlphaInput) GetDefinition() TraitDefinition {
+	if o == nil || IsNil(o.Definition) {
+		var ret TraitDefinition
+		return ret
+	}
+	return *o.Definition
+}
+
+// GetDefinitionOk returns a tuple with the Definition field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateComputedTraitForSpaceAlphaInput) GetDefinitionOk() (*TraitDefinition, bool) {
+	if o == nil || IsNil(o.Definition) {
+		return nil, false
+	}
+	return o.Definition, true
+}
+
+// HasDefinition returns a boolean if a field has been set.
+func (o *UpdateComputedTraitForSpaceAlphaInput) HasDefinition() bool {
+	if o != nil && !IsNil(o.Definition) {
+		return true
+	}
+
+	return false
+}
+
+// SetDefinition gets a reference to the given TraitDefinition and assigns it to the Definition field.
+func (o *UpdateComputedTraitForSpaceAlphaInput) SetDefinition(v TraitDefinition) {
+	o.Definition = &v
+}
+
 func (o UpdateComputedTraitForSpaceAlphaInput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -85,6 +186,15 @@ func (o UpdateComputedTraitForSpaceAlphaInput) ToMap() (map[string]interface{}, 
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
+	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
+	if !IsNil(o.Definition) {
+		toSerialize["definition"] = o.Definition
 	}
 	return toSerialize, nil
 }

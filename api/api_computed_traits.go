@@ -23,6 +23,190 @@ import (
 // ComputedTraitsAPIService ComputedTraitsAPI service
 type ComputedTraitsAPIService service
 
+type ApiCreateComputedTraitRequest struct {
+	ctx                           context.Context
+	ApiService                    *ComputedTraitsAPIService
+	spaceId                       string
+	createComputedTraitAlphaInput *CreateComputedTraitAlphaInput
+}
+
+func (r ApiCreateComputedTraitRequest) CreateComputedTraitAlphaInput(
+	createComputedTraitAlphaInput CreateComputedTraitAlphaInput,
+) ApiCreateComputedTraitRequest {
+	r.createComputedTraitAlphaInput = &createComputedTraitAlphaInput
+	return r
+}
+
+func (r ApiCreateComputedTraitRequest) Execute() (*CreateComputedTrait200Response, *http.Response, error) {
+	return r.ApiService.CreateComputedTraitExecute(r)
+}
+
+/*
+CreateComputedTrait Create Computed Trait
+
+# Creates a Computed Trait
+
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Computed Trait feature enabled. Please reach out to your customer success manager for more information.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param spaceId
+	@return ApiCreateComputedTraitRequest
+*/
+func (a *ComputedTraitsAPIService) CreateComputedTrait(
+	ctx context.Context,
+	spaceId string,
+) ApiCreateComputedTraitRequest {
+	return ApiCreateComputedTraitRequest{
+		ApiService: a,
+		ctx:        ctx,
+		spaceId:    spaceId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CreateComputedTrait200Response
+func (a *ComputedTraitsAPIService) CreateComputedTraitExecute(
+	r ApiCreateComputedTraitRequest,
+) (*CreateComputedTrait200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateComputedTrait200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"ComputedTraitsAPIService.CreateComputedTrait",
+	)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/spaces/{spaceId}/computed-traits"
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"spaceId"+"}",
+		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		-1,
+	)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.createComputedTraitAlphaInput == nil {
+		return localVarReturnValue, nil, reportError(
+			"createComputedTraitAlphaInput is required and must be specified",
+		)
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createComputedTraitAlphaInput
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetComputedTraitRequest struct {
 	ctx        context.Context
 	ApiService *ComputedTraitsAPIService
