@@ -20,7 +20,9 @@ var _ MappedNullable = &TraitOptions{}
 
 // TraitOptions struct for TraitOptions
 type TraitOptions struct {
+	// Determines whether data prior to the computed trait being created is included when determining the computed trait value.
 	IncludeHistoricalData *bool `json:"includeHistoricalData,omitempty"`
+	// Determines whether anonymous users should be included when determining the computed trait value.
 	IncludeAnonymousUsers *bool `json:"includeAnonymousUsers,omitempty"`
 }
 

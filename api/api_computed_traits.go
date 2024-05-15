@@ -46,9 +46,13 @@ CreateComputedTrait Create Computed Trait
 
 # Creates a Computed Trait
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Computed Trait feature enabled. Please reach out to your customer success manager for more information.
+
+• When called, this endpoint may generate the `Computed Trait Created` event in the [audit trail](/tag/Audit-Trail).
+
+The rate limit for this endpoint is 10 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param spaceId
@@ -223,7 +227,7 @@ GetComputedTrait Get Computed Trait
 
 # Returns the Computed Trait by id and spaceId
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Computed Trait feature enabled. Please reach out to your customer success manager for more information.
 
@@ -395,7 +399,7 @@ type ApiListComputedTraitsRequest struct {
 	pagination *PaginationInput
 }
 
-// Information about the pagination of this response.  This parameter exists in alpha.
+// Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha.
 func (r ApiListComputedTraitsRequest) Pagination(
 	pagination PaginationInput,
 ) ApiListComputedTraitsRequest {
@@ -412,7 +416,7 @@ ListComputedTraits List Computed Traits
 
 Returns Computed Traits by spaceId.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Computed Trait feature enabled. Please reach out to your customer success manager for more information.
 
@@ -588,7 +592,7 @@ RemoveComputedTraitFromSpace Remove Computed Trait from Space
 
 Deletes a Computed Trait by id and spaceId.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Computed Trait feature enabled. Please reach out to your customer success manager for more information.
 
@@ -779,7 +783,7 @@ UpdateComputedTraitForSpace Update Computed Trait for Space
 
 Updates the enabled status for a computed trait.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Computed Trait feature enabled. Please reach out to your customer success manager for more information.
 

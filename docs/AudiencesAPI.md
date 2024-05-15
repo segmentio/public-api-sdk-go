@@ -195,7 +195,7 @@ import (
 
 func main() {
     spaceId := "spaceId" // string | 
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Information about the pagination of this response.  This parameter exists in alpha.
+    pagination := *api.NewPaginationInput(10) // PaginationInput | Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -233,7 +233,7 @@ Other parameters are passed through a pointer to a apiListAudiencesRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **pagination** | [**PaginationInput**](PaginationInput.md) | Information about the pagination of this response.  This parameter exists in alpha. | 
+ **pagination** | [**PaginationInput**](PaginationInput.md) | Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha. | 
 
 ### Return type
 

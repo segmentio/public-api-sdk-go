@@ -20,7 +20,9 @@ var _ MappedNullable = &TraitDefinition{}
 
 // TraitDefinition struct for TraitDefinition
 type TraitDefinition struct {
-	Type  string `json:"type"`
+	// The underlying data type being aggregated for this computed trait.  Possible values: users, accounts.
+	Type string `json:"type"`
+	// The query language string defining the computed trait aggregation criteria. For guidance on using the query language, see the [Segment documentation site](https://segment.com/docs/api/public-api/query-language).
 	Query string `json:"query"`
 }
 

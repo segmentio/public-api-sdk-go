@@ -46,7 +46,7 @@ BatchQueryMessagingSubscriptionsForSpace Batch Query Messaging Subscriptions for
 
 Get Messaging Subscriptions for space.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Spaces feature enabled. Please reach out to your customer success manager for more information.
 
@@ -222,7 +222,7 @@ GetSpace Get Space
 
 Returns the Space by id.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Spaces feature enabled. Please reach out to your customer success manager for more information.
 
@@ -391,7 +391,7 @@ ListSpaces List Spaces
 
 List Spaces.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Spaces feature enabled. Please reach out to your customer success manager for more information.
 
@@ -557,7 +557,7 @@ ReplaceMessagingSubscriptionsInSpaces Replace Messaging Subscriptions in Spaces
 
 Replace Messaging Subscriptions in Spaces.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Spaces feature enabled. Please reach out to your customer success manager for more information.
 

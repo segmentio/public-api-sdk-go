@@ -20,9 +20,9 @@ var _ MappedNullable = &CreateAudienceAlphaInput{}
 
 // CreateAudienceAlphaInput Input to create an audience.
 type CreateAudienceAlphaInput struct {
-	// The name of the computation .
+	// Name of the audience.
 	Name string `json:"name"`
-	// The description of the computation.
+	// Description of the audience.
 	Description string                        `json:"description"`
 	Definition  AudienceComputationDefinition `json:"definition"`
 	Options     *AudienceOptions              `json:"options,omitempty"`

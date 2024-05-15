@@ -20,7 +20,9 @@ var _ MappedNullable = &AudienceComputationDefinition{}
 
 // AudienceComputationDefinition struct for AudienceComputationDefinition
 type AudienceComputationDefinition struct {
-	Type  string `json:"type"`
+	// The underlying data type being segmented for this audience.  Possible values: users, accounts.
+	Type string `json:"type"`
+	// The query language string defining the audience segmentation criteria.  For guidance on using the query language, see the [Segment documentation site](https://segment.com/docs/api/public-api/query-language).
 	Query string `json:"query"`
 }
 

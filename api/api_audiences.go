@@ -46,9 +46,13 @@ CreateAudience Create Audience
 
 Creates Audience.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
+
+• When called, this endpoint may generate the `Audience Created` event in the [audit trail](/tag/Audit-Trail).
+
+The rate limit for this endpoint is 10 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param spaceId
@@ -223,7 +227,7 @@ GetAudience Get Audience
 
 Returns the Audience by id and spaceId.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
@@ -395,7 +399,7 @@ type ApiListAudiencesRequest struct {
 	pagination *PaginationInput
 }
 
-// Information about the pagination of this response.  This parameter exists in alpha.
+// Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha.
 func (r ApiListAudiencesRequest) Pagination(pagination PaginationInput) ApiListAudiencesRequest {
 	r.pagination = &pagination
 	return r
@@ -410,7 +414,7 @@ ListAudiences List Audiences
 
 Returns Audiences by spaceId.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
@@ -586,7 +590,7 @@ RemoveAudienceFromSpace Remove Audience from Space
 
 Deletes an Audience by id and spaceId.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
@@ -777,7 +781,7 @@ UpdateAudienceForSpace Update Audience for Space
 
 # Updates the enabled status for an audience
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 

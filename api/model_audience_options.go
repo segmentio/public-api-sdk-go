@@ -20,7 +20,9 @@ var _ MappedNullable = &AudienceOptions{}
 
 // AudienceOptions struct for AudienceOptions
 type AudienceOptions struct {
+	// Determines whether data prior to the audience being created is included when determining audience membership.
 	IncludeHistoricalData *bool `json:"includeHistoricalData,omitempty"`
+	// Determines whether anonymous users should be included when determining audience membership.
 	IncludeAnonymousUsers *bool `json:"includeAnonymousUsers,omitempty"`
 }
 
