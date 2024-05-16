@@ -22,7 +22,7 @@ var _ MappedNullable = &CreateAudienceAlphaInput{}
 type CreateAudienceAlphaInput struct {
 	// Name of the audience.
 	Name string `json:"name"`
-	// Determines whether a computation is enabled
+	// Determines whether a computation is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	// Description of the audience.
 	Description string                        `json:"description"`

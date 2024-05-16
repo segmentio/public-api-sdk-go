@@ -22,7 +22,7 @@ var _ MappedNullable = &CreateComputedTraitAlphaInput{}
 type CreateComputedTraitAlphaInput struct {
 	// The name of the computation.
 	Name string `json:"name"`
-	// Determines whether a computation is enabled
+	// Determines whether a computation is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	// The description of the computation.
 	Description string          `json:"description"`
