@@ -22,6 +22,8 @@ var _ MappedNullable = &CreateAudienceAlphaInput{}
 type CreateAudienceAlphaInput struct {
 	// Name of the audience.
 	Name string `json:"name"`
+	// Determines whether a computation is enabled
+	Enabled *bool `json:"enabled,omitempty"`
 	// Description of the audience.
 	Description string                        `json:"description"`
 	Definition  AudienceComputationDefinition `json:"definition"`
@@ -74,6 +76,38 @@ func (o *CreateAudienceAlphaInput) GetNameOk() (*string, bool) {
 // SetName sets field value
 func (o *CreateAudienceAlphaInput) SetName(v string) {
 	o.Name = v
+}
+
+// GetEnabled returns the Enabled field value if set, zero value otherwise.
+func (o *CreateAudienceAlphaInput) GetEnabled() bool {
+	if o == nil || IsNil(o.Enabled) {
+		var ret bool
+		return ret
+	}
+	return *o.Enabled
+}
+
+// GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAudienceAlphaInput) GetEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.Enabled) {
+		return nil, false
+	}
+	return o.Enabled, true
+}
+
+// HasEnabled returns a boolean if a field has been set.
+func (o *CreateAudienceAlphaInput) HasEnabled() bool {
+	if o != nil && !IsNil(o.Enabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
+func (o *CreateAudienceAlphaInput) SetEnabled(v bool) {
+	o.Enabled = &v
 }
 
 // GetDescription returns the Description field value
@@ -167,6 +201,9 @@ func (o CreateAudienceAlphaInput) MarshalJSON() ([]byte, error) {
 func (o CreateAudienceAlphaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["name"] = o.Name
+	if !IsNil(o.Enabled) {
+		toSerialize["enabled"] = o.Enabled
+	}
 	toSerialize["description"] = o.Description
 	toSerialize["definition"] = o.Definition
 	if !IsNil(o.Options) {
