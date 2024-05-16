@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 50.0.0
+API version: 50.1.0
 Contact: friends@segment.com
 */
 
@@ -46,7 +46,7 @@ CreateEdgeFunctions Create Edge Functions
 
 Create EdgeFunctions for your Source given a valid upload URL for an Edge Functions bundle.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
 
@@ -222,7 +222,7 @@ DisableEdgeFunctions Disable Edge Functions
 
 Disable Edge Functions for your Source.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
 
@@ -391,7 +391,7 @@ GenerateUploadURLForEdgeFunctions Generate Upload URL for Edge Functions
 
 Generate a temporary upload URL that can be used to upload an Edge Functions bundle.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
 
@@ -560,7 +560,7 @@ GetLatestFromEdgeFunctions Get Latest from Edge Functions
 
 Get the latest Edge Functions for your Source.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
 

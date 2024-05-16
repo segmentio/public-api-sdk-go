@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 50.0.0
+API version: 50.1.0
 Contact: friends@segment.com
 */
 
@@ -42,7 +42,8 @@ type ComputedTraitSummary struct {
 	// The timestamp of the computed trait's creation.
 	CreatedAt string `json:"createdAt"`
 	// The timestamp of the computed trait's last change.
-	UpdatedAt string `json:"updatedAt"`
+	UpdatedAt string        `json:"updatedAt"`
+	Options   *TraitOptions `json:"options,omitempty"`
 }
 
 // NewComputedTraitSummary instantiates a new ComputedTraitSummary object
@@ -383,6 +384,38 @@ func (o *ComputedTraitSummary) SetUpdatedAt(v string) {
 	o.UpdatedAt = v
 }
 
+// GetOptions returns the Options field value if set, zero value otherwise.
+func (o *ComputedTraitSummary) GetOptions() TraitOptions {
+	if o == nil || IsNil(o.Options) {
+		var ret TraitOptions
+		return ret
+	}
+	return *o.Options
+}
+
+// GetOptionsOk returns a tuple with the Options field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ComputedTraitSummary) GetOptionsOk() (*TraitOptions, bool) {
+	if o == nil || IsNil(o.Options) {
+		return nil, false
+	}
+	return o.Options, true
+}
+
+// HasOptions returns a boolean if a field has been set.
+func (o *ComputedTraitSummary) HasOptions() bool {
+	if o != nil && !IsNil(o.Options) {
+		return true
+	}
+
+	return false
+}
+
+// SetOptions gets a reference to the given TraitOptions and assigns it to the Options field.
+func (o *ComputedTraitSummary) SetOptions(v TraitOptions) {
+	o.Options = &v
+}
+
 func (o ComputedTraitSummary) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -407,6 +440,9 @@ func (o ComputedTraitSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize["updatedBy"] = o.UpdatedBy
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["updatedAt"] = o.UpdatedAt
+	if !IsNil(o.Options) {
+		toSerialize["options"] = o.Options
+	}
 	return toSerialize, nil
 }
 

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 50.0.0
+API version: 50.1.0
 Contact: friends@segment.com
 */
 
@@ -42,7 +42,8 @@ type AudienceSummary struct {
 	// Date the audience was created.
 	CreatedAt string `json:"createdAt"`
 	// Date the audience was last updated.
-	UpdatedAt string `json:"updatedAt"`
+	UpdatedAt string           `json:"updatedAt"`
+	Options   *AudienceOptions `json:"options,omitempty"`
 }
 
 // NewAudienceSummary instantiates a new AudienceSummary object
@@ -383,6 +384,38 @@ func (o *AudienceSummary) SetUpdatedAt(v string) {
 	o.UpdatedAt = v
 }
 
+// GetOptions returns the Options field value if set, zero value otherwise.
+func (o *AudienceSummary) GetOptions() AudienceOptions {
+	if o == nil || IsNil(o.Options) {
+		var ret AudienceOptions
+		return ret
+	}
+	return *o.Options
+}
+
+// GetOptionsOk returns a tuple with the Options field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AudienceSummary) GetOptionsOk() (*AudienceOptions, bool) {
+	if o == nil || IsNil(o.Options) {
+		return nil, false
+	}
+	return o.Options, true
+}
+
+// HasOptions returns a boolean if a field has been set.
+func (o *AudienceSummary) HasOptions() bool {
+	if o != nil && !IsNil(o.Options) {
+		return true
+	}
+
+	return false
+}
+
+// SetOptions gets a reference to the given AudienceOptions and assigns it to the Options field.
+func (o *AudienceSummary) SetOptions(v AudienceOptions) {
+	o.Options = &v
+}
+
 func (o AudienceSummary) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -407,6 +440,9 @@ func (o AudienceSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize["updatedBy"] = o.UpdatedBy
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["updatedAt"] = o.UpdatedAt
+	if !IsNil(o.Options) {
+		toSerialize["options"] = o.Options
+	}
 	return toSerialize, nil
 }
 
