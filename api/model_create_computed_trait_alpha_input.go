@@ -25,7 +25,7 @@ type CreateComputedTraitAlphaInput struct {
 	// Determines whether a computation is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	// The description of the computation.
-	Description string          `json:"description"`
+	Description *string         `json:"description,omitempty"`
 	Definition  TraitDefinition `json:"definition"`
 	Options     *TraitOptions   `json:"options,omitempty"`
 }
@@ -36,12 +36,10 @@ type CreateComputedTraitAlphaInput struct {
 // will change when the set of required properties is changed
 func NewCreateComputedTraitAlphaInput(
 	name string,
-	description string,
 	definition TraitDefinition,
 ) *CreateComputedTraitAlphaInput {
 	this := CreateComputedTraitAlphaInput{}
 	this.Name = name
-	this.Description = description
 	this.Definition = definition
 	return &this
 }
@@ -110,28 +108,36 @@ func (o *CreateComputedTraitAlphaInput) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetDescription returns the Description field value
+// GetDescription returns the Description field value if set, zero value otherwise.
 func (o *CreateComputedTraitAlphaInput) GetDescription() string {
-	if o == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
-
-	return o.Description
+	return *o.Description
 }
 
-// GetDescriptionOk returns a tuple with the Description field value
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CreateComputedTraitAlphaInput) GetDescriptionOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
-	return &o.Description, true
+	return o.Description, true
 }
 
-// SetDescription sets field value
+// HasDescription returns a boolean if a field has been set.
+func (o *CreateComputedTraitAlphaInput) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *CreateComputedTraitAlphaInput) SetDescription(v string) {
-	o.Description = v
+	o.Description = &v
 }
 
 // GetDefinition returns the Definition field value
@@ -204,7 +210,9 @@ func (o CreateComputedTraitAlphaInput) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	toSerialize["description"] = o.Description
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	toSerialize["definition"] = o.Definition
 	if !IsNil(o.Options) {
 		toSerialize["options"] = o.Options
