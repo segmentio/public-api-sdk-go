@@ -20,7 +20,7 @@ var _ MappedNullable = &AudienceOptions{}
 
 // AudienceOptions struct for AudienceOptions
 type AudienceOptions struct {
-	// Determines whether data prior to the audience being created is included when determining audience membership.
+	// Determines whether data prior to the audience being created is included when determining audience membership. Note that including historical data may be needed in order to properly handle the definition specified. In these cases, Segment will automatically handle including historical data and the response will return the includeHistoricalData parameter as true.
 	IncludeHistoricalData *bool `json:"includeHistoricalData,omitempty"`
 	// Determines whether anonymous users should be included when determining audience membership.
 	IncludeAnonymousUsers *bool `json:"includeAnonymousUsers,omitempty"`
