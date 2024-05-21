@@ -27,12 +27,12 @@ type AudienceSummary struct {
 	// Name of the audience.
 	Name string `json:"name"`
 	// Description of the audience.
-	Description string `json:"description"`
+	Description *string `json:"description,omitempty"`
 	// Key for the audience.
 	Key string `json:"key"`
 	// Enabled/disabled status for the audience.
-	Enabled    bool                `json:"enabled"`
-	Definition NullableDefinition1 `json:"definition"`
+	Enabled    bool               `json:"enabled"`
+	Definition NullableDefinition `json:"definition"`
 	// Status for the audience.  Possible values: Backfilling, Computing, Failed, Live, Awaiting Destinations, Disabled.
 	Status *string `json:"status,omitempty"`
 	// User id who created the audience.
@@ -54,10 +54,9 @@ func NewAudienceSummary(
 	id string,
 	spaceId string,
 	name string,
-	description string,
 	key string,
 	enabled bool,
-	definition NullableDefinition1,
+	definition NullableDefinition,
 	createdBy string,
 	updatedBy string,
 	createdAt string,
@@ -67,7 +66,6 @@ func NewAudienceSummary(
 	this.Id = id
 	this.SpaceId = spaceId
 	this.Name = name
-	this.Description = description
 	this.Key = key
 	this.Enabled = enabled
 	this.Definition = definition
@@ -158,28 +156,36 @@ func (o *AudienceSummary) SetName(v string) {
 	o.Name = v
 }
 
-// GetDescription returns the Description field value
+// GetDescription returns the Description field value if set, zero value otherwise.
 func (o *AudienceSummary) GetDescription() string {
-	if o == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
-
-	return o.Description
+	return *o.Description
 }
 
-// GetDescriptionOk returns a tuple with the Description field value
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AudienceSummary) GetDescriptionOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
-	return &o.Description, true
+	return o.Description, true
 }
 
-// SetDescription sets field value
+// HasDescription returns a boolean if a field has been set.
+func (o *AudienceSummary) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *AudienceSummary) SetDescription(v string) {
-	o.Description = v
+	o.Description = &v
 }
 
 // GetKey returns the Key field value
@@ -231,10 +237,10 @@ func (o *AudienceSummary) SetEnabled(v bool) {
 }
 
 // GetDefinition returns the Definition field value
-// If the value is explicit nil, the zero value for Definition1 will be returned
-func (o *AudienceSummary) GetDefinition() Definition1 {
+// If the value is explicit nil, the zero value for Definition will be returned
+func (o *AudienceSummary) GetDefinition() Definition {
 	if o == nil || o.Definition.Get() == nil {
-		var ret Definition1
+		var ret Definition
 		return ret
 	}
 
@@ -244,7 +250,7 @@ func (o *AudienceSummary) GetDefinition() Definition1 {
 // GetDefinitionOk returns a tuple with the Definition field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AudienceSummary) GetDefinitionOk() (*Definition1, bool) {
+func (o *AudienceSummary) GetDefinitionOk() (*Definition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -252,7 +258,7 @@ func (o *AudienceSummary) GetDefinitionOk() (*Definition1, bool) {
 }
 
 // SetDefinition sets field value
-func (o *AudienceSummary) SetDefinition(v Definition1) {
+func (o *AudienceSummary) SetDefinition(v Definition) {
 	o.Definition.Set(&v)
 }
 
@@ -429,7 +435,9 @@ func (o AudienceSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["spaceId"] = o.SpaceId
 	toSerialize["name"] = o.Name
-	toSerialize["description"] = o.Description
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	toSerialize["key"] = o.Key
 	toSerialize["enabled"] = o.Enabled
 	toSerialize["definition"] = o.Definition.Get()

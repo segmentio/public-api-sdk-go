@@ -34,7 +34,7 @@ import (
 
 func main() {
     spaceId := "spaceId" // string | 
-    createComputedTraitAlphaInput := *api.NewCreateComputedTraitAlphaInput("Name_example", "Description_example", *api.NewTraitDefinition("Type_example", "Query_example")) // CreateComputedTraitAlphaInput | 
+    createComputedTraitAlphaInput := *api.NewCreateComputedTraitAlphaInput("Name_example", *api.NewTraitDefinition("Type_example", "Query_example")) // CreateComputedTraitAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
