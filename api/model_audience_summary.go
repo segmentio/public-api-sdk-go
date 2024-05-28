@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 50.1.0
+API version: 50.2.0
 Contact: friends@segment.com
 */
 
@@ -27,7 +27,7 @@ type AudienceSummary struct {
 	// Name of the audience.
 	Name string `json:"name"`
 	// Description of the audience.
-	Description string `json:"description"`
+	Description *string `json:"description,omitempty"`
 	// Key for the audience.
 	Key string `json:"key"`
 	// Enabled/disabled status for the audience.
@@ -42,7 +42,8 @@ type AudienceSummary struct {
 	// Date the audience was created.
 	CreatedAt string `json:"createdAt"`
 	// Date the audience was last updated.
-	UpdatedAt string `json:"updatedAt"`
+	UpdatedAt string           `json:"updatedAt"`
+	Options   *AudienceOptions `json:"options,omitempty"`
 }
 
 // NewAudienceSummary instantiates a new AudienceSummary object
@@ -53,7 +54,6 @@ func NewAudienceSummary(
 	id string,
 	spaceId string,
 	name string,
-	description string,
 	key string,
 	enabled bool,
 	definition NullableDefinition1,
@@ -66,7 +66,6 @@ func NewAudienceSummary(
 	this.Id = id
 	this.SpaceId = spaceId
 	this.Name = name
-	this.Description = description
 	this.Key = key
 	this.Enabled = enabled
 	this.Definition = definition
@@ -157,28 +156,36 @@ func (o *AudienceSummary) SetName(v string) {
 	o.Name = v
 }
 
-// GetDescription returns the Description field value
+// GetDescription returns the Description field value if set, zero value otherwise.
 func (o *AudienceSummary) GetDescription() string {
-	if o == nil {
+	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
 	}
-
-	return o.Description
+	return *o.Description
 }
 
-// GetDescriptionOk returns a tuple with the Description field value
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AudienceSummary) GetDescriptionOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
-	return &o.Description, true
+	return o.Description, true
 }
 
-// SetDescription sets field value
+// HasDescription returns a boolean if a field has been set.
+func (o *AudienceSummary) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
 func (o *AudienceSummary) SetDescription(v string) {
-	o.Description = v
+	o.Description = &v
 }
 
 // GetKey returns the Key field value
@@ -383,6 +390,38 @@ func (o *AudienceSummary) SetUpdatedAt(v string) {
 	o.UpdatedAt = v
 }
 
+// GetOptions returns the Options field value if set, zero value otherwise.
+func (o *AudienceSummary) GetOptions() AudienceOptions {
+	if o == nil || IsNil(o.Options) {
+		var ret AudienceOptions
+		return ret
+	}
+	return *o.Options
+}
+
+// GetOptionsOk returns a tuple with the Options field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AudienceSummary) GetOptionsOk() (*AudienceOptions, bool) {
+	if o == nil || IsNil(o.Options) {
+		return nil, false
+	}
+	return o.Options, true
+}
+
+// HasOptions returns a boolean if a field has been set.
+func (o *AudienceSummary) HasOptions() bool {
+	if o != nil && !IsNil(o.Options) {
+		return true
+	}
+
+	return false
+}
+
+// SetOptions gets a reference to the given AudienceOptions and assigns it to the Options field.
+func (o *AudienceSummary) SetOptions(v AudienceOptions) {
+	o.Options = &v
+}
+
 func (o AudienceSummary) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -396,7 +435,9 @@ func (o AudienceSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["spaceId"] = o.SpaceId
 	toSerialize["name"] = o.Name
-	toSerialize["description"] = o.Description
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
+	}
 	toSerialize["key"] = o.Key
 	toSerialize["enabled"] = o.Enabled
 	toSerialize["definition"] = o.Definition.Get()
@@ -407,6 +448,9 @@ func (o AudienceSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize["updatedBy"] = o.UpdatedBy
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["updatedAt"] = o.UpdatedAt
+	if !IsNil(o.Options) {
+		toSerialize["options"] = o.Options
+	}
 	return toSerialize, nil
 }
 
