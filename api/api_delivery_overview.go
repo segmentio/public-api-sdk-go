@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 50.2.0
+API version: 50.3.0
 Contact: friends@segment.com
 */
 
@@ -77,7 +77,7 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and &#x60;subscriptionId&#x60;.  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, &#x60;subscriptionId&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, or &#x60;spaceId&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -85,7 +85,7 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and/or &#x60;subscriptionId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, &#x60;subscriptionId&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and/or &#x60;spaceId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewDestinationFilterBy,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -352,7 +352,7 @@ func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and &#x60;subscriptionId&#x60;.  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, &#x60;subscriptionId&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and &#x60;spaceId&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
@@ -360,7 +360,7 @@ func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and/or &#x60;subscriptionId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. If you would like to view retry attempts for a successful delivery, you can filter &#x60;discardReason&#x60; from &#x60;successes.attempt.1&#x60; through &#x60;successes.attempt.10&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, &#x60;subscriptionId&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and/or &#x60;spaceId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. If you would like to view retry attempts for a successful delivery, you can filter &#x60;discardReason&#x60; from &#x60;successes.attempt.1&#x60; through &#x60;successes.attempt.10&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewDestinationFilterBy,
 ) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
@@ -585,7 +585,6 @@ type ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest struct {
 	groupBy             *[]string
 	filter              *DeliveryOverviewDestinationFilterBy
 	pagination          *PaginationInput
-	subscriptionId      *string
 }
 
 // The sourceId for the Workspace.  This parameter exists in beta.
@@ -628,7 +627,7 @@ func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Granulari
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and &#x60;subscriptionId&#x60;.  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, &#x60;subscriptionId&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, or &#x60;spaceId&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
@@ -636,7 +635,7 @@ func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and/or &#x60;subscriptionId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, &#x60;subscriptionId&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and/or &#x60;spaceId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewDestinationFilterBy,
 ) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
@@ -649,14 +648,6 @@ func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Paginatio
 	pagination PaginationInput,
 ) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
 	r.pagination = &pagination
-	return r
-}
-
-// An optional filter for actions destinations, to filter by a specific action.  This parameter exists in beta.
-func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) SubscriptionId(
-	subscriptionId string,
-) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
-	r.subscriptionId = &subscriptionId
 	return r
 }
 
@@ -758,9 +749,6 @@ func (a *DeliveryOverviewAPIService) GetFilteredAtDestinationMetricsFromDelivery
 	}
 	if r.pagination != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
-	}
-	if r.subscriptionId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "subscriptionId", r.subscriptionId, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1527,6 +1515,158 @@ func (a *DeliveryOverviewAPIService) GetIngressSuccessMetricsFromDeliveryOvervie
 	if r.pagination != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1beta+json", "application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest struct {
+	ctx        context.Context
+	ApiService *DeliveryOverviewAPIService
+}
+
+func (r ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest) Execute() (*GetEgressFailedMetricsFromDeliveryOverview200Response, *http.Response, error) {
+	return r.ApiService.GetLinkedAudienceSuccessMetricsFromDeliveryOverviewExecute(r)
+}
+
+/*
+GetLinkedAudienceSuccessMetricsFromDeliveryOverview Get Linked Audience Success Metrics from Delivery Overview
+
+Get events successfully delivered for Linked Audiences.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest
+*/
+func (a *DeliveryOverviewAPIService) GetLinkedAudienceSuccessMetricsFromDeliveryOverview(
+	ctx context.Context,
+) ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest {
+	return ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetEgressFailedMetricsFromDeliveryOverview200Response
+func (a *DeliveryOverviewAPIService) GetLinkedAudienceSuccessMetricsFromDeliveryOverviewExecute(
+	r ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest,
+) (*GetEgressFailedMetricsFromDeliveryOverview200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetEgressFailedMetricsFromDeliveryOverview200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"DeliveryOverviewAPIService.GetLinkedAudienceSuccessMetricsFromDeliveryOverview",
+	)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/delivery-overview/audience/success"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
