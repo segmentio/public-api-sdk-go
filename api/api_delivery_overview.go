@@ -1615,8 +1615,80 @@ func (a *DeliveryOverviewAPIService) GetIngressSuccessMetricsFromDeliveryOvervie
 }
 
 type ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest struct {
-	ctx        context.Context
-	ApiService *DeliveryOverviewAPIService
+	ctx                 context.Context
+	ApiService          *DeliveryOverviewAPIService
+	sourceId            *string
+	destinationConfigId *string
+	startTime           *string
+	endTime             *string
+	granularity         *string
+	groupBy             *[]string
+	filter              *DeliveryOverviewAudienceFilterBy
+	pagination          *PaginationInput
+}
+
+// The sourceId for the Workspace.  This parameter exists in beta.
+func (r ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest) SourceId(
+	sourceId string,
+) ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest {
+	r.sourceId = &sourceId
+	return r
+}
+
+// The id tied to a Workspace Destination.  This parameter exists in beta.
+func (r ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest) DestinationConfigId(
+	destinationConfigId string,
+) ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest {
+	r.destinationConfigId = &destinationConfigId
+	return r
+}
+
+// The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
+func (r ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest) StartTime(
+	startTime string,
+) ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest {
+	r.startTime = &startTime
+	return r
+}
+
+// The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
+func (r ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest) EndTime(
+	endTime string,
+) ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest {
+	r.endTime = &endTime
+	return r
+}
+
+// The size of each bucket in the requested window.  Based on the granularity chosen, there are restrictions on the time range you can query:  **Minute**: - Max time range: 4 hours - Oldest possible start time: 48 hours in the past  **Hour**: - Max Time range: 14 days - Oldest possible start time: 30 days in the past  **Day**: - Max time range: 30 days - Oldest possible start time: 30 days in the past  This parameter exists in beta.
+func (r ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest) Granularity(
+	granularity string,
+) ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest {
+	r.granularity = &granularity
+	return r
+}
+
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and &#x60;spaceId&#x60;.  This parameter exists in beta.
+func (r ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
+	groupBy []string,
+) ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest {
+	r.groupBy = &groupBy
+	return r
+}
+
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and/or &#x60;spaceId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. If you would like to view retry attempts for a successful delivery, you can filter &#x60;discardReason&#x60; from &#x60;successes.attempt.1&#x60; through &#x60;successes.attempt.10&#x60;.  This parameter exists in beta.
+func (r ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest) Filter(
+	filter DeliveryOverviewAudienceFilterBy,
+) ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest {
+	r.filter = &filter
+	return r
+}
+
+// Params to specify the page cursor and count.  This parameter exists in beta.
+func (r ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest {
+	r.pagination = &pagination
+	return r
 }
 
 func (r ApiGetLinkedAudienceSuccessMetricsFromDeliveryOverviewRequest) Execute() (*GetEgressFailedMetricsFromDeliveryOverview200Response, *http.Response, error) {
@@ -1666,7 +1738,58 @@ func (a *DeliveryOverviewAPIService) GetLinkedAudienceSuccessMetricsFromDelivery
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.sourceId == nil {
+		return localVarReturnValue, nil, reportError("sourceId is required and must be specified")
+	}
+	if r.destinationConfigId == nil {
+		return localVarReturnValue, nil, reportError(
+			"destinationConfigId is required and must be specified",
+		)
+	}
+	if r.startTime == nil {
+		return localVarReturnValue, nil, reportError("startTime is required and must be specified")
+	}
+	if r.endTime == nil {
+		return localVarReturnValue, nil, reportError("endTime is required and must be specified")
+	}
+	if r.granularity == nil {
+		return localVarReturnValue, nil, reportError(
+			"granularity is required and must be specified",
+		)
+	}
 
+	parameterAddToHeaderOrQuery(localVarQueryParams, "sourceId", r.sourceId, "")
+	parameterAddToHeaderOrQuery(
+		localVarQueryParams,
+		"destinationConfigId",
+		r.destinationConfigId,
+		"",
+	)
+	parameterAddToHeaderOrQuery(localVarQueryParams, "startTime", r.startTime, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "endTime", r.endTime, "")
+	if r.groupBy != nil {
+		t := *r.groupBy
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(
+					localVarQueryParams,
+					fmt.Sprintf("groupBy.%d", i),
+					s.Index(i).Interface(),
+					"multi",
+				)
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "groupBy", t, "multi")
+		}
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "granularity", r.granularity, "")
+	if r.filter != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "filter", r.filter, "")
+	}
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
