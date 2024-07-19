@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 50.3.0
+API version: 50.4.0
 Contact: friends@segment.com
 */
 
@@ -31,8 +31,8 @@ type AudienceSummary struct {
 	// Key for the audience.
 	Key string `json:"key"`
 	// Enabled/disabled status for the audience.
-	Enabled    bool                `json:"enabled"`
-	Definition NullableDefinition1 `json:"definition"`
+	Enabled    bool               `json:"enabled"`
+	Definition NullableDefinition `json:"definition"`
 	// Status for the audience.  Possible values: Backfilling, Computing, Failed, Live, Awaiting Destinations, Disabled.
 	Status *string `json:"status,omitempty"`
 	// User id who created the audience.
@@ -56,7 +56,7 @@ func NewAudienceSummary(
 	name string,
 	key string,
 	enabled bool,
-	definition NullableDefinition1,
+	definition NullableDefinition,
 	createdBy string,
 	updatedBy string,
 	createdAt string,
@@ -237,10 +237,10 @@ func (o *AudienceSummary) SetEnabled(v bool) {
 }
 
 // GetDefinition returns the Definition field value
-// If the value is explicit nil, the zero value for Definition1 will be returned
-func (o *AudienceSummary) GetDefinition() Definition1 {
+// If the value is explicit nil, the zero value for Definition will be returned
+func (o *AudienceSummary) GetDefinition() Definition {
 	if o == nil || o.Definition.Get() == nil {
-		var ret Definition1
+		var ret Definition
 		return ret
 	}
 
@@ -250,7 +250,7 @@ func (o *AudienceSummary) GetDefinition() Definition1 {
 // GetDefinitionOk returns a tuple with the Definition field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AudienceSummary) GetDefinitionOk() (*Definition1, bool) {
+func (o *AudienceSummary) GetDefinitionOk() (*Definition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -258,7 +258,7 @@ func (o *AudienceSummary) GetDefinitionOk() (*Definition1, bool) {
 }
 
 // SetDefinition sets field value
-func (o *AudienceSummary) SetDefinition(v Definition1) {
+func (o *AudienceSummary) SetDefinition(v Definition) {
 	o.Definition.Set(&v)
 }
 
