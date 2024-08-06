@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 51.0.0
+API version: 52.0.0
 Contact: friends@segment.com
 */
 
@@ -35,6 +35,10 @@ type SourceMetadataV1 struct {
 	Categories []string `json:"categories"`
 	// True if this is a Cloud Event Source.
 	IsCloudEventSource bool `json:"isCloudEventSource"`
+	// Support status of the Source.
+	Status string `json:"status"`
+	// Partner Owned flag.
+	PartnerOwned *bool `json:"partnerOwned,omitempty"`
 }
 
 // NewSourceMetadataV1 instantiates a new SourceMetadataV1 object
@@ -50,6 +54,7 @@ func NewSourceMetadataV1(
 	options []IntegrationOptionBeta,
 	categories []string,
 	isCloudEventSource bool,
+	status string,
 ) *SourceMetadataV1 {
 	this := SourceMetadataV1{}
 	this.Id = id
@@ -60,6 +65,7 @@ func NewSourceMetadataV1(
 	this.Options = options
 	this.Categories = categories
 	this.IsCloudEventSource = isCloudEventSource
+	this.Status = status
 	return &this
 }
 
@@ -263,6 +269,62 @@ func (o *SourceMetadataV1) SetIsCloudEventSource(v bool) {
 	o.IsCloudEventSource = v
 }
 
+// GetStatus returns the Status field value
+func (o *SourceMetadataV1) GetStatus() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value
+// and a boolean to check if the value has been set.
+func (o *SourceMetadataV1) GetStatusOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Status, true
+}
+
+// SetStatus sets field value
+func (o *SourceMetadataV1) SetStatus(v string) {
+	o.Status = v
+}
+
+// GetPartnerOwned returns the PartnerOwned field value if set, zero value otherwise.
+func (o *SourceMetadataV1) GetPartnerOwned() bool {
+	if o == nil || IsNil(o.PartnerOwned) {
+		var ret bool
+		return ret
+	}
+	return *o.PartnerOwned
+}
+
+// GetPartnerOwnedOk returns a tuple with the PartnerOwned field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SourceMetadataV1) GetPartnerOwnedOk() (*bool, bool) {
+	if o == nil || IsNil(o.PartnerOwned) {
+		return nil, false
+	}
+	return o.PartnerOwned, true
+}
+
+// HasPartnerOwned returns a boolean if a field has been set.
+func (o *SourceMetadataV1) HasPartnerOwned() bool {
+	if o != nil && !IsNil(o.PartnerOwned) {
+		return true
+	}
+
+	return false
+}
+
+// SetPartnerOwned gets a reference to the given bool and assigns it to the PartnerOwned field.
+func (o *SourceMetadataV1) SetPartnerOwned(v bool) {
+	o.PartnerOwned = &v
+}
+
 func (o SourceMetadataV1) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -281,6 +343,10 @@ func (o SourceMetadataV1) ToMap() (map[string]interface{}, error) {
 	toSerialize["options"] = o.Options
 	toSerialize["categories"] = o.Categories
 	toSerialize["isCloudEventSource"] = o.IsCloudEventSource
+	toSerialize["status"] = o.Status
+	if !IsNil(o.PartnerOwned) {
+		toSerialize["partnerOwned"] = o.PartnerOwned
+	}
 	return toSerialize, nil
 }
 
