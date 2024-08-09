@@ -30,6 +30,8 @@ type UpdateTransformationV1Input struct {
 	Enabled *bool `json:"enabled,omitempty"`
 	// If statement ([FQL](https://segment.com/docs/config-api/fql/)) to match events.  For standard event matchers, use the following:  Track -\\> \"event='\\<eventName\\>'\"  Identify -\\> \"type='identify'\"  Group -\\> \"type='group'\"
 	If *string `json:"if,omitempty"`
+	// Optional boolean value if the Transformation should drop the event entirely when the if statement matches, ignores all other transforms.
+	Drop *bool `json:"drop,omitempty"`
 	// Optional new event name for renaming events. Works only for 'track' event type.
 	NewEventName *string `json:"newEventName,omitempty"`
 	// Optional array for renaming properties collected by your events.
@@ -218,6 +220,38 @@ func (o *UpdateTransformationV1Input) HasIf() bool {
 // SetIf gets a reference to the given string and assigns it to the If field.
 func (o *UpdateTransformationV1Input) SetIf(v string) {
 	o.If = &v
+}
+
+// GetDrop returns the Drop field value if set, zero value otherwise.
+func (o *UpdateTransformationV1Input) GetDrop() bool {
+	if o == nil || IsNil(o.Drop) {
+		var ret bool
+		return ret
+	}
+	return *o.Drop
+}
+
+// GetDropOk returns a tuple with the Drop field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateTransformationV1Input) GetDropOk() (*bool, bool) {
+	if o == nil || IsNil(o.Drop) {
+		return nil, false
+	}
+	return o.Drop, true
+}
+
+// HasDrop returns a boolean if a field has been set.
+func (o *UpdateTransformationV1Input) HasDrop() bool {
+	if o != nil && !IsNil(o.Drop) {
+		return true
+	}
+
+	return false
+}
+
+// SetDrop gets a reference to the given bool and assigns it to the Drop field.
+func (o *UpdateTransformationV1Input) SetDrop(v bool) {
+	o.Drop = &v
 }
 
 // GetNewEventName returns the NewEventName field value if set, zero value otherwise.
@@ -440,6 +474,9 @@ func (o UpdateTransformationV1Input) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.If) {
 		toSerialize["if"] = o.If
+	}
+	if !IsNil(o.Drop) {
+		toSerialize["drop"] = o.Drop
 	}
 	if !IsNil(o.NewEventName) {
 		toSerialize["newEventName"] = o.NewEventName
