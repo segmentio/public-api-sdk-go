@@ -901,7 +901,7 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and/or &#x60;spaceId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewSourceFilterBy,
 ) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
