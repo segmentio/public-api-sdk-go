@@ -893,7 +893,7 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60; &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and &#x60;spaceId&#x60;, .  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
@@ -1148,7 +1148,7 @@ func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;,&#x60;activationId&#x60;, &#x60;audienceId&#x60;, and/or &#x60;spaceId&#x60;.  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
@@ -1156,7 +1156,7 @@ func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and/or &#x60;spaceId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewSourceFilterBy,
 ) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
@@ -1403,7 +1403,7 @@ func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;appVersion&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and &#x60;spaceId&#x60;.  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, and/or &#x60;appVersion&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
@@ -1411,7 +1411,7 @@ func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;appVersion&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and/or &#x60;spaceId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewSuccessfullyReceivedFilterBy,
 ) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {

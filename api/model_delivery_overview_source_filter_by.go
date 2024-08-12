@@ -28,12 +28,6 @@ type DeliveryOverviewSourceFilterBy struct {
 	EventType []string `json:"eventType,omitempty"`
 	// A list of strings of app versions.
 	AppVersion []string `json:"appVersion,omitempty"`
-	// A list of strings of event context IDs from a Linked Audience mapping/activation.
-	ActivationId []string `json:"activationId,omitempty"`
-	// A list of strings of audienceIDs for a Linked Audience.
-	AudienceId []string `json:"audienceId,omitempty"`
-	// A list of strings of spaceIDs for a Linked Audience.
-	SpaceId []string `json:"spaceId,omitempty"`
 }
 
 // NewDeliveryOverviewSourceFilterBy instantiates a new DeliveryOverviewSourceFilterBy object
@@ -181,102 +175,6 @@ func (o *DeliveryOverviewSourceFilterBy) SetAppVersion(v []string) {
 	o.AppVersion = v
 }
 
-// GetActivationId returns the ActivationId field value if set, zero value otherwise.
-func (o *DeliveryOverviewSourceFilterBy) GetActivationId() []string {
-	if o == nil || IsNil(o.ActivationId) {
-		var ret []string
-		return ret
-	}
-	return o.ActivationId
-}
-
-// GetActivationIdOk returns a tuple with the ActivationId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DeliveryOverviewSourceFilterBy) GetActivationIdOk() ([]string, bool) {
-	if o == nil || IsNil(o.ActivationId) {
-		return nil, false
-	}
-	return o.ActivationId, true
-}
-
-// HasActivationId returns a boolean if a field has been set.
-func (o *DeliveryOverviewSourceFilterBy) HasActivationId() bool {
-	if o != nil && !IsNil(o.ActivationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetActivationId gets a reference to the given []string and assigns it to the ActivationId field.
-func (o *DeliveryOverviewSourceFilterBy) SetActivationId(v []string) {
-	o.ActivationId = v
-}
-
-// GetAudienceId returns the AudienceId field value if set, zero value otherwise.
-func (o *DeliveryOverviewSourceFilterBy) GetAudienceId() []string {
-	if o == nil || IsNil(o.AudienceId) {
-		var ret []string
-		return ret
-	}
-	return o.AudienceId
-}
-
-// GetAudienceIdOk returns a tuple with the AudienceId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DeliveryOverviewSourceFilterBy) GetAudienceIdOk() ([]string, bool) {
-	if o == nil || IsNil(o.AudienceId) {
-		return nil, false
-	}
-	return o.AudienceId, true
-}
-
-// HasAudienceId returns a boolean if a field has been set.
-func (o *DeliveryOverviewSourceFilterBy) HasAudienceId() bool {
-	if o != nil && !IsNil(o.AudienceId) {
-		return true
-	}
-
-	return false
-}
-
-// SetAudienceId gets a reference to the given []string and assigns it to the AudienceId field.
-func (o *DeliveryOverviewSourceFilterBy) SetAudienceId(v []string) {
-	o.AudienceId = v
-}
-
-// GetSpaceId returns the SpaceId field value if set, zero value otherwise.
-func (o *DeliveryOverviewSourceFilterBy) GetSpaceId() []string {
-	if o == nil || IsNil(o.SpaceId) {
-		var ret []string
-		return ret
-	}
-	return o.SpaceId
-}
-
-// GetSpaceIdOk returns a tuple with the SpaceId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DeliveryOverviewSourceFilterBy) GetSpaceIdOk() ([]string, bool) {
-	if o == nil || IsNil(o.SpaceId) {
-		return nil, false
-	}
-	return o.SpaceId, true
-}
-
-// HasSpaceId returns a boolean if a field has been set.
-func (o *DeliveryOverviewSourceFilterBy) HasSpaceId() bool {
-	if o != nil && !IsNil(o.SpaceId) {
-		return true
-	}
-
-	return false
-}
-
-// SetSpaceId gets a reference to the given []string and assigns it to the SpaceId field.
-func (o *DeliveryOverviewSourceFilterBy) SetSpaceId(v []string) {
-	o.SpaceId = v
-}
-
 func (o DeliveryOverviewSourceFilterBy) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -298,15 +196,6 @@ func (o DeliveryOverviewSourceFilterBy) ToMap() (map[string]interface{}, error) 
 	}
 	if !IsNil(o.AppVersion) {
 		toSerialize["appVersion"] = o.AppVersion
-	}
-	if !IsNil(o.ActivationId) {
-		toSerialize["activationId"] = o.ActivationId
-	}
-	if !IsNil(o.AudienceId) {
-		toSerialize["audienceId"] = o.AudienceId
-	}
-	if !IsNil(o.SpaceId) {
-		toSerialize["spaceId"] = o.SpaceId
 	}
 	return toSerialize, nil
 }
