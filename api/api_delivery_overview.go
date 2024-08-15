@@ -627,7 +627,7 @@ func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Granulari
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, and &#x60;subscriptionId&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and &#x60;spaceId&#x60;.  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, &#x60;subscriptionId&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and &#x60;spaceId&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {

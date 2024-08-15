@@ -195,7 +195,7 @@ import (
 )
 
 func main() {
-    destinationId := "fP7qoQw2HTWt9WdMr718gn" // string | 
+    destinationId := "qtiZHLLqqsHmpvLXNtP5du" // string | 
     pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination options.  This parameter exists in v1. (optional)
 
     configuration := api.NewConfiguration()
