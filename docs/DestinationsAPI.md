@@ -271,7 +271,7 @@ import (
 )
 
 func main() {
-    destinationId := "fP7qoQw2HTWt9WdMr718gn" // string | 
+    destinationId := "qtiZHLLqqsHmpvLXNtP5du" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -751,7 +751,7 @@ import (
 )
 
 func main() {
-    destinationId := "fP7qoQw2HTWt9WdMr718gn" // string | 
+    destinationId := "qtiZHLLqqsHmpvLXNtP5du" // string | 
     updateDestinationV1Input := *api.NewUpdateDestinationV1Input() // UpdateDestinationV1Input | 
 
     configuration := api.NewConfiguration()
