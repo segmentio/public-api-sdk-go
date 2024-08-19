@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 53.0.0
+API version: 53.1.0
 Contact: friends@segment.com
 */
 
@@ -28,6 +28,8 @@ type CreateSourceV1Input struct {
 	MetadataId string `json:"metadataId"`
 	// A key-value object that contains instance-specific settings for a Source.  The `options` field in the Source metadata defines the schema of this object.
 	Settings map[string]interface{} `json:"settings,omitempty"`
+	// Whether to disconnect all Warehouses from the Source.
+	DisconnectAllWarehouses *bool `json:"disconnectAllWarehouses,omitempty"`
 }
 
 // NewCreateSourceV1Input instantiates a new CreateSourceV1Input object
@@ -154,6 +156,38 @@ func (o *CreateSourceV1Input) SetSettings(v map[string]interface{}) {
 	o.Settings = v
 }
 
+// GetDisconnectAllWarehouses returns the DisconnectAllWarehouses field value if set, zero value otherwise.
+func (o *CreateSourceV1Input) GetDisconnectAllWarehouses() bool {
+	if o == nil || IsNil(o.DisconnectAllWarehouses) {
+		var ret bool
+		return ret
+	}
+	return *o.DisconnectAllWarehouses
+}
+
+// GetDisconnectAllWarehousesOk returns a tuple with the DisconnectAllWarehouses field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateSourceV1Input) GetDisconnectAllWarehousesOk() (*bool, bool) {
+	if o == nil || IsNil(o.DisconnectAllWarehouses) {
+		return nil, false
+	}
+	return o.DisconnectAllWarehouses, true
+}
+
+// HasDisconnectAllWarehouses returns a boolean if a field has been set.
+func (o *CreateSourceV1Input) HasDisconnectAllWarehouses() bool {
+	if o != nil && !IsNil(o.DisconnectAllWarehouses) {
+		return true
+	}
+
+	return false
+}
+
+// SetDisconnectAllWarehouses gets a reference to the given bool and assigns it to the DisconnectAllWarehouses field.
+func (o *CreateSourceV1Input) SetDisconnectAllWarehouses(v bool) {
+	o.DisconnectAllWarehouses = &v
+}
+
 func (o CreateSourceV1Input) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -169,6 +203,9 @@ func (o CreateSourceV1Input) ToMap() (map[string]interface{}, error) {
 	toSerialize["metadataId"] = o.MetadataId
 	if !IsNil(o.Settings) {
 		toSerialize["settings"] = o.Settings
+	}
+	if !IsNil(o.DisconnectAllWarehouses) {
+		toSerialize["disconnectAllWarehouses"] = o.DisconnectAllWarehouses
 	}
 	return toSerialize, nil
 }
