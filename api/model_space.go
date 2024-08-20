@@ -18,7 +18,7 @@ import (
 // checks if the Space type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Space{}
 
-// Space Space matching the given id.
+// Space struct for Space
 type Space struct {
 	Id   string `json:"id"`
 	Slug string `json:"slug"`
