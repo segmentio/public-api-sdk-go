@@ -31,8 +31,8 @@ type ComputedTraitSummary struct {
 	// Key for the computed trait.
 	Key string `json:"key"`
 	// Enabled/disabled status for the computed trait.
-	Enabled    bool               `json:"enabled"`
-	Definition NullableDefinition `json:"definition"`
+	Enabled    bool                             `json:"enabled"`
+	Definition NullableComputedTraitsDefinition `json:"definition"`
 	// Status for the computed trait.  Possible values: Backfilling, Computing, Failed, Live, Awaiting Destinations, Disabled.
 	Status *string `json:"status,omitempty"`
 	// User id who created the computed trait.
@@ -56,7 +56,7 @@ func NewComputedTraitSummary(
 	name string,
 	key string,
 	enabled bool,
-	definition NullableDefinition,
+	definition NullableComputedTraitsDefinition,
 	createdBy string,
 	updatedBy string,
 	createdAt string,
@@ -237,10 +237,10 @@ func (o *ComputedTraitSummary) SetEnabled(v bool) {
 }
 
 // GetDefinition returns the Definition field value
-// If the value is explicit nil, the zero value for Definition will be returned
-func (o *ComputedTraitSummary) GetDefinition() Definition {
+// If the value is explicit nil, the zero value for ComputedTraitsDefinition will be returned
+func (o *ComputedTraitSummary) GetDefinition() ComputedTraitsDefinition {
 	if o == nil || o.Definition.Get() == nil {
-		var ret Definition
+		var ret ComputedTraitsDefinition
 		return ret
 	}
 
@@ -250,7 +250,7 @@ func (o *ComputedTraitSummary) GetDefinition() Definition {
 // GetDefinitionOk returns a tuple with the Definition field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ComputedTraitSummary) GetDefinitionOk() (*Definition, bool) {
+func (o *ComputedTraitSummary) GetDefinitionOk() (*ComputedTraitsDefinition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -258,7 +258,7 @@ func (o *ComputedTraitSummary) GetDefinitionOk() (*Definition, bool) {
 }
 
 // SetDefinition sets field value
-func (o *ComputedTraitSummary) SetDefinition(v Definition) {
+func (o *ComputedTraitSummary) SetDefinition(v ComputedTraitsDefinition) {
 	o.Definition.Set(&v)
 }
 
