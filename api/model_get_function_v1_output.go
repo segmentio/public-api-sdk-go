@@ -20,14 +20,14 @@ var _ MappedNullable = &GetFunctionV1Output{}
 
 // GetFunctionV1Output Gets a single Function.
 type GetFunctionV1Output struct {
-	Function NullableFunctionV1 `json:"function"`
+	Function NullableFunction `json:"function"`
 }
 
 // NewGetFunctionV1Output instantiates a new GetFunctionV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetFunctionV1Output(function NullableFunctionV1) *GetFunctionV1Output {
+func NewGetFunctionV1Output(function NullableFunction) *GetFunctionV1Output {
 	this := GetFunctionV1Output{}
 	this.Function = function
 	return &this
@@ -42,10 +42,10 @@ func NewGetFunctionV1OutputWithDefaults() *GetFunctionV1Output {
 }
 
 // GetFunction returns the Function field value
-// If the value is explicit nil, the zero value for FunctionV1 will be returned
-func (o *GetFunctionV1Output) GetFunction() FunctionV1 {
+// If the value is explicit nil, the zero value for Function will be returned
+func (o *GetFunctionV1Output) GetFunction() Function {
 	if o == nil || o.Function.Get() == nil {
-		var ret FunctionV1
+		var ret Function
 		return ret
 	}
 
@@ -55,7 +55,7 @@ func (o *GetFunctionV1Output) GetFunction() FunctionV1 {
 // GetFunctionOk returns a tuple with the Function field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetFunctionV1Output) GetFunctionOk() (*FunctionV1, bool) {
+func (o *GetFunctionV1Output) GetFunctionOk() (*Function, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -63,7 +63,7 @@ func (o *GetFunctionV1Output) GetFunctionOk() (*FunctionV1, bool) {
 }
 
 // SetFunction sets field value
-func (o *GetFunctionV1Output) SetFunction(v FunctionV1) {
+func (o *GetFunctionV1Output) SetFunction(v Function) {
 	o.Function.Set(&v)
 }
 
