@@ -716,6 +716,195 @@ func (a *ReverseETLAPIService) GetReverseETLSyncStatusExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiGetReverseETLSyncStatusesBySubscriptionIdRequest struct {
+	ctx            context.Context
+	ApiService     *ReverseETLAPIService
+	modelId        string
+	subscriptionId string
+	pagination     *PaginationInput
+}
+
+// Optional pagination params.  This parameter exists in alpha.
+func (r ApiGetReverseETLSyncStatusesBySubscriptionIdRequest) Pagination(
+	pagination PaginationInput,
+) ApiGetReverseETLSyncStatusesBySubscriptionIdRequest {
+	r.pagination = &pagination
+	return r
+}
+
+func (r ApiGetReverseETLSyncStatusesBySubscriptionIdRequest) Execute() (*GetReverseETLSyncStatusesBySubscriptionId200Response, *http.Response, error) {
+	return r.ApiService.GetReverseETLSyncStatusesBySubscriptionIdExecute(r)
+}
+
+/*
+GetReverseETLSyncStatusesBySubscriptionId Get Reverse ETL Sync Statuses By Subscription Id
+
+Get the sync statuses for a Reverse ETL mapping subscription.
+The sync status includes all detailed information about the sync - sync status, duration, details about the extract and load phase if applicable, etc.
+The default page count is 10, and then the next page can be fetched by passing the `cursor` query parameter.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param modelId
+	@param subscriptionId
+	@return ApiGetReverseETLSyncStatusesBySubscriptionIdRequest
+*/
+func (a *ReverseETLAPIService) GetReverseETLSyncStatusesBySubscriptionId(
+	ctx context.Context,
+	modelId string,
+	subscriptionId string,
+) ApiGetReverseETLSyncStatusesBySubscriptionIdRequest {
+	return ApiGetReverseETLSyncStatusesBySubscriptionIdRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		modelId:        modelId,
+		subscriptionId: subscriptionId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetReverseETLSyncStatusesBySubscriptionId200Response
+func (a *ReverseETLAPIService) GetReverseETLSyncStatusesBySubscriptionIdExecute(
+	r ApiGetReverseETLSyncStatusesBySubscriptionIdRequest,
+) (*GetReverseETLSyncStatusesBySubscriptionId200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetReverseETLSyncStatusesBySubscriptionId200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"ReverseETLAPIService.GetReverseETLSyncStatusesBySubscriptionId",
+	)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/reverse-etl-models/{modelId}/subscriptionId/{subscriptionId}/syncs"
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"modelId"+"}",
+		url.PathEscape(parameterValueToString(r.modelId, "modelId")),
+		-1,
+	)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"subscriptionId"+"}",
+		url.PathEscape(parameterValueToString(r.subscriptionId, "subscriptionId")),
+		-1,
+	)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetReverseEtlModelRequest struct {
 	ctx        context.Context
 	ApiService *ReverseETLAPIService
