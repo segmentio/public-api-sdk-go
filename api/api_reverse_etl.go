@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 53.1.0
+API version: 53.2.0
 Contact: friends@segment.com
 */
 
@@ -716,83 +716,62 @@ func (a *ReverseETLAPIService) GetReverseETLSyncStatusExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReverseETLSyncStatusesBySubscriptionIdRequest struct {
-	ctx            context.Context
-	ApiService     *ReverseETLAPIService
-	modelId        string
-	subscriptionId string
-	pagination     *PaginationInput
+type ApiGetReverseEtlModelRequest struct {
+	ctx        context.Context
+	ApiService *ReverseETLAPIService
+	modelId    string
 }
 
-// Optional pagination params.  This parameter exists in alpha.
-func (r ApiGetReverseETLSyncStatusesBySubscriptionIdRequest) Pagination(
-	pagination PaginationInput,
-) ApiGetReverseETLSyncStatusesBySubscriptionIdRequest {
-	r.pagination = &pagination
-	return r
-}
-
-func (r ApiGetReverseETLSyncStatusesBySubscriptionIdRequest) Execute() (*GetReverseETLSyncStatusesBySubscriptionId200Response, *http.Response, error) {
-	return r.ApiService.GetReverseETLSyncStatusesBySubscriptionIdExecute(r)
+func (r ApiGetReverseEtlModelRequest) Execute() (*GetReverseEtlModel200Response, *http.Response, error) {
+	return r.ApiService.GetReverseEtlModelExecute(r)
 }
 
 /*
-GetReverseETLSyncStatusesBySubscriptionId Get Reverse ETL Sync Statuses By Subscription Id
+GetReverseEtlModel Get Reverse Etl Model
 
-Get the sync statuses for a Reverse ETL mapping subscription.
-The sync status includes all detailed information about the sync - sync status, duration, details about the extract and load phase if applicable, etc.
-The default page count is 10, and then the next page can be fetched by passing the `cursor` query parameter.
+Returns a Reverse ETL Model by its id.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param modelId
-	@param subscriptionId
-	@return ApiGetReverseETLSyncStatusesBySubscriptionIdRequest
+	@return ApiGetReverseEtlModelRequest
 */
-func (a *ReverseETLAPIService) GetReverseETLSyncStatusesBySubscriptionId(
+func (a *ReverseETLAPIService) GetReverseEtlModel(
 	ctx context.Context,
 	modelId string,
-	subscriptionId string,
-) ApiGetReverseETLSyncStatusesBySubscriptionIdRequest {
-	return ApiGetReverseETLSyncStatusesBySubscriptionIdRequest{
-		ApiService:     a,
-		ctx:            ctx,
-		modelId:        modelId,
-		subscriptionId: subscriptionId,
+) ApiGetReverseEtlModelRequest {
+	return ApiGetReverseEtlModelRequest{
+		ApiService: a,
+		ctx:        ctx,
+		modelId:    modelId,
 	}
 }
 
 // Execute executes the request
 //
-//	@return GetReverseETLSyncStatusesBySubscriptionId200Response
-func (a *ReverseETLAPIService) GetReverseETLSyncStatusesBySubscriptionIdExecute(
-	r ApiGetReverseETLSyncStatusesBySubscriptionIdRequest,
-) (*GetReverseETLSyncStatusesBySubscriptionId200Response, *http.Response, error) {
+//	@return GetReverseEtlModel200Response
+func (a *ReverseETLAPIService) GetReverseEtlModelExecute(
+	r ApiGetReverseEtlModelRequest,
+) (*GetReverseEtlModel200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetReverseETLSyncStatusesBySubscriptionId200Response
+		localVarReturnValue *GetReverseEtlModel200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ReverseETLAPIService.GetReverseETLSyncStatusesBySubscriptionId",
+		"ReverseETLAPIService.GetReverseEtlModel",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/reverse-etl-models/{modelId}/subscriptionId/{subscriptionId}/syncs"
+	localVarPath := localBasePath + "/reverse-etl-models/{modelId}"
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"modelId"+"}",
 		url.PathEscape(parameterValueToString(r.modelId, "modelId")),
-		-1,
-	)
-	localVarPath = strings.Replace(
-		localVarPath,
-		"{"+"subscriptionId"+"}",
-		url.PathEscape(parameterValueToString(r.subscriptionId, "subscriptionId")),
 		-1,
 	)
 
@@ -800,9 +779,6 @@ func (a *ReverseETLAPIService) GetReverseETLSyncStatusesBySubscriptionIdExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.pagination != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -905,62 +881,83 @@ func (a *ReverseETLAPIService) GetReverseETLSyncStatusesBySubscriptionIdExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReverseEtlModelRequest struct {
-	ctx        context.Context
-	ApiService *ReverseETLAPIService
-	modelId    string
+type ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest struct {
+	ctx            context.Context
+	ApiService     *ReverseETLAPIService
+	modelId        string
+	subscriptionId string
+	pagination     *PaginationInput
 }
 
-func (r ApiGetReverseEtlModelRequest) Execute() (*GetReverseEtlModel200Response, *http.Response, error) {
-	return r.ApiService.GetReverseEtlModelExecute(r)
+// Optional pagination params.  This parameter exists in alpha.
+func (r ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest) Pagination(
+	pagination PaginationInput,
+) ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest {
+	r.pagination = &pagination
+	return r
+}
+
+func (r ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest) Execute() (*ListReverseETLSyncStatusesFromModelAndSubscriptionId200Response, *http.Response, error) {
+	return r.ApiService.ListReverseETLSyncStatusesFromModelAndSubscriptionIdExecute(r)
 }
 
 /*
-GetReverseEtlModel Get Reverse Etl Model
+ListReverseETLSyncStatusesFromModelAndSubscriptionId List Reverse ETL Sync Statuses from Model And Subscription Id
 
-Returns a Reverse ETL Model by its id.
+Get the sync statuses for a Reverse ETL mapping subscription.
+The sync status includes all detailed information about the sync - sync status, duration, details about the extract and load phase if applicable, etc.
+The default page count is 10, and then the next page can be fetched by passing the `cursor` query parameter.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param modelId
-	@return ApiGetReverseEtlModelRequest
+	@param subscriptionId
+	@return ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest
 */
-func (a *ReverseETLAPIService) GetReverseEtlModel(
+func (a *ReverseETLAPIService) ListReverseETLSyncStatusesFromModelAndSubscriptionId(
 	ctx context.Context,
 	modelId string,
-) ApiGetReverseEtlModelRequest {
-	return ApiGetReverseEtlModelRequest{
-		ApiService: a,
-		ctx:        ctx,
-		modelId:    modelId,
+	subscriptionId string,
+) ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest {
+	return ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest{
+		ApiService:     a,
+		ctx:            ctx,
+		modelId:        modelId,
+		subscriptionId: subscriptionId,
 	}
 }
 
 // Execute executes the request
 //
-//	@return GetReverseEtlModel200Response
-func (a *ReverseETLAPIService) GetReverseEtlModelExecute(
-	r ApiGetReverseEtlModelRequest,
-) (*GetReverseEtlModel200Response, *http.Response, error) {
+//	@return ListReverseETLSyncStatusesFromModelAndSubscriptionId200Response
+func (a *ReverseETLAPIService) ListReverseETLSyncStatusesFromModelAndSubscriptionIdExecute(
+	r ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest,
+) (*ListReverseETLSyncStatusesFromModelAndSubscriptionId200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetReverseEtlModel200Response
+		localVarReturnValue *ListReverseETLSyncStatusesFromModelAndSubscriptionId200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"ReverseETLAPIService.GetReverseEtlModel",
+		"ReverseETLAPIService.ListReverseETLSyncStatusesFromModelAndSubscriptionId",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/reverse-etl-models/{modelId}"
+	localVarPath := localBasePath + "/reverse-etl-models/{modelId}/subscriptionId/{subscriptionId}/syncs"
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"modelId"+"}",
 		url.PathEscape(parameterValueToString(r.modelId, "modelId")),
+		-1,
+	)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"subscriptionId"+"}",
+		url.PathEscape(parameterValueToString(r.subscriptionId, "subscriptionId")),
 		-1,
 	)
 
@@ -968,6 +965,9 @@ func (a *ReverseETLAPIService) GetReverseEtlModelExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
