@@ -402,7 +402,7 @@ Name | Type | Description  | Notes
 
 ## Operation: ListReverseETLSyncStatusesFromModelAndSubscriptionId
 
-> ListReverseETLSyncStatusesFromModelAndSubscriptionId200Response ListReverseETLSyncStatusesFromModelAndSubscriptionId(ctx, modelId, subscriptionId).Pagination(pagination).Execute()
+> ListReverseETLSyncStatusesFromModelAndSubscriptionId200Response ListReverseETLSyncStatusesFromModelAndSubscriptionId(ctx, modelId, subscriptionId).Count(count).Cursor(cursor).Execute()
 
 List Reverse ETL Sync Statuses from Model And Subscription Id
 
@@ -423,13 +423,14 @@ import (
 func main() {
     modelId := "modelId" // string | 
     subscriptionId := "subscriptionId" // string | 
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Optional pagination params.  This parameter exists in alpha. (optional)
+    count := float32(8.14) // float32 | The number of items to retrieve in a page, between 1 and 100. Default is 10  This parameter exists in alpha. (optional)
+    cursor := "cursor_example" // string | The page to request. Acceptable values to use here are in PaginationOutput objects, in the `current`, `next`, and `previous` keys.  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ReverseETLAPI.ListReverseETLSyncStatusesFromModelAndSubscriptionId(ctx, modelId, subscriptionId).Pagination(pagination).Execute()
+    resp, r, err := apiClient.ReverseETLAPI.ListReverseETLSyncStatusesFromModelAndSubscriptionId(ctx, modelId, subscriptionId).Count(count).Cursor(cursor).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReverseETLAPI.ListReverseETLSyncStatusesFromModelAndSubscriptionId``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -463,7 +464,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **pagination** | [**PaginationInput**](PaginationInput.md) | Optional pagination params.  This parameter exists in alpha. | 
+ **count** | **float32** | The number of items to retrieve in a page, between 1 and 100. Default is 10  This parameter exists in alpha. | 
+ **cursor** | **string** | The page to request. Acceptable values to use here are in PaginationOutput objects, in the &#x60;current&#x60;, &#x60;next&#x60;, and &#x60;previous&#x60; keys.  This parameter exists in alpha. | 
 
 ### Return type
 

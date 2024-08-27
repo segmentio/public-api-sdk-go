@@ -886,14 +886,23 @@ type ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest struct {
 	ApiService     *ReverseETLAPIService
 	modelId        string
 	subscriptionId string
-	pagination     *PaginationInput
+	count          *float32
+	cursor         *string
 }
 
-// Optional pagination params.  This parameter exists in alpha.
-func (r ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest) Pagination(
-	pagination PaginationInput,
+// The number of items to retrieve in a page, between 1 and 100. Default is 10  This parameter exists in alpha.
+func (r ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest) Count(
+	count float32,
 ) ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest {
-	r.pagination = &pagination
+	r.count = &count
+	return r
+}
+
+// The page to request. Acceptable values to use here are in PaginationOutput objects, in the &#x60;current&#x60;, &#x60;next&#x60;, and &#x60;previous&#x60; keys.  This parameter exists in alpha.
+func (r ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest) Cursor(
+	cursor string,
+) ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest {
+	r.cursor = &cursor
 	return r
 }
 
@@ -965,8 +974,11 @@ func (a *ReverseETLAPIService) ListReverseETLSyncStatusesFromModelAndSubscriptio
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.pagination != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	if r.count != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "count", r.count, "")
+	}
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
