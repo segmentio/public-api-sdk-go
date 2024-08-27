@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 53.2.0
+API version: 53.1.0
 Contact: friends@segment.com
 */
 
@@ -15,11 +15,11 @@ import (
 	"encoding/json"
 )
 
-// checks if the ReverseETLSyncStatus type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ReverseETLSyncStatus{}
+// checks if the ReverseETLSyncOutput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ReverseETLSyncOutput{}
 
-// ReverseETLSyncStatus Defines the result of getting the sync status of a RETL connection.
-type ReverseETLSyncStatus struct {
+// ReverseETLSyncOutput Defines the result of getting the sync status of a RETL connection.
+type ReverseETLSyncOutput struct {
 	// The id of the sync.
 	SyncId string `json:"syncId"`
 	// The Model id of the sync.
@@ -42,19 +42,19 @@ type ReverseETLSyncStatus struct {
 	ErrorCode *string `json:"errorCode,omitempty"`
 }
 
-// NewReverseETLSyncStatus instantiates a new ReverseETLSyncStatus object
+// NewReverseETLSyncOutput instantiates a new ReverseETLSyncOutput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReverseETLSyncStatus(
+func NewReverseETLSyncOutput(
 	syncId string,
 	modelId string,
 	sourceId string,
 	syncStatus string,
 	duration string,
 	startedAt string,
-) *ReverseETLSyncStatus {
-	this := ReverseETLSyncStatus{}
+) *ReverseETLSyncOutput {
+	this := ReverseETLSyncOutput{}
 	this.SyncId = syncId
 	this.ModelId = modelId
 	this.SourceId = sourceId
@@ -64,16 +64,16 @@ func NewReverseETLSyncStatus(
 	return &this
 }
 
-// NewReverseETLSyncStatusWithDefaults instantiates a new ReverseETLSyncStatus object
+// NewReverseETLSyncOutputWithDefaults instantiates a new ReverseETLSyncOutput object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewReverseETLSyncStatusWithDefaults() *ReverseETLSyncStatus {
-	this := ReverseETLSyncStatus{}
+func NewReverseETLSyncOutputWithDefaults() *ReverseETLSyncOutput {
+	this := ReverseETLSyncOutput{}
 	return &this
 }
 
 // GetSyncId returns the SyncId field value
-func (o *ReverseETLSyncStatus) GetSyncId() string {
+func (o *ReverseETLSyncOutput) GetSyncId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -84,7 +84,7 @@ func (o *ReverseETLSyncStatus) GetSyncId() string {
 
 // GetSyncIdOk returns a tuple with the SyncId field value
 // and a boolean to check if the value has been set.
-func (o *ReverseETLSyncStatus) GetSyncIdOk() (*string, bool) {
+func (o *ReverseETLSyncOutput) GetSyncIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -92,12 +92,12 @@ func (o *ReverseETLSyncStatus) GetSyncIdOk() (*string, bool) {
 }
 
 // SetSyncId sets field value
-func (o *ReverseETLSyncStatus) SetSyncId(v string) {
+func (o *ReverseETLSyncOutput) SetSyncId(v string) {
 	o.SyncId = v
 }
 
 // GetModelId returns the ModelId field value
-func (o *ReverseETLSyncStatus) GetModelId() string {
+func (o *ReverseETLSyncOutput) GetModelId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -108,7 +108,7 @@ func (o *ReverseETLSyncStatus) GetModelId() string {
 
 // GetModelIdOk returns a tuple with the ModelId field value
 // and a boolean to check if the value has been set.
-func (o *ReverseETLSyncStatus) GetModelIdOk() (*string, bool) {
+func (o *ReverseETLSyncOutput) GetModelIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -116,12 +116,12 @@ func (o *ReverseETLSyncStatus) GetModelIdOk() (*string, bool) {
 }
 
 // SetModelId sets field value
-func (o *ReverseETLSyncStatus) SetModelId(v string) {
+func (o *ReverseETLSyncOutput) SetModelId(v string) {
 	o.ModelId = v
 }
 
 // GetSourceId returns the SourceId field value
-func (o *ReverseETLSyncStatus) GetSourceId() string {
+func (o *ReverseETLSyncOutput) GetSourceId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -132,7 +132,7 @@ func (o *ReverseETLSyncStatus) GetSourceId() string {
 
 // GetSourceIdOk returns a tuple with the SourceId field value
 // and a boolean to check if the value has been set.
-func (o *ReverseETLSyncStatus) GetSourceIdOk() (*string, bool) {
+func (o *ReverseETLSyncOutput) GetSourceIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -140,12 +140,12 @@ func (o *ReverseETLSyncStatus) GetSourceIdOk() (*string, bool) {
 }
 
 // SetSourceId sets field value
-func (o *ReverseETLSyncStatus) SetSourceId(v string) {
+func (o *ReverseETLSyncOutput) SetSourceId(v string) {
 	o.SourceId = v
 }
 
 // GetSyncStatus returns the SyncStatus field value
-func (o *ReverseETLSyncStatus) GetSyncStatus() string {
+func (o *ReverseETLSyncOutput) GetSyncStatus() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -156,7 +156,7 @@ func (o *ReverseETLSyncStatus) GetSyncStatus() string {
 
 // GetSyncStatusOk returns a tuple with the SyncStatus field value
 // and a boolean to check if the value has been set.
-func (o *ReverseETLSyncStatus) GetSyncStatusOk() (*string, bool) {
+func (o *ReverseETLSyncOutput) GetSyncStatusOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -164,12 +164,12 @@ func (o *ReverseETLSyncStatus) GetSyncStatusOk() (*string, bool) {
 }
 
 // SetSyncStatus sets field value
-func (o *ReverseETLSyncStatus) SetSyncStatus(v string) {
+func (o *ReverseETLSyncOutput) SetSyncStatus(v string) {
 	o.SyncStatus = v
 }
 
 // GetDuration returns the Duration field value
-func (o *ReverseETLSyncStatus) GetDuration() string {
+func (o *ReverseETLSyncOutput) GetDuration() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -180,7 +180,7 @@ func (o *ReverseETLSyncStatus) GetDuration() string {
 
 // GetDurationOk returns a tuple with the Duration field value
 // and a boolean to check if the value has been set.
-func (o *ReverseETLSyncStatus) GetDurationOk() (*string, bool) {
+func (o *ReverseETLSyncOutput) GetDurationOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -188,12 +188,12 @@ func (o *ReverseETLSyncStatus) GetDurationOk() (*string, bool) {
 }
 
 // SetDuration sets field value
-func (o *ReverseETLSyncStatus) SetDuration(v string) {
+func (o *ReverseETLSyncOutput) SetDuration(v string) {
 	o.Duration = v
 }
 
 // GetStartedAt returns the StartedAt field value
-func (o *ReverseETLSyncStatus) GetStartedAt() string {
+func (o *ReverseETLSyncOutput) GetStartedAt() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -204,7 +204,7 @@ func (o *ReverseETLSyncStatus) GetStartedAt() string {
 
 // GetStartedAtOk returns a tuple with the StartedAt field value
 // and a boolean to check if the value has been set.
-func (o *ReverseETLSyncStatus) GetStartedAtOk() (*string, bool) {
+func (o *ReverseETLSyncOutput) GetStartedAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -212,12 +212,12 @@ func (o *ReverseETLSyncStatus) GetStartedAtOk() (*string, bool) {
 }
 
 // SetStartedAt sets field value
-func (o *ReverseETLSyncStatus) SetStartedAt(v string) {
+func (o *ReverseETLSyncOutput) SetStartedAt(v string) {
 	o.StartedAt = v
 }
 
 // GetFinishedAt returns the FinishedAt field value if set, zero value otherwise.
-func (o *ReverseETLSyncStatus) GetFinishedAt() string {
+func (o *ReverseETLSyncOutput) GetFinishedAt() string {
 	if o == nil || IsNil(o.FinishedAt) {
 		var ret string
 		return ret
@@ -227,7 +227,7 @@ func (o *ReverseETLSyncStatus) GetFinishedAt() string {
 
 // GetFinishedAtOk returns a tuple with the FinishedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReverseETLSyncStatus) GetFinishedAtOk() (*string, bool) {
+func (o *ReverseETLSyncOutput) GetFinishedAtOk() (*string, bool) {
 	if o == nil || IsNil(o.FinishedAt) {
 		return nil, false
 	}
@@ -235,7 +235,7 @@ func (o *ReverseETLSyncStatus) GetFinishedAtOk() (*string, bool) {
 }
 
 // HasFinishedAt returns a boolean if a field has been set.
-func (o *ReverseETLSyncStatus) HasFinishedAt() bool {
+func (o *ReverseETLSyncOutput) HasFinishedAt() bool {
 	if o != nil && !IsNil(o.FinishedAt) {
 		return true
 	}
@@ -244,12 +244,12 @@ func (o *ReverseETLSyncStatus) HasFinishedAt() bool {
 }
 
 // SetFinishedAt gets a reference to the given string and assigns it to the FinishedAt field.
-func (o *ReverseETLSyncStatus) SetFinishedAt(v string) {
+func (o *ReverseETLSyncOutput) SetFinishedAt(v string) {
 	o.FinishedAt = &v
 }
 
 // GetExtractPhase returns the ExtractPhase field value if set, zero value otherwise.
-func (o *ReverseETLSyncStatus) GetExtractPhase() SyncExtractPhase {
+func (o *ReverseETLSyncOutput) GetExtractPhase() SyncExtractPhase {
 	if o == nil || IsNil(o.ExtractPhase) {
 		var ret SyncExtractPhase
 		return ret
@@ -259,7 +259,7 @@ func (o *ReverseETLSyncStatus) GetExtractPhase() SyncExtractPhase {
 
 // GetExtractPhaseOk returns a tuple with the ExtractPhase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReverseETLSyncStatus) GetExtractPhaseOk() (*SyncExtractPhase, bool) {
+func (o *ReverseETLSyncOutput) GetExtractPhaseOk() (*SyncExtractPhase, bool) {
 	if o == nil || IsNil(o.ExtractPhase) {
 		return nil, false
 	}
@@ -267,7 +267,7 @@ func (o *ReverseETLSyncStatus) GetExtractPhaseOk() (*SyncExtractPhase, bool) {
 }
 
 // HasExtractPhase returns a boolean if a field has been set.
-func (o *ReverseETLSyncStatus) HasExtractPhase() bool {
+func (o *ReverseETLSyncOutput) HasExtractPhase() bool {
 	if o != nil && !IsNil(o.ExtractPhase) {
 		return true
 	}
@@ -276,12 +276,12 @@ func (o *ReverseETLSyncStatus) HasExtractPhase() bool {
 }
 
 // SetExtractPhase gets a reference to the given SyncExtractPhase and assigns it to the ExtractPhase field.
-func (o *ReverseETLSyncStatus) SetExtractPhase(v SyncExtractPhase) {
+func (o *ReverseETLSyncOutput) SetExtractPhase(v SyncExtractPhase) {
 	o.ExtractPhase = &v
 }
 
 // GetLoadPhase returns the LoadPhase field value if set, zero value otherwise.
-func (o *ReverseETLSyncStatus) GetLoadPhase() SyncLoadPhase {
+func (o *ReverseETLSyncOutput) GetLoadPhase() SyncLoadPhase {
 	if o == nil || IsNil(o.LoadPhase) {
 		var ret SyncLoadPhase
 		return ret
@@ -291,7 +291,7 @@ func (o *ReverseETLSyncStatus) GetLoadPhase() SyncLoadPhase {
 
 // GetLoadPhaseOk returns a tuple with the LoadPhase field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReverseETLSyncStatus) GetLoadPhaseOk() (*SyncLoadPhase, bool) {
+func (o *ReverseETLSyncOutput) GetLoadPhaseOk() (*SyncLoadPhase, bool) {
 	if o == nil || IsNil(o.LoadPhase) {
 		return nil, false
 	}
@@ -299,7 +299,7 @@ func (o *ReverseETLSyncStatus) GetLoadPhaseOk() (*SyncLoadPhase, bool) {
 }
 
 // HasLoadPhase returns a boolean if a field has been set.
-func (o *ReverseETLSyncStatus) HasLoadPhase() bool {
+func (o *ReverseETLSyncOutput) HasLoadPhase() bool {
 	if o != nil && !IsNil(o.LoadPhase) {
 		return true
 	}
@@ -308,12 +308,12 @@ func (o *ReverseETLSyncStatus) HasLoadPhase() bool {
 }
 
 // SetLoadPhase gets a reference to the given SyncLoadPhase and assigns it to the LoadPhase field.
-func (o *ReverseETLSyncStatus) SetLoadPhase(v SyncLoadPhase) {
+func (o *ReverseETLSyncOutput) SetLoadPhase(v SyncLoadPhase) {
 	o.LoadPhase = &v
 }
 
 // GetError returns the Error field value if set, zero value otherwise.
-func (o *ReverseETLSyncStatus) GetError() string {
+func (o *ReverseETLSyncOutput) GetError() string {
 	if o == nil || IsNil(o.Error) {
 		var ret string
 		return ret
@@ -323,7 +323,7 @@ func (o *ReverseETLSyncStatus) GetError() string {
 
 // GetErrorOk returns a tuple with the Error field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReverseETLSyncStatus) GetErrorOk() (*string, bool) {
+func (o *ReverseETLSyncOutput) GetErrorOk() (*string, bool) {
 	if o == nil || IsNil(o.Error) {
 		return nil, false
 	}
@@ -331,7 +331,7 @@ func (o *ReverseETLSyncStatus) GetErrorOk() (*string, bool) {
 }
 
 // HasError returns a boolean if a field has been set.
-func (o *ReverseETLSyncStatus) HasError() bool {
+func (o *ReverseETLSyncOutput) HasError() bool {
 	if o != nil && !IsNil(o.Error) {
 		return true
 	}
@@ -340,12 +340,12 @@ func (o *ReverseETLSyncStatus) HasError() bool {
 }
 
 // SetError gets a reference to the given string and assigns it to the Error field.
-func (o *ReverseETLSyncStatus) SetError(v string) {
+func (o *ReverseETLSyncOutput) SetError(v string) {
 	o.Error = &v
 }
 
 // GetErrorCode returns the ErrorCode field value if set, zero value otherwise.
-func (o *ReverseETLSyncStatus) GetErrorCode() string {
+func (o *ReverseETLSyncOutput) GetErrorCode() string {
 	if o == nil || IsNil(o.ErrorCode) {
 		var ret string
 		return ret
@@ -355,7 +355,7 @@ func (o *ReverseETLSyncStatus) GetErrorCode() string {
 
 // GetErrorCodeOk returns a tuple with the ErrorCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ReverseETLSyncStatus) GetErrorCodeOk() (*string, bool) {
+func (o *ReverseETLSyncOutput) GetErrorCodeOk() (*string, bool) {
 	if o == nil || IsNil(o.ErrorCode) {
 		return nil, false
 	}
@@ -363,7 +363,7 @@ func (o *ReverseETLSyncStatus) GetErrorCodeOk() (*string, bool) {
 }
 
 // HasErrorCode returns a boolean if a field has been set.
-func (o *ReverseETLSyncStatus) HasErrorCode() bool {
+func (o *ReverseETLSyncOutput) HasErrorCode() bool {
 	if o != nil && !IsNil(o.ErrorCode) {
 		return true
 	}
@@ -372,11 +372,11 @@ func (o *ReverseETLSyncStatus) HasErrorCode() bool {
 }
 
 // SetErrorCode gets a reference to the given string and assigns it to the ErrorCode field.
-func (o *ReverseETLSyncStatus) SetErrorCode(v string) {
+func (o *ReverseETLSyncOutput) SetErrorCode(v string) {
 	o.ErrorCode = &v
 }
 
-func (o ReverseETLSyncStatus) MarshalJSON() ([]byte, error) {
+func (o ReverseETLSyncOutput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -384,7 +384,7 @@ func (o ReverseETLSyncStatus) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ReverseETLSyncStatus) ToMap() (map[string]interface{}, error) {
+func (o ReverseETLSyncOutput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["syncId"] = o.SyncId
 	toSerialize["modelId"] = o.ModelId
@@ -410,38 +410,38 @@ func (o ReverseETLSyncStatus) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableReverseETLSyncStatus struct {
-	value *ReverseETLSyncStatus
+type NullableReverseETLSyncOutput struct {
+	value *ReverseETLSyncOutput
 	isSet bool
 }
 
-func (v NullableReverseETLSyncStatus) Get() *ReverseETLSyncStatus {
+func (v NullableReverseETLSyncOutput) Get() *ReverseETLSyncOutput {
 	return v.value
 }
 
-func (v *NullableReverseETLSyncStatus) Set(val *ReverseETLSyncStatus) {
+func (v *NullableReverseETLSyncOutput) Set(val *ReverseETLSyncOutput) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableReverseETLSyncStatus) IsSet() bool {
+func (v NullableReverseETLSyncOutput) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableReverseETLSyncStatus) Unset() {
+func (v *NullableReverseETLSyncOutput) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableReverseETLSyncStatus(val *ReverseETLSyncStatus) *NullableReverseETLSyncStatus {
-	return &NullableReverseETLSyncStatus{value: val, isSet: true}
+func NewNullableReverseETLSyncOutput(val *ReverseETLSyncOutput) *NullableReverseETLSyncOutput {
+	return &NullableReverseETLSyncOutput{value: val, isSet: true}
 }
 
-func (v NullableReverseETLSyncStatus) MarshalJSON() ([]byte, error) {
+func (v NullableReverseETLSyncOutput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableReverseETLSyncStatus) UnmarshalJSON(src []byte) error {
+func (v *NullableReverseETLSyncOutput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
