@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 53.1.0
+API version: 53.2.0
 Contact: friends@segment.com
 */
 
@@ -20,7 +20,7 @@ var _ MappedNullable = &GetReverseETLSyncStatusOutput{}
 
 // GetReverseETLSyncStatusOutput Output for triggering a manual sync for a RETL connection.
 type GetReverseETLSyncStatusOutput struct {
-	ReverseETLSyncStatus ReverseETLSyncOutput `json:"reverseETLSyncStatus"`
+	ReverseETLSyncStatus ReverseETLSyncStatus `json:"reverseETLSyncStatus"`
 }
 
 // NewGetReverseETLSyncStatusOutput instantiates a new GetReverseETLSyncStatusOutput object
@@ -28,7 +28,7 @@ type GetReverseETLSyncStatusOutput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewGetReverseETLSyncStatusOutput(
-	reverseETLSyncStatus ReverseETLSyncOutput,
+	reverseETLSyncStatus ReverseETLSyncStatus,
 ) *GetReverseETLSyncStatusOutput {
 	this := GetReverseETLSyncStatusOutput{}
 	this.ReverseETLSyncStatus = reverseETLSyncStatus
@@ -44,9 +44,9 @@ func NewGetReverseETLSyncStatusOutputWithDefaults() *GetReverseETLSyncStatusOutp
 }
 
 // GetReverseETLSyncStatus returns the ReverseETLSyncStatus field value
-func (o *GetReverseETLSyncStatusOutput) GetReverseETLSyncStatus() ReverseETLSyncOutput {
+func (o *GetReverseETLSyncStatusOutput) GetReverseETLSyncStatus() ReverseETLSyncStatus {
 	if o == nil {
-		var ret ReverseETLSyncOutput
+		var ret ReverseETLSyncStatus
 		return ret
 	}
 
@@ -55,7 +55,7 @@ func (o *GetReverseETLSyncStatusOutput) GetReverseETLSyncStatus() ReverseETLSync
 
 // GetReverseETLSyncStatusOk returns a tuple with the ReverseETLSyncStatus field value
 // and a boolean to check if the value has been set.
-func (o *GetReverseETLSyncStatusOutput) GetReverseETLSyncStatusOk() (*ReverseETLSyncOutput, bool) {
+func (o *GetReverseETLSyncStatusOutput) GetReverseETLSyncStatusOk() (*ReverseETLSyncStatus, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -63,7 +63,7 @@ func (o *GetReverseETLSyncStatusOutput) GetReverseETLSyncStatusOk() (*ReverseETL
 }
 
 // SetReverseETLSyncStatus sets field value
-func (o *GetReverseETLSyncStatusOutput) SetReverseETLSyncStatus(v ReverseETLSyncOutput) {
+func (o *GetReverseETLSyncStatusOutput) SetReverseETLSyncStatus(v ReverseETLSyncStatus) {
 	o.ReverseETLSyncStatus = v
 }
 
