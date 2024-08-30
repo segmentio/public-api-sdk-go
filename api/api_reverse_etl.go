@@ -898,7 +898,7 @@ func (r ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest) Count(
 	return r
 }
 
-// The page to request. Acceptable values to use are from the &#x60;current&#x60;, &#x60;next&#x60;, and &#x60;previous&#x60; keys.  This parameter exists in alpha.
+// The page to request. Acceptable values to use here are in the &#x60;current&#x60;, &#x60;next&#x60;, and &#x60;previous&#x60; keys.  This parameter exists in alpha.
 func (r ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest) Cursor(
 	cursor string,
 ) ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest {
