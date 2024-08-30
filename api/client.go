@@ -71,6 +71,8 @@ type APIClient struct {
 
 	EventsAPI *EventsAPIService
 
+	FiltersAPI *FiltersAPIService
+
 	FunctionsAPI *FunctionsAPIService
 
 	IAMGroupsAPI *IAMGroupsAPIService
@@ -131,6 +133,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.DestinationsAPI = (*DestinationsAPIService)(&c.common)
 	c.EdgeFunctionsAPI = (*EdgeFunctionsAPIService)(&c.common)
 	c.EventsAPI = (*EventsAPIService)(&c.common)
+	c.FiltersAPI = (*FiltersAPIService)(&c.common)
 	c.FunctionsAPI = (*FunctionsAPIService)(&c.common)
 	c.IAMGroupsAPI = (*IAMGroupsAPIService)(&c.common)
 	c.IAMRolesAPI = (*IAMRolesAPIService)(&c.common)
