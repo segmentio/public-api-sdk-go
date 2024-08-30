@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 53.2.1
+API version: 53.2.0
 Contact: friends@segment.com
 */
 
@@ -898,7 +898,7 @@ func (r ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest) Count(
 	return r
 }
 
-// The page to request. Acceptable values to use here are in the &#x60;current&#x60;, &#x60;next&#x60;, and &#x60;previous&#x60; keys.  This parameter exists in alpha.
+// The page to request. Acceptable values to use are from the &#x60;current&#x60;, &#x60;next&#x60;, and &#x60;previous&#x60; keys.  This parameter exists in alpha.
 func (r ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest) Cursor(
 	cursor string,
 ) ApiListReverseETLSyncStatusesFromModelAndSubscriptionIdRequest {

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 53.2.1
+API version: 53.2.0
 Contact: friends@segment.com
 */
 
@@ -39,7 +39,7 @@ type DestinationSubscription struct {
 	// The unique identifier for the linked ReverseETLModel, if this part of a Reverse ETL connection.
 	ModelId *string `json:"modelId,omitempty"`
 	// The schedule for the Reverse ETL subscription.
-	ReverseETLSchedule interface{} `json:"reverseETLSchedule,omitempty"`
+	ReverseETLSchedule map[string]interface{} `json:"reverseETLSchedule,omitempty"`
 }
 
 // NewDestinationSubscription instantiates a new DestinationSubscription object
@@ -301,9 +301,9 @@ func (o *DestinationSubscription) SetModelId(v string) {
 }
 
 // GetReverseETLSchedule returns the ReverseETLSchedule field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *DestinationSubscription) GetReverseETLSchedule() interface{} {
+func (o *DestinationSubscription) GetReverseETLSchedule() map[string]interface{} {
 	if o == nil {
-		var ret interface{}
+		var ret map[string]interface{}
 		return ret
 	}
 	return o.ReverseETLSchedule
@@ -312,11 +312,11 @@ func (o *DestinationSubscription) GetReverseETLSchedule() interface{} {
 // GetReverseETLScheduleOk returns a tuple with the ReverseETLSchedule field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *DestinationSubscription) GetReverseETLScheduleOk() (*interface{}, bool) {
+func (o *DestinationSubscription) GetReverseETLScheduleOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.ReverseETLSchedule) {
-		return nil, false
+		return map[string]interface{}{}, false
 	}
-	return &o.ReverseETLSchedule, true
+	return o.ReverseETLSchedule, true
 }
 
 // HasReverseETLSchedule returns a boolean if a field has been set.
@@ -328,8 +328,8 @@ func (o *DestinationSubscription) HasReverseETLSchedule() bool {
 	return false
 }
 
-// SetReverseETLSchedule gets a reference to the given interface{} and assigns it to the ReverseETLSchedule field.
-func (o *DestinationSubscription) SetReverseETLSchedule(v interface{}) {
+// SetReverseETLSchedule gets a reference to the given map[string]interface{} and assigns it to the ReverseETLSchedule field.
+func (o *DestinationSubscription) SetReverseETLSchedule(v map[string]interface{}) {
 	o.ReverseETLSchedule = v
 }
 
