@@ -497,7 +497,7 @@ type ApiListFiltersByIntegrationIdRequest struct {
 	ApiService    *FiltersAPIService
 	integrationId string
 	productArea   *string
-	pagination    *PaginationInput
+	pagination    *ListFiltersPaginationInput
 }
 
 // The product area of the filter, which should be spaces (endpoint table should be able to determine the resource)  This parameter exists in alpha.
@@ -510,7 +510,7 @@ func (r ApiListFiltersByIntegrationIdRequest) ProductArea(
 
 // Pagination parameters.  This parameter exists in alpha.
 func (r ApiListFiltersByIntegrationIdRequest) Pagination(
-	pagination PaginationInput,
+	pagination ListFiltersPaginationInput,
 ) ApiListFiltersByIntegrationIdRequest {
 	r.pagination = &pagination
 	return r

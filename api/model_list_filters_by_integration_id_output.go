@@ -21,8 +21,8 @@ var _ MappedNullable = &ListFiltersByIntegrationIdOutput{}
 // ListFiltersByIntegrationIdOutput Output for ListFiltersByIntegrationId
 type ListFiltersByIntegrationIdOutput struct {
 	// Filter output.
-	Filters    []Filter          `json:"filters,omitempty"`
-	Pagination *PaginationOutput `json:"pagination,omitempty"`
+	Filters    []Filter                     `json:"filters,omitempty"`
+	Pagination *ListFiltersPaginationOutput `json:"pagination,omitempty"`
 }
 
 // NewListFiltersByIntegrationIdOutput instantiates a new ListFiltersByIntegrationIdOutput object
@@ -75,9 +75,9 @@ func (o *ListFiltersByIntegrationIdOutput) SetFilters(v []Filter) {
 }
 
 // GetPagination returns the Pagination field value if set, zero value otherwise.
-func (o *ListFiltersByIntegrationIdOutput) GetPagination() PaginationOutput {
+func (o *ListFiltersByIntegrationIdOutput) GetPagination() ListFiltersPaginationOutput {
 	if o == nil || IsNil(o.Pagination) {
-		var ret PaginationOutput
+		var ret ListFiltersPaginationOutput
 		return ret
 	}
 	return *o.Pagination
@@ -85,7 +85,7 @@ func (o *ListFiltersByIntegrationIdOutput) GetPagination() PaginationOutput {
 
 // GetPaginationOk returns a tuple with the Pagination field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListFiltersByIntegrationIdOutput) GetPaginationOk() (*PaginationOutput, bool) {
+func (o *ListFiltersByIntegrationIdOutput) GetPaginationOk() (*ListFiltersPaginationOutput, bool) {
 	if o == nil || IsNil(o.Pagination) {
 		return nil, false
 	}
@@ -101,8 +101,8 @@ func (o *ListFiltersByIntegrationIdOutput) HasPagination() bool {
 	return false
 }
 
-// SetPagination gets a reference to the given PaginationOutput and assigns it to the Pagination field.
-func (o *ListFiltersByIntegrationIdOutput) SetPagination(v PaginationOutput) {
+// SetPagination gets a reference to the given ListFiltersPaginationOutput and assigns it to the Pagination field.
+func (o *ListFiltersByIntegrationIdOutput) SetPagination(v ListFiltersPaginationOutput) {
 	o.Pagination = &v
 }
 

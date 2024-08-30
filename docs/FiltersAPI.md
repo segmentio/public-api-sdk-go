@@ -269,7 +269,7 @@ import (
 func main() {
     integrationId := "<id>" // string | 
     productArea := "spaces" // string | The product area of the filter, which should be spaces (endpoint table should be able to determine the resource)  This parameter exists in alpha.
-    pagination := *api.NewPaginationInput(10) // PaginationInput | Pagination parameters.  This parameter exists in alpha. (optional)
+    pagination := *api.NewListFiltersPaginationInput(float32(123)) // ListFiltersPaginationInput | Pagination parameters.  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -306,7 +306,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **productArea** | **string** | The product area of the filter, which should be spaces (endpoint table should be able to determine the resource)  This parameter exists in alpha. | 
- **pagination** | [**PaginationInput**](PaginationInput.md) | Pagination parameters.  This parameter exists in alpha. | 
+ **pagination** | [**ListFiltersPaginationInput**](ListFiltersPaginationInput.md) | Pagination parameters.  This parameter exists in alpha. | 
 
 ### Return type
 
