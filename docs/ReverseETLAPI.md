@@ -424,7 +424,7 @@ func main() {
     modelId := "modelId" // string | 
     subscriptionId := "subscriptionId" // string | 
     count := float32(8.14) // float32 | The number of items to retrieve in a page, between 1 and 100. Default is 10  This parameter exists in alpha. (optional)
-    cursor := "cursor_example" // string | The page to request. Acceptable values to use are from the `current`, `next`, and `previous` keys.  This parameter exists in alpha. (optional)
+    cursor := "cursor_example" // string | The page to request. Acceptable values to use here are in the `current`, `next`, and `previous` keys.  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -465,7 +465,7 @@ Name | Type | Description  | Notes
 
 
  **count** | **float32** | The number of items to retrieve in a page, between 1 and 100. Default is 10  This parameter exists in alpha. | 
- **cursor** | **string** | The page to request. Acceptable values to use are from the &#x60;current&#x60;, &#x60;next&#x60;, and &#x60;previous&#x60; keys.  This parameter exists in alpha. | 
+ **cursor** | **string** | The page to request. Acceptable values to use here are in the &#x60;current&#x60;, &#x60;next&#x60;, and &#x60;previous&#x60; keys.  This parameter exists in alpha. | 
 
 ### Return type
 

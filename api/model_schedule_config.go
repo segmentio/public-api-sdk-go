@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 53.2.0
+API version: 53.2.1
 Contact: friends@segment.com
 */
 
@@ -13,71 +13,67 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
 )
-
-// checks if the ScheduleConfig type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ScheduleConfig{}
 
 // ScheduleConfig Depending on the chosen strategy, configures the schedule for this model.
 type ScheduleConfig struct {
-	// Duration is specified as a string, eg: 15m, 3h25m30s.
-	Interval string `json:"interval"`
+	ReverseEtlPeriodicScheduleConfig     *ReverseEtlPeriodicScheduleConfig
+	ReverseEtlSpecificTimeScheduleConfig *ReverseEtlSpecificTimeScheduleConfig
 }
 
-// NewScheduleConfig instantiates a new ScheduleConfig object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewScheduleConfig(interval string) *ScheduleConfig {
-	this := ScheduleConfig{}
-	this.Interval = interval
-	return &this
-}
-
-// NewScheduleConfigWithDefaults instantiates a new ScheduleConfig object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewScheduleConfigWithDefaults() *ScheduleConfig {
-	this := ScheduleConfig{}
-	return &this
-}
-
-// GetInterval returns the Interval field value
-func (o *ScheduleConfig) GetInterval() string {
-	if o == nil {
-		var ret string
-		return ret
+// Unmarshal JSON data into any of the pointers in the struct
+func (dst *ScheduleConfig) UnmarshalJSON(data []byte) error {
+	var err error
+	// this object is nullable so check if the payload is null or empty string
+	if string(data) == "" || string(data) == "{}" {
+		return nil
 	}
 
-	return o.Interval
-}
-
-// GetIntervalOk returns a tuple with the Interval field value
-// and a boolean to check if the value has been set.
-func (o *ScheduleConfig) GetIntervalOk() (*string, bool) {
-	if o == nil {
-		return nil, false
+	// try to unmarshal JSON data into ReverseEtlPeriodicScheduleConfig
+	err = json.Unmarshal(data, &dst.ReverseEtlPeriodicScheduleConfig)
+	if err == nil {
+		jsonReverseEtlPeriodicScheduleConfig, _ := json.Marshal(
+			dst.ReverseEtlPeriodicScheduleConfig,
+		)
+		if string(jsonReverseEtlPeriodicScheduleConfig) == "{}" { // empty struct
+			dst.ReverseEtlPeriodicScheduleConfig = nil
+		} else {
+			return nil // data stored in dst.ReverseEtlPeriodicScheduleConfig, return on the first match
+		}
+	} else {
+		dst.ReverseEtlPeriodicScheduleConfig = nil
 	}
-	return &o.Interval, true
-}
 
-// SetInterval sets field value
-func (o *ScheduleConfig) SetInterval(v string) {
-	o.Interval = v
-}
-
-func (o ScheduleConfig) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
-	if err != nil {
-		return []byte{}, err
+	// try to unmarshal JSON data into ReverseEtlSpecificTimeScheduleConfig
+	err = json.Unmarshal(data, &dst.ReverseEtlSpecificTimeScheduleConfig)
+	if err == nil {
+		jsonReverseEtlSpecificTimeScheduleConfig, _ := json.Marshal(
+			dst.ReverseEtlSpecificTimeScheduleConfig,
+		)
+		if string(jsonReverseEtlSpecificTimeScheduleConfig) == "{}" { // empty struct
+			dst.ReverseEtlSpecificTimeScheduleConfig = nil
+		} else {
+			return nil // data stored in dst.ReverseEtlSpecificTimeScheduleConfig, return on the first match
+		}
+	} else {
+		dst.ReverseEtlSpecificTimeScheduleConfig = nil
 	}
-	return json.Marshal(toSerialize)
+
+	return fmt.Errorf("data failed to match schemas in anyOf(ScheduleConfig)")
 }
 
-func (o ScheduleConfig) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	toSerialize["interval"] = o.Interval
-	return toSerialize, nil
+// Marshal data from the first non-nil pointers in the struct to JSON
+func (src *ScheduleConfig) MarshalJSON() ([]byte, error) {
+	if src.ReverseEtlPeriodicScheduleConfig != nil {
+		return json.Marshal(&src.ReverseEtlPeriodicScheduleConfig)
+	}
+
+	if src.ReverseEtlSpecificTimeScheduleConfig != nil {
+		return json.Marshal(&src.ReverseEtlSpecificTimeScheduleConfig)
+	}
+
+	return nil, nil // no data in anyOf schemas
 }
 
 type NullableScheduleConfig struct {
