@@ -18,7 +18,7 @@ import (
 // checks if the ListFiltersPaginationInput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListFiltersPaginationInput{}
 
-// ListFiltersPaginationInput Pagination for list filters
+// ListFiltersPaginationInput Pagination for list filters.
 type ListFiltersPaginationInput struct {
 	// The offset.
 	Cursor *float32 `json:"cursor,omitempty"`

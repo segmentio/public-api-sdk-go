@@ -18,7 +18,7 @@ import (
 // checks if the ListFiltersByIntegrationIdOutput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListFiltersByIntegrationIdOutput{}
 
-// ListFiltersByIntegrationIdOutput Output for ListFiltersByIntegrationId
+// ListFiltersByIntegrationIdOutput Output for ListFiltersByIntegrationId.
 type ListFiltersByIntegrationIdOutput struct {
 	// Filter output.
 	Filters    []Filter                     `json:"filters,omitempty"`

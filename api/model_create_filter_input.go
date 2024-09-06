@@ -20,17 +20,19 @@ var _ MappedNullable = &CreateFilterInput{}
 
 // CreateFilterInput Input for CreateFilter.
 type CreateFilterInput struct {
-	// Whether the filter is enabled
+	// The integration id of the resource.
+	IntegrationId string `json:"integrationId"`
+	// Whether the filter is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
-	// Whether the event is dropped
+	// Whether the event is dropped.
 	Drop *bool `json:"drop,omitempty"`
-	// The name of the filter
+	// The name of the filter.
 	Name string `json:"name"`
-	// The description of the filter
+	// The description of the filter.
 	Description *string `json:"description,omitempty"`
-	// The \"if\" statement for a filter
+	// The \"if\" statement for a filter.
 	If string `json:"if"`
-	// The product area of the filter, which should be spaces (endpoint table should be able to determine the resource)
+	// The product area of the filter, which should be spaces (endpoint table should be able to determine the resource).
 	ProductArea *string `json:"productArea,omitempty"`
 	// Describes the properties to be dropped on events that match the \"if\" statement.
 	PropertyDrops []string `json:"propertyDrops,omitempty"`
@@ -42,8 +44,9 @@ type CreateFilterInput struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateFilterInput(name string, if_ string) *CreateFilterInput {
+func NewCreateFilterInput(integrationId string, name string, if_ string) *CreateFilterInput {
 	this := CreateFilterInput{}
+	this.IntegrationId = integrationId
 	this.Name = name
 	this.If = if_
 	return &this
@@ -55,6 +58,30 @@ func NewCreateFilterInput(name string, if_ string) *CreateFilterInput {
 func NewCreateFilterInputWithDefaults() *CreateFilterInput {
 	this := CreateFilterInput{}
 	return &this
+}
+
+// GetIntegrationId returns the IntegrationId field value
+func (o *CreateFilterInput) GetIntegrationId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.IntegrationId
+}
+
+// GetIntegrationIdOk returns a tuple with the IntegrationId field value
+// and a boolean to check if the value has been set.
+func (o *CreateFilterInput) GetIntegrationIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IntegrationId, true
+}
+
+// SetIntegrationId sets field value
+func (o *CreateFilterInput) SetIntegrationId(v string) {
+	o.IntegrationId = v
 }
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
@@ -307,6 +334,7 @@ func (o CreateFilterInput) MarshalJSON() ([]byte, error) {
 
 func (o CreateFilterInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["integrationId"] = o.IntegrationId
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}

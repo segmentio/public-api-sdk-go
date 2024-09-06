@@ -4,17 +4,17 @@ All URIs are relative to *https://api.segmentapis.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateFilter**](FiltersAPI.md#CreateFilter) | **Post** /filters/create/{integrationId} | Create Filter
-[**DeleteFilterById**](FiltersAPI.md#DeleteFilterById) | **Delete** /filters/delete/{id} | Delete Filter By Id
-[**GetFilterById**](FiltersAPI.md#GetFilterById) | **Get** /filters/filter/{id} | Get Filter By Id
-[**ListFiltersByIntegrationId**](FiltersAPI.md#ListFiltersByIntegrationId) | **Get** /filters/{integrationId} | List Filters By Integration Id
-[**UpdateFilterById**](FiltersAPI.md#UpdateFilterById) | **Patch** /filters/update/{id} | Update Filter By Id
+[**CreateFilter**](FiltersAPI.md#CreateFilter) | **Post** /filters | Create Filter
+[**DeleteFilterById**](FiltersAPI.md#DeleteFilterById) | **Delete** /filters/{id} | Delete Filter By Id
+[**GetFilterById**](FiltersAPI.md#GetFilterById) | **Get** /filters/{id} | Get Filter By Id
+[**ListFiltersByIntegrationId**](FiltersAPI.md#ListFiltersByIntegrationId) | **Get** /filters | List Filters By Integration Id
+[**UpdateFilterById**](FiltersAPI.md#UpdateFilterById) | **Patch** /filters/{id} | Update Filter By Id
 
 
 
 ## Operation: CreateFilter
 
-> CreateFilter(ctx, integrationId).CreateFilterInput(createFilterInput).Execute()
+> CreateFilter(ctx).CreateFilterInput(createFilterInput).Execute()
 
 Create Filter
 
@@ -33,14 +33,13 @@ import (
 )
 
 func main() {
-    integrationId := "<id>" // string | 
-    createFilterInput := *api.NewCreateFilterInput("Name_example", "If_example") // CreateFilterInput | 
+    createFilterInput := *api.NewCreateFilterInput("IntegrationId_example", "Name_example", "If_example") // CreateFilterInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    r, err := apiClient.FiltersAPI.CreateFilter(ctx, integrationId).CreateFilterInput(createFilterInput).Execute()
+    r, err := apiClient.FiltersAPI.CreateFilter(ctx).CreateFilterInput(createFilterInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FiltersAPI.CreateFilter``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -57,10 +56,6 @@ func main() {
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**integrationId** | **string** |  | 
 
 ### Other Parameters
 
@@ -69,7 +64,6 @@ Other parameters are passed through a pointer to a apiCreateFilterRequest struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
  **createFilterInput** | [**CreateFilterInput**](CreateFilterInput.md) |  | 
 
 ### Return type
@@ -112,7 +106,7 @@ import (
 
 func main() {
     id := "<id>" // string | 
-    productArea := "spaces" // string | The product area of the filter  This parameter exists in alpha.
+    productArea := "spaces" // string | The product area of the filter.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -148,7 +142,7 @@ Other parameters are passed through a pointer to a apiDeleteFilterByIdRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **productArea** | **string** | The product area of the filter  This parameter exists in alpha. | 
+ **productArea** | **string** | The product area of the filter.  This parameter exists in alpha. | 
 
 ### Return type
 
@@ -190,7 +184,7 @@ import (
 
 func main() {
     id := "<id>" // string | 
-    productArea := "spaces" // string | The product area of the filter, which should be spaces (endpoint table should be able to determine the resource)  This parameter exists in alpha.
+    productArea := "spaces" // string | The product area of the filter, which should be spaces (endpoint table should be able to determine the resource).  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -226,7 +220,7 @@ Other parameters are passed through a pointer to a apiGetFilterByIdRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **productArea** | **string** | The product area of the filter, which should be spaces (endpoint table should be able to determine the resource)  This parameter exists in alpha. | 
+ **productArea** | **string** | The product area of the filter, which should be spaces (endpoint table should be able to determine the resource).  This parameter exists in alpha. | 
 
 ### Return type
 
@@ -248,7 +242,7 @@ Name | Type | Description  | Notes
 
 ## Operation: ListFiltersByIntegrationId
 
-> ListFiltersByIntegrationId(ctx, integrationId).ProductArea(productArea).Pagination(pagination).Execute()
+> ListFiltersByIntegrationId(ctx).IntegrationId(integrationId).ProductArea(productArea).Pagination(pagination).Execute()
 
 List Filters By Integration Id
 
@@ -267,15 +261,15 @@ import (
 )
 
 func main() {
-    integrationId := "<id>" // string | 
-    productArea := "spaces" // string | The product area of the filter, which should be spaces (endpoint table should be able to determine the resource)  This parameter exists in alpha.
+    integrationId := "<id>" // string | The integration id used to fetch filters.  This parameter exists in alpha.
+    productArea := "spaces" // string | The product area of the filter, which should be spaces (endpoint table should be able to determine the resource).  This parameter exists in alpha.
     pagination := *api.NewListFiltersPaginationInput(float32(123)) // ListFiltersPaginationInput | Pagination parameters.  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    r, err := apiClient.FiltersAPI.ListFiltersByIntegrationId(ctx, integrationId).ProductArea(productArea).Pagination(pagination).Execute()
+    r, err := apiClient.FiltersAPI.ListFiltersByIntegrationId(ctx).IntegrationId(integrationId).ProductArea(productArea).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FiltersAPI.ListFiltersByIntegrationId``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -292,10 +286,6 @@ func main() {
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**integrationId** | **string** |  | 
 
 ### Other Parameters
 
@@ -304,8 +294,8 @@ Other parameters are passed through a pointer to a apiListFiltersByIntegrationId
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **productArea** | **string** | The product area of the filter, which should be spaces (endpoint table should be able to determine the resource)  This parameter exists in alpha. | 
+ **integrationId** | **string** | The integration id used to fetch filters.  This parameter exists in alpha. | 
+ **productArea** | **string** | The product area of the filter, which should be spaces (endpoint table should be able to determine the resource).  This parameter exists in alpha. | 
  **pagination** | [**ListFiltersPaginationInput**](ListFiltersPaginationInput.md) | Pagination parameters.  This parameter exists in alpha. | 
 
 ### Return type

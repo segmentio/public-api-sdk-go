@@ -26,7 +26,6 @@ type FiltersAPIService service
 type ApiCreateFilterRequest struct {
 	ctx               context.Context
 	ApiService        *FiltersAPIService
-	integrationId     string
 	createFilterInput *CreateFilterInput
 }
 
@@ -49,17 +48,12 @@ Creates a filter.
 • When called, this endpoint may generate the `Filter Created` event in the [audit trail](/tag/Audit-Trail).
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param integrationId
 	@return ApiCreateFilterRequest
 */
-func (a *FiltersAPIService) CreateFilter(
-	ctx context.Context,
-	integrationId string,
-) ApiCreateFilterRequest {
+func (a *FiltersAPIService) CreateFilter(ctx context.Context) ApiCreateFilterRequest {
 	return ApiCreateFilterRequest{
-		ApiService:    a,
-		ctx:           ctx,
-		integrationId: integrationId,
+		ApiService: a,
+		ctx:        ctx,
 	}
 }
 
@@ -76,13 +70,7 @@ func (a *FiltersAPIService) CreateFilterExecute(r ApiCreateFilterRequest) (*http
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/filters/create/{integrationId}"
-	localVarPath = strings.Replace(
-		localVarPath,
-		"{"+"integrationId"+"}",
-		url.PathEscape(parameterValueToString(r.integrationId, "integrationId")),
-		-1,
-	)
+	localVarPath := localBasePath + "/filters"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -186,7 +174,7 @@ type ApiDeleteFilterByIdRequest struct {
 	productArea *string
 }
 
-// The product area of the filter  This parameter exists in alpha.
+// The product area of the filter.  This parameter exists in alpha.
 func (r ApiDeleteFilterByIdRequest) ProductArea(productArea string) ApiDeleteFilterByIdRequest {
 	r.productArea = &productArea
 	return r
@@ -236,7 +224,7 @@ func (a *FiltersAPIService) DeleteFilterByIdExecute(
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/filters/delete/{id}"
+	localVarPath := localBasePath + "/filters/{id}"
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"id"+"}",
@@ -345,7 +333,7 @@ type ApiGetFilterByIdRequest struct {
 	productArea *string
 }
 
-// The product area of the filter, which should be spaces (endpoint table should be able to determine the resource)  This parameter exists in alpha.
+// The product area of the filter, which should be spaces (endpoint table should be able to determine the resource).  This parameter exists in alpha.
 func (r ApiGetFilterByIdRequest) ProductArea(productArea string) ApiGetFilterByIdRequest {
 	r.productArea = &productArea
 	return r
@@ -390,7 +378,7 @@ func (a *FiltersAPIService) GetFilterByIdExecute(
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/filters/filter/{id}"
+	localVarPath := localBasePath + "/filters/{id}"
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"id"+"}",
@@ -495,12 +483,20 @@ func (a *FiltersAPIService) GetFilterByIdExecute(
 type ApiListFiltersByIntegrationIdRequest struct {
 	ctx           context.Context
 	ApiService    *FiltersAPIService
-	integrationId string
+	integrationId *string
 	productArea   *string
 	pagination    *ListFiltersPaginationInput
 }
 
-// The product area of the filter, which should be spaces (endpoint table should be able to determine the resource)  This parameter exists in alpha.
+// The integration id used to fetch filters.  This parameter exists in alpha.
+func (r ApiListFiltersByIntegrationIdRequest) IntegrationId(
+	integrationId string,
+) ApiListFiltersByIntegrationIdRequest {
+	r.integrationId = &integrationId
+	return r
+}
+
+// The product area of the filter, which should be spaces (endpoint table should be able to determine the resource).  This parameter exists in alpha.
 func (r ApiListFiltersByIntegrationIdRequest) ProductArea(
 	productArea string,
 ) ApiListFiltersByIntegrationIdRequest {
@@ -526,17 +522,14 @@ ListFiltersByIntegrationId List Filters By Integration Id
 Lists filters by integration id.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param integrationId
 	@return ApiListFiltersByIntegrationIdRequest
 */
 func (a *FiltersAPIService) ListFiltersByIntegrationId(
 	ctx context.Context,
-	integrationId string,
 ) ApiListFiltersByIntegrationIdRequest {
 	return ApiListFiltersByIntegrationIdRequest{
-		ApiService:    a,
-		ctx:           ctx,
-		integrationId: integrationId,
+		ApiService: a,
+		ctx:        ctx,
 	}
 }
 
@@ -558,21 +551,19 @@ func (a *FiltersAPIService) ListFiltersByIntegrationIdExecute(
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/filters/{integrationId}"
-	localVarPath = strings.Replace(
-		localVarPath,
-		"{"+"integrationId"+"}",
-		url.PathEscape(parameterValueToString(r.integrationId, "integrationId")),
-		-1,
-	)
+	localVarPath := localBasePath + "/filters"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.integrationId == nil {
+		return nil, reportError("integrationId is required and must be specified")
+	}
 	if r.productArea == nil {
 		return nil, reportError("productArea is required and must be specified")
 	}
 
+	parameterAddToHeaderOrQuery(localVarQueryParams, "integrationId", r.integrationId, "")
 	parameterAddToHeaderOrQuery(localVarQueryParams, "productArea", r.productArea, "")
 	if r.pagination != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
@@ -721,7 +712,7 @@ func (a *FiltersAPIService) UpdateFilterByIdExecute(
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/filters/update/{id}"
+	localVarPath := localBasePath + "/filters/{id}"
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"id"+"}",

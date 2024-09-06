@@ -18,7 +18,7 @@ import (
 // checks if the ListFiltersPaginationOutput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListFiltersPaginationOutput{}
 
-// ListFiltersPaginationOutput Pagination for list filters
+// ListFiltersPaginationOutput Pagination for list filters.
 type ListFiltersPaginationOutput struct {
 	// Current.
 	Current *float32 `json:"current,omitempty"`

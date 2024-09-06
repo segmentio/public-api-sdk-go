@@ -18,7 +18,7 @@ import (
 // checks if the UpdateFilterByIdOutput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateFilterByIdOutput{}
 
-// UpdateFilterByIdOutput Output for UpdateFilterById
+// UpdateFilterByIdOutput Output for UpdateFilterById.
 type UpdateFilterByIdOutput struct {
 	Filter Filter `json:"filter"`
 }

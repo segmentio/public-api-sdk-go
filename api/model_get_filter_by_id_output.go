@@ -18,7 +18,7 @@ import (
 // checks if the GetFilterByIdOutput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetFilterByIdOutput{}
 
-// GetFilterByIdOutput Output for GetFilterById
+// GetFilterByIdOutput Output for GetFilterById.
 type GetFilterByIdOutput struct {
 	Filter Filter `json:"filter"`
 }

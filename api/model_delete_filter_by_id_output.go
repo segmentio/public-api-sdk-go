@@ -18,7 +18,7 @@ import (
 // checks if the DeleteFilterByIdOutput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DeleteFilterByIdOutput{}
 
-// DeleteFilterByIdOutput Output for DeleteFilterById
+// DeleteFilterByIdOutput Output for DeleteFilterById.
 type DeleteFilterByIdOutput struct {
 	// Filter deleted by filter id.
 	Deleted bool `json:"deleted"`

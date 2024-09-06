@@ -18,21 +18,21 @@ import (
 // checks if the UpdateFilterByIdInput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateFilterByIdInput{}
 
-// UpdateFilterByIdInput Input for UpdateFilterById
+// UpdateFilterByIdInput Input for UpdateFilterById.
 type UpdateFilterByIdInput struct {
-	// The integration id of the resource
+	// The integration id of the resource.
 	IntegrationId string `json:"integrationId"`
-	// Whether the filter is enabled
+	// Whether the filter is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
-	// Whether the event is dropped
+	// Whether the event is dropped.
 	Drop *bool `json:"drop,omitempty"`
-	// The name of the filter
+	// The name of the filter.
 	Name string `json:"name"`
-	// The description of the filter
+	// The description of the filter.
 	Description *string `json:"description,omitempty"`
-	// The \"if\" statement for a filter
+	// The \"if\" statement for a filter.
 	If string `json:"if"`
-	// The product area of the filter, which should be spaces (endpoint table should be able to determine the resource)
+	// The product area of the filter, which should be spaces (endpoint table should be able to determine the resource).
 	ProductArea *string `json:"productArea,omitempty"`
 	// Describes the properties to be dropped on events that match the \"if\" statement.
 	PropertyDrops []string `json:"propertyDrops,omitempty"`
