@@ -12,6 +12,7 @@ Contact: friends@segment.com
 package api
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -25,8 +26,14 @@ type ReverseEtlScheduleConfig struct {
 // Unmarshal JSON data into any of the pointers in the struct
 func (dst *ReverseEtlScheduleConfig) UnmarshalJSON(data []byte) error {
 	var err error
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+
 	// try to unmarshal JSON data into ReverseEtlPeriodicScheduleConfig
-	err = json.Unmarshal(data, &dst.ReverseEtlPeriodicScheduleConfig)
+	decoder = json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&dst.ReverseEtlPeriodicScheduleConfig)
 	if err == nil {
 		jsonReverseEtlPeriodicScheduleConfig, _ := json.Marshal(
 			dst.ReverseEtlPeriodicScheduleConfig,
@@ -41,7 +48,9 @@ func (dst *ReverseEtlScheduleConfig) UnmarshalJSON(data []byte) error {
 	}
 
 	// try to unmarshal JSON data into ReverseEtlSpecificTimeScheduleConfig
-	err = json.Unmarshal(data, &dst.ReverseEtlSpecificTimeScheduleConfig)
+	decoder = json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&dst.ReverseEtlSpecificTimeScheduleConfig)
 	if err == nil {
 		jsonReverseEtlSpecificTimeScheduleConfig, _ := json.Marshal(
 			dst.ReverseEtlSpecificTimeScheduleConfig,
