@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 53.2.0
+API version: 54.0.0
 Contact: friends@segment.com
 */
 
@@ -20,14 +20,14 @@ var _ MappedNullable = &GetFunctionV1Output{}
 
 // GetFunctionV1Output Gets a single Function.
 type GetFunctionV1Output struct {
-	Function NullableFunction `json:"function"`
+	Function NullableFunctionV1 `json:"function"`
 }
 
 // NewGetFunctionV1Output instantiates a new GetFunctionV1Output object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetFunctionV1Output(function NullableFunction) *GetFunctionV1Output {
+func NewGetFunctionV1Output(function NullableFunctionV1) *GetFunctionV1Output {
 	this := GetFunctionV1Output{}
 	this.Function = function
 	return &this
@@ -42,10 +42,10 @@ func NewGetFunctionV1OutputWithDefaults() *GetFunctionV1Output {
 }
 
 // GetFunction returns the Function field value
-// If the value is explicit nil, the zero value for Function will be returned
-func (o *GetFunctionV1Output) GetFunction() Function {
+// If the value is explicit nil, the zero value for FunctionV1 will be returned
+func (o *GetFunctionV1Output) GetFunction() FunctionV1 {
 	if o == nil || o.Function.Get() == nil {
-		var ret Function
+		var ret FunctionV1
 		return ret
 	}
 
@@ -55,7 +55,7 @@ func (o *GetFunctionV1Output) GetFunction() Function {
 // GetFunctionOk returns a tuple with the Function field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetFunctionV1Output) GetFunctionOk() (*Function, bool) {
+func (o *GetFunctionV1Output) GetFunctionOk() (*FunctionV1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -63,7 +63,7 @@ func (o *GetFunctionV1Output) GetFunctionOk() (*Function, bool) {
 }
 
 // SetFunction sets field value
-func (o *GetFunctionV1Output) SetFunction(v Function) {
+func (o *GetFunctionV1Output) SetFunction(v FunctionV1) {
 	o.Function.Set(&v)
 }
 
