@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 54.0.0
+API version: 54.1.0
 Contact: friends@segment.com
 */
 
@@ -28,6 +28,9 @@ type DestinationSubscriptionUpdateInput struct {
 	Enabled *bool `json:"enabled,omitempty"`
 	// Represents settings used to configure an action subscription.
 	Settings map[string]interface{} `json:"settings,omitempty"`
+	// (Reverse ETL only) The reverse ETL model to attach this subscription to.
+	ReverseETLModelId  *string                       `json:"reverseETLModelId,omitempty"`
+	ReverseETLSchedule *ReverseEtlScheduleDefinition `json:"reverseETLSchedule,omitempty"`
 }
 
 // NewDestinationSubscriptionUpdateInput instantiates a new DestinationSubscriptionUpdateInput object
@@ -175,6 +178,70 @@ func (o *DestinationSubscriptionUpdateInput) SetSettings(v map[string]interface{
 	o.Settings = v
 }
 
+// GetReverseETLModelId returns the ReverseETLModelId field value if set, zero value otherwise.
+func (o *DestinationSubscriptionUpdateInput) GetReverseETLModelId() string {
+	if o == nil || IsNil(o.ReverseETLModelId) {
+		var ret string
+		return ret
+	}
+	return *o.ReverseETLModelId
+}
+
+// GetReverseETLModelIdOk returns a tuple with the ReverseETLModelId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DestinationSubscriptionUpdateInput) GetReverseETLModelIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ReverseETLModelId) {
+		return nil, false
+	}
+	return o.ReverseETLModelId, true
+}
+
+// HasReverseETLModelId returns a boolean if a field has been set.
+func (o *DestinationSubscriptionUpdateInput) HasReverseETLModelId() bool {
+	if o != nil && !IsNil(o.ReverseETLModelId) {
+		return true
+	}
+
+	return false
+}
+
+// SetReverseETLModelId gets a reference to the given string and assigns it to the ReverseETLModelId field.
+func (o *DestinationSubscriptionUpdateInput) SetReverseETLModelId(v string) {
+	o.ReverseETLModelId = &v
+}
+
+// GetReverseETLSchedule returns the ReverseETLSchedule field value if set, zero value otherwise.
+func (o *DestinationSubscriptionUpdateInput) GetReverseETLSchedule() ReverseEtlScheduleDefinition {
+	if o == nil || IsNil(o.ReverseETLSchedule) {
+		var ret ReverseEtlScheduleDefinition
+		return ret
+	}
+	return *o.ReverseETLSchedule
+}
+
+// GetReverseETLScheduleOk returns a tuple with the ReverseETLSchedule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DestinationSubscriptionUpdateInput) GetReverseETLScheduleOk() (*ReverseEtlScheduleDefinition, bool) {
+	if o == nil || IsNil(o.ReverseETLSchedule) {
+		return nil, false
+	}
+	return o.ReverseETLSchedule, true
+}
+
+// HasReverseETLSchedule returns a boolean if a field has been set.
+func (o *DestinationSubscriptionUpdateInput) HasReverseETLSchedule() bool {
+	if o != nil && !IsNil(o.ReverseETLSchedule) {
+		return true
+	}
+
+	return false
+}
+
+// SetReverseETLSchedule gets a reference to the given ReverseEtlScheduleDefinition and assigns it to the ReverseETLSchedule field.
+func (o *DestinationSubscriptionUpdateInput) SetReverseETLSchedule(v ReverseEtlScheduleDefinition) {
+	o.ReverseETLSchedule = &v
+}
+
 func (o DestinationSubscriptionUpdateInput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -196,6 +263,12 @@ func (o DestinationSubscriptionUpdateInput) ToMap() (map[string]interface{}, err
 	}
 	if !IsNil(o.Settings) {
 		toSerialize["settings"] = o.Settings
+	}
+	if !IsNil(o.ReverseETLModelId) {
+		toSerialize["reverseETLModelId"] = o.ReverseETLModelId
+	}
+	if !IsNil(o.ReverseETLSchedule) {
+		toSerialize["reverseETLSchedule"] = o.ReverseETLSchedule
 	}
 	return toSerialize, nil
 }
