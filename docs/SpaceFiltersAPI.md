@@ -1,14 +1,14 @@
-# \FiltersAPI
+# \SpaceFiltersAPI
 
 All URIs are relative to *https://api.segmentapis.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateFilter**](FiltersAPI.md#CreateFilter) | **Post** /filters | Create Filter
-[**DeleteFilterById**](FiltersAPI.md#DeleteFilterById) | **Delete** /filters/{id} | Delete Filter By Id
-[**GetFilterById**](FiltersAPI.md#GetFilterById) | **Get** /filters/{id} | Get Filter By Id
-[**ListFiltersByIntegrationId**](FiltersAPI.md#ListFiltersByIntegrationId) | **Get** /filters | List Filters By Integration Id
-[**UpdateFilterById**](FiltersAPI.md#UpdateFilterById) | **Patch** /filters/{id} | Update Filter By Id
+[**CreateFilter**](SpaceFiltersAPI.md#CreateFilter) | **Post** /filters | Create Filter
+[**DeleteFilterById**](SpaceFiltersAPI.md#DeleteFilterById) | **Delete** /filters/{id} | Delete Filter By Id
+[**GetFilterById**](SpaceFiltersAPI.md#GetFilterById) | **Get** /filters/{id} | Get Filter By Id
+[**ListFiltersByIntegrationId**](SpaceFiltersAPI.md#ListFiltersByIntegrationId) | **Get** /filters | List Filters By Integration Id
+[**UpdateFilterById**](SpaceFiltersAPI.md#UpdateFilterById) | **Patch** /filters/{id} | Update Filter By Id
 
 
 
@@ -39,9 +39,9 @@ func main() {
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FiltersAPI.CreateFilter(ctx).CreateFilterInput(createFilterInput).Execute()
+    resp, r, err := apiClient.SpaceFiltersAPI.CreateFilter(ctx).CreateFilterInput(createFilterInput).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FiltersAPI.CreateFilter``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SpaceFiltersAPI.CreateFilter``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -51,7 +51,7 @@ func main() {
         }
     }
     // response from `CreateFilter`: CreateFilter200Response
-    fmt.Fprintf(os.Stdout, "Response from `FiltersAPI.CreateFilter`: %v\n", resp.GetData())
+    fmt.Fprintf(os.Stdout, "Response from `SpaceFiltersAPI.CreateFilter`: %v\n", resp.GetData())
 }
 ```
 
@@ -113,9 +113,9 @@ func main() {
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FiltersAPI.DeleteFilterById(ctx, id).Execute()
+    resp, r, err := apiClient.SpaceFiltersAPI.DeleteFilterById(ctx, id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FiltersAPI.DeleteFilterById``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SpaceFiltersAPI.DeleteFilterById``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -125,7 +125,7 @@ func main() {
         }
     }
     // response from `DeleteFilterById`: DeleteFilterById200Response
-    fmt.Fprintf(os.Stdout, "Response from `FiltersAPI.DeleteFilterById`: %v\n", resp.GetData())
+    fmt.Fprintf(os.Stdout, "Response from `SpaceFiltersAPI.DeleteFilterById`: %v\n", resp.GetData())
 }
 ```
 
@@ -191,9 +191,9 @@ func main() {
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FiltersAPI.GetFilterById(ctx, id).Execute()
+    resp, r, err := apiClient.SpaceFiltersAPI.GetFilterById(ctx, id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FiltersAPI.GetFilterById``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SpaceFiltersAPI.GetFilterById``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -203,7 +203,7 @@ func main() {
         }
     }
     // response from `GetFilterById`: GetFilterById200Response
-    fmt.Fprintf(os.Stdout, "Response from `FiltersAPI.GetFilterById`: %v\n", resp.GetData())
+    fmt.Fprintf(os.Stdout, "Response from `SpaceFiltersAPI.GetFilterById`: %v\n", resp.GetData())
 }
 ```
 
@@ -270,9 +270,9 @@ func main() {
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FiltersAPI.ListFiltersByIntegrationId(ctx).IntegrationId(integrationId).Pagination(pagination).Execute()
+    resp, r, err := apiClient.SpaceFiltersAPI.ListFiltersByIntegrationId(ctx).IntegrationId(integrationId).Pagination(pagination).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FiltersAPI.ListFiltersByIntegrationId``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SpaceFiltersAPI.ListFiltersByIntegrationId``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -282,7 +282,7 @@ func main() {
         }
     }
     // response from `ListFiltersByIntegrationId`: ListFiltersByIntegrationId200Response
-    fmt.Fprintf(os.Stdout, "Response from `FiltersAPI.ListFiltersByIntegrationId`: %v\n", resp.GetData())
+    fmt.Fprintf(os.Stdout, "Response from `SpaceFiltersAPI.ListFiltersByIntegrationId`: %v\n", resp.GetData())
 }
 ```
 
@@ -346,9 +346,9 @@ func main() {
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.FiltersAPI.UpdateFilterById(ctx, id).UpdateFilterByIdInput(updateFilterByIdInput).Execute()
+    resp, r, err := apiClient.SpaceFiltersAPI.UpdateFilterById(ctx, id).UpdateFilterByIdInput(updateFilterByIdInput).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FiltersAPI.UpdateFilterById``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SpaceFiltersAPI.UpdateFilterById``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -358,7 +358,7 @@ func main() {
         }
     }
     // response from `UpdateFilterById`: UpdateFilterById200Response
-    fmt.Fprintf(os.Stdout, "Response from `FiltersAPI.UpdateFilterById`: %v\n", resp.GetData())
+    fmt.Fprintf(os.Stdout, "Response from `SpaceFiltersAPI.UpdateFilterById`: %v\n", resp.GetData())
 }
 ```
 

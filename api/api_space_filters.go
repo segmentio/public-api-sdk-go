@@ -20,12 +20,12 @@ import (
 	"strings"
 )
 
-// FiltersAPIService FiltersAPI service
-type FiltersAPIService service
+// SpaceFiltersAPIService SpaceFiltersAPI service
+type SpaceFiltersAPIService service
 
 type ApiCreateFilterRequest struct {
 	ctx               context.Context
-	ApiService        *FiltersAPIService
+	ApiService        *SpaceFiltersAPIService
 	createFilterInput *CreateFilterInput
 }
 
@@ -47,14 +47,14 @@ Creates a filter.
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
-• In order to successfully call this endpoint, the specified Workspace needs to have the Filters feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Space Filters feature enabled. Please reach out to your customer success manager for more information.
 
 • When called, this endpoint may generate the `Filter Created` event in the [audit trail](/tag/Audit-Trail).
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateFilterRequest
 */
-func (a *FiltersAPIService) CreateFilter(ctx context.Context) ApiCreateFilterRequest {
+func (a *SpaceFiltersAPIService) CreateFilter(ctx context.Context) ApiCreateFilterRequest {
 	return ApiCreateFilterRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -64,7 +64,7 @@ func (a *FiltersAPIService) CreateFilter(ctx context.Context) ApiCreateFilterReq
 // Execute executes the request
 //
 //	@return CreateFilter200Response
-func (a *FiltersAPIService) CreateFilterExecute(
+func (a *SpaceFiltersAPIService) CreateFilterExecute(
 	r ApiCreateFilterRequest,
 ) (*CreateFilter200Response, *http.Response, error) {
 	var (
@@ -74,7 +74,10 @@ func (a *FiltersAPIService) CreateFilterExecute(
 		localVarReturnValue *CreateFilter200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FiltersAPIService.CreateFilter")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"SpaceFiltersAPIService.CreateFilter",
+	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -196,7 +199,7 @@ func (a *FiltersAPIService) CreateFilterExecute(
 
 type ApiDeleteFilterByIdRequest struct {
 	ctx        context.Context
-	ApiService *FiltersAPIService
+	ApiService *SpaceFiltersAPIService
 	id         string
 }
 
@@ -211,7 +214,7 @@ Deletes a filter by id.
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
-• In order to successfully call this endpoint, the specified Workspace needs to have the Filters feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Space Filters feature enabled. Please reach out to your customer success manager for more information.
 
 • When called, this endpoint may generate the `Filter Deleted` event in the [audit trail](/tag/Audit-Trail).
 
@@ -219,7 +222,7 @@ Deletes a filter by id.
 	@param id
 	@return ApiDeleteFilterByIdRequest
 */
-func (a *FiltersAPIService) DeleteFilterById(
+func (a *SpaceFiltersAPIService) DeleteFilterById(
 	ctx context.Context,
 	id string,
 ) ApiDeleteFilterByIdRequest {
@@ -233,7 +236,7 @@ func (a *FiltersAPIService) DeleteFilterById(
 // Execute executes the request
 //
 //	@return DeleteFilterById200Response
-func (a *FiltersAPIService) DeleteFilterByIdExecute(
+func (a *SpaceFiltersAPIService) DeleteFilterByIdExecute(
 	r ApiDeleteFilterByIdRequest,
 ) (*DeleteFilterById200Response, *http.Response, error) {
 	var (
@@ -245,7 +248,7 @@ func (a *FiltersAPIService) DeleteFilterByIdExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FiltersAPIService.DeleteFilterById",
+		"SpaceFiltersAPIService.DeleteFilterById",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -367,7 +370,7 @@ func (a *FiltersAPIService) DeleteFilterByIdExecute(
 
 type ApiGetFilterByIdRequest struct {
 	ctx        context.Context
-	ApiService *FiltersAPIService
+	ApiService *SpaceFiltersAPIService
 	id         string
 }
 
@@ -382,13 +385,16 @@ Gets a filter by id.
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
-• In order to successfully call this endpoint, the specified Workspace needs to have the Filters feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Space Filters feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id
 	@return ApiGetFilterByIdRequest
 */
-func (a *FiltersAPIService) GetFilterById(ctx context.Context, id string) ApiGetFilterByIdRequest {
+func (a *SpaceFiltersAPIService) GetFilterById(
+	ctx context.Context,
+	id string,
+) ApiGetFilterByIdRequest {
 	return ApiGetFilterByIdRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -399,7 +405,7 @@ func (a *FiltersAPIService) GetFilterById(ctx context.Context, id string) ApiGet
 // Execute executes the request
 //
 //	@return GetFilterById200Response
-func (a *FiltersAPIService) GetFilterByIdExecute(
+func (a *SpaceFiltersAPIService) GetFilterByIdExecute(
 	r ApiGetFilterByIdRequest,
 ) (*GetFilterById200Response, *http.Response, error) {
 	var (
@@ -411,7 +417,7 @@ func (a *FiltersAPIService) GetFilterByIdExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FiltersAPIService.GetFilterById",
+		"SpaceFiltersAPIService.GetFilterById",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -533,7 +539,7 @@ func (a *FiltersAPIService) GetFilterByIdExecute(
 
 type ApiListFiltersByIntegrationIdRequest struct {
 	ctx           context.Context
-	ApiService    *FiltersAPIService
+	ApiService    *SpaceFiltersAPIService
 	integrationId *string
 	pagination    *ListFiltersPaginationInput
 }
@@ -565,12 +571,12 @@ Lists filters by Integration id.
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
-• In order to successfully call this endpoint, the specified Workspace needs to have the Filters feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Space Filters feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListFiltersByIntegrationIdRequest
 */
-func (a *FiltersAPIService) ListFiltersByIntegrationId(
+func (a *SpaceFiltersAPIService) ListFiltersByIntegrationId(
 	ctx context.Context,
 ) ApiListFiltersByIntegrationIdRequest {
 	return ApiListFiltersByIntegrationIdRequest{
@@ -582,7 +588,7 @@ func (a *FiltersAPIService) ListFiltersByIntegrationId(
 // Execute executes the request
 //
 //	@return ListFiltersByIntegrationId200Response
-func (a *FiltersAPIService) ListFiltersByIntegrationIdExecute(
+func (a *SpaceFiltersAPIService) ListFiltersByIntegrationIdExecute(
 	r ApiListFiltersByIntegrationIdRequest,
 ) (*ListFiltersByIntegrationId200Response, *http.Response, error) {
 	var (
@@ -594,7 +600,7 @@ func (a *FiltersAPIService) ListFiltersByIntegrationIdExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FiltersAPIService.ListFiltersByIntegrationId",
+		"SpaceFiltersAPIService.ListFiltersByIntegrationId",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -719,7 +725,7 @@ func (a *FiltersAPIService) ListFiltersByIntegrationIdExecute(
 
 type ApiUpdateFilterByIdRequest struct {
 	ctx                   context.Context
-	ApiService            *FiltersAPIService
+	ApiService            *SpaceFiltersAPIService
 	id                    string
 	updateFilterByIdInput *UpdateFilterByIdInput
 }
@@ -742,7 +748,7 @@ Updates a filter by id and replaces the existing filter.
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
-• In order to successfully call this endpoint, the specified Workspace needs to have the Filters feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Space Filters feature enabled. Please reach out to your customer success manager for more information.
 
 • When called, this endpoint may generate the `Filter Updated` event in the [audit trail](/tag/Audit-Trail).
 
@@ -750,7 +756,7 @@ Updates a filter by id and replaces the existing filter.
 	@param id
 	@return ApiUpdateFilterByIdRequest
 */
-func (a *FiltersAPIService) UpdateFilterById(
+func (a *SpaceFiltersAPIService) UpdateFilterById(
 	ctx context.Context,
 	id string,
 ) ApiUpdateFilterByIdRequest {
@@ -764,7 +770,7 @@ func (a *FiltersAPIService) UpdateFilterById(
 // Execute executes the request
 //
 //	@return UpdateFilterById200Response
-func (a *FiltersAPIService) UpdateFilterByIdExecute(
+func (a *SpaceFiltersAPIService) UpdateFilterByIdExecute(
 	r ApiUpdateFilterByIdRequest,
 ) (*UpdateFilterById200Response, *http.Response, error) {
 	var (
@@ -776,7 +782,7 @@ func (a *FiltersAPIService) UpdateFilterByIdExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"FiltersAPIService.UpdateFilterById",
+		"SpaceFiltersAPIService.UpdateFilterById",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}

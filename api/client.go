@@ -71,8 +71,6 @@ type APIClient struct {
 
 	EventsAPI *EventsAPIService
 
-	FiltersAPI *FiltersAPIService
-
 	FunctionsAPI *FunctionsAPIService
 
 	IAMGroupsAPI *IAMGroupsAPIService
@@ -92,6 +90,8 @@ type APIClient struct {
 	SelectiveSyncAPI *SelectiveSyncAPIService
 
 	SourcesAPI *SourcesAPIService
+
+	SpaceFiltersAPI *SpaceFiltersAPIService
 
 	SpacesAPI *SpacesAPIService
 
@@ -133,7 +133,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.DestinationsAPI = (*DestinationsAPIService)(&c.common)
 	c.EdgeFunctionsAPI = (*EdgeFunctionsAPIService)(&c.common)
 	c.EventsAPI = (*EventsAPIService)(&c.common)
-	c.FiltersAPI = (*FiltersAPIService)(&c.common)
 	c.FunctionsAPI = (*FunctionsAPIService)(&c.common)
 	c.IAMGroupsAPI = (*IAMGroupsAPIService)(&c.common)
 	c.IAMRolesAPI = (*IAMRolesAPIService)(&c.common)
@@ -144,6 +143,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ReverseETLAPI = (*ReverseETLAPIService)(&c.common)
 	c.SelectiveSyncAPI = (*SelectiveSyncAPIService)(&c.common)
 	c.SourcesAPI = (*SourcesAPIService)(&c.common)
+	c.SpaceFiltersAPI = (*SpaceFiltersAPIService)(&c.common)
 	c.SpacesAPI = (*SpacesAPIService)(&c.common)
 	c.TestingAPI = (*TestingAPIService)(&c.common)
 	c.TrackingPlansAPI = (*TrackingPlansAPIService)(&c.common)
