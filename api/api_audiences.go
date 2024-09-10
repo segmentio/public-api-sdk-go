@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 54.1.0
+API version: 54.2.0
 Contact: friends@segment.com
 */
 
@@ -51,7 +51,7 @@ Creates Audience.
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
   - When called, this endpoint may generate the `Audience Created` event in the [audit trail](/tag/Audit-Trail).
-    Note: The definition for an Audience created via the API is not editable via the Segment App.
+    Note: The definition for an Audience created using the API is not editable through the Segment App.
 
 The rate limit for this endpoint is 10 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
@@ -788,7 +788,7 @@ UpdateAudienceForSpace Update Audience for Space
 • When called, this endpoint may generate the `Audience Modified` event in the [audit trail](/tag/Audit-Trail).
 
   - Note that when an Audience is updated, the Audience will be locked from future edits until the changes have been incorporated. You can find more information [in the Segment docs](https://segment-docs.netlify.app/docs/engage/audiences/#editing-realtime-audiences-and-traits).
-    Note: The definition for an Audience updated via the API is not editable via the Segment App.
+    Note: The definition for an Audience updated using the API is not editable through the Segment App.
 
 The rate limit for this endpoint is 10 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 

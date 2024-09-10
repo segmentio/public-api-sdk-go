@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 54.1.0
+API version: 54.2.0
 Contact: friends@segment.com
 */
 
@@ -41,7 +41,7 @@ var (
 	queryDescape    = strings.NewReplacer("%5B", "[", "%5D", "]")
 )
 
-// APIClient manages communication with the Segment Public API API v54.1.0
+// APIClient manages communication with the Segment Public API API v54.2.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -70,6 +70,8 @@ type APIClient struct {
 	EdgeFunctionsAPI *EdgeFunctionsAPIService
 
 	EventsAPI *EventsAPIService
+
+	FiltersAPI *FiltersAPIService
 
 	FunctionsAPI *FunctionsAPIService
 
@@ -131,6 +133,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.DestinationsAPI = (*DestinationsAPIService)(&c.common)
 	c.EdgeFunctionsAPI = (*EdgeFunctionsAPIService)(&c.common)
 	c.EventsAPI = (*EventsAPIService)(&c.common)
+	c.FiltersAPI = (*FiltersAPIService)(&c.common)
 	c.FunctionsAPI = (*FunctionsAPIService)(&c.common)
 	c.IAMGroupsAPI = (*IAMGroupsAPIService)(&c.common)
 	c.IAMRolesAPI = (*IAMRolesAPIService)(&c.common)
