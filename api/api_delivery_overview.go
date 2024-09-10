@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 54.1.0
+API version: 54.2.0
 Contact: friends@segment.com
 */
 
@@ -53,7 +53,7 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) DestinationConfigI
 	return r
 }
 
-// The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
+// The ISO8601 formatted timestamp corresponding to the beginning of the requested time frame, inclusive.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) StartTime(
 	startTime string,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -61,7 +61,7 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) StartTime(
 	return r
 }
 
-// The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
+// The ISO8601 formatted timestamp corresponding to the end of the requested time frame, noninclusive.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) EndTime(
 	endTime string,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -77,7 +77,7 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, &#x60;subscriptionId&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and &#x60;spaceId&#x60;.  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;event Name&#x60;, &#x60;event Type&#x60;, &#x60;discard Reason&#x60;, &#x60;app Version&#x60;, &#x60;subscription Id&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and &#x60;spaceId&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -85,7 +85,7 @@ func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, &#x60;subscriptionId&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and/or &#x60;spaceId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;event Name&#x60;, &#x60;event Type&#x60;, &#x60;discard Reason&#x60;, &#x60;app Version&#x60;, &#x60;subscription Id&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and/or &#x60;spaceId&#x60; that can be applied in addition to a &#x60;group By&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressFailedMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewDestinationFilterBy,
 ) ApiGetEgressFailedMetricsFromDeliveryOverviewRequest {
@@ -328,7 +328,7 @@ func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) DestinationConfig
 	return r
 }
 
-// The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
+// The ISO8601 formatted timestamp corresponding to the beginning of the requested time frame, inclusive.  This parameter exists in beta.
 func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) StartTime(
 	startTime string,
 ) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
@@ -336,7 +336,7 @@ func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) StartTime(
 	return r
 }
 
-// The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
+// The ISO8601 formatted timestamp corresponding to the end of the requested time frame, noninclusive.  This parameter exists in beta.
 func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) EndTime(
 	endTime string,
 ) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
@@ -352,7 +352,7 @@ func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, &#x60;subscriptionId&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and &#x60;spaceId&#x60;.  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;event Name&#x60;, &#x60;event Type&#x60;, &#x60;discard Reason&#x60;, &#x60;app Version&#x60;, &#x60;subscription Id&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and &#x60;spaceId&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
@@ -360,7 +360,7 @@ func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, &#x60;subscriptionId&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, or &#x60;spaceId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;. If you would like to view retry attempts for a successful delivery, you can filter &#x60;discardReason&#x60; from &#x60;successes.attempt.1&#x60; through &#x60;successes.attempt.10&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;event Name&#x60;, &#x60;event Type&#x60;, &#x60;discard Reason&#x60;, &#x60;appVersion&#x60;, &#x60;subscription Id&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, or &#x60;spaceId&#x60; that can be applied in addition to a &#x60;group By&#x60;. If you would like to view retry attempts for a successful delivery, you can filter &#x60;discard Reason&#x60; from &#x60;successes.attempt.1&#x60; through &#x60;successes.attempt.10&#x60;.  This parameter exists in beta.
 func (r ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewDestinationFilterBy,
 ) ApiGetEgressSuccessMetricsFromDeliveryOverviewRequest {
@@ -603,7 +603,7 @@ func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Destinati
 	return r
 }
 
-// The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
+// The ISO8601 formatted timestamp corresponding to the beginning of the requested time frame, inclusive.  This parameter exists in beta.
 func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) StartTime(
 	startTime string,
 ) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
@@ -611,7 +611,7 @@ func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) StartTime
 	return r
 }
 
-// The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
+// The ISO8601 formatted timestamp corresponding to the end of the requested time frame, noninclusive.  This parameter exists in beta.
 func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) EndTime(
 	endTime string,
 ) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
@@ -627,7 +627,7 @@ func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Granulari
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, &#x60;subscriptionId&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and &#x60;spaceId&#x60;.  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;event Name&#x60;, &#x60;event Type&#x60;, &#x60;discard Reason&#x60;, &#x60;app Version&#x60;, &#x60;subscription Id&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and &#x60;spaceId&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
@@ -635,7 +635,7 @@ func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, &#x60;appVersion&#x60;, &#x60;subscriptionId&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and/or &#x60;spaceId&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;event Name&#x60;, &#x60;event Type&#x60;, &#x60;discard Reason&#x60;, &#x60;app Version&#x60;, &#x60;subscription Id&#x60;, &#x60;activationId&#x60;, &#x60;audienceId&#x60;, and/or &#x60;spaceId&#x60; that can be applied in addition to a &#x60;group By&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewDestinationFilterBy,
 ) ApiGetFilteredAtDestinationMetricsFromDeliveryOverviewRequest {
@@ -869,7 +869,7 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) SourceId(
 	return r
 }
 
-// The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
+// The ISO8601 formatted timestamp corresponding to the beginning of the requested time frame, inclusive.  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) StartTime(
 	startTime string,
 ) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
@@ -877,7 +877,7 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) StartTime(
 	return r
 }
 
-// The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
+// The ISO8601 formatted timestamp corresponding to the end of the requested time frame, noninclusive.  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) EndTime(
 	endTime string,
 ) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
@@ -893,7 +893,7 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and &#x60;appVersion&#x60;.  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;event Name&#x60;, &#x60;event Type&#x60;, &#x60;discard Reason&#x60;, and &#x60;app Version&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
@@ -901,7 +901,7 @@ func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;event Name&#x60;, &#x60;event Type&#x60;, &#x60;discard Reason&#x60;, and/or &#x60;app Version&#x60; that can be applied in addition to a &#x60;group By&#x60;.  This parameter exists in beta.
 func (r ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewSourceFilterBy,
 ) ApiGetFilteredAtSourceMetricsFromDeliveryOverviewRequest {
@@ -1124,7 +1124,7 @@ func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) SourceId(
 	return r
 }
 
-// The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
+// The ISO8601 formatted timestamp corresponding to the beginning of the requested time frame, inclusive.  This parameter exists in beta.
 func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) StartTime(
 	startTime string,
 ) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
@@ -1132,7 +1132,7 @@ func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) StartTime(
 	return r
 }
 
-// The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
+// The ISO8601 formatted timestamp corresponding to the end of the requested time frame, noninclusive.  This parameter exists in beta.
 func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) EndTime(
 	endTime string,
 ) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
@@ -1148,7 +1148,7 @@ func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60;.  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;event Name&#x60;, &#x60;event Type&#x60;, &#x60;discard Reason&#x60;, and/or &#x60;appVersion&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
@@ -1156,7 +1156,7 @@ func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, &#x60;discardReason&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;event Name&#x60;, &#x60;event Type&#x60;, &#x60;discard Reason&#x60;, and/or &#x60;app Version&#x60; that can be applied in addition to a &#x60;group By&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressFailedMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewSourceFilterBy,
 ) ApiGetIngressFailedMetricsFromDeliveryOverviewRequest {
@@ -1379,7 +1379,7 @@ func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) SourceId(
 	return r
 }
 
-// The ISO8601 formatted timestamp corresponding to the beginning of the requested timeframe, inclusive.  This parameter exists in beta.
+// The ISO8601 formatted timestamp corresponding to the beginning of the requested time frame, inclusive.  This parameter exists in beta.
 func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) StartTime(
 	startTime string,
 ) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
@@ -1387,7 +1387,7 @@ func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) StartTime(
 	return r
 }
 
-// The ISO8601 formatted timestamp corresponding to the end of the requested timeframe, noninclusive.  This parameter exists in beta.
+// The ISO8601 formatted timestamp corresponding to the end of the requested time frame, noninclusive.  This parameter exists in beta.
 func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) EndTime(
 	endTime string,
 ) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
@@ -1403,7 +1403,7 @@ func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) Granularity(
 	return r
 }
 
-// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;eventName&#x60;, &#x60;eventType&#x60;, and/or &#x60;appVersion&#x60;.  This parameter exists in beta.
+// A comma-delimited list of strings representing one or more dimensions to group the result by.  Valid options are: &#x60;event Name&#x60;, &#x60;event Type&#x60;, and/or &#x60;app Version&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 	groupBy []string,
 ) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {
@@ -1411,7 +1411,7 @@ func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) GroupBy(
 	return r
 }
 
-// An optional filter for &#x60;eventName&#x60;, &#x60;eventType&#x60;, and/or &#x60;appVersion&#x60; that can be applied in addition to a &#x60;groupBy&#x60;.  This parameter exists in beta.
+// An optional filter for &#x60;event Name&#x60;, &#x60;event Type&#x60;, and/or &#x60;app Version&#x60; that can be applied in addition to a &#x60;group By&#x60;.  This parameter exists in beta.
 func (r ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest) Filter(
 	filter DeliveryOverviewSuccessfullyReceivedFilterBy,
 ) ApiGetIngressSuccessMetricsFromDeliveryOverviewRequest {

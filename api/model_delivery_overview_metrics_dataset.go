@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 54.1.0
+API version: 54.2.0
 Contact: friends@segment.com
 */
 
@@ -20,17 +20,17 @@ var _ MappedNullable = &DeliveryOverviewMetricsDataset{}
 
 // DeliveryOverviewMetricsDataset Dataset within GetDeliveryOverviewMetricsBetaOutput.
 type DeliveryOverviewMetricsDataset struct {
-	// The name of the event if groupBy[] included 'eventName' in the request.
+	// The name of the event if group By[] included 'event Name' in the request.
 	EventName *string `json:"eventName,omitempty"`
-	// The version of the app if groupBy[] included 'appVersion' in the request.
+	// The version of the app if group By[] included 'app Version' in the request.
 	AppVersion *string `json:"appVersion,omitempty"`
-	// The event type if groupBy[] included 'eventType' in the request.
+	// The event type if group By[] included 'event Type' in the request.
 	EventType *string `json:"eventType,omitempty"`
-	// The discard reason for dropped events if groupBy[] included 'discardReason' in the request.
+	// The discard reason for dropped events if group By[] included 'discard Reason' in the request.
 	DiscardReason *string `json:"discardReason,omitempty"`
-	// Holds the count of all event counts over the timeframe of the series.
+	// Holds the count of all event counts over the time frame of the series.
 	Total float32 `json:"total"`
-	// A list of the event counts broken down by the requested granularity, timeframe, and groupBy options.
+	// A list of the event counts broken down by the requested granularity, time frame, and group By options.
 	Series []DeliveryOverviewMetricsDatapoint `json:"series"`
 	// The number of events successfully delivered upon retry.
 	TotalRetryCount *float32 `json:"totalRetryCount,omitempty"`
