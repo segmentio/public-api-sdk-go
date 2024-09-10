@@ -45,6 +45,10 @@ CreateFilter Create Filter
 
 Creates a filter.
 
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Filters feature enabled. Please reach out to your customer success manager for more information.
+
 • When called, this endpoint may generate the `Filter Created` event in the [audit trail](/tag/Audit-Trail).
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -204,6 +208,10 @@ func (r ApiDeleteFilterByIdRequest) Execute() (*DeleteFilterById200Response, *ht
 DeleteFilterById Delete Filter By Id
 
 Deletes a filter by id.
+
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Filters feature enabled. Please reach out to your customer success manager for more information.
 
 • When called, this endpoint may generate the `Filter Deleted` event in the [audit trail](/tag/Audit-Trail).
 
@@ -371,6 +379,10 @@ func (r ApiGetFilterByIdRequest) Execute() (*GetFilterById200Response, *http.Res
 GetFilterById Get Filter By Id
 
 Gets a filter by id.
+
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Filters feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id
@@ -551,6 +563,10 @@ ListFiltersByIntegrationId List Filters By Integration Id
 
 Lists filters by Integration id.
 
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Filters feature enabled. Please reach out to your customer success manager for more information.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListFiltersByIntegrationIdRequest
 */
@@ -722,7 +738,11 @@ func (r ApiUpdateFilterByIdRequest) Execute() (*UpdateFilterById200Response, *ht
 /*
 UpdateFilterById Update Filter By Id
 
-Updates a filter by id.
+Updates a filter by id and replaces the existing filter.
+
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Filters feature enabled. Please reach out to your customer success manager for more information.
 
 • When called, this endpoint may generate the `Filter Updated` event in the [audit trail](/tag/Audit-Trail).
 
