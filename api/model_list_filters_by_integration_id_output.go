@@ -15,35 +15,35 @@ import (
 	"encoding/json"
 )
 
-// checks if the ListFiltersForSpaceOutput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListFiltersForSpaceOutput{}
+// checks if the ListFiltersByIntegrationIdOutput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListFiltersByIntegrationIdOutput{}
 
-// ListFiltersForSpaceOutput Output for ListFiltersByIntegrationId.
-type ListFiltersForSpaceOutput struct {
+// ListFiltersByIntegrationIdOutput Output for ListFiltersByIntegrationId.
+type ListFiltersByIntegrationIdOutput struct {
 	// Filter output.
 	Filters    []Filter                     `json:"filters,omitempty"`
 	Pagination *ListFiltersPaginationOutput `json:"pagination,omitempty"`
 }
 
-// NewListFiltersForSpaceOutput instantiates a new ListFiltersForSpaceOutput object
+// NewListFiltersByIntegrationIdOutput instantiates a new ListFiltersByIntegrationIdOutput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListFiltersForSpaceOutput() *ListFiltersForSpaceOutput {
-	this := ListFiltersForSpaceOutput{}
+func NewListFiltersByIntegrationIdOutput() *ListFiltersByIntegrationIdOutput {
+	this := ListFiltersByIntegrationIdOutput{}
 	return &this
 }
 
-// NewListFiltersForSpaceOutputWithDefaults instantiates a new ListFiltersForSpaceOutput object
+// NewListFiltersByIntegrationIdOutputWithDefaults instantiates a new ListFiltersByIntegrationIdOutput object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewListFiltersForSpaceOutputWithDefaults() *ListFiltersForSpaceOutput {
-	this := ListFiltersForSpaceOutput{}
+func NewListFiltersByIntegrationIdOutputWithDefaults() *ListFiltersByIntegrationIdOutput {
+	this := ListFiltersByIntegrationIdOutput{}
 	return &this
 }
 
 // GetFilters returns the Filters field value if set, zero value otherwise.
-func (o *ListFiltersForSpaceOutput) GetFilters() []Filter {
+func (o *ListFiltersByIntegrationIdOutput) GetFilters() []Filter {
 	if o == nil || IsNil(o.Filters) {
 		var ret []Filter
 		return ret
@@ -53,7 +53,7 @@ func (o *ListFiltersForSpaceOutput) GetFilters() []Filter {
 
 // GetFiltersOk returns a tuple with the Filters field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListFiltersForSpaceOutput) GetFiltersOk() ([]Filter, bool) {
+func (o *ListFiltersByIntegrationIdOutput) GetFiltersOk() ([]Filter, bool) {
 	if o == nil || IsNil(o.Filters) {
 		return nil, false
 	}
@@ -61,7 +61,7 @@ func (o *ListFiltersForSpaceOutput) GetFiltersOk() ([]Filter, bool) {
 }
 
 // HasFilters returns a boolean if a field has been set.
-func (o *ListFiltersForSpaceOutput) HasFilters() bool {
+func (o *ListFiltersByIntegrationIdOutput) HasFilters() bool {
 	if o != nil && !IsNil(o.Filters) {
 		return true
 	}
@@ -70,12 +70,12 @@ func (o *ListFiltersForSpaceOutput) HasFilters() bool {
 }
 
 // SetFilters gets a reference to the given []Filter and assigns it to the Filters field.
-func (o *ListFiltersForSpaceOutput) SetFilters(v []Filter) {
+func (o *ListFiltersByIntegrationIdOutput) SetFilters(v []Filter) {
 	o.Filters = v
 }
 
 // GetPagination returns the Pagination field value if set, zero value otherwise.
-func (o *ListFiltersForSpaceOutput) GetPagination() ListFiltersPaginationOutput {
+func (o *ListFiltersByIntegrationIdOutput) GetPagination() ListFiltersPaginationOutput {
 	if o == nil || IsNil(o.Pagination) {
 		var ret ListFiltersPaginationOutput
 		return ret
@@ -85,7 +85,7 @@ func (o *ListFiltersForSpaceOutput) GetPagination() ListFiltersPaginationOutput 
 
 // GetPaginationOk returns a tuple with the Pagination field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListFiltersForSpaceOutput) GetPaginationOk() (*ListFiltersPaginationOutput, bool) {
+func (o *ListFiltersByIntegrationIdOutput) GetPaginationOk() (*ListFiltersPaginationOutput, bool) {
 	if o == nil || IsNil(o.Pagination) {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *ListFiltersForSpaceOutput) GetPaginationOk() (*ListFiltersPaginationOut
 }
 
 // HasPagination returns a boolean if a field has been set.
-func (o *ListFiltersForSpaceOutput) HasPagination() bool {
+func (o *ListFiltersByIntegrationIdOutput) HasPagination() bool {
 	if o != nil && !IsNil(o.Pagination) {
 		return true
 	}
@@ -102,11 +102,11 @@ func (o *ListFiltersForSpaceOutput) HasPagination() bool {
 }
 
 // SetPagination gets a reference to the given ListFiltersPaginationOutput and assigns it to the Pagination field.
-func (o *ListFiltersForSpaceOutput) SetPagination(v ListFiltersPaginationOutput) {
+func (o *ListFiltersByIntegrationIdOutput) SetPagination(v ListFiltersPaginationOutput) {
 	o.Pagination = &v
 }
 
-func (o ListFiltersForSpaceOutput) MarshalJSON() ([]byte, error) {
+func (o ListFiltersByIntegrationIdOutput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -114,7 +114,7 @@ func (o ListFiltersForSpaceOutput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ListFiltersForSpaceOutput) ToMap() (map[string]interface{}, error) {
+func (o ListFiltersByIntegrationIdOutput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Filters) {
 		toSerialize["filters"] = o.Filters
@@ -125,40 +125,40 @@ func (o ListFiltersForSpaceOutput) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableListFiltersForSpaceOutput struct {
-	value *ListFiltersForSpaceOutput
+type NullableListFiltersByIntegrationIdOutput struct {
+	value *ListFiltersByIntegrationIdOutput
 	isSet bool
 }
 
-func (v NullableListFiltersForSpaceOutput) Get() *ListFiltersForSpaceOutput {
+func (v NullableListFiltersByIntegrationIdOutput) Get() *ListFiltersByIntegrationIdOutput {
 	return v.value
 }
 
-func (v *NullableListFiltersForSpaceOutput) Set(val *ListFiltersForSpaceOutput) {
+func (v *NullableListFiltersByIntegrationIdOutput) Set(val *ListFiltersByIntegrationIdOutput) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableListFiltersForSpaceOutput) IsSet() bool {
+func (v NullableListFiltersByIntegrationIdOutput) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableListFiltersForSpaceOutput) Unset() {
+func (v *NullableListFiltersByIntegrationIdOutput) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableListFiltersForSpaceOutput(
-	val *ListFiltersForSpaceOutput,
-) *NullableListFiltersForSpaceOutput {
-	return &NullableListFiltersForSpaceOutput{value: val, isSet: true}
+func NewNullableListFiltersByIntegrationIdOutput(
+	val *ListFiltersByIntegrationIdOutput,
+) *NullableListFiltersByIntegrationIdOutput {
+	return &NullableListFiltersByIntegrationIdOutput{value: val, isSet: true}
 }
 
-func (v NullableListFiltersForSpaceOutput) MarshalJSON() ([]byte, error) {
+func (v NullableListFiltersByIntegrationIdOutput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableListFiltersForSpaceOutput) UnmarshalJSON(src []byte) error {
+func (v *NullableListFiltersByIntegrationIdOutput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
