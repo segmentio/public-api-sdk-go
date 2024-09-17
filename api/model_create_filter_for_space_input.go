@@ -15,12 +15,12 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateFilterInput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateFilterInput{}
+// checks if the CreateFilterForSpaceInput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateFilterForSpaceInput{}
 
-// CreateFilterInput Input for CreateFilter.
-type CreateFilterInput struct {
-	// The Integration id of the resource.
+// CreateFilterForSpaceInput Input for CreateFilter.
+type CreateFilterForSpaceInput struct {
+	// The Space id to filer on.
 	IntegrationId string `json:"integrationId"`
 	// Whether the filter is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
@@ -38,28 +38,32 @@ type CreateFilterInput struct {
 	AllowProperties []string `json:"allowProperties,omitempty"`
 }
 
-// NewCreateFilterInput instantiates a new CreateFilterInput object
+// NewCreateFilterForSpaceInput instantiates a new CreateFilterForSpaceInput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateFilterInput(integrationId string, name string, if_ string) *CreateFilterInput {
-	this := CreateFilterInput{}
+func NewCreateFilterForSpaceInput(
+	integrationId string,
+	name string,
+	if_ string,
+) *CreateFilterForSpaceInput {
+	this := CreateFilterForSpaceInput{}
 	this.IntegrationId = integrationId
 	this.Name = name
 	this.If = if_
 	return &this
 }
 
-// NewCreateFilterInputWithDefaults instantiates a new CreateFilterInput object
+// NewCreateFilterForSpaceInputWithDefaults instantiates a new CreateFilterForSpaceInput object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateFilterInputWithDefaults() *CreateFilterInput {
-	this := CreateFilterInput{}
+func NewCreateFilterForSpaceInputWithDefaults() *CreateFilterForSpaceInput {
+	this := CreateFilterForSpaceInput{}
 	return &this
 }
 
 // GetIntegrationId returns the IntegrationId field value
-func (o *CreateFilterInput) GetIntegrationId() string {
+func (o *CreateFilterForSpaceInput) GetIntegrationId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -70,7 +74,7 @@ func (o *CreateFilterInput) GetIntegrationId() string {
 
 // GetIntegrationIdOk returns a tuple with the IntegrationId field value
 // and a boolean to check if the value has been set.
-func (o *CreateFilterInput) GetIntegrationIdOk() (*string, bool) {
+func (o *CreateFilterForSpaceInput) GetIntegrationIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -78,12 +82,12 @@ func (o *CreateFilterInput) GetIntegrationIdOk() (*string, bool) {
 }
 
 // SetIntegrationId sets field value
-func (o *CreateFilterInput) SetIntegrationId(v string) {
+func (o *CreateFilterForSpaceInput) SetIntegrationId(v string) {
 	o.IntegrationId = v
 }
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
-func (o *CreateFilterInput) GetEnabled() bool {
+func (o *CreateFilterForSpaceInput) GetEnabled() bool {
 	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
@@ -93,7 +97,7 @@ func (o *CreateFilterInput) GetEnabled() bool {
 
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateFilterInput) GetEnabledOk() (*bool, bool) {
+func (o *CreateFilterForSpaceInput) GetEnabledOk() (*bool, bool) {
 	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
@@ -101,7 +105,7 @@ func (o *CreateFilterInput) GetEnabledOk() (*bool, bool) {
 }
 
 // HasEnabled returns a boolean if a field has been set.
-func (o *CreateFilterInput) HasEnabled() bool {
+func (o *CreateFilterForSpaceInput) HasEnabled() bool {
 	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
@@ -110,12 +114,12 @@ func (o *CreateFilterInput) HasEnabled() bool {
 }
 
 // SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
-func (o *CreateFilterInput) SetEnabled(v bool) {
+func (o *CreateFilterForSpaceInput) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
 // GetName returns the Name field value
-func (o *CreateFilterInput) GetName() string {
+func (o *CreateFilterForSpaceInput) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -126,7 +130,7 @@ func (o *CreateFilterInput) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *CreateFilterInput) GetNameOk() (*string, bool) {
+func (o *CreateFilterForSpaceInput) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -134,12 +138,12 @@ func (o *CreateFilterInput) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *CreateFilterInput) SetName(v string) {
+func (o *CreateFilterForSpaceInput) SetName(v string) {
 	o.Name = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *CreateFilterInput) GetDescription() string {
+func (o *CreateFilterForSpaceInput) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
@@ -149,7 +153,7 @@ func (o *CreateFilterInput) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateFilterInput) GetDescriptionOk() (*string, bool) {
+func (o *CreateFilterForSpaceInput) GetDescriptionOk() (*string, bool) {
 	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
@@ -157,7 +161,7 @@ func (o *CreateFilterInput) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *CreateFilterInput) HasDescription() bool {
+func (o *CreateFilterForSpaceInput) HasDescription() bool {
 	if o != nil && !IsNil(o.Description) {
 		return true
 	}
@@ -166,12 +170,12 @@ func (o *CreateFilterInput) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *CreateFilterInput) SetDescription(v string) {
+func (o *CreateFilterForSpaceInput) SetDescription(v string) {
 	o.Description = &v
 }
 
 // GetIf returns the If field value
-func (o *CreateFilterInput) GetIf() string {
+func (o *CreateFilterForSpaceInput) GetIf() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -182,7 +186,7 @@ func (o *CreateFilterInput) GetIf() string {
 
 // GetIfOk returns a tuple with the If field value
 // and a boolean to check if the value has been set.
-func (o *CreateFilterInput) GetIfOk() (*string, bool) {
+func (o *CreateFilterForSpaceInput) GetIfOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -190,12 +194,12 @@ func (o *CreateFilterInput) GetIfOk() (*string, bool) {
 }
 
 // SetIf sets field value
-func (o *CreateFilterInput) SetIf(v string) {
+func (o *CreateFilterForSpaceInput) SetIf(v string) {
 	o.If = v
 }
 
 // GetDrop returns the Drop field value if set, zero value otherwise.
-func (o *CreateFilterInput) GetDrop() bool {
+func (o *CreateFilterForSpaceInput) GetDrop() bool {
 	if o == nil || IsNil(o.Drop) {
 		var ret bool
 		return ret
@@ -205,7 +209,7 @@ func (o *CreateFilterInput) GetDrop() bool {
 
 // GetDropOk returns a tuple with the Drop field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateFilterInput) GetDropOk() (*bool, bool) {
+func (o *CreateFilterForSpaceInput) GetDropOk() (*bool, bool) {
 	if o == nil || IsNil(o.Drop) {
 		return nil, false
 	}
@@ -213,7 +217,7 @@ func (o *CreateFilterInput) GetDropOk() (*bool, bool) {
 }
 
 // HasDrop returns a boolean if a field has been set.
-func (o *CreateFilterInput) HasDrop() bool {
+func (o *CreateFilterForSpaceInput) HasDrop() bool {
 	if o != nil && !IsNil(o.Drop) {
 		return true
 	}
@@ -222,12 +226,12 @@ func (o *CreateFilterInput) HasDrop() bool {
 }
 
 // SetDrop gets a reference to the given bool and assigns it to the Drop field.
-func (o *CreateFilterInput) SetDrop(v bool) {
+func (o *CreateFilterForSpaceInput) SetDrop(v bool) {
 	o.Drop = &v
 }
 
 // GetDropProperties returns the DropProperties field value if set, zero value otherwise.
-func (o *CreateFilterInput) GetDropProperties() []string {
+func (o *CreateFilterForSpaceInput) GetDropProperties() []string {
 	if o == nil || IsNil(o.DropProperties) {
 		var ret []string
 		return ret
@@ -237,7 +241,7 @@ func (o *CreateFilterInput) GetDropProperties() []string {
 
 // GetDropPropertiesOk returns a tuple with the DropProperties field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateFilterInput) GetDropPropertiesOk() ([]string, bool) {
+func (o *CreateFilterForSpaceInput) GetDropPropertiesOk() ([]string, bool) {
 	if o == nil || IsNil(o.DropProperties) {
 		return nil, false
 	}
@@ -245,7 +249,7 @@ func (o *CreateFilterInput) GetDropPropertiesOk() ([]string, bool) {
 }
 
 // HasDropProperties returns a boolean if a field has been set.
-func (o *CreateFilterInput) HasDropProperties() bool {
+func (o *CreateFilterForSpaceInput) HasDropProperties() bool {
 	if o != nil && !IsNil(o.DropProperties) {
 		return true
 	}
@@ -254,12 +258,12 @@ func (o *CreateFilterInput) HasDropProperties() bool {
 }
 
 // SetDropProperties gets a reference to the given []string and assigns it to the DropProperties field.
-func (o *CreateFilterInput) SetDropProperties(v []string) {
+func (o *CreateFilterForSpaceInput) SetDropProperties(v []string) {
 	o.DropProperties = v
 }
 
 // GetAllowProperties returns the AllowProperties field value if set, zero value otherwise.
-func (o *CreateFilterInput) GetAllowProperties() []string {
+func (o *CreateFilterForSpaceInput) GetAllowProperties() []string {
 	if o == nil || IsNil(o.AllowProperties) {
 		var ret []string
 		return ret
@@ -269,7 +273,7 @@ func (o *CreateFilterInput) GetAllowProperties() []string {
 
 // GetAllowPropertiesOk returns a tuple with the AllowProperties field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateFilterInput) GetAllowPropertiesOk() ([]string, bool) {
+func (o *CreateFilterForSpaceInput) GetAllowPropertiesOk() ([]string, bool) {
 	if o == nil || IsNil(o.AllowProperties) {
 		return nil, false
 	}
@@ -277,7 +281,7 @@ func (o *CreateFilterInput) GetAllowPropertiesOk() ([]string, bool) {
 }
 
 // HasAllowProperties returns a boolean if a field has been set.
-func (o *CreateFilterInput) HasAllowProperties() bool {
+func (o *CreateFilterForSpaceInput) HasAllowProperties() bool {
 	if o != nil && !IsNil(o.AllowProperties) {
 		return true
 	}
@@ -286,11 +290,11 @@ func (o *CreateFilterInput) HasAllowProperties() bool {
 }
 
 // SetAllowProperties gets a reference to the given []string and assigns it to the AllowProperties field.
-func (o *CreateFilterInput) SetAllowProperties(v []string) {
+func (o *CreateFilterForSpaceInput) SetAllowProperties(v []string) {
 	o.AllowProperties = v
 }
 
-func (o CreateFilterInput) MarshalJSON() ([]byte, error) {
+func (o CreateFilterForSpaceInput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -298,7 +302,7 @@ func (o CreateFilterInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateFilterInput) ToMap() (map[string]interface{}, error) {
+func (o CreateFilterForSpaceInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["integrationId"] = o.IntegrationId
 	if !IsNil(o.Enabled) {
@@ -321,38 +325,40 @@ func (o CreateFilterInput) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableCreateFilterInput struct {
-	value *CreateFilterInput
+type NullableCreateFilterForSpaceInput struct {
+	value *CreateFilterForSpaceInput
 	isSet bool
 }
 
-func (v NullableCreateFilterInput) Get() *CreateFilterInput {
+func (v NullableCreateFilterForSpaceInput) Get() *CreateFilterForSpaceInput {
 	return v.value
 }
 
-func (v *NullableCreateFilterInput) Set(val *CreateFilterInput) {
+func (v *NullableCreateFilterForSpaceInput) Set(val *CreateFilterForSpaceInput) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateFilterInput) IsSet() bool {
+func (v NullableCreateFilterForSpaceInput) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateFilterInput) Unset() {
+func (v *NullableCreateFilterForSpaceInput) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateFilterInput(val *CreateFilterInput) *NullableCreateFilterInput {
-	return &NullableCreateFilterInput{value: val, isSet: true}
+func NewNullableCreateFilterForSpaceInput(
+	val *CreateFilterForSpaceInput,
+) *NullableCreateFilterForSpaceInput {
+	return &NullableCreateFilterForSpaceInput{value: val, isSet: true}
 }
 
-func (v NullableCreateFilterInput) MarshalJSON() ([]byte, error) {
+func (v NullableCreateFilterForSpaceInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateFilterInput) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateFilterForSpaceInput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
