@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 54.3.0
+API version: 54.2.0
 Contact: friends@segment.com
 */
 
@@ -23,39 +23,41 @@ import (
 // SpaceFiltersAPIService SpaceFiltersAPI service
 type SpaceFiltersAPIService service
 
-type ApiCreateFilterRequest struct {
-	ctx               context.Context
-	ApiService        *SpaceFiltersAPIService
-	createFilterInput *CreateFilterInput
+type ApiCreateFilterForSpaceRequest struct {
+	ctx                       context.Context
+	ApiService                *SpaceFiltersAPIService
+	createFilterForSpaceInput *CreateFilterForSpaceInput
 }
 
-func (r ApiCreateFilterRequest) CreateFilterInput(
-	createFilterInput CreateFilterInput,
-) ApiCreateFilterRequest {
-	r.createFilterInput = &createFilterInput
+func (r ApiCreateFilterForSpaceRequest) CreateFilterForSpaceInput(
+	createFilterForSpaceInput CreateFilterForSpaceInput,
+) ApiCreateFilterForSpaceRequest {
+	r.createFilterForSpaceInput = &createFilterForSpaceInput
 	return r
 }
 
-func (r ApiCreateFilterRequest) Execute() (*CreateFilter200Response, *http.Response, error) {
-	return r.ApiService.CreateFilterExecute(r)
+func (r ApiCreateFilterForSpaceRequest) Execute() (*CreateFilterForSpace200Response, *http.Response, error) {
+	return r.ApiService.CreateFilterForSpaceExecute(r)
 }
 
 /*
-CreateFilter Create Filter
+CreateFilterForSpace Create Filter for Space
 
-Creates a filter.
+Creates a filter for a space. A space filter applies to events coming from all Sources connected to a space.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+• This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Space Filters feature enabled. Please reach out to your customer success manager for more information.
 
 • When called, this endpoint may generate the `Filter Created` event in the [audit trail](/tag/Audit-Trail).
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateFilterRequest
+	@return ApiCreateFilterForSpaceRequest
 */
-func (a *SpaceFiltersAPIService) CreateFilter(ctx context.Context) ApiCreateFilterRequest {
-	return ApiCreateFilterRequest{
+func (a *SpaceFiltersAPIService) CreateFilterForSpace(
+	ctx context.Context,
+) ApiCreateFilterForSpaceRequest {
+	return ApiCreateFilterForSpaceRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -63,20 +65,20 @@ func (a *SpaceFiltersAPIService) CreateFilter(ctx context.Context) ApiCreateFilt
 
 // Execute executes the request
 //
-//	@return CreateFilter200Response
-func (a *SpaceFiltersAPIService) CreateFilterExecute(
-	r ApiCreateFilterRequest,
-) (*CreateFilter200Response, *http.Response, error) {
+//	@return CreateFilterForSpace200Response
+func (a *SpaceFiltersAPIService) CreateFilterForSpaceExecute(
+	r ApiCreateFilterForSpaceRequest,
+) (*CreateFilterForSpace200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateFilter200Response
+		localVarReturnValue *CreateFilterForSpace200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SpaceFiltersAPIService.CreateFilter",
+		"SpaceFiltersAPIService.CreateFilterForSpace",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -87,14 +89,17 @@ func (a *SpaceFiltersAPIService) CreateFilterExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createFilterInput == nil {
+	if r.createFilterForSpaceInput == nil {
 		return localVarReturnValue, nil, reportError(
-			"createFilterInput is required and must be specified",
+			"createFilterForSpaceInput is required and must be specified",
 		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -104,6 +109,7 @@ func (a *SpaceFiltersAPIService) CreateFilterExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 		"application/json",
 	}
@@ -114,7 +120,7 @@ func (a *SpaceFiltersAPIService) CreateFilterExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createFilterInput
+	localVarPostBody = r.createFilterForSpaceInput
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,
@@ -212,7 +218,7 @@ DeleteFilterById Delete Filter By Id
 
 Deletes a filter by id.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+• This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Space Filters feature enabled. Please reach out to your customer success manager for more information.
 
@@ -277,6 +283,7 @@ func (a *SpaceFiltersAPIService) DeleteFilterByIdExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 		"application/json",
 	}
@@ -383,7 +390,7 @@ GetFilterById Get Filter By Id
 
 Gets a filter by id.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+• This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Space Filters feature enabled. Please reach out to your customer success manager for more information.
 
@@ -446,6 +453,7 @@ func (a *SpaceFiltersAPIService) GetFilterByIdExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 		"application/json",
 	}
@@ -537,49 +545,49 @@ func (a *SpaceFiltersAPIService) GetFilterByIdExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListFiltersByIntegrationIdRequest struct {
+type ApiListFiltersForSpaceRequest struct {
 	ctx           context.Context
 	ApiService    *SpaceFiltersAPIService
 	integrationId *string
 	pagination    *ListFiltersPaginationInput
 }
 
-// The integration id used to fetch filters.  This parameter exists in alpha.
-func (r ApiListFiltersByIntegrationIdRequest) IntegrationId(
+// The Space Id for which to fetch filters  This parameter exists in beta.
+func (r ApiListFiltersForSpaceRequest) IntegrationId(
 	integrationId string,
-) ApiListFiltersByIntegrationIdRequest {
+) ApiListFiltersForSpaceRequest {
 	r.integrationId = &integrationId
 	return r
 }
 
-// Pagination parameters.  This parameter exists in alpha.
-func (r ApiListFiltersByIntegrationIdRequest) Pagination(
+// Pagination parameters.  This parameter exists in beta.
+func (r ApiListFiltersForSpaceRequest) Pagination(
 	pagination ListFiltersPaginationInput,
-) ApiListFiltersByIntegrationIdRequest {
+) ApiListFiltersForSpaceRequest {
 	r.pagination = &pagination
 	return r
 }
 
-func (r ApiListFiltersByIntegrationIdRequest) Execute() (*ListFiltersByIntegrationId200Response, *http.Response, error) {
-	return r.ApiService.ListFiltersByIntegrationIdExecute(r)
+func (r ApiListFiltersForSpaceRequest) Execute() (*ListFiltersForSpace200Response, *http.Response, error) {
+	return r.ApiService.ListFiltersForSpaceExecute(r)
 }
 
 /*
-ListFiltersByIntegrationId List Filters By Integration Id
+ListFiltersForSpace List Filters for Space
 
-Lists filters by Integration id.
+Lists filters for a space.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+• This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Space Filters feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListFiltersByIntegrationIdRequest
+	@return ApiListFiltersForSpaceRequest
 */
-func (a *SpaceFiltersAPIService) ListFiltersByIntegrationId(
+func (a *SpaceFiltersAPIService) ListFiltersForSpace(
 	ctx context.Context,
-) ApiListFiltersByIntegrationIdRequest {
-	return ApiListFiltersByIntegrationIdRequest{
+) ApiListFiltersForSpaceRequest {
+	return ApiListFiltersForSpaceRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -587,20 +595,20 @@ func (a *SpaceFiltersAPIService) ListFiltersByIntegrationId(
 
 // Execute executes the request
 //
-//	@return ListFiltersByIntegrationId200Response
-func (a *SpaceFiltersAPIService) ListFiltersByIntegrationIdExecute(
-	r ApiListFiltersByIntegrationIdRequest,
-) (*ListFiltersByIntegrationId200Response, *http.Response, error) {
+//	@return ListFiltersForSpace200Response
+func (a *SpaceFiltersAPIService) ListFiltersForSpaceExecute(
+	r ApiListFiltersForSpaceRequest,
+) (*ListFiltersForSpace200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ListFiltersByIntegrationId200Response
+		localVarReturnValue *ListFiltersForSpace200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SpaceFiltersAPIService.ListFiltersByIntegrationId",
+		"SpaceFiltersAPIService.ListFiltersForSpace",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -632,6 +640,7 @@ func (a *SpaceFiltersAPIService) ListFiltersByIntegrationIdExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 		"application/json",
 	}
@@ -746,7 +755,7 @@ UpdateFilterById Update Filter By Id
 
 Updates a filter by id and replaces the existing filter.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+• This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Space Filters feature enabled. Please reach out to your customer success manager for more information.
 
@@ -806,7 +815,10 @@ func (a *SpaceFiltersAPIService) UpdateFilterByIdExecute(
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -816,6 +828,7 @@ func (a *SpaceFiltersAPIService) UpdateFilterByIdExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 		"application/json",
 	}

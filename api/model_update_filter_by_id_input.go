@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 54.3.0
+API version: 54.2.0
 Contact: friends@segment.com
 */
 
@@ -24,16 +24,16 @@ type UpdateFilterByIdInput struct {
 	IntegrationId string `json:"integrationId"`
 	// Whether the filter is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
-	// Whether the event is dropped.
-	Drop *bool `json:"drop,omitempty"`
 	// The name of the filter.
 	Name *string `json:"name,omitempty"`
 	// The description of the filter.
 	Description *string `json:"description,omitempty"`
 	// The \"if\" statement for a filter.
 	If *string `json:"if,omitempty"`
+	// Whether the event is dropped.
+	Drop *bool `json:"drop,omitempty"`
 	// Describes the properties to be dropped on events that match the \"if\" statement.
-	PropertyDrops []string `json:"propertyDrops,omitempty"`
+	DropProperties []string `json:"dropProperties,omitempty"`
 	// Describes the properties allowed on events that match the \"if\" statement.
 	AllowProperties []string `json:"allowProperties,omitempty"`
 }
@@ -110,38 +110,6 @@ func (o *UpdateFilterByIdInput) HasEnabled() bool {
 // SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
 func (o *UpdateFilterByIdInput) SetEnabled(v bool) {
 	o.Enabled = &v
-}
-
-// GetDrop returns the Drop field value if set, zero value otherwise.
-func (o *UpdateFilterByIdInput) GetDrop() bool {
-	if o == nil || IsNil(o.Drop) {
-		var ret bool
-		return ret
-	}
-	return *o.Drop
-}
-
-// GetDropOk returns a tuple with the Drop field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateFilterByIdInput) GetDropOk() (*bool, bool) {
-	if o == nil || IsNil(o.Drop) {
-		return nil, false
-	}
-	return o.Drop, true
-}
-
-// HasDrop returns a boolean if a field has been set.
-func (o *UpdateFilterByIdInput) HasDrop() bool {
-	if o != nil && !IsNil(o.Drop) {
-		return true
-	}
-
-	return false
-}
-
-// SetDrop gets a reference to the given bool and assigns it to the Drop field.
-func (o *UpdateFilterByIdInput) SetDrop(v bool) {
-	o.Drop = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -240,36 +208,68 @@ func (o *UpdateFilterByIdInput) SetIf(v string) {
 	o.If = &v
 }
 
-// GetPropertyDrops returns the PropertyDrops field value if set, zero value otherwise.
-func (o *UpdateFilterByIdInput) GetPropertyDrops() []string {
-	if o == nil || IsNil(o.PropertyDrops) {
-		var ret []string
+// GetDrop returns the Drop field value if set, zero value otherwise.
+func (o *UpdateFilterByIdInput) GetDrop() bool {
+	if o == nil || IsNil(o.Drop) {
+		var ret bool
 		return ret
 	}
-	return o.PropertyDrops
+	return *o.Drop
 }
 
-// GetPropertyDropsOk returns a tuple with the PropertyDrops field value if set, nil otherwise
+// GetDropOk returns a tuple with the Drop field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateFilterByIdInput) GetPropertyDropsOk() ([]string, bool) {
-	if o == nil || IsNil(o.PropertyDrops) {
+func (o *UpdateFilterByIdInput) GetDropOk() (*bool, bool) {
+	if o == nil || IsNil(o.Drop) {
 		return nil, false
 	}
-	return o.PropertyDrops, true
+	return o.Drop, true
 }
 
-// HasPropertyDrops returns a boolean if a field has been set.
-func (o *UpdateFilterByIdInput) HasPropertyDrops() bool {
-	if o != nil && !IsNil(o.PropertyDrops) {
+// HasDrop returns a boolean if a field has been set.
+func (o *UpdateFilterByIdInput) HasDrop() bool {
+	if o != nil && !IsNil(o.Drop) {
 		return true
 	}
 
 	return false
 }
 
-// SetPropertyDrops gets a reference to the given []string and assigns it to the PropertyDrops field.
-func (o *UpdateFilterByIdInput) SetPropertyDrops(v []string) {
-	o.PropertyDrops = v
+// SetDrop gets a reference to the given bool and assigns it to the Drop field.
+func (o *UpdateFilterByIdInput) SetDrop(v bool) {
+	o.Drop = &v
+}
+
+// GetDropProperties returns the DropProperties field value if set, zero value otherwise.
+func (o *UpdateFilterByIdInput) GetDropProperties() []string {
+	if o == nil || IsNil(o.DropProperties) {
+		var ret []string
+		return ret
+	}
+	return o.DropProperties
+}
+
+// GetDropPropertiesOk returns a tuple with the DropProperties field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateFilterByIdInput) GetDropPropertiesOk() ([]string, bool) {
+	if o == nil || IsNil(o.DropProperties) {
+		return nil, false
+	}
+	return o.DropProperties, true
+}
+
+// HasDropProperties returns a boolean if a field has been set.
+func (o *UpdateFilterByIdInput) HasDropProperties() bool {
+	if o != nil && !IsNil(o.DropProperties) {
+		return true
+	}
+
+	return false
+}
+
+// SetDropProperties gets a reference to the given []string and assigns it to the DropProperties field.
+func (o *UpdateFilterByIdInput) SetDropProperties(v []string) {
+	o.DropProperties = v
 }
 
 // GetAllowProperties returns the AllowProperties field value if set, zero value otherwise.
@@ -318,9 +318,6 @@ func (o UpdateFilterByIdInput) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if !IsNil(o.Drop) {
-		toSerialize["drop"] = o.Drop
-	}
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -330,8 +327,11 @@ func (o UpdateFilterByIdInput) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.If) {
 		toSerialize["if"] = o.If
 	}
-	if !IsNil(o.PropertyDrops) {
-		toSerialize["propertyDrops"] = o.PropertyDrops
+	if !IsNil(o.Drop) {
+		toSerialize["drop"] = o.Drop
+	}
+	if !IsNil(o.DropProperties) {
+		toSerialize["dropProperties"] = o.DropProperties
 	}
 	if !IsNil(o.AllowProperties) {
 		toSerialize["allowProperties"] = o.AllowProperties

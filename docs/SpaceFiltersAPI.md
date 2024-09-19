@@ -4,19 +4,19 @@ All URIs are relative to *https://api.segmentapis.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateFilter**](SpaceFiltersAPI.md#CreateFilter) | **Post** /filters | Create Filter
+[**CreateFilterForSpace**](SpaceFiltersAPI.md#CreateFilterForSpace) | **Post** /filters | Create Filter for Space
 [**DeleteFilterById**](SpaceFiltersAPI.md#DeleteFilterById) | **Delete** /filters/{id} | Delete Filter By Id
 [**GetFilterById**](SpaceFiltersAPI.md#GetFilterById) | **Get** /filters/{id} | Get Filter By Id
-[**ListFiltersByIntegrationId**](SpaceFiltersAPI.md#ListFiltersByIntegrationId) | **Get** /filters | List Filters By Integration Id
+[**ListFiltersForSpace**](SpaceFiltersAPI.md#ListFiltersForSpace) | **Get** /filters | List Filters for Space
 [**UpdateFilterById**](SpaceFiltersAPI.md#UpdateFilterById) | **Patch** /filters/{id} | Update Filter By Id
 
 
 
-## Operation: CreateFilter
+## Operation: CreateFilterForSpace
 
-> CreateFilter200Response CreateFilter(ctx).CreateFilterInput(createFilterInput).Execute()
+> CreateFilterForSpace200Response CreateFilterForSpace(ctx).CreateFilterForSpaceInput(createFilterForSpaceInput).Execute()
 
-Create Filter
+Create Filter for Space
 
 
 
@@ -33,15 +33,15 @@ import (
 )
 
 func main() {
-    createFilterInput := *api.NewCreateFilterInput("IntegrationId_example", "Name_example", "If_example") // CreateFilterInput | 
+    createFilterForSpaceInput := *api.NewCreateFilterForSpaceInput("IntegrationId_example", "Name_example", "If_example") // CreateFilterForSpaceInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SpaceFiltersAPI.CreateFilter(ctx).CreateFilterInput(createFilterInput).Execute()
+    resp, r, err := apiClient.SpaceFiltersAPI.CreateFilterForSpace(ctx).CreateFilterForSpaceInput(createFilterForSpaceInput).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpaceFiltersAPI.CreateFilter``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SpaceFiltersAPI.CreateFilterForSpace``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -50,8 +50,8 @@ func main() {
             }
         }
     }
-    // response from `CreateFilter`: CreateFilter200Response
-    fmt.Fprintf(os.Stdout, "Response from `SpaceFiltersAPI.CreateFilter`: %v\n", resp.GetData())
+    // response from `CreateFilterForSpace`: CreateFilterForSpace200Response
+    fmt.Fprintf(os.Stdout, "Response from `SpaceFiltersAPI.CreateFilterForSpace`: %v\n", resp.GetData())
 }
 ```
 
@@ -61,16 +61,16 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateFilterRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateFilterForSpaceRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createFilterInput** | [**CreateFilterInput**](CreateFilterInput.md) |  | 
+ **createFilterForSpaceInput** | [**CreateFilterForSpaceInput**](CreateFilterForSpaceInput.md) |  | 
 
 ### Return type
 
-[**CreateFilter200Response**](CreateFilter200Response.md)
+[**CreateFilterForSpace200Response**](CreateFilterForSpace200Response.md)
 
 ### Authorization
 
@@ -78,8 +78,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/vnd.segment.v1alpha+json
-- **Accept**: application/vnd.segment.v1alpha+json, application/json
+- **Content-Type**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -157,7 +157,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.segment.v1alpha+json, application/json
+- **Accept**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -235,18 +235,18 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.segment.v1alpha+json, application/json
+- **Accept**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## Operation: ListFiltersByIntegrationId
+## Operation: ListFiltersForSpace
 
-> ListFiltersByIntegrationId200Response ListFiltersByIntegrationId(ctx).IntegrationId(integrationId).Pagination(pagination).Execute()
+> ListFiltersForSpace200Response ListFiltersForSpace(ctx).IntegrationId(integrationId).Pagination(pagination).Execute()
 
-List Filters By Integration Id
+List Filters for Space
 
 
 
@@ -263,16 +263,16 @@ import (
 )
 
 func main() {
-    integrationId := "<id>" // string | The integration id used to fetch filters.  This parameter exists in alpha.
-    pagination := *api.NewListFiltersPaginationInput(float32(123)) // ListFiltersPaginationInput | Pagination parameters.  This parameter exists in alpha. (optional)
+    integrationId := "<id>" // string | The Space Id for which to fetch filters  This parameter exists in beta.
+    pagination := *api.NewListFiltersPaginationInput(float32(123)) // ListFiltersPaginationInput | Pagination parameters.  This parameter exists in beta. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SpaceFiltersAPI.ListFiltersByIntegrationId(ctx).IntegrationId(integrationId).Pagination(pagination).Execute()
+    resp, r, err := apiClient.SpaceFiltersAPI.ListFiltersForSpace(ctx).IntegrationId(integrationId).Pagination(pagination).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpaceFiltersAPI.ListFiltersByIntegrationId``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SpaceFiltersAPI.ListFiltersForSpace``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -281,8 +281,8 @@ func main() {
             }
         }
     }
-    // response from `ListFiltersByIntegrationId`: ListFiltersByIntegrationId200Response
-    fmt.Fprintf(os.Stdout, "Response from `SpaceFiltersAPI.ListFiltersByIntegrationId`: %v\n", resp.GetData())
+    // response from `ListFiltersForSpace`: ListFiltersForSpace200Response
+    fmt.Fprintf(os.Stdout, "Response from `SpaceFiltersAPI.ListFiltersForSpace`: %v\n", resp.GetData())
 }
 ```
 
@@ -292,17 +292,17 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListFiltersByIntegrationIdRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListFiltersForSpaceRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **integrationId** | **string** | The integration id used to fetch filters.  This parameter exists in alpha. | 
- **pagination** | [**ListFiltersPaginationInput**](ListFiltersPaginationInput.md) | Pagination parameters.  This parameter exists in alpha. | 
+ **integrationId** | **string** | The Space Id for which to fetch filters  This parameter exists in beta. | 
+ **pagination** | [**ListFiltersPaginationInput**](ListFiltersPaginationInput.md) | Pagination parameters.  This parameter exists in beta. | 
 
 ### Return type
 
-[**ListFiltersByIntegrationId200Response**](ListFiltersByIntegrationId200Response.md)
+[**ListFiltersForSpace200Response**](ListFiltersForSpace200Response.md)
 
 ### Authorization
 
@@ -311,7 +311,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.segment.v1alpha+json, application/json
+- **Accept**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -390,8 +390,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/vnd.segment.v1alpha+json
-- **Accept**: application/vnd.segment.v1alpha+json, application/json
+- **Content-Type**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
