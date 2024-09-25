@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateFilterForSpaceInput{}
 
 // CreateFilterForSpaceInput Input for CreateFilter.
 type CreateFilterForSpaceInput struct {
-	// The Space id to filer on.
+	// The Space id to filter on.
 	IntegrationId string `json:"integrationId"`
 	// Whether the filter is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
