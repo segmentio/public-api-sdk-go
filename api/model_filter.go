@@ -40,17 +40,29 @@ type Filter struct {
 	DropProperties []string `json:"dropProperties,omitempty"`
 	// Describes the properties allowed on events that match the \"if\" statement.
 	AllowProperties []string `json:"allowProperties,omitempty"`
+	// The timestamp of this filter's creation.
+	CreatedAt string `json:"createdAt"`
+	// The timestamp of this filter's last change.
+	UpdatedAt string `json:"updatedAt"`
 }
 
 // NewFilter instantiates a new Filter object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFilter(id string, workspaceId string, integrationId string) *Filter {
+func NewFilter(
+	id string,
+	workspaceId string,
+	integrationId string,
+	createdAt string,
+	updatedAt string,
+) *Filter {
 	this := Filter{}
 	this.Id = id
 	this.WorkspaceId = workspaceId
 	this.IntegrationId = integrationId
+	this.CreatedAt = createdAt
+	this.UpdatedAt = updatedAt
 	return &this
 }
 
@@ -358,6 +370,54 @@ func (o *Filter) SetAllowProperties(v []string) {
 	o.AllowProperties = v
 }
 
+// GetCreatedAt returns the CreatedAt field value
+func (o *Filter) GetCreatedAt() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
+// and a boolean to check if the value has been set.
+func (o *Filter) GetCreatedAtOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CreatedAt, true
+}
+
+// SetCreatedAt sets field value
+func (o *Filter) SetCreatedAt(v string) {
+	o.CreatedAt = v
+}
+
+// GetUpdatedAt returns the UpdatedAt field value
+func (o *Filter) GetUpdatedAt() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
+// and a boolean to check if the value has been set.
+func (o *Filter) GetUpdatedAtOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UpdatedAt, true
+}
+
+// SetUpdatedAt sets field value
+func (o *Filter) SetUpdatedAt(v string) {
+	o.UpdatedAt = v
+}
+
 func (o Filter) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -392,6 +452,8 @@ func (o Filter) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AllowProperties) {
 		toSerialize["allowProperties"] = o.AllowProperties
 	}
+	toSerialize["createdAt"] = o.CreatedAt
+	toSerialize["updatedAt"] = o.UpdatedAt
 	return toSerialize, nil
 }
 
