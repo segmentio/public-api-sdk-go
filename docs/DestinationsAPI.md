@@ -831,8 +831,8 @@ import (
 )
 
 func main() {
-    destinationId := "fP7qoQw2HTWt9WdMr718gn" // string | 
-    id := "3ELMSracBm5MMikXBYfo1c" // string | 
+    destinationId := "qtiZHLLqqsHmpvLXNtP5du" // string | 
+    id := "pJtn52LjrcD1TrQcm2ZSwp" // string | 
     updateSubscriptionForDestinationAlphaInput := *api.NewUpdateSubscriptionForDestinationAlphaInput(*api.NewDestinationSubscriptionUpdateInput()) // UpdateSubscriptionForDestinationAlphaInput | 
 
     configuration := api.NewConfiguration()
