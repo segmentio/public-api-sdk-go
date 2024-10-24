@@ -30,9 +30,6 @@ type ReverseEtlModel struct {
 	Description string `json:"description"`
 	// Indicates whether the Model should have syncs enabled. When disabled, no syncs will be triggered, regardless of the enabled status of the attached destinations/subscriptions.
 	Enabled bool `json:"enabled"`
-	// Determines the strategy used for triggering syncs, which will be used in conjunction with scheduleConfig.  Possible values: \"manual\", \"periodic\", \"specific_days\".
-	ScheduleStrategy string                 `json:"scheduleStrategy"`
-	ScheduleConfig   NullableScheduleConfig `json:"scheduleConfig,omitempty"`
 	// The SQL query that will be executed to extract data from the connected Source.
 	Query string `json:"query"`
 	// Indicates the column named in `query` that should be used to uniquely identify the extracted records.
@@ -49,7 +46,6 @@ func NewReverseEtlModel(
 	name string,
 	description string,
 	enabled bool,
-	scheduleStrategy string,
 	query string,
 	queryIdentifierColumn string,
 ) *ReverseEtlModel {
@@ -59,7 +55,6 @@ func NewReverseEtlModel(
 	this.Name = name
 	this.Description = description
 	this.Enabled = enabled
-	this.ScheduleStrategy = scheduleStrategy
 	this.Query = query
 	this.QueryIdentifierColumn = queryIdentifierColumn
 	return &this
@@ -193,73 +188,6 @@ func (o *ReverseEtlModel) SetEnabled(v bool) {
 	o.Enabled = v
 }
 
-// GetScheduleStrategy returns the ScheduleStrategy field value
-func (o *ReverseEtlModel) GetScheduleStrategy() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ScheduleStrategy
-}
-
-// GetScheduleStrategyOk returns a tuple with the ScheduleStrategy field value
-// and a boolean to check if the value has been set.
-func (o *ReverseEtlModel) GetScheduleStrategyOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ScheduleStrategy, true
-}
-
-// SetScheduleStrategy sets field value
-func (o *ReverseEtlModel) SetScheduleStrategy(v string) {
-	o.ScheduleStrategy = v
-}
-
-// GetScheduleConfig returns the ScheduleConfig field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ReverseEtlModel) GetScheduleConfig() ScheduleConfig {
-	if o == nil || IsNil(o.ScheduleConfig.Get()) {
-		var ret ScheduleConfig
-		return ret
-	}
-	return *o.ScheduleConfig.Get()
-}
-
-// GetScheduleConfigOk returns a tuple with the ScheduleConfig field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ReverseEtlModel) GetScheduleConfigOk() (*ScheduleConfig, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.ScheduleConfig.Get(), o.ScheduleConfig.IsSet()
-}
-
-// HasScheduleConfig returns a boolean if a field has been set.
-func (o *ReverseEtlModel) HasScheduleConfig() bool {
-	if o != nil && o.ScheduleConfig.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetScheduleConfig gets a reference to the given NullableScheduleConfig and assigns it to the ScheduleConfig field.
-func (o *ReverseEtlModel) SetScheduleConfig(v ScheduleConfig) {
-	o.ScheduleConfig.Set(&v)
-}
-
-// SetScheduleConfigNil sets the value for ScheduleConfig to be an explicit nil
-func (o *ReverseEtlModel) SetScheduleConfigNil() {
-	o.ScheduleConfig.Set(nil)
-}
-
-// UnsetScheduleConfig ensures that no value is present for ScheduleConfig, not even an explicit nil
-func (o *ReverseEtlModel) UnsetScheduleConfig() {
-	o.ScheduleConfig.Unset()
-}
-
 // GetQuery returns the Query field value
 func (o *ReverseEtlModel) GetQuery() string {
 	if o == nil {
@@ -323,10 +251,6 @@ func (o ReverseEtlModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["description"] = o.Description
 	toSerialize["enabled"] = o.Enabled
-	toSerialize["scheduleStrategy"] = o.ScheduleStrategy
-	if o.ScheduleConfig.IsSet() {
-		toSerialize["scheduleConfig"] = o.ScheduleConfig.Get()
-	}
 	toSerialize["query"] = o.Query
 	toSerialize["queryIdentifierColumn"] = o.QueryIdentifierColumn
 	return toSerialize, nil

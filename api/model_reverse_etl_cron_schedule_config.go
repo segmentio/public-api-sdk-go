@@ -22,7 +22,7 @@ var _ MappedNullable = &ReverseEtlCronScheduleConfig{}
 type ReverseEtlCronScheduleConfig struct {
 	// 5 field cron string expression. The cron expression must be larger than 15 minutes.
 	Spec string `json:"spec"`
-	// Timezone for the specified times.
+	// Timezone respected by the cron string. Format must be in IANA Timezone Identifier. Example: 'America/Los_Angeles'.
 	Timezone string `json:"timezone"`
 }
 
