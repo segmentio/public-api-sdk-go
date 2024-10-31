@@ -110,7 +110,7 @@ import (
 )
 
 func main() {
-    createReverseEtlModelInput := *api.NewCreateReverseEtlModelInput("SourceId_example", "Name_example", "Description_example", false, "ScheduleStrategy_example", map[string]interface{}{"key": interface{}(123)}, "Query_example", "QueryIdentifierColumn_example") // CreateReverseEtlModelInput | 
+    createReverseEtlModelInput := *api.NewCreateReverseEtlModelInput("SourceId_example", "Name_example", "Description_example", false, "Query_example", "QueryIdentifierColumn_example") // CreateReverseEtlModelInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -343,7 +343,7 @@ import (
 )
 
 func main() {
-    modelId := "dY1JLx4HgWHKUNsB76tEU" // string | 
+    modelId := "jSAVzDH3z89geNDZwoNY9V" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -580,7 +580,7 @@ import (
 )
 
 func main() {
-    modelId := "gFBTkmP2ENiu6BQRmdHBkr" // string | 
+    modelId := "6BthE21tPsXyA2cK3QPQFQ" // string | 
     updateReverseEtlModelInput := *api.NewUpdateReverseEtlModelInput() // UpdateReverseEtlModelInput | 
 
     configuration := api.NewConfiguration()

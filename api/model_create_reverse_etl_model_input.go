@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 55.1.0
+API version: 55.2.0
 Contact: friends@segment.com
 */
 
@@ -28,10 +28,6 @@ type CreateReverseEtlModelInput struct {
 	Description string `json:"description"`
 	// Indicates whether the Model should have syncs enabled. When disabled, no syncs will be triggered, regardless of the enabled status of the attached destinations/subscriptions.
 	Enabled bool `json:"enabled"`
-	// Determines the strategy used for triggering syncs, which will be used in conjunction with scheduleConfig.
-	ScheduleStrategy string `json:"scheduleStrategy"`
-	// Defines a configuration object used for scheduling, which can vary depending on the configured strategy, but must always be an object with at least 1 level of keys.
-	ScheduleConfig map[string]interface{} `json:"scheduleConfig"`
 	// The SQL query that will be executed to extract data from the connected Source.
 	Query string `json:"query"`
 	// Indicates the column named in `query` that should be used to uniquely identify the extracted records.
@@ -47,8 +43,6 @@ func NewCreateReverseEtlModelInput(
 	name string,
 	description string,
 	enabled bool,
-	scheduleStrategy string,
-	scheduleConfig map[string]interface{},
 	query string,
 	queryIdentifierColumn string,
 ) *CreateReverseEtlModelInput {
@@ -57,8 +51,6 @@ func NewCreateReverseEtlModelInput(
 	this.Name = name
 	this.Description = description
 	this.Enabled = enabled
-	this.ScheduleStrategy = scheduleStrategy
-	this.ScheduleConfig = scheduleConfig
 	this.Query = query
 	this.QueryIdentifierColumn = queryIdentifierColumn
 	return &this
@@ -168,54 +160,6 @@ func (o *CreateReverseEtlModelInput) SetEnabled(v bool) {
 	o.Enabled = v
 }
 
-// GetScheduleStrategy returns the ScheduleStrategy field value
-func (o *CreateReverseEtlModelInput) GetScheduleStrategy() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.ScheduleStrategy
-}
-
-// GetScheduleStrategyOk returns a tuple with the ScheduleStrategy field value
-// and a boolean to check if the value has been set.
-func (o *CreateReverseEtlModelInput) GetScheduleStrategyOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ScheduleStrategy, true
-}
-
-// SetScheduleStrategy sets field value
-func (o *CreateReverseEtlModelInput) SetScheduleStrategy(v string) {
-	o.ScheduleStrategy = v
-}
-
-// GetScheduleConfig returns the ScheduleConfig field value
-func (o *CreateReverseEtlModelInput) GetScheduleConfig() map[string]interface{} {
-	if o == nil {
-		var ret map[string]interface{}
-		return ret
-	}
-
-	return o.ScheduleConfig
-}
-
-// GetScheduleConfigOk returns a tuple with the ScheduleConfig field value
-// and a boolean to check if the value has been set.
-func (o *CreateReverseEtlModelInput) GetScheduleConfigOk() (map[string]interface{}, bool) {
-	if o == nil {
-		return map[string]interface{}{}, false
-	}
-	return o.ScheduleConfig, true
-}
-
-// SetScheduleConfig sets field value
-func (o *CreateReverseEtlModelInput) SetScheduleConfig(v map[string]interface{}) {
-	o.ScheduleConfig = v
-}
-
 // GetQuery returns the Query field value
 func (o *CreateReverseEtlModelInput) GetQuery() string {
 	if o == nil {
@@ -278,8 +222,6 @@ func (o CreateReverseEtlModelInput) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["description"] = o.Description
 	toSerialize["enabled"] = o.Enabled
-	toSerialize["scheduleStrategy"] = o.ScheduleStrategy
-	toSerialize["scheduleConfig"] = o.ScheduleConfig
 	toSerialize["query"] = o.Query
 	toSerialize["queryIdentifierColumn"] = o.QueryIdentifierColumn
 	return toSerialize, nil
