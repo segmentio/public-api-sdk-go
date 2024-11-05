@@ -32,9 +32,9 @@ type DeliveryOverviewDestinationFilterBy struct {
 	SubscriptionId []string `json:"subscriptionId,omitempty"`
 	// A list of strings of event context IDs from a Linked Audience mapping/activation.
 	ActivationId []string `json:"activationId,omitempty"`
-	// A list of strings of audience IDs for a Linked Audience.
+	// A list of strings of audienceIDs for a Linked Audience.
 	AudienceId []string `json:"audienceId,omitempty"`
-	// A list of strings of space IDs for a Linked Audience.
+	// A list of strings of spaceIDs for a Linked Audience.
 	SpaceId []string `json:"spaceId,omitempty"`
 }
 

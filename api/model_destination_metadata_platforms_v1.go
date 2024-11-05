@@ -30,6 +30,8 @@ type DestinationMetadataPlatformsV1 struct {
 	Warehouse *bool `json:"warehouse,omitempty"`
 	// Whether this Destination supports cloud app object events.
 	CloudAppObject *bool `json:"cloudAppObject,omitempty"`
+	// Whether this Destination supports linked audiences.
+	LinkedAudiences *bool `json:"linkedAudiences,omitempty"`
 }
 
 // NewDestinationMetadataPlatformsV1 instantiates a new DestinationMetadataPlatformsV1 object
@@ -209,6 +211,38 @@ func (o *DestinationMetadataPlatformsV1) SetCloudAppObject(v bool) {
 	o.CloudAppObject = &v
 }
 
+// GetLinkedAudiences returns the LinkedAudiences field value if set, zero value otherwise.
+func (o *DestinationMetadataPlatformsV1) GetLinkedAudiences() bool {
+	if o == nil || IsNil(o.LinkedAudiences) {
+		var ret bool
+		return ret
+	}
+	return *o.LinkedAudiences
+}
+
+// GetLinkedAudiencesOk returns a tuple with the LinkedAudiences field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DestinationMetadataPlatformsV1) GetLinkedAudiencesOk() (*bool, bool) {
+	if o == nil || IsNil(o.LinkedAudiences) {
+		return nil, false
+	}
+	return o.LinkedAudiences, true
+}
+
+// HasLinkedAudiences returns a boolean if a field has been set.
+func (o *DestinationMetadataPlatformsV1) HasLinkedAudiences() bool {
+	if o != nil && !IsNil(o.LinkedAudiences) {
+		return true
+	}
+
+	return false
+}
+
+// SetLinkedAudiences gets a reference to the given bool and assigns it to the LinkedAudiences field.
+func (o *DestinationMetadataPlatformsV1) SetLinkedAudiences(v bool) {
+	o.LinkedAudiences = &v
+}
+
 func (o DestinationMetadataPlatformsV1) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -233,6 +267,9 @@ func (o DestinationMetadataPlatformsV1) ToMap() (map[string]interface{}, error) 
 	}
 	if !IsNil(o.CloudAppObject) {
 		toSerialize["cloudAppObject"] = o.CloudAppObject
+	}
+	if !IsNil(o.LinkedAudiences) {
+		toSerialize["linkedAudiences"] = o.LinkedAudiences
 	}
 	return toSerialize, nil
 }

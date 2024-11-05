@@ -18,7 +18,7 @@ import (
 // checks if the GetDeliveryOverviewMetricsBetaOutput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetDeliveryOverviewMetricsBetaOutput{}
 
-// GetDeliveryOverviewMetricsBetaOutput Output of the Delivery Overview public API endpoints.
+// GetDeliveryOverviewMetricsBetaOutput Output of the Delivery Overview public api endpoints.
 type GetDeliveryOverviewMetricsBetaOutput struct {
 	// The total number of events for the returned dataset.
 	Total float32 `json:"total"`
