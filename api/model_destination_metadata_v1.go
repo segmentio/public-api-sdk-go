@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 56.0.0
+API version: 57.0.0
 Contact: friends@segment.com
 */
 
@@ -56,6 +56,8 @@ type DestinationMetadataV1 struct {
 	SupportedRegions []string `json:"supportedRegions,omitempty"`
 	// The list of regional endpoints for this Destination.
 	RegionEndpoints []string `json:"regionEndpoints,omitempty"`
+	// This Destination's support for multiple instance types.
+	MultiInstanceSupportedVersion *string `json:"multiInstanceSupportedVersion,omitempty"`
 }
 
 // NewDestinationMetadataV1 instantiates a new DestinationMetadataV1 object
@@ -620,6 +622,38 @@ func (o *DestinationMetadataV1) SetRegionEndpoints(v []string) {
 	o.RegionEndpoints = v
 }
 
+// GetMultiInstanceSupportedVersion returns the MultiInstanceSupportedVersion field value if set, zero value otherwise.
+func (o *DestinationMetadataV1) GetMultiInstanceSupportedVersion() string {
+	if o == nil || IsNil(o.MultiInstanceSupportedVersion) {
+		var ret string
+		return ret
+	}
+	return *o.MultiInstanceSupportedVersion
+}
+
+// GetMultiInstanceSupportedVersionOk returns a tuple with the MultiInstanceSupportedVersion field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DestinationMetadataV1) GetMultiInstanceSupportedVersionOk() (*string, bool) {
+	if o == nil || IsNil(o.MultiInstanceSupportedVersion) {
+		return nil, false
+	}
+	return o.MultiInstanceSupportedVersion, true
+}
+
+// HasMultiInstanceSupportedVersion returns a boolean if a field has been set.
+func (o *DestinationMetadataV1) HasMultiInstanceSupportedVersion() bool {
+	if o != nil && !IsNil(o.MultiInstanceSupportedVersion) {
+		return true
+	}
+
+	return false
+}
+
+// SetMultiInstanceSupportedVersion gets a reference to the given string and assigns it to the MultiInstanceSupportedVersion field.
+func (o *DestinationMetadataV1) SetMultiInstanceSupportedVersion(v string) {
+	o.MultiInstanceSupportedVersion = &v
+}
+
 func (o DestinationMetadataV1) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -657,6 +691,9 @@ func (o DestinationMetadataV1) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.RegionEndpoints) {
 		toSerialize["regionEndpoints"] = o.RegionEndpoints
+	}
+	if !IsNil(o.MultiInstanceSupportedVersion) {
+		toSerialize["multiInstanceSupportedVersion"] = o.MultiInstanceSupportedVersion
 	}
 	return toSerialize, nil
 }
