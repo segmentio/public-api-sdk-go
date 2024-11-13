@@ -4,7 +4,6 @@ All URIs are relative to *https://api.segmentapis.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CancelReverseETLSyncForModel**](ReverseETLAPI.md#CancelReverseETLSyncForModel) | **Post** /reverse-etl-models/{modelId}/syncs/{syncId}/cancel | Cancel Reverse ETL Sync for Model
 [**CreateReverseETLManualSync**](ReverseETLAPI.md#CreateReverseETLManualSync) | **Post** /reverse-etl-syncs | Create Reverse ETL Manual Sync
 [**CreateReverseEtlModel**](ReverseETLAPI.md#CreateReverseEtlModel) | **Post** /reverse-etl-models | Create Reverse Etl Model
 [**DeleteReverseEtlModel**](ReverseETLAPI.md#DeleteReverseEtlModel) | **Delete** /reverse-etl-models/{modelId} | Delete Reverse Etl Model
@@ -14,89 +13,6 @@ Method | HTTP request | Description
 [**ListReverseEtlModels**](ReverseETLAPI.md#ListReverseEtlModels) | **Get** /reverse-etl-models | List Reverse Etl Models
 [**UpdateReverseEtlModel**](ReverseETLAPI.md#UpdateReverseEtlModel) | **Patch** /reverse-etl-models/{modelId} | Update Reverse Etl Model
 
-
-
-## Operation: CancelReverseETLSyncForModel
-
-> CancelReverseETLSyncForModel200Response CancelReverseETLSyncForModel(ctx, modelId, syncId).CancelReverseETLSyncForModelInput(cancelReverseETLSyncForModelInput).Execute()
-
-Cancel Reverse ETL Sync for Model
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    api "github.com/segmentio/public-api-sdk-go"
-)
-
-func main() {
-    modelId := "modelId" // string | 
-    syncId := "1" // string | 
-    cancelReverseETLSyncForModelInput := *api.NewCancelReverseETLSyncForModelInput() // CancelReverseETLSyncForModelInput | 
-
-    configuration := api.NewConfiguration()
-    apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
-    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ReverseETLAPI.CancelReverseETLSyncForModel(ctx, modelId, syncId).CancelReverseETLSyncForModelInput(cancelReverseETLSyncForModelInput).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReverseETLAPI.CancelReverseETLSyncForModel``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-        responseErrors := api.UnwrapFullErrors(err)
-        if responseErrors != nil {
-            for _, responseError := range responseErrors.Errors {
-                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
-            }
-        }
-    }
-    // response from `CancelReverseETLSyncForModel`: CancelReverseETLSyncForModel200Response
-    fmt.Fprintf(os.Stdout, "Response from `ReverseETLAPI.CancelReverseETLSyncForModel`: %v\n", resp.GetData())
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**modelId** | **string** |  | 
-**syncId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCancelReverseETLSyncForModelRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **cancelReverseETLSyncForModelInput** | [**CancelReverseETLSyncForModelInput**](CancelReverseETLSyncForModelInput.md) |  | 
-
-### Return type
-
-[**CancelReverseETLSyncForModel200Response**](CancelReverseETLSyncForModel200Response.md)
-
-### Authorization
-
-[token](../README.md#token)
-
-### HTTP request headers
-
-- **Content-Type**: application/vnd.segment.v1alpha+json
-- **Accept**: application/vnd.segment.v1alpha+json, application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## Operation: CreateReverseETLManualSync
