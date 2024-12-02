@@ -781,7 +781,7 @@ func (r ApiUpdateComputedTraitForSpaceRequest) Execute() (*UpdateComputedTraitFo
 /*
 UpdateComputedTraitForSpace Update Computed Trait for Space
 
-Updates the enabled status for a computed trait.
+Updates the Computed Trait.
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
