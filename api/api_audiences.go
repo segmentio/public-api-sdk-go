@@ -779,7 +779,7 @@ func (r ApiUpdateAudienceForSpaceRequest) Execute() (*UpdateAudienceForSpace200R
 /*
 UpdateAudienceForSpace Update Audience for Space
 
-# Updates the enabled status for an audience
+Updates the Audience.
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
