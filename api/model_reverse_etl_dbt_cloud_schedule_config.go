@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 57.2.0
+API version: 57.3.0
 Contact: friends@segment.com
 */
 
@@ -18,11 +18,11 @@ import (
 // checks if the ReverseEtlDbtCloudScheduleConfig type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReverseEtlDbtCloudScheduleConfig{}
 
-// ReverseEtlDbtCloudScheduleConfig Definition for dbt cloud job event schedule.
+// ReverseEtlDbtCloudScheduleConfig Definition for a schedule triggered by dbt Cloud job events.
 type ReverseEtlDbtCloudScheduleConfig struct {
-	// The dbt cloud job id used to start a reverse ETL sync.
+	// The dbt Cloud job used to trigger a sync for a Reverse ETL Connection.
 	JobId string `json:"jobId"`
-	// The dbt cloud account id where the job belongs to.
+	// The dbt Cloud account where the job belongs to.
 	AccountId string `json:"accountId"`
 }
 
