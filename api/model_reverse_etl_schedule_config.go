@@ -20,6 +20,7 @@ import (
 // ReverseEtlScheduleConfig struct for ReverseEtlScheduleConfig
 type ReverseEtlScheduleConfig struct {
 	ReverseEtlCronScheduleConfig         *ReverseEtlCronScheduleConfig
+	ReverseEtlDbtCloudScheduleConfig     *ReverseEtlDbtCloudScheduleConfig
 	ReverseEtlPeriodicScheduleConfig     *ReverseEtlPeriodicScheduleConfig
 	ReverseEtlSpecificTimeScheduleConfig *ReverseEtlSpecificTimeScheduleConfig
 }
@@ -44,6 +45,23 @@ func (dst *ReverseEtlScheduleConfig) UnmarshalJSON(data []byte) error {
 		}
 	} else {
 		dst.ReverseEtlCronScheduleConfig = nil
+	}
+
+	// try to unmarshal JSON data into ReverseEtlDbtCloudScheduleConfig
+	decoder = json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&dst.ReverseEtlDbtCloudScheduleConfig)
+	if err == nil {
+		jsonReverseEtlDbtCloudScheduleConfig, _ := json.Marshal(
+			dst.ReverseEtlDbtCloudScheduleConfig,
+		)
+		if string(jsonReverseEtlDbtCloudScheduleConfig) == "{}" { // empty struct
+			dst.ReverseEtlDbtCloudScheduleConfig = nil
+		} else {
+			return nil // data stored in dst.ReverseEtlDbtCloudScheduleConfig, return on the first match
+		}
+	} else {
+		dst.ReverseEtlDbtCloudScheduleConfig = nil
 	}
 
 	// try to unmarshal JSON data into ReverseEtlPeriodicScheduleConfig
@@ -87,6 +105,10 @@ func (dst *ReverseEtlScheduleConfig) UnmarshalJSON(data []byte) error {
 func (src *ReverseEtlScheduleConfig) MarshalJSON() ([]byte, error) {
 	if src.ReverseEtlCronScheduleConfig != nil {
 		return json.Marshal(&src.ReverseEtlCronScheduleConfig)
+	}
+
+	if src.ReverseEtlDbtCloudScheduleConfig != nil {
+		return json.Marshal(&src.ReverseEtlDbtCloudScheduleConfig)
 	}
 
 	if src.ReverseEtlPeriodicScheduleConfig != nil {

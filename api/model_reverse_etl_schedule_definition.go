@@ -20,7 +20,7 @@ var _ MappedNullable = &ReverseEtlScheduleDefinition{}
 
 // ReverseEtlScheduleDefinition Defines a configuration object used for scheduling, which can vary depending on the configured strategy.
 type ReverseEtlScheduleDefinition struct {
-	// Strategy supports: Periodic, Specific Days, Manual, CRON.
+	// Strategy supports: Periodic, Specific Days, Manual, CRON and DBT_CLOUD.
 	Strategy string         `json:"strategy"`
 	Config   NullableConfig `json:"config,omitempty"`
 }
