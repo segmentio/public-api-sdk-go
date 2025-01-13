@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 57.2.0
+API version: 57.3.0
 Contact: friends@segment.com
 */
 
@@ -19,12 +19,12 @@ import (
 	"net/url"
 )
 
-// DBTAPIService DBTAPI service
-type DBTAPIService service
+// DbtAPIService DbtAPI service
+type DbtAPIService service
 
 type ApiCreateDbtModelSyncTriggerRequest struct {
 	ctx                            context.Context
-	ApiService                     *DBTAPIService
+	ApiService                     *DbtAPIService
 	createDbtModelSyncTriggerInput *CreateDbtModelSyncTriggerInput
 }
 
@@ -49,7 +49,7 @@ The rate limit for this endpoint is 10 requests per minute, which is lower than 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateDbtModelSyncTriggerRequest
 */
-func (a *DBTAPIService) CreateDbtModelSyncTrigger(
+func (a *DbtAPIService) CreateDbtModelSyncTrigger(
 	ctx context.Context,
 ) ApiCreateDbtModelSyncTriggerRequest {
 	return ApiCreateDbtModelSyncTriggerRequest{
@@ -61,7 +61,7 @@ func (a *DBTAPIService) CreateDbtModelSyncTrigger(
 // Execute executes the request
 //
 //	@return CreateDbtModelSyncTrigger200Response
-func (a *DBTAPIService) CreateDbtModelSyncTriggerExecute(
+func (a *DbtAPIService) CreateDbtModelSyncTriggerExecute(
 	r ApiCreateDbtModelSyncTriggerRequest,
 ) (*CreateDbtModelSyncTrigger200Response, *http.Response, error) {
 	var (
@@ -73,7 +73,7 @@ func (a *DBTAPIService) CreateDbtModelSyncTriggerExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"DBTAPIService.CreateDbtModelSyncTrigger",
+		"DbtAPIService.CreateDbtModelSyncTrigger",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}

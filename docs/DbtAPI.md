@@ -1,10 +1,10 @@
-# \DBTAPI
+# \DbtAPI
 
 All URIs are relative to *https://api.segmentapis.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateDbtModelSyncTrigger**](DBTAPI.md#CreateDbtModelSyncTrigger) | **Post** /dbt-model-syncs/trigger | Create Dbt Model Sync Trigger
+[**CreateDbtModelSyncTrigger**](DbtAPI.md#CreateDbtModelSyncTrigger) | **Post** /dbt-model-syncs/trigger | Create Dbt Model Sync Trigger
 
 
 
@@ -35,9 +35,9 @@ func main() {
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DBTAPI.CreateDbtModelSyncTrigger(ctx).CreateDbtModelSyncTriggerInput(createDbtModelSyncTriggerInput).Execute()
+    resp, r, err := apiClient.DbtAPI.CreateDbtModelSyncTrigger(ctx).CreateDbtModelSyncTriggerInput(createDbtModelSyncTriggerInput).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DBTAPI.CreateDbtModelSyncTrigger``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DbtAPI.CreateDbtModelSyncTrigger``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -47,7 +47,7 @@ func main() {
         }
     }
     // response from `CreateDbtModelSyncTrigger`: CreateDbtModelSyncTrigger200Response
-    fmt.Fprintf(os.Stdout, "Response from `DBTAPI.CreateDbtModelSyncTrigger`: %v\n", resp.GetData())
+    fmt.Fprintf(os.Stdout, "Response from `DbtAPI.CreateDbtModelSyncTrigger`: %v\n", resp.GetData())
 }
 ```
 
