@@ -48,7 +48,7 @@ CreateCloudSourceRegulation Create Cloud Source Regulation
 
 Creates a Source-scoped regulation.
 
-	Please Note: Suppression rules at the workspace level take precedence over those at the source level. If a user has been suppressed at the workspace level, any attempt to unsuppress them at the source level is not supported and the processing of the request will fail in the Segment
+	Please Note: Suppression rules at the Workspace level take precedence over those at the Source level. If a user has been suppressed at the Workspace level, any attempt to un-suppress at the Source level is not supported and the processing of the request will fail in Segment
 
 	Config API omitted fields:
 
@@ -242,7 +242,7 @@ CreateSourceRegulation Create Source Regulation
 
 Creates a Source-scoped regulation.
 
-	Please Note: Suppression rules at the workspace level take precedence over those at the source level. If a user has been suppressed at the workspace level, any attempt to unsuppress them at the source level is not supported and the processing of the request will fail in the Segment
+	Please Note: Suppression rules at the Workspace level take precedence over those at the Source level. If a user has been suppressed at the Workspace level, any attempt to un-suppress at the Source level is not supported and the processing of the request will fail in Segment
 
 • When called, this endpoint may generate the `Source Regulation Created` event in the [audit trail](/tag/Audit-Trail).
 
