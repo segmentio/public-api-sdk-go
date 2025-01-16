@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateSourceRegulationV1Input{}
 
 // CreateSourceRegulationV1Input The input to create a Source-scoped regulation.
 type CreateSourceRegulationV1Input struct {
-	// The regulation type to create.
+	// The regulation type to create. Please note that `DELETE_ARCHIVE_ONLY` is only supported for limited Workspaces for Source-scoped regulations.
 	RegulationType string `json:"regulationType"`
 	// The subject type.
 	SubjectType string `json:"subjectType"`
