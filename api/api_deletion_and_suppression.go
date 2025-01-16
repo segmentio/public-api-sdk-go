@@ -48,7 +48,9 @@ CreateCloudSourceRegulation Create Cloud Source Regulation
 
 Creates a Source-scoped regulation.
 
-	Config API omitted fields:
+	Please Note: Suppression rules at the Workspace level take precedence over those at the Source level. If a user has been suppressed at the Workspace level, any attempt to un-suppress at the Source level is not supported and the processing of the request will fail in Segment
+
+	     Config API omitted fields:
 
 - `attributes`,
 - `userAgent`
@@ -239,6 +241,8 @@ func (r ApiCreateSourceRegulationRequest) Execute() (*CreateSourceRegulation200R
 CreateSourceRegulation Create Source Regulation
 
 Creates a Source-scoped regulation.
+
+	Please Note: Suppression rules at the Workspace level take precedence over those at the Source level. If a user has been suppressed at the Workspace level, any attempt to un-suppress at the Source level is not supported and the processing of the request will fail in Segment
 
 • When called, this endpoint may generate the `Source Regulation Created` event in the [audit trail](/tag/Audit-Trail).
 
