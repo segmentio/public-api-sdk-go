@@ -22,9 +22,9 @@ var _ MappedNullable = &CreateSourceRegulationV1Input{}
 type CreateSourceRegulationV1Input struct {
 	// The regulation type to create. Please note that `DELETE_ARCHIVE_ONLY` is only supported for limited Workspaces for Source-scoped regulations.
 	RegulationType string `json:"regulationType"`
-	// The subject type.
+	// The subject type. Note: `ANONYMOUS_ID` is only supported for limited Workspaces for Source-scoped regulations. `ANONYMOUS_ID` is only supported when regulationType is `DELETE_ARCHIVE_ONLY`.
 	SubjectType string `json:"subjectType"`
-	// The list of `userId` or `objectId` values of the subjects to regulate.  Config API note: equal to `parent` but allows an array.
+	// The list of `userId` or `objectId` or `anonymousId` values of the subjects to regulate.  Config API note: equal to `parent` but allows an array.
 	SubjectIds []string `json:"subjectIds"`
 }
 
