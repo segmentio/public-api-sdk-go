@@ -17,15 +17,14 @@ import (
 	"fmt"
 )
 
-// StatesInner struct for StatesInner
-type StatesInner struct {
+// RulesInner struct for RulesInner
+type RulesInner struct {
 	AudienceExitRule *AudienceExitRule
-	DestinationState *DestinationState
 	EventExitRule    *EventExitRule
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
-func (dst *StatesInner) UnmarshalJSON(data []byte) error {
+func (dst *RulesInner) UnmarshalJSON(data []byte) error {
 	var err error
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
@@ -46,21 +45,6 @@ func (dst *StatesInner) UnmarshalJSON(data []byte) error {
 		dst.AudienceExitRule = nil
 	}
 
-	// try to unmarshal JSON data into DestinationState
-	decoder = json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&dst.DestinationState)
-	if err == nil {
-		jsonDestinationState, _ := json.Marshal(dst.DestinationState)
-		if string(jsonDestinationState) == "{}" { // empty struct
-			dst.DestinationState = nil
-		} else {
-			return nil // data stored in dst.DestinationState, return on the first match
-		}
-	} else {
-		dst.DestinationState = nil
-	}
-
 	// try to unmarshal JSON data into EventExitRule
 	decoder = json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
@@ -76,17 +60,13 @@ func (dst *StatesInner) UnmarshalJSON(data []byte) error {
 		dst.EventExitRule = nil
 	}
 
-	return fmt.Errorf("data failed to match schemas in anyOf(StatesInner)")
+	return fmt.Errorf("data failed to match schemas in anyOf(RulesInner)")
 }
 
 // Marshal data from the first non-nil pointers in the struct to JSON
-func (src *StatesInner) MarshalJSON() ([]byte, error) {
+func (src *RulesInner) MarshalJSON() ([]byte, error) {
 	if src.AudienceExitRule != nil {
 		return json.Marshal(&src.AudienceExitRule)
-	}
-
-	if src.DestinationState != nil {
-		return json.Marshal(&src.DestinationState)
 	}
 
 	if src.EventExitRule != nil {
@@ -96,38 +76,38 @@ func (src *StatesInner) MarshalJSON() ([]byte, error) {
 	return nil, nil // no data in anyOf schemas
 }
 
-type NullableStatesInner struct {
-	value *StatesInner
+type NullableRulesInner struct {
+	value *RulesInner
 	isSet bool
 }
 
-func (v NullableStatesInner) Get() *StatesInner {
+func (v NullableRulesInner) Get() *RulesInner {
 	return v.value
 }
 
-func (v *NullableStatesInner) Set(val *StatesInner) {
+func (v *NullableRulesInner) Set(val *RulesInner) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableStatesInner) IsSet() bool {
+func (v NullableRulesInner) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableStatesInner) Unset() {
+func (v *NullableRulesInner) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableStatesInner(val *StatesInner) *NullableStatesInner {
-	return &NullableStatesInner{value: val, isSet: true}
+func NewNullableRulesInner(val *RulesInner) *NullableRulesInner {
+	return &NullableRulesInner{value: val, isSet: true}
 }
 
-func (v NullableStatesInner) MarshalJSON() ([]byte, error) {
+func (v NullableRulesInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableStatesInner) UnmarshalJSON(src []byte) error {
+func (v *NullableRulesInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

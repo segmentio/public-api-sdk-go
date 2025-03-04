@@ -20,12 +20,12 @@ var _ MappedNullable = &ExitRule{}
 
 // ExitRule struct for ExitRule
 type ExitRule struct {
-	Type               string        `json:"type"`
-	ExitType           string        `json:"exitType"`
-	Enabled            bool          `json:"enabled"`
-	ConcurrencyEnabled bool          `json:"concurrencyEnabled"`
-	Transitions        []Transitions `json:"transitions,omitempty"`
-	Key                Key           `json:"key"`
+	Type                  string   `json:"type"`
+	ExitType              string   `json:"exitType"`
+	Enabled               bool     `json:"enabled"`
+	ConcurrencyEnabled    bool     `json:"concurrencyEnabled"`
+	ConnectedDestinations []string `json:"connectedDestinations,omitempty"`
+	Key                   Key      `json:"key"`
 }
 
 // NewExitRule instantiates a new ExitRule object
@@ -152,36 +152,36 @@ func (o *ExitRule) SetConcurrencyEnabled(v bool) {
 	o.ConcurrencyEnabled = v
 }
 
-// GetTransitions returns the Transitions field value if set, zero value otherwise.
-func (o *ExitRule) GetTransitions() []Transitions {
-	if o == nil || IsNil(o.Transitions) {
-		var ret []Transitions
+// GetConnectedDestinations returns the ConnectedDestinations field value if set, zero value otherwise.
+func (o *ExitRule) GetConnectedDestinations() []string {
+	if o == nil || IsNil(o.ConnectedDestinations) {
+		var ret []string
 		return ret
 	}
-	return o.Transitions
+	return o.ConnectedDestinations
 }
 
-// GetTransitionsOk returns a tuple with the Transitions field value if set, nil otherwise
+// GetConnectedDestinationsOk returns a tuple with the ConnectedDestinations field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ExitRule) GetTransitionsOk() ([]Transitions, bool) {
-	if o == nil || IsNil(o.Transitions) {
+func (o *ExitRule) GetConnectedDestinationsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ConnectedDestinations) {
 		return nil, false
 	}
-	return o.Transitions, true
+	return o.ConnectedDestinations, true
 }
 
-// HasTransitions returns a boolean if a field has been set.
-func (o *ExitRule) HasTransitions() bool {
-	if o != nil && !IsNil(o.Transitions) {
+// HasConnectedDestinations returns a boolean if a field has been set.
+func (o *ExitRule) HasConnectedDestinations() bool {
+	if o != nil && !IsNil(o.ConnectedDestinations) {
 		return true
 	}
 
 	return false
 }
 
-// SetTransitions gets a reference to the given []Transitions and assigns it to the Transitions field.
-func (o *ExitRule) SetTransitions(v []Transitions) {
-	o.Transitions = v
+// SetConnectedDestinations gets a reference to the given []string and assigns it to the ConnectedDestinations field.
+func (o *ExitRule) SetConnectedDestinations(v []string) {
+	o.ConnectedDestinations = v
 }
 
 // GetKey returns the Key field value
@@ -222,8 +222,8 @@ func (o ExitRule) ToMap() (map[string]interface{}, error) {
 	toSerialize["exitType"] = o.ExitType
 	toSerialize["enabled"] = o.Enabled
 	toSerialize["concurrencyEnabled"] = o.ConcurrencyEnabled
-	if !IsNil(o.Transitions) {
-		toSerialize["transitions"] = o.Transitions
+	if !IsNil(o.ConnectedDestinations) {
+		toSerialize["connectedDestinations"] = o.ConnectedDestinations
 	}
 	toSerialize["key"] = o.Key
 	return toSerialize, nil

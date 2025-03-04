@@ -25,7 +25,7 @@ type UpdateDestinationsForJourneyAlphaOutput struct {
 	// The version of journey.
 	Version *float32 `json:"version,omitempty"`
 	// The updated DESTINATIONS.
-	Destinations []DestinationState `json:"destinations"`
+	Destinations []DestinationsInner `json:"destinations"`
 }
 
 // NewUpdateDestinationsForJourneyAlphaOutput instantiates a new UpdateDestinationsForJourneyAlphaOutput object
@@ -34,7 +34,7 @@ type UpdateDestinationsForJourneyAlphaOutput struct {
 // will change when the set of required properties is changed
 func NewUpdateDestinationsForJourneyAlphaOutput(
 	containerId string,
-	destinations []DestinationState,
+	destinations []DestinationsInner,
 ) *UpdateDestinationsForJourneyAlphaOutput {
 	this := UpdateDestinationsForJourneyAlphaOutput{}
 	this.ContainerId = containerId
@@ -107,9 +107,9 @@ func (o *UpdateDestinationsForJourneyAlphaOutput) SetVersion(v float32) {
 }
 
 // GetDestinations returns the Destinations field value
-func (o *UpdateDestinationsForJourneyAlphaOutput) GetDestinations() []DestinationState {
+func (o *UpdateDestinationsForJourneyAlphaOutput) GetDestinations() []DestinationsInner {
 	if o == nil {
-		var ret []DestinationState
+		var ret []DestinationsInner
 		return ret
 	}
 
@@ -118,7 +118,7 @@ func (o *UpdateDestinationsForJourneyAlphaOutput) GetDestinations() []Destinatio
 
 // GetDestinationsOk returns a tuple with the Destinations field value
 // and a boolean to check if the value has been set.
-func (o *UpdateDestinationsForJourneyAlphaOutput) GetDestinationsOk() ([]DestinationState, bool) {
+func (o *UpdateDestinationsForJourneyAlphaOutput) GetDestinationsOk() ([]DestinationsInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -126,7 +126,7 @@ func (o *UpdateDestinationsForJourneyAlphaOutput) GetDestinationsOk() ([]Destina
 }
 
 // SetDestinations sets field value
-func (o *UpdateDestinationsForJourneyAlphaOutput) SetDestinations(v []DestinationState) {
+func (o *UpdateDestinationsForJourneyAlphaOutput) SetDestinations(v []DestinationsInner) {
 	o.Destinations = v
 }
 

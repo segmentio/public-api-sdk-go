@@ -20,18 +20,19 @@ var _ MappedNullable = &ExitRulesConfig{}
 
 // ExitRulesConfig The exit rules configuration.
 type ExitRulesConfig struct {
-	Enabled bool          `json:"enabled"`
-	States  []StatesInner `json:"states"`
+	Enabled             bool                   `json:"enabled"`
+	Rules               []RulesInner           `json:"rules"`
+	RelatedDestinations []ExitDestinationState `json:"relatedDestinations,omitempty"`
 }
 
 // NewExitRulesConfig instantiates a new ExitRulesConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewExitRulesConfig(enabled bool, states []StatesInner) *ExitRulesConfig {
+func NewExitRulesConfig(enabled bool, rules []RulesInner) *ExitRulesConfig {
 	this := ExitRulesConfig{}
 	this.Enabled = enabled
-	this.States = states
+	this.Rules = rules
 	return &this
 }
 
@@ -67,28 +68,60 @@ func (o *ExitRulesConfig) SetEnabled(v bool) {
 	o.Enabled = v
 }
 
-// GetStates returns the States field value
-func (o *ExitRulesConfig) GetStates() []StatesInner {
+// GetRules returns the Rules field value
+func (o *ExitRulesConfig) GetRules() []RulesInner {
 	if o == nil {
-		var ret []StatesInner
+		var ret []RulesInner
 		return ret
 	}
 
-	return o.States
+	return o.Rules
 }
 
-// GetStatesOk returns a tuple with the States field value
+// GetRulesOk returns a tuple with the Rules field value
 // and a boolean to check if the value has been set.
-func (o *ExitRulesConfig) GetStatesOk() ([]StatesInner, bool) {
+func (o *ExitRulesConfig) GetRulesOk() ([]RulesInner, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.States, true
+	return o.Rules, true
 }
 
-// SetStates sets field value
-func (o *ExitRulesConfig) SetStates(v []StatesInner) {
-	o.States = v
+// SetRules sets field value
+func (o *ExitRulesConfig) SetRules(v []RulesInner) {
+	o.Rules = v
+}
+
+// GetRelatedDestinations returns the RelatedDestinations field value if set, zero value otherwise.
+func (o *ExitRulesConfig) GetRelatedDestinations() []ExitDestinationState {
+	if o == nil || IsNil(o.RelatedDestinations) {
+		var ret []ExitDestinationState
+		return ret
+	}
+	return o.RelatedDestinations
+}
+
+// GetRelatedDestinationsOk returns a tuple with the RelatedDestinations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ExitRulesConfig) GetRelatedDestinationsOk() ([]ExitDestinationState, bool) {
+	if o == nil || IsNil(o.RelatedDestinations) {
+		return nil, false
+	}
+	return o.RelatedDestinations, true
+}
+
+// HasRelatedDestinations returns a boolean if a field has been set.
+func (o *ExitRulesConfig) HasRelatedDestinations() bool {
+	if o != nil && !IsNil(o.RelatedDestinations) {
+		return true
+	}
+
+	return false
+}
+
+// SetRelatedDestinations gets a reference to the given []ExitDestinationState and assigns it to the RelatedDestinations field.
+func (o *ExitRulesConfig) SetRelatedDestinations(v []ExitDestinationState) {
+	o.RelatedDestinations = v
 }
 
 func (o ExitRulesConfig) MarshalJSON() ([]byte, error) {
@@ -102,7 +135,10 @@ func (o ExitRulesConfig) MarshalJSON() ([]byte, error) {
 func (o ExitRulesConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["enabled"] = o.Enabled
-	toSerialize["states"] = o.States
+	toSerialize["rules"] = o.Rules
+	if !IsNil(o.RelatedDestinations) {
+		toSerialize["relatedDestinations"] = o.RelatedDestinations
+	}
 	return toSerialize, nil
 }
 

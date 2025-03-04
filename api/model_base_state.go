@@ -18,9 +18,17 @@ import (
 
 // BaseState - struct for BaseState
 type BaseState struct {
-	ExitRule        *ExitRule
-	ExitState       *ExitState
-	TransitionState *TransitionState
+	ExitDestinationState *ExitDestinationState
+	ExitRule             *ExitRule
+	ExitState            *ExitState
+	TransitionState      *TransitionState
+}
+
+// ExitDestinationStateAsBaseState is a convenience function that returns ExitDestinationState wrapped in BaseState
+func ExitDestinationStateAsBaseState(v *ExitDestinationState) BaseState {
+	return BaseState{
+		ExitDestinationState: v,
+	}
 }
 
 // ExitRuleAsBaseState is a convenience function that returns ExitRule wrapped in BaseState
@@ -48,6 +56,19 @@ func TransitionStateAsBaseState(v *TransitionState) BaseState {
 func (dst *BaseState) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into ExitDestinationState
+	err = newStrictDecoder(data).Decode(&dst.ExitDestinationState)
+	if err == nil {
+		jsonExitDestinationState, _ := json.Marshal(dst.ExitDestinationState)
+		if string(jsonExitDestinationState) == "{}" { // empty struct
+			dst.ExitDestinationState = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.ExitDestinationState = nil
+	}
+
 	// try to unmarshal data into ExitRule
 	err = newStrictDecoder(data).Decode(&dst.ExitRule)
 	if err == nil {
@@ -89,6 +110,7 @@ func (dst *BaseState) UnmarshalJSON(data []byte) error {
 
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.ExitDestinationState = nil
 		dst.ExitRule = nil
 		dst.ExitState = nil
 		dst.TransitionState = nil
@@ -103,6 +125,10 @@ func (dst *BaseState) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src BaseState) MarshalJSON() ([]byte, error) {
+	if src.ExitDestinationState != nil {
+		return json.Marshal(&src.ExitDestinationState)
+	}
+
 	if src.ExitRule != nil {
 		return json.Marshal(&src.ExitRule)
 	}
@@ -123,6 +149,10 @@ func (obj *BaseState) GetActualInstance() interface{} {
 	if obj == nil {
 		return nil
 	}
+	if obj.ExitDestinationState != nil {
+		return obj.ExitDestinationState
+	}
+
 	if obj.ExitRule != nil {
 		return obj.ExitRule
 	}
