@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 57.3.0
+API version: 58.0.0
 Contact: friends@segment.com
 */
 
@@ -32,10 +32,6 @@ type UpdateFilterByIdInput struct {
 	If *string `json:"if,omitempty"`
 	// Whether the event is dropped.
 	Drop *bool `json:"drop,omitempty"`
-	// Describes the properties to be dropped on events that match the \"if\" statement.
-	DropProperties []string `json:"dropProperties,omitempty"`
-	// Describes the properties allowed on events that match the \"if\" statement.
-	AllowProperties []string `json:"allowProperties,omitempty"`
 }
 
 // NewUpdateFilterByIdInput instantiates a new UpdateFilterByIdInput object
@@ -240,70 +236,6 @@ func (o *UpdateFilterByIdInput) SetDrop(v bool) {
 	o.Drop = &v
 }
 
-// GetDropProperties returns the DropProperties field value if set, zero value otherwise.
-func (o *UpdateFilterByIdInput) GetDropProperties() []string {
-	if o == nil || IsNil(o.DropProperties) {
-		var ret []string
-		return ret
-	}
-	return o.DropProperties
-}
-
-// GetDropPropertiesOk returns a tuple with the DropProperties field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateFilterByIdInput) GetDropPropertiesOk() ([]string, bool) {
-	if o == nil || IsNil(o.DropProperties) {
-		return nil, false
-	}
-	return o.DropProperties, true
-}
-
-// HasDropProperties returns a boolean if a field has been set.
-func (o *UpdateFilterByIdInput) HasDropProperties() bool {
-	if o != nil && !IsNil(o.DropProperties) {
-		return true
-	}
-
-	return false
-}
-
-// SetDropProperties gets a reference to the given []string and assigns it to the DropProperties field.
-func (o *UpdateFilterByIdInput) SetDropProperties(v []string) {
-	o.DropProperties = v
-}
-
-// GetAllowProperties returns the AllowProperties field value if set, zero value otherwise.
-func (o *UpdateFilterByIdInput) GetAllowProperties() []string {
-	if o == nil || IsNil(o.AllowProperties) {
-		var ret []string
-		return ret
-	}
-	return o.AllowProperties
-}
-
-// GetAllowPropertiesOk returns a tuple with the AllowProperties field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateFilterByIdInput) GetAllowPropertiesOk() ([]string, bool) {
-	if o == nil || IsNil(o.AllowProperties) {
-		return nil, false
-	}
-	return o.AllowProperties, true
-}
-
-// HasAllowProperties returns a boolean if a field has been set.
-func (o *UpdateFilterByIdInput) HasAllowProperties() bool {
-	if o != nil && !IsNil(o.AllowProperties) {
-		return true
-	}
-
-	return false
-}
-
-// SetAllowProperties gets a reference to the given []string and assigns it to the AllowProperties field.
-func (o *UpdateFilterByIdInput) SetAllowProperties(v []string) {
-	o.AllowProperties = v
-}
-
 func (o UpdateFilterByIdInput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -329,12 +261,6 @@ func (o UpdateFilterByIdInput) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Drop) {
 		toSerialize["drop"] = o.Drop
-	}
-	if !IsNil(o.DropProperties) {
-		toSerialize["dropProperties"] = o.DropProperties
-	}
-	if !IsNil(o.AllowProperties) {
-		toSerialize["allowProperties"] = o.AllowProperties
 	}
 	return toSerialize, nil
 }
