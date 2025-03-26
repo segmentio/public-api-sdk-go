@@ -18,9 +18,9 @@ import (
 // checks if the ListAudienceConsumersFromSpaceAndAudienceOutput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListAudienceConsumersFromSpaceAndAudienceOutput{}
 
-// ListAudienceConsumersFromSpaceAndAudienceOutput List the audience consumers endpoint output.
+// ListAudienceConsumersFromSpaceAndAudienceOutput List Audience consumers output.
 type ListAudienceConsumersFromSpaceAndAudienceOutput struct {
-	// A list of audience summary results.
+	// The list of audience consumers.
 	Audiences  []AudienceSummary `json:"audiences"`
 	Pagination PaginationOutput  `json:"pagination"`
 }
