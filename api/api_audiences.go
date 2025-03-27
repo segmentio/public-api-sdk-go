@@ -463,7 +463,7 @@ func (a *AudiencesAPIService) ListAudienceConsumersFromSpaceAndAudienceExecute(
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/spaces/{spaceId}/audiences/{id}/consumers"
+	localVarPath := localBasePath + "/spaces/{spaceId}/audiences/{id}/audience-references"
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
