@@ -228,7 +228,7 @@ GetAudience Get Audience
 
 Returns the Audience by id and spaceId.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+• This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
@@ -302,6 +302,7 @@ func (a *AudiencesAPIService) GetAudienceExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 		"application/json",
 	}
