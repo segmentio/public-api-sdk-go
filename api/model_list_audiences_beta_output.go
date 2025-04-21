@@ -21,8 +21,8 @@ var _ MappedNullable = &ListAudiencesBetaOutput{}
 // ListAudiencesBetaOutput List audiences endpoint output.
 type ListAudiencesBetaOutput struct {
 	// A list of audience summary results.
-	Audiences  []AudienceSummaryBeta `json:"audiences"`
-	Pagination PaginationOutput      `json:"pagination"`
+	Audiences  []AudienceSummary `json:"audiences"`
+	Pagination PaginationOutput  `json:"pagination"`
 }
 
 // NewListAudiencesBetaOutput instantiates a new ListAudiencesBetaOutput object
@@ -30,7 +30,7 @@ type ListAudiencesBetaOutput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewListAudiencesBetaOutput(
-	audiences []AudienceSummaryBeta,
+	audiences []AudienceSummary,
 	pagination PaginationOutput,
 ) *ListAudiencesBetaOutput {
 	this := ListAudiencesBetaOutput{}
@@ -48,9 +48,9 @@ func NewListAudiencesBetaOutputWithDefaults() *ListAudiencesBetaOutput {
 }
 
 // GetAudiences returns the Audiences field value
-func (o *ListAudiencesBetaOutput) GetAudiences() []AudienceSummaryBeta {
+func (o *ListAudiencesBetaOutput) GetAudiences() []AudienceSummary {
 	if o == nil {
-		var ret []AudienceSummaryBeta
+		var ret []AudienceSummary
 		return ret
 	}
 
@@ -59,7 +59,7 @@ func (o *ListAudiencesBetaOutput) GetAudiences() []AudienceSummaryBeta {
 
 // GetAudiencesOk returns a tuple with the Audiences field value
 // and a boolean to check if the value has been set.
-func (o *ListAudiencesBetaOutput) GetAudiencesOk() ([]AudienceSummaryBeta, bool) {
+func (o *ListAudiencesBetaOutput) GetAudiencesOk() ([]AudienceSummary, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *ListAudiencesBetaOutput) GetAudiencesOk() ([]AudienceSummaryBeta, bool)
 }
 
 // SetAudiences sets field value
-func (o *ListAudiencesBetaOutput) SetAudiences(v []AudienceSummaryBeta) {
+func (o *ListAudiencesBetaOutput) SetAudiences(v []AudienceSummary) {
 	o.Audiences = v
 }
 

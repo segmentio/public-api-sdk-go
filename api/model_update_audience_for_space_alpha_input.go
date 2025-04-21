@@ -15,39 +15,39 @@ import (
 	"encoding/json"
 )
 
-// checks if the UpdateAudienceForSpaceInput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &UpdateAudienceForSpaceInput{}
+// checks if the UpdateAudienceForSpaceAlphaInput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &UpdateAudienceForSpaceAlphaInput{}
 
-// UpdateAudienceForSpaceInput Input to update an audience.
-type UpdateAudienceForSpaceInput struct {
+// UpdateAudienceForSpaceAlphaInput Input to update an audience.
+type UpdateAudienceForSpaceAlphaInput struct {
 	// Enabled/disabled status for the audience.
 	Enabled *bool `json:"enabled,omitempty"`
 	// The name of the computation.
 	Name *string `json:"name,omitempty"`
 	// The description of the computation.
-	Description *string                        `json:"description,omitempty"`
-	Definition  *AudienceComputationDefinition `json:"definition,omitempty"`
+	Description *string             `json:"description,omitempty"`
+	Definition  *AudienceDefinition `json:"definition,omitempty"`
 }
 
-// NewUpdateAudienceForSpaceInput instantiates a new UpdateAudienceForSpaceInput object
+// NewUpdateAudienceForSpaceAlphaInput instantiates a new UpdateAudienceForSpaceAlphaInput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateAudienceForSpaceInput() *UpdateAudienceForSpaceInput {
-	this := UpdateAudienceForSpaceInput{}
+func NewUpdateAudienceForSpaceAlphaInput() *UpdateAudienceForSpaceAlphaInput {
+	this := UpdateAudienceForSpaceAlphaInput{}
 	return &this
 }
 
-// NewUpdateAudienceForSpaceInputWithDefaults instantiates a new UpdateAudienceForSpaceInput object
+// NewUpdateAudienceForSpaceAlphaInputWithDefaults instantiates a new UpdateAudienceForSpaceAlphaInput object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewUpdateAudienceForSpaceInputWithDefaults() *UpdateAudienceForSpaceInput {
-	this := UpdateAudienceForSpaceInput{}
+func NewUpdateAudienceForSpaceAlphaInputWithDefaults() *UpdateAudienceForSpaceAlphaInput {
+	this := UpdateAudienceForSpaceAlphaInput{}
 	return &this
 }
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
-func (o *UpdateAudienceForSpaceInput) GetEnabled() bool {
+func (o *UpdateAudienceForSpaceAlphaInput) GetEnabled() bool {
 	if o == nil || IsNil(o.Enabled) {
 		var ret bool
 		return ret
@@ -57,7 +57,7 @@ func (o *UpdateAudienceForSpaceInput) GetEnabled() bool {
 
 // GetEnabledOk returns a tuple with the Enabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAudienceForSpaceInput) GetEnabledOk() (*bool, bool) {
+func (o *UpdateAudienceForSpaceAlphaInput) GetEnabledOk() (*bool, bool) {
 	if o == nil || IsNil(o.Enabled) {
 		return nil, false
 	}
@@ -65,7 +65,7 @@ func (o *UpdateAudienceForSpaceInput) GetEnabledOk() (*bool, bool) {
 }
 
 // HasEnabled returns a boolean if a field has been set.
-func (o *UpdateAudienceForSpaceInput) HasEnabled() bool {
+func (o *UpdateAudienceForSpaceAlphaInput) HasEnabled() bool {
 	if o != nil && !IsNil(o.Enabled) {
 		return true
 	}
@@ -74,12 +74,12 @@ func (o *UpdateAudienceForSpaceInput) HasEnabled() bool {
 }
 
 // SetEnabled gets a reference to the given bool and assigns it to the Enabled field.
-func (o *UpdateAudienceForSpaceInput) SetEnabled(v bool) {
+func (o *UpdateAudienceForSpaceAlphaInput) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *UpdateAudienceForSpaceInput) GetName() string {
+func (o *UpdateAudienceForSpaceAlphaInput) GetName() string {
 	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
@@ -89,7 +89,7 @@ func (o *UpdateAudienceForSpaceInput) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAudienceForSpaceInput) GetNameOk() (*string, bool) {
+func (o *UpdateAudienceForSpaceAlphaInput) GetNameOk() (*string, bool) {
 	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
@@ -97,7 +97,7 @@ func (o *UpdateAudienceForSpaceInput) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *UpdateAudienceForSpaceInput) HasName() bool {
+func (o *UpdateAudienceForSpaceAlphaInput) HasName() bool {
 	if o != nil && !IsNil(o.Name) {
 		return true
 	}
@@ -106,12 +106,12 @@ func (o *UpdateAudienceForSpaceInput) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *UpdateAudienceForSpaceInput) SetName(v string) {
+func (o *UpdateAudienceForSpaceAlphaInput) SetName(v string) {
 	o.Name = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *UpdateAudienceForSpaceInput) GetDescription() string {
+func (o *UpdateAudienceForSpaceAlphaInput) GetDescription() string {
 	if o == nil || IsNil(o.Description) {
 		var ret string
 		return ret
@@ -121,7 +121,7 @@ func (o *UpdateAudienceForSpaceInput) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAudienceForSpaceInput) GetDescriptionOk() (*string, bool) {
+func (o *UpdateAudienceForSpaceAlphaInput) GetDescriptionOk() (*string, bool) {
 	if o == nil || IsNil(o.Description) {
 		return nil, false
 	}
@@ -129,7 +129,7 @@ func (o *UpdateAudienceForSpaceInput) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *UpdateAudienceForSpaceInput) HasDescription() bool {
+func (o *UpdateAudienceForSpaceAlphaInput) HasDescription() bool {
 	if o != nil && !IsNil(o.Description) {
 		return true
 	}
@@ -138,14 +138,14 @@ func (o *UpdateAudienceForSpaceInput) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *UpdateAudienceForSpaceInput) SetDescription(v string) {
+func (o *UpdateAudienceForSpaceAlphaInput) SetDescription(v string) {
 	o.Description = &v
 }
 
 // GetDefinition returns the Definition field value if set, zero value otherwise.
-func (o *UpdateAudienceForSpaceInput) GetDefinition() AudienceComputationDefinition {
+func (o *UpdateAudienceForSpaceAlphaInput) GetDefinition() AudienceDefinition {
 	if o == nil || IsNil(o.Definition) {
-		var ret AudienceComputationDefinition
+		var ret AudienceDefinition
 		return ret
 	}
 	return *o.Definition
@@ -153,7 +153,7 @@ func (o *UpdateAudienceForSpaceInput) GetDefinition() AudienceComputationDefinit
 
 // GetDefinitionOk returns a tuple with the Definition field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAudienceForSpaceInput) GetDefinitionOk() (*AudienceComputationDefinition, bool) {
+func (o *UpdateAudienceForSpaceAlphaInput) GetDefinitionOk() (*AudienceDefinition, bool) {
 	if o == nil || IsNil(o.Definition) {
 		return nil, false
 	}
@@ -161,7 +161,7 @@ func (o *UpdateAudienceForSpaceInput) GetDefinitionOk() (*AudienceComputationDef
 }
 
 // HasDefinition returns a boolean if a field has been set.
-func (o *UpdateAudienceForSpaceInput) HasDefinition() bool {
+func (o *UpdateAudienceForSpaceAlphaInput) HasDefinition() bool {
 	if o != nil && !IsNil(o.Definition) {
 		return true
 	}
@@ -169,12 +169,12 @@ func (o *UpdateAudienceForSpaceInput) HasDefinition() bool {
 	return false
 }
 
-// SetDefinition gets a reference to the given AudienceComputationDefinition and assigns it to the Definition field.
-func (o *UpdateAudienceForSpaceInput) SetDefinition(v AudienceComputationDefinition) {
+// SetDefinition gets a reference to the given AudienceDefinition and assigns it to the Definition field.
+func (o *UpdateAudienceForSpaceAlphaInput) SetDefinition(v AudienceDefinition) {
 	o.Definition = &v
 }
 
-func (o UpdateAudienceForSpaceInput) MarshalJSON() ([]byte, error) {
+func (o UpdateAudienceForSpaceAlphaInput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -182,7 +182,7 @@ func (o UpdateAudienceForSpaceInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateAudienceForSpaceInput) ToMap() (map[string]interface{}, error) {
+func (o UpdateAudienceForSpaceAlphaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
@@ -199,40 +199,40 @@ func (o UpdateAudienceForSpaceInput) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableUpdateAudienceForSpaceInput struct {
-	value *UpdateAudienceForSpaceInput
+type NullableUpdateAudienceForSpaceAlphaInput struct {
+	value *UpdateAudienceForSpaceAlphaInput
 	isSet bool
 }
 
-func (v NullableUpdateAudienceForSpaceInput) Get() *UpdateAudienceForSpaceInput {
+func (v NullableUpdateAudienceForSpaceAlphaInput) Get() *UpdateAudienceForSpaceAlphaInput {
 	return v.value
 }
 
-func (v *NullableUpdateAudienceForSpaceInput) Set(val *UpdateAudienceForSpaceInput) {
+func (v *NullableUpdateAudienceForSpaceAlphaInput) Set(val *UpdateAudienceForSpaceAlphaInput) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableUpdateAudienceForSpaceInput) IsSet() bool {
+func (v NullableUpdateAudienceForSpaceAlphaInput) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableUpdateAudienceForSpaceInput) Unset() {
+func (v *NullableUpdateAudienceForSpaceAlphaInput) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableUpdateAudienceForSpaceInput(
-	val *UpdateAudienceForSpaceInput,
-) *NullableUpdateAudienceForSpaceInput {
-	return &NullableUpdateAudienceForSpaceInput{value: val, isSet: true}
+func NewNullableUpdateAudienceForSpaceAlphaInput(
+	val *UpdateAudienceForSpaceAlphaInput,
+) *NullableUpdateAudienceForSpaceAlphaInput {
+	return &NullableUpdateAudienceForSpaceAlphaInput{value: val, isSet: true}
 }
 
-func (v NullableUpdateAudienceForSpaceInput) MarshalJSON() ([]byte, error) {
+func (v NullableUpdateAudienceForSpaceAlphaInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableUpdateAudienceForSpaceInput) UnmarshalJSON(src []byte) error {
+func (v *NullableUpdateAudienceForSpaceAlphaInput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

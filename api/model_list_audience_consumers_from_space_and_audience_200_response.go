@@ -20,7 +20,7 @@ var _ MappedNullable = &ListAudienceConsumersFromSpaceAndAudience200Response{}
 
 // ListAudienceConsumersFromSpaceAndAudience200Response struct for ListAudienceConsumersFromSpaceAndAudience200Response
 type ListAudienceConsumersFromSpaceAndAudience200Response struct {
-	Data *ListAudienceConsumersFromSpaceAndAudienceOutput `json:"data,omitempty"`
+	Data *ListAudienceConsumersFromSpaceAndAudienceAlphaOutput `json:"data,omitempty"`
 }
 
 // NewListAudienceConsumersFromSpaceAndAudience200Response instantiates a new ListAudienceConsumersFromSpaceAndAudience200Response object
@@ -41,9 +41,9 @@ func NewListAudienceConsumersFromSpaceAndAudience200ResponseWithDefaults() *List
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *ListAudienceConsumersFromSpaceAndAudience200Response) GetData() ListAudienceConsumersFromSpaceAndAudienceOutput {
+func (o *ListAudienceConsumersFromSpaceAndAudience200Response) GetData() ListAudienceConsumersFromSpaceAndAudienceAlphaOutput {
 	if o == nil || IsNil(o.Data) {
-		var ret ListAudienceConsumersFromSpaceAndAudienceOutput
+		var ret ListAudienceConsumersFromSpaceAndAudienceAlphaOutput
 		return ret
 	}
 	return *o.Data
@@ -51,7 +51,7 @@ func (o *ListAudienceConsumersFromSpaceAndAudience200Response) GetData() ListAud
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListAudienceConsumersFromSpaceAndAudience200Response) GetDataOk() (*ListAudienceConsumersFromSpaceAndAudienceOutput, bool) {
+func (o *ListAudienceConsumersFromSpaceAndAudience200Response) GetDataOk() (*ListAudienceConsumersFromSpaceAndAudienceAlphaOutput, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -67,9 +67,9 @@ func (o *ListAudienceConsumersFromSpaceAndAudience200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given ListAudienceConsumersFromSpaceAndAudienceOutput and assigns it to the Data field.
+// SetData gets a reference to the given ListAudienceConsumersFromSpaceAndAudienceAlphaOutput and assigns it to the Data field.
 func (o *ListAudienceConsumersFromSpaceAndAudience200Response) SetData(
-	v ListAudienceConsumersFromSpaceAndAudienceOutput,
+	v ListAudienceConsumersFromSpaceAndAudienceAlphaOutput,
 ) {
 	o.Data = &v
 }

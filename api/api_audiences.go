@@ -977,17 +977,17 @@ func (a *AudiencesAPIService) RemoveAudienceFromSpaceExecute(
 }
 
 type ApiUpdateAudienceForSpaceRequest struct {
-	ctx                         context.Context
-	ApiService                  *AudiencesAPIService
-	spaceId                     string
-	id                          string
-	updateAudienceForSpaceInput *UpdateAudienceForSpaceInput
+	ctx                              context.Context
+	ApiService                       *AudiencesAPIService
+	spaceId                          string
+	id                               string
+	updateAudienceForSpaceAlphaInput *UpdateAudienceForSpaceAlphaInput
 }
 
-func (r ApiUpdateAudienceForSpaceRequest) UpdateAudienceForSpaceInput(
-	updateAudienceForSpaceInput UpdateAudienceForSpaceInput,
+func (r ApiUpdateAudienceForSpaceRequest) UpdateAudienceForSpaceAlphaInput(
+	updateAudienceForSpaceAlphaInput UpdateAudienceForSpaceAlphaInput,
 ) ApiUpdateAudienceForSpaceRequest {
-	r.updateAudienceForSpaceInput = &updateAudienceForSpaceInput
+	r.updateAudienceForSpaceAlphaInput = &updateAudienceForSpaceAlphaInput
 	return r
 }
 
@@ -1067,9 +1067,9 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.updateAudienceForSpaceInput == nil {
+	if r.updateAudienceForSpaceAlphaInput == nil {
 		return localVarReturnValue, nil, reportError(
-			"updateAudienceForSpaceInput is required and must be specified",
+			"updateAudienceForSpaceAlphaInput is required and must be specified",
 		)
 	}
 
@@ -1094,7 +1094,7 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateAudienceForSpaceInput
+	localVarPostBody = r.updateAudienceForSpaceAlphaInput
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,
