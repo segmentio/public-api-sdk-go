@@ -400,6 +400,8 @@ type ApiListAudienceConsumersFromSpaceAndAudienceRequest struct {
 	spaceId    string
 	id         string
 	pagination *PaginationInput
+	search     *ListAudienceConsumersSearchInput
+	sort       *ListAudienceConsumersSortInput
 }
 
 // Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha.
@@ -407,6 +409,22 @@ func (r ApiListAudienceConsumersFromSpaceAndAudienceRequest) Pagination(
 	pagination PaginationInput,
 ) ApiListAudienceConsumersFromSpaceAndAudienceRequest {
 	r.pagination = &pagination
+	return r
+}
+
+// Optional search criteria  This parameter exists in alpha.
+func (r ApiListAudienceConsumersFromSpaceAndAudienceRequest) Search(
+	search ListAudienceConsumersSearchInput,
+) ApiListAudienceConsumersFromSpaceAndAudienceRequest {
+	r.search = &search
+	return r
+}
+
+// Optional sort criteria  This parameter exists in alpha.
+func (r ApiListAudienceConsumersFromSpaceAndAudienceRequest) Sort(
+	sort ListAudienceConsumersSortInput,
+) ApiListAudienceConsumersFromSpaceAndAudienceRequest {
+	r.sort = &sort
 	return r
 }
 
@@ -484,6 +502,12 @@ func (a *AudiencesAPIService) ListAudienceConsumersFromSpaceAndAudienceExecute(
 
 	if r.pagination != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
+	if r.search != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "")
+	}
+	if r.sort != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
