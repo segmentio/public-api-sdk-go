@@ -400,6 +400,8 @@ type ApiListAudienceConsumersFromSpaceAndAudienceRequest struct {
 	spaceId    string
 	id         string
 	pagination *PaginationInput
+	search     *ListAudienceConsumersSearchInput
+	sort       *ListAudienceConsumersSortInput
 }
 
 // Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha.
@@ -407,6 +409,22 @@ func (r ApiListAudienceConsumersFromSpaceAndAudienceRequest) Pagination(
 	pagination PaginationInput,
 ) ApiListAudienceConsumersFromSpaceAndAudienceRequest {
 	r.pagination = &pagination
+	return r
+}
+
+// Optional search criteria  This parameter exists in alpha.
+func (r ApiListAudienceConsumersFromSpaceAndAudienceRequest) Search(
+	search ListAudienceConsumersSearchInput,
+) ApiListAudienceConsumersFromSpaceAndAudienceRequest {
+	r.search = &search
+	return r
+}
+
+// Optional sort criteria  This parameter exists in alpha.
+func (r ApiListAudienceConsumersFromSpaceAndAudienceRequest) Sort(
+	sort ListAudienceConsumersSortInput,
+) ApiListAudienceConsumersFromSpaceAndAudienceRequest {
+	r.sort = &sort
 	return r
 }
 
@@ -484,6 +502,12 @@ func (a *AudiencesAPIService) ListAudienceConsumersFromSpaceAndAudienceExecute(
 
 	if r.pagination != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
+	if r.search != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "")
+	}
+	if r.sort != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sort", r.sort, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -953,17 +977,17 @@ func (a *AudiencesAPIService) RemoveAudienceFromSpaceExecute(
 }
 
 type ApiUpdateAudienceForSpaceRequest struct {
-	ctx                         context.Context
-	ApiService                  *AudiencesAPIService
-	spaceId                     string
-	id                          string
-	updateAudienceForSpaceInput *UpdateAudienceForSpaceInput
+	ctx                              context.Context
+	ApiService                       *AudiencesAPIService
+	spaceId                          string
+	id                               string
+	updateAudienceForSpaceAlphaInput *UpdateAudienceForSpaceAlphaInput
 }
 
-func (r ApiUpdateAudienceForSpaceRequest) UpdateAudienceForSpaceInput(
-	updateAudienceForSpaceInput UpdateAudienceForSpaceInput,
+func (r ApiUpdateAudienceForSpaceRequest) UpdateAudienceForSpaceAlphaInput(
+	updateAudienceForSpaceAlphaInput UpdateAudienceForSpaceAlphaInput,
 ) ApiUpdateAudienceForSpaceRequest {
-	r.updateAudienceForSpaceInput = &updateAudienceForSpaceInput
+	r.updateAudienceForSpaceAlphaInput = &updateAudienceForSpaceAlphaInput
 	return r
 }
 
@@ -1043,9 +1067,9 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.updateAudienceForSpaceInput == nil {
+	if r.updateAudienceForSpaceAlphaInput == nil {
 		return localVarReturnValue, nil, reportError(
-			"updateAudienceForSpaceInput is required and must be specified",
+			"updateAudienceForSpaceAlphaInput is required and must be specified",
 		)
 	}
 
@@ -1070,7 +1094,7 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateAudienceForSpaceInput
+	localVarPostBody = r.updateAudienceForSpaceAlphaInput
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,

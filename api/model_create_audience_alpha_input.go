@@ -25,9 +25,9 @@ type CreateAudienceAlphaInput struct {
 	// Determines whether a computation is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	// Description of the audience.
-	Description *string                       `json:"description,omitempty"`
-	Definition  AudienceComputationDefinition `json:"definition"`
-	Options     *AudienceOptions              `json:"options,omitempty"`
+	Description *string            `json:"description,omitempty"`
+	Definition  AudienceDefinition `json:"definition"`
+	Options     *AudienceOptions   `json:"options,omitempty"`
 }
 
 // NewCreateAudienceAlphaInput instantiates a new CreateAudienceAlphaInput object
@@ -36,7 +36,7 @@ type CreateAudienceAlphaInput struct {
 // will change when the set of required properties is changed
 func NewCreateAudienceAlphaInput(
 	name string,
-	definition AudienceComputationDefinition,
+	definition AudienceDefinition,
 ) *CreateAudienceAlphaInput {
 	this := CreateAudienceAlphaInput{}
 	this.Name = name
@@ -141,9 +141,9 @@ func (o *CreateAudienceAlphaInput) SetDescription(v string) {
 }
 
 // GetDefinition returns the Definition field value
-func (o *CreateAudienceAlphaInput) GetDefinition() AudienceComputationDefinition {
+func (o *CreateAudienceAlphaInput) GetDefinition() AudienceDefinition {
 	if o == nil {
-		var ret AudienceComputationDefinition
+		var ret AudienceDefinition
 		return ret
 	}
 
@@ -152,7 +152,7 @@ func (o *CreateAudienceAlphaInput) GetDefinition() AudienceComputationDefinition
 
 // GetDefinitionOk returns a tuple with the Definition field value
 // and a boolean to check if the value has been set.
-func (o *CreateAudienceAlphaInput) GetDefinitionOk() (*AudienceComputationDefinition, bool) {
+func (o *CreateAudienceAlphaInput) GetDefinitionOk() (*AudienceDefinition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -160,7 +160,7 @@ func (o *CreateAudienceAlphaInput) GetDefinitionOk() (*AudienceComputationDefini
 }
 
 // SetDefinition sets field value
-func (o *CreateAudienceAlphaInput) SetDefinition(v AudienceComputationDefinition) {
+func (o *CreateAudienceAlphaInput) SetDefinition(v AudienceDefinition) {
 	o.Definition = v
 }
 

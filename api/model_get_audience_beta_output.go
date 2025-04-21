@@ -20,14 +20,14 @@ var _ MappedNullable = &GetAudienceBetaOutput{}
 
 // GetAudienceBetaOutput Audience output for get.
 type GetAudienceBetaOutput struct {
-	Audience AudienceSummaryBeta `json:"audience"`
+	Audience AudienceSummary `json:"audience"`
 }
 
 // NewGetAudienceBetaOutput instantiates a new GetAudienceBetaOutput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetAudienceBetaOutput(audience AudienceSummaryBeta) *GetAudienceBetaOutput {
+func NewGetAudienceBetaOutput(audience AudienceSummary) *GetAudienceBetaOutput {
 	this := GetAudienceBetaOutput{}
 	this.Audience = audience
 	return &this
@@ -42,9 +42,9 @@ func NewGetAudienceBetaOutputWithDefaults() *GetAudienceBetaOutput {
 }
 
 // GetAudience returns the Audience field value
-func (o *GetAudienceBetaOutput) GetAudience() AudienceSummaryBeta {
+func (o *GetAudienceBetaOutput) GetAudience() AudienceSummary {
 	if o == nil {
-		var ret AudienceSummaryBeta
+		var ret AudienceSummary
 		return ret
 	}
 
@@ -53,7 +53,7 @@ func (o *GetAudienceBetaOutput) GetAudience() AudienceSummaryBeta {
 
 // GetAudienceOk returns a tuple with the Audience field value
 // and a boolean to check if the value has been set.
-func (o *GetAudienceBetaOutput) GetAudienceOk() (*AudienceSummaryBeta, bool) {
+func (o *GetAudienceBetaOutput) GetAudienceOk() (*AudienceSummary, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -61,7 +61,7 @@ func (o *GetAudienceBetaOutput) GetAudienceOk() (*AudienceSummaryBeta, bool) {
 }
 
 // SetAudience sets field value
-func (o *GetAudienceBetaOutput) SetAudience(v AudienceSummaryBeta) {
+func (o *GetAudienceBetaOutput) SetAudience(v AudienceSummary) {
 	o.Audience = v
 }
 

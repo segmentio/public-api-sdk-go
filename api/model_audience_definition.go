@@ -18,22 +18,22 @@ import (
 // checks if the AudienceDefinition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AudienceDefinition{}
 
-// AudienceDefinition Defines an audience definition.
+// AudienceDefinition struct for AudienceDefinition
 type AudienceDefinition struct {
-	// The query language string defining the audience segmentation criteria.
-	Query string `json:"query"`
 	// The underlying data type being segmented for this audience.  Possible values: users, accounts.
 	Type string `json:"type"`
+	// The query language string defining the audience segmentation criteria.  For guidance on using the query language, see the [Segment documentation site](https://segment.com/docs/api/public-api/query-language).
+	Query string `json:"query"`
 }
 
 // NewAudienceDefinition instantiates a new AudienceDefinition object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAudienceDefinition(query string, type_ string) *AudienceDefinition {
+func NewAudienceDefinition(type_ string, query string) *AudienceDefinition {
 	this := AudienceDefinition{}
-	this.Query = query
 	this.Type = type_
+	this.Query = query
 	return &this
 }
 
@@ -43,30 +43,6 @@ func NewAudienceDefinition(query string, type_ string) *AudienceDefinition {
 func NewAudienceDefinitionWithDefaults() *AudienceDefinition {
 	this := AudienceDefinition{}
 	return &this
-}
-
-// GetQuery returns the Query field value
-func (o *AudienceDefinition) GetQuery() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Query
-}
-
-// GetQueryOk returns a tuple with the Query field value
-// and a boolean to check if the value has been set.
-func (o *AudienceDefinition) GetQueryOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Query, true
-}
-
-// SetQuery sets field value
-func (o *AudienceDefinition) SetQuery(v string) {
-	o.Query = v
 }
 
 // GetType returns the Type field value
@@ -93,6 +69,30 @@ func (o *AudienceDefinition) SetType(v string) {
 	o.Type = v
 }
 
+// GetQuery returns the Query field value
+func (o *AudienceDefinition) GetQuery() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Query
+}
+
+// GetQueryOk returns a tuple with the Query field value
+// and a boolean to check if the value has been set.
+func (o *AudienceDefinition) GetQueryOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Query, true
+}
+
+// SetQuery sets field value
+func (o *AudienceDefinition) SetQuery(v string) {
+	o.Query = v
+}
+
 func (o AudienceDefinition) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -103,8 +103,8 @@ func (o AudienceDefinition) MarshalJSON() ([]byte, error) {
 
 func (o AudienceDefinition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["query"] = o.Query
 	toSerialize["type"] = o.Type
+	toSerialize["query"] = o.Query
 	return toSerialize, nil
 }
 

@@ -35,7 +35,7 @@ import (
 
 func main() {
     spaceId := "spaceId" // string | 
-    createAudienceAlphaInput := *api.NewCreateAudienceAlphaInput("Name_example", *api.NewAudienceComputationDefinition("Type_example", "Query_example")) // CreateAudienceAlphaInput | 
+    createAudienceAlphaInput := *api.NewCreateAudienceAlphaInput("Name_example", *api.NewAudienceDefinition("Type_example", "Query_example")) // CreateAudienceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -176,7 +176,7 @@ Name | Type | Description  | Notes
 
 ## Operation: ListAudienceConsumersFromSpaceAndAudience
 
-> ListAudienceConsumersFromSpaceAndAudience200Response ListAudienceConsumersFromSpaceAndAudience(ctx, spaceId, id).Pagination(pagination).Execute()
+> ListAudienceConsumersFromSpaceAndAudience200Response ListAudienceConsumersFromSpaceAndAudience(ctx, spaceId, id).Pagination(pagination).Search(search).Sort(sort).Execute()
 
 List Audience Consumers from Space And Audience
 
@@ -198,12 +198,14 @@ func main() {
     spaceId := "spaceId" // string | 
     id := "ReferencedAudienceId" // string | 
     pagination := *api.NewPaginationInput(10) // PaginationInput | Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha. (optional)
+    search := *api.NewListAudienceConsumersSearchInput("Type_example", "Query_example") // ListAudienceConsumersSearchInput | Optional search criteria  This parameter exists in alpha. (optional)
+    sort := *api.NewListAudienceConsumersSortInput("Field_example", "Direction_example") // ListAudienceConsumersSortInput | Optional sort criteria  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.ListAudienceConsumersFromSpaceAndAudience(ctx, spaceId, id).Pagination(pagination).Execute()
+    resp, r, err := apiClient.AudiencesAPI.ListAudienceConsumersFromSpaceAndAudience(ctx, spaceId, id).Pagination(pagination).Search(search).Sort(sort).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.ListAudienceConsumersFromSpaceAndAudience``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -238,6 +240,8 @@ Name | Type | Description  | Notes
 
 
  **pagination** | [**PaginationInput**](PaginationInput.md) | Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha. | 
+ **search** | [**ListAudienceConsumersSearchInput**](ListAudienceConsumersSearchInput.md) | Optional search criteria  This parameter exists in alpha. | 
+ **sort** | [**ListAudienceConsumersSortInput**](ListAudienceConsumersSortInput.md) | Optional sort criteria  This parameter exists in alpha. | 
 
 ### Return type
 
@@ -420,7 +424,7 @@ Name | Type | Description  | Notes
 
 ## Operation: UpdateAudienceForSpace
 
-> UpdateAudienceForSpace200Response UpdateAudienceForSpace(ctx, spaceId, id).UpdateAudienceForSpaceInput(updateAudienceForSpaceInput).Execute()
+> UpdateAudienceForSpace200Response UpdateAudienceForSpace(ctx, spaceId, id).UpdateAudienceForSpaceAlphaInput(updateAudienceForSpaceAlphaInput).Execute()
 
 Update Audience for Space
 
@@ -441,13 +445,13 @@ import (
 func main() {
     spaceId := "spaceId" // string | 
     id := "id" // string | 
-    updateAudienceForSpaceInput := *api.NewUpdateAudienceForSpaceInput() // UpdateAudienceForSpaceInput | 
+    updateAudienceForSpaceAlphaInput := *api.NewUpdateAudienceForSpaceAlphaInput() // UpdateAudienceForSpaceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.UpdateAudienceForSpace(ctx, spaceId, id).UpdateAudienceForSpaceInput(updateAudienceForSpaceInput).Execute()
+    resp, r, err := apiClient.AudiencesAPI.UpdateAudienceForSpace(ctx, spaceId, id).UpdateAudienceForSpaceAlphaInput(updateAudienceForSpaceAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.UpdateAudienceForSpace``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -481,7 +485,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **updateAudienceForSpaceInput** | [**UpdateAudienceForSpaceInput**](UpdateAudienceForSpaceInput.md) |  | 
+ **updateAudienceForSpaceAlphaInput** | [**UpdateAudienceForSpaceAlphaInput**](UpdateAudienceForSpaceAlphaInput.md) |  | 
 
 ### Return type
 
