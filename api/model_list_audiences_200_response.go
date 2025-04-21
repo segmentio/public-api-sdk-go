@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.1.1
+API version: 58.2.0
 Contact: friends@segment.com
 */
 
@@ -20,7 +20,7 @@ var _ MappedNullable = &ListAudiences200Response{}
 
 // ListAudiences200Response struct for ListAudiences200Response
 type ListAudiences200Response struct {
-	Data *ListAudiencesAlphaOutput `json:"data,omitempty"`
+	Data *ListAudiencesBetaOutput `json:"data,omitempty"`
 }
 
 // NewListAudiences200Response instantiates a new ListAudiences200Response object
@@ -41,9 +41,9 @@ func NewListAudiences200ResponseWithDefaults() *ListAudiences200Response {
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *ListAudiences200Response) GetData() ListAudiencesAlphaOutput {
+func (o *ListAudiences200Response) GetData() ListAudiencesBetaOutput {
 	if o == nil || IsNil(o.Data) {
-		var ret ListAudiencesAlphaOutput
+		var ret ListAudiencesBetaOutput
 		return ret
 	}
 	return *o.Data
@@ -51,7 +51,7 @@ func (o *ListAudiences200Response) GetData() ListAudiencesAlphaOutput {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListAudiences200Response) GetDataOk() (*ListAudiencesAlphaOutput, bool) {
+func (o *ListAudiences200Response) GetDataOk() (*ListAudiencesBetaOutput, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *ListAudiences200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given ListAudiencesAlphaOutput and assigns it to the Data field.
-func (o *ListAudiences200Response) SetData(v ListAudiencesAlphaOutput) {
+// SetData gets a reference to the given ListAudiencesBetaOutput and assigns it to the Data field.
+func (o *ListAudiences200Response) SetData(v ListAudiencesBetaOutput) {
 	o.Data = &v
 }
 
