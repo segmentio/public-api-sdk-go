@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.2.0
+API version: 58.3.0
 Contact: friends@segment.com
 */
 
@@ -21,8 +21,8 @@ var _ MappedNullable = &ListAudiencesBetaOutput{}
 // ListAudiencesBetaOutput List audiences endpoint output.
 type ListAudiencesBetaOutput struct {
 	// A list of audience summary results.
-	Audiences  []AudienceSummary `json:"audiences"`
-	Pagination PaginationOutput  `json:"pagination"`
+	Audiences  []AudienceSummaryWithAudienceTypeAndLookback `json:"audiences"`
+	Pagination PaginationOutput                             `json:"pagination"`
 }
 
 // NewListAudiencesBetaOutput instantiates a new ListAudiencesBetaOutput object
@@ -30,7 +30,7 @@ type ListAudiencesBetaOutput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewListAudiencesBetaOutput(
-	audiences []AudienceSummary,
+	audiences []AudienceSummaryWithAudienceTypeAndLookback,
 	pagination PaginationOutput,
 ) *ListAudiencesBetaOutput {
 	this := ListAudiencesBetaOutput{}
@@ -48,9 +48,9 @@ func NewListAudiencesBetaOutputWithDefaults() *ListAudiencesBetaOutput {
 }
 
 // GetAudiences returns the Audiences field value
-func (o *ListAudiencesBetaOutput) GetAudiences() []AudienceSummary {
+func (o *ListAudiencesBetaOutput) GetAudiences() []AudienceSummaryWithAudienceTypeAndLookback {
 	if o == nil {
-		var ret []AudienceSummary
+		var ret []AudienceSummaryWithAudienceTypeAndLookback
 		return ret
 	}
 
@@ -59,7 +59,7 @@ func (o *ListAudiencesBetaOutput) GetAudiences() []AudienceSummary {
 
 // GetAudiencesOk returns a tuple with the Audiences field value
 // and a boolean to check if the value has been set.
-func (o *ListAudiencesBetaOutput) GetAudiencesOk() ([]AudienceSummary, bool) {
+func (o *ListAudiencesBetaOutput) GetAudiencesOk() ([]AudienceSummaryWithAudienceTypeAndLookback, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *ListAudiencesBetaOutput) GetAudiencesOk() ([]AudienceSummary, bool) {
 }
 
 // SetAudiences sets field value
-func (o *ListAudiencesBetaOutput) SetAudiences(v []AudienceSummary) {
+func (o *ListAudiencesBetaOutput) SetAudiences(v []AudienceSummaryWithAudienceTypeAndLookback) {
 	o.Audiences = v
 }
 
