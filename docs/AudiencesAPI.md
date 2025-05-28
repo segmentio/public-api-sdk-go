@@ -35,7 +35,7 @@ import (
 )
 
 func main() {
-    spaceId := "spaceId" // string | 
+    spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
     createAudienceAlphaInput := *api.NewCreateAudienceAlphaInput("Name_example", *api.NewAudienceDefinition("Type_example", "Query_example")) // CreateAudienceAlphaInput | 
 
     configuration := api.NewConfiguration()
@@ -115,7 +115,7 @@ import (
 )
 
 func main() {
-    spaceId := "spaceId" // string | 
+    spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
     id := "id" // string | 
 
     configuration := api.NewConfiguration()
@@ -196,8 +196,8 @@ import (
 )
 
 func main() {
-    spaceId := "spaceId" // string | 
-    id := "ReferencedAudienceId" // string | 
+    spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
+    id := "aud_0ujsswThIGTUYm2K8FjOOfXtY1K" // string | 
     pagination := *api.NewPaginationInput(10) // PaginationInput | Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha. (optional)
     search := *api.NewListAudienceConsumersSearchInput("Type_example", "Query_example") // ListAudienceConsumersSearchInput | Optional search criteria  This parameter exists in alpha. (optional)
     sort := *api.NewListAudienceConsumersSortInput("Field_example", "Direction_example") // ListAudienceConsumersSortInput | Optional sort criteria  This parameter exists in alpha. (optional)
@@ -283,7 +283,7 @@ import (
 )
 
 func main() {
-    spaceId := "spaceId" // string | 
+    spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
     pagination := *api.NewListAudiencesPaginationInput(float32(123)) // ListAudiencesPaginationInput | Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
@@ -363,7 +363,7 @@ import (
 )
 
 func main() {
-    spaceId := "spaceId" // string | 
+    spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
     previewAudienceInput := *api.NewPreviewAudienceInput(*api.NewAudienceDefinitionWithoutType("Query_example"), "AudienceType_example") // PreviewAudienceInput | 
 
     configuration := api.NewConfiguration()
@@ -443,8 +443,8 @@ import (
 )
 
 func main() {
-    spaceId := "spaceId" // string | 
-    id := "id" // string | 
+    spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
+    id := "aud_0ujsswThIGTUYm2K8FjOOfXtY1K" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -524,8 +524,8 @@ import (
 )
 
 func main() {
-    spaceId := "spaceId" // string | 
-    id := "id" // string | 
+    spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
+    id := "aud_0ujsswThIGTUYm2K8FjOOfXtY1K" // string | 
     updateAudienceForSpaceAlphaInput := *api.NewUpdateAudienceForSpaceAlphaInput() // UpdateAudienceForSpaceAlphaInput | 
 
     configuration := api.NewConfiguration()
