@@ -29,7 +29,7 @@ import (
 )
 
 func main() {
-    createDownloadAlphaInput := *api.NewCreateDownloadAlphaInput("CollectionId_example", "WorkspaceId_example", "StartTime_example") // CreateDownloadAlphaInput | 
+    createDownloadAlphaInput := *api.NewCreateDownloadAlphaInput("CollectionId_example", "WorkspaceId_example", "Hour_example") // CreateDownloadAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)

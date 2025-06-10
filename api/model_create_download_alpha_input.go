@@ -24,8 +24,8 @@ type CreateDownloadAlphaInput struct {
 	CollectionId string `json:"collectionId"`
 	// The Workspace id for the collection.
 	WorkspaceId string `json:"workspaceId"`
-	// The ISO8601 formatted timestamp corresponding to the beginning of the time range. Currently, there is a month of data retained.
-	StartTime string `json:"startTime"`
+	// The ISO8601 formatted timestamp corresponding to a specific hour and day to retrieve data for. E.g.: 2025-05-07T23:00:00Z Objects are bucketed by hour and a month of data is retained.
+	Hour string `json:"hour"`
 }
 
 // NewCreateDownloadAlphaInput instantiates a new CreateDownloadAlphaInput object
@@ -35,12 +35,12 @@ type CreateDownloadAlphaInput struct {
 func NewCreateDownloadAlphaInput(
 	collectionId string,
 	workspaceId string,
-	startTime string,
+	hour string,
 ) *CreateDownloadAlphaInput {
 	this := CreateDownloadAlphaInput{}
 	this.CollectionId = collectionId
 	this.WorkspaceId = workspaceId
-	this.StartTime = startTime
+	this.Hour = hour
 	return &this
 }
 
@@ -100,28 +100,28 @@ func (o *CreateDownloadAlphaInput) SetWorkspaceId(v string) {
 	o.WorkspaceId = v
 }
 
-// GetStartTime returns the StartTime field value
-func (o *CreateDownloadAlphaInput) GetStartTime() string {
+// GetHour returns the Hour field value
+func (o *CreateDownloadAlphaInput) GetHour() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.StartTime
+	return o.Hour
 }
 
-// GetStartTimeOk returns a tuple with the StartTime field value
+// GetHourOk returns a tuple with the Hour field value
 // and a boolean to check if the value has been set.
-func (o *CreateDownloadAlphaInput) GetStartTimeOk() (*string, bool) {
+func (o *CreateDownloadAlphaInput) GetHourOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.StartTime, true
+	return &o.Hour, true
 }
 
-// SetStartTime sets field value
-func (o *CreateDownloadAlphaInput) SetStartTime(v string) {
-	o.StartTime = v
+// SetHour sets field value
+func (o *CreateDownloadAlphaInput) SetHour(v string) {
+	o.Hour = v
 }
 
 func (o CreateDownloadAlphaInput) MarshalJSON() ([]byte, error) {
@@ -136,7 +136,7 @@ func (o CreateDownloadAlphaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["collectionId"] = o.CollectionId
 	toSerialize["workspaceId"] = o.WorkspaceId
-	toSerialize["startTime"] = o.StartTime
+	toSerialize["hour"] = o.Hour
 	return toSerialize, nil
 }
 
