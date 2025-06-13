@@ -27,7 +27,7 @@ type RunningAudiencePreview struct {
 	// The audience type of the preview.
 	AudienceType string                        `json:"audienceType"`
 	Definition   AudienceDefinitionWithoutType `json:"definition"`
-	Options      AudienceOptionsWithLookback   `json:"options"`
+	Options      AudiencePreviewOptions        `json:"options"`
 }
 
 // NewRunningAudiencePreview instantiates a new RunningAudiencePreview object
@@ -39,7 +39,7 @@ func NewRunningAudiencePreview(
 	id string,
 	audienceType string,
 	definition AudienceDefinitionWithoutType,
-	options AudienceOptionsWithLookback,
+	options AudiencePreviewOptions,
 ) *RunningAudiencePreview {
 	this := RunningAudiencePreview{}
 	this.Status = status
@@ -155,9 +155,9 @@ func (o *RunningAudiencePreview) SetDefinition(v AudienceDefinitionWithoutType) 
 }
 
 // GetOptions returns the Options field value
-func (o *RunningAudiencePreview) GetOptions() AudienceOptionsWithLookback {
+func (o *RunningAudiencePreview) GetOptions() AudiencePreviewOptions {
 	if o == nil {
-		var ret AudienceOptionsWithLookback
+		var ret AudiencePreviewOptions
 		return ret
 	}
 
@@ -166,7 +166,7 @@ func (o *RunningAudiencePreview) GetOptions() AudienceOptionsWithLookback {
 
 // GetOptionsOk returns a tuple with the Options field value
 // and a boolean to check if the value has been set.
-func (o *RunningAudiencePreview) GetOptionsOk() (*AudienceOptionsWithLookback, bool) {
+func (o *RunningAudiencePreview) GetOptionsOk() (*AudiencePreviewOptions, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -174,7 +174,7 @@ func (o *RunningAudiencePreview) GetOptionsOk() (*AudienceOptionsWithLookback, b
 }
 
 // SetOptions sets field value
-func (o *RunningAudiencePreview) SetOptions(v AudienceOptionsWithLookback) {
+func (o *RunningAudiencePreview) SetOptions(v AudiencePreviewOptions) {
 	o.Options = v
 }
 

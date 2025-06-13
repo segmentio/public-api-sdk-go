@@ -17,7 +17,7 @@ import (
 	"fmt"
 )
 
-// AudiencePreview struct for AudiencePreview
+// AudiencePreview Audience preview that can be in one of the three states: completed, running, or failed.
 type AudiencePreview struct {
 	CompletedAudiencePreview *CompletedAudiencePreview
 	FailedAudiencePreview    *FailedAudiencePreview

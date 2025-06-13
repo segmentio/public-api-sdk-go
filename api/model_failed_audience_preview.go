@@ -18,7 +18,7 @@ import (
 // checks if the FailedAudiencePreview type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FailedAudiencePreview{}
 
-// FailedAudiencePreview struct for FailedAudiencePreview
+// FailedAudiencePreview Audience preview that has failed to calculate.
 type FailedAudiencePreview struct {
 	// Status for the audience preview.
 	Status string `json:"status"`
@@ -29,7 +29,7 @@ type FailedAudiencePreview struct {
 	// The audience type of the preview.
 	AudienceType string                        `json:"audienceType"`
 	Definition   AudienceDefinitionWithoutType `json:"definition"`
-	Options      AudienceOptionsWithLookback   `json:"options"`
+	Options      AudiencePreviewOptions        `json:"options"`
 }
 
 // NewFailedAudiencePreview instantiates a new FailedAudiencePreview object
@@ -41,7 +41,7 @@ func NewFailedAudiencePreview(
 	id string,
 	audienceType string,
 	definition AudienceDefinitionWithoutType,
-	options AudienceOptionsWithLookback,
+	options AudiencePreviewOptions,
 ) *FailedAudiencePreview {
 	this := FailedAudiencePreview{}
 	this.Status = status
@@ -189,9 +189,9 @@ func (o *FailedAudiencePreview) SetDefinition(v AudienceDefinitionWithoutType) {
 }
 
 // GetOptions returns the Options field value
-func (o *FailedAudiencePreview) GetOptions() AudienceOptionsWithLookback {
+func (o *FailedAudiencePreview) GetOptions() AudiencePreviewOptions {
 	if o == nil {
-		var ret AudienceOptionsWithLookback
+		var ret AudiencePreviewOptions
 		return ret
 	}
 
@@ -200,7 +200,7 @@ func (o *FailedAudiencePreview) GetOptions() AudienceOptionsWithLookback {
 
 // GetOptionsOk returns a tuple with the Options field value
 // and a boolean to check if the value has been set.
-func (o *FailedAudiencePreview) GetOptionsOk() (*AudienceOptionsWithLookback, bool) {
+func (o *FailedAudiencePreview) GetOptionsOk() (*AudiencePreviewOptions, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -208,7 +208,7 @@ func (o *FailedAudiencePreview) GetOptionsOk() (*AudienceOptionsWithLookback, bo
 }
 
 // SetOptions sets field value
-func (o *FailedAudiencePreview) SetOptions(v AudienceOptionsWithLookback) {
+func (o *FailedAudiencePreview) SetOptions(v AudiencePreviewOptions) {
 	o.Options = v
 }
 

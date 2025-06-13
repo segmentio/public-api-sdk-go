@@ -22,8 +22,8 @@ var _ MappedNullable = &CreateAudiencePreviewAlphaInput{}
 type CreateAudiencePreviewAlphaInput struct {
 	Definition AudienceDefinitionWithoutType `json:"definition"`
 	// Discriminator denoting the audience's product type.  Possible values: USERS, ACCOUNTS.
-	AudienceType string                       `json:"audienceType"`
-	Options      *AudienceOptionsWithLookback `json:"options,omitempty"`
+	AudienceType string                  `json:"audienceType"`
+	Options      *AudiencePreviewOptions `json:"options,omitempty"`
 }
 
 // NewCreateAudiencePreviewAlphaInput instantiates a new CreateAudiencePreviewAlphaInput object
@@ -97,9 +97,9 @@ func (o *CreateAudiencePreviewAlphaInput) SetAudienceType(v string) {
 }
 
 // GetOptions returns the Options field value if set, zero value otherwise.
-func (o *CreateAudiencePreviewAlphaInput) GetOptions() AudienceOptionsWithLookback {
+func (o *CreateAudiencePreviewAlphaInput) GetOptions() AudiencePreviewOptions {
 	if o == nil || IsNil(o.Options) {
-		var ret AudienceOptionsWithLookback
+		var ret AudiencePreviewOptions
 		return ret
 	}
 	return *o.Options
@@ -107,7 +107,7 @@ func (o *CreateAudiencePreviewAlphaInput) GetOptions() AudienceOptionsWithLookba
 
 // GetOptionsOk returns a tuple with the Options field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAudiencePreviewAlphaInput) GetOptionsOk() (*AudienceOptionsWithLookback, bool) {
+func (o *CreateAudiencePreviewAlphaInput) GetOptionsOk() (*AudiencePreviewOptions, bool) {
 	if o == nil || IsNil(o.Options) {
 		return nil, false
 	}
@@ -123,8 +123,8 @@ func (o *CreateAudiencePreviewAlphaInput) HasOptions() bool {
 	return false
 }
 
-// SetOptions gets a reference to the given AudienceOptionsWithLookback and assigns it to the Options field.
-func (o *CreateAudiencePreviewAlphaInput) SetOptions(v AudienceOptionsWithLookback) {
+// SetOptions gets a reference to the given AudiencePreviewOptions and assigns it to the Options field.
+func (o *CreateAudiencePreviewAlphaInput) SetOptions(v AudiencePreviewOptions) {
 	o.Options = &v
 }
 
