@@ -12,88 +12,298 @@ Contact: friends@segment.com
 package api
 
 import (
-	"bytes"
 	"encoding/json"
-	"fmt"
 )
 
-// AudiencePreview Audience preview that can be in one of the three states: completed, running, or failed.
+// checks if the AudiencePreview type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AudiencePreview{}
+
+// AudiencePreview An audience preview.
 type AudiencePreview struct {
-	CompletedAudiencePreview *CompletedAudiencePreview
-	FailedAudiencePreview    *FailedAudiencePreview
-	RunningAudiencePreview   *RunningAudiencePreview
+	// Unique identifier for tracking and retrieving results of an audience preview.
+	Id string `json:"id"`
+	// The audience type of the preview.
+	AudienceType string                        `json:"audienceType"`
+	Definition   AudienceDefinitionWithoutType `json:"definition"`
+	Options      AudiencePreviewOptions        `json:"options"`
+	// Status for the audience preview.
+	Status string `json:"status"`
+	// Sampled result membership for the audience preview. Only has a value if the status is 'COMPLETED'.
+	Results []AudiencePreviewResult `json:"results,omitempty"`
+	Size    *AudienceSize           `json:"size,omitempty"`
+	// Explanation of why the audience preview failed. Only has a value if status is 'FAILED'.
+	FailureReason *string `json:"failureReason,omitempty"`
 }
 
-// Unmarshal JSON data into any of the pointers in the struct
-func (dst *AudiencePreview) UnmarshalJSON(data []byte) error {
-	var err error
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-
-	// try to unmarshal JSON data into CompletedAudiencePreview
-	decoder = json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&dst.CompletedAudiencePreview)
-	if err == nil {
-		jsonCompletedAudiencePreview, _ := json.Marshal(dst.CompletedAudiencePreview)
-		if string(jsonCompletedAudiencePreview) == "{}" { // empty struct
-			dst.CompletedAudiencePreview = nil
-		} else {
-			return nil // data stored in dst.CompletedAudiencePreview, return on the first match
-		}
-	} else {
-		dst.CompletedAudiencePreview = nil
-	}
-
-	// try to unmarshal JSON data into FailedAudiencePreview
-	decoder = json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&dst.FailedAudiencePreview)
-	if err == nil {
-		jsonFailedAudiencePreview, _ := json.Marshal(dst.FailedAudiencePreview)
-		if string(jsonFailedAudiencePreview) == "{}" { // empty struct
-			dst.FailedAudiencePreview = nil
-		} else {
-			return nil // data stored in dst.FailedAudiencePreview, return on the first match
-		}
-	} else {
-		dst.FailedAudiencePreview = nil
-	}
-
-	// try to unmarshal JSON data into RunningAudiencePreview
-	decoder = json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&dst.RunningAudiencePreview)
-	if err == nil {
-		jsonRunningAudiencePreview, _ := json.Marshal(dst.RunningAudiencePreview)
-		if string(jsonRunningAudiencePreview) == "{}" { // empty struct
-			dst.RunningAudiencePreview = nil
-		} else {
-			return nil // data stored in dst.RunningAudiencePreview, return on the first match
-		}
-	} else {
-		dst.RunningAudiencePreview = nil
-	}
-
-	return fmt.Errorf("data failed to match schemas in anyOf(AudiencePreview)")
+// NewAudiencePreview instantiates a new AudiencePreview object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewAudiencePreview(
+	id string,
+	audienceType string,
+	definition AudienceDefinitionWithoutType,
+	options AudiencePreviewOptions,
+	status string,
+) *AudiencePreview {
+	this := AudiencePreview{}
+	this.Id = id
+	this.AudienceType = audienceType
+	this.Definition = definition
+	this.Options = options
+	this.Status = status
+	return &this
 }
 
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src *AudiencePreview) MarshalJSON() ([]byte, error) {
-	if src.CompletedAudiencePreview != nil {
-		return json.Marshal(&src.CompletedAudiencePreview)
+// NewAudiencePreviewWithDefaults instantiates a new AudiencePreview object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewAudiencePreviewWithDefaults() *AudiencePreview {
+	this := AudiencePreview{}
+	return &this
+}
+
+// GetId returns the Id field value
+func (o *AudiencePreview) GetId() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
 
-	if src.FailedAudiencePreview != nil {
-		return json.Marshal(&src.FailedAudiencePreview)
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *AudiencePreview) GetIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *AudiencePreview) SetId(v string) {
+	o.Id = v
+}
+
+// GetAudienceType returns the AudienceType field value
+func (o *AudiencePreview) GetAudienceType() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
 
-	if src.RunningAudiencePreview != nil {
-		return json.Marshal(&src.RunningAudiencePreview)
+	return o.AudienceType
+}
+
+// GetAudienceTypeOk returns a tuple with the AudienceType field value
+// and a boolean to check if the value has been set.
+func (o *AudiencePreview) GetAudienceTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AudienceType, true
+}
+
+// SetAudienceType sets field value
+func (o *AudiencePreview) SetAudienceType(v string) {
+	o.AudienceType = v
+}
+
+// GetDefinition returns the Definition field value
+func (o *AudiencePreview) GetDefinition() AudienceDefinitionWithoutType {
+	if o == nil {
+		var ret AudienceDefinitionWithoutType
+		return ret
 	}
 
-	return nil, nil // no data in anyOf schemas
+	return o.Definition
+}
+
+// GetDefinitionOk returns a tuple with the Definition field value
+// and a boolean to check if the value has been set.
+func (o *AudiencePreview) GetDefinitionOk() (*AudienceDefinitionWithoutType, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Definition, true
+}
+
+// SetDefinition sets field value
+func (o *AudiencePreview) SetDefinition(v AudienceDefinitionWithoutType) {
+	o.Definition = v
+}
+
+// GetOptions returns the Options field value
+func (o *AudiencePreview) GetOptions() AudiencePreviewOptions {
+	if o == nil {
+		var ret AudiencePreviewOptions
+		return ret
+	}
+
+	return o.Options
+}
+
+// GetOptionsOk returns a tuple with the Options field value
+// and a boolean to check if the value has been set.
+func (o *AudiencePreview) GetOptionsOk() (*AudiencePreviewOptions, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Options, true
+}
+
+// SetOptions sets field value
+func (o *AudiencePreview) SetOptions(v AudiencePreviewOptions) {
+	o.Options = v
+}
+
+// GetStatus returns the Status field value
+func (o *AudiencePreview) GetStatus() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value
+// and a boolean to check if the value has been set.
+func (o *AudiencePreview) GetStatusOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Status, true
+}
+
+// SetStatus sets field value
+func (o *AudiencePreview) SetStatus(v string) {
+	o.Status = v
+}
+
+// GetResults returns the Results field value if set, zero value otherwise.
+func (o *AudiencePreview) GetResults() []AudiencePreviewResult {
+	if o == nil || IsNil(o.Results) {
+		var ret []AudiencePreviewResult
+		return ret
+	}
+	return o.Results
+}
+
+// GetResultsOk returns a tuple with the Results field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AudiencePreview) GetResultsOk() ([]AudiencePreviewResult, bool) {
+	if o == nil || IsNil(o.Results) {
+		return nil, false
+	}
+	return o.Results, true
+}
+
+// HasResults returns a boolean if a field has been set.
+func (o *AudiencePreview) HasResults() bool {
+	if o != nil && !IsNil(o.Results) {
+		return true
+	}
+
+	return false
+}
+
+// SetResults gets a reference to the given []AudiencePreviewResult and assigns it to the Results field.
+func (o *AudiencePreview) SetResults(v []AudiencePreviewResult) {
+	o.Results = v
+}
+
+// GetSize returns the Size field value if set, zero value otherwise.
+func (o *AudiencePreview) GetSize() AudienceSize {
+	if o == nil || IsNil(o.Size) {
+		var ret AudienceSize
+		return ret
+	}
+	return *o.Size
+}
+
+// GetSizeOk returns a tuple with the Size field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AudiencePreview) GetSizeOk() (*AudienceSize, bool) {
+	if o == nil || IsNil(o.Size) {
+		return nil, false
+	}
+	return o.Size, true
+}
+
+// HasSize returns a boolean if a field has been set.
+func (o *AudiencePreview) HasSize() bool {
+	if o != nil && !IsNil(o.Size) {
+		return true
+	}
+
+	return false
+}
+
+// SetSize gets a reference to the given AudienceSize and assigns it to the Size field.
+func (o *AudiencePreview) SetSize(v AudienceSize) {
+	o.Size = &v
+}
+
+// GetFailureReason returns the FailureReason field value if set, zero value otherwise.
+func (o *AudiencePreview) GetFailureReason() string {
+	if o == nil || IsNil(o.FailureReason) {
+		var ret string
+		return ret
+	}
+	return *o.FailureReason
+}
+
+// GetFailureReasonOk returns a tuple with the FailureReason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AudiencePreview) GetFailureReasonOk() (*string, bool) {
+	if o == nil || IsNil(o.FailureReason) {
+		return nil, false
+	}
+	return o.FailureReason, true
+}
+
+// HasFailureReason returns a boolean if a field has been set.
+func (o *AudiencePreview) HasFailureReason() bool {
+	if o != nil && !IsNil(o.FailureReason) {
+		return true
+	}
+
+	return false
+}
+
+// SetFailureReason gets a reference to the given string and assigns it to the FailureReason field.
+func (o *AudiencePreview) SetFailureReason(v string) {
+	o.FailureReason = &v
+}
+
+func (o AudiencePreview) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AudiencePreview) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
+	toSerialize["audienceType"] = o.AudienceType
+	toSerialize["definition"] = o.Definition
+	toSerialize["options"] = o.Options
+	toSerialize["status"] = o.Status
+	if !IsNil(o.Results) {
+		toSerialize["results"] = o.Results
+	}
+	if !IsNil(o.Size) {
+		toSerialize["size"] = o.Size
+	}
+	if !IsNil(o.FailureReason) {
+		toSerialize["failureReason"] = o.FailureReason
+	}
+	return toSerialize, nil
 }
 
 type NullableAudiencePreview struct {
