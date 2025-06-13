@@ -19,9 +19,9 @@ import (
 
 // AudiencePreview Audience preview that can be in one of the three states: completed, running, or failed.
 type AudiencePreview struct {
-	CompletedAudiencePreview *CompletedAudiencePreview
-	FailedAudiencePreview    *FailedAudiencePreview
-	RunningAudiencePreview   *RunningAudiencePreview
+	AudiencePreviewAnyOf  *AudiencePreviewAnyOf
+	AudiencePreviewAnyOf1 *AudiencePreviewAnyOf1
+	AudiencePreviewAnyOf2 *AudiencePreviewAnyOf2
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
@@ -31,49 +31,49 @@ func (dst *AudiencePreview) UnmarshalJSON(data []byte) error {
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
 
-	// try to unmarshal JSON data into CompletedAudiencePreview
+	// try to unmarshal JSON data into AudiencePreviewAnyOf
 	decoder = json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&dst.CompletedAudiencePreview)
+	err = decoder.Decode(&dst.AudiencePreviewAnyOf)
 	if err == nil {
-		jsonCompletedAudiencePreview, _ := json.Marshal(dst.CompletedAudiencePreview)
-		if string(jsonCompletedAudiencePreview) == "{}" { // empty struct
-			dst.CompletedAudiencePreview = nil
+		jsonAudiencePreviewAnyOf, _ := json.Marshal(dst.AudiencePreviewAnyOf)
+		if string(jsonAudiencePreviewAnyOf) == "{}" { // empty struct
+			dst.AudiencePreviewAnyOf = nil
 		} else {
-			return nil // data stored in dst.CompletedAudiencePreview, return on the first match
+			return nil // data stored in dst.AudiencePreviewAnyOf, return on the first match
 		}
 	} else {
-		dst.CompletedAudiencePreview = nil
+		dst.AudiencePreviewAnyOf = nil
 	}
 
-	// try to unmarshal JSON data into FailedAudiencePreview
+	// try to unmarshal JSON data into AudiencePreviewAnyOf1
 	decoder = json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&dst.FailedAudiencePreview)
+	err = decoder.Decode(&dst.AudiencePreviewAnyOf1)
 	if err == nil {
-		jsonFailedAudiencePreview, _ := json.Marshal(dst.FailedAudiencePreview)
-		if string(jsonFailedAudiencePreview) == "{}" { // empty struct
-			dst.FailedAudiencePreview = nil
+		jsonAudiencePreviewAnyOf1, _ := json.Marshal(dst.AudiencePreviewAnyOf1)
+		if string(jsonAudiencePreviewAnyOf1) == "{}" { // empty struct
+			dst.AudiencePreviewAnyOf1 = nil
 		} else {
-			return nil // data stored in dst.FailedAudiencePreview, return on the first match
+			return nil // data stored in dst.AudiencePreviewAnyOf1, return on the first match
 		}
 	} else {
-		dst.FailedAudiencePreview = nil
+		dst.AudiencePreviewAnyOf1 = nil
 	}
 
-	// try to unmarshal JSON data into RunningAudiencePreview
+	// try to unmarshal JSON data into AudiencePreviewAnyOf2
 	decoder = json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&dst.RunningAudiencePreview)
+	err = decoder.Decode(&dst.AudiencePreviewAnyOf2)
 	if err == nil {
-		jsonRunningAudiencePreview, _ := json.Marshal(dst.RunningAudiencePreview)
-		if string(jsonRunningAudiencePreview) == "{}" { // empty struct
-			dst.RunningAudiencePreview = nil
+		jsonAudiencePreviewAnyOf2, _ := json.Marshal(dst.AudiencePreviewAnyOf2)
+		if string(jsonAudiencePreviewAnyOf2) == "{}" { // empty struct
+			dst.AudiencePreviewAnyOf2 = nil
 		} else {
-			return nil // data stored in dst.RunningAudiencePreview, return on the first match
+			return nil // data stored in dst.AudiencePreviewAnyOf2, return on the first match
 		}
 	} else {
-		dst.RunningAudiencePreview = nil
+		dst.AudiencePreviewAnyOf2 = nil
 	}
 
 	return fmt.Errorf("data failed to match schemas in anyOf(AudiencePreview)")
@@ -81,16 +81,16 @@ func (dst *AudiencePreview) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src *AudiencePreview) MarshalJSON() ([]byte, error) {
-	if src.CompletedAudiencePreview != nil {
-		return json.Marshal(&src.CompletedAudiencePreview)
+	if src.AudiencePreviewAnyOf != nil {
+		return json.Marshal(&src.AudiencePreviewAnyOf)
 	}
 
-	if src.FailedAudiencePreview != nil {
-		return json.Marshal(&src.FailedAudiencePreview)
+	if src.AudiencePreviewAnyOf1 != nil {
+		return json.Marshal(&src.AudiencePreviewAnyOf1)
 	}
 
-	if src.RunningAudiencePreview != nil {
-		return json.Marshal(&src.RunningAudiencePreview)
+	if src.AudiencePreviewAnyOf2 != nil {
+		return json.Marshal(&src.AudiencePreviewAnyOf2)
 	}
 
 	return nil, nil // no data in anyOf schemas
