@@ -22,8 +22,6 @@ var _ MappedNullable = &CreateDownloadAlphaInput{}
 type CreateDownloadAlphaInput struct {
 	// The collection's unique id.
 	CollectionId string `json:"collectionId"`
-	// The Workspace id for the collection.
-	WorkspaceId string `json:"workspaceId"`
 	// The ISO8601 formatted timestamp corresponding to a specific hour and day to retrieve data for. E.g.: 2025-05-07T23:00:00Z Objects are bucketed by hour and a month of data is retained.
 	Hour string `json:"hour"`
 }
@@ -32,14 +30,9 @@ type CreateDownloadAlphaInput struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateDownloadAlphaInput(
-	collectionId string,
-	workspaceId string,
-	hour string,
-) *CreateDownloadAlphaInput {
+func NewCreateDownloadAlphaInput(collectionId string, hour string) *CreateDownloadAlphaInput {
 	this := CreateDownloadAlphaInput{}
 	this.CollectionId = collectionId
-	this.WorkspaceId = workspaceId
 	this.Hour = hour
 	return &this
 }
@@ -74,30 +67,6 @@ func (o *CreateDownloadAlphaInput) GetCollectionIdOk() (*string, bool) {
 // SetCollectionId sets field value
 func (o *CreateDownloadAlphaInput) SetCollectionId(v string) {
 	o.CollectionId = v
-}
-
-// GetWorkspaceId returns the WorkspaceId field value
-func (o *CreateDownloadAlphaInput) GetWorkspaceId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.WorkspaceId
-}
-
-// GetWorkspaceIdOk returns a tuple with the WorkspaceId field value
-// and a boolean to check if the value has been set.
-func (o *CreateDownloadAlphaInput) GetWorkspaceIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.WorkspaceId, true
-}
-
-// SetWorkspaceId sets field value
-func (o *CreateDownloadAlphaInput) SetWorkspaceId(v string) {
-	o.WorkspaceId = v
 }
 
 // GetHour returns the Hour field value
@@ -135,7 +104,6 @@ func (o CreateDownloadAlphaInput) MarshalJSON() ([]byte, error) {
 func (o CreateDownloadAlphaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["collectionId"] = o.CollectionId
-	toSerialize["workspaceId"] = o.WorkspaceId
 	toSerialize["hour"] = o.Hour
 	return toSerialize, nil
 }
