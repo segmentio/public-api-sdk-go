@@ -15,36 +15,36 @@ import (
 	"encoding/json"
 )
 
-// checks if the AudiencePreviewOptions type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AudiencePreviewOptions{}
+// checks if the CreateAudiencePreviewOptions type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAudiencePreviewOptions{}
 
-// AudiencePreviewOptions Options which should be applied when segmenting audience previews.
-type AudiencePreviewOptions struct {
+// CreateAudiencePreviewOptions Options which should be applied when segmenting audience previews.
+type CreateAudiencePreviewOptions struct {
 	// The set of profile external identifiers being used to determine audience preview membership. Profiles will only be considered for audience preview membership if the profile has at least one external id whose key matches a value in this set. If unspecified, a default set of external identifiers will be used: `['user_id', 'email', 'android.idfa', 'ios.idfa']`.
 	FilterByExternalIds []string `json:"filterByExternalIds,omitempty"`
-	// If specified, the value of this field indicates the number of days (specified from the date the audience preview was created) that event data will be included from when determining audience preview membership. If unspecified, event data will not be included when determining audience preview membership.
+	// If specified, the value of this field indicates the number of days (specified from the date the audience preview was created) that event data will be included from when determining audience preview membership. If not specified, the default is set to the maximum event window size, or 7 days if no window condition is defined. Note that this is applied on a best-effort basis and may not always be applicable. In such cases, the response will not return a backfillEventDataDays value, and all available data will be taken into account.
 	BackfillEventDataDays *float32 `json:"backfillEventDataDays,omitempty"`
 }
 
-// NewAudiencePreviewOptions instantiates a new AudiencePreviewOptions object
+// NewCreateAudiencePreviewOptions instantiates a new CreateAudiencePreviewOptions object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAudiencePreviewOptions() *AudiencePreviewOptions {
-	this := AudiencePreviewOptions{}
+func NewCreateAudiencePreviewOptions() *CreateAudiencePreviewOptions {
+	this := CreateAudiencePreviewOptions{}
 	return &this
 }
 
-// NewAudiencePreviewOptionsWithDefaults instantiates a new AudiencePreviewOptions object
+// NewCreateAudiencePreviewOptionsWithDefaults instantiates a new CreateAudiencePreviewOptions object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAudiencePreviewOptionsWithDefaults() *AudiencePreviewOptions {
-	this := AudiencePreviewOptions{}
+func NewCreateAudiencePreviewOptionsWithDefaults() *CreateAudiencePreviewOptions {
+	this := CreateAudiencePreviewOptions{}
 	return &this
 }
 
 // GetFilterByExternalIds returns the FilterByExternalIds field value if set, zero value otherwise.
-func (o *AudiencePreviewOptions) GetFilterByExternalIds() []string {
+func (o *CreateAudiencePreviewOptions) GetFilterByExternalIds() []string {
 	if o == nil || IsNil(o.FilterByExternalIds) {
 		var ret []string
 		return ret
@@ -54,7 +54,7 @@ func (o *AudiencePreviewOptions) GetFilterByExternalIds() []string {
 
 // GetFilterByExternalIdsOk returns a tuple with the FilterByExternalIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AudiencePreviewOptions) GetFilterByExternalIdsOk() ([]string, bool) {
+func (o *CreateAudiencePreviewOptions) GetFilterByExternalIdsOk() ([]string, bool) {
 	if o == nil || IsNil(o.FilterByExternalIds) {
 		return nil, false
 	}
@@ -62,7 +62,7 @@ func (o *AudiencePreviewOptions) GetFilterByExternalIdsOk() ([]string, bool) {
 }
 
 // HasFilterByExternalIds returns a boolean if a field has been set.
-func (o *AudiencePreviewOptions) HasFilterByExternalIds() bool {
+func (o *CreateAudiencePreviewOptions) HasFilterByExternalIds() bool {
 	if o != nil && !IsNil(o.FilterByExternalIds) {
 		return true
 	}
@@ -71,12 +71,12 @@ func (o *AudiencePreviewOptions) HasFilterByExternalIds() bool {
 }
 
 // SetFilterByExternalIds gets a reference to the given []string and assigns it to the FilterByExternalIds field.
-func (o *AudiencePreviewOptions) SetFilterByExternalIds(v []string) {
+func (o *CreateAudiencePreviewOptions) SetFilterByExternalIds(v []string) {
 	o.FilterByExternalIds = v
 }
 
 // GetBackfillEventDataDays returns the BackfillEventDataDays field value if set, zero value otherwise.
-func (o *AudiencePreviewOptions) GetBackfillEventDataDays() float32 {
+func (o *CreateAudiencePreviewOptions) GetBackfillEventDataDays() float32 {
 	if o == nil || IsNil(o.BackfillEventDataDays) {
 		var ret float32
 		return ret
@@ -86,7 +86,7 @@ func (o *AudiencePreviewOptions) GetBackfillEventDataDays() float32 {
 
 // GetBackfillEventDataDaysOk returns a tuple with the BackfillEventDataDays field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AudiencePreviewOptions) GetBackfillEventDataDaysOk() (*float32, bool) {
+func (o *CreateAudiencePreviewOptions) GetBackfillEventDataDaysOk() (*float32, bool) {
 	if o == nil || IsNil(o.BackfillEventDataDays) {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *AudiencePreviewOptions) GetBackfillEventDataDaysOk() (*float32, bool) {
 }
 
 // HasBackfillEventDataDays returns a boolean if a field has been set.
-func (o *AudiencePreviewOptions) HasBackfillEventDataDays() bool {
+func (o *CreateAudiencePreviewOptions) HasBackfillEventDataDays() bool {
 	if o != nil && !IsNil(o.BackfillEventDataDays) {
 		return true
 	}
@@ -103,11 +103,11 @@ func (o *AudiencePreviewOptions) HasBackfillEventDataDays() bool {
 }
 
 // SetBackfillEventDataDays gets a reference to the given float32 and assigns it to the BackfillEventDataDays field.
-func (o *AudiencePreviewOptions) SetBackfillEventDataDays(v float32) {
+func (o *CreateAudiencePreviewOptions) SetBackfillEventDataDays(v float32) {
 	o.BackfillEventDataDays = &v
 }
 
-func (o AudiencePreviewOptions) MarshalJSON() ([]byte, error) {
+func (o CreateAudiencePreviewOptions) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -115,7 +115,7 @@ func (o AudiencePreviewOptions) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AudiencePreviewOptions) ToMap() (map[string]interface{}, error) {
+func (o CreateAudiencePreviewOptions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.FilterByExternalIds) {
 		toSerialize["filterByExternalIds"] = o.FilterByExternalIds
@@ -126,40 +126,40 @@ func (o AudiencePreviewOptions) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableAudiencePreviewOptions struct {
-	value *AudiencePreviewOptions
+type NullableCreateAudiencePreviewOptions struct {
+	value *CreateAudiencePreviewOptions
 	isSet bool
 }
 
-func (v NullableAudiencePreviewOptions) Get() *AudiencePreviewOptions {
+func (v NullableCreateAudiencePreviewOptions) Get() *CreateAudiencePreviewOptions {
 	return v.value
 }
 
-func (v *NullableAudiencePreviewOptions) Set(val *AudiencePreviewOptions) {
+func (v *NullableCreateAudiencePreviewOptions) Set(val *CreateAudiencePreviewOptions) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAudiencePreviewOptions) IsSet() bool {
+func (v NullableCreateAudiencePreviewOptions) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAudiencePreviewOptions) Unset() {
+func (v *NullableCreateAudiencePreviewOptions) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAudiencePreviewOptions(
-	val *AudiencePreviewOptions,
-) *NullableAudiencePreviewOptions {
-	return &NullableAudiencePreviewOptions{value: val, isSet: true}
+func NewNullableCreateAudiencePreviewOptions(
+	val *CreateAudiencePreviewOptions,
+) *NullableCreateAudiencePreviewOptions {
+	return &NullableCreateAudiencePreviewOptions{value: val, isSet: true}
 }
 
-func (v NullableAudiencePreviewOptions) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAudiencePreviewOptions) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAudiencePreviewOptions) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAudiencePreviewOptions) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

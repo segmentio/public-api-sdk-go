@@ -25,7 +25,7 @@ type AudiencePreview struct {
 	// The audience type of the preview.
 	AudienceType string                        `json:"audienceType"`
 	Definition   AudienceDefinitionWithoutType `json:"definition"`
-	Options      AudiencePreviewOptions        `json:"options"`
+	Options      ReadAudiencePreviewOptions    `json:"options"`
 	// Status for the audience preview.
 	Status string `json:"status"`
 	// Sampled result membership for the audience preview. Only has a value if the status is 'COMPLETED'.
@@ -43,7 +43,7 @@ func NewAudiencePreview(
 	id string,
 	audienceType string,
 	definition AudienceDefinitionWithoutType,
-	options AudiencePreviewOptions,
+	options ReadAudiencePreviewOptions,
 	status string,
 ) *AudiencePreview {
 	this := AudiencePreview{}
@@ -136,9 +136,9 @@ func (o *AudiencePreview) SetDefinition(v AudienceDefinitionWithoutType) {
 }
 
 // GetOptions returns the Options field value
-func (o *AudiencePreview) GetOptions() AudiencePreviewOptions {
+func (o *AudiencePreview) GetOptions() ReadAudiencePreviewOptions {
 	if o == nil {
-		var ret AudiencePreviewOptions
+		var ret ReadAudiencePreviewOptions
 		return ret
 	}
 
@@ -147,7 +147,7 @@ func (o *AudiencePreview) GetOptions() AudiencePreviewOptions {
 
 // GetOptionsOk returns a tuple with the Options field value
 // and a boolean to check if the value has been set.
-func (o *AudiencePreview) GetOptionsOk() (*AudiencePreviewOptions, bool) {
+func (o *AudiencePreview) GetOptionsOk() (*ReadAudiencePreviewOptions, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -155,7 +155,7 @@ func (o *AudiencePreview) GetOptionsOk() (*AudiencePreviewOptions, bool) {
 }
 
 // SetOptions sets field value
-func (o *AudiencePreview) SetOptions(v AudiencePreviewOptions) {
+func (o *AudiencePreview) SetOptions(v ReadAudiencePreviewOptions) {
 	o.Options = v
 }
 
