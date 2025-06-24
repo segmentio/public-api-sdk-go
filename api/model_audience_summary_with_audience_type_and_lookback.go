@@ -23,6 +23,7 @@ type AudienceSummaryWithAudienceTypeAndLookback struct {
 	// Discriminator denoting the audience's product type.
 	AudienceType   string                       `json:"audienceType"`
 	ComputeCadence AudienceComputeCadence       `json:"computeCadence"`
+	Size           *AudienceSize                `json:"size,omitempty"`
 	Options        *AudienceOptionsWithLookback `json:"options,omitempty"`
 	// Audience id.
 	Id string `json:"id"`
@@ -137,6 +138,38 @@ func (o *AudienceSummaryWithAudienceTypeAndLookback) GetComputeCadenceOk() (*Aud
 // SetComputeCadence sets field value
 func (o *AudienceSummaryWithAudienceTypeAndLookback) SetComputeCadence(v AudienceComputeCadence) {
 	o.ComputeCadence = v
+}
+
+// GetSize returns the Size field value if set, zero value otherwise.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) GetSize() AudienceSize {
+	if o == nil || IsNil(o.Size) {
+		var ret AudienceSize
+		return ret
+	}
+	return *o.Size
+}
+
+// GetSizeOk returns a tuple with the Size field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) GetSizeOk() (*AudienceSize, bool) {
+	if o == nil || IsNil(o.Size) {
+		return nil, false
+	}
+	return o.Size, true
+}
+
+// HasSize returns a boolean if a field has been set.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) HasSize() bool {
+	if o != nil && !IsNil(o.Size) {
+		return true
+	}
+
+	return false
+}
+
+// SetSize gets a reference to the given AudienceSize and assigns it to the Size field.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) SetSize(v AudienceSize) {
+	o.Size = &v
 }
 
 // GetOptions returns the Options field value if set, zero value otherwise.
@@ -489,6 +522,9 @@ func (o AudienceSummaryWithAudienceTypeAndLookback) ToMap() (map[string]interfac
 	toSerialize := map[string]interface{}{}
 	toSerialize["audienceType"] = o.AudienceType
 	toSerialize["computeCadence"] = o.ComputeCadence
+	if !IsNil(o.Size) {
+		toSerialize["size"] = o.Size
+	}
 	if !IsNil(o.Options) {
 		toSerialize["options"] = o.Options
 	}
