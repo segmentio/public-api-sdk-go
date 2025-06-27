@@ -42,7 +42,7 @@ func (r ApiCreateDownloadRequest) Execute() (*CreateDownload200Response, *http.R
 /*
 CreateDownload Create Download
 
-Create Customer Insights Presigned URLsThe rate limit for this endpoint is 30 requests per day per workspaceId, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
+Create Customer Insights Presigned URLsThe rate limit for this endpoint is 120 requests per day per workspaceId, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateDownloadRequest
