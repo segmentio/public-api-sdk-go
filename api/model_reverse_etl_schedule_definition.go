@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.6.0
+API version: 58.7.0
 Contact: friends@segment.com
 */
 
@@ -21,8 +21,8 @@ var _ MappedNullable = &ReverseEtlScheduleDefinition{}
 // ReverseEtlScheduleDefinition Defines a configuration object used for scheduling, which can vary depending on the configured strategy.
 type ReverseEtlScheduleDefinition struct {
 	// Strategy supports: Periodic, Specific Days, Manual, CRON and DBT_CLOUD.
-	Strategy string         `json:"strategy"`
-	Config   NullableConfig `json:"config,omitempty"`
+	Strategy string          `json:"strategy"`
+	Config   NullableConfig1 `json:"config,omitempty"`
 }
 
 // NewReverseEtlScheduleDefinition instantiates a new ReverseEtlScheduleDefinition object
@@ -68,9 +68,9 @@ func (o *ReverseEtlScheduleDefinition) SetStrategy(v string) {
 }
 
 // GetConfig returns the Config field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ReverseEtlScheduleDefinition) GetConfig() Config {
+func (o *ReverseEtlScheduleDefinition) GetConfig() Config1 {
 	if o == nil || IsNil(o.Config.Get()) {
-		var ret Config
+		var ret Config1
 		return ret
 	}
 	return *o.Config.Get()
@@ -79,7 +79,7 @@ func (o *ReverseEtlScheduleDefinition) GetConfig() Config {
 // GetConfigOk returns a tuple with the Config field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ReverseEtlScheduleDefinition) GetConfigOk() (*Config, bool) {
+func (o *ReverseEtlScheduleDefinition) GetConfigOk() (*Config1, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -95,8 +95,8 @@ func (o *ReverseEtlScheduleDefinition) HasConfig() bool {
 	return false
 }
 
-// SetConfig gets a reference to the given NullableConfig and assigns it to the Config field.
-func (o *ReverseEtlScheduleDefinition) SetConfig(v Config) {
+// SetConfig gets a reference to the given NullableConfig1 and assigns it to the Config field.
+func (o *ReverseEtlScheduleDefinition) SetConfig(v Config1) {
 	o.Config.Set(&v)
 }
 
