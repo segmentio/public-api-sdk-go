@@ -199,7 +199,7 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
+    id := "aud_171sV3fzJkiY2PnlbpMZJRbrgSW" // string | 
     include := "include_example" // string | Additional resource to include, support schedules only.  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
@@ -363,8 +363,8 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
-    scheduleId := "sch_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
+    id := "aud_171sV3fzJkiY2PnlbpMZJRbrgSW" // string | 
+    scheduleId := "sch_171sV3fzJkiY2PnlbpMZJRbrgSW" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -534,7 +534,7 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
+    id := "aud_171sV3fzJkiY2PnlbpMZJRbrgSW" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
