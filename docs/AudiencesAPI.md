@@ -197,7 +197,7 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    id := "id" // string | 
+    id := "aud_171sV3fzJkiY2PnlbpMZJRbrgSW" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -526,7 +526,7 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    id := "aud_0ujsswThIGTUYm2K8FjOOfXtY1K" // string | 
+    id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -607,7 +607,7 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    id := "aud_0ujsswThIGTUYm2K8FjOOfXtY1K" // string | 
+    id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
     updateAudienceForSpaceAlphaInput := *api.NewUpdateAudienceForSpaceAlphaInput() // UpdateAudienceForSpaceAlphaInput | 
 
     configuration := api.NewConfiguration()
