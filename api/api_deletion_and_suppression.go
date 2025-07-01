@@ -614,9 +614,13 @@ Deletes a regulation from the Workspace. The regulation must be in the initializ
 
 • When called, this endpoint may generate the `Regulation Deleted` event in the [audit trail](/tag/Audit-Trail).
 
+**DEPRECATED**: this endpoint has been deprecated according to the guidelines, and may experience reduced SLA guarantees.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param regulateId
 	@return ApiDeleteRegulationRequest
+
+Deprecated
 */
 func (a *DeletionAndSuppressionAPIService) DeleteRegulation(
 	ctx context.Context,
@@ -632,6 +636,8 @@ func (a *DeletionAndSuppressionAPIService) DeleteRegulation(
 // Execute executes the request
 //
 //	@return DeleteRegulation200Response
+//
+// Deprecated
 func (a *DeletionAndSuppressionAPIService) DeleteRegulationExecute(
 	r ApiDeleteRegulationRequest,
 ) (*DeleteRegulation200Response, *http.Response, error) {
