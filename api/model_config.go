@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.8.0
+API version: 58.9.0
 Contact: friends@segment.com
 */
 
@@ -17,12 +17,10 @@ import (
 	"fmt"
 )
 
-// Config Config contains interval duration in case of periodic or day and hours in case of specific_days. Empty if strategy is MANUAL.
+// Config Configuration for PERIODIC or SPECIFIC_DAYS strategies.
 type Config struct {
-	ReverseEtlCronScheduleConfig         *ReverseEtlCronScheduleConfig
-	ReverseEtlDbtCloudScheduleConfig     *ReverseEtlDbtCloudScheduleConfig
-	ReverseEtlPeriodicScheduleConfig     *ReverseEtlPeriodicScheduleConfig
-	ReverseEtlSpecificTimeScheduleConfig *ReverseEtlSpecificTimeScheduleConfig
+	PeriodicConfig     *PeriodicConfig
+	SpecificDaysConfig *SpecificDaysConfig
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
@@ -37,70 +35,34 @@ func (dst *Config) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	// try to unmarshal JSON data into ReverseEtlCronScheduleConfig
+	// try to unmarshal JSON data into PeriodicConfig
 	decoder = json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&dst.ReverseEtlCronScheduleConfig)
+	err = decoder.Decode(&dst.PeriodicConfig)
 	if err == nil {
-		jsonReverseEtlCronScheduleConfig, _ := json.Marshal(dst.ReverseEtlCronScheduleConfig)
-		if string(jsonReverseEtlCronScheduleConfig) == "{}" { // empty struct
-			dst.ReverseEtlCronScheduleConfig = nil
+		jsonPeriodicConfig, _ := json.Marshal(dst.PeriodicConfig)
+		if string(jsonPeriodicConfig) == "{}" { // empty struct
+			dst.PeriodicConfig = nil
 		} else {
-			return nil // data stored in dst.ReverseEtlCronScheduleConfig, return on the first match
+			return nil // data stored in dst.PeriodicConfig, return on the first match
 		}
 	} else {
-		dst.ReverseEtlCronScheduleConfig = nil
+		dst.PeriodicConfig = nil
 	}
 
-	// try to unmarshal JSON data into ReverseEtlDbtCloudScheduleConfig
+	// try to unmarshal JSON data into SpecificDaysConfig
 	decoder = json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&dst.ReverseEtlDbtCloudScheduleConfig)
+	err = decoder.Decode(&dst.SpecificDaysConfig)
 	if err == nil {
-		jsonReverseEtlDbtCloudScheduleConfig, _ := json.Marshal(
-			dst.ReverseEtlDbtCloudScheduleConfig,
-		)
-		if string(jsonReverseEtlDbtCloudScheduleConfig) == "{}" { // empty struct
-			dst.ReverseEtlDbtCloudScheduleConfig = nil
+		jsonSpecificDaysConfig, _ := json.Marshal(dst.SpecificDaysConfig)
+		if string(jsonSpecificDaysConfig) == "{}" { // empty struct
+			dst.SpecificDaysConfig = nil
 		} else {
-			return nil // data stored in dst.ReverseEtlDbtCloudScheduleConfig, return on the first match
+			return nil // data stored in dst.SpecificDaysConfig, return on the first match
 		}
 	} else {
-		dst.ReverseEtlDbtCloudScheduleConfig = nil
-	}
-
-	// try to unmarshal JSON data into ReverseEtlPeriodicScheduleConfig
-	decoder = json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&dst.ReverseEtlPeriodicScheduleConfig)
-	if err == nil {
-		jsonReverseEtlPeriodicScheduleConfig, _ := json.Marshal(
-			dst.ReverseEtlPeriodicScheduleConfig,
-		)
-		if string(jsonReverseEtlPeriodicScheduleConfig) == "{}" { // empty struct
-			dst.ReverseEtlPeriodicScheduleConfig = nil
-		} else {
-			return nil // data stored in dst.ReverseEtlPeriodicScheduleConfig, return on the first match
-		}
-	} else {
-		dst.ReverseEtlPeriodicScheduleConfig = nil
-	}
-
-	// try to unmarshal JSON data into ReverseEtlSpecificTimeScheduleConfig
-	decoder = json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&dst.ReverseEtlSpecificTimeScheduleConfig)
-	if err == nil {
-		jsonReverseEtlSpecificTimeScheduleConfig, _ := json.Marshal(
-			dst.ReverseEtlSpecificTimeScheduleConfig,
-		)
-		if string(jsonReverseEtlSpecificTimeScheduleConfig) == "{}" { // empty struct
-			dst.ReverseEtlSpecificTimeScheduleConfig = nil
-		} else {
-			return nil // data stored in dst.ReverseEtlSpecificTimeScheduleConfig, return on the first match
-		}
-	} else {
-		dst.ReverseEtlSpecificTimeScheduleConfig = nil
+		dst.SpecificDaysConfig = nil
 	}
 
 	return fmt.Errorf("data failed to match schemas in anyOf(Config)")
@@ -108,20 +70,12 @@ func (dst *Config) UnmarshalJSON(data []byte) error {
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src *Config) MarshalJSON() ([]byte, error) {
-	if src.ReverseEtlCronScheduleConfig != nil {
-		return json.Marshal(&src.ReverseEtlCronScheduleConfig)
+	if src.PeriodicConfig != nil {
+		return json.Marshal(&src.PeriodicConfig)
 	}
 
-	if src.ReverseEtlDbtCloudScheduleConfig != nil {
-		return json.Marshal(&src.ReverseEtlDbtCloudScheduleConfig)
-	}
-
-	if src.ReverseEtlPeriodicScheduleConfig != nil {
-		return json.Marshal(&src.ReverseEtlPeriodicScheduleConfig)
-	}
-
-	if src.ReverseEtlSpecificTimeScheduleConfig != nil {
-		return json.Marshal(&src.ReverseEtlSpecificTimeScheduleConfig)
+	if src.SpecificDaysConfig != nil {
+		return json.Marshal(&src.SpecificDaysConfig)
 	}
 
 	return nil, nil // no data in anyOf schemas
