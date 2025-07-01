@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.8.0
+API version: 58.6.0
 Contact: friends@segment.com
 */
 
@@ -15,41 +15,41 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateAudiencePreviewAlphaInput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAudiencePreviewAlphaInput{}
+// checks if the PreviewAudienceInput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &PreviewAudienceInput{}
 
-// CreateAudiencePreviewAlphaInput Input to create an audience preview.
-type CreateAudiencePreviewAlphaInput struct {
+// PreviewAudienceInput Input to preview an audience.
+type PreviewAudienceInput struct {
 	Definition AudienceDefinitionWithoutType `json:"definition"`
 	// Discriminator denoting the audience's product type.  Possible values: USERS, ACCOUNTS.
-	AudienceType string                        `json:"audienceType"`
-	Options      *CreateAudiencePreviewOptions `json:"options,omitempty"`
+	AudienceType string                       `json:"audienceType"`
+	Options      *AudienceOptionsWithLookback `json:"options,omitempty"`
 }
 
-// NewCreateAudiencePreviewAlphaInput instantiates a new CreateAudiencePreviewAlphaInput object
+// NewPreviewAudienceInput instantiates a new PreviewAudienceInput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAudiencePreviewAlphaInput(
+func NewPreviewAudienceInput(
 	definition AudienceDefinitionWithoutType,
 	audienceType string,
-) *CreateAudiencePreviewAlphaInput {
-	this := CreateAudiencePreviewAlphaInput{}
+) *PreviewAudienceInput {
+	this := PreviewAudienceInput{}
 	this.Definition = definition
 	this.AudienceType = audienceType
 	return &this
 }
 
-// NewCreateAudiencePreviewAlphaInputWithDefaults instantiates a new CreateAudiencePreviewAlphaInput object
+// NewPreviewAudienceInputWithDefaults instantiates a new PreviewAudienceInput object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAudiencePreviewAlphaInputWithDefaults() *CreateAudiencePreviewAlphaInput {
-	this := CreateAudiencePreviewAlphaInput{}
+func NewPreviewAudienceInputWithDefaults() *PreviewAudienceInput {
+	this := PreviewAudienceInput{}
 	return &this
 }
 
 // GetDefinition returns the Definition field value
-func (o *CreateAudiencePreviewAlphaInput) GetDefinition() AudienceDefinitionWithoutType {
+func (o *PreviewAudienceInput) GetDefinition() AudienceDefinitionWithoutType {
 	if o == nil {
 		var ret AudienceDefinitionWithoutType
 		return ret
@@ -60,7 +60,7 @@ func (o *CreateAudiencePreviewAlphaInput) GetDefinition() AudienceDefinitionWith
 
 // GetDefinitionOk returns a tuple with the Definition field value
 // and a boolean to check if the value has been set.
-func (o *CreateAudiencePreviewAlphaInput) GetDefinitionOk() (*AudienceDefinitionWithoutType, bool) {
+func (o *PreviewAudienceInput) GetDefinitionOk() (*AudienceDefinitionWithoutType, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,12 +68,12 @@ func (o *CreateAudiencePreviewAlphaInput) GetDefinitionOk() (*AudienceDefinition
 }
 
 // SetDefinition sets field value
-func (o *CreateAudiencePreviewAlphaInput) SetDefinition(v AudienceDefinitionWithoutType) {
+func (o *PreviewAudienceInput) SetDefinition(v AudienceDefinitionWithoutType) {
 	o.Definition = v
 }
 
 // GetAudienceType returns the AudienceType field value
-func (o *CreateAudiencePreviewAlphaInput) GetAudienceType() string {
+func (o *PreviewAudienceInput) GetAudienceType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -84,7 +84,7 @@ func (o *CreateAudiencePreviewAlphaInput) GetAudienceType() string {
 
 // GetAudienceTypeOk returns a tuple with the AudienceType field value
 // and a boolean to check if the value has been set.
-func (o *CreateAudiencePreviewAlphaInput) GetAudienceTypeOk() (*string, bool) {
+func (o *PreviewAudienceInput) GetAudienceTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -92,14 +92,14 @@ func (o *CreateAudiencePreviewAlphaInput) GetAudienceTypeOk() (*string, bool) {
 }
 
 // SetAudienceType sets field value
-func (o *CreateAudiencePreviewAlphaInput) SetAudienceType(v string) {
+func (o *PreviewAudienceInput) SetAudienceType(v string) {
 	o.AudienceType = v
 }
 
 // GetOptions returns the Options field value if set, zero value otherwise.
-func (o *CreateAudiencePreviewAlphaInput) GetOptions() CreateAudiencePreviewOptions {
+func (o *PreviewAudienceInput) GetOptions() AudienceOptionsWithLookback {
 	if o == nil || IsNil(o.Options) {
-		var ret CreateAudiencePreviewOptions
+		var ret AudienceOptionsWithLookback
 		return ret
 	}
 	return *o.Options
@@ -107,7 +107,7 @@ func (o *CreateAudiencePreviewAlphaInput) GetOptions() CreateAudiencePreviewOpti
 
 // GetOptionsOk returns a tuple with the Options field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAudiencePreviewAlphaInput) GetOptionsOk() (*CreateAudiencePreviewOptions, bool) {
+func (o *PreviewAudienceInput) GetOptionsOk() (*AudienceOptionsWithLookback, bool) {
 	if o == nil || IsNil(o.Options) {
 		return nil, false
 	}
@@ -115,7 +115,7 @@ func (o *CreateAudiencePreviewAlphaInput) GetOptionsOk() (*CreateAudiencePreview
 }
 
 // HasOptions returns a boolean if a field has been set.
-func (o *CreateAudiencePreviewAlphaInput) HasOptions() bool {
+func (o *PreviewAudienceInput) HasOptions() bool {
 	if o != nil && !IsNil(o.Options) {
 		return true
 	}
@@ -123,12 +123,12 @@ func (o *CreateAudiencePreviewAlphaInput) HasOptions() bool {
 	return false
 }
 
-// SetOptions gets a reference to the given CreateAudiencePreviewOptions and assigns it to the Options field.
-func (o *CreateAudiencePreviewAlphaInput) SetOptions(v CreateAudiencePreviewOptions) {
+// SetOptions gets a reference to the given AudienceOptionsWithLookback and assigns it to the Options field.
+func (o *PreviewAudienceInput) SetOptions(v AudienceOptionsWithLookback) {
 	o.Options = &v
 }
 
-func (o CreateAudiencePreviewAlphaInput) MarshalJSON() ([]byte, error) {
+func (o PreviewAudienceInput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -136,7 +136,7 @@ func (o CreateAudiencePreviewAlphaInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAudiencePreviewAlphaInput) ToMap() (map[string]interface{}, error) {
+func (o PreviewAudienceInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["definition"] = o.Definition
 	toSerialize["audienceType"] = o.AudienceType
@@ -146,40 +146,38 @@ func (o CreateAudiencePreviewAlphaInput) ToMap() (map[string]interface{}, error)
 	return toSerialize, nil
 }
 
-type NullableCreateAudiencePreviewAlphaInput struct {
-	value *CreateAudiencePreviewAlphaInput
+type NullablePreviewAudienceInput struct {
+	value *PreviewAudienceInput
 	isSet bool
 }
 
-func (v NullableCreateAudiencePreviewAlphaInput) Get() *CreateAudiencePreviewAlphaInput {
+func (v NullablePreviewAudienceInput) Get() *PreviewAudienceInput {
 	return v.value
 }
 
-func (v *NullableCreateAudiencePreviewAlphaInput) Set(val *CreateAudiencePreviewAlphaInput) {
+func (v *NullablePreviewAudienceInput) Set(val *PreviewAudienceInput) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAudiencePreviewAlphaInput) IsSet() bool {
+func (v NullablePreviewAudienceInput) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAudiencePreviewAlphaInput) Unset() {
+func (v *NullablePreviewAudienceInput) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAudiencePreviewAlphaInput(
-	val *CreateAudiencePreviewAlphaInput,
-) *NullableCreateAudiencePreviewAlphaInput {
-	return &NullableCreateAudiencePreviewAlphaInput{value: val, isSet: true}
+func NewNullablePreviewAudienceInput(val *PreviewAudienceInput) *NullablePreviewAudienceInput {
+	return &NullablePreviewAudienceInput{value: val, isSet: true}
 }
 
-func (v NullableCreateAudiencePreviewAlphaInput) MarshalJSON() ([]byte, error) {
+func (v NullablePreviewAudienceInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAudiencePreviewAlphaInput) UnmarshalJSON(src []byte) error {
+func (v *NullablePreviewAudienceInput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

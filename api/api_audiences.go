@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.8.0
+API version: 58.6.0
 Contact: friends@segment.com
 */
 
@@ -212,207 +212,11 @@ func (a *AudiencesAPIService) CreateAudienceExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateAudiencePreviewRequest struct {
-	ctx                             context.Context
-	ApiService                      *AudiencesAPIService
-	spaceId                         string
-	createAudiencePreviewAlphaInput *CreateAudiencePreviewAlphaInput
-}
-
-func (r ApiCreateAudiencePreviewRequest) CreateAudiencePreviewAlphaInput(
-	createAudiencePreviewAlphaInput CreateAudiencePreviewAlphaInput,
-) ApiCreateAudiencePreviewRequest {
-	r.createAudiencePreviewAlphaInput = &createAudiencePreviewAlphaInput
-	return r
-}
-
-func (r ApiCreateAudiencePreviewRequest) Execute() (*CreateAudiencePreview200Response, *http.Response, error) {
-	return r.ApiService.CreateAudiencePreviewExecute(r)
-}
-
-/*
-CreateAudiencePreview Create Audience Preview
-
-Previews Audience.
-
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
-
-• In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
-
-• When called, this endpoint may generate the `Audience Preview Created` event in the [audit trail](/tag/Audit-Trail).
-
-The rate limit for this endpoint is 5 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
-This endpoint also has a rate limit of 700 requests per month per spaceId, which is lower than the default due to access pattern restrictions.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param spaceId
-	@return ApiCreateAudiencePreviewRequest
-*/
-func (a *AudiencesAPIService) CreateAudiencePreview(
-	ctx context.Context,
-	spaceId string,
-) ApiCreateAudiencePreviewRequest {
-	return ApiCreateAudiencePreviewRequest{
-		ApiService: a,
-		ctx:        ctx,
-		spaceId:    spaceId,
-	}
-}
-
-// Execute executes the request
-//
-//	@return CreateAudiencePreview200Response
-func (a *AudiencesAPIService) CreateAudiencePreviewExecute(
-	r ApiCreateAudiencePreviewRequest,
-) (*CreateAudiencePreview200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CreateAudiencePreview200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(
-		r.ctx,
-		"AudiencesAPIService.CreateAudiencePreview",
-	)
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/spaces/{spaceId}/audiences/previews"
-	localVarPath = strings.Replace(
-		localVarPath,
-		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
-		-1,
-	)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.createAudiencePreviewAlphaInput == nil {
-		return localVarReturnValue, nil, reportError(
-			"createAudiencePreviewAlphaInput is required and must be specified",
-		)
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{
-		"application/vnd.segment.v1alpha+json",
-		"application/json",
-	}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.createAudiencePreviewAlphaInput
-	req, err := a.client.prepareRequest(
-		r.ctx,
-		localVarPath,
-		localVarHTTPMethod,
-		localVarPostBody,
-		localVarHeaderParams,
-		localVarQueryParams,
-		localVarFormParams,
-		formFiles,
-	)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v RequestErrorEnvelope
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v RequestErrorEnvelope
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v RequestErrorEnvelope
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(
-		&localVarReturnValue,
-		localVarBody,
-		localVarHTTPResponse.Header.Get("Content-Type"),
-	)
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiGetAudienceRequest struct {
 	ctx        context.Context
 	ApiService *AudiencesAPIService
 	spaceId    string
 	id         string
-	include    *string
-}
-
-// Additional resource to include, support schedules only.  This parameter exists in alpha.
-func (r ApiGetAudienceRequest) Include(include string) ApiGetAudienceRequest {
-	r.include = &include
-	return r
 }
 
 func (r ApiGetAudienceRequest) Execute() (*GetAudience200Response, *http.Response, error) {
@@ -422,7 +226,7 @@ func (r ApiGetAudienceRequest) Execute() (*GetAudience200Response, *http.Respons
 /*
 GetAudience Get Audience
 
-Returns the Audience by id and spaceId. Supports including audience schedules via `?include=schedules`.
+Returns the Audience by id and spaceId.
 
 • This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
@@ -487,9 +291,6 @@ func (a *AudiencesAPIService) GetAudienceExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.include != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "include", r.include, "")
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -502,376 +303,6 @@ func (a *AudiencesAPIService) GetAudienceExecute(
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
 		"application/vnd.segment.v1beta+json",
-		"application/vnd.segment.v1alpha+json",
-		"application/json",
-	}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(
-		r.ctx,
-		localVarPath,
-		localVarHTTPMethod,
-		localVarPostBody,
-		localVarHeaderParams,
-		localVarQueryParams,
-		localVarFormParams,
-		formFiles,
-	)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v RequestErrorEnvelope
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v RequestErrorEnvelope
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v RequestErrorEnvelope
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(
-		&localVarReturnValue,
-		localVarBody,
-		localVarHTTPResponse.Header.Get("Content-Type"),
-	)
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetAudiencePreviewRequest struct {
-	ctx        context.Context
-	ApiService *AudiencesAPIService
-	spaceId    string
-	id         string
-}
-
-func (r ApiGetAudiencePreviewRequest) Execute() (*GetAudiencePreview200Response, *http.Response, error) {
-	return r.ApiService.GetAudiencePreviewExecute(r)
-}
-
-/*
-GetAudiencePreview Get Audience Preview
-
-Reads the results of an audience preview.
-
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
-
-• In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
-
-The rate limit for this endpoint is 100 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param spaceId
-	@param id
-	@return ApiGetAudiencePreviewRequest
-*/
-func (a *AudiencesAPIService) GetAudiencePreview(
-	ctx context.Context,
-	spaceId string,
-	id string,
-) ApiGetAudiencePreviewRequest {
-	return ApiGetAudiencePreviewRequest{
-		ApiService: a,
-		ctx:        ctx,
-		spaceId:    spaceId,
-		id:         id,
-	}
-}
-
-// Execute executes the request
-//
-//	@return GetAudiencePreview200Response
-func (a *AudiencesAPIService) GetAudiencePreviewExecute(
-	r ApiGetAudiencePreviewRequest,
-) (*GetAudiencePreview200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetAudiencePreview200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(
-		r.ctx,
-		"AudiencesAPIService.GetAudiencePreview",
-	)
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/spaces/{spaceId}/audiences/previews/{id}"
-	localVarPath = strings.Replace(
-		localVarPath,
-		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
-		-1,
-	)
-	localVarPath = strings.Replace(
-		localVarPath,
-		"{"+"id"+"}",
-		url.PathEscape(parameterValueToString(r.id, "id")),
-		-1,
-	)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{
-		"application/vnd.segment.v1alpha+json",
-		"application/json",
-	}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(
-		r.ctx,
-		localVarPath,
-		localVarHTTPMethod,
-		localVarPostBody,
-		localVarHeaderParams,
-		localVarQueryParams,
-		localVarFormParams,
-		formFiles,
-	)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v RequestErrorEnvelope
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v RequestErrorEnvelope
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v RequestErrorEnvelope
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(
-		&localVarReturnValue,
-		localVarBody,
-		localVarHTTPResponse.Header.Get("Content-Type"),
-	)
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetAudienceScheduleFromSpaceAndAudienceRequest struct {
-	ctx        context.Context
-	ApiService *AudiencesAPIService
-	spaceId    string
-	id         string
-	scheduleId string
-}
-
-func (r ApiGetAudienceScheduleFromSpaceAndAudienceRequest) Execute() (*GetAudienceScheduleFromSpaceAndAudience200Response, *http.Response, error) {
-	return r.ApiService.GetAudienceScheduleFromSpaceAndAudienceExecute(r)
-}
-
-/*
-GetAudienceScheduleFromSpaceAndAudience Get Audience Schedule from Space And Audience
-
-Returns the schedule for the given audience and scheduleId.
-
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
-
-• In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param spaceId
-	@param id
-	@param scheduleId
-	@return ApiGetAudienceScheduleFromSpaceAndAudienceRequest
-*/
-func (a *AudiencesAPIService) GetAudienceScheduleFromSpaceAndAudience(
-	ctx context.Context,
-	spaceId string,
-	id string,
-	scheduleId string,
-) ApiGetAudienceScheduleFromSpaceAndAudienceRequest {
-	return ApiGetAudienceScheduleFromSpaceAndAudienceRequest{
-		ApiService: a,
-		ctx:        ctx,
-		spaceId:    spaceId,
-		id:         id,
-		scheduleId: scheduleId,
-	}
-}
-
-// Execute executes the request
-//
-//	@return GetAudienceScheduleFromSpaceAndAudience200Response
-func (a *AudiencesAPIService) GetAudienceScheduleFromSpaceAndAudienceExecute(
-	r ApiGetAudienceScheduleFromSpaceAndAudienceRequest,
-) (*GetAudienceScheduleFromSpaceAndAudience200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetAudienceScheduleFromSpaceAndAudience200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(
-		r.ctx,
-		"AudiencesAPIService.GetAudienceScheduleFromSpaceAndAudience",
-	)
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/spaces/{spaceId}/audiences/{id}/schedules/{scheduleId}"
-	localVarPath = strings.Replace(
-		localVarPath,
-		"{"+"spaceId"+"}",
-		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
-		-1,
-	)
-	localVarPath = strings.Replace(
-		localVarPath,
-		"{"+"id"+"}",
-		url.PathEscape(parameterValueToString(r.id, "id")),
-		-1,
-	)
-	localVarPath = strings.Replace(
-		localVarPath,
-		"{"+"scheduleId"+"}",
-		url.PathEscape(parameterValueToString(r.scheduleId, "scheduleId")),
-		-1,
-	)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{
 		"application/vnd.segment.v1alpha+json",
 		"application/json",
 	}
@@ -1180,76 +611,77 @@ func (a *AudiencesAPIService) ListAudienceConsumersFromSpaceAndAudienceExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListAudienceSchedulesFromSpaceAndAudienceRequest struct {
+type ApiListAudiencesRequest struct {
 	ctx        context.Context
 	ApiService *AudiencesAPIService
 	spaceId    string
-	id         string
+	pagination *ListAudiencesPaginationInput
 }
 
-func (r ApiListAudienceSchedulesFromSpaceAndAudienceRequest) Execute() (*ListAudienceSchedulesFromSpaceAndAudience200Response, *http.Response, error) {
-	return r.ApiService.ListAudienceSchedulesFromSpaceAndAudienceExecute(r)
+// Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha.
+func (r ApiListAudiencesRequest) Pagination(
+	pagination ListAudiencesPaginationInput,
+) ApiListAudiencesRequest {
+	r.pagination = &pagination
+	return r
+}
+
+func (r ApiListAudiencesRequest) Execute() (*ListAudiences200Response, *http.Response, error) {
+	return r.ApiService.ListAudiencesExecute(r)
 }
 
 /*
-ListAudienceSchedulesFromSpaceAndAudience List Audience Schedules from Space And Audience
+ListAudiences List Audiences
 
-Returns the list of schedules for the given audience.
+Returns Audiences by spaceId.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+• This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
+The rate limit for this endpoint is 25 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param spaceId
-	@param id
-	@return ApiListAudienceSchedulesFromSpaceAndAudienceRequest
+	@return ApiListAudiencesRequest
 */
-func (a *AudiencesAPIService) ListAudienceSchedulesFromSpaceAndAudience(
+func (a *AudiencesAPIService) ListAudiences(
 	ctx context.Context,
 	spaceId string,
-	id string,
-) ApiListAudienceSchedulesFromSpaceAndAudienceRequest {
-	return ApiListAudienceSchedulesFromSpaceAndAudienceRequest{
+) ApiListAudiencesRequest {
+	return ApiListAudiencesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		spaceId:    spaceId,
-		id:         id,
 	}
 }
 
 // Execute executes the request
 //
-//	@return ListAudienceSchedulesFromSpaceAndAudience200Response
-func (a *AudiencesAPIService) ListAudienceSchedulesFromSpaceAndAudienceExecute(
-	r ApiListAudienceSchedulesFromSpaceAndAudienceRequest,
-) (*ListAudienceSchedulesFromSpaceAndAudience200Response, *http.Response, error) {
+//	@return ListAudiences200Response
+func (a *AudiencesAPIService) ListAudiencesExecute(
+	r ApiListAudiencesRequest,
+) (*ListAudiences200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ListAudienceSchedulesFromSpaceAndAudience200Response
+		localVarReturnValue *ListAudiences200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"AudiencesAPIService.ListAudienceSchedulesFromSpaceAndAudience",
+		"AudiencesAPIService.ListAudiences",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/spaces/{spaceId}/audiences/{id}/schedules"
+	localVarPath := localBasePath + "/spaces/{spaceId}/audiences"
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
 		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
-		-1,
-	)
-	localVarPath = strings.Replace(
-		localVarPath,
-		"{"+"id"+"}",
-		url.PathEscape(parameterValueToString(r.id, "id")),
 		-1,
 	)
 
@@ -1257,6 +689,9 @@ func (a *AudiencesAPIService) ListAudienceSchedulesFromSpaceAndAudienceExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1268,6 +703,7 @@ func (a *AudiencesAPIService) ListAudienceSchedulesFromSpaceAndAudienceExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 		"application/json",
 	}
@@ -1359,52 +795,47 @@ func (a *AudiencesAPIService) ListAudienceSchedulesFromSpaceAndAudienceExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListAudiencesRequest struct {
-	ctx        context.Context
-	ApiService *AudiencesAPIService
-	spaceId    string
-	pagination *ListAudiencesPaginationInput
-	include    *string
+type ApiPreviewAudienceRequest struct {
+	ctx                  context.Context
+	ApiService           *AudiencesAPIService
+	spaceId              string
+	previewAudienceInput *PreviewAudienceInput
 }
 
-// Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha.
-func (r ApiListAudiencesRequest) Pagination(
-	pagination ListAudiencesPaginationInput,
-) ApiListAudiencesRequest {
-	r.pagination = &pagination
+func (r ApiPreviewAudienceRequest) PreviewAudienceInput(
+	previewAudienceInput PreviewAudienceInput,
+) ApiPreviewAudienceRequest {
+	r.previewAudienceInput = &previewAudienceInput
 	return r
 }
 
-// Additional resource to include, support schedules only.  This parameter exists in alpha.
-func (r ApiListAudiencesRequest) Include(include string) ApiListAudiencesRequest {
-	r.include = &include
-	return r
-}
-
-func (r ApiListAudiencesRequest) Execute() (*ListAudiences200Response, *http.Response, error) {
-	return r.ApiService.ListAudiencesExecute(r)
+func (r ApiPreviewAudienceRequest) Execute() (*PreviewAudience200Response, *http.Response, error) {
+	return r.ApiService.PreviewAudienceExecute(r)
 }
 
 /*
-ListAudiences List Audiences
+PreviewAudience Preview Audience
 
-Returns Audiences by spaceId. Supports including audience schedules via `?include=schedules`.
+Previews Audience.
 
-• This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
-The rate limit for this endpoint is 25 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
+• When called, this endpoint may generate the `Audience Preview Created` event in the [audit trail](/tag/Audit-Trail).
+
+The rate limit for this endpoint is 5 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
+The rate limit for this endpoint is 700 requests per month per spaceId, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param spaceId
-	@return ApiListAudiencesRequest
+	@return ApiPreviewAudienceRequest
 */
-func (a *AudiencesAPIService) ListAudiences(
+func (a *AudiencesAPIService) PreviewAudience(
 	ctx context.Context,
 	spaceId string,
-) ApiListAudiencesRequest {
-	return ApiListAudiencesRequest{
+) ApiPreviewAudienceRequest {
+	return ApiPreviewAudienceRequest{
 		ApiService: a,
 		ctx:        ctx,
 		spaceId:    spaceId,
@@ -1413,26 +844,26 @@ func (a *AudiencesAPIService) ListAudiences(
 
 // Execute executes the request
 //
-//	@return ListAudiences200Response
-func (a *AudiencesAPIService) ListAudiencesExecute(
-	r ApiListAudiencesRequest,
-) (*ListAudiences200Response, *http.Response, error) {
+//	@return PreviewAudience200Response
+func (a *AudiencesAPIService) PreviewAudienceExecute(
+	r ApiPreviewAudienceRequest,
+) (*PreviewAudience200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
+		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *ListAudiences200Response
+		localVarReturnValue *PreviewAudience200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"AudiencesAPIService.ListAudiences",
+		"AudiencesAPIService.PreviewAudience",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/spaces/{spaceId}/audiences"
+	localVarPath := localBasePath + "/spaces/{spaceId}/audiences/previews"
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
@@ -1443,15 +874,14 @@ func (a *AudiencesAPIService) ListAudiencesExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.previewAudienceInput == nil {
+		return localVarReturnValue, nil, reportError(
+			"previewAudienceInput is required and must be specified",
+		)
+	}
 
-	if r.pagination != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
-	}
-	if r.include != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "include", r.include, "")
-	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -1461,7 +891,6 @@ func (a *AudiencesAPIService) ListAudiencesExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
-		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 		"application/json",
 	}
@@ -1471,6 +900,8 @@ func (a *AudiencesAPIService) ListAudiencesExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.previewAudienceInput
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,
