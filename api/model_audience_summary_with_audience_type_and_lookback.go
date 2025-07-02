@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.7.0
+API version: 58.8.0
 Contact: friends@segment.com
 */
 
@@ -24,6 +24,8 @@ type AudienceSummaryWithAudienceTypeAndLookback struct {
 	AudienceType   string                       `json:"audienceType"`
 	ComputeCadence AudienceComputeCadence       `json:"computeCadence"`
 	Options        *AudienceOptionsWithLookback `json:"options,omitempty"`
+	// List of schedules for the audience.
+	Schedules []AudienceSchedule `json:"schedules,omitempty"`
 	// Audience id.
 	Id string `json:"id"`
 	// Space id for the audience.
@@ -169,6 +171,38 @@ func (o *AudienceSummaryWithAudienceTypeAndLookback) HasOptions() bool {
 // SetOptions gets a reference to the given AudienceOptionsWithLookback and assigns it to the Options field.
 func (o *AudienceSummaryWithAudienceTypeAndLookback) SetOptions(v AudienceOptionsWithLookback) {
 	o.Options = &v
+}
+
+// GetSchedules returns the Schedules field value if set, zero value otherwise.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) GetSchedules() []AudienceSchedule {
+	if o == nil || IsNil(o.Schedules) {
+		var ret []AudienceSchedule
+		return ret
+	}
+	return o.Schedules
+}
+
+// GetSchedulesOk returns a tuple with the Schedules field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) GetSchedulesOk() ([]AudienceSchedule, bool) {
+	if o == nil || IsNil(o.Schedules) {
+		return nil, false
+	}
+	return o.Schedules, true
+}
+
+// HasSchedules returns a boolean if a field has been set.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) HasSchedules() bool {
+	if o != nil && !IsNil(o.Schedules) {
+		return true
+	}
+
+	return false
+}
+
+// SetSchedules gets a reference to the given []AudienceSchedule and assigns it to the Schedules field.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) SetSchedules(v []AudienceSchedule) {
+	o.Schedules = v
 }
 
 // GetId returns the Id field value
@@ -491,6 +525,9 @@ func (o AudienceSummaryWithAudienceTypeAndLookback) ToMap() (map[string]interfac
 	toSerialize["computeCadence"] = o.ComputeCadence
 	if !IsNil(o.Options) {
 		toSerialize["options"] = o.Options
+	}
+	if !IsNil(o.Schedules) {
+		toSerialize["schedules"] = o.Schedules
 	}
 	toSerialize["id"] = o.Id
 	toSerialize["spaceId"] = o.SpaceId

@@ -8,7 +8,9 @@ Method | HTTP request | Description
 [**CreateAudiencePreview**](AudiencesAPI.md#CreateAudiencePreview) | **Post** /spaces/{spaceId}/audiences/previews | Create Audience Preview
 [**GetAudience**](AudiencesAPI.md#GetAudience) | **Get** /spaces/{spaceId}/audiences/{id} | Get Audience
 [**GetAudiencePreview**](AudiencesAPI.md#GetAudiencePreview) | **Get** /spaces/{spaceId}/audiences/previews/{id} | Get Audience Preview
+[**GetAudienceScheduleFromSpaceAndAudience**](AudiencesAPI.md#GetAudienceScheduleFromSpaceAndAudience) | **Get** /spaces/{spaceId}/audiences/{id}/schedules/{scheduleId} | Get Audience Schedule from Space And Audience
 [**ListAudienceConsumersFromSpaceAndAudience**](AudiencesAPI.md#ListAudienceConsumersFromSpaceAndAudience) | **Get** /spaces/{spaceId}/audiences/{id}/audience-references | List Audience Consumers from Space And Audience
+[**ListAudienceSchedulesFromSpaceAndAudience**](AudiencesAPI.md#ListAudienceSchedulesFromSpaceAndAudience) | **Get** /spaces/{spaceId}/audiences/{id}/schedules | List Audience Schedules from Space And Audience
 [**ListAudiences**](AudiencesAPI.md#ListAudiences) | **Get** /spaces/{spaceId}/audiences | List Audiences
 [**RemoveAudienceFromSpace**](AudiencesAPI.md#RemoveAudienceFromSpace) | **Delete** /spaces/{spaceId}/audiences/{id} | Remove Audience from Space
 [**UpdateAudienceForSpace**](AudiencesAPI.md#UpdateAudienceForSpace) | **Patch** /spaces/{spaceId}/audiences/{id} | Update Audience for Space
@@ -177,7 +179,7 @@ Name | Type | Description  | Notes
 
 ## Operation: GetAudience
 
-> GetAudience200Response GetAudience(ctx, spaceId, id).Execute()
+> GetAudience200Response GetAudience(ctx, spaceId, id).Include(include).Execute()
 
 Get Audience
 
@@ -197,13 +199,14 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    id := "id" // string | 
+    id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
+    include := "include_example" // string | Additional resource to include, support schedules only.  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.GetAudience(ctx, spaceId, id).Execute()
+    resp, r, err := apiClient.AudiencesAPI.GetAudience(ctx, spaceId, id).Include(include).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.GetAudience``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -237,6 +240,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **include** | **string** | Additional resource to include, support schedules only.  This parameter exists in alpha. | 
 
 ### Return type
 
@@ -322,6 +326,90 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetAudiencePreview200Response**](GetAudiencePreview200Response.md)
+
+### Authorization
+
+[token](../README.md#token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Operation: GetAudienceScheduleFromSpaceAndAudience
+
+> GetAudienceScheduleFromSpaceAndAudience200Response GetAudienceScheduleFromSpaceAndAudience(ctx, spaceId, id, scheduleId).Execute()
+
+Get Audience Schedule from Space And Audience
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    api "github.com/segmentio/public-api-sdk-go"
+)
+
+func main() {
+    spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
+    id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
+    scheduleId := "sch_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
+
+    configuration := api.NewConfiguration()
+    apiClient := api.NewAPIClient(configuration)
+    token := "<BEARER_TOKEN>"
+    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
+    resp, r, err := apiClient.AudiencesAPI.GetAudienceScheduleFromSpaceAndAudience(ctx, spaceId, id, scheduleId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.GetAudienceScheduleFromSpaceAndAudience``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+        responseErrors := api.UnwrapFullErrors(err)
+        if responseErrors != nil {
+            for _, responseError := range responseErrors.Errors {
+                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
+            }
+        }
+    }
+    // response from `GetAudienceScheduleFromSpaceAndAudience`: GetAudienceScheduleFromSpaceAndAudience200Response
+    fmt.Fprintf(os.Stdout, "Response from `AudiencesAPI.GetAudienceScheduleFromSpaceAndAudience`: %v\n", resp.GetData())
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**spaceId** | **string** |  | 
+**id** | **string** |  | 
+**scheduleId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAudienceScheduleFromSpaceAndAudienceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**GetAudienceScheduleFromSpaceAndAudience200Response**](GetAudienceScheduleFromSpaceAndAudience200Response.md)
 
 ### Authorization
 
@@ -424,9 +512,90 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## Operation: ListAudienceSchedulesFromSpaceAndAudience
+
+> ListAudienceSchedulesFromSpaceAndAudience200Response ListAudienceSchedulesFromSpaceAndAudience(ctx, spaceId, id).Execute()
+
+List Audience Schedules from Space And Audience
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    api "github.com/segmentio/public-api-sdk-go"
+)
+
+func main() {
+    spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
+    id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
+
+    configuration := api.NewConfiguration()
+    apiClient := api.NewAPIClient(configuration)
+    token := "<BEARER_TOKEN>"
+    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
+    resp, r, err := apiClient.AudiencesAPI.ListAudienceSchedulesFromSpaceAndAudience(ctx, spaceId, id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.ListAudienceSchedulesFromSpaceAndAudience``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+        responseErrors := api.UnwrapFullErrors(err)
+        if responseErrors != nil {
+            for _, responseError := range responseErrors.Errors {
+                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
+            }
+        }
+    }
+    // response from `ListAudienceSchedulesFromSpaceAndAudience`: ListAudienceSchedulesFromSpaceAndAudience200Response
+    fmt.Fprintf(os.Stdout, "Response from `AudiencesAPI.ListAudienceSchedulesFromSpaceAndAudience`: %v\n", resp.GetData())
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**spaceId** | **string** |  | 
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListAudienceSchedulesFromSpaceAndAudienceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**ListAudienceSchedulesFromSpaceAndAudience200Response**](ListAudienceSchedulesFromSpaceAndAudience200Response.md)
+
+### Authorization
+
+[token](../README.md#token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## Operation: ListAudiences
 
-> ListAudiences200Response ListAudiences(ctx, spaceId).Pagination(pagination).Execute()
+> ListAudiences200Response ListAudiences(ctx, spaceId).Pagination(pagination).Include(include).Execute()
 
 List Audiences
 
@@ -447,12 +616,13 @@ import (
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
     pagination := *api.NewListAudiencesPaginationInput(float32(123)) // ListAudiencesPaginationInput | Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha. (optional)
+    include := "include_example" // string | Additional resource to include, support schedules only.  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.ListAudiences(ctx, spaceId).Pagination(pagination).Execute()
+    resp, r, err := apiClient.AudiencesAPI.ListAudiences(ctx, spaceId).Pagination(pagination).Include(include).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.ListAudiences``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -485,6 +655,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **pagination** | [**ListAudiencesPaginationInput**](ListAudiencesPaginationInput.md) | Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha. | 
+ **include** | **string** | Additional resource to include, support schedules only.  This parameter exists in alpha. | 
 
 ### Return type
 
@@ -526,7 +697,7 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    id := "aud_0ujsswThIGTUYm2K8FjOOfXtY1K" // string | 
+    id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -607,7 +778,7 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    id := "aud_0ujsswThIGTUYm2K8FjOOfXtY1K" // string | 
+    id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
     updateAudienceForSpaceAlphaInput := *api.NewUpdateAudienceForSpaceAlphaInput() // UpdateAudienceForSpaceAlphaInput | 
 
     configuration := api.NewConfiguration()
