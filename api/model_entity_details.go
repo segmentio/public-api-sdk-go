@@ -28,7 +28,7 @@ type EntityDetails struct {
 	RelationshipSlug string `json:"relationshipSlug"`
 	// Entity properties.
 	Properties map[string]interface{} `json:"properties,omitempty"`
-	// The related entities one level deeper into an entity branch.
+	// Related entities that are one level deeper will only be returned if those entities are referenced in the audience definition.
 	Entities map[string]interface{} `json:"entities,omitempty"`
 }
 
