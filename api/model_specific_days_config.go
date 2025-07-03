@@ -20,7 +20,7 @@ var _ MappedNullable = &SpecificDaysConfig{}
 
 // SpecificDaysConfig Configures a schedule for specific days and times.
 type SpecificDaysConfig struct {
-	// Days of week for schedule (0=Saturday, 6=Sunday).
+	// Days of week for schedule (0=Sunday, 6=Saturday).
 	Days []float32 `json:"days"`
 	// Hours of day for schedule (0-23).
 	Hours []float32 `json:"hours"`

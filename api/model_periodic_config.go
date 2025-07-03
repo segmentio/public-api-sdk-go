@@ -20,7 +20,7 @@ var _ MappedNullable = &PeriodicConfig{}
 
 // PeriodicConfig Configures a periodic schedule interval.
 type PeriodicConfig struct {
-	// Go duration format string, only supporting units \"h\" (hours) and \"m\" (minutes).
+	// Go duration format string, only supporting units \"day\" (days), \"h\" (hours) and \"m\" (minutes).
 	Interval string `json:"interval"`
 }
 
