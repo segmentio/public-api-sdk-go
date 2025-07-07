@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.9.0
+API version: 58.8.0
 Contact: friends@segment.com
 */
 
@@ -12,68 +12,72 @@ Contact: friends@segment.com
 package api
 
 import (
-	"bytes"
 	"encoding/json"
-	"fmt"
 )
 
-// AudiencePreviewResult struct for AudiencePreviewResult
+// checks if the AudiencePreviewResult type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AudiencePreviewResult{}
+
+// AudiencePreviewResult Result membership object for an audience preview.
 type AudiencePreviewResult struct {
-	AudiencePreviewAccountResult *AudiencePreviewAccountResult
-	AudiencePreviewProfileResult *AudiencePreviewProfileResult
+	// Segment id or account id.
+	Id string `json:"id"`
 }
 
-// Unmarshal JSON data into any of the pointers in the struct
-func (dst *AudiencePreviewResult) UnmarshalJSON(data []byte) error {
-	var err error
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-
-	// try to unmarshal JSON data into AudiencePreviewAccountResult
-	decoder = json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&dst.AudiencePreviewAccountResult)
-	if err == nil {
-		jsonAudiencePreviewAccountResult, _ := json.Marshal(dst.AudiencePreviewAccountResult)
-		if string(jsonAudiencePreviewAccountResult) == "{}" { // empty struct
-			dst.AudiencePreviewAccountResult = nil
-		} else {
-			return nil // data stored in dst.AudiencePreviewAccountResult, return on the first match
-		}
-	} else {
-		dst.AudiencePreviewAccountResult = nil
-	}
-
-	// try to unmarshal JSON data into AudiencePreviewProfileResult
-	decoder = json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&dst.AudiencePreviewProfileResult)
-	if err == nil {
-		jsonAudiencePreviewProfileResult, _ := json.Marshal(dst.AudiencePreviewProfileResult)
-		if string(jsonAudiencePreviewProfileResult) == "{}" { // empty struct
-			dst.AudiencePreviewProfileResult = nil
-		} else {
-			return nil // data stored in dst.AudiencePreviewProfileResult, return on the first match
-		}
-	} else {
-		dst.AudiencePreviewProfileResult = nil
-	}
-
-	return fmt.Errorf("data failed to match schemas in anyOf(AudiencePreviewResult)")
+// NewAudiencePreviewResult instantiates a new AudiencePreviewResult object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewAudiencePreviewResult(id string) *AudiencePreviewResult {
+	this := AudiencePreviewResult{}
+	this.Id = id
+	return &this
 }
 
-// Marshal data from the first non-nil pointers in the struct to JSON
-func (src *AudiencePreviewResult) MarshalJSON() ([]byte, error) {
-	if src.AudiencePreviewAccountResult != nil {
-		return json.Marshal(&src.AudiencePreviewAccountResult)
+// NewAudiencePreviewResultWithDefaults instantiates a new AudiencePreviewResult object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewAudiencePreviewResultWithDefaults() *AudiencePreviewResult {
+	this := AudiencePreviewResult{}
+	return &this
+}
+
+// GetId returns the Id field value
+func (o *AudiencePreviewResult) GetId() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
 
-	if src.AudiencePreviewProfileResult != nil {
-		return json.Marshal(&src.AudiencePreviewProfileResult)
-	}
+	return o.Id
+}
 
-	return nil, nil // no data in anyOf schemas
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *AudiencePreviewResult) GetIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *AudiencePreviewResult) SetId(v string) {
+	o.Id = v
+}
+
+func (o AudiencePreviewResult) MarshalJSON() ([]byte, error) {
+	toSerialize, err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o AudiencePreviewResult) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
+	return toSerialize, nil
 }
 
 type NullableAudiencePreviewResult struct {
