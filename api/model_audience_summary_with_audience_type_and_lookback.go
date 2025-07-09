@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.9.0
+API version: 58.10.0
 Contact: friends@segment.com
 */
 
@@ -23,6 +23,7 @@ type AudienceSummaryWithAudienceTypeAndLookback struct {
 	// Discriminator denoting the audience's product type.
 	AudienceType   string                       `json:"audienceType"`
 	ComputeCadence AudienceComputeCadence       `json:"computeCadence"`
+	Size           *AudienceSize                `json:"size,omitempty"`
 	Options        *AudienceOptionsWithLookback `json:"options,omitempty"`
 	// List of schedules for the audience.
 	Schedules []AudienceSchedule `json:"schedules,omitempty"`
@@ -139,6 +140,38 @@ func (o *AudienceSummaryWithAudienceTypeAndLookback) GetComputeCadenceOk() (*Aud
 // SetComputeCadence sets field value
 func (o *AudienceSummaryWithAudienceTypeAndLookback) SetComputeCadence(v AudienceComputeCadence) {
 	o.ComputeCadence = v
+}
+
+// GetSize returns the Size field value if set, zero value otherwise.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) GetSize() AudienceSize {
+	if o == nil || IsNil(o.Size) {
+		var ret AudienceSize
+		return ret
+	}
+	return *o.Size
+}
+
+// GetSizeOk returns a tuple with the Size field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) GetSizeOk() (*AudienceSize, bool) {
+	if o == nil || IsNil(o.Size) {
+		return nil, false
+	}
+	return o.Size, true
+}
+
+// HasSize returns a boolean if a field has been set.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) HasSize() bool {
+	if o != nil && !IsNil(o.Size) {
+		return true
+	}
+
+	return false
+}
+
+// SetSize gets a reference to the given AudienceSize and assigns it to the Size field.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) SetSize(v AudienceSize) {
+	o.Size = &v
 }
 
 // GetOptions returns the Options field value if set, zero value otherwise.
@@ -523,6 +556,9 @@ func (o AudienceSummaryWithAudienceTypeAndLookback) ToMap() (map[string]interfac
 	toSerialize := map[string]interface{}{}
 	toSerialize["audienceType"] = o.AudienceType
 	toSerialize["computeCadence"] = o.ComputeCadence
+	if !IsNil(o.Size) {
+		toSerialize["size"] = o.Size
+	}
 	if !IsNil(o.Options) {
 		toSerialize["options"] = o.Options
 	}
