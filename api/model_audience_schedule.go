@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.8.0
+API version: 58.11.0
 Contact: friends@segment.com
 */
 
@@ -25,27 +25,18 @@ type AudienceSchedule struct {
 	// Strategy of the audience schedule (manual, periodic, or specific days).
 	Strategy string         `json:"strategy"`
 	Config   NullableConfig `json:"config,omitempty"`
-	// Whether the schedule is enabled.
-	Enabled bool `json:"enabled"`
 	// The next scheduled execution time (RFC3339).
-	NextExecution string `json:"nextExecution"`
+	NextExecution *string `json:"nextExecution,omitempty"`
 }
 
 // NewAudienceSchedule instantiates a new AudienceSchedule object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAudienceSchedule(
-	id string,
-	strategy string,
-	enabled bool,
-	nextExecution string,
-) *AudienceSchedule {
+func NewAudienceSchedule(id string, strategy string) *AudienceSchedule {
 	this := AudienceSchedule{}
 	this.Id = id
 	this.Strategy = strategy
-	this.Enabled = enabled
-	this.NextExecution = nextExecution
 	return &this
 }
 
@@ -148,52 +139,36 @@ func (o *AudienceSchedule) UnsetConfig() {
 	o.Config.Unset()
 }
 
-// GetEnabled returns the Enabled field value
-func (o *AudienceSchedule) GetEnabled() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Enabled
-}
-
-// GetEnabledOk returns a tuple with the Enabled field value
-// and a boolean to check if the value has been set.
-func (o *AudienceSchedule) GetEnabledOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Enabled, true
-}
-
-// SetEnabled sets field value
-func (o *AudienceSchedule) SetEnabled(v bool) {
-	o.Enabled = v
-}
-
-// GetNextExecution returns the NextExecution field value
+// GetNextExecution returns the NextExecution field value if set, zero value otherwise.
 func (o *AudienceSchedule) GetNextExecution() string {
-	if o == nil {
+	if o == nil || IsNil(o.NextExecution) {
 		var ret string
 		return ret
 	}
-
-	return o.NextExecution
+	return *o.NextExecution
 }
 
-// GetNextExecutionOk returns a tuple with the NextExecution field value
+// GetNextExecutionOk returns a tuple with the NextExecution field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AudienceSchedule) GetNextExecutionOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.NextExecution) {
 		return nil, false
 	}
-	return &o.NextExecution, true
+	return o.NextExecution, true
 }
 
-// SetNextExecution sets field value
+// HasNextExecution returns a boolean if a field has been set.
+func (o *AudienceSchedule) HasNextExecution() bool {
+	if o != nil && !IsNil(o.NextExecution) {
+		return true
+	}
+
+	return false
+}
+
+// SetNextExecution gets a reference to the given string and assigns it to the NextExecution field.
 func (o *AudienceSchedule) SetNextExecution(v string) {
-	o.NextExecution = v
+	o.NextExecution = &v
 }
 
 func (o AudienceSchedule) MarshalJSON() ([]byte, error) {
@@ -211,8 +186,9 @@ func (o AudienceSchedule) ToMap() (map[string]interface{}, error) {
 	if o.Config.IsSet() {
 		toSerialize["config"] = o.Config.Get()
 	}
-	toSerialize["enabled"] = o.Enabled
-	toSerialize["nextExecution"] = o.NextExecution
+	if !IsNil(o.NextExecution) {
+		toSerialize["nextExecution"] = o.NextExecution
+	}
 	return toSerialize, nil
 }
 

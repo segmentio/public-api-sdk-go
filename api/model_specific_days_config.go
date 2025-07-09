@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.8.0
+API version: 58.11.0
 Contact: friends@segment.com
 */
 
@@ -20,7 +20,7 @@ var _ MappedNullable = &SpecificDaysConfig{}
 
 // SpecificDaysConfig Configures a schedule for specific days and times.
 type SpecificDaysConfig struct {
-	// Days of week for schedule (0=Saturday, 6=Sunday).
+	// Days of week for schedule (0=Sunday, 6=Saturday).
 	Days []float32 `json:"days"`
 	// Hours of day for schedule (0-23).
 	Hours []float32 `json:"hours"`
