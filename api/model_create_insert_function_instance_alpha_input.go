@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateInsertFunctionInstanceAlphaInput{}
 
 // CreateInsertFunctionInstanceAlphaInput Creates an insert Function instance.
 type CreateInsertFunctionInstanceAlphaInput struct {
-	// Insert Function id to which this instance is associated.
+	// Insert Function id to which this instance is associated.  Note: Remove the ifnd_/ifns_ prefix from the id.
 	FunctionId string `json:"functionId"`
 	// The Source or Destination id to be connected.
 	IntegrationId string `json:"integrationId"`
