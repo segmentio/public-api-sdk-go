@@ -449,7 +449,7 @@ func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
     id := "aud_0ujsswThIGTUYm2K8FjOOfXtY1K" // string | 
     pagination := *api.NewPaginationInput(10) // PaginationInput | Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha. (optional)
-    search := *api.NewListAudienceConsumersSearchInput("Type_example", "Query_example") // ListAudienceConsumersSearchInput | Optional search criteria  This parameter exists in alpha. (optional)
+    search := *api.NewListAudienceSearchInput("Type_example", "Query_example") // ListAudienceSearchInput | Optional search criteria  This parameter exists in alpha. (optional)
     sort := *api.NewListAudienceConsumersSortInput("Field_example", "Direction_example") // ListAudienceConsumersSortInput | Optional sort criteria  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
@@ -491,7 +491,7 @@ Name | Type | Description  | Notes
 
 
  **pagination** | [**PaginationInput**](PaginationInput.md) | Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha. | 
- **search** | [**ListAudienceConsumersSearchInput**](ListAudienceConsumersSearchInput.md) | Optional search criteria  This parameter exists in alpha. | 
+ **search** | [**ListAudienceSearchInput**](ListAudienceSearchInput.md) | Optional search criteria  This parameter exists in alpha. | 
  **sort** | [**ListAudienceConsumersSortInput**](ListAudienceConsumersSortInput.md) | Optional sort criteria  This parameter exists in alpha. | 
 
 ### Return type
@@ -595,7 +595,7 @@ Name | Type | Description  | Notes
 
 ## Operation: ListAudiences
 
-> ListAudiences200Response ListAudiences(ctx, spaceId).Pagination(pagination).Include(include).Execute()
+> ListAudiences200Response ListAudiences(ctx, spaceId).Search(search).Pagination(pagination).Include(include).Execute()
 
 List Audiences
 
@@ -615,6 +615,7 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
+    search := *api.NewListAudienceSearchInput("Type_example", "Query_example") // ListAudienceSearchInput | Optional search criteria  This parameter exists in alpha. (optional)
     pagination := *api.NewListAudiencesPaginationInput(float32(123)) // ListAudiencesPaginationInput | Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha. (optional)
     include := "include_example" // string | Additional resource to include, support schedules only.  This parameter exists in alpha. (optional)
 
@@ -622,7 +623,7 @@ func main() {
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.ListAudiences(ctx, spaceId).Pagination(pagination).Include(include).Execute()
+    resp, r, err := apiClient.AudiencesAPI.ListAudiences(ctx, spaceId).Search(search).Pagination(pagination).Include(include).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.ListAudiences``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -654,6 +655,7 @@ Other parameters are passed through a pointer to a apiListAudiencesRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **search** | [**ListAudienceSearchInput**](ListAudienceSearchInput.md) | Optional search criteria  This parameter exists in alpha. | 
  **pagination** | [**ListAudiencesPaginationInput**](ListAudiencesPaginationInput.md) | Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha. | 
  **include** | **string** | Additional resource to include, support schedules only.  This parameter exists in alpha. | 
 
