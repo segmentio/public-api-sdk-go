@@ -15,41 +15,38 @@ import (
 	"encoding/json"
 )
 
-// checks if the ListAudienceConsumersSearchInput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ListAudienceConsumersSearchInput{}
+// checks if the ListAudienceSearchInput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ListAudienceSearchInput{}
 
-// ListAudienceConsumersSearchInput Search criteria input for list audience consumers.
-type ListAudienceConsumersSearchInput struct {
+// ListAudienceSearchInput Search criteria input for list audience consumers.
+type ListAudienceSearchInput struct {
 	// Field to filter by.
 	Type string `json:"type"`
-	// Text to match the field value.
+	// Text to match against the selected field (max 255 characters).
 	Query string `json:"query"`
 }
 
-// NewListAudienceConsumersSearchInput instantiates a new ListAudienceConsumersSearchInput object
+// NewListAudienceSearchInput instantiates a new ListAudienceSearchInput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListAudienceConsumersSearchInput(
-	type_ string,
-	query string,
-) *ListAudienceConsumersSearchInput {
-	this := ListAudienceConsumersSearchInput{}
+func NewListAudienceSearchInput(type_ string, query string) *ListAudienceSearchInput {
+	this := ListAudienceSearchInput{}
 	this.Type = type_
 	this.Query = query
 	return &this
 }
 
-// NewListAudienceConsumersSearchInputWithDefaults instantiates a new ListAudienceConsumersSearchInput object
+// NewListAudienceSearchInputWithDefaults instantiates a new ListAudienceSearchInput object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewListAudienceConsumersSearchInputWithDefaults() *ListAudienceConsumersSearchInput {
-	this := ListAudienceConsumersSearchInput{}
+func NewListAudienceSearchInputWithDefaults() *ListAudienceSearchInput {
+	this := ListAudienceSearchInput{}
 	return &this
 }
 
 // GetType returns the Type field value
-func (o *ListAudienceConsumersSearchInput) GetType() string {
+func (o *ListAudienceSearchInput) GetType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -60,7 +57,7 @@ func (o *ListAudienceConsumersSearchInput) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *ListAudienceConsumersSearchInput) GetTypeOk() (*string, bool) {
+func (o *ListAudienceSearchInput) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,12 +65,12 @@ func (o *ListAudienceConsumersSearchInput) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *ListAudienceConsumersSearchInput) SetType(v string) {
+func (o *ListAudienceSearchInput) SetType(v string) {
 	o.Type = v
 }
 
 // GetQuery returns the Query field value
-func (o *ListAudienceConsumersSearchInput) GetQuery() string {
+func (o *ListAudienceSearchInput) GetQuery() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -84,7 +81,7 @@ func (o *ListAudienceConsumersSearchInput) GetQuery() string {
 
 // GetQueryOk returns a tuple with the Query field value
 // and a boolean to check if the value has been set.
-func (o *ListAudienceConsumersSearchInput) GetQueryOk() (*string, bool) {
+func (o *ListAudienceSearchInput) GetQueryOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -92,11 +89,11 @@ func (o *ListAudienceConsumersSearchInput) GetQueryOk() (*string, bool) {
 }
 
 // SetQuery sets field value
-func (o *ListAudienceConsumersSearchInput) SetQuery(v string) {
+func (o *ListAudienceSearchInput) SetQuery(v string) {
 	o.Query = v
 }
 
-func (o ListAudienceConsumersSearchInput) MarshalJSON() ([]byte, error) {
+func (o ListAudienceSearchInput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -104,47 +101,47 @@ func (o ListAudienceConsumersSearchInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ListAudienceConsumersSearchInput) ToMap() (map[string]interface{}, error) {
+func (o ListAudienceSearchInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
 	toSerialize["query"] = o.Query
 	return toSerialize, nil
 }
 
-type NullableListAudienceConsumersSearchInput struct {
-	value *ListAudienceConsumersSearchInput
+type NullableListAudienceSearchInput struct {
+	value *ListAudienceSearchInput
 	isSet bool
 }
 
-func (v NullableListAudienceConsumersSearchInput) Get() *ListAudienceConsumersSearchInput {
+func (v NullableListAudienceSearchInput) Get() *ListAudienceSearchInput {
 	return v.value
 }
 
-func (v *NullableListAudienceConsumersSearchInput) Set(val *ListAudienceConsumersSearchInput) {
+func (v *NullableListAudienceSearchInput) Set(val *ListAudienceSearchInput) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableListAudienceConsumersSearchInput) IsSet() bool {
+func (v NullableListAudienceSearchInput) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableListAudienceConsumersSearchInput) Unset() {
+func (v *NullableListAudienceSearchInput) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableListAudienceConsumersSearchInput(
-	val *ListAudienceConsumersSearchInput,
-) *NullableListAudienceConsumersSearchInput {
-	return &NullableListAudienceConsumersSearchInput{value: val, isSet: true}
+func NewNullableListAudienceSearchInput(
+	val *ListAudienceSearchInput,
+) *NullableListAudienceSearchInput {
+	return &NullableListAudienceSearchInput{value: val, isSet: true}
 }
 
-func (v NullableListAudienceConsumersSearchInput) MarshalJSON() ([]byte, error) {
+func (v NullableListAudienceSearchInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableListAudienceConsumersSearchInput) UnmarshalJSON(src []byte) error {
+func (v *NullableListAudienceSearchInput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

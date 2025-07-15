@@ -969,7 +969,7 @@ type ApiListAudienceConsumersFromSpaceAndAudienceRequest struct {
 	spaceId    string
 	id         string
 	pagination *PaginationInput
-	search     *ListAudienceConsumersSearchInput
+	search     *ListAudienceSearchInput
 	sort       *ListAudienceConsumersSortInput
 }
 
@@ -983,7 +983,7 @@ func (r ApiListAudienceConsumersFromSpaceAndAudienceRequest) Pagination(
 
 // Optional search criteria  This parameter exists in alpha.
 func (r ApiListAudienceConsumersFromSpaceAndAudienceRequest) Search(
-	search ListAudienceConsumersSearchInput,
+	search ListAudienceSearchInput,
 ) ApiListAudienceConsumersFromSpaceAndAudienceRequest {
 	r.search = &search
 	return r
@@ -1363,8 +1363,15 @@ type ApiListAudiencesRequest struct {
 	ctx        context.Context
 	ApiService *AudiencesAPIService
 	spaceId    string
+	search     *ListAudienceSearchInput
 	pagination *ListAudiencesPaginationInput
 	include    *string
+}
+
+// Optional search criteria  This parameter exists in alpha.
+func (r ApiListAudiencesRequest) Search(search ListAudienceSearchInput) ApiListAudiencesRequest {
+	r.search = &search
+	return r
 }
 
 // Information about the pagination of this response.  [See pagination](https://docs.segmentapis.com/tag/Pagination/#section/Pagination-parameters) for more info.  This parameter exists in alpha.
@@ -1444,6 +1451,9 @@ func (a *AudiencesAPIService) ListAudiencesExecute(
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.search != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "")
+	}
 	if r.pagination != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	}
