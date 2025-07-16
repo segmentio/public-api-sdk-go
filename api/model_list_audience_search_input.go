@@ -22,7 +22,7 @@ var _ MappedNullable = &ListAudienceSearchInput{}
 type ListAudienceSearchInput struct {
 	// Field to filter by.
 	Type string `json:"type"`
-	// Text to match the field value.
+	// Text to match against the selected field (max 255 characters).
 	Query string `json:"query"`
 }
 
