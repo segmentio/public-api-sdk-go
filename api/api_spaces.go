@@ -44,6 +44,19 @@ func (r ApiBatchQueryMessagingSubscriptionsForSpaceRequest) Execute() (*BatchQue
 /*
 BatchQueryMessagingSubscriptionsForSpace Batch Query Messaging Subscriptions for Space
 
+<div style="background-color: #fff3cd; border: 1px solid #ffc107; border-radius: 6px; padding: 16px; margin: 16px 0; color: #856404; display: flex; align-items: center; gap: 12px; line-height: 1.5;">
+
+	<span style="color: #ff9800; font-size: 16px; flex-shrink: 0;">⚠️</span>
+	<div style="line-height: 1.5;">
+	  <div style="font-weight: 600; font-size: 14px; margin-bottom: 6px;">
+	    Engage Premier features will no longer be available after December 15, 2025.
+	  </div>
+	  <div style="font-size: 13px;">
+	    This API will be deactivated after this date.
+	  </div>
+	</div>
+
+</div>
 Get Messaging Subscriptions for space.
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
@@ -555,6 +568,19 @@ func (r ApiReplaceMessagingSubscriptionsInSpacesRequest) Execute() (*ReplaceMess
 /*
 ReplaceMessagingSubscriptionsInSpaces Replace Messaging Subscriptions in Spaces
 
+<div style="background-color: #fff3cd; border: 1px solid #ffc107; border-radius: 6px; padding: 16px; margin: 16px 0; color: #856404; display: flex; align-items: center; gap: 12px; line-height: 1.5;">
+
+	<span style="color: #ff9800; font-size: 16px; flex-shrink: 0;">⚠️</span>
+	<div style="line-height: 1.5;">
+	  <div style="font-weight: 600; font-size: 14px; margin-bottom: 6px;">
+	    Engage Premier features will no longer be available after December 15, 2025.
+	  </div>
+	  <div style="font-size: 13px;">
+	    This API will be deactivated after this date.
+	  </div>
+	</div>
+
+</div>
 Replace Messaging Subscriptions in Spaces.
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
