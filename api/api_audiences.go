@@ -617,7 +617,7 @@ Get Audience Echo test endpoint for rate limiting per spaceId. Returns an echo r
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
-This endpoint has a rate limit of 3 requests per day per spaceId for testing rate limiting functionality.
+This endpoint has a rate limit of 1 requests per day per spaceId for testing rate limiting functionality.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param spaceId
