@@ -42,8 +42,10 @@ type AudienceSummary struct {
 	// Date the audience was created.
 	CreatedAt string `json:"createdAt"`
 	// Date the audience was last updated.
-	UpdatedAt string           `json:"updatedAt"`
-	Options   *AudienceOptions `json:"options,omitempty"`
+	UpdatedAt string `json:"updatedAt"`
+	// Discriminator denoting the audience's product type.
+	AudienceType string           `json:"audienceType"`
+	Options      *AudienceOptions `json:"options,omitempty"`
 }
 
 // NewAudienceSummary instantiates a new AudienceSummary object
@@ -61,6 +63,7 @@ func NewAudienceSummary(
 	updatedBy string,
 	createdAt string,
 	updatedAt string,
+	audienceType string,
 ) *AudienceSummary {
 	this := AudienceSummary{}
 	this.Id = id
@@ -73,6 +76,7 @@ func NewAudienceSummary(
 	this.UpdatedBy = updatedBy
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
+	this.AudienceType = audienceType
 	return &this
 }
 
@@ -390,6 +394,30 @@ func (o *AudienceSummary) SetUpdatedAt(v string) {
 	o.UpdatedAt = v
 }
 
+// GetAudienceType returns the AudienceType field value
+func (o *AudienceSummary) GetAudienceType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.AudienceType
+}
+
+// GetAudienceTypeOk returns a tuple with the AudienceType field value
+// and a boolean to check if the value has been set.
+func (o *AudienceSummary) GetAudienceTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AudienceType, true
+}
+
+// SetAudienceType sets field value
+func (o *AudienceSummary) SetAudienceType(v string) {
+	o.AudienceType = v
+}
+
 // GetOptions returns the Options field value if set, zero value otherwise.
 func (o *AudienceSummary) GetOptions() AudienceOptions {
 	if o == nil || IsNil(o.Options) {
@@ -448,6 +476,7 @@ func (o AudienceSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize["updatedBy"] = o.UpdatedBy
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["updatedAt"] = o.UpdatedAt
+	toSerialize["audienceType"] = o.AudienceType
 	if !IsNil(o.Options) {
 		toSerialize["options"] = o.Options
 	}

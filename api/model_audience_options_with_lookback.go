@@ -22,12 +22,12 @@ var _ MappedNullable = &AudienceOptionsWithLookback{}
 type AudienceOptionsWithLookback struct {
 	// The set of profile external identifiers being used to determine audience membership. Profiles will only be considered for audience membership if the profile has at least one external id whose key matches a value in this set.
 	FilterByExternalIds []string `json:"filterByExternalIds"`
-	// If specified, the value of this field indicates the number of days, specified from the date the audience was created, that event data will be included from when determining audience membership. If unspecified, defer to the value of `includeHistoricalData` to determine whether historical data is either entirely included or entirely excluded when determining audience membership.
-	BackfillEventDataDays *float32 `json:"backfillEventDataDays,omitempty"`
 	// Determines whether data prior to the audience being created is included when determining audience membership. Note that including historical data may be needed in order to properly handle the definition specified. In these cases, Segment will automatically handle including historical data and the response will return the includeHistoricalData parameter as true.
 	IncludeHistoricalData *bool `json:"includeHistoricalData,omitempty"`
 	// Determines whether anonymous users should be included when determining audience membership.
 	IncludeAnonymousUsers *bool `json:"includeAnonymousUsers,omitempty"`
+	// If specified, the value of this field indicates the number of days, specified from the date the audience was created, that event data will be included from when determining audience membership. If unspecified, defer to the value of `includeHistoricalData` to determine whether historical data is either entirely included or entirely excluded when determining audience membership.
+	BackfillEventDataDays *float32 `json:"backfillEventDataDays,omitempty"`
 }
 
 // NewAudienceOptionsWithLookback instantiates a new AudienceOptionsWithLookback object
@@ -70,38 +70,6 @@ func (o *AudienceOptionsWithLookback) GetFilterByExternalIdsOk() ([]string, bool
 // SetFilterByExternalIds sets field value
 func (o *AudienceOptionsWithLookback) SetFilterByExternalIds(v []string) {
 	o.FilterByExternalIds = v
-}
-
-// GetBackfillEventDataDays returns the BackfillEventDataDays field value if set, zero value otherwise.
-func (o *AudienceOptionsWithLookback) GetBackfillEventDataDays() float32 {
-	if o == nil || IsNil(o.BackfillEventDataDays) {
-		var ret float32
-		return ret
-	}
-	return *o.BackfillEventDataDays
-}
-
-// GetBackfillEventDataDaysOk returns a tuple with the BackfillEventDataDays field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AudienceOptionsWithLookback) GetBackfillEventDataDaysOk() (*float32, bool) {
-	if o == nil || IsNil(o.BackfillEventDataDays) {
-		return nil, false
-	}
-	return o.BackfillEventDataDays, true
-}
-
-// HasBackfillEventDataDays returns a boolean if a field has been set.
-func (o *AudienceOptionsWithLookback) HasBackfillEventDataDays() bool {
-	if o != nil && !IsNil(o.BackfillEventDataDays) {
-		return true
-	}
-
-	return false
-}
-
-// SetBackfillEventDataDays gets a reference to the given float32 and assigns it to the BackfillEventDataDays field.
-func (o *AudienceOptionsWithLookback) SetBackfillEventDataDays(v float32) {
-	o.BackfillEventDataDays = &v
 }
 
 // GetIncludeHistoricalData returns the IncludeHistoricalData field value if set, zero value otherwise.
@@ -168,6 +136,38 @@ func (o *AudienceOptionsWithLookback) SetIncludeAnonymousUsers(v bool) {
 	o.IncludeAnonymousUsers = &v
 }
 
+// GetBackfillEventDataDays returns the BackfillEventDataDays field value if set, zero value otherwise.
+func (o *AudienceOptionsWithLookback) GetBackfillEventDataDays() float32 {
+	if o == nil || IsNil(o.BackfillEventDataDays) {
+		var ret float32
+		return ret
+	}
+	return *o.BackfillEventDataDays
+}
+
+// GetBackfillEventDataDaysOk returns a tuple with the BackfillEventDataDays field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AudienceOptionsWithLookback) GetBackfillEventDataDaysOk() (*float32, bool) {
+	if o == nil || IsNil(o.BackfillEventDataDays) {
+		return nil, false
+	}
+	return o.BackfillEventDataDays, true
+}
+
+// HasBackfillEventDataDays returns a boolean if a field has been set.
+func (o *AudienceOptionsWithLookback) HasBackfillEventDataDays() bool {
+	if o != nil && !IsNil(o.BackfillEventDataDays) {
+		return true
+	}
+
+	return false
+}
+
+// SetBackfillEventDataDays gets a reference to the given float32 and assigns it to the BackfillEventDataDays field.
+func (o *AudienceOptionsWithLookback) SetBackfillEventDataDays(v float32) {
+	o.BackfillEventDataDays = &v
+}
+
 func (o AudienceOptionsWithLookback) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -179,14 +179,14 @@ func (o AudienceOptionsWithLookback) MarshalJSON() ([]byte, error) {
 func (o AudienceOptionsWithLookback) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["filterByExternalIds"] = o.FilterByExternalIds
-	if !IsNil(o.BackfillEventDataDays) {
-		toSerialize["backfillEventDataDays"] = o.BackfillEventDataDays
-	}
 	if !IsNil(o.IncludeHistoricalData) {
 		toSerialize["includeHistoricalData"] = o.IncludeHistoricalData
 	}
 	if !IsNil(o.IncludeAnonymousUsers) {
 		toSerialize["includeAnonymousUsers"] = o.IncludeAnonymousUsers
+	}
+	if !IsNil(o.BackfillEventDataDays) {
+		toSerialize["backfillEventDataDays"] = o.BackfillEventDataDays
 	}
 	return toSerialize, nil
 }
