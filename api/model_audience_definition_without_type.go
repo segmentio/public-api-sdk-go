@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.13.0
+API version: 58.14.0
 Contact: friends@segment.com
 */
 
@@ -22,6 +22,8 @@ var _ MappedNullable = &AudienceDefinitionWithoutType{}
 type AudienceDefinitionWithoutType struct {
 	// The query language string defining the audience segmentation criteria.  For guidance on using the query language, see the [Segment documentation site](https://segment.com/docs/api/public-api/query-language).
 	Query string `json:"query"`
+	// The target entity slug.
+	TargetEntity *string `json:"targetEntity,omitempty"`
 }
 
 // NewAudienceDefinitionWithoutType instantiates a new AudienceDefinitionWithoutType object
@@ -66,6 +68,38 @@ func (o *AudienceDefinitionWithoutType) SetQuery(v string) {
 	o.Query = v
 }
 
+// GetTargetEntity returns the TargetEntity field value if set, zero value otherwise.
+func (o *AudienceDefinitionWithoutType) GetTargetEntity() string {
+	if o == nil || IsNil(o.TargetEntity) {
+		var ret string
+		return ret
+	}
+	return *o.TargetEntity
+}
+
+// GetTargetEntityOk returns a tuple with the TargetEntity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AudienceDefinitionWithoutType) GetTargetEntityOk() (*string, bool) {
+	if o == nil || IsNil(o.TargetEntity) {
+		return nil, false
+	}
+	return o.TargetEntity, true
+}
+
+// HasTargetEntity returns a boolean if a field has been set.
+func (o *AudienceDefinitionWithoutType) HasTargetEntity() bool {
+	if o != nil && !IsNil(o.TargetEntity) {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetEntity gets a reference to the given string and assigns it to the TargetEntity field.
+func (o *AudienceDefinitionWithoutType) SetTargetEntity(v string) {
+	o.TargetEntity = &v
+}
+
 func (o AudienceDefinitionWithoutType) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -77,6 +111,9 @@ func (o AudienceDefinitionWithoutType) MarshalJSON() ([]byte, error) {
 func (o AudienceDefinitionWithoutType) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["query"] = o.Query
+	if !IsNil(o.TargetEntity) {
+		toSerialize["targetEntity"] = o.TargetEntity
+	}
 	return toSerialize, nil
 }
 
