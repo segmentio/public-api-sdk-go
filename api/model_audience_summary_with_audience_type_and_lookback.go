@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.14.0
+API version: 58.13.0
 Contact: friends@segment.com
 */
 
@@ -20,8 +20,6 @@ var _ MappedNullable = &AudienceSummaryWithAudienceTypeAndLookback{}
 
 // AudienceSummaryWithAudienceTypeAndLookback struct for AudienceSummaryWithAudienceTypeAndLookback
 type AudienceSummaryWithAudienceTypeAndLookback struct {
-	// Discriminator denoting the audience's product type.
-	AudienceType   string                       `json:"audienceType"`
 	ComputeCadence AudienceComputeCadence       `json:"computeCadence"`
 	Size           *AudienceSize                `json:"size,omitempty"`
 	Options        *AudienceOptionsWithLookback `json:"options,omitempty"`
@@ -50,6 +48,8 @@ type AudienceSummaryWithAudienceTypeAndLookback struct {
 	CreatedAt string `json:"createdAt"`
 	// Date the audience was last updated.
 	UpdatedAt string `json:"updatedAt"`
+	// Discriminator denoting the audience's product type.
+	AudienceType string `json:"audienceType"`
 }
 
 // NewAudienceSummaryWithAudienceTypeAndLookback instantiates a new AudienceSummaryWithAudienceTypeAndLookback object
@@ -57,7 +57,6 @@ type AudienceSummaryWithAudienceTypeAndLookback struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewAudienceSummaryWithAudienceTypeAndLookback(
-	audienceType string,
 	computeCadence AudienceComputeCadence,
 	id string,
 	spaceId string,
@@ -69,9 +68,9 @@ func NewAudienceSummaryWithAudienceTypeAndLookback(
 	updatedBy string,
 	createdAt string,
 	updatedAt string,
+	audienceType string,
 ) *AudienceSummaryWithAudienceTypeAndLookback {
 	this := AudienceSummaryWithAudienceTypeAndLookback{}
-	this.AudienceType = audienceType
 	this.ComputeCadence = computeCadence
 	this.Id = id
 	this.SpaceId = spaceId
@@ -83,6 +82,7 @@ func NewAudienceSummaryWithAudienceTypeAndLookback(
 	this.UpdatedBy = updatedBy
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
+	this.AudienceType = audienceType
 	return &this
 }
 
@@ -92,30 +92,6 @@ func NewAudienceSummaryWithAudienceTypeAndLookback(
 func NewAudienceSummaryWithAudienceTypeAndLookbackWithDefaults() *AudienceSummaryWithAudienceTypeAndLookback {
 	this := AudienceSummaryWithAudienceTypeAndLookback{}
 	return &this
-}
-
-// GetAudienceType returns the AudienceType field value
-func (o *AudienceSummaryWithAudienceTypeAndLookback) GetAudienceType() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.AudienceType
-}
-
-// GetAudienceTypeOk returns a tuple with the AudienceType field value
-// and a boolean to check if the value has been set.
-func (o *AudienceSummaryWithAudienceTypeAndLookback) GetAudienceTypeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.AudienceType, true
-}
-
-// SetAudienceType sets field value
-func (o *AudienceSummaryWithAudienceTypeAndLookback) SetAudienceType(v string) {
-	o.AudienceType = v
 }
 
 // GetComputeCadence returns the ComputeCadence field value
@@ -544,6 +520,30 @@ func (o *AudienceSummaryWithAudienceTypeAndLookback) SetUpdatedAt(v string) {
 	o.UpdatedAt = v
 }
 
+// GetAudienceType returns the AudienceType field value
+func (o *AudienceSummaryWithAudienceTypeAndLookback) GetAudienceType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.AudienceType
+}
+
+// GetAudienceTypeOk returns a tuple with the AudienceType field value
+// and a boolean to check if the value has been set.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) GetAudienceTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.AudienceType, true
+}
+
+// SetAudienceType sets field value
+func (o *AudienceSummaryWithAudienceTypeAndLookback) SetAudienceType(v string) {
+	o.AudienceType = v
+}
+
 func (o AudienceSummaryWithAudienceTypeAndLookback) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -554,7 +554,6 @@ func (o AudienceSummaryWithAudienceTypeAndLookback) MarshalJSON() ([]byte, error
 
 func (o AudienceSummaryWithAudienceTypeAndLookback) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["audienceType"] = o.AudienceType
 	toSerialize["computeCadence"] = o.ComputeCadence
 	if !IsNil(o.Size) {
 		toSerialize["size"] = o.Size
@@ -581,6 +580,7 @@ func (o AudienceSummaryWithAudienceTypeAndLookback) ToMap() (map[string]interfac
 	toSerialize["updatedBy"] = o.UpdatedBy
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["updatedAt"] = o.UpdatedAt
+	toSerialize["audienceType"] = o.AudienceType
 	return toSerialize, nil
 }
 
