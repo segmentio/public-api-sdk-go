@@ -22,7 +22,7 @@ var _ MappedNullable = &ListAudienceSearchInput{}
 type ListAudienceSearchInput struct {
 	// Field to filter by.
 	Type string `json:"type"`
-	// Text to match against the selected field (max 255 characters).
+	// Text to match against the selected field (max 255 characters). When searching by KEY, a prefix match is used. For all other options, a full wildcard search will be used.
 	Query string `json:"query"`
 }
 
