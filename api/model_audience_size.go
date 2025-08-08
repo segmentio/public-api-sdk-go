@@ -21,18 +21,19 @@ var _ MappedNullable = &AudienceSize{}
 // AudienceSize struct for AudienceSize
 type AudienceSize struct {
 	// The total audience membership count. Refer to the type field to determine the unit for this field (profiles, accounts, etc).
-	Count float32 `json:"count"`
+	Count *float32 `json:"count,omitempty"`
 	// The unit type for the count(s) being returned.
 	Type string `json:"type"`
+	// The unique audience membership count.
+	UniqueCount *float32 `json:"uniqueCount,omitempty"`
 }
 
 // NewAudienceSize instantiates a new AudienceSize object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAudienceSize(count float32, type_ string) *AudienceSize {
+func NewAudienceSize(type_ string) *AudienceSize {
 	this := AudienceSize{}
-	this.Count = count
 	this.Type = type_
 	return &this
 }
@@ -45,28 +46,36 @@ func NewAudienceSizeWithDefaults() *AudienceSize {
 	return &this
 }
 
-// GetCount returns the Count field value
+// GetCount returns the Count field value if set, zero value otherwise.
 func (o *AudienceSize) GetCount() float32 {
-	if o == nil {
+	if o == nil || IsNil(o.Count) {
 		var ret float32
 		return ret
 	}
-
-	return o.Count
+	return *o.Count
 }
 
-// GetCountOk returns a tuple with the Count field value
+// GetCountOk returns a tuple with the Count field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AudienceSize) GetCountOk() (*float32, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Count) {
 		return nil, false
 	}
-	return &o.Count, true
+	return o.Count, true
 }
 
-// SetCount sets field value
+// HasCount returns a boolean if a field has been set.
+func (o *AudienceSize) HasCount() bool {
+	if o != nil && !IsNil(o.Count) {
+		return true
+	}
+
+	return false
+}
+
+// SetCount gets a reference to the given float32 and assigns it to the Count field.
 func (o *AudienceSize) SetCount(v float32) {
-	o.Count = v
+	o.Count = &v
 }
 
 // GetType returns the Type field value
@@ -93,6 +102,38 @@ func (o *AudienceSize) SetType(v string) {
 	o.Type = v
 }
 
+// GetUniqueCount returns the UniqueCount field value if set, zero value otherwise.
+func (o *AudienceSize) GetUniqueCount() float32 {
+	if o == nil || IsNil(o.UniqueCount) {
+		var ret float32
+		return ret
+	}
+	return *o.UniqueCount
+}
+
+// GetUniqueCountOk returns a tuple with the UniqueCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AudienceSize) GetUniqueCountOk() (*float32, bool) {
+	if o == nil || IsNil(o.UniqueCount) {
+		return nil, false
+	}
+	return o.UniqueCount, true
+}
+
+// HasUniqueCount returns a boolean if a field has been set.
+func (o *AudienceSize) HasUniqueCount() bool {
+	if o != nil && !IsNil(o.UniqueCount) {
+		return true
+	}
+
+	return false
+}
+
+// SetUniqueCount gets a reference to the given float32 and assigns it to the UniqueCount field.
+func (o *AudienceSize) SetUniqueCount(v float32) {
+	o.UniqueCount = &v
+}
+
 func (o AudienceSize) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -103,8 +144,13 @@ func (o AudienceSize) MarshalJSON() ([]byte, error) {
 
 func (o AudienceSize) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["count"] = o.Count
+	if !IsNil(o.Count) {
+		toSerialize["count"] = o.Count
+	}
 	toSerialize["type"] = o.Type
+	if !IsNil(o.UniqueCount) {
+		toSerialize["uniqueCount"] = o.UniqueCount
+	}
 	return toSerialize, nil
 }
 
