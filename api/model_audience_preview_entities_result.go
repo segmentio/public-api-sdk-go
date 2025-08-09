@@ -20,15 +20,37 @@ var _ MappedNullable = &AudiencePreviewEntitiesResult{}
 
 // AudiencePreviewEntitiesResult Result membership object for an audience preview with `audienceType: USERS` or `audienceType: LINKED`.
 type AudiencePreviewEntitiesResult struct {
-	Entities *map[string][]EntityProfileDetails `json:"entities,omitempty"`
+	// The entities associated with the profile. Will only have a value if the audience preview has `audienceType: LINKED` and entities are referenced in the audience preview's definition.
+	Id string `json:"id"`
+	// The entity primary key column name.
+	IdProperty string `json:"idProperty"`
+	// The entity relationship slug.
+	RelationshipSlug string `json:"relationshipSlug"`
+	// Entity properties.
+	Properties map[string]interface{} `json:"properties,omitempty"`
+	// Related entities that are one level deeper will only be returned if those entities are referenced in the audience definition.
+	Entities map[string]interface{} `json:"entities,omitempty"`
+	// List of profiles.
+	Profiles []Profile `json:"profiles,omitempty"`
+	// Indicates if only a subset of the profiles associated with the entity were returned.
+	ProfilesTruncated bool `json:"profilesTruncated"`
 }
 
 // NewAudiencePreviewEntitiesResult instantiates a new AudiencePreviewEntitiesResult object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAudiencePreviewEntitiesResult() *AudiencePreviewEntitiesResult {
+func NewAudiencePreviewEntitiesResult(
+	id string,
+	idProperty string,
+	relationshipSlug string,
+	profilesTruncated bool,
+) *AudiencePreviewEntitiesResult {
 	this := AudiencePreviewEntitiesResult{}
+	this.Id = id
+	this.IdProperty = idProperty
+	this.RelationshipSlug = relationshipSlug
+	this.ProfilesTruncated = profilesTruncated
 	return &this
 }
 
@@ -40,20 +62,124 @@ func NewAudiencePreviewEntitiesResultWithDefaults() *AudiencePreviewEntitiesResu
 	return &this
 }
 
-// GetEntities returns the Entities field value if set, zero value otherwise.
-func (o *AudiencePreviewEntitiesResult) GetEntities() map[string][]EntityProfileDetails {
-	if o == nil || IsNil(o.Entities) {
-		var ret map[string][]EntityProfileDetails
+// GetId returns the Id field value
+func (o *AudiencePreviewEntitiesResult) GetId() string {
+	if o == nil {
+		var ret string
 		return ret
 	}
-	return *o.Entities
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *AudiencePreviewEntitiesResult) GetIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *AudiencePreviewEntitiesResult) SetId(v string) {
+	o.Id = v
+}
+
+// GetIdProperty returns the IdProperty field value
+func (o *AudiencePreviewEntitiesResult) GetIdProperty() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.IdProperty
+}
+
+// GetIdPropertyOk returns a tuple with the IdProperty field value
+// and a boolean to check if the value has been set.
+func (o *AudiencePreviewEntitiesResult) GetIdPropertyOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IdProperty, true
+}
+
+// SetIdProperty sets field value
+func (o *AudiencePreviewEntitiesResult) SetIdProperty(v string) {
+	o.IdProperty = v
+}
+
+// GetRelationshipSlug returns the RelationshipSlug field value
+func (o *AudiencePreviewEntitiesResult) GetRelationshipSlug() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.RelationshipSlug
+}
+
+// GetRelationshipSlugOk returns a tuple with the RelationshipSlug field value
+// and a boolean to check if the value has been set.
+func (o *AudiencePreviewEntitiesResult) GetRelationshipSlugOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.RelationshipSlug, true
+}
+
+// SetRelationshipSlug sets field value
+func (o *AudiencePreviewEntitiesResult) SetRelationshipSlug(v string) {
+	o.RelationshipSlug = v
+}
+
+// GetProperties returns the Properties field value if set, zero value otherwise.
+func (o *AudiencePreviewEntitiesResult) GetProperties() map[string]interface{} {
+	if o == nil || IsNil(o.Properties) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Properties
+}
+
+// GetPropertiesOk returns a tuple with the Properties field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AudiencePreviewEntitiesResult) GetPropertiesOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Properties) {
+		return map[string]interface{}{}, false
+	}
+	return o.Properties, true
+}
+
+// HasProperties returns a boolean if a field has been set.
+func (o *AudiencePreviewEntitiesResult) HasProperties() bool {
+	if o != nil && !IsNil(o.Properties) {
+		return true
+	}
+
+	return false
+}
+
+// SetProperties gets a reference to the given map[string]interface{} and assigns it to the Properties field.
+func (o *AudiencePreviewEntitiesResult) SetProperties(v map[string]interface{}) {
+	o.Properties = v
+}
+
+// GetEntities returns the Entities field value if set, zero value otherwise.
+func (o *AudiencePreviewEntitiesResult) GetEntities() map[string]interface{} {
+	if o == nil || IsNil(o.Entities) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Entities
 }
 
 // GetEntitiesOk returns a tuple with the Entities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AudiencePreviewEntitiesResult) GetEntitiesOk() (*map[string][]EntityProfileDetails, bool) {
+func (o *AudiencePreviewEntitiesResult) GetEntitiesOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Entities) {
-		return nil, false
+		return map[string]interface{}{}, false
 	}
 	return o.Entities, true
 }
@@ -67,9 +193,65 @@ func (o *AudiencePreviewEntitiesResult) HasEntities() bool {
 	return false
 }
 
-// SetEntities gets a reference to the given map[string][]EntityProfileDetails and assigns it to the Entities field.
-func (o *AudiencePreviewEntitiesResult) SetEntities(v map[string][]EntityProfileDetails) {
-	o.Entities = &v
+// SetEntities gets a reference to the given map[string]interface{} and assigns it to the Entities field.
+func (o *AudiencePreviewEntitiesResult) SetEntities(v map[string]interface{}) {
+	o.Entities = v
+}
+
+// GetProfiles returns the Profiles field value if set, zero value otherwise.
+func (o *AudiencePreviewEntitiesResult) GetProfiles() []Profile {
+	if o == nil || IsNil(o.Profiles) {
+		var ret []Profile
+		return ret
+	}
+	return o.Profiles
+}
+
+// GetProfilesOk returns a tuple with the Profiles field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AudiencePreviewEntitiesResult) GetProfilesOk() ([]Profile, bool) {
+	if o == nil || IsNil(o.Profiles) {
+		return nil, false
+	}
+	return o.Profiles, true
+}
+
+// HasProfiles returns a boolean if a field has been set.
+func (o *AudiencePreviewEntitiesResult) HasProfiles() bool {
+	if o != nil && !IsNil(o.Profiles) {
+		return true
+	}
+
+	return false
+}
+
+// SetProfiles gets a reference to the given []Profile and assigns it to the Profiles field.
+func (o *AudiencePreviewEntitiesResult) SetProfiles(v []Profile) {
+	o.Profiles = v
+}
+
+// GetProfilesTruncated returns the ProfilesTruncated field value
+func (o *AudiencePreviewEntitiesResult) GetProfilesTruncated() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ProfilesTruncated
+}
+
+// GetProfilesTruncatedOk returns a tuple with the ProfilesTruncated field value
+// and a boolean to check if the value has been set.
+func (o *AudiencePreviewEntitiesResult) GetProfilesTruncatedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ProfilesTruncated, true
+}
+
+// SetProfilesTruncated sets field value
+func (o *AudiencePreviewEntitiesResult) SetProfilesTruncated(v bool) {
+	o.ProfilesTruncated = v
 }
 
 func (o AudiencePreviewEntitiesResult) MarshalJSON() ([]byte, error) {
@@ -82,9 +264,19 @@ func (o AudiencePreviewEntitiesResult) MarshalJSON() ([]byte, error) {
 
 func (o AudiencePreviewEntitiesResult) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["id"] = o.Id
+	toSerialize["idProperty"] = o.IdProperty
+	toSerialize["relationshipSlug"] = o.RelationshipSlug
+	if !IsNil(o.Properties) {
+		toSerialize["properties"] = o.Properties
+	}
 	if !IsNil(o.Entities) {
 		toSerialize["entities"] = o.Entities
 	}
+	if !IsNil(o.Profiles) {
+		toSerialize["profiles"] = o.Profiles
+	}
+	toSerialize["profilesTruncated"] = o.ProfilesTruncated
 	return toSerialize, nil
 }
 
