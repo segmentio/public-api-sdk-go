@@ -30,7 +30,7 @@ type AudiencePreviewEntitiesResult struct {
 	Properties map[string]interface{} `json:"properties,omitempty"`
 	// Related entities that are one level deeper will only be returned if those entities are referenced in the audience definition.
 	Entities map[string]interface{} `json:"entities,omitempty"`
-	// List of profiles.
+	// Related list of profiles.
 	Profiles []Profile `json:"profiles,omitempty"`
 	// Indicates if only a subset of the profiles associated with the entity were returned.
 	ProfilesTruncated bool `json:"profilesTruncated"`
