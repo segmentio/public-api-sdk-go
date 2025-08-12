@@ -19,8 +19,9 @@ import (
 
 // AudiencePreviewResult struct for AudiencePreviewResult
 type AudiencePreviewResult struct {
-	AudiencePreviewAccountResult *AudiencePreviewAccountResult
-	AudiencePreviewProfileResult *AudiencePreviewProfileResult
+	AudiencePreviewAccountResult  *AudiencePreviewAccountResult
+	AudiencePreviewEntitiesResult *AudiencePreviewEntitiesResult
+	AudiencePreviewProfileResult  *AudiencePreviewProfileResult
 }
 
 // Unmarshal JSON data into any of the pointers in the struct
@@ -45,6 +46,21 @@ func (dst *AudiencePreviewResult) UnmarshalJSON(data []byte) error {
 		dst.AudiencePreviewAccountResult = nil
 	}
 
+	// try to unmarshal JSON data into AudiencePreviewEntitiesResult
+	decoder = json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&dst.AudiencePreviewEntitiesResult)
+	if err == nil {
+		jsonAudiencePreviewEntitiesResult, _ := json.Marshal(dst.AudiencePreviewEntitiesResult)
+		if string(jsonAudiencePreviewEntitiesResult) == "{}" { // empty struct
+			dst.AudiencePreviewEntitiesResult = nil
+		} else {
+			return nil // data stored in dst.AudiencePreviewEntitiesResult, return on the first match
+		}
+	} else {
+		dst.AudiencePreviewEntitiesResult = nil
+	}
+
 	// try to unmarshal JSON data into AudiencePreviewProfileResult
 	decoder = json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
@@ -67,6 +83,10 @@ func (dst *AudiencePreviewResult) UnmarshalJSON(data []byte) error {
 func (src *AudiencePreviewResult) MarshalJSON() ([]byte, error) {
 	if src.AudiencePreviewAccountResult != nil {
 		return json.Marshal(&src.AudiencePreviewAccountResult)
+	}
+
+	if src.AudiencePreviewEntitiesResult != nil {
+		return json.Marshal(&src.AudiencePreviewEntitiesResult)
 	}
 
 	if src.AudiencePreviewProfileResult != nil {
