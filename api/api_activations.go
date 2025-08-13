@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.13.0
+API version: 59.0.0
 Contact: friends@segment.com
 */
 
@@ -98,7 +98,7 @@ func (a *ActivationsAPIService) AddActivationToAudienceExecute(
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/spaces/{spaceId}/audiences/{audienceId}/{connectionId}/activations"
+	localVarPath := localBasePath + "/spaces/{spaceId}/audiences/{audienceId}/destination-connections/{connectionId}/activations"
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
@@ -300,7 +300,7 @@ func (a *ActivationsAPIService) AddDestinationToAudienceExecute(
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/spaces/{spaceId}/audiences/{audienceId}/destinations"
+	localVarPath := localBasePath + "/spaces/{spaceId}/audiences/{audienceId}/destination-connections"
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
@@ -428,20 +428,11 @@ func (a *ActivationsAPIService) AddDestinationToAudienceExecute(
 }
 
 type ApiGetActivationFromAudienceRequest struct {
-	ctx         context.Context
-	ApiService  *ActivationsAPIService
-	spaceId     string
-	audienceId  string
-	id          string
-	workspaceId *string
-}
-
-// The workspace id  This parameter exists in alpha.
-func (r ApiGetActivationFromAudienceRequest) WorkspaceId(
-	workspaceId string,
-) ApiGetActivationFromAudienceRequest {
-	r.workspaceId = &workspaceId
-	return r
+	ctx        context.Context
+	ApiService *ActivationsAPIService
+	spaceId    string
+	audienceId string
+	id         string
 }
 
 func (r ApiGetActivationFromAudienceRequest) Execute() (*GetActivationFromAudience200Response, *http.Response, error) {
@@ -520,13 +511,7 @@ func (a *ActivationsAPIService) GetActivationFromAudienceExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.workspaceId == nil {
-		return localVarReturnValue, nil, reportError(
-			"workspaceId is required and must be specified",
-		)
-	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "workspaceId", r.workspaceId, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -630,20 +615,11 @@ func (a *ActivationsAPIService) GetActivationFromAudienceExecute(
 }
 
 type ApiListActivationsFromAudienceRequest struct {
-	ctx         context.Context
-	ApiService  *ActivationsAPIService
-	spaceId     string
-	audienceId  string
-	workspaceId *string
-	pagination  *PaginationInput
-}
-
-// The workspace id  This parameter exists in alpha.
-func (r ApiListActivationsFromAudienceRequest) WorkspaceId(
-	workspaceId string,
-) ApiListActivationsFromAudienceRequest {
-	r.workspaceId = &workspaceId
-	return r
+	ctx        context.Context
+	ApiService *ActivationsAPIService
+	spaceId    string
+	audienceId string
+	pagination *PaginationInput
 }
 
 // Optional pagination.  This parameter exists in alpha.
@@ -721,13 +697,7 @@ func (a *ActivationsAPIService) ListActivationsFromAudienceExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.workspaceId == nil {
-		return localVarReturnValue, nil, reportError(
-			"workspaceId is required and must be specified",
-		)
-	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "workspaceId", r.workspaceId, "")
 	if r.pagination != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
 	}
@@ -834,20 +804,11 @@ func (a *ActivationsAPIService) ListActivationsFromAudienceExecute(
 }
 
 type ApiRemoveActivationFromAudienceRequest struct {
-	ctx         context.Context
-	ApiService  *ActivationsAPIService
-	spaceId     string
-	audienceId  string
-	id          string
-	workspaceId *string
-}
-
-// The workspace id  This parameter exists in alpha.
-func (r ApiRemoveActivationFromAudienceRequest) WorkspaceId(
-	workspaceId string,
-) ApiRemoveActivationFromAudienceRequest {
-	r.workspaceId = &workspaceId
-	return r
+	ctx        context.Context
+	ApiService *ActivationsAPIService
+	spaceId    string
+	audienceId string
+	id         string
 }
 
 func (r ApiRemoveActivationFromAudienceRequest) Execute() (*RemoveActivationFromAudience200Response, *http.Response, error) {
@@ -926,13 +887,7 @@ func (a *ActivationsAPIService) RemoveActivationFromAudienceExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.workspaceId == nil {
-		return localVarReturnValue, nil, reportError(
-			"workspaceId is required and must be specified",
-		)
-	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "workspaceId", r.workspaceId, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.13.0
+API version: 59.0.0
 Contact: friends@segment.com
 */
 
@@ -20,29 +20,22 @@ var _ MappedNullable = &UpdateActivationForAudienceAlphaInput{}
 
 // UpdateActivationForAudienceAlphaInput Input to update an activation.
 type UpdateActivationForAudienceAlphaInput struct {
-	// The Workspace id.
-	WorkspaceId string `json:"workspaceId"`
 	// Determines whether an activation is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
-	// Configuration settings for the event emitter to be created.
-	EventEmitter interface{} `json:"eventEmitter"`
-	// Subscription info to connect the event emitter to a Destination attached to the audience.
-	Subscription interface{} `json:"subscription"`
+	// Activation name.
+	ActivationName     *string                               `json:"activationName,omitempty"`
+	Personalization    *PersonalizationInput                 `json:"personalization,omitempty"`
+	DestinationMapping *DestinationSubscriptionConfiguration `json:"destinationMapping,omitempty"`
+	// Whether to skip the first sync so the activation events are not generated on the first audience sync. Will only work if the Audience has not already synced.
+	PerformFirstSync *bool `json:"performFirstSync,omitempty"`
 }
 
 // NewUpdateActivationForAudienceAlphaInput instantiates a new UpdateActivationForAudienceAlphaInput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateActivationForAudienceAlphaInput(
-	workspaceId string,
-	eventEmitter interface{},
-	subscription interface{},
-) *UpdateActivationForAudienceAlphaInput {
+func NewUpdateActivationForAudienceAlphaInput() *UpdateActivationForAudienceAlphaInput {
 	this := UpdateActivationForAudienceAlphaInput{}
-	this.WorkspaceId = workspaceId
-	this.EventEmitter = eventEmitter
-	this.Subscription = subscription
 	return &this
 }
 
@@ -52,30 +45,6 @@ func NewUpdateActivationForAudienceAlphaInput(
 func NewUpdateActivationForAudienceAlphaInputWithDefaults() *UpdateActivationForAudienceAlphaInput {
 	this := UpdateActivationForAudienceAlphaInput{}
 	return &this
-}
-
-// GetWorkspaceId returns the WorkspaceId field value
-func (o *UpdateActivationForAudienceAlphaInput) GetWorkspaceId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.WorkspaceId
-}
-
-// GetWorkspaceIdOk returns a tuple with the WorkspaceId field value
-// and a boolean to check if the value has been set.
-func (o *UpdateActivationForAudienceAlphaInput) GetWorkspaceIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.WorkspaceId, true
-}
-
-// SetWorkspaceId sets field value
-func (o *UpdateActivationForAudienceAlphaInput) SetWorkspaceId(v string) {
-	o.WorkspaceId = v
 }
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
@@ -110,56 +79,134 @@ func (o *UpdateActivationForAudienceAlphaInput) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetEventEmitter returns the EventEmitter field value
-// If the value is explicit nil, the zero value for interface{} will be returned
-func (o *UpdateActivationForAudienceAlphaInput) GetEventEmitter() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetActivationName returns the ActivationName field value if set, zero value otherwise.
+func (o *UpdateActivationForAudienceAlphaInput) GetActivationName() string {
+	if o == nil || IsNil(o.ActivationName) {
+		var ret string
 		return ret
 	}
-
-	return o.EventEmitter
+	return *o.ActivationName
 }
 
-// GetEventEmitterOk returns a tuple with the EventEmitter field value
+// GetActivationNameOk returns a tuple with the ActivationName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdateActivationForAudienceAlphaInput) GetEventEmitterOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.EventEmitter) {
+func (o *UpdateActivationForAudienceAlphaInput) GetActivationNameOk() (*string, bool) {
+	if o == nil || IsNil(o.ActivationName) {
 		return nil, false
 	}
-	return &o.EventEmitter, true
+	return o.ActivationName, true
 }
 
-// SetEventEmitter sets field value
-func (o *UpdateActivationForAudienceAlphaInput) SetEventEmitter(v interface{}) {
-	o.EventEmitter = v
+// HasActivationName returns a boolean if a field has been set.
+func (o *UpdateActivationForAudienceAlphaInput) HasActivationName() bool {
+	if o != nil && !IsNil(o.ActivationName) {
+		return true
+	}
+
+	return false
 }
 
-// GetSubscription returns the Subscription field value
-// If the value is explicit nil, the zero value for interface{} will be returned
-func (o *UpdateActivationForAudienceAlphaInput) GetSubscription() interface{} {
-	if o == nil {
-		var ret interface{}
+// SetActivationName gets a reference to the given string and assigns it to the ActivationName field.
+func (o *UpdateActivationForAudienceAlphaInput) SetActivationName(v string) {
+	o.ActivationName = &v
+}
+
+// GetPersonalization returns the Personalization field value if set, zero value otherwise.
+func (o *UpdateActivationForAudienceAlphaInput) GetPersonalization() PersonalizationInput {
+	if o == nil || IsNil(o.Personalization) {
+		var ret PersonalizationInput
 		return ret
 	}
-
-	return o.Subscription
+	return *o.Personalization
 }
 
-// GetSubscriptionOk returns a tuple with the Subscription field value
+// GetPersonalizationOk returns a tuple with the Personalization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdateActivationForAudienceAlphaInput) GetSubscriptionOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Subscription) {
+func (o *UpdateActivationForAudienceAlphaInput) GetPersonalizationOk() (*PersonalizationInput, bool) {
+	if o == nil || IsNil(o.Personalization) {
 		return nil, false
 	}
-	return &o.Subscription, true
+	return o.Personalization, true
 }
 
-// SetSubscription sets field value
-func (o *UpdateActivationForAudienceAlphaInput) SetSubscription(v interface{}) {
-	o.Subscription = v
+// HasPersonalization returns a boolean if a field has been set.
+func (o *UpdateActivationForAudienceAlphaInput) HasPersonalization() bool {
+	if o != nil && !IsNil(o.Personalization) {
+		return true
+	}
+
+	return false
+}
+
+// SetPersonalization gets a reference to the given PersonalizationInput and assigns it to the Personalization field.
+func (o *UpdateActivationForAudienceAlphaInput) SetPersonalization(v PersonalizationInput) {
+	o.Personalization = &v
+}
+
+// GetDestinationMapping returns the DestinationMapping field value if set, zero value otherwise.
+func (o *UpdateActivationForAudienceAlphaInput) GetDestinationMapping() DestinationSubscriptionConfiguration {
+	if o == nil || IsNil(o.DestinationMapping) {
+		var ret DestinationSubscriptionConfiguration
+		return ret
+	}
+	return *o.DestinationMapping
+}
+
+// GetDestinationMappingOk returns a tuple with the DestinationMapping field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateActivationForAudienceAlphaInput) GetDestinationMappingOk() (*DestinationSubscriptionConfiguration, bool) {
+	if o == nil || IsNil(o.DestinationMapping) {
+		return nil, false
+	}
+	return o.DestinationMapping, true
+}
+
+// HasDestinationMapping returns a boolean if a field has been set.
+func (o *UpdateActivationForAudienceAlphaInput) HasDestinationMapping() bool {
+	if o != nil && !IsNil(o.DestinationMapping) {
+		return true
+	}
+
+	return false
+}
+
+// SetDestinationMapping gets a reference to the given DestinationSubscriptionConfiguration and assigns it to the DestinationMapping field.
+func (o *UpdateActivationForAudienceAlphaInput) SetDestinationMapping(
+	v DestinationSubscriptionConfiguration,
+) {
+	o.DestinationMapping = &v
+}
+
+// GetPerformFirstSync returns the PerformFirstSync field value if set, zero value otherwise.
+func (o *UpdateActivationForAudienceAlphaInput) GetPerformFirstSync() bool {
+	if o == nil || IsNil(o.PerformFirstSync) {
+		var ret bool
+		return ret
+	}
+	return *o.PerformFirstSync
+}
+
+// GetPerformFirstSyncOk returns a tuple with the PerformFirstSync field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateActivationForAudienceAlphaInput) GetPerformFirstSyncOk() (*bool, bool) {
+	if o == nil || IsNil(o.PerformFirstSync) {
+		return nil, false
+	}
+	return o.PerformFirstSync, true
+}
+
+// HasPerformFirstSync returns a boolean if a field has been set.
+func (o *UpdateActivationForAudienceAlphaInput) HasPerformFirstSync() bool {
+	if o != nil && !IsNil(o.PerformFirstSync) {
+		return true
+	}
+
+	return false
+}
+
+// SetPerformFirstSync gets a reference to the given bool and assigns it to the PerformFirstSync field.
+func (o *UpdateActivationForAudienceAlphaInput) SetPerformFirstSync(v bool) {
+	o.PerformFirstSync = &v
 }
 
 func (o UpdateActivationForAudienceAlphaInput) MarshalJSON() ([]byte, error) {
@@ -172,15 +219,20 @@ func (o UpdateActivationForAudienceAlphaInput) MarshalJSON() ([]byte, error) {
 
 func (o UpdateActivationForAudienceAlphaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["workspaceId"] = o.WorkspaceId
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if o.EventEmitter != nil {
-		toSerialize["eventEmitter"] = o.EventEmitter
+	if !IsNil(o.ActivationName) {
+		toSerialize["activationName"] = o.ActivationName
 	}
-	if o.Subscription != nil {
-		toSerialize["subscription"] = o.Subscription
+	if !IsNil(o.Personalization) {
+		toSerialize["personalization"] = o.Personalization
+	}
+	if !IsNil(o.DestinationMapping) {
+		toSerialize["destinationMapping"] = o.DestinationMapping
+	}
+	if !IsNil(o.PerformFirstSync) {
+		toSerialize["performFirstSync"] = o.PerformFirstSync
 	}
 	return toSerialize, nil
 }
