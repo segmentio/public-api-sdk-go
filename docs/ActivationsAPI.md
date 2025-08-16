@@ -37,7 +37,7 @@ func main() {
     spaceId := "spa_9aQ1Lj62S4bomZKLF4DPqW" // string | 
     audienceId := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
     connectionId := "ii_123456789" // string | 
-    addActivationToAudienceAlphaInput := *api.NewAddActivationToAudienceAlphaInput("DestinationId_example", false, "ActivationType_example", "ActivationName_example", "SegmentEvent_example", *api.NewDestinationSubscriptionConfiguration("ActionId_example")) // AddActivationToAudienceAlphaInput | 
+    addActivationToAudienceAlphaInput := *api.NewAddActivationToAudienceAlphaInput("DestinationId_example", false, "ActivationType_example", "ActivationName_example", *api.NewPersonalizationInput(*api.NewProfile([]string{"Properties_example"})), *api.NewDestinationSubscriptionConfiguration("ActionId_example")) // AddActivationToAudienceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)

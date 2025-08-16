@@ -29,10 +29,8 @@ type AddActivationToAudienceAlphaInput struct {
 	// Type of activation trigger.
 	ActivationType string `json:"activationType"`
 	// Name of the activation.
-	ActivationName string `json:"activationName"`
-	// Segment event type to emit.
-	SegmentEvent       string                               `json:"segmentEvent"`
-	Personalization    *PersonalizationInput                `json:"personalization,omitempty"`
+	ActivationName     string                               `json:"activationName"`
+	Personalization    PersonalizationInput                 `json:"personalization"`
 	DestinationMapping DestinationSubscriptionConfiguration `json:"destinationMapping"`
 }
 
@@ -45,7 +43,7 @@ func NewAddActivationToAudienceAlphaInput(
 	performFirstSync bool,
 	activationType string,
 	activationName string,
-	segmentEvent string,
+	personalization PersonalizationInput,
 	destinationMapping DestinationSubscriptionConfiguration,
 ) *AddActivationToAudienceAlphaInput {
 	this := AddActivationToAudienceAlphaInput{}
@@ -53,7 +51,7 @@ func NewAddActivationToAudienceAlphaInput(
 	this.PerformFirstSync = performFirstSync
 	this.ActivationType = activationType
 	this.ActivationName = activationName
-	this.SegmentEvent = segmentEvent
+	this.Personalization = personalization
 	this.DestinationMapping = destinationMapping
 	return &this
 }
@@ -194,60 +192,28 @@ func (o *AddActivationToAudienceAlphaInput) SetActivationName(v string) {
 	o.ActivationName = v
 }
 
-// GetSegmentEvent returns the SegmentEvent field value
-func (o *AddActivationToAudienceAlphaInput) GetSegmentEvent() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.SegmentEvent
-}
-
-// GetSegmentEventOk returns a tuple with the SegmentEvent field value
-// and a boolean to check if the value has been set.
-func (o *AddActivationToAudienceAlphaInput) GetSegmentEventOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.SegmentEvent, true
-}
-
-// SetSegmentEvent sets field value
-func (o *AddActivationToAudienceAlphaInput) SetSegmentEvent(v string) {
-	o.SegmentEvent = v
-}
-
-// GetPersonalization returns the Personalization field value if set, zero value otherwise.
+// GetPersonalization returns the Personalization field value
 func (o *AddActivationToAudienceAlphaInput) GetPersonalization() PersonalizationInput {
-	if o == nil || IsNil(o.Personalization) {
+	if o == nil {
 		var ret PersonalizationInput
 		return ret
 	}
-	return *o.Personalization
+
+	return o.Personalization
 }
 
-// GetPersonalizationOk returns a tuple with the Personalization field value if set, nil otherwise
+// GetPersonalizationOk returns a tuple with the Personalization field value
 // and a boolean to check if the value has been set.
 func (o *AddActivationToAudienceAlphaInput) GetPersonalizationOk() (*PersonalizationInput, bool) {
-	if o == nil || IsNil(o.Personalization) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Personalization, true
+	return &o.Personalization, true
 }
 
-// HasPersonalization returns a boolean if a field has been set.
-func (o *AddActivationToAudienceAlphaInput) HasPersonalization() bool {
-	if o != nil && !IsNil(o.Personalization) {
-		return true
-	}
-
-	return false
-}
-
-// SetPersonalization gets a reference to the given PersonalizationInput and assigns it to the Personalization field.
+// SetPersonalization sets field value
 func (o *AddActivationToAudienceAlphaInput) SetPersonalization(v PersonalizationInput) {
-	o.Personalization = &v
+	o.Personalization = v
 }
 
 // GetDestinationMapping returns the DestinationMapping field value
@@ -293,10 +259,7 @@ func (o AddActivationToAudienceAlphaInput) ToMap() (map[string]interface{}, erro
 	toSerialize["performFirstSync"] = o.PerformFirstSync
 	toSerialize["activationType"] = o.ActivationType
 	toSerialize["activationName"] = o.ActivationName
-	toSerialize["segmentEvent"] = o.SegmentEvent
-	if !IsNil(o.Personalization) {
-		toSerialize["personalization"] = o.Personalization
-	}
+	toSerialize["personalization"] = o.Personalization
 	toSerialize["destinationMapping"] = o.DestinationMapping
 	return toSerialize, nil
 }
