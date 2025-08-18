@@ -4,8 +4,8 @@ All URIs are relative to *https://api.segmentapis.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddActivationToAudience**](ActivationsAPI.md#AddActivationToAudience) | **Post** /spaces/{spaceId}/audiences/{audienceId}/{connectionId}/activations | Add Activation to Audience
-[**AddDestinationToAudience**](ActivationsAPI.md#AddDestinationToAudience) | **Post** /spaces/{spaceId}/audiences/{audienceId}/destinations | Add Destination to Audience
+[**AddActivationToAudience**](ActivationsAPI.md#AddActivationToAudience) | **Post** /spaces/{spaceId}/audiences/{audienceId}/destination-connections/{connectionId}/activations | Add Activation to Audience
+[**AddDestinationToAudience**](ActivationsAPI.md#AddDestinationToAudience) | **Post** /spaces/{spaceId}/audiences/{audienceId}/destination-connections | Add Destination to Audience
 [**GetActivationFromAudience**](ActivationsAPI.md#GetActivationFromAudience) | **Get** /spaces/{spaceId}/audiences/{audienceId}/activations/{id} | Get Activation from Audience
 [**ListActivationsFromAudience**](ActivationsAPI.md#ListActivationsFromAudience) | **Get** /spaces/{spaceId}/audiences/{audienceId}/activations | List Activations from Audience
 [**RemoveActivationFromAudience**](ActivationsAPI.md#RemoveActivationFromAudience) | **Delete** /spaces/{spaceId}/audiences/{audienceId}/activations/{id} | Remove Activation from Audience
@@ -37,7 +37,7 @@ func main() {
     spaceId := "spa_9aQ1Lj62S4bomZKLF4DPqW" // string | 
     audienceId := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
     connectionId := "ii_123456789" // string | 
-    addActivationToAudienceAlphaInput := *api.NewAddActivationToAudienceAlphaInput("VersionSchema_example", "WorkspaceId_example", "DestinationId_example", interface{}(123), interface{}(123)) // AddActivationToAudienceAlphaInput | 
+    addActivationToAudienceAlphaInput := *api.NewAddActivationToAudienceAlphaInput("DestinationId_example", false, "ActivationType_example", "ActivationName_example", *api.NewPersonalizationInput(*api.NewProfile([]string{"Properties_example"})), *api.NewDestinationSubscriptionConfiguration("ActionId_example")) // AddActivationToAudienceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -122,7 +122,7 @@ import (
 func main() {
     spaceId := "spa_9aQ1Lj62S4bomZKLF4DPqW" // string | 
     audienceId := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
-    addDestinationToAudienceAlphaInput := *api.NewAddDestinationToAudienceAlphaInput("VersionSchema_example", "WorkspaceId_example", *api.NewDestinationInput("Id_example", "Type_example")) // AddDestinationToAudienceAlphaInput | 
+    addDestinationToAudienceAlphaInput := *api.NewAddDestinationToAudienceAlphaInput(*api.NewDestinationInput("Id_example", "Type_example")) // AddDestinationToAudienceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -184,7 +184,7 @@ Name | Type | Description  | Notes
 
 ## Operation: GetActivationFromAudience
 
-> GetActivationFromAudience200Response GetActivationFromAudience(ctx, spaceId, audienceId, id).WorkspaceId(workspaceId).Execute()
+> GetActivationFromAudience200Response GetActivationFromAudience(ctx, spaceId, audienceId, id).Execute()
 
 Get Activation from Audience
 
@@ -206,13 +206,12 @@ func main() {
     spaceId := "spa_9aQ1Lj62S4bomZKLF4DPqW" // string | 
     audienceId := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
     id := "act_987654321" // string | 
-    workspaceId := "LF4DPqW" // string | The workspace id  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ActivationsAPI.GetActivationFromAudience(ctx, spaceId, audienceId, id).WorkspaceId(workspaceId).Execute()
+    resp, r, err := apiClient.ActivationsAPI.GetActivationFromAudience(ctx, spaceId, audienceId, id).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ActivationsAPI.GetActivationFromAudience``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -248,7 +247,6 @@ Name | Type | Description  | Notes
 
 
 
- **workspaceId** | **string** | The workspace id  This parameter exists in alpha. | 
 
 ### Return type
 
@@ -270,7 +268,7 @@ Name | Type | Description  | Notes
 
 ## Operation: ListActivationsFromAudience
 
-> ListActivationsFromAudience200Response ListActivationsFromAudience(ctx, spaceId, audienceId).WorkspaceId(workspaceId).Pagination(pagination).Execute()
+> ListActivationsFromAudience200Response ListActivationsFromAudience(ctx, spaceId, audienceId).Pagination(pagination).Execute()
 
 List Activations from Audience
 
@@ -291,14 +289,13 @@ import (
 func main() {
     spaceId := "spa_9aQ1Lj62S4bomZKLF4DPqW" // string | 
     audienceId := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
-    workspaceId := "LF4DPqW" // string | The workspace id  This parameter exists in alpha.
     pagination := *api.NewPaginationInput(10) // PaginationInput | Optional pagination.  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ActivationsAPI.ListActivationsFromAudience(ctx, spaceId, audienceId).WorkspaceId(workspaceId).Pagination(pagination).Execute()
+    resp, r, err := apiClient.ActivationsAPI.ListActivationsFromAudience(ctx, spaceId, audienceId).Pagination(pagination).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ActivationsAPI.ListActivationsFromAudience``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -332,7 +329,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **workspaceId** | **string** | The workspace id  This parameter exists in alpha. | 
  **pagination** | [**PaginationInput**](PaginationInput.md) | Optional pagination.  This parameter exists in alpha. | 
 
 ### Return type
@@ -355,7 +351,7 @@ Name | Type | Description  | Notes
 
 ## Operation: RemoveActivationFromAudience
 
-> RemoveActivationFromAudience200Response RemoveActivationFromAudience(ctx, spaceId, audienceId, id).WorkspaceId(workspaceId).Execute()
+> RemoveActivationFromAudience200Response RemoveActivationFromAudience(ctx, spaceId, audienceId, id).Execute()
 
 Remove Activation from Audience
 
@@ -377,13 +373,12 @@ func main() {
     spaceId := "spa_9aQ1Lj62S4bomZKLF4DPqW" // string | 
     audienceId := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
     id := "act_987654321" // string | 
-    workspaceId := "LF4DPqW" // string | The workspace id  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.ActivationsAPI.RemoveActivationFromAudience(ctx, spaceId, audienceId, id).WorkspaceId(workspaceId).Execute()
+    resp, r, err := apiClient.ActivationsAPI.RemoveActivationFromAudience(ctx, spaceId, audienceId, id).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ActivationsAPI.RemoveActivationFromAudience``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -419,7 +414,6 @@ Name | Type | Description  | Notes
 
 
 
- **workspaceId** | **string** | The workspace id  This parameter exists in alpha. | 
 
 ### Return type
 
@@ -463,7 +457,7 @@ func main() {
     spaceId := "spa_9aQ1Lj62S4bomZKLF4DPqW" // string | 
     audienceId := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
     id := "act_987654321" // string | 
-    updateActivationForAudienceAlphaInput := *api.NewUpdateActivationForAudienceAlphaInput("WorkspaceId_example", interface{}(123), interface{}(123)) // UpdateActivationForAudienceAlphaInput | 
+    updateActivationForAudienceAlphaInput := *api.NewUpdateActivationForAudienceAlphaInput() // UpdateActivationForAudienceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
