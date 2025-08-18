@@ -26,7 +26,7 @@ type UpdateActivationForAudienceAlphaInput struct {
 	ActivationName     *string                               `json:"activationName,omitempty"`
 	Personalization    *PersonalizationInput                 `json:"personalization,omitempty"`
 	DestinationMapping *DestinationSubscriptionConfiguration `json:"destinationMapping,omitempty"`
-	// Whether to skip the first sync so the activation events are not generated on the first audience sync. Will only work if the Audience has not already synced.
+	// Whether to perform the first sync so the activation events are generated on the first audience sync.
 	PerformFirstSync *bool `json:"performFirstSync,omitempty"`
 }
 

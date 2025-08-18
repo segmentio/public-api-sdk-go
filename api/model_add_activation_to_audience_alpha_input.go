@@ -24,7 +24,7 @@ type AddActivationToAudienceAlphaInput struct {
 	DestinationId string `json:"destinationId"`
 	// Whether the event emitter should be created in an enabled state. Will trigger an audience run if enabled.
 	Enabled *bool `json:"enabled,omitempty"`
-	// Whether to skip the first sync so the activation events are not generated on the first audience sync.
+	// Whether to perform the first sync so the activation events are generated on the first audience sync.
 	PerformFirstSync bool `json:"performFirstSync"`
 	// Type of activation trigger.
 	ActivationType string `json:"activationType"`
