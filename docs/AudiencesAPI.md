@@ -39,7 +39,7 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    createAudienceAlphaInput := *api.NewCreateAudienceAlphaInput("Name_example", *api.NewAudienceDefinition("Type_example", "Query_example")) // CreateAudienceAlphaInput | 
+    createAudienceAlphaInput := *api.NewCreateAudienceAlphaInput("Name_example", *api.NewAudienceDefinition("Query_example")) // CreateAudienceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)

@@ -43,7 +43,7 @@ type AudienceSummary struct {
 	CreatedAt string `json:"createdAt"`
 	// Date the audience was last updated.
 	UpdatedAt string `json:"updatedAt"`
-	// Discriminator denoting the audience's product type.
+	// Denotes the type of audience product.
 	AudienceType string           `json:"audienceType"`
 	Options      *AudienceOptions `json:"options,omitempty"`
 }

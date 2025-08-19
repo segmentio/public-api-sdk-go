@@ -21,7 +21,7 @@ var _ MappedNullable = &CreateAudiencePreviewAlphaInput{}
 // CreateAudiencePreviewAlphaInput Input to create an audience preview.
 type CreateAudiencePreviewAlphaInput struct {
 	Definition AudienceDefinitionWithoutType `json:"definition"`
-	// Discriminator denoting the audience's product type.  Possible values: USERS, ACCOUNTS, LINKED.
+	// Denotes the type of audience product.  Possible values: USERS, ACCOUNTS, LINKED.
 	AudienceType string                        `json:"audienceType"`
 	Options      *CreateAudiencePreviewOptions `json:"options,omitempty"`
 }

@@ -27,7 +27,9 @@ type CreateAudienceAlphaInput struct {
 	// Description of the audience.
 	Description *string            `json:"description,omitempty"`
 	Definition  AudienceDefinition `json:"definition"`
-	Options     *AudienceOptions   `json:"options,omitempty"`
+	// Denotes the type of audience product.  Possible values: USERS, ACCOUNTS.
+	AudienceType *string          `json:"audienceType,omitempty"`
+	Options      *AudienceOptions `json:"options,omitempty"`
 }
 
 // NewCreateAudienceAlphaInput instantiates a new CreateAudienceAlphaInput object
@@ -164,6 +166,38 @@ func (o *CreateAudienceAlphaInput) SetDefinition(v AudienceDefinition) {
 	o.Definition = v
 }
 
+// GetAudienceType returns the AudienceType field value if set, zero value otherwise.
+func (o *CreateAudienceAlphaInput) GetAudienceType() string {
+	if o == nil || IsNil(o.AudienceType) {
+		var ret string
+		return ret
+	}
+	return *o.AudienceType
+}
+
+// GetAudienceTypeOk returns a tuple with the AudienceType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateAudienceAlphaInput) GetAudienceTypeOk() (*string, bool) {
+	if o == nil || IsNil(o.AudienceType) {
+		return nil, false
+	}
+	return o.AudienceType, true
+}
+
+// HasAudienceType returns a boolean if a field has been set.
+func (o *CreateAudienceAlphaInput) HasAudienceType() bool {
+	if o != nil && !IsNil(o.AudienceType) {
+		return true
+	}
+
+	return false
+}
+
+// SetAudienceType gets a reference to the given string and assigns it to the AudienceType field.
+func (o *CreateAudienceAlphaInput) SetAudienceType(v string) {
+	o.AudienceType = &v
+}
+
 // GetOptions returns the Options field value if set, zero value otherwise.
 func (o *CreateAudienceAlphaInput) GetOptions() AudienceOptions {
 	if o == nil || IsNil(o.Options) {
@@ -214,6 +248,9 @@ func (o CreateAudienceAlphaInput) ToMap() (map[string]interface{}, error) {
 		toSerialize["description"] = o.Description
 	}
 	toSerialize["definition"] = o.Definition
+	if !IsNil(o.AudienceType) {
+		toSerialize["audienceType"] = o.AudienceType
+	}
 	if !IsNil(o.Options) {
 		toSerialize["options"] = o.Options
 	}
