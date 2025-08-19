@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.14.0
+API version: 59.0.0
 Contact: friends@segment.com
 */
 
@@ -20,11 +20,11 @@ var _ MappedNullable = &AddDestinationToAudienceAlphaInput{}
 
 // AddDestinationToAudienceAlphaInput Input to Add a Destination into an Audience.
 type AddDestinationToAudienceAlphaInput struct {
-	// Version Schema.
-	VersionSchema string `json:"versionSchema"`
-	// The id of the Workspace the audience exists within.
-	WorkspaceId string           `json:"workspaceId"`
 	Destination DestinationInput `json:"destination"`
+	// The identifier sync configuration input.
+	IdSyncConfiguration map[string]interface{} `json:"idSyncConfiguration,omitempty"`
+	// The settings that a Destination requires to create audiences on a third-party platform. These settings are Destination-specific and thus are best defined as unknown.
+	ConnectionSettings interface{} `json:"connectionSettings,omitempty"`
 }
 
 // NewAddDestinationToAudienceAlphaInput instantiates a new AddDestinationToAudienceAlphaInput object
@@ -32,13 +32,9 @@ type AddDestinationToAudienceAlphaInput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewAddDestinationToAudienceAlphaInput(
-	versionSchema string,
-	workspaceId string,
 	destination DestinationInput,
 ) *AddDestinationToAudienceAlphaInput {
 	this := AddDestinationToAudienceAlphaInput{}
-	this.VersionSchema = versionSchema
-	this.WorkspaceId = workspaceId
 	this.Destination = destination
 	return &this
 }
@@ -49,54 +45,6 @@ func NewAddDestinationToAudienceAlphaInput(
 func NewAddDestinationToAudienceAlphaInputWithDefaults() *AddDestinationToAudienceAlphaInput {
 	this := AddDestinationToAudienceAlphaInput{}
 	return &this
-}
-
-// GetVersionSchema returns the VersionSchema field value
-func (o *AddDestinationToAudienceAlphaInput) GetVersionSchema() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.VersionSchema
-}
-
-// GetVersionSchemaOk returns a tuple with the VersionSchema field value
-// and a boolean to check if the value has been set.
-func (o *AddDestinationToAudienceAlphaInput) GetVersionSchemaOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.VersionSchema, true
-}
-
-// SetVersionSchema sets field value
-func (o *AddDestinationToAudienceAlphaInput) SetVersionSchema(v string) {
-	o.VersionSchema = v
-}
-
-// GetWorkspaceId returns the WorkspaceId field value
-func (o *AddDestinationToAudienceAlphaInput) GetWorkspaceId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.WorkspaceId
-}
-
-// GetWorkspaceIdOk returns a tuple with the WorkspaceId field value
-// and a boolean to check if the value has been set.
-func (o *AddDestinationToAudienceAlphaInput) GetWorkspaceIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.WorkspaceId, true
-}
-
-// SetWorkspaceId sets field value
-func (o *AddDestinationToAudienceAlphaInput) SetWorkspaceId(v string) {
-	o.WorkspaceId = v
 }
 
 // GetDestination returns the Destination field value
@@ -123,6 +71,71 @@ func (o *AddDestinationToAudienceAlphaInput) SetDestination(v DestinationInput) 
 	o.Destination = v
 }
 
+// GetIdSyncConfiguration returns the IdSyncConfiguration field value if set, zero value otherwise.
+func (o *AddDestinationToAudienceAlphaInput) GetIdSyncConfiguration() map[string]interface{} {
+	if o == nil || IsNil(o.IdSyncConfiguration) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.IdSyncConfiguration
+}
+
+// GetIdSyncConfigurationOk returns a tuple with the IdSyncConfiguration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AddDestinationToAudienceAlphaInput) GetIdSyncConfigurationOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.IdSyncConfiguration) {
+		return map[string]interface{}{}, false
+	}
+	return o.IdSyncConfiguration, true
+}
+
+// HasIdSyncConfiguration returns a boolean if a field has been set.
+func (o *AddDestinationToAudienceAlphaInput) HasIdSyncConfiguration() bool {
+	if o != nil && !IsNil(o.IdSyncConfiguration) {
+		return true
+	}
+
+	return false
+}
+
+// SetIdSyncConfiguration gets a reference to the given map[string]interface{} and assigns it to the IdSyncConfiguration field.
+func (o *AddDestinationToAudienceAlphaInput) SetIdSyncConfiguration(v map[string]interface{}) {
+	o.IdSyncConfiguration = v
+}
+
+// GetConnectionSettings returns the ConnectionSettings field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AddDestinationToAudienceAlphaInput) GetConnectionSettings() interface{} {
+	if o == nil {
+		var ret interface{}
+		return ret
+	}
+	return o.ConnectionSettings
+}
+
+// GetConnectionSettingsOk returns a tuple with the ConnectionSettings field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AddDestinationToAudienceAlphaInput) GetConnectionSettingsOk() (*interface{}, bool) {
+	if o == nil || IsNil(o.ConnectionSettings) {
+		return nil, false
+	}
+	return &o.ConnectionSettings, true
+}
+
+// HasConnectionSettings returns a boolean if a field has been set.
+func (o *AddDestinationToAudienceAlphaInput) HasConnectionSettings() bool {
+	if o != nil && IsNil(o.ConnectionSettings) {
+		return true
+	}
+
+	return false
+}
+
+// SetConnectionSettings gets a reference to the given interface{} and assigns it to the ConnectionSettings field.
+func (o *AddDestinationToAudienceAlphaInput) SetConnectionSettings(v interface{}) {
+	o.ConnectionSettings = v
+}
+
 func (o AddDestinationToAudienceAlphaInput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -133,9 +146,13 @@ func (o AddDestinationToAudienceAlphaInput) MarshalJSON() ([]byte, error) {
 
 func (o AddDestinationToAudienceAlphaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["versionSchema"] = o.VersionSchema
-	toSerialize["workspaceId"] = o.WorkspaceId
 	toSerialize["destination"] = o.Destination
+	if !IsNil(o.IdSyncConfiguration) {
+		toSerialize["idSyncConfiguration"] = o.IdSyncConfiguration
+	}
+	if o.ConnectionSettings != nil {
+		toSerialize["connectionSettings"] = o.ConnectionSettings
+	}
 	return toSerialize, nil
 }
 

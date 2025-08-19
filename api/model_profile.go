@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.14.0
+API version: 59.0.0
 Contact: friends@segment.com
 */
 
@@ -18,19 +18,19 @@ import (
 // checks if the Profile type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Profile{}
 
-// Profile struct for Profile
+// Profile Profile Object.
 type Profile struct {
-	// The id of the profile.
-	Id string `json:"id"`
+	Properties []string           `json:"properties"`
+	Mapping    *map[string]string `json:"mapping,omitempty"`
 }
 
 // NewProfile instantiates a new Profile object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfile(id string) *Profile {
+func NewProfile(properties []string) *Profile {
 	this := Profile{}
-	this.Id = id
+	this.Properties = properties
 	return &this
 }
 
@@ -42,28 +42,60 @@ func NewProfileWithDefaults() *Profile {
 	return &this
 }
 
-// GetId returns the Id field value
-func (o *Profile) GetId() string {
+// GetProperties returns the Properties field value
+func (o *Profile) GetProperties() []string {
 	if o == nil {
-		var ret string
+		var ret []string
 		return ret
 	}
 
-	return o.Id
+	return o.Properties
 }
 
-// GetIdOk returns a tuple with the Id field value
+// GetPropertiesOk returns a tuple with the Properties field value
 // and a boolean to check if the value has been set.
-func (o *Profile) GetIdOk() (*string, bool) {
+func (o *Profile) GetPropertiesOk() ([]string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Id, true
+	return o.Properties, true
 }
 
-// SetId sets field value
-func (o *Profile) SetId(v string) {
-	o.Id = v
+// SetProperties sets field value
+func (o *Profile) SetProperties(v []string) {
+	o.Properties = v
+}
+
+// GetMapping returns the Mapping field value if set, zero value otherwise.
+func (o *Profile) GetMapping() map[string]string {
+	if o == nil || IsNil(o.Mapping) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Mapping
+}
+
+// GetMappingOk returns a tuple with the Mapping field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Profile) GetMappingOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.Mapping) {
+		return nil, false
+	}
+	return o.Mapping, true
+}
+
+// HasMapping returns a boolean if a field has been set.
+func (o *Profile) HasMapping() bool {
+	if o != nil && !IsNil(o.Mapping) {
+		return true
+	}
+
+	return false
+}
+
+// SetMapping gets a reference to the given map[string]string and assigns it to the Mapping field.
+func (o *Profile) SetMapping(v map[string]string) {
+	o.Mapping = &v
 }
 
 func (o Profile) MarshalJSON() ([]byte, error) {
@@ -76,7 +108,10 @@ func (o Profile) MarshalJSON() ([]byte, error) {
 
 func (o Profile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["id"] = o.Id
+	toSerialize["properties"] = o.Properties
+	if !IsNil(o.Mapping) {
+		toSerialize["mapping"] = o.Mapping
+	}
 	return toSerialize, nil
 }
 

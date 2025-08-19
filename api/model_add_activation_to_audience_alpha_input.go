@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 58.14.0
+API version: 59.0.0
 Contact: friends@segment.com
 */
 
@@ -20,22 +20,18 @@ var _ MappedNullable = &AddActivationToAudienceAlphaInput{}
 
 // AddActivationToAudienceAlphaInput Input to create an activation.
 type AddActivationToAudienceAlphaInput struct {
-	// Version Schema.
-	VersionSchema string `json:"versionSchema"`
-	// The id of the Workspace the audience exists within.
-	WorkspaceId string `json:"workspaceId"`
 	// The Destination id.
 	DestinationId string `json:"destinationId"`
-	// Whether the event emitter should be created in an enabled state.
+	// Whether the event emitter should be created in an enabled state. Will trigger an audience run if enabled.
 	Enabled *bool `json:"enabled,omitempty"`
-	// Whether the event emitter should be created with the resync option.
-	HasEnabledResync *bool `json:"hasEnabledResync,omitempty"`
-	// Whether the event emitter should emit events when the profile changes or when any enriched entity values changes. Only valid for identify events.
-	EmitEntityContext *string `json:"emitEntityContext,omitempty"`
-	// Configuration settings for the event emitter to be created.
-	EventEmitter interface{} `json:"eventEmitter"`
-	// Subscription info to connect the event emitter to a Destination attached to the audience.
-	Subscription interface{} `json:"subscription"`
+	// Whether to perform the first sync so the activation events are generated on the first audience sync.
+	PerformFirstSync bool `json:"performFirstSync"`
+	// Type of activation trigger.
+	ActivationType string `json:"activationType"`
+	// Name of the activation.
+	ActivationName     string                               `json:"activationName"`
+	Personalization    PersonalizationInput                 `json:"personalization"`
+	DestinationMapping DestinationSubscriptionConfiguration `json:"destinationMapping"`
 }
 
 // NewAddActivationToAudienceAlphaInput instantiates a new AddActivationToAudienceAlphaInput object
@@ -43,18 +39,20 @@ type AddActivationToAudienceAlphaInput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewAddActivationToAudienceAlphaInput(
-	versionSchema string,
-	workspaceId string,
 	destinationId string,
-	eventEmitter interface{},
-	subscription interface{},
+	performFirstSync bool,
+	activationType string,
+	activationName string,
+	personalization PersonalizationInput,
+	destinationMapping DestinationSubscriptionConfiguration,
 ) *AddActivationToAudienceAlphaInput {
 	this := AddActivationToAudienceAlphaInput{}
-	this.VersionSchema = versionSchema
-	this.WorkspaceId = workspaceId
 	this.DestinationId = destinationId
-	this.EventEmitter = eventEmitter
-	this.Subscription = subscription
+	this.PerformFirstSync = performFirstSync
+	this.ActivationType = activationType
+	this.ActivationName = activationName
+	this.Personalization = personalization
+	this.DestinationMapping = destinationMapping
 	return &this
 }
 
@@ -64,54 +62,6 @@ func NewAddActivationToAudienceAlphaInput(
 func NewAddActivationToAudienceAlphaInputWithDefaults() *AddActivationToAudienceAlphaInput {
 	this := AddActivationToAudienceAlphaInput{}
 	return &this
-}
-
-// GetVersionSchema returns the VersionSchema field value
-func (o *AddActivationToAudienceAlphaInput) GetVersionSchema() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.VersionSchema
-}
-
-// GetVersionSchemaOk returns a tuple with the VersionSchema field value
-// and a boolean to check if the value has been set.
-func (o *AddActivationToAudienceAlphaInput) GetVersionSchemaOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.VersionSchema, true
-}
-
-// SetVersionSchema sets field value
-func (o *AddActivationToAudienceAlphaInput) SetVersionSchema(v string) {
-	o.VersionSchema = v
-}
-
-// GetWorkspaceId returns the WorkspaceId field value
-func (o *AddActivationToAudienceAlphaInput) GetWorkspaceId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.WorkspaceId
-}
-
-// GetWorkspaceIdOk returns a tuple with the WorkspaceId field value
-// and a boolean to check if the value has been set.
-func (o *AddActivationToAudienceAlphaInput) GetWorkspaceIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.WorkspaceId, true
-}
-
-// SetWorkspaceId sets field value
-func (o *AddActivationToAudienceAlphaInput) SetWorkspaceId(v string) {
-	o.WorkspaceId = v
 }
 
 // GetDestinationId returns the DestinationId field value
@@ -170,120 +120,126 @@ func (o *AddActivationToAudienceAlphaInput) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetHasEnabledResync returns the HasEnabledResync field value if set, zero value otherwise.
-func (o *AddActivationToAudienceAlphaInput) GetHasEnabledResync() bool {
-	if o == nil || IsNil(o.HasEnabledResync) {
+// GetPerformFirstSync returns the PerformFirstSync field value
+func (o *AddActivationToAudienceAlphaInput) GetPerformFirstSync() bool {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.HasEnabledResync
+
+	return o.PerformFirstSync
 }
 
-// GetHasEnabledResyncOk returns a tuple with the HasEnabledResync field value if set, nil otherwise
+// GetPerformFirstSyncOk returns a tuple with the PerformFirstSync field value
 // and a boolean to check if the value has been set.
-func (o *AddActivationToAudienceAlphaInput) GetHasEnabledResyncOk() (*bool, bool) {
-	if o == nil || IsNil(o.HasEnabledResync) {
+func (o *AddActivationToAudienceAlphaInput) GetPerformFirstSyncOk() (*bool, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.HasEnabledResync, true
+	return &o.PerformFirstSync, true
 }
 
-// HasHasEnabledResync returns a boolean if a field has been set.
-func (o *AddActivationToAudienceAlphaInput) HasHasEnabledResync() bool {
-	if o != nil && !IsNil(o.HasEnabledResync) {
-		return true
-	}
-
-	return false
+// SetPerformFirstSync sets field value
+func (o *AddActivationToAudienceAlphaInput) SetPerformFirstSync(v bool) {
+	o.PerformFirstSync = v
 }
 
-// SetHasEnabledResync gets a reference to the given bool and assigns it to the HasEnabledResync field.
-func (o *AddActivationToAudienceAlphaInput) SetHasEnabledResync(v bool) {
-	o.HasEnabledResync = &v
-}
-
-// GetEmitEntityContext returns the EmitEntityContext field value if set, zero value otherwise.
-func (o *AddActivationToAudienceAlphaInput) GetEmitEntityContext() string {
-	if o == nil || IsNil(o.EmitEntityContext) {
+// GetActivationType returns the ActivationType field value
+func (o *AddActivationToAudienceAlphaInput) GetActivationType() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.EmitEntityContext
+
+	return o.ActivationType
 }
 
-// GetEmitEntityContextOk returns a tuple with the EmitEntityContext field value if set, nil otherwise
+// GetActivationTypeOk returns a tuple with the ActivationType field value
 // and a boolean to check if the value has been set.
-func (o *AddActivationToAudienceAlphaInput) GetEmitEntityContextOk() (*string, bool) {
-	if o == nil || IsNil(o.EmitEntityContext) {
+func (o *AddActivationToAudienceAlphaInput) GetActivationTypeOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EmitEntityContext, true
+	return &o.ActivationType, true
 }
 
-// HasEmitEntityContext returns a boolean if a field has been set.
-func (o *AddActivationToAudienceAlphaInput) HasEmitEntityContext() bool {
-	if o != nil && !IsNil(o.EmitEntityContext) {
-		return true
-	}
-
-	return false
+// SetActivationType sets field value
+func (o *AddActivationToAudienceAlphaInput) SetActivationType(v string) {
+	o.ActivationType = v
 }
 
-// SetEmitEntityContext gets a reference to the given string and assigns it to the EmitEntityContext field.
-func (o *AddActivationToAudienceAlphaInput) SetEmitEntityContext(v string) {
-	o.EmitEntityContext = &v
-}
-
-// GetEventEmitter returns the EventEmitter field value
-// If the value is explicit nil, the zero value for interface{} will be returned
-func (o *AddActivationToAudienceAlphaInput) GetEventEmitter() interface{} {
+// GetActivationName returns the ActivationName field value
+func (o *AddActivationToAudienceAlphaInput) GetActivationName() string {
 	if o == nil {
-		var ret interface{}
+		var ret string
 		return ret
 	}
 
-	return o.EventEmitter
+	return o.ActivationName
 }
 
-// GetEventEmitterOk returns a tuple with the EventEmitter field value
+// GetActivationNameOk returns a tuple with the ActivationName field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AddActivationToAudienceAlphaInput) GetEventEmitterOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.EventEmitter) {
+func (o *AddActivationToAudienceAlphaInput) GetActivationNameOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return &o.EventEmitter, true
+	return &o.ActivationName, true
 }
 
-// SetEventEmitter sets field value
-func (o *AddActivationToAudienceAlphaInput) SetEventEmitter(v interface{}) {
-	o.EventEmitter = v
+// SetActivationName sets field value
+func (o *AddActivationToAudienceAlphaInput) SetActivationName(v string) {
+	o.ActivationName = v
 }
 
-// GetSubscription returns the Subscription field value
-// If the value is explicit nil, the zero value for interface{} will be returned
-func (o *AddActivationToAudienceAlphaInput) GetSubscription() interface{} {
+// GetPersonalization returns the Personalization field value
+func (o *AddActivationToAudienceAlphaInput) GetPersonalization() PersonalizationInput {
 	if o == nil {
-		var ret interface{}
+		var ret PersonalizationInput
 		return ret
 	}
 
-	return o.Subscription
+	return o.Personalization
 }
 
-// GetSubscriptionOk returns a tuple with the Subscription field value
+// GetPersonalizationOk returns a tuple with the Personalization field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AddActivationToAudienceAlphaInput) GetSubscriptionOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Subscription) {
+func (o *AddActivationToAudienceAlphaInput) GetPersonalizationOk() (*PersonalizationInput, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return &o.Subscription, true
+	return &o.Personalization, true
 }
 
-// SetSubscription sets field value
-func (o *AddActivationToAudienceAlphaInput) SetSubscription(v interface{}) {
-	o.Subscription = v
+// SetPersonalization sets field value
+func (o *AddActivationToAudienceAlphaInput) SetPersonalization(v PersonalizationInput) {
+	o.Personalization = v
+}
+
+// GetDestinationMapping returns the DestinationMapping field value
+func (o *AddActivationToAudienceAlphaInput) GetDestinationMapping() DestinationSubscriptionConfiguration {
+	if o == nil {
+		var ret DestinationSubscriptionConfiguration
+		return ret
+	}
+
+	return o.DestinationMapping
+}
+
+// GetDestinationMappingOk returns a tuple with the DestinationMapping field value
+// and a boolean to check if the value has been set.
+func (o *AddActivationToAudienceAlphaInput) GetDestinationMappingOk() (*DestinationSubscriptionConfiguration, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DestinationMapping, true
+}
+
+// SetDestinationMapping sets field value
+func (o *AddActivationToAudienceAlphaInput) SetDestinationMapping(
+	v DestinationSubscriptionConfiguration,
+) {
+	o.DestinationMapping = v
 }
 
 func (o AddActivationToAudienceAlphaInput) MarshalJSON() ([]byte, error) {
@@ -296,24 +252,15 @@ func (o AddActivationToAudienceAlphaInput) MarshalJSON() ([]byte, error) {
 
 func (o AddActivationToAudienceAlphaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["versionSchema"] = o.VersionSchema
-	toSerialize["workspaceId"] = o.WorkspaceId
 	toSerialize["destinationId"] = o.DestinationId
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	if !IsNil(o.HasEnabledResync) {
-		toSerialize["hasEnabledResync"] = o.HasEnabledResync
-	}
-	if !IsNil(o.EmitEntityContext) {
-		toSerialize["emitEntityContext"] = o.EmitEntityContext
-	}
-	if o.EventEmitter != nil {
-		toSerialize["eventEmitter"] = o.EventEmitter
-	}
-	if o.Subscription != nil {
-		toSerialize["subscription"] = o.Subscription
-	}
+	toSerialize["performFirstSync"] = o.PerformFirstSync
+	toSerialize["activationType"] = o.ActivationType
+	toSerialize["activationName"] = o.ActivationName
+	toSerialize["personalization"] = o.Personalization
+	toSerialize["destinationMapping"] = o.DestinationMapping
 	return toSerialize, nil
 }
 
