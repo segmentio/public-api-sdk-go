@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 59.0.0
+API version: 59.1.0
 Contact: friends@segment.com
 */
 
@@ -20,7 +20,7 @@ var _ MappedNullable = &GetAudiencePreview200Response{}
 
 // GetAudiencePreview200Response struct for GetAudiencePreview200Response
 type GetAudiencePreview200Response struct {
-	Data *GetAudiencePreviewAlphaOutput `json:"data,omitempty"`
+	Data *GetAudiencePreviewBetaOutput `json:"data,omitempty"`
 }
 
 // NewGetAudiencePreview200Response instantiates a new GetAudiencePreview200Response object
@@ -41,9 +41,9 @@ func NewGetAudiencePreview200ResponseWithDefaults() *GetAudiencePreview200Respon
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *GetAudiencePreview200Response) GetData() GetAudiencePreviewAlphaOutput {
+func (o *GetAudiencePreview200Response) GetData() GetAudiencePreviewBetaOutput {
 	if o == nil || IsNil(o.Data) {
-		var ret GetAudiencePreviewAlphaOutput
+		var ret GetAudiencePreviewBetaOutput
 		return ret
 	}
 	return *o.Data
@@ -51,7 +51,7 @@ func (o *GetAudiencePreview200Response) GetData() GetAudiencePreviewAlphaOutput 
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAudiencePreview200Response) GetDataOk() (*GetAudiencePreviewAlphaOutput, bool) {
+func (o *GetAudiencePreview200Response) GetDataOk() (*GetAudiencePreviewBetaOutput, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *GetAudiencePreview200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given GetAudiencePreviewAlphaOutput and assigns it to the Data field.
-func (o *GetAudiencePreview200Response) SetData(v GetAudiencePreviewAlphaOutput) {
+// SetData gets a reference to the given GetAudiencePreviewBetaOutput and assigns it to the Data field.
+func (o *GetAudiencePreview200Response) SetData(v GetAudiencePreviewBetaOutput) {
 	o.Data = &v
 }
 
