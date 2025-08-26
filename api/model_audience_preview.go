@@ -22,7 +22,7 @@ var _ MappedNullable = &AudiencePreview{}
 type AudiencePreview struct {
 	// Unique identifier for tracking and retrieving results of an audience preview.
 	Id string `json:"id"`
-	// The audience type of the preview.
+	// The audience type of the preview.  Possible values: USERS, ACCOUNTS, LINKED.
 	AudienceType string                        `json:"audienceType"`
 	Definition   AudienceDefinitionWithoutType `json:"definition"`
 	Options      ReadAudiencePreviewOptions    `json:"options"`

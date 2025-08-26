@@ -20,7 +20,8 @@ var _ MappedNullable = &Profile{}
 
 // Profile Profile Object.
 type Profile struct {
-	Properties []string `json:"properties"`
+	Properties []string           `json:"properties"`
+	Mapping    *map[string]string `json:"mapping,omitempty"`
 }
 
 // NewProfile instantiates a new Profile object
@@ -65,6 +66,38 @@ func (o *Profile) SetProperties(v []string) {
 	o.Properties = v
 }
 
+// GetMapping returns the Mapping field value if set, zero value otherwise.
+func (o *Profile) GetMapping() map[string]string {
+	if o == nil || IsNil(o.Mapping) {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Mapping
+}
+
+// GetMappingOk returns a tuple with the Mapping field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Profile) GetMappingOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.Mapping) {
+		return nil, false
+	}
+	return o.Mapping, true
+}
+
+// HasMapping returns a boolean if a field has been set.
+func (o *Profile) HasMapping() bool {
+	if o != nil && !IsNil(o.Mapping) {
+		return true
+	}
+
+	return false
+}
+
+// SetMapping gets a reference to the given map[string]string and assigns it to the Mapping field.
+func (o *Profile) SetMapping(v map[string]string) {
+	o.Mapping = &v
+}
+
 func (o Profile) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -76,6 +109,9 @@ func (o Profile) MarshalJSON() ([]byte, error) {
 func (o Profile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["properties"] = o.Properties
+	if !IsNil(o.Mapping) {
+		toSerialize["mapping"] = o.Mapping
+	}
 	return toSerialize, nil
 }
 
