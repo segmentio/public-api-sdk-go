@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 
 ## Operation: CreateAudiencePreview
 
-> CreateAudiencePreview200Response CreateAudiencePreview(ctx, spaceId).CreateAudiencePreviewAlphaInput(createAudiencePreviewAlphaInput).Execute()
+> CreateAudiencePreview200Response CreateAudiencePreview(ctx, spaceId).CreateAudiencePreviewBetaInput(createAudiencePreviewBetaInput).Execute()
 
 Create Audience Preview
 
@@ -119,13 +119,13 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    createAudiencePreviewAlphaInput := *api.NewCreateAudiencePreviewAlphaInput(*api.NewAudienceDefinitionWithoutType("Query_example"), "AudienceType_example") // CreateAudiencePreviewAlphaInput | 
+    createAudiencePreviewBetaInput := *api.NewCreateAudiencePreviewBetaInput(*api.NewAudienceDefinitionWithoutType("Query_example"), "AudienceType_example") // CreateAudiencePreviewBetaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.CreateAudiencePreview(ctx, spaceId).CreateAudiencePreviewAlphaInput(createAudiencePreviewAlphaInput).Execute()
+    resp, r, err := apiClient.AudiencesAPI.CreateAudiencePreview(ctx, spaceId).CreateAudiencePreviewBetaInput(createAudiencePreviewBetaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.CreateAudiencePreview``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -157,7 +157,7 @@ Other parameters are passed through a pointer to a apiCreateAudiencePreviewReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createAudiencePreviewAlphaInput** | [**CreateAudiencePreviewAlphaInput**](CreateAudiencePreviewAlphaInput.md) |  | 
+ **createAudiencePreviewBetaInput** | [**CreateAudiencePreviewBetaInput**](CreateAudiencePreviewBetaInput.md) |  | 
 
 ### Return type
 
@@ -169,8 +169,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/vnd.segment.v1alpha+json
-- **Accept**: application/vnd.segment.v1alpha+json, application/json
+- **Content-Type**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -334,7 +334,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.segment.v1alpha+json, application/json
+- **Accept**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

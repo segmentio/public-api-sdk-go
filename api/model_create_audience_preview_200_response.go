@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateAudiencePreview200Response{}
 
 // CreateAudiencePreview200Response struct for CreateAudiencePreview200Response
 type CreateAudiencePreview200Response struct {
-	Data *CreateAudiencePreviewAlphaOutput `json:"data,omitempty"`
+	Data *CreateAudiencePreviewBetaOutput `json:"data,omitempty"`
 }
 
 // NewCreateAudiencePreview200Response instantiates a new CreateAudiencePreview200Response object
@@ -41,9 +41,9 @@ func NewCreateAudiencePreview200ResponseWithDefaults() *CreateAudiencePreview200
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *CreateAudiencePreview200Response) GetData() CreateAudiencePreviewAlphaOutput {
+func (o *CreateAudiencePreview200Response) GetData() CreateAudiencePreviewBetaOutput {
 	if o == nil || IsNil(o.Data) {
-		var ret CreateAudiencePreviewAlphaOutput
+		var ret CreateAudiencePreviewBetaOutput
 		return ret
 	}
 	return *o.Data
@@ -51,7 +51,7 @@ func (o *CreateAudiencePreview200Response) GetData() CreateAudiencePreviewAlphaO
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAudiencePreview200Response) GetDataOk() (*CreateAudiencePreviewAlphaOutput, bool) {
+func (o *CreateAudiencePreview200Response) GetDataOk() (*CreateAudiencePreviewBetaOutput, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *CreateAudiencePreview200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given CreateAudiencePreviewAlphaOutput and assigns it to the Data field.
-func (o *CreateAudiencePreview200Response) SetData(v CreateAudiencePreviewAlphaOutput) {
+// SetData gets a reference to the given CreateAudiencePreviewBetaOutput and assigns it to the Data field.
+func (o *CreateAudiencePreview200Response) SetData(v CreateAudiencePreviewBetaOutput) {
 	o.Data = &v
 }
 
