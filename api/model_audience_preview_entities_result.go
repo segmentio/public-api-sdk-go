@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 59.0.0
+API version: 59.1.0
 Contact: friends@segment.com
 */
 
@@ -20,7 +20,7 @@ var _ MappedNullable = &AudiencePreviewEntitiesResult{}
 
 // AudiencePreviewEntitiesResult Result membership object for an audience preview with `audienceType: USERS` or `audienceType: LINKED`.
 type AudiencePreviewEntitiesResult struct {
-	// The entities associated with the profile. Will only have a value if the audience preview has `audienceType: LINKED` and entities are referenced in the audience preview's definition.
+	// Entity id.
 	Id string `json:"id"`
 	// The entity primary key column name.
 	IdProperty string `json:"idProperty"`

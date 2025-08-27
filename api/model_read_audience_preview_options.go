@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 59.0.0
+API version: 59.1.0
 Contact: friends@segment.com
 */
 
@@ -21,9 +21,9 @@ var _ MappedNullable = &ReadAudiencePreviewOptions{}
 // ReadAudiencePreviewOptions Options which should be applied when segmenting audience previews.
 type ReadAudiencePreviewOptions struct {
 	// The set of profile external identifiers being used to determine audience preview membership. Profiles will only be considered for audience preview membership if the profile has at least one external id whose key matches a value in this set.
-	FilterByExternalIds []string `json:"filterByExternalIds"`
+	FilterByExternalIds []string `json:"filterByExternalIds,omitempty"`
 	// Determines whether data prior to the audience preview being created is included when determining audience preview membership. Note that including historical data may be needed in order to properly handle the definition specified. In these cases, Segment will automatically handle including historical data and the response will return the includeHistoricalData parameter as true.
-	IncludeHistoricalData bool `json:"includeHistoricalData"`
+	IncludeHistoricalData *bool `json:"includeHistoricalData,omitempty"`
 	// If specified, the value of this field indicates the number of days (specified from the date the audience preview was created) that event data will be included from when determining audience preview membership. If unspecified, defer to the value of `includeHistoricalData` to determine whether historical data is either entirely included or entirely excluded when determining audience preview membership.
 	BackfillEventDataDays *float32 `json:"backfillEventDataDays,omitempty"`
 }
@@ -32,13 +32,8 @@ type ReadAudiencePreviewOptions struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReadAudiencePreviewOptions(
-	filterByExternalIds []string,
-	includeHistoricalData bool,
-) *ReadAudiencePreviewOptions {
+func NewReadAudiencePreviewOptions() *ReadAudiencePreviewOptions {
 	this := ReadAudiencePreviewOptions{}
-	this.FilterByExternalIds = filterByExternalIds
-	this.IncludeHistoricalData = includeHistoricalData
 	return &this
 }
 
@@ -50,52 +45,68 @@ func NewReadAudiencePreviewOptionsWithDefaults() *ReadAudiencePreviewOptions {
 	return &this
 }
 
-// GetFilterByExternalIds returns the FilterByExternalIds field value
+// GetFilterByExternalIds returns the FilterByExternalIds field value if set, zero value otherwise.
 func (o *ReadAudiencePreviewOptions) GetFilterByExternalIds() []string {
-	if o == nil {
+	if o == nil || IsNil(o.FilterByExternalIds) {
 		var ret []string
 		return ret
 	}
-
 	return o.FilterByExternalIds
 }
 
-// GetFilterByExternalIdsOk returns a tuple with the FilterByExternalIds field value
+// GetFilterByExternalIdsOk returns a tuple with the FilterByExternalIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ReadAudiencePreviewOptions) GetFilterByExternalIdsOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.FilterByExternalIds) {
 		return nil, false
 	}
 	return o.FilterByExternalIds, true
 }
 
-// SetFilterByExternalIds sets field value
+// HasFilterByExternalIds returns a boolean if a field has been set.
+func (o *ReadAudiencePreviewOptions) HasFilterByExternalIds() bool {
+	if o != nil && !IsNil(o.FilterByExternalIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetFilterByExternalIds gets a reference to the given []string and assigns it to the FilterByExternalIds field.
 func (o *ReadAudiencePreviewOptions) SetFilterByExternalIds(v []string) {
 	o.FilterByExternalIds = v
 }
 
-// GetIncludeHistoricalData returns the IncludeHistoricalData field value
+// GetIncludeHistoricalData returns the IncludeHistoricalData field value if set, zero value otherwise.
 func (o *ReadAudiencePreviewOptions) GetIncludeHistoricalData() bool {
-	if o == nil {
+	if o == nil || IsNil(o.IncludeHistoricalData) {
 		var ret bool
 		return ret
 	}
-
-	return o.IncludeHistoricalData
+	return *o.IncludeHistoricalData
 }
 
-// GetIncludeHistoricalDataOk returns a tuple with the IncludeHistoricalData field value
+// GetIncludeHistoricalDataOk returns a tuple with the IncludeHistoricalData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ReadAudiencePreviewOptions) GetIncludeHistoricalDataOk() (*bool, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.IncludeHistoricalData) {
 		return nil, false
 	}
-	return &o.IncludeHistoricalData, true
+	return o.IncludeHistoricalData, true
 }
 
-// SetIncludeHistoricalData sets field value
+// HasIncludeHistoricalData returns a boolean if a field has been set.
+func (o *ReadAudiencePreviewOptions) HasIncludeHistoricalData() bool {
+	if o != nil && !IsNil(o.IncludeHistoricalData) {
+		return true
+	}
+
+	return false
+}
+
+// SetIncludeHistoricalData gets a reference to the given bool and assigns it to the IncludeHistoricalData field.
 func (o *ReadAudiencePreviewOptions) SetIncludeHistoricalData(v bool) {
-	o.IncludeHistoricalData = v
+	o.IncludeHistoricalData = &v
 }
 
 // GetBackfillEventDataDays returns the BackfillEventDataDays field value if set, zero value otherwise.
@@ -140,8 +151,12 @@ func (o ReadAudiencePreviewOptions) MarshalJSON() ([]byte, error) {
 
 func (o ReadAudiencePreviewOptions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["filterByExternalIds"] = o.FilterByExternalIds
-	toSerialize["includeHistoricalData"] = o.IncludeHistoricalData
+	if !IsNil(o.FilterByExternalIds) {
+		toSerialize["filterByExternalIds"] = o.FilterByExternalIds
+	}
+	if !IsNil(o.IncludeHistoricalData) {
+		toSerialize["includeHistoricalData"] = o.IncludeHistoricalData
+	}
 	if !IsNil(o.BackfillEventDataDays) {
 		toSerialize["backfillEventDataDays"] = o.BackfillEventDataDays
 	}

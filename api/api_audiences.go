@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 59.0.0
+API version: 59.1.0
 Contact: friends@segment.com
 */
 
@@ -213,16 +213,16 @@ func (a *AudiencesAPIService) CreateAudienceExecute(
 }
 
 type ApiCreateAudiencePreviewRequest struct {
-	ctx                             context.Context
-	ApiService                      *AudiencesAPIService
-	spaceId                         string
-	createAudiencePreviewAlphaInput *CreateAudiencePreviewAlphaInput
+	ctx                            context.Context
+	ApiService                     *AudiencesAPIService
+	spaceId                        string
+	createAudiencePreviewBetaInput *CreateAudiencePreviewBetaInput
 }
 
-func (r ApiCreateAudiencePreviewRequest) CreateAudiencePreviewAlphaInput(
-	createAudiencePreviewAlphaInput CreateAudiencePreviewAlphaInput,
+func (r ApiCreateAudiencePreviewRequest) CreateAudiencePreviewBetaInput(
+	createAudiencePreviewBetaInput CreateAudiencePreviewBetaInput,
 ) ApiCreateAudiencePreviewRequest {
-	r.createAudiencePreviewAlphaInput = &createAudiencePreviewAlphaInput
+	r.createAudiencePreviewBetaInput = &createAudiencePreviewBetaInput
 	return r
 }
 
@@ -235,7 +235,7 @@ CreateAudiencePreview Create Audience Preview
 
 Previews Audience.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+• This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
@@ -291,14 +291,17 @@ func (a *AudiencesAPIService) CreateAudiencePreviewExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createAudiencePreviewAlphaInput == nil {
+	if r.createAudiencePreviewBetaInput == nil {
 		return localVarReturnValue, nil, reportError(
-			"createAudiencePreviewAlphaInput is required and must be specified",
+			"createAudiencePreviewBetaInput is required and must be specified",
 		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -308,6 +311,7 @@ func (a *AudiencesAPIService) CreateAudiencePreviewExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 		"application/json",
 	}
@@ -318,7 +322,7 @@ func (a *AudiencesAPIService) CreateAudiencePreviewExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createAudiencePreviewAlphaInput
+	localVarPostBody = r.createAudiencePreviewBetaInput
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,
@@ -609,7 +613,7 @@ GetAudiencePreview Get Audience Preview
 
 Reads the results of an audience preview.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+• This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
@@ -683,6 +687,7 @@ func (a *AudiencesAPIService) GetAudiencePreviewExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 		"application/json",
 	}
