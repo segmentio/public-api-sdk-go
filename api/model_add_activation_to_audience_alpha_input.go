@@ -20,8 +20,6 @@ var _ MappedNullable = &AddActivationToAudienceAlphaInput{}
 
 // AddActivationToAudienceAlphaInput Input to create an activation.
 type AddActivationToAudienceAlphaInput struct {
-	// The Destination id.
-	DestinationId string `json:"destinationId"`
 	// Whether the event emitter should be created in an enabled state. Will trigger an audience run if enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	// Whether to perform the first sync so the activation events are generated on the first audience sync.
@@ -39,7 +37,6 @@ type AddActivationToAudienceAlphaInput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewAddActivationToAudienceAlphaInput(
-	destinationId string,
 	performFirstSync bool,
 	activationType string,
 	activationName string,
@@ -47,7 +44,6 @@ func NewAddActivationToAudienceAlphaInput(
 	destinationMapping DestinationSubscriptionConfiguration,
 ) *AddActivationToAudienceAlphaInput {
 	this := AddActivationToAudienceAlphaInput{}
-	this.DestinationId = destinationId
 	this.PerformFirstSync = performFirstSync
 	this.ActivationType = activationType
 	this.ActivationName = activationName
@@ -62,30 +58,6 @@ func NewAddActivationToAudienceAlphaInput(
 func NewAddActivationToAudienceAlphaInputWithDefaults() *AddActivationToAudienceAlphaInput {
 	this := AddActivationToAudienceAlphaInput{}
 	return &this
-}
-
-// GetDestinationId returns the DestinationId field value
-func (o *AddActivationToAudienceAlphaInput) GetDestinationId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.DestinationId
-}
-
-// GetDestinationIdOk returns a tuple with the DestinationId field value
-// and a boolean to check if the value has been set.
-func (o *AddActivationToAudienceAlphaInput) GetDestinationIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.DestinationId, true
-}
-
-// SetDestinationId sets field value
-func (o *AddActivationToAudienceAlphaInput) SetDestinationId(v string) {
-	o.DestinationId = v
 }
 
 // GetEnabled returns the Enabled field value if set, zero value otherwise.
@@ -252,7 +224,6 @@ func (o AddActivationToAudienceAlphaInput) MarshalJSON() ([]byte, error) {
 
 func (o AddActivationToAudienceAlphaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["destinationId"] = o.DestinationId
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
