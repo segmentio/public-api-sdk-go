@@ -20,7 +20,7 @@ var _ MappedNullable = &AudiencePreviewEntitiesResult{}
 
 // AudiencePreviewEntitiesResult Result membership object for an audience preview with `audienceType: USERS` or `audienceType: LINKED`.
 type AudiencePreviewEntitiesResult struct {
-	// The entities associated with the profile. Will only have a value if the audience preview has `audienceType: LINKED` and entities are referenced in the audience preview's definition.
+	// Entity id.
 	Id string `json:"id"`
 	// The entity primary key column name.
 	IdProperty string `json:"idProperty"`
