@@ -15,35 +15,35 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateAudience200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateAudience200Response{}
+// checks if the CreateAudience200Response1 type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateAudience200Response1{}
 
-// CreateAudience200Response struct for CreateAudience200Response
-type CreateAudience200Response struct {
-	Data *CreateAudienceBetaOutput `json:"data,omitempty"`
+// CreateAudience200Response1 struct for CreateAudience200Response1
+type CreateAudience200Response1 struct {
+	Data *CreateAudienceAlphaOutput `json:"data,omitempty"`
 }
 
-// NewCreateAudience200Response instantiates a new CreateAudience200Response object
+// NewCreateAudience200Response1 instantiates a new CreateAudience200Response1 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateAudience200Response() *CreateAudience200Response {
-	this := CreateAudience200Response{}
+func NewCreateAudience200Response1() *CreateAudience200Response1 {
+	this := CreateAudience200Response1{}
 	return &this
 }
 
-// NewCreateAudience200ResponseWithDefaults instantiates a new CreateAudience200Response object
+// NewCreateAudience200Response1WithDefaults instantiates a new CreateAudience200Response1 object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateAudience200ResponseWithDefaults() *CreateAudience200Response {
-	this := CreateAudience200Response{}
+func NewCreateAudience200Response1WithDefaults() *CreateAudience200Response1 {
+	this := CreateAudience200Response1{}
 	return &this
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *CreateAudience200Response) GetData() CreateAudienceBetaOutput {
+func (o *CreateAudience200Response1) GetData() CreateAudienceAlphaOutput {
 	if o == nil || IsNil(o.Data) {
-		var ret CreateAudienceBetaOutput
+		var ret CreateAudienceAlphaOutput
 		return ret
 	}
 	return *o.Data
@@ -51,7 +51,7 @@ func (o *CreateAudience200Response) GetData() CreateAudienceBetaOutput {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateAudience200Response) GetDataOk() (*CreateAudienceBetaOutput, bool) {
+func (o *CreateAudience200Response1) GetDataOk() (*CreateAudienceAlphaOutput, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -59,7 +59,7 @@ func (o *CreateAudience200Response) GetDataOk() (*CreateAudienceBetaOutput, bool
 }
 
 // HasData returns a boolean if a field has been set.
-func (o *CreateAudience200Response) HasData() bool {
+func (o *CreateAudience200Response1) HasData() bool {
 	if o != nil && !IsNil(o.Data) {
 		return true
 	}
@@ -67,12 +67,12 @@ func (o *CreateAudience200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given CreateAudienceBetaOutput and assigns it to the Data field.
-func (o *CreateAudience200Response) SetData(v CreateAudienceBetaOutput) {
+// SetData gets a reference to the given CreateAudienceAlphaOutput and assigns it to the Data field.
+func (o *CreateAudience200Response1) SetData(v CreateAudienceAlphaOutput) {
 	o.Data = &v
 }
 
-func (o CreateAudience200Response) MarshalJSON() ([]byte, error) {
+func (o CreateAudience200Response1) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -80,7 +80,7 @@ func (o CreateAudience200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAudience200Response) ToMap() (map[string]interface{}, error) {
+func (o CreateAudience200Response1) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
@@ -88,40 +88,40 @@ func (o CreateAudience200Response) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-type NullableCreateAudience200Response struct {
-	value *CreateAudience200Response
+type NullableCreateAudience200Response1 struct {
+	value *CreateAudience200Response1
 	isSet bool
 }
 
-func (v NullableCreateAudience200Response) Get() *CreateAudience200Response {
+func (v NullableCreateAudience200Response1) Get() *CreateAudience200Response1 {
 	return v.value
 }
 
-func (v *NullableCreateAudience200Response) Set(val *CreateAudience200Response) {
+func (v *NullableCreateAudience200Response1) Set(val *CreateAudience200Response1) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateAudience200Response) IsSet() bool {
+func (v NullableCreateAudience200Response1) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateAudience200Response) Unset() {
+func (v *NullableCreateAudience200Response1) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateAudience200Response(
-	val *CreateAudience200Response,
-) *NullableCreateAudience200Response {
-	return &NullableCreateAudience200Response{value: val, isSet: true}
+func NewNullableCreateAudience200Response1(
+	val *CreateAudience200Response1,
+) *NullableCreateAudience200Response1 {
+	return &NullableCreateAudience200Response1{value: val, isSet: true}
 }
 
-func (v NullableCreateAudience200Response) MarshalJSON() ([]byte, error) {
+func (v NullableCreateAudience200Response1) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateAudience200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateAudience200Response1) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

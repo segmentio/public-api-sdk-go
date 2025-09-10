@@ -38,6 +38,8 @@ type AudienceSummaryWithAudienceTypeAndLookback struct {
 	// Enabled/disabled status for the audience.
 	Enabled    bool                       `json:"enabled"`
 	Definition NullableAudienceDefinition `json:"definition"`
+	// Array of conditions in different formats (AST, CQL) - Enhanced format.
+	Conditions []AudienceConditionsWrapper `json:"conditions,omitempty"`
 	// Status for the audience.  Possible values: Backfilling, Computing, Failed, Live, Awaiting Destinations, Disabled.
 	Status *string `json:"status,omitempty"`
 	// User id who created the audience.
@@ -392,6 +394,38 @@ func (o *AudienceSummaryWithAudienceTypeAndLookback) SetDefinition(v AudienceDef
 	o.Definition.Set(&v)
 }
 
+// GetConditions returns the Conditions field value if set, zero value otherwise.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) GetConditions() []AudienceConditionsWrapper {
+	if o == nil || IsNil(o.Conditions) {
+		var ret []AudienceConditionsWrapper
+		return ret
+	}
+	return o.Conditions
+}
+
+// GetConditionsOk returns a tuple with the Conditions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) GetConditionsOk() ([]AudienceConditionsWrapper, bool) {
+	if o == nil || IsNil(o.Conditions) {
+		return nil, false
+	}
+	return o.Conditions, true
+}
+
+// HasConditions returns a boolean if a field has been set.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) HasConditions() bool {
+	if o != nil && !IsNil(o.Conditions) {
+		return true
+	}
+
+	return false
+}
+
+// SetConditions gets a reference to the given []AudienceConditionsWrapper and assigns it to the Conditions field.
+func (o *AudienceSummaryWithAudienceTypeAndLookback) SetConditions(v []AudienceConditionsWrapper) {
+	o.Conditions = v
+}
+
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *AudienceSummaryWithAudienceTypeAndLookback) GetStatus() string {
 	if o == nil || IsNil(o.Status) {
@@ -573,6 +607,9 @@ func (o AudienceSummaryWithAudienceTypeAndLookback) ToMap() (map[string]interfac
 	toSerialize["key"] = o.Key
 	toSerialize["enabled"] = o.Enabled
 	toSerialize["definition"] = o.Definition.Get()
+	if !IsNil(o.Conditions) {
+		toSerialize["conditions"] = o.Conditions
+	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
