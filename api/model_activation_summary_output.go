@@ -18,7 +18,7 @@ import (
 // checks if the ActivationSummaryOutput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ActivationSummaryOutput{}
 
-// ActivationSummaryOutput A class that encapsulates the output shared across endpoints for a given activation.
+// ActivationSummaryOutput struct for ActivationSummaryOutput
 type ActivationSummaryOutput struct {
 	// The activation id.
 	Id string `json:"id"`

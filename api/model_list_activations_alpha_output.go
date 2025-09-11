@@ -21,17 +21,15 @@ var _ MappedNullable = &ListActivationsAlphaOutput{}
 // ListActivationsAlphaOutput Output for listing all activations.
 type ListActivationsAlphaOutput struct {
 	// A list of activation results.
-	Activations []ActivationSummaryOutput `json:"activations"`
-	Pagination  *PaginationOutput         `json:"pagination,omitempty"`
+	Activations []ActivationOutput `json:"activations"`
+	Pagination  *PaginationOutput  `json:"pagination,omitempty"`
 }
 
 // NewListActivationsAlphaOutput instantiates a new ListActivationsAlphaOutput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListActivationsAlphaOutput(
-	activations []ActivationSummaryOutput,
-) *ListActivationsAlphaOutput {
+func NewListActivationsAlphaOutput(activations []ActivationOutput) *ListActivationsAlphaOutput {
 	this := ListActivationsAlphaOutput{}
 	this.Activations = activations
 	return &this
@@ -46,9 +44,9 @@ func NewListActivationsAlphaOutputWithDefaults() *ListActivationsAlphaOutput {
 }
 
 // GetActivations returns the Activations field value
-func (o *ListActivationsAlphaOutput) GetActivations() []ActivationSummaryOutput {
+func (o *ListActivationsAlphaOutput) GetActivations() []ActivationOutput {
 	if o == nil {
-		var ret []ActivationSummaryOutput
+		var ret []ActivationOutput
 		return ret
 	}
 
@@ -57,7 +55,7 @@ func (o *ListActivationsAlphaOutput) GetActivations() []ActivationSummaryOutput 
 
 // GetActivationsOk returns a tuple with the Activations field value
 // and a boolean to check if the value has been set.
-func (o *ListActivationsAlphaOutput) GetActivationsOk() ([]ActivationSummaryOutput, bool) {
+func (o *ListActivationsAlphaOutput) GetActivationsOk() ([]ActivationOutput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -65,7 +63,7 @@ func (o *ListActivationsAlphaOutput) GetActivationsOk() ([]ActivationSummaryOutp
 }
 
 // SetActivations sets field value
-func (o *ListActivationsAlphaOutput) SetActivations(v []ActivationSummaryOutput) {
+func (o *ListActivationsAlphaOutput) SetActivations(v []ActivationOutput) {
 	o.Activations = v
 }
 
