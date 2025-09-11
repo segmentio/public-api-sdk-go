@@ -24,6 +24,8 @@ type TraitOptions struct {
 	IncludeHistoricalData *bool `json:"includeHistoricalData,omitempty"`
 	// Determines whether anonymous users should be included when determining the computed trait value.
 	IncludeAnonymousUsers *bool `json:"includeAnonymousUsers,omitempty"`
+	// If specified, the value of this field indicates the number of days, specified from the date the audience was created, that event data will be included from when determining audience membership. If unspecified, defer to the value of `includeHistoricalData` to determine whether historical data is either entirely included or entirely excluded when determining audience membership.
+	BackfillDurationDays *float32 `json:"backfillDurationDays,omitempty"`
 }
 
 // NewTraitOptions instantiates a new TraitOptions object
@@ -107,6 +109,38 @@ func (o *TraitOptions) SetIncludeAnonymousUsers(v bool) {
 	o.IncludeAnonymousUsers = &v
 }
 
+// GetBackfillDurationDays returns the BackfillDurationDays field value if set, zero value otherwise.
+func (o *TraitOptions) GetBackfillDurationDays() float32 {
+	if o == nil || IsNil(o.BackfillDurationDays) {
+		var ret float32
+		return ret
+	}
+	return *o.BackfillDurationDays
+}
+
+// GetBackfillDurationDaysOk returns a tuple with the BackfillDurationDays field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TraitOptions) GetBackfillDurationDaysOk() (*float32, bool) {
+	if o == nil || IsNil(o.BackfillDurationDays) {
+		return nil, false
+	}
+	return o.BackfillDurationDays, true
+}
+
+// HasBackfillDurationDays returns a boolean if a field has been set.
+func (o *TraitOptions) HasBackfillDurationDays() bool {
+	if o != nil && !IsNil(o.BackfillDurationDays) {
+		return true
+	}
+
+	return false
+}
+
+// SetBackfillDurationDays gets a reference to the given float32 and assigns it to the BackfillDurationDays field.
+func (o *TraitOptions) SetBackfillDurationDays(v float32) {
+	o.BackfillDurationDays = &v
+}
+
 func (o TraitOptions) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -122,6 +156,9 @@ func (o TraitOptions) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.IncludeAnonymousUsers) {
 		toSerialize["includeAnonymousUsers"] = o.IncludeAnonymousUsers
+	}
+	if !IsNil(o.BackfillDurationDays) {
+		toSerialize["backfillDurationDays"] = o.BackfillDurationDays
 	}
 	return toSerialize, nil
 }
