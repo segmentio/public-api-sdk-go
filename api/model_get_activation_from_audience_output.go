@@ -20,7 +20,7 @@ var _ MappedNullable = &GetActivationFromAudienceOutput{}
 
 // GetActivationFromAudienceOutput Output for getting an activation from space and audience.
 type GetActivationFromAudienceOutput struct {
-	Activation ActivationSummaryOutput `json:"activation"`
+	Activation ActivationOutput `json:"activation"`
 }
 
 // NewGetActivationFromAudienceOutput instantiates a new GetActivationFromAudienceOutput object
@@ -28,7 +28,7 @@ type GetActivationFromAudienceOutput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewGetActivationFromAudienceOutput(
-	activation ActivationSummaryOutput,
+	activation ActivationOutput,
 ) *GetActivationFromAudienceOutput {
 	this := GetActivationFromAudienceOutput{}
 	this.Activation = activation
@@ -44,9 +44,9 @@ func NewGetActivationFromAudienceOutputWithDefaults() *GetActivationFromAudience
 }
 
 // GetActivation returns the Activation field value
-func (o *GetActivationFromAudienceOutput) GetActivation() ActivationSummaryOutput {
+func (o *GetActivationFromAudienceOutput) GetActivation() ActivationOutput {
 	if o == nil {
-		var ret ActivationSummaryOutput
+		var ret ActivationOutput
 		return ret
 	}
 
@@ -55,7 +55,7 @@ func (o *GetActivationFromAudienceOutput) GetActivation() ActivationSummaryOutpu
 
 // GetActivationOk returns a tuple with the Activation field value
 // and a boolean to check if the value has been set.
-func (o *GetActivationFromAudienceOutput) GetActivationOk() (*ActivationSummaryOutput, bool) {
+func (o *GetActivationFromAudienceOutput) GetActivationOk() (*ActivationOutput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -63,7 +63,7 @@ func (o *GetActivationFromAudienceOutput) GetActivationOk() (*ActivationSummaryO
 }
 
 // SetActivation sets field value
-func (o *GetActivationFromAudienceOutput) SetActivation(v ActivationSummaryOutput) {
+func (o *GetActivationFromAudienceOutput) SetActivation(v ActivationOutput) {
 	o.Activation = v
 }
 

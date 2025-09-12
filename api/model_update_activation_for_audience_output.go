@@ -20,7 +20,7 @@ var _ MappedNullable = &UpdateActivationForAudienceOutput{}
 
 // UpdateActivationForAudienceOutput Output for updating an activation for audience.
 type UpdateActivationForAudienceOutput struct {
-	Activation ActivationSummaryOutput `json:"activation"`
+	Activation ActivationOutput `json:"activation"`
 }
 
 // NewUpdateActivationForAudienceOutput instantiates a new UpdateActivationForAudienceOutput object
@@ -28,7 +28,7 @@ type UpdateActivationForAudienceOutput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewUpdateActivationForAudienceOutput(
-	activation ActivationSummaryOutput,
+	activation ActivationOutput,
 ) *UpdateActivationForAudienceOutput {
 	this := UpdateActivationForAudienceOutput{}
 	this.Activation = activation
@@ -44,9 +44,9 @@ func NewUpdateActivationForAudienceOutputWithDefaults() *UpdateActivationForAudi
 }
 
 // GetActivation returns the Activation field value
-func (o *UpdateActivationForAudienceOutput) GetActivation() ActivationSummaryOutput {
+func (o *UpdateActivationForAudienceOutput) GetActivation() ActivationOutput {
 	if o == nil {
-		var ret ActivationSummaryOutput
+		var ret ActivationOutput
 		return ret
 	}
 
@@ -55,7 +55,7 @@ func (o *UpdateActivationForAudienceOutput) GetActivation() ActivationSummaryOut
 
 // GetActivationOk returns a tuple with the Activation field value
 // and a boolean to check if the value has been set.
-func (o *UpdateActivationForAudienceOutput) GetActivationOk() (*ActivationSummaryOutput, bool) {
+func (o *UpdateActivationForAudienceOutput) GetActivationOk() (*ActivationOutput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -63,7 +63,7 @@ func (o *UpdateActivationForAudienceOutput) GetActivationOk() (*ActivationSummar
 }
 
 // SetActivation sets field value
-func (o *UpdateActivationForAudienceOutput) SetActivation(v ActivationSummaryOutput) {
+func (o *UpdateActivationForAudienceOutput) SetActivation(v ActivationOutput) {
 	o.Activation = v
 }
 
