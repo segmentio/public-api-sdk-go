@@ -24,16 +24,16 @@ import (
 type AudiencesAPIService service
 
 type ApiCreateAudienceRequest struct {
-	ctx                      context.Context
-	ApiService               *AudiencesAPIService
-	spaceId                  string
-	createAudienceAlphaInput *CreateAudienceAlphaInput
+	ctx                     context.Context
+	ApiService              *AudiencesAPIService
+	spaceId                 string
+	createAudienceBetaInput *CreateAudienceBetaInput
 }
 
-func (r ApiCreateAudienceRequest) CreateAudienceAlphaInput(
-	createAudienceAlphaInput CreateAudienceAlphaInput,
+func (r ApiCreateAudienceRequest) CreateAudienceBetaInput(
+	createAudienceBetaInput CreateAudienceBetaInput,
 ) ApiCreateAudienceRequest {
-	r.createAudienceAlphaInput = &createAudienceAlphaInput
+	r.createAudienceBetaInput = &createAudienceBetaInput
 	return r
 }
 
@@ -46,7 +46,7 @@ CreateAudience Create Audience
 
 Creates Audience.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+• This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
@@ -102,14 +102,17 @@ func (a *AudiencesAPIService) CreateAudienceExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createAudienceAlphaInput == nil {
+	if r.createAudienceBetaInput == nil {
 		return localVarReturnValue, nil, reportError(
-			"createAudienceAlphaInput is required and must be specified",
+			"createAudienceBetaInput is required and must be specified",
 		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -119,6 +122,7 @@ func (a *AudiencesAPIService) CreateAudienceExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 		"application/json",
 	}
@@ -129,7 +133,7 @@ func (a *AudiencesAPIService) CreateAudienceExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createAudienceAlphaInput
+	localVarPostBody = r.createAudienceBetaInput
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,
