@@ -26,8 +26,8 @@ type UpdateActivationForAudienceAlphaInput struct {
 	ActivationName     *string                               `json:"activationName,omitempty"`
 	Personalization    *PersonalizationInput                 `json:"personalization,omitempty"`
 	DestinationMapping *DestinationSubscriptionConfiguration `json:"destinationMapping,omitempty"`
-	// Whether to perform the first sync so the activation events are generated on the first audience sync.
-	PerformFirstSync *bool `json:"performFirstSync,omitempty"`
+	// Whether to perform a resync after creation of the activation.
+	PerformResync *bool `json:"performResync,omitempty"`
 }
 
 // NewUpdateActivationForAudienceAlphaInput instantiates a new UpdateActivationForAudienceAlphaInput object
@@ -177,36 +177,36 @@ func (o *UpdateActivationForAudienceAlphaInput) SetDestinationMapping(
 	o.DestinationMapping = &v
 }
 
-// GetPerformFirstSync returns the PerformFirstSync field value if set, zero value otherwise.
-func (o *UpdateActivationForAudienceAlphaInput) GetPerformFirstSync() bool {
-	if o == nil || IsNil(o.PerformFirstSync) {
+// GetPerformResync returns the PerformResync field value if set, zero value otherwise.
+func (o *UpdateActivationForAudienceAlphaInput) GetPerformResync() bool {
+	if o == nil || IsNil(o.PerformResync) {
 		var ret bool
 		return ret
 	}
-	return *o.PerformFirstSync
+	return *o.PerformResync
 }
 
-// GetPerformFirstSyncOk returns a tuple with the PerformFirstSync field value if set, nil otherwise
+// GetPerformResyncOk returns a tuple with the PerformResync field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateActivationForAudienceAlphaInput) GetPerformFirstSyncOk() (*bool, bool) {
-	if o == nil || IsNil(o.PerformFirstSync) {
+func (o *UpdateActivationForAudienceAlphaInput) GetPerformResyncOk() (*bool, bool) {
+	if o == nil || IsNil(o.PerformResync) {
 		return nil, false
 	}
-	return o.PerformFirstSync, true
+	return o.PerformResync, true
 }
 
-// HasPerformFirstSync returns a boolean if a field has been set.
-func (o *UpdateActivationForAudienceAlphaInput) HasPerformFirstSync() bool {
-	if o != nil && !IsNil(o.PerformFirstSync) {
+// HasPerformResync returns a boolean if a field has been set.
+func (o *UpdateActivationForAudienceAlphaInput) HasPerformResync() bool {
+	if o != nil && !IsNil(o.PerformResync) {
 		return true
 	}
 
 	return false
 }
 
-// SetPerformFirstSync gets a reference to the given bool and assigns it to the PerformFirstSync field.
-func (o *UpdateActivationForAudienceAlphaInput) SetPerformFirstSync(v bool) {
-	o.PerformFirstSync = &v
+// SetPerformResync gets a reference to the given bool and assigns it to the PerformResync field.
+func (o *UpdateActivationForAudienceAlphaInput) SetPerformResync(v bool) {
+	o.PerformResync = &v
 }
 
 func (o UpdateActivationForAudienceAlphaInput) MarshalJSON() ([]byte, error) {
@@ -231,8 +231,8 @@ func (o UpdateActivationForAudienceAlphaInput) ToMap() (map[string]interface{}, 
 	if !IsNil(o.DestinationMapping) {
 		toSerialize["destinationMapping"] = o.DestinationMapping
 	}
-	if !IsNil(o.PerformFirstSync) {
-		toSerialize["performFirstSync"] = o.PerformFirstSync
+	if !IsNil(o.PerformResync) {
+		toSerialize["performResync"] = o.PerformResync
 	}
 	return toSerialize, nil
 }

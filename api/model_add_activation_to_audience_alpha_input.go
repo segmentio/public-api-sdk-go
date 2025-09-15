@@ -22,8 +22,8 @@ var _ MappedNullable = &AddActivationToAudienceAlphaInput{}
 type AddActivationToAudienceAlphaInput struct {
 	// Whether the event emitter should be created in an enabled state. Will trigger an audience run if enabled.
 	Enabled *bool `json:"enabled,omitempty"`
-	// Whether to perform the first sync so the activation events are generated on the first audience sync.
-	PerformFirstSync bool `json:"performFirstSync"`
+	// Whether to perform a resync after creation of the activation.
+	PerformResync bool `json:"performResync"`
 	// Type of activation trigger.
 	ActivationType string `json:"activationType"`
 	// Name of the activation.
@@ -37,14 +37,14 @@ type AddActivationToAudienceAlphaInput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewAddActivationToAudienceAlphaInput(
-	performFirstSync bool,
+	performResync bool,
 	activationType string,
 	activationName string,
 	personalization PersonalizationInput,
 	destinationMapping DestinationSubscriptionConfiguration,
 ) *AddActivationToAudienceAlphaInput {
 	this := AddActivationToAudienceAlphaInput{}
-	this.PerformFirstSync = performFirstSync
+	this.PerformResync = performResync
 	this.ActivationType = activationType
 	this.ActivationName = activationName
 	this.Personalization = personalization
@@ -92,28 +92,28 @@ func (o *AddActivationToAudienceAlphaInput) SetEnabled(v bool) {
 	o.Enabled = &v
 }
 
-// GetPerformFirstSync returns the PerformFirstSync field value
-func (o *AddActivationToAudienceAlphaInput) GetPerformFirstSync() bool {
+// GetPerformResync returns the PerformResync field value
+func (o *AddActivationToAudienceAlphaInput) GetPerformResync() bool {
 	if o == nil {
 		var ret bool
 		return ret
 	}
 
-	return o.PerformFirstSync
+	return o.PerformResync
 }
 
-// GetPerformFirstSyncOk returns a tuple with the PerformFirstSync field value
+// GetPerformResyncOk returns a tuple with the PerformResync field value
 // and a boolean to check if the value has been set.
-func (o *AddActivationToAudienceAlphaInput) GetPerformFirstSyncOk() (*bool, bool) {
+func (o *AddActivationToAudienceAlphaInput) GetPerformResyncOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.PerformFirstSync, true
+	return &o.PerformResync, true
 }
 
-// SetPerformFirstSync sets field value
-func (o *AddActivationToAudienceAlphaInput) SetPerformFirstSync(v bool) {
-	o.PerformFirstSync = v
+// SetPerformResync sets field value
+func (o *AddActivationToAudienceAlphaInput) SetPerformResync(v bool) {
+	o.PerformResync = v
 }
 
 // GetActivationType returns the ActivationType field value
@@ -227,7 +227,7 @@ func (o AddActivationToAudienceAlphaInput) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.Enabled) {
 		toSerialize["enabled"] = o.Enabled
 	}
-	toSerialize["performFirstSync"] = o.PerformFirstSync
+	toSerialize["performResync"] = o.PerformResync
 	toSerialize["activationType"] = o.ActivationType
 	toSerialize["activationName"] = o.ActivationName
 	toSerialize["personalization"] = o.Personalization

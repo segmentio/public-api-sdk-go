@@ -30,6 +30,8 @@ type CreateInsertFunctionInstanceAlphaInput struct {
 	Name string `json:"name"`
 	// An object that contains settings for this insert Function instance based on the settings present in the insert Function class.
 	Settings map[string]interface{} `json:"settings"`
+	// The Integration type for the insert Function instance.
+	IntegrationType string `json:"integrationType"`
 }
 
 // NewCreateInsertFunctionInstanceAlphaInput instantiates a new CreateInsertFunctionInstanceAlphaInput object
@@ -41,12 +43,14 @@ func NewCreateInsertFunctionInstanceAlphaInput(
 	integrationId string,
 	name string,
 	settings map[string]interface{},
+	integrationType string,
 ) *CreateInsertFunctionInstanceAlphaInput {
 	this := CreateInsertFunctionInstanceAlphaInput{}
 	this.FunctionId = functionId
 	this.IntegrationId = integrationId
 	this.Name = name
 	this.Settings = settings
+	this.IntegrationType = integrationType
 	return &this
 }
 
@@ -186,6 +190,30 @@ func (o *CreateInsertFunctionInstanceAlphaInput) SetSettings(v map[string]interf
 	o.Settings = v
 }
 
+// GetIntegrationType returns the IntegrationType field value
+func (o *CreateInsertFunctionInstanceAlphaInput) GetIntegrationType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.IntegrationType
+}
+
+// GetIntegrationTypeOk returns a tuple with the IntegrationType field value
+// and a boolean to check if the value has been set.
+func (o *CreateInsertFunctionInstanceAlphaInput) GetIntegrationTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IntegrationType, true
+}
+
+// SetIntegrationType sets field value
+func (o *CreateInsertFunctionInstanceAlphaInput) SetIntegrationType(v string) {
+	o.IntegrationType = v
+}
+
 func (o CreateInsertFunctionInstanceAlphaInput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -203,6 +231,7 @@ func (o CreateInsertFunctionInstanceAlphaInput) ToMap() (map[string]interface{},
 	}
 	toSerialize["name"] = o.Name
 	toSerialize["settings"] = o.Settings
+	toSerialize["integrationType"] = o.IntegrationType
 	return toSerialize, nil
 }
 
