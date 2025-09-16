@@ -22,8 +22,6 @@ var _ MappedNullable = &AudienceOptions{}
 type AudienceOptions struct {
 	// Determines whether data prior to the audience being created is included when determining audience membership. Note that including historical data may be needed in order to properly handle the definition specified. In these cases, Segment will automatically handle including historical data and the response will return the includeHistoricalData parameter as true.
 	IncludeHistoricalData *bool `json:"includeHistoricalData,omitempty"`
-	// Determines whether anonymous users should be included when determining audience membership.
-	IncludeAnonymousUsers *bool `json:"includeAnonymousUsers,omitempty"`
 	// The set of profile external identifiers being used to determine audience membership. Profiles will only be considered for audience membership if the profile has at least one external id whose key matches a value in this set.
 	FilterByExternalIds []string `json:"filterByExternalIds,omitempty"`
 	// If specified, the value of this field indicates the number of days, specified from the date the audience was created, that event data will be included from when determining audience membership. If unspecified, defer to the value of `includeHistoricalData` to determine whether historical data is either entirely included or entirely excluded when determining audience membership.
@@ -77,38 +75,6 @@ func (o *AudienceOptions) HasIncludeHistoricalData() bool {
 // SetIncludeHistoricalData gets a reference to the given bool and assigns it to the IncludeHistoricalData field.
 func (o *AudienceOptions) SetIncludeHistoricalData(v bool) {
 	o.IncludeHistoricalData = &v
-}
-
-// GetIncludeAnonymousUsers returns the IncludeAnonymousUsers field value if set, zero value otherwise.
-func (o *AudienceOptions) GetIncludeAnonymousUsers() bool {
-	if o == nil || IsNil(o.IncludeAnonymousUsers) {
-		var ret bool
-		return ret
-	}
-	return *o.IncludeAnonymousUsers
-}
-
-// GetIncludeAnonymousUsersOk returns a tuple with the IncludeAnonymousUsers field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AudienceOptions) GetIncludeAnonymousUsersOk() (*bool, bool) {
-	if o == nil || IsNil(o.IncludeAnonymousUsers) {
-		return nil, false
-	}
-	return o.IncludeAnonymousUsers, true
-}
-
-// HasIncludeAnonymousUsers returns a boolean if a field has been set.
-func (o *AudienceOptions) HasIncludeAnonymousUsers() bool {
-	if o != nil && !IsNil(o.IncludeAnonymousUsers) {
-		return true
-	}
-
-	return false
-}
-
-// SetIncludeAnonymousUsers gets a reference to the given bool and assigns it to the IncludeAnonymousUsers field.
-func (o *AudienceOptions) SetIncludeAnonymousUsers(v bool) {
-	o.IncludeAnonymousUsers = &v
 }
 
 // GetFilterByExternalIds returns the FilterByExternalIds field value if set, zero value otherwise.
@@ -187,9 +153,6 @@ func (o AudienceOptions) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.IncludeHistoricalData) {
 		toSerialize["includeHistoricalData"] = o.IncludeHistoricalData
-	}
-	if !IsNil(o.IncludeAnonymousUsers) {
-		toSerialize["includeAnonymousUsers"] = o.IncludeAnonymousUsers
 	}
 	if !IsNil(o.FilterByExternalIds) {
 		toSerialize["filterByExternalIds"] = o.FilterByExternalIds

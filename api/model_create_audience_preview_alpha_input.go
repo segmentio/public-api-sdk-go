@@ -20,7 +20,7 @@ var _ MappedNullable = &CreateAudiencePreviewAlphaInput{}
 
 // CreateAudiencePreviewAlphaInput Input to create an audience preview.
 type CreateAudiencePreviewAlphaInput struct {
-	Definition AudienceDefinitionWithoutType `json:"definition"`
+	Definition AudienceDefinition `json:"definition"`
 	// Denotes the type of audience product.  Possible values: USERS, ACCOUNTS, LINKED.
 	AudienceType string                        `json:"audienceType"`
 	Options      *CreateAudiencePreviewOptions `json:"options,omitempty"`
@@ -31,7 +31,7 @@ type CreateAudiencePreviewAlphaInput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewCreateAudiencePreviewAlphaInput(
-	definition AudienceDefinitionWithoutType,
+	definition AudienceDefinition,
 	audienceType string,
 ) *CreateAudiencePreviewAlphaInput {
 	this := CreateAudiencePreviewAlphaInput{}
@@ -49,9 +49,9 @@ func NewCreateAudiencePreviewAlphaInputWithDefaults() *CreateAudiencePreviewAlph
 }
 
 // GetDefinition returns the Definition field value
-func (o *CreateAudiencePreviewAlphaInput) GetDefinition() AudienceDefinitionWithoutType {
+func (o *CreateAudiencePreviewAlphaInput) GetDefinition() AudienceDefinition {
 	if o == nil {
-		var ret AudienceDefinitionWithoutType
+		var ret AudienceDefinition
 		return ret
 	}
 
@@ -60,7 +60,7 @@ func (o *CreateAudiencePreviewAlphaInput) GetDefinition() AudienceDefinitionWith
 
 // GetDefinitionOk returns a tuple with the Definition field value
 // and a boolean to check if the value has been set.
-func (o *CreateAudiencePreviewAlphaInput) GetDefinitionOk() (*AudienceDefinitionWithoutType, bool) {
+func (o *CreateAudiencePreviewAlphaInput) GetDefinitionOk() (*AudienceDefinition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,7 +68,7 @@ func (o *CreateAudiencePreviewAlphaInput) GetDefinitionOk() (*AudienceDefinition
 }
 
 // SetDefinition sets field value
-func (o *CreateAudiencePreviewAlphaInput) SetDefinition(v AudienceDefinitionWithoutType) {
+func (o *CreateAudiencePreviewAlphaInput) SetDefinition(v AudienceDefinition) {
 	o.Definition = v
 }
 
