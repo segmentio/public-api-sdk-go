@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 ## Operation: CreateAudience
 
-> CreateAudience200Response CreateAudience(ctx, spaceId).CreateAudienceBetaInput(createAudienceBetaInput).Execute()
+> CreateAudience200Response CreateAudience(ctx, spaceId).CreateAudienceAlphaInput(createAudienceAlphaInput).Execute()
 
 Create Audience
 
@@ -39,13 +39,13 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    createAudienceBetaInput := *api.NewCreateAudienceBetaInput("Name_example", *api.NewAudienceDefinition("Query_example"), "AudienceType_example") // CreateAudienceBetaInput | 
+    createAudienceAlphaInput := *api.NewCreateAudienceAlphaInput("Name_example", *api.NewAudienceDefinition("Query_example")) // CreateAudienceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.CreateAudience(ctx, spaceId).CreateAudienceBetaInput(createAudienceBetaInput).Execute()
+    resp, r, err := apiClient.AudiencesAPI.CreateAudience(ctx, spaceId).CreateAudienceAlphaInput(createAudienceAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.CreateAudience``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -77,7 +77,7 @@ Other parameters are passed through a pointer to a apiCreateAudienceRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createAudienceBetaInput** | [**CreateAudienceBetaInput**](CreateAudienceBetaInput.md) |  | 
+ **createAudienceAlphaInput** | [**CreateAudienceAlphaInput**](CreateAudienceAlphaInput.md) |  | 
 
 ### Return type
 
@@ -89,8 +89,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
-- **Accept**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json, application/json
+- **Content-Type**: application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

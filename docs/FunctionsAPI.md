@@ -194,7 +194,7 @@ import (
 )
 
 func main() {
-    createInsertFunctionInstanceAlphaInput := *api.NewCreateInsertFunctionInstanceAlphaInput("FunctionId_example", "IntegrationId_example", "Name_example", map[string]interface{}{"key": interface{}(123)}, "IntegrationType_example") // CreateInsertFunctionInstanceAlphaInput | 
+    createInsertFunctionInstanceAlphaInput := *api.NewCreateInsertFunctionInstanceAlphaInput("FunctionId_example", "IntegrationId_example", "Name_example", map[string]interface{}{"key": interface{}(123)}) // CreateInsertFunctionInstanceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
