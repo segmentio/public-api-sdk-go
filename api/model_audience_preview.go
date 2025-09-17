@@ -23,9 +23,9 @@ type AudiencePreview struct {
 	// Unique identifier for tracking and retrieving results of an audience preview.
 	Id string `json:"id"`
 	// The audience type of the preview.  Possible values: USERS, ACCOUNTS, LINKED.
-	AudienceType string                        `json:"audienceType"`
-	Definition   AudienceDefinitionWithoutType `json:"definition"`
-	Options      ReadAudiencePreviewOptions    `json:"options"`
+	AudienceType string                     `json:"audienceType"`
+	Definition   AudienceDefinition         `json:"definition"`
+	Options      ReadAudiencePreviewOptions `json:"options"`
 	// Status for the audience preview.
 	Status string `json:"status"`
 	// Sampled result membership for the audience preview. Only has a value if the status is 'COMPLETED'.
@@ -42,7 +42,7 @@ type AudiencePreview struct {
 func NewAudiencePreview(
 	id string,
 	audienceType string,
-	definition AudienceDefinitionWithoutType,
+	definition AudienceDefinition,
 	options ReadAudiencePreviewOptions,
 	status string,
 ) *AudiencePreview {
@@ -112,9 +112,9 @@ func (o *AudiencePreview) SetAudienceType(v string) {
 }
 
 // GetDefinition returns the Definition field value
-func (o *AudiencePreview) GetDefinition() AudienceDefinitionWithoutType {
+func (o *AudiencePreview) GetDefinition() AudienceDefinition {
 	if o == nil {
-		var ret AudienceDefinitionWithoutType
+		var ret AudienceDefinition
 		return ret
 	}
 
@@ -123,7 +123,7 @@ func (o *AudiencePreview) GetDefinition() AudienceDefinitionWithoutType {
 
 // GetDefinitionOk returns a tuple with the Definition field value
 // and a boolean to check if the value has been set.
-func (o *AudiencePreview) GetDefinitionOk() (*AudienceDefinitionWithoutType, bool) {
+func (o *AudiencePreview) GetDefinitionOk() (*AudienceDefinition, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -131,7 +131,7 @@ func (o *AudiencePreview) GetDefinitionOk() (*AudienceDefinitionWithoutType, boo
 }
 
 // SetDefinition sets field value
-func (o *AudiencePreview) SetDefinition(v AudienceDefinitionWithoutType) {
+func (o *AudiencePreview) SetDefinition(v AudienceDefinition) {
 	o.Definition = v
 }
 

@@ -39,7 +39,7 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    createAudienceAlphaInput := *api.NewCreateAudienceAlphaInput("Name_example", *api.NewAudienceDefinition("Query_example")) // CreateAudienceAlphaInput | 
+    createAudienceAlphaInput := *api.NewCreateAudienceAlphaInput("Name_example", *api.NewAudienceDefinition("Query_example"), "AudienceType_example") // CreateAudienceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -119,7 +119,7 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    createAudiencePreviewBetaInput := *api.NewCreateAudiencePreviewBetaInput(*api.NewAudienceDefinitionWithoutType("Query_example"), "AudienceType_example") // CreateAudiencePreviewBetaInput | 
+    createAudiencePreviewBetaInput := *api.NewCreateAudiencePreviewBetaInput(*api.NewAudienceDefinition("Query_example"), "AudienceType_example") // CreateAudiencePreviewBetaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)

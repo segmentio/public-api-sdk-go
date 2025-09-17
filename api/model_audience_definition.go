@@ -20,8 +20,6 @@ var _ MappedNullable = &AudienceDefinition{}
 
 // AudienceDefinition struct for AudienceDefinition
 type AudienceDefinition struct {
-	// The underlying data type being segmented for this audience.  Possible values: users, accounts.
-	Type *string `json:"type,omitempty"`
 	// The query language string defining the audience segmentation criteria.  For guidance on using the query language, see the [Segment documentation site](https://segment.com/docs/api/public-api/query-language).
 	Query string `json:"query"`
 	// The target entity slug.
@@ -44,38 +42,6 @@ func NewAudienceDefinition(query string) *AudienceDefinition {
 func NewAudienceDefinitionWithDefaults() *AudienceDefinition {
 	this := AudienceDefinition{}
 	return &this
-}
-
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *AudienceDefinition) GetType() string {
-	if o == nil || IsNil(o.Type) {
-		var ret string
-		return ret
-	}
-	return *o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AudienceDefinition) GetTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.Type) {
-		return nil, false
-	}
-	return o.Type, true
-}
-
-// HasType returns a boolean if a field has been set.
-func (o *AudienceDefinition) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *AudienceDefinition) SetType(v string) {
-	o.Type = &v
 }
 
 // GetQuery returns the Query field value
@@ -144,9 +110,6 @@ func (o AudienceDefinition) MarshalJSON() ([]byte, error) {
 
 func (o AudienceDefinition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
-	}
 	toSerialize["query"] = o.Query
 	if !IsNil(o.TargetEntity) {
 		toSerialize["targetEntity"] = o.TargetEntity
