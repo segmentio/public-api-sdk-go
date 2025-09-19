@@ -20,13 +20,13 @@ var _ MappedNullable = &SimpleDestination{}
 
 // SimpleDestination struct for SimpleDestination
 type SimpleDestination struct {
-	// The id of the Destination.
+	// The id of the Integration.
 	Id string `json:"id"`
 	// The name of the Destination.
 	Name *string `json:"name,omitempty"`
 	// The Source of the Destination.
 	SourceId string `json:"sourceId"`
-	// Enabled or not.
+	// Whether the Integration is enabled or not.
 	Enabled bool `json:"enabled"`
 	// When the Integration connection was created.
 	CreatedAt string `json:"createdAt"`
@@ -34,8 +34,10 @@ type SimpleDestination struct {
 	UpdatedAt string `json:"updatedAt"`
 	// The Destination settings.
 	Settings map[string]interface{} `json:"settings"`
-	Metadata *Metadata              `json:"metadata,omitempty"`
-	IdSync   *IDSyncOptions         `json:"idSync,omitempty"`
+	// The Destination id.
+	DestinationId string         `json:"destinationId"`
+	Metadata      *Metadata      `json:"metadata,omitempty"`
+	IdSync        *IDSyncOptions `json:"idSync,omitempty"`
 }
 
 // NewSimpleDestination instantiates a new SimpleDestination object
@@ -49,6 +51,7 @@ func NewSimpleDestination(
 	createdAt string,
 	updatedAt string,
 	settings map[string]interface{},
+	destinationId string,
 ) *SimpleDestination {
 	this := SimpleDestination{}
 	this.Id = id
@@ -57,6 +60,7 @@ func NewSimpleDestination(
 	this.CreatedAt = createdAt
 	this.UpdatedAt = updatedAt
 	this.Settings = settings
+	this.DestinationId = destinationId
 	return &this
 }
 
@@ -244,6 +248,30 @@ func (o *SimpleDestination) SetSettings(v map[string]interface{}) {
 	o.Settings = v
 }
 
+// GetDestinationId returns the DestinationId field value
+func (o *SimpleDestination) GetDestinationId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.DestinationId
+}
+
+// GetDestinationIdOk returns a tuple with the DestinationId field value
+// and a boolean to check if the value has been set.
+func (o *SimpleDestination) GetDestinationIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.DestinationId, true
+}
+
+// SetDestinationId sets field value
+func (o *SimpleDestination) SetDestinationId(v string) {
+	o.DestinationId = v
+}
+
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *SimpleDestination) GetMetadata() Metadata {
 	if o == nil || IsNil(o.Metadata) {
@@ -327,6 +355,7 @@ func (o SimpleDestination) ToMap() (map[string]interface{}, error) {
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["updatedAt"] = o.UpdatedAt
 	toSerialize["settings"] = o.Settings
+	toSerialize["destinationId"] = o.DestinationId
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
