@@ -29,7 +29,6 @@ type InsertFunctionInstanceAlpha struct {
 	UpdatedAt         string                 `json:"updatedAt"`
 	Settings          map[string]interface{} `json:"settings"`
 	EncryptedSettings map[string]interface{} `json:"encryptedSettings"`
-	IntegrationType   map[string]interface{} `json:"integrationType,omitempty"`
 }
 
 // NewInsertFunctionInstanceAlpha instantiates a new InsertFunctionInstanceAlpha object
@@ -290,39 +289,6 @@ func (o *InsertFunctionInstanceAlpha) SetEncryptedSettings(v map[string]interfac
 	o.EncryptedSettings = v
 }
 
-// GetIntegrationType returns the IntegrationType field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *InsertFunctionInstanceAlpha) GetIntegrationType() map[string]interface{} {
-	if o == nil {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.IntegrationType
-}
-
-// GetIntegrationTypeOk returns a tuple with the IntegrationType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InsertFunctionInstanceAlpha) GetIntegrationTypeOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.IntegrationType) {
-		return map[string]interface{}{}, false
-	}
-	return o.IntegrationType, true
-}
-
-// HasIntegrationType returns a boolean if a field has been set.
-func (o *InsertFunctionInstanceAlpha) HasIntegrationType() bool {
-	if o != nil && IsNil(o.IntegrationType) {
-		return true
-	}
-
-	return false
-}
-
-// SetIntegrationType gets a reference to the given map[string]interface{} and assigns it to the IntegrationType field.
-func (o *InsertFunctionInstanceAlpha) SetIntegrationType(v map[string]interface{}) {
-	o.IntegrationType = v
-}
-
 func (o InsertFunctionInstanceAlpha) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -344,9 +310,6 @@ func (o InsertFunctionInstanceAlpha) ToMap() (map[string]interface{}, error) {
 	toSerialize["updatedAt"] = o.UpdatedAt
 	toSerialize["settings"] = o.Settings
 	toSerialize["encryptedSettings"] = o.EncryptedSettings
-	if o.IntegrationType != nil {
-		toSerialize["integrationType"] = o.IntegrationType
-	}
 	return toSerialize, nil
 }
 
