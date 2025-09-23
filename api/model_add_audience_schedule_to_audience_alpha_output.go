@@ -18,7 +18,7 @@ import (
 // checks if the AddAudienceScheduleToAudienceAlphaOutput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AddAudienceScheduleToAudienceAlphaOutput{}
 
-// AddAudienceScheduleToAudienceAlphaOutput Defines a Create Audience Schedule Output.
+// AddAudienceScheduleToAudienceAlphaOutput Defines the output of creating an audience schedule.
 type AddAudienceScheduleToAudienceAlphaOutput struct {
 	AudienceSchedule AudienceSchedule `json:"audienceSchedule"`
 }
