@@ -42,7 +42,7 @@ import (
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
     id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
-    addAudienceScheduleToAudienceAlphaInput := *api.NewAddAudienceScheduleToAudienceAlphaInput(false, "Strategy_example") // AddAudienceScheduleToAudienceAlphaInput | 
+    addAudienceScheduleToAudienceAlphaInput := *api.NewAddAudienceScheduleToAudienceAlphaInput("Strategy_example") // AddAudienceScheduleToAudienceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
