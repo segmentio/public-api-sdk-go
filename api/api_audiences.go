@@ -45,7 +45,7 @@ func (r ApiAddAudienceScheduleToAudienceRequest) Execute() (*AddAudienceSchedule
 /*
 AddAudienceScheduleToAudience Add Audience Schedule to Audience
 
-Creates a schedule for the given audience.
+The ability to configure the run schedule for an Audience is limited to Linked Audiences (for example audienceType = LINKED).
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 

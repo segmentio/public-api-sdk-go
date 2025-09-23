@@ -20,8 +20,6 @@ var _ MappedNullable = &AddAudienceScheduleToAudienceAlphaInput{}
 
 // AddAudienceScheduleToAudienceAlphaInput Defines an input for creating an audience schedule.
 type AddAudienceScheduleToAudienceAlphaInput struct {
-	// The enabled status of the schedule to be created.
-	Enabled bool `json:"enabled"`
 	// Strategy of the audience schedule (manual, periodic, or specific days).
 	Strategy string         `json:"strategy"`
 	Config   NullableConfig `json:"config,omitempty"`
@@ -32,11 +30,9 @@ type AddAudienceScheduleToAudienceAlphaInput struct {
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
 func NewAddAudienceScheduleToAudienceAlphaInput(
-	enabled bool,
 	strategy string,
 ) *AddAudienceScheduleToAudienceAlphaInput {
 	this := AddAudienceScheduleToAudienceAlphaInput{}
-	this.Enabled = enabled
 	this.Strategy = strategy
 	return &this
 }
@@ -47,30 +43,6 @@ func NewAddAudienceScheduleToAudienceAlphaInput(
 func NewAddAudienceScheduleToAudienceAlphaInputWithDefaults() *AddAudienceScheduleToAudienceAlphaInput {
 	this := AddAudienceScheduleToAudienceAlphaInput{}
 	return &this
-}
-
-// GetEnabled returns the Enabled field value
-func (o *AddAudienceScheduleToAudienceAlphaInput) GetEnabled() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Enabled
-}
-
-// GetEnabledOk returns a tuple with the Enabled field value
-// and a boolean to check if the value has been set.
-func (o *AddAudienceScheduleToAudienceAlphaInput) GetEnabledOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Enabled, true
-}
-
-// SetEnabled sets field value
-func (o *AddAudienceScheduleToAudienceAlphaInput) SetEnabled(v bool) {
-	o.Enabled = v
 }
 
 // GetStrategy returns the Strategy field value
@@ -150,7 +122,6 @@ func (o AddAudienceScheduleToAudienceAlphaInput) MarshalJSON() ([]byte, error) {
 
 func (o AddAudienceScheduleToAudienceAlphaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["enabled"] = o.Enabled
 	toSerialize["strategy"] = o.Strategy
 	if o.Config.IsSet() {
 		toSerialize["config"] = o.Config.Get()
