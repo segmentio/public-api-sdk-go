@@ -2174,7 +2174,7 @@ func (r ApiUpdateAudienceScheduleForAudienceRequest) Execute() (*UpdateAudienceS
 /*
 UpdateAudienceScheduleForAudience Update Audience Schedule for Audience
 
-Updates an audience schedule for the given audience id.
+Updates an audience schedule for a Linked Audience (audienceType = LINKED).
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
