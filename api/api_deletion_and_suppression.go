@@ -985,6 +985,8 @@ ListRegulationsFromSource List Regulations from Source
 
 Lists all Source-scoped regulations.
 
+	Please note: List regulations for Source only returns deletion requests from the past 90 days. Deletion requests older than 90 days are not retained and will result in 404 resource not found.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sourceId
 	@return ApiListRegulationsFromSourceRequest
@@ -1368,6 +1370,8 @@ func (r ApiListWorkspaceRegulationsRequest) Execute() (*ListWorkspaceRegulations
 ListWorkspaceRegulations List Workspace Regulations
 
 Lists all Workspace-scoped regulations.
+
+	Please note: List Workspace regulations only returns deletion requests from the past 90 days. Deletion requests older than 90 days are not retained and will result in 404 resource not found.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiListWorkspaceRegulationsRequest
