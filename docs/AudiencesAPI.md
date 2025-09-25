@@ -845,7 +845,7 @@ Name | Type | Description  | Notes
 
 ## Operation: UpdateAudienceForSpace
 
-> UpdateAudienceForSpace200Response UpdateAudienceForSpace(ctx, spaceId, id).UpdateAudienceForSpaceAlphaInput(updateAudienceForSpaceAlphaInput).Execute()
+> UpdateAudienceForSpace200Response UpdateAudienceForSpace(ctx, spaceId, id).UpdateAudienceForSpaceBetaInput(updateAudienceForSpaceBetaInput).Execute()
 
 Update Audience for Space
 
@@ -866,13 +866,13 @@ import (
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
     id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
-    updateAudienceForSpaceAlphaInput := *api.NewUpdateAudienceForSpaceAlphaInput() // UpdateAudienceForSpaceAlphaInput | 
+    updateAudienceForSpaceBetaInput := *api.NewUpdateAudienceForSpaceBetaInput() // UpdateAudienceForSpaceBetaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.UpdateAudienceForSpace(ctx, spaceId, id).UpdateAudienceForSpaceAlphaInput(updateAudienceForSpaceAlphaInput).Execute()
+    resp, r, err := apiClient.AudiencesAPI.UpdateAudienceForSpace(ctx, spaceId, id).UpdateAudienceForSpaceBetaInput(updateAudienceForSpaceBetaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.UpdateAudienceForSpace``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -906,7 +906,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **updateAudienceForSpaceAlphaInput** | [**UpdateAudienceForSpaceAlphaInput**](UpdateAudienceForSpaceAlphaInput.md) |  | 
+ **updateAudienceForSpaceBetaInput** | [**UpdateAudienceForSpaceBetaInput**](UpdateAudienceForSpaceBetaInput.md) |  | 
 
 ### Return type
 
@@ -918,8 +918,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/vnd.segment.v1alpha+json
-- **Accept**: application/vnd.segment.v1alpha+json, application/json
+- **Content-Type**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 59.5.0
+API version: 59.6.0
 Contact: friends@segment.com
 */
 
@@ -1951,17 +1951,17 @@ func (a *AudiencesAPIService) RemoveAudienceFromSpaceExecute(
 }
 
 type ApiUpdateAudienceForSpaceRequest struct {
-	ctx                              context.Context
-	ApiService                       *AudiencesAPIService
-	spaceId                          string
-	id                               string
-	updateAudienceForSpaceAlphaInput *UpdateAudienceForSpaceAlphaInput
+	ctx                             context.Context
+	ApiService                      *AudiencesAPIService
+	spaceId                         string
+	id                              string
+	updateAudienceForSpaceBetaInput *UpdateAudienceForSpaceBetaInput
 }
 
-func (r ApiUpdateAudienceForSpaceRequest) UpdateAudienceForSpaceAlphaInput(
-	updateAudienceForSpaceAlphaInput UpdateAudienceForSpaceAlphaInput,
+func (r ApiUpdateAudienceForSpaceRequest) UpdateAudienceForSpaceBetaInput(
+	updateAudienceForSpaceBetaInput UpdateAudienceForSpaceBetaInput,
 ) ApiUpdateAudienceForSpaceRequest {
-	r.updateAudienceForSpaceAlphaInput = &updateAudienceForSpaceAlphaInput
+	r.updateAudienceForSpaceBetaInput = &updateAudienceForSpaceBetaInput
 	return r
 }
 
@@ -2041,14 +2041,17 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.updateAudienceForSpaceAlphaInput == nil {
+	if r.updateAudienceForSpaceBetaInput == nil {
 		return localVarReturnValue, nil, reportError(
-			"updateAudienceForSpaceAlphaInput is required and must be specified",
+			"updateAudienceForSpaceBetaInput is required and must be specified",
 		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/vnd.segment.v1beta+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -2058,6 +2061,7 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 		"application/json",
 	}
@@ -2068,7 +2072,7 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateAudienceForSpaceAlphaInput
+	localVarPostBody = r.updateAudienceForSpaceBetaInput
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,

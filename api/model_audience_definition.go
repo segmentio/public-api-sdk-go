@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 59.5.0
+API version: 59.6.0
 Contact: friends@segment.com
 */
 
@@ -20,10 +20,10 @@ var _ MappedNullable = &AudienceDefinition{}
 
 // AudienceDefinition struct for AudienceDefinition
 type AudienceDefinition struct {
+	// The target entity slug, required in creating a linked audience.
+	TargetEntity *string `json:"targetEntity,omitempty"`
 	// The query language string defining the audience segmentation criteria.  For guidance on using the query language, see the [Segment documentation site](https://segment.com/docs/api/public-api/query-language).
 	Query string `json:"query"`
-	// The target entity slug.
-	TargetEntity *string `json:"targetEntity,omitempty"`
 }
 
 // NewAudienceDefinition instantiates a new AudienceDefinition object
@@ -42,30 +42,6 @@ func NewAudienceDefinition(query string) *AudienceDefinition {
 func NewAudienceDefinitionWithDefaults() *AudienceDefinition {
 	this := AudienceDefinition{}
 	return &this
-}
-
-// GetQuery returns the Query field value
-func (o *AudienceDefinition) GetQuery() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Query
-}
-
-// GetQueryOk returns a tuple with the Query field value
-// and a boolean to check if the value has been set.
-func (o *AudienceDefinition) GetQueryOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Query, true
-}
-
-// SetQuery sets field value
-func (o *AudienceDefinition) SetQuery(v string) {
-	o.Query = v
 }
 
 // GetTargetEntity returns the TargetEntity field value if set, zero value otherwise.
@@ -100,6 +76,30 @@ func (o *AudienceDefinition) SetTargetEntity(v string) {
 	o.TargetEntity = &v
 }
 
+// GetQuery returns the Query field value
+func (o *AudienceDefinition) GetQuery() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Query
+}
+
+// GetQueryOk returns a tuple with the Query field value
+// and a boolean to check if the value has been set.
+func (o *AudienceDefinition) GetQueryOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Query, true
+}
+
+// SetQuery sets field value
+func (o *AudienceDefinition) SetQuery(v string) {
+	o.Query = v
+}
+
 func (o AudienceDefinition) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -110,10 +110,10 @@ func (o AudienceDefinition) MarshalJSON() ([]byte, error) {
 
 func (o AudienceDefinition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["query"] = o.Query
 	if !IsNil(o.TargetEntity) {
 		toSerialize["targetEntity"] = o.TargetEntity
 	}
+	toSerialize["query"] = o.Query
 	return toSerialize, nil
 }
 
