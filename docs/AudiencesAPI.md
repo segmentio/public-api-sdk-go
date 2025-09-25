@@ -15,6 +15,7 @@ Method | HTTP request | Description
 [**ListAudiences**](AudiencesAPI.md#ListAudiences) | **Get** /spaces/{spaceId}/audiences | List Audiences
 [**RemoveAudienceFromSpace**](AudiencesAPI.md#RemoveAudienceFromSpace) | **Delete** /spaces/{spaceId}/audiences/{id} | Remove Audience from Space
 [**UpdateAudienceForSpace**](AudiencesAPI.md#UpdateAudienceForSpace) | **Patch** /spaces/{spaceId}/audiences/{id} | Update Audience for Space
+[**UpdateAudienceScheduleForAudience**](AudiencesAPI.md#UpdateAudienceScheduleForAudience) | **Patch** /spaces/{spaceId}/audiences/{id}/schedules/{scheduleId} | Update Audience Schedule for Audience
 
 
 
@@ -910,6 +911,92 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UpdateAudienceForSpace200Response**](UpdateAudienceForSpace200Response.md)
+
+### Authorization
+
+[token](../README.md#token)
+
+### HTTP request headers
+
+- **Content-Type**: application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Operation: UpdateAudienceScheduleForAudience
+
+> UpdateAudienceScheduleForAudience200Response UpdateAudienceScheduleForAudience(ctx, spaceId, id, scheduleId).UpdateAudienceScheduleForAudienceAlphaInput(updateAudienceScheduleForAudienceAlphaInput).Execute()
+
+Update Audience Schedule for Audience
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    api "github.com/segmentio/public-api-sdk-go"
+)
+
+func main() {
+    spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
+    id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
+    scheduleId := "sch_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
+    updateAudienceScheduleForAudienceAlphaInput := *api.NewUpdateAudienceScheduleForAudienceAlphaInput("Strategy_example") // UpdateAudienceScheduleForAudienceAlphaInput | 
+
+    configuration := api.NewConfiguration()
+    apiClient := api.NewAPIClient(configuration)
+    token := "<BEARER_TOKEN>"
+    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
+    resp, r, err := apiClient.AudiencesAPI.UpdateAudienceScheduleForAudience(ctx, spaceId, id, scheduleId).UpdateAudienceScheduleForAudienceAlphaInput(updateAudienceScheduleForAudienceAlphaInput).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.UpdateAudienceScheduleForAudience``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+        responseErrors := api.UnwrapFullErrors(err)
+        if responseErrors != nil {
+            for _, responseError := range responseErrors.Errors {
+                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
+            }
+        }
+    }
+    // response from `UpdateAudienceScheduleForAudience`: UpdateAudienceScheduleForAudience200Response
+    fmt.Fprintf(os.Stdout, "Response from `AudiencesAPI.UpdateAudienceScheduleForAudience`: %v\n", resp.GetData())
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**spaceId** | **string** |  | 
+**id** | **string** |  | 
+**scheduleId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateAudienceScheduleForAudienceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **updateAudienceScheduleForAudienceAlphaInput** | [**UpdateAudienceScheduleForAudienceAlphaInput**](UpdateAudienceScheduleForAudienceAlphaInput.md) |  | 
+
+### Return type
+
+[**UpdateAudienceScheduleForAudience200Response**](UpdateAudienceScheduleForAudience200Response.md)
 
 ### Authorization
 
