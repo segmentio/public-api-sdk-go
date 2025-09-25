@@ -20,7 +20,7 @@ var _ MappedNullable = &UpdateAudienceForSpace200Response{}
 
 // UpdateAudienceForSpace200Response struct for UpdateAudienceForSpace200Response
 type UpdateAudienceForSpace200Response struct {
-	Data *UpdateAudienceForSpaceAlphaOutput `json:"data,omitempty"`
+	Data *UpdateAudienceForSpaceBetaOutput `json:"data,omitempty"`
 }
 
 // NewUpdateAudienceForSpace200Response instantiates a new UpdateAudienceForSpace200Response object
@@ -41,9 +41,9 @@ func NewUpdateAudienceForSpace200ResponseWithDefaults() *UpdateAudienceForSpace2
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *UpdateAudienceForSpace200Response) GetData() UpdateAudienceForSpaceAlphaOutput {
+func (o *UpdateAudienceForSpace200Response) GetData() UpdateAudienceForSpaceBetaOutput {
 	if o == nil || IsNil(o.Data) {
-		var ret UpdateAudienceForSpaceAlphaOutput
+		var ret UpdateAudienceForSpaceBetaOutput
 		return ret
 	}
 	return *o.Data
@@ -51,7 +51,7 @@ func (o *UpdateAudienceForSpace200Response) GetData() UpdateAudienceForSpaceAlph
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateAudienceForSpace200Response) GetDataOk() (*UpdateAudienceForSpaceAlphaOutput, bool) {
+func (o *UpdateAudienceForSpace200Response) GetDataOk() (*UpdateAudienceForSpaceBetaOutput, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *UpdateAudienceForSpace200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given UpdateAudienceForSpaceAlphaOutput and assigns it to the Data field.
-func (o *UpdateAudienceForSpace200Response) SetData(v UpdateAudienceForSpaceAlphaOutput) {
+// SetData gets a reference to the given UpdateAudienceForSpaceBetaOutput and assigns it to the Data field.
+func (o *UpdateAudienceForSpace200Response) SetData(v UpdateAudienceForSpaceBetaOutput) {
 	o.Data = &v
 }
 
