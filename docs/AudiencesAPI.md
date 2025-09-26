@@ -7,7 +7,6 @@ Method | HTTP request | Description
 [**AddAudienceScheduleToAudience**](AudiencesAPI.md#AddAudienceScheduleToAudience) | **Post** /spaces/{spaceId}/audiences/{id}/schedules | Add Audience Schedule to Audience
 [**CreateAudience**](AudiencesAPI.md#CreateAudience) | **Post** /spaces/{spaceId}/audiences | Create Audience
 [**CreateAudiencePreview**](AudiencesAPI.md#CreateAudiencePreview) | **Post** /spaces/{spaceId}/audiences/previews | Create Audience Preview
-[**ForceExecuteAudienceRun**](AudiencesAPI.md#ForceExecuteAudienceRun) | **Post** /spaces/{spaceId}/audiences/{audienceId}/runs | Force Execute Audience Run
 [**GetAudience**](AudiencesAPI.md#GetAudience) | **Get** /spaces/{spaceId}/audiences/{id} | Get Audience
 [**GetAudiencePreview**](AudiencesAPI.md#GetAudiencePreview) | **Get** /spaces/{spaceId}/audiences/previews/{id} | Get Audience Preview
 [**GetAudienceScheduleFromSpaceAndAudience**](AudiencesAPI.md#GetAudienceScheduleFromSpaceAndAudience) | **Get** /spaces/{spaceId}/audiences/{id}/schedules/{scheduleId} | Get Audience Schedule from Space And Audience
@@ -257,87 +256,6 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 - **Accept**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json, application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## Operation: ForceExecuteAudienceRun
-
-> ForceExecuteAudienceRun200Response ForceExecuteAudienceRun(ctx, spaceId, audienceId).Execute()
-
-Force Execute Audience Run
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    api "github.com/segmentio/public-api-sdk-go"
-)
-
-func main() {
-    spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    audienceId := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
-
-    configuration := api.NewConfiguration()
-    apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
-    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.ForceExecuteAudienceRun(ctx, spaceId, audienceId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.ForceExecuteAudienceRun``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-        responseErrors := api.UnwrapFullErrors(err)
-        if responseErrors != nil {
-            for _, responseError := range responseErrors.Errors {
-                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
-            }
-        }
-    }
-    // response from `ForceExecuteAudienceRun`: ForceExecuteAudienceRun200Response
-    fmt.Fprintf(os.Stdout, "Response from `AudiencesAPI.ForceExecuteAudienceRun`: %v\n", resp.GetData())
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**spaceId** | **string** |  | 
-**audienceId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiForceExecuteAudienceRunRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-
-### Return type
-
-[**ForceExecuteAudienceRun200Response**](ForceExecuteAudienceRun200Response.md)
-
-### Authorization
-
-[token](../README.md#token)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
