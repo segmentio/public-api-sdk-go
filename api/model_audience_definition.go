@@ -20,7 +20,7 @@ var _ MappedNullable = &AudienceDefinition{}
 
 // AudienceDefinition struct for AudienceDefinition
 type AudienceDefinition struct {
-	// The target entity slug, required in creating a linked audience.
+	// The target entity relationship slug, required in a linked audience, default to profile if not specified.
 	TargetEntity *string `json:"targetEntity,omitempty"`
 	// The query language string defining the audience segmentation criteria.  For guidance on using the query language, see the [Segment documentation site](https://segment.com/docs/api/public-api/query-language).
 	Query string `json:"query"`
