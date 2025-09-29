@@ -624,7 +624,7 @@ func (r ApiGetAudienceRequest) Execute() (*GetAudience200Response, *http.Respons
 /*
 GetAudience Get Audience
 
-Returns the Audience by id and spaceId. Supports including audience schedules via `?include=schedules`.
+Returns the Audience by id and spaceId. Supports including audience schedules using `?include=schedules`.
 
 • This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
@@ -1598,7 +1598,7 @@ func (r ApiListAudiencesRequest) Execute() (*ListAudiences200Response, *http.Res
 /*
 ListAudiences List Audiences
 
-Returns Audiences by spaceId. Supports including audience schedules via `?include=schedules`.
+Returns Audiences by spaceId. Supports including audience schedules using `?include=schedules`.
 
 • This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
