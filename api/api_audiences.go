@@ -617,7 +617,7 @@ func (r ApiForceExecuteAudienceRunRequest) Execute() (*ForceExecuteAudienceRun20
 /*
 ForceExecuteAudienceRun Force Execute Audience Run
 
-The ability to force execute a run for an Audience is limited to Linked Audiences (audienceType = LINKED).
+The ability to force execute a run for an Audience is limited to Linked Audiences (audienceType = `LINKED`).
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
