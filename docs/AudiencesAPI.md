@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**ListAudienceSchedulesFromSpaceAndAudience**](AudiencesAPI.md#ListAudienceSchedulesFromSpaceAndAudience) | **Get** /spaces/{spaceId}/audiences/{id}/schedules | List Audience Schedules from Space And Audience
 [**ListAudiences**](AudiencesAPI.md#ListAudiences) | **Get** /spaces/{spaceId}/audiences | List Audiences
 [**RemoveAudienceFromSpace**](AudiencesAPI.md#RemoveAudienceFromSpace) | **Delete** /spaces/{spaceId}/audiences/{id} | Remove Audience from Space
+[**RemoveAudienceScheduleFromAudience**](AudiencesAPI.md#RemoveAudienceScheduleFromAudience) | **Delete** /spaces/{spaceId}/audiences/{id}/schedules/{scheduleId} | Remove Audience Schedule from Audience
 [**UpdateAudienceForSpace**](AudiencesAPI.md#UpdateAudienceForSpace) | **Patch** /spaces/{spaceId}/audiences/{id} | Update Audience for Space
 [**UpdateAudienceScheduleForAudience**](AudiencesAPI.md#UpdateAudienceScheduleForAudience) | **Patch** /spaces/{spaceId}/audiences/{id}/schedules/{scheduleId} | Update Audience Schedule for Audience
 
@@ -837,6 +838,90 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json, application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Operation: RemoveAudienceScheduleFromAudience
+
+> RemoveAudienceScheduleFromAudience200Response RemoveAudienceScheduleFromAudience(ctx, spaceId, id, scheduleId).Execute()
+
+Remove Audience Schedule from Audience
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    api "github.com/segmentio/public-api-sdk-go"
+)
+
+func main() {
+    spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
+    id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
+    scheduleId := "sch_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
+
+    configuration := api.NewConfiguration()
+    apiClient := api.NewAPIClient(configuration)
+    token := "<BEARER_TOKEN>"
+    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
+    resp, r, err := apiClient.AudiencesAPI.RemoveAudienceScheduleFromAudience(ctx, spaceId, id, scheduleId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.RemoveAudienceScheduleFromAudience``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+        responseErrors := api.UnwrapFullErrors(err)
+        if responseErrors != nil {
+            for _, responseError := range responseErrors.Errors {
+                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
+            }
+        }
+    }
+    // response from `RemoveAudienceScheduleFromAudience`: RemoveAudienceScheduleFromAudience200Response
+    fmt.Fprintf(os.Stdout, "Response from `AudiencesAPI.RemoveAudienceScheduleFromAudience`: %v\n", resp.GetData())
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**spaceId** | **string** |  | 
+**id** | **string** |  | 
+**scheduleId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiRemoveAudienceScheduleFromAudienceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**RemoveAudienceScheduleFromAudience200Response**](RemoveAudienceScheduleFromAudience200Response.md)
+
+### Authorization
+
+[token](../README.md#token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
