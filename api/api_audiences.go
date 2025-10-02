@@ -2136,7 +2136,15 @@ type ApiRemoveAudienceScheduleFromAudienceRequest struct {
 	ApiService *AudiencesAPIService
 	spaceId    string
 	id         string
-	scheduleId string
+	scheduleId *string
+}
+
+// The ID of the schedule to delete  This parameter exists in alpha.
+func (r ApiRemoveAudienceScheduleFromAudienceRequest) ScheduleId(
+	scheduleId string,
+) ApiRemoveAudienceScheduleFromAudienceRequest {
+	r.scheduleId = &scheduleId
+	return r
 }
 
 func (r ApiRemoveAudienceScheduleFromAudienceRequest) Execute() (*RemoveAudienceScheduleFromAudience200Response, *http.Response, error) {
@@ -2155,21 +2163,18 @@ Deletes an audience schedule for a Linked Audience (audienceType = LINKED).
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param spaceId
 	@param id
-	@param scheduleId
 	@return ApiRemoveAudienceScheduleFromAudienceRequest
 */
 func (a *AudiencesAPIService) RemoveAudienceScheduleFromAudience(
 	ctx context.Context,
 	spaceId string,
 	id string,
-	scheduleId string,
 ) ApiRemoveAudienceScheduleFromAudienceRequest {
 	return ApiRemoveAudienceScheduleFromAudienceRequest{
 		ApiService: a,
 		ctx:        ctx,
 		spaceId:    spaceId,
 		id:         id,
-		scheduleId: scheduleId,
 	}
 }
 
@@ -2194,7 +2199,7 @@ func (a *AudiencesAPIService) RemoveAudienceScheduleFromAudienceExecute(
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/spaces/{spaceId}/audiences/{id}/schedules/{scheduleId}"
+	localVarPath := localBasePath + "/spaces/{spaceId}/audiences/{id}/schedules"
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"spaceId"+"}",
@@ -2207,17 +2212,14 @@ func (a *AudiencesAPIService) RemoveAudienceScheduleFromAudienceExecute(
 		url.PathEscape(parameterValueToString(r.id, "id")),
 		-1,
 	)
-	localVarPath = strings.Replace(
-		localVarPath,
-		"{"+"scheduleId"+"}",
-		url.PathEscape(parameterValueToString(r.scheduleId, "scheduleId")),
-		-1,
-	)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.scheduleId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "scheduleId", r.scheduleId, "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

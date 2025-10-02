@@ -15,7 +15,7 @@ Method | HTTP request | Description
 [**ListAudienceSchedulesFromSpaceAndAudience**](AudiencesAPI.md#ListAudienceSchedulesFromSpaceAndAudience) | **Get** /spaces/{spaceId}/audiences/{id}/schedules | List Audience Schedules from Space And Audience
 [**ListAudiences**](AudiencesAPI.md#ListAudiences) | **Get** /spaces/{spaceId}/audiences | List Audiences
 [**RemoveAudienceFromSpace**](AudiencesAPI.md#RemoveAudienceFromSpace) | **Delete** /spaces/{spaceId}/audiences/{id} | Remove Audience from Space
-[**RemoveAudienceScheduleFromAudience**](AudiencesAPI.md#RemoveAudienceScheduleFromAudience) | **Delete** /spaces/{spaceId}/audiences/{id}/schedules/{scheduleId} | Remove Audience Schedule from Audience
+[**RemoveAudienceScheduleFromAudience**](AudiencesAPI.md#RemoveAudienceScheduleFromAudience) | **Delete** /spaces/{spaceId}/audiences/{id}/schedules | Remove Audience Schedule from Audience
 [**UpdateAudienceForSpace**](AudiencesAPI.md#UpdateAudienceForSpace) | **Patch** /spaces/{spaceId}/audiences/{id} | Update Audience for Space
 [**UpdateAudienceScheduleForAudience**](AudiencesAPI.md#UpdateAudienceScheduleForAudience) | **Patch** /spaces/{spaceId}/audiences/{id}/schedules/{scheduleId} | Update Audience Schedule for Audience
 
@@ -928,7 +928,7 @@ Name | Type | Description  | Notes
 
 ## Operation: RemoveAudienceScheduleFromAudience
 
-> RemoveAudienceScheduleFromAudience200Response RemoveAudienceScheduleFromAudience(ctx, spaceId, id, scheduleId).Execute()
+> RemoveAudienceScheduleFromAudience200Response RemoveAudienceScheduleFromAudience(ctx, spaceId, id).ScheduleId(scheduleId).Execute()
 
 Remove Audience Schedule from Audience
 
@@ -949,13 +949,13 @@ import (
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
     id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
-    scheduleId := "sch_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
+    scheduleId := "sch_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | The ID of the schedule to delete  This parameter exists in alpha. (optional)
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.RemoveAudienceScheduleFromAudience(ctx, spaceId, id, scheduleId).Execute()
+    resp, r, err := apiClient.AudiencesAPI.RemoveAudienceScheduleFromAudience(ctx, spaceId, id).ScheduleId(scheduleId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.RemoveAudienceScheduleFromAudience``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -979,7 +979,6 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **spaceId** | **string** |  | 
 **id** | **string** |  | 
-**scheduleId** | **string** |  | 
 
 ### Other Parameters
 
@@ -990,7 +989,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
-
+ **scheduleId** | **string** | The ID of the schedule to delete  This parameter exists in alpha. | 
 
 ### Return type
 
