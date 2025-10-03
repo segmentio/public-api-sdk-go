@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 59.7.0
+API version: 59.8.0
 Contact: friends@segment.com
 */
 
@@ -23,6 +23,8 @@ type PersonalizationInput struct {
 	Profile Profile `json:"profile"`
 	// Entities V2 Object.
 	Entities []PersonalizationInputEntity `json:"entities,omitempty"`
+	// Sync entity property changes back to Segment. Only applicable if activationType is \"Audience Membership Changed\".
+	SyncEntityPropertyChanges *bool `json:"syncEntityPropertyChanges,omitempty"`
 }
 
 // NewPersonalizationInput instantiates a new PersonalizationInput object
@@ -99,6 +101,38 @@ func (o *PersonalizationInput) SetEntities(v []PersonalizationInputEntity) {
 	o.Entities = v
 }
 
+// GetSyncEntityPropertyChanges returns the SyncEntityPropertyChanges field value if set, zero value otherwise.
+func (o *PersonalizationInput) GetSyncEntityPropertyChanges() bool {
+	if o == nil || IsNil(o.SyncEntityPropertyChanges) {
+		var ret bool
+		return ret
+	}
+	return *o.SyncEntityPropertyChanges
+}
+
+// GetSyncEntityPropertyChangesOk returns a tuple with the SyncEntityPropertyChanges field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PersonalizationInput) GetSyncEntityPropertyChangesOk() (*bool, bool) {
+	if o == nil || IsNil(o.SyncEntityPropertyChanges) {
+		return nil, false
+	}
+	return o.SyncEntityPropertyChanges, true
+}
+
+// HasSyncEntityPropertyChanges returns a boolean if a field has been set.
+func (o *PersonalizationInput) HasSyncEntityPropertyChanges() bool {
+	if o != nil && !IsNil(o.SyncEntityPropertyChanges) {
+		return true
+	}
+
+	return false
+}
+
+// SetSyncEntityPropertyChanges gets a reference to the given bool and assigns it to the SyncEntityPropertyChanges field.
+func (o *PersonalizationInput) SetSyncEntityPropertyChanges(v bool) {
+	o.SyncEntityPropertyChanges = &v
+}
+
 func (o PersonalizationInput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -112,6 +146,9 @@ func (o PersonalizationInput) ToMap() (map[string]interface{}, error) {
 	toSerialize["profile"] = o.Profile
 	if !IsNil(o.Entities) {
 		toSerialize["entities"] = o.Entities
+	}
+	if !IsNil(o.SyncEntityPropertyChanges) {
+		toSerialize["syncEntityPropertyChanges"] = o.SyncEntityPropertyChanges
 	}
 	return toSerialize, nil
 }
