@@ -18,7 +18,7 @@ import (
 // checks if the RemoveAudienceScheduleFromAudienceAlphaOutput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &RemoveAudienceScheduleFromAudienceAlphaOutput{}
 
-// RemoveAudienceScheduleFromAudienceAlphaOutput Output to remove a RETL audience schedule.
+// RemoveAudienceScheduleFromAudienceAlphaOutput Delete audience schedule endpoint output.
 type RemoveAudienceScheduleFromAudienceAlphaOutput struct {
 	// The status of the operation.
 	Status string `json:"status"`
