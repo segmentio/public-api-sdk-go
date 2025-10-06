@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 60.1.0
+API version: 60.1.1
 Contact: friends@segment.com
 */
 
@@ -46,6 +46,8 @@ func (r ApiAddAudienceScheduleToAudienceRequest) Execute() (*AddAudienceSchedule
 AddAudienceScheduleToAudience Add Audience Schedule to Audience
 
 The ability to configure the run schedule for an Audience is limited to Linked Audiences (audienceType = LINKED).
+
+Note that if a Linked Audience remains disabled for 90 days Segment will delete the associated schedule and a new schedule will need to be created.
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
