@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 60.1.1
+API version: 61.0.0
 Contact: friends@segment.com
 */
 
@@ -23,28 +23,28 @@ import (
 // EdgeFunctionsAPIService EdgeFunctionsAPI service
 type EdgeFunctionsAPIService service
 
-type ApiCreateEdgeFunctionsRequest struct {
-	ctx                           context.Context
-	ApiService                    *EdgeFunctionsAPIService
-	sourceId                      string
-	createEdgeFunctionsAlphaInput *CreateEdgeFunctionsAlphaInput
+type ApiCreateEdgeFunctionRequest struct {
+	ctx                          context.Context
+	ApiService                   *EdgeFunctionsAPIService
+	sourceId                     string
+	createEdgeFunctionAlphaInput *CreateEdgeFunctionAlphaInput
 }
 
-func (r ApiCreateEdgeFunctionsRequest) CreateEdgeFunctionsAlphaInput(
-	createEdgeFunctionsAlphaInput CreateEdgeFunctionsAlphaInput,
-) ApiCreateEdgeFunctionsRequest {
-	r.createEdgeFunctionsAlphaInput = &createEdgeFunctionsAlphaInput
+func (r ApiCreateEdgeFunctionRequest) CreateEdgeFunctionAlphaInput(
+	createEdgeFunctionAlphaInput CreateEdgeFunctionAlphaInput,
+) ApiCreateEdgeFunctionRequest {
+	r.createEdgeFunctionAlphaInput = &createEdgeFunctionAlphaInput
 	return r
 }
 
-func (r ApiCreateEdgeFunctionsRequest) Execute() (*CreateEdgeFunctions200Response, *http.Response, error) {
-	return r.ApiService.CreateEdgeFunctionsExecute(r)
+func (r ApiCreateEdgeFunctionRequest) Execute() (*CreateEdgeFunction200Response, *http.Response, error) {
+	return r.ApiService.CreateEdgeFunctionExecute(r)
 }
 
 /*
-CreateEdgeFunctions Create Edge Functions
+CreateEdgeFunction Create Edge Function
 
-Create EdgeFunctions for your Source given a valid upload URL for an Edge Functions bundle.
+Creates or updates an Edge Function for your Source with given code.
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
@@ -52,13 +52,13 @@ Create EdgeFunctions for your Source given a valid upload URL for an Edge Functi
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sourceId
-	@return ApiCreateEdgeFunctionsRequest
+	@return ApiCreateEdgeFunctionRequest
 */
-func (a *EdgeFunctionsAPIService) CreateEdgeFunctions(
+func (a *EdgeFunctionsAPIService) CreateEdgeFunction(
 	ctx context.Context,
 	sourceId string,
-) ApiCreateEdgeFunctionsRequest {
-	return ApiCreateEdgeFunctionsRequest{
+) ApiCreateEdgeFunctionRequest {
+	return ApiCreateEdgeFunctionRequest{
 		ApiService: a,
 		ctx:        ctx,
 		sourceId:   sourceId,
@@ -67,26 +67,26 @@ func (a *EdgeFunctionsAPIService) CreateEdgeFunctions(
 
 // Execute executes the request
 //
-//	@return CreateEdgeFunctions200Response
-func (a *EdgeFunctionsAPIService) CreateEdgeFunctionsExecute(
-	r ApiCreateEdgeFunctionsRequest,
-) (*CreateEdgeFunctions200Response, *http.Response, error) {
+//	@return CreateEdgeFunction200Response
+func (a *EdgeFunctionsAPIService) CreateEdgeFunctionExecute(
+	r ApiCreateEdgeFunctionRequest,
+) (*CreateEdgeFunction200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateEdgeFunctions200Response
+		localVarReturnValue *CreateEdgeFunction200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"EdgeFunctionsAPIService.CreateEdgeFunctions",
+		"EdgeFunctionsAPIService.CreateEdgeFunction",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/sources/{sourceId}/edge-functions"
+	localVarPath := localBasePath + "/sources/{sourceId}/edge-functions/create"
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
@@ -97,9 +97,9 @@ func (a *EdgeFunctionsAPIService) CreateEdgeFunctionsExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createEdgeFunctionsAlphaInput == nil {
+	if r.createEdgeFunctionAlphaInput == nil {
 		return localVarReturnValue, nil, reportError(
-			"createEdgeFunctionsAlphaInput is required and must be specified",
+			"createEdgeFunctionAlphaInput is required and must be specified",
 		)
 	}
 
@@ -124,7 +124,176 @@ func (a *EdgeFunctionsAPIService) CreateEdgeFunctionsExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createEdgeFunctionsAlphaInput
+	localVarPostBody = r.createEdgeFunctionAlphaInput
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiDeleteEdgeFunctionCodeRequest struct {
+	ctx        context.Context
+	ApiService *EdgeFunctionsAPIService
+	sourceId   string
+}
+
+func (r ApiDeleteEdgeFunctionCodeRequest) Execute() (*DeleteEdgeFunctionCode200Response, *http.Response, error) {
+	return r.ApiService.DeleteEdgeFunctionCodeExecute(r)
+}
+
+/*
+DeleteEdgeFunctionCode Delete Edge Function Code
+
+Delete the Edge Function code for a Source. This will not disable Edge Functions for the Source, but will remove any existing code.
+
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sourceId
+	@return ApiDeleteEdgeFunctionCodeRequest
+*/
+func (a *EdgeFunctionsAPIService) DeleteEdgeFunctionCode(
+	ctx context.Context,
+	sourceId string,
+) ApiDeleteEdgeFunctionCodeRequest {
+	return ApiDeleteEdgeFunctionCodeRequest{
+		ApiService: a,
+		ctx:        ctx,
+		sourceId:   sourceId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return DeleteEdgeFunctionCode200Response
+func (a *EdgeFunctionsAPIService) DeleteEdgeFunctionCodeExecute(
+	r ApiDeleteEdgeFunctionCodeRequest,
+) (*DeleteEdgeFunctionCode200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteEdgeFunctionCode200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"EdgeFunctionsAPIService.DeleteEdgeFunctionCode",
+	)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/sources/{sourceId}/edge-functions/delete-code"
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"sourceId"+"}",
+		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
+		-1,
+	)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,

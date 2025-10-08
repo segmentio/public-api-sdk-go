@@ -4,18 +4,19 @@ All URIs are relative to *https://api.segmentapis.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateEdgeFunctions**](EdgeFunctionsAPI.md#CreateEdgeFunctions) | **Post** /sources/{sourceId}/edge-functions | Create Edge Functions
+[**CreateEdgeFunction**](EdgeFunctionsAPI.md#CreateEdgeFunction) | **Post** /sources/{sourceId}/edge-functions/create | Create Edge Function
+[**DeleteEdgeFunctionCode**](EdgeFunctionsAPI.md#DeleteEdgeFunctionCode) | **Delete** /sources/{sourceId}/edge-functions/delete-code | Delete Edge Function Code
 [**DisableEdgeFunctions**](EdgeFunctionsAPI.md#DisableEdgeFunctions) | **Patch** /sources/{sourceId}/edge-functions/disable | Disable Edge Functions
 [**GenerateUploadURLForEdgeFunctions**](EdgeFunctionsAPI.md#GenerateUploadURLForEdgeFunctions) | **Post** /sources/{sourceId}/edge-functions/upload-url | Generate Upload URL for Edge Functions
 [**GetLatestFromEdgeFunctions**](EdgeFunctionsAPI.md#GetLatestFromEdgeFunctions) | **Get** /sources/{sourceId}/edge-functions/latest | Get Latest from Edge Functions
 
 
 
-## Operation: CreateEdgeFunctions
+## Operation: CreateEdgeFunction
 
-> CreateEdgeFunctions200Response CreateEdgeFunctions(ctx, sourceId).CreateEdgeFunctionsAlphaInput(createEdgeFunctionsAlphaInput).Execute()
+> CreateEdgeFunction200Response CreateEdgeFunction(ctx, sourceId).CreateEdgeFunctionAlphaInput(createEdgeFunctionAlphaInput).Execute()
 
-Create Edge Functions
+Create Edge Function
 
 
 
@@ -33,15 +34,15 @@ import (
 
 func main() {
     sourceId := "qQEHquLrjRDN9j1ByrChyn" // string | 
-    createEdgeFunctionsAlphaInput := *api.NewCreateEdgeFunctionsAlphaInput("UploadURL_example") // CreateEdgeFunctionsAlphaInput | 
+    createEdgeFunctionAlphaInput := *api.NewCreateEdgeFunctionAlphaInput("Code_example") // CreateEdgeFunctionAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.EdgeFunctionsAPI.CreateEdgeFunctions(ctx, sourceId).CreateEdgeFunctionsAlphaInput(createEdgeFunctionsAlphaInput).Execute()
+    resp, r, err := apiClient.EdgeFunctionsAPI.CreateEdgeFunction(ctx, sourceId).CreateEdgeFunctionAlphaInput(createEdgeFunctionAlphaInput).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EdgeFunctionsAPI.CreateEdgeFunctions``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `EdgeFunctionsAPI.CreateEdgeFunction``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -50,8 +51,8 @@ func main() {
             }
         }
     }
-    // response from `CreateEdgeFunctions`: CreateEdgeFunctions200Response
-    fmt.Fprintf(os.Stdout, "Response from `EdgeFunctionsAPI.CreateEdgeFunctions`: %v\n", resp.GetData())
+    // response from `CreateEdgeFunction`: CreateEdgeFunction200Response
+    fmt.Fprintf(os.Stdout, "Response from `EdgeFunctionsAPI.CreateEdgeFunction`: %v\n", resp.GetData())
 }
 ```
 
@@ -65,17 +66,17 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateEdgeFunctionsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateEdgeFunctionRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createEdgeFunctionsAlphaInput** | [**CreateEdgeFunctionsAlphaInput**](CreateEdgeFunctionsAlphaInput.md) |  | 
+ **createEdgeFunctionAlphaInput** | [**CreateEdgeFunctionAlphaInput**](CreateEdgeFunctionAlphaInput.md) |  | 
 
 ### Return type
 
-[**CreateEdgeFunctions200Response**](CreateEdgeFunctions200Response.md)
+[**CreateEdgeFunction200Response**](CreateEdgeFunction200Response.md)
 
 ### Authorization
 
@@ -84,6 +85,84 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Operation: DeleteEdgeFunctionCode
+
+> DeleteEdgeFunctionCode200Response DeleteEdgeFunctionCode(ctx, sourceId).Execute()
+
+Delete Edge Function Code
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    api "github.com/segmentio/public-api-sdk-go"
+)
+
+func main() {
+    sourceId := "qQEHquLrjRDN9j1ByrChyn" // string | 
+
+    configuration := api.NewConfiguration()
+    apiClient := api.NewAPIClient(configuration)
+    token := "<BEARER_TOKEN>"
+    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
+    resp, r, err := apiClient.EdgeFunctionsAPI.DeleteEdgeFunctionCode(ctx, sourceId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `EdgeFunctionsAPI.DeleteEdgeFunctionCode``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+        responseErrors := api.UnwrapFullErrors(err)
+        if responseErrors != nil {
+            for _, responseError := range responseErrors.Errors {
+                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
+            }
+        }
+    }
+    // response from `DeleteEdgeFunctionCode`: DeleteEdgeFunctionCode200Response
+    fmt.Fprintf(os.Stdout, "Response from `EdgeFunctionsAPI.DeleteEdgeFunctionCode`: %v\n", resp.GetData())
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**sourceId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteEdgeFunctionCodeRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**DeleteEdgeFunctionCode200Response**](DeleteEdgeFunctionCode200Response.md)
+
+### Authorization
+
+[token](../README.md#token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

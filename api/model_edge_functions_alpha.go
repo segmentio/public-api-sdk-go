@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 60.1.1
+API version: 61.0.0
 Contact: friends@segment.com
 */
 
@@ -32,6 +32,8 @@ type EdgeFunctionsAlpha struct {
 	DownloadURL string `json:"downloadURL"`
 	// Revision number associated with the latest Edge Function.
 	Version float32 `json:"version"`
+	// The code of the Edge Function.
+	Code NullableString `json:"code,omitempty"`
 }
 
 // NewEdgeFunctionsAlpha instantiates a new EdgeFunctionsAlpha object
@@ -208,6 +210,49 @@ func (o *EdgeFunctionsAlpha) SetVersion(v float32) {
 	o.Version = v
 }
 
+// GetCode returns the Code field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *EdgeFunctionsAlpha) GetCode() string {
+	if o == nil || IsNil(o.Code.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Code.Get()
+}
+
+// GetCodeOk returns a tuple with the Code field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *EdgeFunctionsAlpha) GetCodeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Code.Get(), o.Code.IsSet()
+}
+
+// HasCode returns a boolean if a field has been set.
+func (o *EdgeFunctionsAlpha) HasCode() bool {
+	if o != nil && o.Code.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCode gets a reference to the given NullableString and assigns it to the Code field.
+func (o *EdgeFunctionsAlpha) SetCode(v string) {
+	o.Code.Set(&v)
+}
+
+// SetCodeNil sets the value for Code to be an explicit nil
+func (o *EdgeFunctionsAlpha) SetCodeNil() {
+	o.Code.Set(nil)
+}
+
+// UnsetCode ensures that no value is present for Code, not even an explicit nil
+func (o *EdgeFunctionsAlpha) UnsetCode() {
+	o.Code.Unset()
+}
+
 func (o EdgeFunctionsAlpha) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -224,6 +269,9 @@ func (o EdgeFunctionsAlpha) ToMap() (map[string]interface{}, error) {
 	toSerialize["createdBy"] = o.CreatedBy
 	toSerialize["downloadURL"] = o.DownloadURL
 	toSerialize["version"] = o.Version
+	if o.Code.IsSet() {
+		toSerialize["code"] = o.Code.Get()
+	}
 	return toSerialize, nil
 }
 
