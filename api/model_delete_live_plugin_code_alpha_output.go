@@ -15,35 +15,35 @@ import (
 	"encoding/json"
 )
 
-// checks if the DeleteEdgeFunctionCodeAlphaOutput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &DeleteEdgeFunctionCodeAlphaOutput{}
+// checks if the DeleteLivePluginCodeAlphaOutput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &DeleteLivePluginCodeAlphaOutput{}
 
-// DeleteEdgeFunctionCodeAlphaOutput Output for DeleteEdgeFunctionCode.
-type DeleteEdgeFunctionCodeAlphaOutput struct {
+// DeleteLivePluginCodeAlphaOutput Output for DeleteLivePlugin.
+type DeleteLivePluginCodeAlphaOutput struct {
 	// The status of the delete operation.
 	Status string `json:"status"`
 }
 
-// NewDeleteEdgeFunctionCodeAlphaOutput instantiates a new DeleteEdgeFunctionCodeAlphaOutput object
+// NewDeleteLivePluginCodeAlphaOutput instantiates a new DeleteLivePluginCodeAlphaOutput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeleteEdgeFunctionCodeAlphaOutput(status string) *DeleteEdgeFunctionCodeAlphaOutput {
-	this := DeleteEdgeFunctionCodeAlphaOutput{}
+func NewDeleteLivePluginCodeAlphaOutput(status string) *DeleteLivePluginCodeAlphaOutput {
+	this := DeleteLivePluginCodeAlphaOutput{}
 	this.Status = status
 	return &this
 }
 
-// NewDeleteEdgeFunctionCodeAlphaOutputWithDefaults instantiates a new DeleteEdgeFunctionCodeAlphaOutput object
+// NewDeleteLivePluginCodeAlphaOutputWithDefaults instantiates a new DeleteLivePluginCodeAlphaOutput object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewDeleteEdgeFunctionCodeAlphaOutputWithDefaults() *DeleteEdgeFunctionCodeAlphaOutput {
-	this := DeleteEdgeFunctionCodeAlphaOutput{}
+func NewDeleteLivePluginCodeAlphaOutputWithDefaults() *DeleteLivePluginCodeAlphaOutput {
+	this := DeleteLivePluginCodeAlphaOutput{}
 	return &this
 }
 
 // GetStatus returns the Status field value
-func (o *DeleteEdgeFunctionCodeAlphaOutput) GetStatus() string {
+func (o *DeleteLivePluginCodeAlphaOutput) GetStatus() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -54,7 +54,7 @@ func (o *DeleteEdgeFunctionCodeAlphaOutput) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-func (o *DeleteEdgeFunctionCodeAlphaOutput) GetStatusOk() (*string, bool) {
+func (o *DeleteLivePluginCodeAlphaOutput) GetStatusOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -62,11 +62,11 @@ func (o *DeleteEdgeFunctionCodeAlphaOutput) GetStatusOk() (*string, bool) {
 }
 
 // SetStatus sets field value
-func (o *DeleteEdgeFunctionCodeAlphaOutput) SetStatus(v string) {
+func (o *DeleteLivePluginCodeAlphaOutput) SetStatus(v string) {
 	o.Status = v
 }
 
-func (o DeleteEdgeFunctionCodeAlphaOutput) MarshalJSON() ([]byte, error) {
+func (o DeleteLivePluginCodeAlphaOutput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -74,46 +74,46 @@ func (o DeleteEdgeFunctionCodeAlphaOutput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DeleteEdgeFunctionCodeAlphaOutput) ToMap() (map[string]interface{}, error) {
+func (o DeleteLivePluginCodeAlphaOutput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
 	return toSerialize, nil
 }
 
-type NullableDeleteEdgeFunctionCodeAlphaOutput struct {
-	value *DeleteEdgeFunctionCodeAlphaOutput
+type NullableDeleteLivePluginCodeAlphaOutput struct {
+	value *DeleteLivePluginCodeAlphaOutput
 	isSet bool
 }
 
-func (v NullableDeleteEdgeFunctionCodeAlphaOutput) Get() *DeleteEdgeFunctionCodeAlphaOutput {
+func (v NullableDeleteLivePluginCodeAlphaOutput) Get() *DeleteLivePluginCodeAlphaOutput {
 	return v.value
 }
 
-func (v *NullableDeleteEdgeFunctionCodeAlphaOutput) Set(val *DeleteEdgeFunctionCodeAlphaOutput) {
+func (v *NullableDeleteLivePluginCodeAlphaOutput) Set(val *DeleteLivePluginCodeAlphaOutput) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableDeleteEdgeFunctionCodeAlphaOutput) IsSet() bool {
+func (v NullableDeleteLivePluginCodeAlphaOutput) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableDeleteEdgeFunctionCodeAlphaOutput) Unset() {
+func (v *NullableDeleteLivePluginCodeAlphaOutput) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableDeleteEdgeFunctionCodeAlphaOutput(
-	val *DeleteEdgeFunctionCodeAlphaOutput,
-) *NullableDeleteEdgeFunctionCodeAlphaOutput {
-	return &NullableDeleteEdgeFunctionCodeAlphaOutput{value: val, isSet: true}
+func NewNullableDeleteLivePluginCodeAlphaOutput(
+	val *DeleteLivePluginCodeAlphaOutput,
+) *NullableDeleteLivePluginCodeAlphaOutput {
+	return &NullableDeleteLivePluginCodeAlphaOutput{value: val, isSet: true}
 }
 
-func (v NullableDeleteEdgeFunctionCodeAlphaOutput) MarshalJSON() ([]byte, error) {
+func (v NullableDeleteLivePluginCodeAlphaOutput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableDeleteEdgeFunctionCodeAlphaOutput) UnmarshalJSON(src []byte) error {
+func (v *NullableDeleteLivePluginCodeAlphaOutput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

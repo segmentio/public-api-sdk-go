@@ -15,35 +15,35 @@ import (
 	"encoding/json"
 )
 
-// checks if the CreateEdgeFunctionAlphaInput type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &CreateEdgeFunctionAlphaInput{}
+// checks if the CreateLivePluginAlphaInput type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &CreateLivePluginAlphaInput{}
 
-// CreateEdgeFunctionAlphaInput Input for CreateEdgeFunction.
-type CreateEdgeFunctionAlphaInput struct {
-	// The Edge Function code to be uploaded.
+// CreateLivePluginAlphaInput Input for CreateLivePlugin.
+type CreateLivePluginAlphaInput struct {
+	// The Live Plugin code to be uploaded.
 	Code string `json:"code"`
 }
 
-// NewCreateEdgeFunctionAlphaInput instantiates a new CreateEdgeFunctionAlphaInput object
+// NewCreateLivePluginAlphaInput instantiates a new CreateLivePluginAlphaInput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateEdgeFunctionAlphaInput(code string) *CreateEdgeFunctionAlphaInput {
-	this := CreateEdgeFunctionAlphaInput{}
+func NewCreateLivePluginAlphaInput(code string) *CreateLivePluginAlphaInput {
+	this := CreateLivePluginAlphaInput{}
 	this.Code = code
 	return &this
 }
 
-// NewCreateEdgeFunctionAlphaInputWithDefaults instantiates a new CreateEdgeFunctionAlphaInput object
+// NewCreateLivePluginAlphaInputWithDefaults instantiates a new CreateLivePluginAlphaInput object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCreateEdgeFunctionAlphaInputWithDefaults() *CreateEdgeFunctionAlphaInput {
-	this := CreateEdgeFunctionAlphaInput{}
+func NewCreateLivePluginAlphaInputWithDefaults() *CreateLivePluginAlphaInput {
+	this := CreateLivePluginAlphaInput{}
 	return &this
 }
 
 // GetCode returns the Code field value
-func (o *CreateEdgeFunctionAlphaInput) GetCode() string {
+func (o *CreateLivePluginAlphaInput) GetCode() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -54,7 +54,7 @@ func (o *CreateEdgeFunctionAlphaInput) GetCode() string {
 
 // GetCodeOk returns a tuple with the Code field value
 // and a boolean to check if the value has been set.
-func (o *CreateEdgeFunctionAlphaInput) GetCodeOk() (*string, bool) {
+func (o *CreateLivePluginAlphaInput) GetCodeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -62,11 +62,11 @@ func (o *CreateEdgeFunctionAlphaInput) GetCodeOk() (*string, bool) {
 }
 
 // SetCode sets field value
-func (o *CreateEdgeFunctionAlphaInput) SetCode(v string) {
+func (o *CreateLivePluginAlphaInput) SetCode(v string) {
 	o.Code = v
 }
 
-func (o CreateEdgeFunctionAlphaInput) MarshalJSON() ([]byte, error) {
+func (o CreateLivePluginAlphaInput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -74,46 +74,46 @@ func (o CreateEdgeFunctionAlphaInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateEdgeFunctionAlphaInput) ToMap() (map[string]interface{}, error) {
+func (o CreateLivePluginAlphaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["code"] = o.Code
 	return toSerialize, nil
 }
 
-type NullableCreateEdgeFunctionAlphaInput struct {
-	value *CreateEdgeFunctionAlphaInput
+type NullableCreateLivePluginAlphaInput struct {
+	value *CreateLivePluginAlphaInput
 	isSet bool
 }
 
-func (v NullableCreateEdgeFunctionAlphaInput) Get() *CreateEdgeFunctionAlphaInput {
+func (v NullableCreateLivePluginAlphaInput) Get() *CreateLivePluginAlphaInput {
 	return v.value
 }
 
-func (v *NullableCreateEdgeFunctionAlphaInput) Set(val *CreateEdgeFunctionAlphaInput) {
+func (v *NullableCreateLivePluginAlphaInput) Set(val *CreateLivePluginAlphaInput) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCreateEdgeFunctionAlphaInput) IsSet() bool {
+func (v NullableCreateLivePluginAlphaInput) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCreateEdgeFunctionAlphaInput) Unset() {
+func (v *NullableCreateLivePluginAlphaInput) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCreateEdgeFunctionAlphaInput(
-	val *CreateEdgeFunctionAlphaInput,
-) *NullableCreateEdgeFunctionAlphaInput {
-	return &NullableCreateEdgeFunctionAlphaInput{value: val, isSet: true}
+func NewNullableCreateLivePluginAlphaInput(
+	val *CreateLivePluginAlphaInput,
+) *NullableCreateLivePluginAlphaInput {
+	return &NullableCreateLivePluginAlphaInput{value: val, isSet: true}
 }
 
-func (v NullableCreateEdgeFunctionAlphaInput) MarshalJSON() ([]byte, error) {
+func (v NullableCreateLivePluginAlphaInput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCreateEdgeFunctionAlphaInput) UnmarshalJSON(src []byte) error {
+func (v *NullableCreateLivePluginAlphaInput) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

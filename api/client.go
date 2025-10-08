@@ -73,8 +73,6 @@ type APIClient struct {
 
 	DestinationsAPI *DestinationsAPIService
 
-	EdgeFunctionsAPI *EdgeFunctionsAPIService
-
 	EventsAPI *EventsAPIService
 
 	FunctionsAPI *FunctionsAPIService
@@ -86,6 +84,8 @@ type APIClient struct {
 	IAMUsersAPI *IAMUsersAPIService
 
 	LabelsAPI *LabelsAPIService
+
+	LivePluginsAPI *LivePluginsAPIService
 
 	MonthlyTrackedUsersAPI *MonthlyTrackedUsersAPIService
 
@@ -140,13 +140,13 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.DeliveryOverviewAPI = (*DeliveryOverviewAPIService)(&c.common)
 	c.DestinationFiltersAPI = (*DestinationFiltersAPIService)(&c.common)
 	c.DestinationsAPI = (*DestinationsAPIService)(&c.common)
-	c.EdgeFunctionsAPI = (*EdgeFunctionsAPIService)(&c.common)
 	c.EventsAPI = (*EventsAPIService)(&c.common)
 	c.FunctionsAPI = (*FunctionsAPIService)(&c.common)
 	c.IAMGroupsAPI = (*IAMGroupsAPIService)(&c.common)
 	c.IAMRolesAPI = (*IAMRolesAPIService)(&c.common)
 	c.IAMUsersAPI = (*IAMUsersAPIService)(&c.common)
 	c.LabelsAPI = (*LabelsAPIService)(&c.common)
+	c.LivePluginsAPI = (*LivePluginsAPIService)(&c.common)
 	c.MonthlyTrackedUsersAPI = (*MonthlyTrackedUsersAPIService)(&c.common)
 	c.ProfilesSyncAPI = (*ProfilesSyncAPIService)(&c.common)
 	c.ReverseETLAPI = (*ReverseETLAPIService)(&c.common)
