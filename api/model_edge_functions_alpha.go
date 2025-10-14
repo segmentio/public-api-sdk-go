@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 60.1.2
+API version: 60.1.1
 Contact: friends@segment.com
 */
 
@@ -15,12 +15,12 @@ import (
 	"encoding/json"
 )
 
-// checks if the LivePluginsAlpha type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &LivePluginsAlpha{}
+// checks if the EdgeFunctionsAlpha type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &EdgeFunctionsAlpha{}
 
-// LivePluginsAlpha Represents a Live Plugin bundle.
-type LivePluginsAlpha struct {
-	// The Live Plugin id.
+// EdgeFunctionsAlpha Represents an Edge Function bundle.
+type EdgeFunctionsAlpha struct {
+	// The Edge Function id.
 	Id string `json:"id"`
 	// The Source id.
 	SourceId string `json:"sourceId"`
@@ -28,27 +28,25 @@ type LivePluginsAlpha struct {
 	CreatedAt string `json:"createdAt"`
 	// Creating user's id.
 	CreatedBy string `json:"createdBy"`
-	// The CDN URL that can be used to fetch your latest Live Plugin bundle.
+	// The CDN URL that can be used to fetch your latest EdgeFunctions bundle.
 	DownloadURL string `json:"downloadURL"`
-	// Revision number associated with the latest Live Plugin.
+	// Revision number associated with the latest Edge Function.
 	Version float32 `json:"version"`
-	// The code of the Live Plugin.
-	Code NullableString `json:"code,omitempty"`
 }
 
-// NewLivePluginsAlpha instantiates a new LivePluginsAlpha object
+// NewEdgeFunctionsAlpha instantiates a new EdgeFunctionsAlpha object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLivePluginsAlpha(
+func NewEdgeFunctionsAlpha(
 	id string,
 	sourceId string,
 	createdAt string,
 	createdBy string,
 	downloadURL string,
 	version float32,
-) *LivePluginsAlpha {
-	this := LivePluginsAlpha{}
+) *EdgeFunctionsAlpha {
+	this := EdgeFunctionsAlpha{}
 	this.Id = id
 	this.SourceId = sourceId
 	this.CreatedAt = createdAt
@@ -58,16 +56,16 @@ func NewLivePluginsAlpha(
 	return &this
 }
 
-// NewLivePluginsAlphaWithDefaults instantiates a new LivePluginsAlpha object
+// NewEdgeFunctionsAlphaWithDefaults instantiates a new EdgeFunctionsAlpha object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewLivePluginsAlphaWithDefaults() *LivePluginsAlpha {
-	this := LivePluginsAlpha{}
+func NewEdgeFunctionsAlphaWithDefaults() *EdgeFunctionsAlpha {
+	this := EdgeFunctionsAlpha{}
 	return &this
 }
 
 // GetId returns the Id field value
-func (o *LivePluginsAlpha) GetId() string {
+func (o *EdgeFunctionsAlpha) GetId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -78,7 +76,7 @@ func (o *LivePluginsAlpha) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *LivePluginsAlpha) GetIdOk() (*string, bool) {
+func (o *EdgeFunctionsAlpha) GetIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -86,12 +84,12 @@ func (o *LivePluginsAlpha) GetIdOk() (*string, bool) {
 }
 
 // SetId sets field value
-func (o *LivePluginsAlpha) SetId(v string) {
+func (o *EdgeFunctionsAlpha) SetId(v string) {
 	o.Id = v
 }
 
 // GetSourceId returns the SourceId field value
-func (o *LivePluginsAlpha) GetSourceId() string {
+func (o *EdgeFunctionsAlpha) GetSourceId() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -102,7 +100,7 @@ func (o *LivePluginsAlpha) GetSourceId() string {
 
 // GetSourceIdOk returns a tuple with the SourceId field value
 // and a boolean to check if the value has been set.
-func (o *LivePluginsAlpha) GetSourceIdOk() (*string, bool) {
+func (o *EdgeFunctionsAlpha) GetSourceIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -110,12 +108,12 @@ func (o *LivePluginsAlpha) GetSourceIdOk() (*string, bool) {
 }
 
 // SetSourceId sets field value
-func (o *LivePluginsAlpha) SetSourceId(v string) {
+func (o *EdgeFunctionsAlpha) SetSourceId(v string) {
 	o.SourceId = v
 }
 
 // GetCreatedAt returns the CreatedAt field value
-func (o *LivePluginsAlpha) GetCreatedAt() string {
+func (o *EdgeFunctionsAlpha) GetCreatedAt() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -126,7 +124,7 @@ func (o *LivePluginsAlpha) GetCreatedAt() string {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
-func (o *LivePluginsAlpha) GetCreatedAtOk() (*string, bool) {
+func (o *EdgeFunctionsAlpha) GetCreatedAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -134,12 +132,12 @@ func (o *LivePluginsAlpha) GetCreatedAtOk() (*string, bool) {
 }
 
 // SetCreatedAt sets field value
-func (o *LivePluginsAlpha) SetCreatedAt(v string) {
+func (o *EdgeFunctionsAlpha) SetCreatedAt(v string) {
 	o.CreatedAt = v
 }
 
 // GetCreatedBy returns the CreatedBy field value
-func (o *LivePluginsAlpha) GetCreatedBy() string {
+func (o *EdgeFunctionsAlpha) GetCreatedBy() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -150,7 +148,7 @@ func (o *LivePluginsAlpha) GetCreatedBy() string {
 
 // GetCreatedByOk returns a tuple with the CreatedBy field value
 // and a boolean to check if the value has been set.
-func (o *LivePluginsAlpha) GetCreatedByOk() (*string, bool) {
+func (o *EdgeFunctionsAlpha) GetCreatedByOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -158,12 +156,12 @@ func (o *LivePluginsAlpha) GetCreatedByOk() (*string, bool) {
 }
 
 // SetCreatedBy sets field value
-func (o *LivePluginsAlpha) SetCreatedBy(v string) {
+func (o *EdgeFunctionsAlpha) SetCreatedBy(v string) {
 	o.CreatedBy = v
 }
 
 // GetDownloadURL returns the DownloadURL field value
-func (o *LivePluginsAlpha) GetDownloadURL() string {
+func (o *EdgeFunctionsAlpha) GetDownloadURL() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -174,7 +172,7 @@ func (o *LivePluginsAlpha) GetDownloadURL() string {
 
 // GetDownloadURLOk returns a tuple with the DownloadURL field value
 // and a boolean to check if the value has been set.
-func (o *LivePluginsAlpha) GetDownloadURLOk() (*string, bool) {
+func (o *EdgeFunctionsAlpha) GetDownloadURLOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -182,12 +180,12 @@ func (o *LivePluginsAlpha) GetDownloadURLOk() (*string, bool) {
 }
 
 // SetDownloadURL sets field value
-func (o *LivePluginsAlpha) SetDownloadURL(v string) {
+func (o *EdgeFunctionsAlpha) SetDownloadURL(v string) {
 	o.DownloadURL = v
 }
 
 // GetVersion returns the Version field value
-func (o *LivePluginsAlpha) GetVersion() float32 {
+func (o *EdgeFunctionsAlpha) GetVersion() float32 {
 	if o == nil {
 		var ret float32
 		return ret
@@ -198,7 +196,7 @@ func (o *LivePluginsAlpha) GetVersion() float32 {
 
 // GetVersionOk returns a tuple with the Version field value
 // and a boolean to check if the value has been set.
-func (o *LivePluginsAlpha) GetVersionOk() (*float32, bool) {
+func (o *EdgeFunctionsAlpha) GetVersionOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -206,54 +204,11 @@ func (o *LivePluginsAlpha) GetVersionOk() (*float32, bool) {
 }
 
 // SetVersion sets field value
-func (o *LivePluginsAlpha) SetVersion(v float32) {
+func (o *EdgeFunctionsAlpha) SetVersion(v float32) {
 	o.Version = v
 }
 
-// GetCode returns the Code field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *LivePluginsAlpha) GetCode() string {
-	if o == nil || IsNil(o.Code.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.Code.Get()
-}
-
-// GetCodeOk returns a tuple with the Code field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LivePluginsAlpha) GetCodeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Code.Get(), o.Code.IsSet()
-}
-
-// HasCode returns a boolean if a field has been set.
-func (o *LivePluginsAlpha) HasCode() bool {
-	if o != nil && o.Code.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCode gets a reference to the given NullableString and assigns it to the Code field.
-func (o *LivePluginsAlpha) SetCode(v string) {
-	o.Code.Set(&v)
-}
-
-// SetCodeNil sets the value for Code to be an explicit nil
-func (o *LivePluginsAlpha) SetCodeNil() {
-	o.Code.Set(nil)
-}
-
-// UnsetCode ensures that no value is present for Code, not even an explicit nil
-func (o *LivePluginsAlpha) UnsetCode() {
-	o.Code.Unset()
-}
-
-func (o LivePluginsAlpha) MarshalJSON() ([]byte, error) {
+func (o EdgeFunctionsAlpha) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -261,7 +216,7 @@ func (o LivePluginsAlpha) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o LivePluginsAlpha) ToMap() (map[string]interface{}, error) {
+func (o EdgeFunctionsAlpha) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["sourceId"] = o.SourceId
@@ -269,44 +224,41 @@ func (o LivePluginsAlpha) ToMap() (map[string]interface{}, error) {
 	toSerialize["createdBy"] = o.CreatedBy
 	toSerialize["downloadURL"] = o.DownloadURL
 	toSerialize["version"] = o.Version
-	if o.Code.IsSet() {
-		toSerialize["code"] = o.Code.Get()
-	}
 	return toSerialize, nil
 }
 
-type NullableLivePluginsAlpha struct {
-	value *LivePluginsAlpha
+type NullableEdgeFunctionsAlpha struct {
+	value *EdgeFunctionsAlpha
 	isSet bool
 }
 
-func (v NullableLivePluginsAlpha) Get() *LivePluginsAlpha {
+func (v NullableEdgeFunctionsAlpha) Get() *EdgeFunctionsAlpha {
 	return v.value
 }
 
-func (v *NullableLivePluginsAlpha) Set(val *LivePluginsAlpha) {
+func (v *NullableEdgeFunctionsAlpha) Set(val *EdgeFunctionsAlpha) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableLivePluginsAlpha) IsSet() bool {
+func (v NullableEdgeFunctionsAlpha) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableLivePluginsAlpha) Unset() {
+func (v *NullableEdgeFunctionsAlpha) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableLivePluginsAlpha(val *LivePluginsAlpha) *NullableLivePluginsAlpha {
-	return &NullableLivePluginsAlpha{value: val, isSet: true}
+func NewNullableEdgeFunctionsAlpha(val *EdgeFunctionsAlpha) *NullableEdgeFunctionsAlpha {
+	return &NullableEdgeFunctionsAlpha{value: val, isSet: true}
 }
 
-func (v NullableLivePluginsAlpha) MarshalJSON() ([]byte, error) {
+func (v NullableEdgeFunctionsAlpha) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableLivePluginsAlpha) UnmarshalJSON(src []byte) error {
+func (v *NullableEdgeFunctionsAlpha) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
