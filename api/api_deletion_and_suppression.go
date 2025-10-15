@@ -58,10 +58,10 @@ Creates a Source-scoped regulation.
 Rate limit headers
 If the control plane returns limit metadata for the created regulation, the response will include rate-limit headers similar to the other create endpoints:
 
-- X-Regulation-RateLimit-Segment-Remaining: remaining requests (stringified integer)
-- X-Regulation-RateLimit-Quota-Reset: reset time as an ISO 8601 timestamp (e.g. 2024-12-31T23:59:59.000Z)
+- X-Regulation-RateLimit-Segment-Remaining: remaining requests (string)
+- X-Regulation-RateLimit-Quota-Reset: reset time as an ISO 8601 timestamp (for example, 2024-12-31T23:59:59.000Z)
 
-Header name casing may be normalized by intermediaries; use case-insensitive header lookups in clients.
+Header name casing may be normalized by intermediaries; use case-insensitive header access in clients.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sourceId
@@ -261,10 +261,10 @@ Config API omitted fields:
 Rate limit headers
 When available, the response includes the following headers to indicate rate-limit state for the operation:
 
-- X-Regulation-RateLimit-Segment-Remaining: remaining requests in the current period (stringified integer)
-- X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (e.g. 2024-12-31T23:59:59.000Z)
+- X-Regulation-RateLimit-Segment-Remaining: remaining requests in the current period (string)
+- X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (for example, 2024-12-31T23:59:59.000Z)
 
-Treat header names as case-insensitive when reading them from HTTP client libraries.
+Treat header names as case-insensitive when reading these headers from HTTP client libraries.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sourceId
@@ -458,11 +458,11 @@ Config API omitted fields:
 - `attributes`,
 - `userAgent`
 
-Rate limit headers
+Rate limit headers:
 The handler sets rate-limit information on the response when the control plane returns limit metadata. These headers are useful for clients to understand remaining quota and reset times. Header names (examples):
 
-- X-Regulation-RateLimit-Segment-Remaining: remaining requests in the current period (stringified integer)
-- X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (e.g. 2024-12-31T23:59:59.000Z)
+- X-Regulation-RateLimit-Segment-Remaining: remaining requests in the current period (string)
+- X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (for example, 2024-12-31T23:59:59.000Z)
 
 Note: HTTP clients and proxies may normalize header name casing; consumers should treat header names as case-insensitive.
 
