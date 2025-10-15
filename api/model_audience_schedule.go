@@ -22,7 +22,7 @@ var _ MappedNullable = &AudienceSchedule{}
 type AudienceSchedule struct {
 	// Distinct identifier for the schedule.
 	Id string `json:"id"`
-	// Strategy of the audience schedule (periodic or specific days).
+	// Strategy of the audience schedule (manual, periodic or specific days).
 	Strategy string         `json:"strategy"`
 	Config   NullableConfig `json:"config,omitempty"`
 	// The next scheduled execution time (RFC3339).
