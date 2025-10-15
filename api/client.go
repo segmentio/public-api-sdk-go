@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 60.1.1
+API version: 61.0.0
 Contact: friends@segment.com
 */
 
@@ -41,7 +41,7 @@ var (
 	queryDescape    = strings.NewReplacer("%5B", "[", "%5D", "]")
 )
 
-// APIClient manages communication with the Segment Public API API v60.1.1
+// APIClient manages communication with the Segment Public API API v61.0.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -73,8 +73,6 @@ type APIClient struct {
 
 	DestinationsAPI *DestinationsAPIService
 
-	EdgeFunctionsAPI *EdgeFunctionsAPIService
-
 	EventsAPI *EventsAPIService
 
 	FunctionsAPI *FunctionsAPIService
@@ -86,6 +84,8 @@ type APIClient struct {
 	IAMUsersAPI *IAMUsersAPIService
 
 	LabelsAPI *LabelsAPIService
+
+	LivePluginsAPI *LivePluginsAPIService
 
 	MonthlyTrackedUsersAPI *MonthlyTrackedUsersAPIService
 
@@ -140,13 +140,13 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.DeliveryOverviewAPI = (*DeliveryOverviewAPIService)(&c.common)
 	c.DestinationFiltersAPI = (*DestinationFiltersAPIService)(&c.common)
 	c.DestinationsAPI = (*DestinationsAPIService)(&c.common)
-	c.EdgeFunctionsAPI = (*EdgeFunctionsAPIService)(&c.common)
 	c.EventsAPI = (*EventsAPIService)(&c.common)
 	c.FunctionsAPI = (*FunctionsAPIService)(&c.common)
 	c.IAMGroupsAPI = (*IAMGroupsAPIService)(&c.common)
 	c.IAMRolesAPI = (*IAMRolesAPIService)(&c.common)
 	c.IAMUsersAPI = (*IAMUsersAPIService)(&c.common)
 	c.LabelsAPI = (*LabelsAPIService)(&c.common)
+	c.LivePluginsAPI = (*LivePluginsAPIService)(&c.common)
 	c.MonthlyTrackedUsersAPI = (*MonthlyTrackedUsersAPIService)(&c.common)
 	c.ProfilesSyncAPI = (*ProfilesSyncAPIService)(&c.common)
 	c.ReverseETLAPI = (*ReverseETLAPIService)(&c.common)
