@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 60.1.1
+API version: 61.0.0
 Contact: friends@segment.com
 */
 
@@ -20,45 +20,45 @@ import (
 	"strings"
 )
 
-// EdgeFunctionsAPIService EdgeFunctionsAPI service
-type EdgeFunctionsAPIService service
+// LivePluginsAPIService LivePluginsAPI service
+type LivePluginsAPIService service
 
-type ApiCreateEdgeFunctionsRequest struct {
-	ctx                           context.Context
-	ApiService                    *EdgeFunctionsAPIService
-	sourceId                      string
-	createEdgeFunctionsAlphaInput *CreateEdgeFunctionsAlphaInput
+type ApiCreateLivePluginRequest struct {
+	ctx                        context.Context
+	ApiService                 *LivePluginsAPIService
+	sourceId                   string
+	createLivePluginAlphaInput *CreateLivePluginAlphaInput
 }
 
-func (r ApiCreateEdgeFunctionsRequest) CreateEdgeFunctionsAlphaInput(
-	createEdgeFunctionsAlphaInput CreateEdgeFunctionsAlphaInput,
-) ApiCreateEdgeFunctionsRequest {
-	r.createEdgeFunctionsAlphaInput = &createEdgeFunctionsAlphaInput
+func (r ApiCreateLivePluginRequest) CreateLivePluginAlphaInput(
+	createLivePluginAlphaInput CreateLivePluginAlphaInput,
+) ApiCreateLivePluginRequest {
+	r.createLivePluginAlphaInput = &createLivePluginAlphaInput
 	return r
 }
 
-func (r ApiCreateEdgeFunctionsRequest) Execute() (*CreateEdgeFunctions200Response, *http.Response, error) {
-	return r.ApiService.CreateEdgeFunctionsExecute(r)
+func (r ApiCreateLivePluginRequest) Execute() (*CreateLivePlugin200Response, *http.Response, error) {
+	return r.ApiService.CreateLivePluginExecute(r)
 }
 
 /*
-CreateEdgeFunctions Create Edge Functions
+CreateLivePlugin Create Live Plugin
 
-Create EdgeFunctions for your Source given a valid upload URL for an Edge Functions bundle.
+Creates or updates a Live Plugin for your Source with given code.
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
-• In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Live Plugins feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sourceId
-	@return ApiCreateEdgeFunctionsRequest
+	@return ApiCreateLivePluginRequest
 */
-func (a *EdgeFunctionsAPIService) CreateEdgeFunctions(
+func (a *LivePluginsAPIService) CreateLivePlugin(
 	ctx context.Context,
 	sourceId string,
-) ApiCreateEdgeFunctionsRequest {
-	return ApiCreateEdgeFunctionsRequest{
+) ApiCreateLivePluginRequest {
+	return ApiCreateLivePluginRequest{
 		ApiService: a,
 		ctx:        ctx,
 		sourceId:   sourceId,
@@ -67,26 +67,26 @@ func (a *EdgeFunctionsAPIService) CreateEdgeFunctions(
 
 // Execute executes the request
 //
-//	@return CreateEdgeFunctions200Response
-func (a *EdgeFunctionsAPIService) CreateEdgeFunctionsExecute(
-	r ApiCreateEdgeFunctionsRequest,
-) (*CreateEdgeFunctions200Response, *http.Response, error) {
+//	@return CreateLivePlugin200Response
+func (a *LivePluginsAPIService) CreateLivePluginExecute(
+	r ApiCreateLivePluginRequest,
+) (*CreateLivePlugin200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *CreateEdgeFunctions200Response
+		localVarReturnValue *CreateLivePlugin200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"EdgeFunctionsAPIService.CreateEdgeFunctions",
+		"LivePluginsAPIService.CreateLivePlugin",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/sources/{sourceId}/edge-functions"
+	localVarPath := localBasePath + "/sources/{sourceId}/live-plugins/create"
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
@@ -97,9 +97,9 @@ func (a *EdgeFunctionsAPIService) CreateEdgeFunctionsExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createEdgeFunctionsAlphaInput == nil {
+	if r.createLivePluginAlphaInput == nil {
 		return localVarReturnValue, nil, reportError(
-			"createEdgeFunctionsAlphaInput is required and must be specified",
+			"createLivePluginAlphaInput is required and must be specified",
 		)
 	}
 
@@ -124,7 +124,7 @@ func (a *EdgeFunctionsAPIService) CreateEdgeFunctionsExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createEdgeFunctionsAlphaInput
+	localVarPostBody = r.createLivePluginAlphaInput
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,
@@ -207,34 +207,34 @@ func (a *EdgeFunctionsAPIService) CreateEdgeFunctionsExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDisableEdgeFunctionsRequest struct {
+type ApiDeleteLivePluginCodeRequest struct {
 	ctx        context.Context
-	ApiService *EdgeFunctionsAPIService
+	ApiService *LivePluginsAPIService
 	sourceId   string
 }
 
-func (r ApiDisableEdgeFunctionsRequest) Execute() (*DisableEdgeFunctions200Response, *http.Response, error) {
-	return r.ApiService.DisableEdgeFunctionsExecute(r)
+func (r ApiDeleteLivePluginCodeRequest) Execute() (*DeleteLivePluginCode200Response, *http.Response, error) {
+	return r.ApiService.DeleteLivePluginCodeExecute(r)
 }
 
 /*
-DisableEdgeFunctions Disable Edge Functions
+DeleteLivePluginCode Delete Live Plugin Code
 
-Disable Edge Functions for your Source.
+Delete the Live Plugin code for a Source. This will not disable Live Plugins for the Source, but will remove any existing code.
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
-• In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Live Plugins feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sourceId
-	@return ApiDisableEdgeFunctionsRequest
+	@return ApiDeleteLivePluginCodeRequest
 */
-func (a *EdgeFunctionsAPIService) DisableEdgeFunctions(
+func (a *LivePluginsAPIService) DeleteLivePluginCode(
 	ctx context.Context,
 	sourceId string,
-) ApiDisableEdgeFunctionsRequest {
-	return ApiDisableEdgeFunctionsRequest{
+) ApiDeleteLivePluginCodeRequest {
+	return ApiDeleteLivePluginCodeRequest{
 		ApiService: a,
 		ctx:        ctx,
 		sourceId:   sourceId,
@@ -243,26 +243,26 @@ func (a *EdgeFunctionsAPIService) DisableEdgeFunctions(
 
 // Execute executes the request
 //
-//	@return DisableEdgeFunctions200Response
-func (a *EdgeFunctionsAPIService) DisableEdgeFunctionsExecute(
-	r ApiDisableEdgeFunctionsRequest,
-) (*DisableEdgeFunctions200Response, *http.Response, error) {
+//	@return DeleteLivePluginCode200Response
+func (a *LivePluginsAPIService) DeleteLivePluginCodeExecute(
+	r ApiDeleteLivePluginCodeRequest,
+) (*DeleteLivePluginCode200Response, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPatch
+		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *DisableEdgeFunctions200Response
+		localVarReturnValue *DeleteLivePluginCode200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"EdgeFunctionsAPIService.DisableEdgeFunctions",
+		"LivePluginsAPIService.DeleteLivePluginCode",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/sources/{sourceId}/edge-functions/disable"
+	localVarPath := localBasePath + "/sources/{sourceId}/live-plugins/delete-code"
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
@@ -376,34 +376,34 @@ func (a *EdgeFunctionsAPIService) DisableEdgeFunctionsExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUploadURLForEdgeFunctionsRequest struct {
+type ApiGetLatestFromLivePluginsRequest struct {
 	ctx        context.Context
-	ApiService *EdgeFunctionsAPIService
+	ApiService *LivePluginsAPIService
 	sourceId   string
 }
 
-func (r ApiGenerateUploadURLForEdgeFunctionsRequest) Execute() (*GenerateUploadURLForEdgeFunctions200Response, *http.Response, error) {
-	return r.ApiService.GenerateUploadURLForEdgeFunctionsExecute(r)
+func (r ApiGetLatestFromLivePluginsRequest) Execute() (*GetLatestFromLivePlugins200Response, *http.Response, error) {
+	return r.ApiService.GetLatestFromLivePluginsExecute(r)
 }
 
 /*
-GenerateUploadURLForEdgeFunctions Generate Upload URL for Edge Functions
+GetLatestFromLivePlugins Get Latest from Live Plugins
 
-Generate a temporary upload URL that can be used to upload an Edge Functions bundle.
+Get the latest Live Plugins for your Source.
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
-• In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
+• In order to successfully call this endpoint, the specified Workspace needs to have the Live Plugins feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sourceId
-	@return ApiGenerateUploadURLForEdgeFunctionsRequest
+	@return ApiGetLatestFromLivePluginsRequest
 */
-func (a *EdgeFunctionsAPIService) GenerateUploadURLForEdgeFunctions(
+func (a *LivePluginsAPIService) GetLatestFromLivePlugins(
 	ctx context.Context,
 	sourceId string,
-) ApiGenerateUploadURLForEdgeFunctionsRequest {
-	return ApiGenerateUploadURLForEdgeFunctionsRequest{
+) ApiGetLatestFromLivePluginsRequest {
+	return ApiGetLatestFromLivePluginsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		sourceId:   sourceId,
@@ -412,195 +412,26 @@ func (a *EdgeFunctionsAPIService) GenerateUploadURLForEdgeFunctions(
 
 // Execute executes the request
 //
-//	@return GenerateUploadURLForEdgeFunctions200Response
-func (a *EdgeFunctionsAPIService) GenerateUploadURLForEdgeFunctionsExecute(
-	r ApiGenerateUploadURLForEdgeFunctionsRequest,
-) (*GenerateUploadURLForEdgeFunctions200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GenerateUploadURLForEdgeFunctions200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(
-		r.ctx,
-		"EdgeFunctionsAPIService.GenerateUploadURLForEdgeFunctions",
-	)
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/sources/{sourceId}/edge-functions/upload-url"
-	localVarPath = strings.Replace(
-		localVarPath,
-		"{"+"sourceId"+"}",
-		url.PathEscape(parameterValueToString(r.sourceId, "sourceId")),
-		-1,
-	)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{
-		"application/vnd.segment.v1alpha+json",
-		"application/json",
-	}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(
-		r.ctx,
-		localVarPath,
-		localVarHTTPMethod,
-		localVarPostBody,
-		localVarHeaderParams,
-		localVarQueryParams,
-		localVarFormParams,
-		formFiles,
-	)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v RequestErrorEnvelope
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v RequestErrorEnvelope
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 429 {
-			var v RequestErrorEnvelope
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(
-		&localVarReturnValue,
-		localVarBody,
-		localVarHTTPResponse.Header.Get("Content-Type"),
-	)
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiGetLatestFromEdgeFunctionsRequest struct {
-	ctx        context.Context
-	ApiService *EdgeFunctionsAPIService
-	sourceId   string
-}
-
-func (r ApiGetLatestFromEdgeFunctionsRequest) Execute() (*GetLatestFromEdgeFunctions200Response, *http.Response, error) {
-	return r.ApiService.GetLatestFromEdgeFunctionsExecute(r)
-}
-
-/*
-GetLatestFromEdgeFunctions Get Latest from Edge Functions
-
-Get the latest Edge Functions for your Source.
-
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
-
-• In order to successfully call this endpoint, the specified Workspace needs to have the Edge Functions feature enabled. Please reach out to your customer success manager for more information.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param sourceId
-	@return ApiGetLatestFromEdgeFunctionsRequest
-*/
-func (a *EdgeFunctionsAPIService) GetLatestFromEdgeFunctions(
-	ctx context.Context,
-	sourceId string,
-) ApiGetLatestFromEdgeFunctionsRequest {
-	return ApiGetLatestFromEdgeFunctionsRequest{
-		ApiService: a,
-		ctx:        ctx,
-		sourceId:   sourceId,
-	}
-}
-
-// Execute executes the request
-//
-//	@return GetLatestFromEdgeFunctions200Response
-func (a *EdgeFunctionsAPIService) GetLatestFromEdgeFunctionsExecute(
-	r ApiGetLatestFromEdgeFunctionsRequest,
-) (*GetLatestFromEdgeFunctions200Response, *http.Response, error) {
+//	@return GetLatestFromLivePlugins200Response
+func (a *LivePluginsAPIService) GetLatestFromLivePluginsExecute(
+	r ApiGetLatestFromLivePluginsRequest,
+) (*GetLatestFromLivePlugins200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetLatestFromEdgeFunctions200Response
+		localVarReturnValue *GetLatestFromLivePlugins200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"EdgeFunctionsAPIService.GetLatestFromEdgeFunctions",
+		"LivePluginsAPIService.GetLatestFromLivePlugins",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/sources/{sourceId}/edge-functions/latest"
+	localVarPath := localBasePath + "/sources/{sourceId}/live-plugins/latest"
 	localVarPath = strings.Replace(
 		localVarPath,
 		"{"+"sourceId"+"}",
