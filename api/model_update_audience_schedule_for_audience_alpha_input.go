@@ -20,7 +20,7 @@ var _ MappedNullable = &UpdateAudienceScheduleForAudienceAlphaInput{}
 
 // UpdateAudienceScheduleForAudienceAlphaInput Input for updating a schedule on an audience.
 type UpdateAudienceScheduleForAudienceAlphaInput struct {
-	// Strategy of the audience schedule (manual, periodic, or specific days).
+	// Strategy of the audience schedule (periodic or specific days).
 	Strategy string         `json:"strategy"`
 	Config   NullableConfig `json:"config,omitempty"`
 }

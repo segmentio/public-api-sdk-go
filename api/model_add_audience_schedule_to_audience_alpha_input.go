@@ -20,7 +20,7 @@ var _ MappedNullable = &AddAudienceScheduleToAudienceAlphaInput{}
 
 // AddAudienceScheduleToAudienceAlphaInput Defines an input for creating an audience schedule.
 type AddAudienceScheduleToAudienceAlphaInput struct {
-	// Strategy of the audience schedule (manual, periodic, or specific days).
+	// Strategy of the audience schedule (periodic or specific days).
 	Strategy string         `json:"strategy"`
 	Config   NullableConfig `json:"config,omitempty"`
 }
