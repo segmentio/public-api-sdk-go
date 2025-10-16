@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 61.0.0
+API version: 62.0.0
 Contact: friends@segment.com
 */
 
@@ -56,11 +56,11 @@ Creates a Source-scoped regulation.
 - `userAgent`
 
 Rate limit headers (tracked separately for internal vs external regulation types):
-- X-Regulation-RateLimit-Remaining: Remaining requests for the regulation type category (stringified integer)
+- X-Regulation-RateLimit-Remaining: Remaining requests for the regulation type category (string field integer)
   - Internal types: DELETE_INTERNAL, SUPPRESS_WITH_DELETE_INTERNAL, SUPPRESS_ONLY, UNSUPPRESS, DELETE_ARCHIVE_ONLY
   - External types: DELETE_ONLY, SUPPRESS_WITH_DELETE
 
-- X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (e.g., 2024-12-31T23:59:59.000Z)
+- X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (for example, 2024-12-31T23:59:59.000Z)
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sourceId
@@ -258,11 +258,11 @@ Config API omitted fields:
 - `userAgent`
 
 Rate limit headers (tracked separately for internal vs external regulation types):
-- X-Regulation-RateLimit-Remaining: Remaining requests for the regulation type category (stringified integer)
+- X-Regulation-RateLimit-Remaining: Remaining requests for the regulation type category (string field integer)
   - Internal types: DELETE_INTERNAL, SUPPRESS_WITH_DELETE_INTERNAL, SUPPRESS_ONLY, UNSUPPRESS, DELETE_ARCHIVE_ONLY
   - External types: DELETE_ONLY, SUPPRESS_WITH_DELETE
 
-- X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (e.g., 2024-12-31T23:59:59.000Z)
+- X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (for example, 2024-12-31T23:59:59.000Z)
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sourceId
@@ -457,11 +457,11 @@ Config API omitted fields:
 - `userAgent`
 
 Rate limit headers (tracked separately for internal vs external regulation types):
-- X-Regulation-RateLimit-Remaining: Remaining requests for the regulation type category (stringified integer)
+- X-Regulation-RateLimit-Remaining: Remaining requests for the regulation type category (string field integer)
   - Internal types: DELETE_INTERNAL, SUPPRESS_WITH_DELETE_INTERNAL, SUPPRESS_ONLY, UNSUPPRESS, DELETE_ARCHIVE_ONLY
   - External types: DELETE_ONLY, SUPPRESS_WITH_DELETE
 
-- X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (e.g., 2024-12-31T23:59:59.000Z)
+- X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (for example, 2024-12-31T23:59:59.000Z)
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateWorkspaceRegulationRequest
