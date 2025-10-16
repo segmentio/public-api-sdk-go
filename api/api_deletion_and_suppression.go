@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 61.0.1
+API version: 61.0.0
 Contact: friends@segment.com
 */
 
@@ -55,13 +55,9 @@ Creates a Source-scoped regulation.
 - `attributes`,
 - `userAgent`
 
-Rate limit headers
-If the control plane returns limit metadata for the created regulation, the response will include rate-limit headers similar to the other create endpoints:
-
-- X-Regulation-RateLimit-Segment-Remaining: remaining requests (string)
-- X-Regulation-RateLimit-Quota-Reset: reset time as an ISO 8601 timestamp (for example, 2024-12-31T23:59:59.000Z)
-
-Header name casing may be normalized by intermediaries; use case-insensitive header access in clients.
+Rate limit headers:
+- X-Regulation-RateLimit-Remaining: Remaining requests in the current period (stringified integer)
+- X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (e.g., 2024-12-31T23:59:59.000Z)
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sourceId
@@ -258,13 +254,9 @@ Config API omitted fields:
 - `attributes`,
 - `userAgent`
 
-Rate limit headers
-When available, the response includes the following headers to indicate rate-limit state for the operation:
-
-- X-Regulation-RateLimit-Segment-Remaining: remaining requests in the current period (string)
-- X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (for example, 2024-12-31T23:59:59.000Z)
-
-Treat header names as case-insensitive when reading these headers from HTTP client libraries.
+Rate limit headers:
+- X-Regulation-RateLimit-Remaining: Remaining requests in the current period (stringified integer)
+- X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (e.g., 2024-12-31T23:59:59.000Z)
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sourceId
@@ -459,12 +451,8 @@ Config API omitted fields:
 - `userAgent`
 
 Rate limit headers:
-The handler sets rate-limit information on the response when the control plane returns limit metadata. These headers are useful for clients to understand remaining quota and reset times. Header names (examples):
-
-- X-Regulation-RateLimit-Segment-Remaining: remaining requests in the current period (string)
-- X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (for example, 2024-12-31T23:59:59.000Z)
-
-Note: HTTP clients and proxies may normalize header name casing; consumers should treat header names as case-insensitive.
+- X-Regulation-RateLimit-Remaining: Remaining requests in the current period (stringified integer)
+- X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (e.g., 2024-12-31T23:59:59.000Z)
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateWorkspaceRegulationRequest
