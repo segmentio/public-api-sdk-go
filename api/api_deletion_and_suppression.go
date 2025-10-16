@@ -55,8 +55,11 @@ Creates a Source-scoped regulation.
 - `attributes`,
 - `userAgent`
 
-Rate limit headers:
-- X-Regulation-RateLimit-Remaining: Remaining requests in the current period (stringified integer)
+Rate limit headers (tracked separately for internal vs external regulation types):
+- X-Regulation-RateLimit-Remaining: Remaining requests for the regulation type category (stringified integer)
+  - Internal types: DELETE_INTERNAL, SUPPRESS_WITH_DELETE_INTERNAL, SUPPRESS_ONLY, UNSUPPRESS, DELETE_ARCHIVE_ONLY
+  - External types: DELETE_ONLY, SUPPRESS_WITH_DELETE
+
 - X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (e.g., 2024-12-31T23:59:59.000Z)
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -254,8 +257,11 @@ Config API omitted fields:
 - `attributes`,
 - `userAgent`
 
-Rate limit headers:
-- X-Regulation-RateLimit-Remaining: Remaining requests in the current period (stringified integer)
+Rate limit headers (tracked separately for internal vs external regulation types):
+- X-Regulation-RateLimit-Remaining: Remaining requests for the regulation type category (stringified integer)
+  - Internal types: DELETE_INTERNAL, SUPPRESS_WITH_DELETE_INTERNAL, SUPPRESS_ONLY, UNSUPPRESS, DELETE_ARCHIVE_ONLY
+  - External types: DELETE_ONLY, SUPPRESS_WITH_DELETE
+
 - X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (e.g., 2024-12-31T23:59:59.000Z)
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -450,8 +456,11 @@ Config API omitted fields:
 - `attributes`,
 - `userAgent`
 
-Rate limit headers:
-- X-Regulation-RateLimit-Remaining: Remaining requests in the current period (stringified integer)
+Rate limit headers (tracked separately for internal vs external regulation types):
+- X-Regulation-RateLimit-Remaining: Remaining requests for the regulation type category (stringified integer)
+  - Internal types: DELETE_INTERNAL, SUPPRESS_WITH_DELETE_INTERNAL, SUPPRESS_ONLY, UNSUPPRESS, DELETE_ARCHIVE_ONLY
+  - External types: DELETE_ONLY, SUPPRESS_WITH_DELETE
+
 - X-Regulation-RateLimit-Quota-Reset: ISO 8601 timestamp for when the quota resets (e.g., 2024-12-31T23:59:59.000Z)
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
