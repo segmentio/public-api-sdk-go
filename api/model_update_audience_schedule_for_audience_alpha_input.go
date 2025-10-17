@@ -22,7 +22,7 @@ var _ MappedNullable = &UpdateAudienceScheduleForAudienceAlphaInput{}
 type UpdateAudienceScheduleForAudienceAlphaInput struct {
 	// Strategy of the audience schedule (periodic or specific days).
 	Strategy string         `json:"strategy"`
-	Config   NullableConfig `json:"config,omitempty"`
+	Config   NullableConfig `json:"config"`
 }
 
 // NewUpdateAudienceScheduleForAudienceAlphaInput instantiates a new UpdateAudienceScheduleForAudienceAlphaInput object
@@ -31,9 +31,11 @@ type UpdateAudienceScheduleForAudienceAlphaInput struct {
 // will change when the set of required properties is changed
 func NewUpdateAudienceScheduleForAudienceAlphaInput(
 	strategy string,
+	config NullableConfig,
 ) *UpdateAudienceScheduleForAudienceAlphaInput {
 	this := UpdateAudienceScheduleForAudienceAlphaInput{}
 	this.Strategy = strategy
+	this.Config = config
 	return &this
 }
 
@@ -69,16 +71,18 @@ func (o *UpdateAudienceScheduleForAudienceAlphaInput) SetStrategy(v string) {
 	o.Strategy = v
 }
 
-// GetConfig returns the Config field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetConfig returns the Config field value
+// If the value is explicit nil, the zero value for Config will be returned
 func (o *UpdateAudienceScheduleForAudienceAlphaInput) GetConfig() Config {
-	if o == nil || IsNil(o.Config.Get()) {
+	if o == nil || o.Config.Get() == nil {
 		var ret Config
 		return ret
 	}
+
 	return *o.Config.Get()
 }
 
-// GetConfigOk returns a tuple with the Config field value if set, nil otherwise
+// GetConfigOk returns a tuple with the Config field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateAudienceScheduleForAudienceAlphaInput) GetConfigOk() (*Config, bool) {
@@ -88,28 +92,9 @@ func (o *UpdateAudienceScheduleForAudienceAlphaInput) GetConfigOk() (*Config, bo
 	return o.Config.Get(), o.Config.IsSet()
 }
 
-// HasConfig returns a boolean if a field has been set.
-func (o *UpdateAudienceScheduleForAudienceAlphaInput) HasConfig() bool {
-	if o != nil && o.Config.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetConfig gets a reference to the given NullableConfig and assigns it to the Config field.
+// SetConfig sets field value
 func (o *UpdateAudienceScheduleForAudienceAlphaInput) SetConfig(v Config) {
 	o.Config.Set(&v)
-}
-
-// SetConfigNil sets the value for Config to be an explicit nil
-func (o *UpdateAudienceScheduleForAudienceAlphaInput) SetConfigNil() {
-	o.Config.Set(nil)
-}
-
-// UnsetConfig ensures that no value is present for Config, not even an explicit nil
-func (o *UpdateAudienceScheduleForAudienceAlphaInput) UnsetConfig() {
-	o.Config.Unset()
 }
 
 func (o UpdateAudienceScheduleForAudienceAlphaInput) MarshalJSON() ([]byte, error) {
@@ -123,9 +108,7 @@ func (o UpdateAudienceScheduleForAudienceAlphaInput) MarshalJSON() ([]byte, erro
 func (o UpdateAudienceScheduleForAudienceAlphaInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["strategy"] = o.Strategy
-	if o.Config.IsSet() {
-		toSerialize["config"] = o.Config.Get()
-	}
+	toSerialize["config"] = o.Config.Get()
 	return toSerialize, nil
 }
 

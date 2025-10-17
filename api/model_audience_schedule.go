@@ -24,7 +24,7 @@ type AudienceSchedule struct {
 	Id string `json:"id"`
 	// Strategy of the audience schedule (periodic or specific days).
 	Strategy string         `json:"strategy"`
-	Config   NullableConfig `json:"config,omitempty"`
+	Config   NullableConfig `json:"config"`
 	// The next scheduled execution time (RFC3339).
 	NextExecution *string `json:"nextExecution,omitempty"`
 }
@@ -33,10 +33,11 @@ type AudienceSchedule struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAudienceSchedule(id string, strategy string) *AudienceSchedule {
+func NewAudienceSchedule(id string, strategy string, config NullableConfig) *AudienceSchedule {
 	this := AudienceSchedule{}
 	this.Id = id
 	this.Strategy = strategy
+	this.Config = config
 	return &this
 }
 
@@ -96,16 +97,18 @@ func (o *AudienceSchedule) SetStrategy(v string) {
 	o.Strategy = v
 }
 
-// GetConfig returns the Config field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetConfig returns the Config field value
+// If the value is explicit nil, the zero value for Config will be returned
 func (o *AudienceSchedule) GetConfig() Config {
-	if o == nil || IsNil(o.Config.Get()) {
+	if o == nil || o.Config.Get() == nil {
 		var ret Config
 		return ret
 	}
+
 	return *o.Config.Get()
 }
 
-// GetConfigOk returns a tuple with the Config field value if set, nil otherwise
+// GetConfigOk returns a tuple with the Config field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AudienceSchedule) GetConfigOk() (*Config, bool) {
@@ -115,28 +118,9 @@ func (o *AudienceSchedule) GetConfigOk() (*Config, bool) {
 	return o.Config.Get(), o.Config.IsSet()
 }
 
-// HasConfig returns a boolean if a field has been set.
-func (o *AudienceSchedule) HasConfig() bool {
-	if o != nil && o.Config.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetConfig gets a reference to the given NullableConfig and assigns it to the Config field.
+// SetConfig sets field value
 func (o *AudienceSchedule) SetConfig(v Config) {
 	o.Config.Set(&v)
-}
-
-// SetConfigNil sets the value for Config to be an explicit nil
-func (o *AudienceSchedule) SetConfigNil() {
-	o.Config.Set(nil)
-}
-
-// UnsetConfig ensures that no value is present for Config, not even an explicit nil
-func (o *AudienceSchedule) UnsetConfig() {
-	o.Config.Unset()
 }
 
 // GetNextExecution returns the NextExecution field value if set, zero value otherwise.
@@ -183,9 +167,7 @@ func (o AudienceSchedule) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["strategy"] = o.Strategy
-	if o.Config.IsSet() {
-		toSerialize["config"] = o.Config.Get()
-	}
+	toSerialize["config"] = o.Config.Get()
 	if !IsNil(o.NextExecution) {
 		toSerialize["nextExecution"] = o.NextExecution
 	}
