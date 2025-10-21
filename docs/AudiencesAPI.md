@@ -44,7 +44,7 @@ import (
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
     id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
-    addAudienceScheduleToAudienceAlphaInput := *api.NewAddAudienceScheduleToAudienceAlphaInput("Strategy_example") // AddAudienceScheduleToAudienceAlphaInput | 
+    addAudienceScheduleToAudienceAlphaInput := *api.NewAddAudienceScheduleToAudienceAlphaInput("Strategy_example", "TODO") // AddAudienceScheduleToAudienceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -1117,7 +1117,7 @@ func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
     id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
     scheduleId := "sch_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
-    updateAudienceScheduleForAudienceAlphaInput := *api.NewUpdateAudienceScheduleForAudienceAlphaInput("Strategy_example") // UpdateAudienceScheduleForAudienceAlphaInput | 
+    updateAudienceScheduleForAudienceAlphaInput := *api.NewUpdateAudienceScheduleForAudienceAlphaInput("Strategy_example", "TODO") // UpdateAudienceScheduleForAudienceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
