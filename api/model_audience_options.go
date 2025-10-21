@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 61.0.2
+API version: 61.1.3
 Contact: friends@segment.com
 */
 
@@ -24,7 +24,7 @@ type AudienceOptions struct {
 	IncludeHistoricalData *bool `json:"includeHistoricalData,omitempty"`
 	// The set of profile external identifiers being used to determine audience membership. Profiles will only be considered for audience membership if the profile has at least one external id whose key matches a value in this set. If unspecified, a default set of external identifiers will be used: ['user_id', 'email', 'android.idfa', 'ios.idfa'].
 	FilterByExternalIds []string `json:"filterByExternalIds,omitempty"`
-	// If specified and positive, the value of this field indicates the number of days, specified from the date the audience was created, that event data will be included from when determining audience membership. If unspecified, defer to the value of `includeHistoricalData` to determine whether historical data is either entirely included or entirely excluded when determining audience membership.
+	// If specified, the value of this field indicates the number of days (specified from the date the audience was created) that event data will be included from when determining audience membership. If not specified, the default is set to the maximum event window size, or 7 days if no window condition is defined. Note that this is applied on a best-effort basis and may not always be applicable. In such cases, the response will not return a backfillEventDataDays value, and all available data will be taken into account. Note that includeHistoricalData must be set to true.
 	BackfillEventDataDays *float32 `json:"backfillEventDataDays,omitempty"`
 }
 
