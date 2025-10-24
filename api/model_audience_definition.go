@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 61.1.3
+API version: 62.0.0
 Contact: friends@segment.com
 */
 
@@ -20,8 +20,8 @@ var _ MappedNullable = &AudienceDefinition{}
 
 // AudienceDefinition struct for AudienceDefinition
 type AudienceDefinition struct {
-	// The target entity relationship slug, required in a linked audience, default to profile if not specified.
-	TargetEntity *string `json:"targetEntity,omitempty"`
+	// The target entity relationship slug, only applicable for linked audiences. Use ```profile``` when the targeting the profile.  Note that the value defaults to profile if not specified. Also note, that the value will be returned as null if the target entity is removed from the data graph.
+	TargetEntity NullableString `json:"targetEntity,omitempty"`
 	// The query language string defining the audience segmentation criteria.  For guidance on using the query language, see the [Segment documentation site](https://segment.com/docs/api/public-api/query-language).
 	Query string `json:"query"`
 }
@@ -44,36 +44,47 @@ func NewAudienceDefinitionWithDefaults() *AudienceDefinition {
 	return &this
 }
 
-// GetTargetEntity returns the TargetEntity field value if set, zero value otherwise.
+// GetTargetEntity returns the TargetEntity field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AudienceDefinition) GetTargetEntity() string {
-	if o == nil || IsNil(o.TargetEntity) {
+	if o == nil || IsNil(o.TargetEntity.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.TargetEntity
+	return *o.TargetEntity.Get()
 }
 
 // GetTargetEntityOk returns a tuple with the TargetEntity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AudienceDefinition) GetTargetEntityOk() (*string, bool) {
-	if o == nil || IsNil(o.TargetEntity) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TargetEntity, true
+	return o.TargetEntity.Get(), o.TargetEntity.IsSet()
 }
 
 // HasTargetEntity returns a boolean if a field has been set.
 func (o *AudienceDefinition) HasTargetEntity() bool {
-	if o != nil && !IsNil(o.TargetEntity) {
+	if o != nil && o.TargetEntity.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTargetEntity gets a reference to the given string and assigns it to the TargetEntity field.
+// SetTargetEntity gets a reference to the given NullableString and assigns it to the TargetEntity field.
 func (o *AudienceDefinition) SetTargetEntity(v string) {
-	o.TargetEntity = &v
+	o.TargetEntity.Set(&v)
+}
+
+// SetTargetEntityNil sets the value for TargetEntity to be an explicit nil
+func (o *AudienceDefinition) SetTargetEntityNil() {
+	o.TargetEntity.Set(nil)
+}
+
+// UnsetTargetEntity ensures that no value is present for TargetEntity, not even an explicit nil
+func (o *AudienceDefinition) UnsetTargetEntity() {
+	o.TargetEntity.Unset()
 }
 
 // GetQuery returns the Query field value
@@ -110,8 +121,8 @@ func (o AudienceDefinition) MarshalJSON() ([]byte, error) {
 
 func (o AudienceDefinition) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.TargetEntity) {
-		toSerialize["targetEntity"] = o.TargetEntity
+	if o.TargetEntity.IsSet() {
+		toSerialize["targetEntity"] = o.TargetEntity.Get()
 	}
 	toSerialize["query"] = o.Query
 	return toSerialize, nil
