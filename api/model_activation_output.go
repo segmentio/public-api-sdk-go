@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 61.1.3
+API version: 61.1.4
 Contact: friends@segment.com
 */
 
@@ -35,9 +35,9 @@ type ActivationOutput struct {
 	// Type of activation trigger.
 	ActivationType string `json:"activationType"`
 	// Name of the activation.
-	ActivationName     string                               `json:"activationName"`
-	Personalization    PersonalizationInput                 `json:"personalization"`
-	DestinationMapping DestinationSubscriptionConfiguration `json:"destinationMapping"`
+	ActivationName     string                                `json:"activationName"`
+	Personalization    PersonalizationInput                  `json:"personalization"`
+	DestinationMapping *DestinationSubscriptionConfiguration `json:"destinationMapping,omitempty"`
 	// Whether to perform a resync after creation of the activation.
 	PerformResync *bool `json:"performResync,omitempty"`
 }
@@ -56,7 +56,6 @@ func NewActivationOutput(
 	activationType string,
 	activationName string,
 	personalization PersonalizationInput,
-	destinationMapping DestinationSubscriptionConfiguration,
 ) *ActivationOutput {
 	this := ActivationOutput{}
 	this.Id = id
@@ -68,7 +67,6 @@ func NewActivationOutput(
 	this.ActivationType = activationType
 	this.ActivationName = activationName
 	this.Personalization = personalization
-	this.DestinationMapping = destinationMapping
 	return &this
 }
 
@@ -296,28 +294,36 @@ func (o *ActivationOutput) SetPersonalization(v PersonalizationInput) {
 	o.Personalization = v
 }
 
-// GetDestinationMapping returns the DestinationMapping field value
+// GetDestinationMapping returns the DestinationMapping field value if set, zero value otherwise.
 func (o *ActivationOutput) GetDestinationMapping() DestinationSubscriptionConfiguration {
-	if o == nil {
+	if o == nil || IsNil(o.DestinationMapping) {
 		var ret DestinationSubscriptionConfiguration
 		return ret
 	}
-
-	return o.DestinationMapping
+	return *o.DestinationMapping
 }
 
-// GetDestinationMappingOk returns a tuple with the DestinationMapping field value
+// GetDestinationMappingOk returns a tuple with the DestinationMapping field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ActivationOutput) GetDestinationMappingOk() (*DestinationSubscriptionConfiguration, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.DestinationMapping) {
 		return nil, false
 	}
-	return &o.DestinationMapping, true
+	return o.DestinationMapping, true
 }
 
-// SetDestinationMapping sets field value
+// HasDestinationMapping returns a boolean if a field has been set.
+func (o *ActivationOutput) HasDestinationMapping() bool {
+	if o != nil && !IsNil(o.DestinationMapping) {
+		return true
+	}
+
+	return false
+}
+
+// SetDestinationMapping gets a reference to the given DestinationSubscriptionConfiguration and assigns it to the DestinationMapping field.
 func (o *ActivationOutput) SetDestinationMapping(v DestinationSubscriptionConfiguration) {
-	o.DestinationMapping = v
+	o.DestinationMapping = &v
 }
 
 // GetPerformResync returns the PerformResync field value if set, zero value otherwise.
@@ -371,7 +377,9 @@ func (o ActivationOutput) ToMap() (map[string]interface{}, error) {
 	toSerialize["activationType"] = o.ActivationType
 	toSerialize["activationName"] = o.ActivationName
 	toSerialize["personalization"] = o.Personalization
-	toSerialize["destinationMapping"] = o.DestinationMapping
+	if !IsNil(o.DestinationMapping) {
+		toSerialize["destinationMapping"] = o.DestinationMapping
+	}
 	if !IsNil(o.PerformResync) {
 		toSerialize["performResync"] = o.PerformResync
 	}
