@@ -21,8 +21,8 @@ var _ MappedNullable = &AddDestinationToAudienceAlphaInput{}
 // AddDestinationToAudienceAlphaInput Input to Add a Destination into an Audience.
 type AddDestinationToAudienceAlphaInput struct {
 	Destination DestinationInput `json:"destination"`
-	// The identifier sync configuration input.
-	IdSyncConfiguration map[string]interface{} `json:"idSyncConfiguration,omitempty"`
+	// Identifier sync configuration - array of external IDs to sync with their strategies. Maximum 5 items allowed.
+	IdSyncConfiguration []IDSyncConfigurationInput `json:"idSyncConfiguration,omitempty"`
 	// The settings that a Destination requires to create audiences on a third-party platform. These settings are Destination-specific and thus are best defined as unknown.
 	ConnectionSettings interface{} `json:"connectionSettings,omitempty"`
 }
@@ -72,9 +72,9 @@ func (o *AddDestinationToAudienceAlphaInput) SetDestination(v DestinationInput) 
 }
 
 // GetIdSyncConfiguration returns the IdSyncConfiguration field value if set, zero value otherwise.
-func (o *AddDestinationToAudienceAlphaInput) GetIdSyncConfiguration() map[string]interface{} {
+func (o *AddDestinationToAudienceAlphaInput) GetIdSyncConfiguration() []IDSyncConfigurationInput {
 	if o == nil || IsNil(o.IdSyncConfiguration) {
-		var ret map[string]interface{}
+		var ret []IDSyncConfigurationInput
 		return ret
 	}
 	return o.IdSyncConfiguration
@@ -82,9 +82,9 @@ func (o *AddDestinationToAudienceAlphaInput) GetIdSyncConfiguration() map[string
 
 // GetIdSyncConfigurationOk returns a tuple with the IdSyncConfiguration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AddDestinationToAudienceAlphaInput) GetIdSyncConfigurationOk() (map[string]interface{}, bool) {
+func (o *AddDestinationToAudienceAlphaInput) GetIdSyncConfigurationOk() ([]IDSyncConfigurationInput, bool) {
 	if o == nil || IsNil(o.IdSyncConfiguration) {
-		return map[string]interface{}{}, false
+		return nil, false
 	}
 	return o.IdSyncConfiguration, true
 }
@@ -98,8 +98,8 @@ func (o *AddDestinationToAudienceAlphaInput) HasIdSyncConfiguration() bool {
 	return false
 }
 
-// SetIdSyncConfiguration gets a reference to the given map[string]interface{} and assigns it to the IdSyncConfiguration field.
-func (o *AddDestinationToAudienceAlphaInput) SetIdSyncConfiguration(v map[string]interface{}) {
+// SetIdSyncConfiguration gets a reference to the given []IDSyncConfigurationInput and assigns it to the IdSyncConfiguration field.
+func (o *AddDestinationToAudienceAlphaInput) SetIdSyncConfiguration(v []IDSyncConfigurationInput) {
 	o.IdSyncConfiguration = v
 }
 
