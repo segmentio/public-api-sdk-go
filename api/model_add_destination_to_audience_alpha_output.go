@@ -21,6 +21,8 @@ var _ MappedNullable = &AddDestinationToAudienceAlphaOutput{}
 // AddDestinationToAudienceAlphaOutput struct for AddDestinationToAudienceAlphaOutput
 type AddDestinationToAudienceAlphaOutput struct {
 	Connection Connection `json:"connection"`
+	// The id sync configuration for the Destination - array of external ids with their strategies.
+	IdSyncConfiguration []IDSyncConfigurationInput `json:"idSyncConfiguration"`
 }
 
 // NewAddDestinationToAudienceAlphaOutput instantiates a new AddDestinationToAudienceAlphaOutput object
@@ -29,9 +31,11 @@ type AddDestinationToAudienceAlphaOutput struct {
 // will change when the set of required properties is changed
 func NewAddDestinationToAudienceAlphaOutput(
 	connection Connection,
+	idSyncConfiguration []IDSyncConfigurationInput,
 ) *AddDestinationToAudienceAlphaOutput {
 	this := AddDestinationToAudienceAlphaOutput{}
 	this.Connection = connection
+	this.IdSyncConfiguration = idSyncConfiguration
 	return &this
 }
 
@@ -67,6 +71,30 @@ func (o *AddDestinationToAudienceAlphaOutput) SetConnection(v Connection) {
 	o.Connection = v
 }
 
+// GetIdSyncConfiguration returns the IdSyncConfiguration field value
+func (o *AddDestinationToAudienceAlphaOutput) GetIdSyncConfiguration() []IDSyncConfigurationInput {
+	if o == nil {
+		var ret []IDSyncConfigurationInput
+		return ret
+	}
+
+	return o.IdSyncConfiguration
+}
+
+// GetIdSyncConfigurationOk returns a tuple with the IdSyncConfiguration field value
+// and a boolean to check if the value has been set.
+func (o *AddDestinationToAudienceAlphaOutput) GetIdSyncConfigurationOk() ([]IDSyncConfigurationInput, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.IdSyncConfiguration, true
+}
+
+// SetIdSyncConfiguration sets field value
+func (o *AddDestinationToAudienceAlphaOutput) SetIdSyncConfiguration(v []IDSyncConfigurationInput) {
+	o.IdSyncConfiguration = v
+}
+
 func (o AddDestinationToAudienceAlphaOutput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -78,6 +106,7 @@ func (o AddDestinationToAudienceAlphaOutput) MarshalJSON() ([]byte, error) {
 func (o AddDestinationToAudienceAlphaOutput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["connection"] = o.Connection
+	toSerialize["idSyncConfiguration"] = o.IdSyncConfiguration
 	return toSerialize, nil
 }
 
