@@ -30,8 +30,8 @@ type ActivationOutput struct {
 	SpaceId string `json:"spaceId"`
 	// The audience id.
 	AudienceId string `json:"audienceId"`
-	// The DESTINATION connection id (formerly integrationInstanceId).
-	DestinationConnectionId string `json:"destinationConnectionId"`
+	// The connection id.
+	ConnectionId string `json:"connectionId"`
 	// Type of activation trigger.
 	ActivationType string `json:"activationType"`
 	// Name of the activation.
@@ -52,7 +52,7 @@ func NewActivationOutput(
 	workspaceId string,
 	spaceId string,
 	audienceId string,
-	destinationConnectionId string,
+	connectionId string,
 	activationType string,
 	activationName string,
 	personalization PersonalizationInput,
@@ -63,7 +63,7 @@ func NewActivationOutput(
 	this.WorkspaceId = workspaceId
 	this.SpaceId = spaceId
 	this.AudienceId = audienceId
-	this.DestinationConnectionId = destinationConnectionId
+	this.ConnectionId = connectionId
 	this.ActivationType = activationType
 	this.ActivationName = activationName
 	this.Personalization = personalization
@@ -198,28 +198,28 @@ func (o *ActivationOutput) SetAudienceId(v string) {
 	o.AudienceId = v
 }
 
-// GetDestinationConnectionId returns the DestinationConnectionId field value
-func (o *ActivationOutput) GetDestinationConnectionId() string {
+// GetConnectionId returns the ConnectionId field value
+func (o *ActivationOutput) GetConnectionId() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.DestinationConnectionId
+	return o.ConnectionId
 }
 
-// GetDestinationConnectionIdOk returns a tuple with the DestinationConnectionId field value
+// GetConnectionIdOk returns a tuple with the ConnectionId field value
 // and a boolean to check if the value has been set.
-func (o *ActivationOutput) GetDestinationConnectionIdOk() (*string, bool) {
+func (o *ActivationOutput) GetConnectionIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.DestinationConnectionId, true
+	return &o.ConnectionId, true
 }
 
-// SetDestinationConnectionId sets field value
-func (o *ActivationOutput) SetDestinationConnectionId(v string) {
-	o.DestinationConnectionId = v
+// SetConnectionId sets field value
+func (o *ActivationOutput) SetConnectionId(v string) {
+	o.ConnectionId = v
 }
 
 // GetActivationType returns the ActivationType field value
@@ -373,7 +373,7 @@ func (o ActivationOutput) ToMap() (map[string]interface{}, error) {
 	toSerialize["workspaceId"] = o.WorkspaceId
 	toSerialize["spaceId"] = o.SpaceId
 	toSerialize["audienceId"] = o.AudienceId
-	toSerialize["destinationConnectionId"] = o.DestinationConnectionId
+	toSerialize["connectionId"] = o.ConnectionId
 	toSerialize["activationType"] = o.ActivationType
 	toSerialize["activationName"] = o.ActivationName
 	toSerialize["personalization"] = o.Personalization
