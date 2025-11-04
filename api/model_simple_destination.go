@@ -35,9 +35,10 @@ type SimpleDestination struct {
 	// The Destination settings.
 	Settings map[string]interface{} `json:"settings"`
 	// The Destination id.
-	DestinationId string         `json:"destinationId"`
-	Metadata      *Metadata      `json:"metadata,omitempty"`
-	IdSync        *IDSyncOptions `json:"idSync,omitempty"`
+	DestinationId string    `json:"destinationId"`
+	Metadata      *Metadata `json:"metadata,omitempty"`
+	// ID Sync configuration - array of external IDs with their strategies.
+	IdSyncConfiguration []IDSyncConfigurationInput `json:"idSyncConfiguration,omitempty"`
 }
 
 // NewSimpleDestination instantiates a new SimpleDestination object
@@ -304,36 +305,36 @@ func (o *SimpleDestination) SetMetadata(v Metadata) {
 	o.Metadata = &v
 }
 
-// GetIdSync returns the IdSync field value if set, zero value otherwise.
-func (o *SimpleDestination) GetIdSync() IDSyncOptions {
-	if o == nil || IsNil(o.IdSync) {
-		var ret IDSyncOptions
+// GetIdSyncConfiguration returns the IdSyncConfiguration field value if set, zero value otherwise.
+func (o *SimpleDestination) GetIdSyncConfiguration() []IDSyncConfigurationInput {
+	if o == nil || IsNil(o.IdSyncConfiguration) {
+		var ret []IDSyncConfigurationInput
 		return ret
 	}
-	return *o.IdSync
+	return o.IdSyncConfiguration
 }
 
-// GetIdSyncOk returns a tuple with the IdSync field value if set, nil otherwise
+// GetIdSyncConfigurationOk returns a tuple with the IdSyncConfiguration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SimpleDestination) GetIdSyncOk() (*IDSyncOptions, bool) {
-	if o == nil || IsNil(o.IdSync) {
+func (o *SimpleDestination) GetIdSyncConfigurationOk() ([]IDSyncConfigurationInput, bool) {
+	if o == nil || IsNil(o.IdSyncConfiguration) {
 		return nil, false
 	}
-	return o.IdSync, true
+	return o.IdSyncConfiguration, true
 }
 
-// HasIdSync returns a boolean if a field has been set.
-func (o *SimpleDestination) HasIdSync() bool {
-	if o != nil && !IsNil(o.IdSync) {
+// HasIdSyncConfiguration returns a boolean if a field has been set.
+func (o *SimpleDestination) HasIdSyncConfiguration() bool {
+	if o != nil && !IsNil(o.IdSyncConfiguration) {
 		return true
 	}
 
 	return false
 }
 
-// SetIdSync gets a reference to the given IDSyncOptions and assigns it to the IdSync field.
-func (o *SimpleDestination) SetIdSync(v IDSyncOptions) {
-	o.IdSync = &v
+// SetIdSyncConfiguration gets a reference to the given []IDSyncConfigurationInput and assigns it to the IdSyncConfiguration field.
+func (o *SimpleDestination) SetIdSyncConfiguration(v []IDSyncConfigurationInput) {
+	o.IdSyncConfiguration = v
 }
 
 func (o SimpleDestination) MarshalJSON() ([]byte, error) {
@@ -359,8 +360,8 @@ func (o SimpleDestination) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if !IsNil(o.IdSync) {
-		toSerialize["idSync"] = o.IdSync
+	if !IsNil(o.IdSyncConfiguration) {
+		toSerialize["idSyncConfiguration"] = o.IdSyncConfiguration
 	}
 	return toSerialize, nil
 }
