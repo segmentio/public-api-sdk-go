@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**CreateFunction**](FunctionsAPI.md#CreateFunction) | **Post** /functions | Create Function
 [**CreateFunctionDeployment**](FunctionsAPI.md#CreateFunctionDeployment) | **Post** /functions/{functionId}/deploy | Create Function Deployment
 [**CreateInsertFunctionInstance**](FunctionsAPI.md#CreateInsertFunctionInstance) | **Post** /insert-function-instances | Create Insert Function Instance
+[**CreateTransformationFunctionInstance**](FunctionsAPI.md#CreateTransformationFunctionInstance) | **Post** /transformation-function-instances | Create Transformation Function Instance
 [**DeleteFunction**](FunctionsAPI.md#DeleteFunction) | **Delete** /functions/{functionId} | Delete Function
 [**DeleteInsertFunctionInstance**](FunctionsAPI.md#DeleteInsertFunctionInstance) | **Delete** /insert-function-instances/{instanceId} | Delete Insert Function Instance
 [**GetFunction**](FunctionsAPI.md#GetFunction) | **Get** /functions/{functionId} | Get Function
@@ -232,6 +233,80 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateInsertFunctionInstance200Response**](CreateInsertFunctionInstance200Response.md)
+
+### Authorization
+
+[token](../README.md#token)
+
+### HTTP request headers
+
+- **Content-Type**: application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Operation: CreateTransformationFunctionInstance
+
+> CreateTransformationFunctionInstance200Response CreateTransformationFunctionInstance(ctx).CreateTransformationFunctionInstanceAlphaInput(createTransformationFunctionInstanceAlphaInput).Execute()
+
+Create Transformation Function Instance
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    api "github.com/segmentio/public-api-sdk-go"
+)
+
+func main() {
+    createTransformationFunctionInstanceAlphaInput := *api.NewCreateTransformationFunctionInstanceAlphaInput("FunctionId_example", "IntegrationId_example", "IntegrationType_example", "Name_example", map[string]interface{}{"key": interface{}(123)}) // CreateTransformationFunctionInstanceAlphaInput | 
+
+    configuration := api.NewConfiguration()
+    apiClient := api.NewAPIClient(configuration)
+    token := "<BEARER_TOKEN>"
+    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
+    resp, r, err := apiClient.FunctionsAPI.CreateTransformationFunctionInstance(ctx).CreateTransformationFunctionInstanceAlphaInput(createTransformationFunctionInstanceAlphaInput).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FunctionsAPI.CreateTransformationFunctionInstance``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+        responseErrors := api.UnwrapFullErrors(err)
+        if responseErrors != nil {
+            for _, responseError := range responseErrors.Errors {
+                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
+            }
+        }
+    }
+    // response from `CreateTransformationFunctionInstance`: CreateTransformationFunctionInstance200Response
+    fmt.Fprintf(os.Stdout, "Response from `FunctionsAPI.CreateTransformationFunctionInstance`: %v\n", resp.GetData())
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateTransformationFunctionInstanceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **createTransformationFunctionInstanceAlphaInput** | [**CreateTransformationFunctionInstanceAlphaInput**](CreateTransformationFunctionInstanceAlphaInput.md) |  | 
+
+### Return type
+
+[**CreateTransformationFunctionInstance200Response**](CreateTransformationFunctionInstance200Response.md)
 
 ### Authorization
 
