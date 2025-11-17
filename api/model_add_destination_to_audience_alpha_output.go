@@ -23,8 +23,6 @@ type AddDestinationToAudienceAlphaOutput struct {
 	Connection Connection `json:"connection"`
 	// The id sync configuration for the Destination - array of external ids with their strategies.
 	IdSyncConfiguration []IDSyncConfigurationInput `json:"idSyncConfiguration"`
-	// The settings that a Destination requires to create audiences on a third-party platform. These settings are Destination-specific and thus are best defined as unknown.
-	ConnectionSettings interface{} `json:"connectionSettings,omitempty"`
 }
 
 // NewAddDestinationToAudienceAlphaOutput instantiates a new AddDestinationToAudienceAlphaOutput object
@@ -97,39 +95,6 @@ func (o *AddDestinationToAudienceAlphaOutput) SetIdSyncConfiguration(v []IDSyncC
 	o.IdSyncConfiguration = v
 }
 
-// GetConnectionSettings returns the ConnectionSettings field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AddDestinationToAudienceAlphaOutput) GetConnectionSettings() interface{} {
-	if o == nil {
-		var ret interface{}
-		return ret
-	}
-	return o.ConnectionSettings
-}
-
-// GetConnectionSettingsOk returns a tuple with the ConnectionSettings field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AddDestinationToAudienceAlphaOutput) GetConnectionSettingsOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.ConnectionSettings) {
-		return nil, false
-	}
-	return &o.ConnectionSettings, true
-}
-
-// HasConnectionSettings returns a boolean if a field has been set.
-func (o *AddDestinationToAudienceAlphaOutput) HasConnectionSettings() bool {
-	if o != nil && IsNil(o.ConnectionSettings) {
-		return true
-	}
-
-	return false
-}
-
-// SetConnectionSettings gets a reference to the given interface{} and assigns it to the ConnectionSettings field.
-func (o *AddDestinationToAudienceAlphaOutput) SetConnectionSettings(v interface{}) {
-	o.ConnectionSettings = v
-}
-
 func (o AddDestinationToAudienceAlphaOutput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -142,9 +107,6 @@ func (o AddDestinationToAudienceAlphaOutput) ToMap() (map[string]interface{}, er
 	toSerialize := map[string]interface{}{}
 	toSerialize["connection"] = o.Connection
 	toSerialize["idSyncConfiguration"] = o.IdSyncConfiguration
-	if o.ConnectionSettings != nil {
-		toSerialize["connectionSettings"] = o.ConnectionSettings
-	}
 	return toSerialize, nil
 }
 
