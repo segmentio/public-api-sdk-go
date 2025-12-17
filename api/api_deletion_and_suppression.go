@@ -463,8 +463,6 @@ Rate limit headers will be updated to reflect regulation-specific limits (tracke
 
 - X-RateLimit-Reset: RFC 5322 timestamp for when the quota resets (for example, Tue, 31 Dec 2024 23:59:59 GMT)
 
-The rate limit for this endpoint is 5 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
-
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateWorkspaceRegulationRequest
 */
