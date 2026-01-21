@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 62.0.6
+API version: 63.0.0
 Contact: friends@segment.com
 */
 
@@ -222,16 +222,16 @@ func (a *AudiencesAPIService) AddAudienceScheduleToAudienceExecute(
 }
 
 type ApiCreateAudienceRequest struct {
-	ctx                     context.Context
-	ApiService              *AudiencesAPIService
-	spaceId                 string
-	createAudienceBetaInput *CreateAudienceBetaInput
+	ctx                 context.Context
+	ApiService          *AudiencesAPIService
+	spaceId             string
+	createAudienceInput *CreateAudienceInput
 }
 
-func (r ApiCreateAudienceRequest) CreateAudienceBetaInput(
-	createAudienceBetaInput CreateAudienceBetaInput,
+func (r ApiCreateAudienceRequest) CreateAudienceInput(
+	createAudienceInput CreateAudienceInput,
 ) ApiCreateAudienceRequest {
-	r.createAudienceBetaInput = &createAudienceBetaInput
+	r.createAudienceInput = &createAudienceInput
 	return r
 }
 
@@ -243,8 +243,6 @@ func (r ApiCreateAudienceRequest) Execute() (*CreateAudience200Response, *http.R
 CreateAudience Create Audience
 
 Creates Audience.
-
-• This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
@@ -300,14 +298,16 @@ func (a *AudiencesAPIService) CreateAudienceExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createAudienceBetaInput == nil {
+	if r.createAudienceInput == nil {
 		return localVarReturnValue, nil, reportError(
-			"createAudienceBetaInput is required and must be specified",
+			"createAudienceInput is required and must be specified",
 		)
 	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
+		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -320,9 +320,10 @@ func (a *AudiencesAPIService) CreateAudienceExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
-		"application/json",
 	}
 
 	// set Accept header
@@ -331,7 +332,7 @@ func (a *AudiencesAPIService) CreateAudienceExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createAudienceBetaInput
+	localVarPostBody = r.createAudienceInput
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,
