@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 64.0.0
+API version: 65.0.0
 Contact: friends@segment.com
 */
 
@@ -1968,8 +1968,6 @@ RemoveAudienceFromSpace Remove Audience from Space
 
 Deletes an Audience by id and spaceId.
 
-• This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
-
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
 • When called, this endpoint may generate the `Audience Deleted` event in the [audit trail](/tag/Audit-Trail).
@@ -2329,17 +2327,17 @@ func (a *AudiencesAPIService) RemoveAudienceScheduleFromAudienceExecute(
 }
 
 type ApiUpdateAudienceForSpaceRequest struct {
-	ctx                             context.Context
-	ApiService                      *AudiencesAPIService
-	spaceId                         string
-	id                              string
-	updateAudienceForSpaceBetaInput *UpdateAudienceForSpaceBetaInput
+	ctx                         context.Context
+	ApiService                  *AudiencesAPIService
+	spaceId                     string
+	id                          string
+	updateAudienceForSpaceInput *UpdateAudienceForSpaceInput
 }
 
-func (r ApiUpdateAudienceForSpaceRequest) UpdateAudienceForSpaceBetaInput(
-	updateAudienceForSpaceBetaInput UpdateAudienceForSpaceBetaInput,
+func (r ApiUpdateAudienceForSpaceRequest) UpdateAudienceForSpaceInput(
+	updateAudienceForSpaceInput UpdateAudienceForSpaceInput,
 ) ApiUpdateAudienceForSpaceRequest {
-	r.updateAudienceForSpaceBetaInput = &updateAudienceForSpaceBetaInput
+	r.updateAudienceForSpaceInput = &updateAudienceForSpaceInput
 	return r
 }
 
@@ -2351,8 +2349,6 @@ func (r ApiUpdateAudienceForSpaceRequest) Execute() (*UpdateAudienceForSpace200R
 UpdateAudienceForSpace Update Audience for Space
 
 Updates the Audience.
-
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
@@ -2419,14 +2415,16 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.updateAudienceForSpaceBetaInput == nil {
+	if r.updateAudienceForSpaceInput == nil {
 		return localVarReturnValue, nil, reportError(
-			"updateAudienceForSpaceBetaInput is required and must be specified",
+			"updateAudienceForSpaceInput is required and must be specified",
 		)
 	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
+		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -2439,9 +2437,10 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
-		"application/json",
 	}
 
 	// set Accept header
@@ -2450,7 +2449,7 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateAudienceForSpaceBetaInput
+	localVarPostBody = r.updateAudienceForSpaceInput
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,
