@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 65.0.0
+API version: 66.0.0
 Contact: friends@segment.com
 */
 
@@ -20,7 +20,7 @@ var _ MappedNullable = &GetAudience200Response1{}
 
 // GetAudience200Response1 struct for GetAudience200Response1
 type GetAudience200Response1 struct {
-	Data *GetAudienceAlphaOutput `json:"data,omitempty"`
+	Data *GetAudienceBetaOutput `json:"data,omitempty"`
 }
 
 // NewGetAudience200Response1 instantiates a new GetAudience200Response1 object
@@ -41,9 +41,9 @@ func NewGetAudience200Response1WithDefaults() *GetAudience200Response1 {
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *GetAudience200Response1) GetData() GetAudienceAlphaOutput {
+func (o *GetAudience200Response1) GetData() GetAudienceBetaOutput {
 	if o == nil || IsNil(o.Data) {
-		var ret GetAudienceAlphaOutput
+		var ret GetAudienceBetaOutput
 		return ret
 	}
 	return *o.Data
@@ -51,7 +51,7 @@ func (o *GetAudience200Response1) GetData() GetAudienceAlphaOutput {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetAudience200Response1) GetDataOk() (*GetAudienceAlphaOutput, bool) {
+func (o *GetAudience200Response1) GetDataOk() (*GetAudienceBetaOutput, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *GetAudience200Response1) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given GetAudienceAlphaOutput and assigns it to the Data field.
-func (o *GetAudience200Response1) SetData(v GetAudienceAlphaOutput) {
+// SetData gets a reference to the given GetAudienceBetaOutput and assigns it to the Data field.
+func (o *GetAudience200Response1) SetData(v GetAudienceBetaOutput) {
 	o.Data = &v
 }
 
