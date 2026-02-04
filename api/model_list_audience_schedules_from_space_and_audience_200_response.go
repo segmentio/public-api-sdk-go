@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 69.0.0
+API version: 70.0.0
 Contact: friends@segment.com
 */
 
@@ -20,7 +20,7 @@ var _ MappedNullable = &ListAudienceSchedulesFromSpaceAndAudience200Response{}
 
 // ListAudienceSchedulesFromSpaceAndAudience200Response struct for ListAudienceSchedulesFromSpaceAndAudience200Response
 type ListAudienceSchedulesFromSpaceAndAudience200Response struct {
-	Data *ListAudienceSchedulesFromSpaceAndAudienceAlphaOutput `json:"data,omitempty"`
+	Data *ListAudienceSchedulesFromSpaceAndAudienceOutput `json:"data,omitempty"`
 }
 
 // NewListAudienceSchedulesFromSpaceAndAudience200Response instantiates a new ListAudienceSchedulesFromSpaceAndAudience200Response object
@@ -41,9 +41,9 @@ func NewListAudienceSchedulesFromSpaceAndAudience200ResponseWithDefaults() *List
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *ListAudienceSchedulesFromSpaceAndAudience200Response) GetData() ListAudienceSchedulesFromSpaceAndAudienceAlphaOutput {
+func (o *ListAudienceSchedulesFromSpaceAndAudience200Response) GetData() ListAudienceSchedulesFromSpaceAndAudienceOutput {
 	if o == nil || IsNil(o.Data) {
-		var ret ListAudienceSchedulesFromSpaceAndAudienceAlphaOutput
+		var ret ListAudienceSchedulesFromSpaceAndAudienceOutput
 		return ret
 	}
 	return *o.Data
@@ -51,7 +51,7 @@ func (o *ListAudienceSchedulesFromSpaceAndAudience200Response) GetData() ListAud
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ListAudienceSchedulesFromSpaceAndAudience200Response) GetDataOk() (*ListAudienceSchedulesFromSpaceAndAudienceAlphaOutput, bool) {
+func (o *ListAudienceSchedulesFromSpaceAndAudience200Response) GetDataOk() (*ListAudienceSchedulesFromSpaceAndAudienceOutput, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -67,9 +67,9 @@ func (o *ListAudienceSchedulesFromSpaceAndAudience200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given ListAudienceSchedulesFromSpaceAndAudienceAlphaOutput and assigns it to the Data field.
+// SetData gets a reference to the given ListAudienceSchedulesFromSpaceAndAudienceOutput and assigns it to the Data field.
 func (o *ListAudienceSchedulesFromSpaceAndAudience200Response) SetData(
-	v ListAudienceSchedulesFromSpaceAndAudienceAlphaOutput,
+	v ListAudienceSchedulesFromSpaceAndAudienceOutput,
 ) {
 	o.Data = &v
 }
