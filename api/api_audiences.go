@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 67.0.0
+API version: 68.0.0
 Contact: friends@segment.com
 */
 
@@ -416,16 +416,16 @@ func (a *AudiencesAPIService) CreateAudienceExecute(
 }
 
 type ApiCreateAudiencePreviewRequest struct {
-	ctx                            context.Context
-	ApiService                     *AudiencesAPIService
-	spaceId                        string
-	createAudiencePreviewBetaInput *CreateAudiencePreviewBetaInput
+	ctx                        context.Context
+	ApiService                 *AudiencesAPIService
+	spaceId                    string
+	createAudiencePreviewInput *CreateAudiencePreviewInput
 }
 
-func (r ApiCreateAudiencePreviewRequest) CreateAudiencePreviewBetaInput(
-	createAudiencePreviewBetaInput CreateAudiencePreviewBetaInput,
+func (r ApiCreateAudiencePreviewRequest) CreateAudiencePreviewInput(
+	createAudiencePreviewInput CreateAudiencePreviewInput,
 ) ApiCreateAudiencePreviewRequest {
-	r.createAudiencePreviewBetaInput = &createAudiencePreviewBetaInput
+	r.createAudiencePreviewInput = &createAudiencePreviewInput
 	return r
 }
 
@@ -437,8 +437,6 @@ func (r ApiCreateAudiencePreviewRequest) Execute() (*CreateAudiencePreview200Res
 CreateAudiencePreview Create Audience Preview
 
 Previews Audience.
-
-• This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
@@ -494,14 +492,16 @@ func (a *AudiencesAPIService) CreateAudiencePreviewExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createAudiencePreviewBetaInput == nil {
+	if r.createAudiencePreviewInput == nil {
 		return localVarReturnValue, nil, reportError(
-			"createAudiencePreviewBetaInput is required and must be specified",
+			"createAudiencePreviewInput is required and must be specified",
 		)
 	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{
+		"application/json",
+		"application/vnd.segment.v1+json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
 	}
@@ -514,9 +514,10 @@ func (a *AudiencesAPIService) CreateAudiencePreviewExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1+json",
+		"application/json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
-		"application/json",
 	}
 
 	// set Accept header
@@ -525,7 +526,7 @@ func (a *AudiencesAPIService) CreateAudiencePreviewExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createAudiencePreviewBetaInput
+	localVarPostBody = r.createAudiencePreviewInput
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,

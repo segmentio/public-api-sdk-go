@@ -186,7 +186,7 @@ Name | Type | Description  | Notes
 
 ## Operation: CreateAudiencePreview
 
-> CreateAudiencePreview200Response CreateAudiencePreview(ctx, spaceId).CreateAudiencePreviewBetaInput(createAudiencePreviewBetaInput).Execute()
+> CreateAudiencePreview200Response CreateAudiencePreview(ctx, spaceId).CreateAudiencePreviewInput(createAudiencePreviewInput).Execute()
 
 Create Audience Preview
 
@@ -206,13 +206,13 @@ import (
 
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
-    createAudiencePreviewBetaInput := *api.NewCreateAudiencePreviewBetaInput(*api.NewAudienceDefinition("Query_example"), "AudienceType_example") // CreateAudiencePreviewBetaInput | 
+    createAudiencePreviewInput := *api.NewCreateAudiencePreviewInput(*api.NewAudienceDefinition("Query_example"), "AudienceType_example") // CreateAudiencePreviewInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.CreateAudiencePreview(ctx, spaceId).CreateAudiencePreviewBetaInput(createAudiencePreviewBetaInput).Execute()
+    resp, r, err := apiClient.AudiencesAPI.CreateAudiencePreview(ctx, spaceId).CreateAudiencePreviewInput(createAudiencePreviewInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.CreateAudiencePreview``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -244,7 +244,7 @@ Other parameters are passed through a pointer to a apiCreateAudiencePreviewReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **createAudiencePreviewBetaInput** | [**CreateAudiencePreviewBetaInput**](CreateAudiencePreviewBetaInput.md) |  | 
+ **createAudiencePreviewInput** | [**CreateAudiencePreviewInput**](CreateAudiencePreviewInput.md) |  | 
 
 ### Return type
 
@@ -256,8 +256,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
-- **Accept**: application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json, application/json
+- **Content-Type**: application/json, application/vnd.segment.v1+json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
