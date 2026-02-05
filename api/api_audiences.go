@@ -443,8 +443,6 @@ CreateAudiencePreview Create Audience Preview
 
 Previews Audience.
 
-• This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
-
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
 • When called, this endpoint may generate the `Audience Preview Created` event in the [audit trail](/tag/Audit-Trail).
@@ -1003,8 +1001,6 @@ func (r ApiGetAudiencePreviewRequest) Execute() (*GetAudiencePreview200Response,
 GetAudiencePreview Get Audience Preview
 
 Reads the results of an audience preview.
-
-• This endpoint is in **Beta** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
