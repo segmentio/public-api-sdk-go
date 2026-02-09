@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 70.0.0
+API version: 69.0.0
 Contact: friends@segment.com
 */
 
@@ -20,7 +20,7 @@ var _ MappedNullable = &RemoveAudienceScheduleFromAudience200Response{}
 
 // RemoveAudienceScheduleFromAudience200Response struct for RemoveAudienceScheduleFromAudience200Response
 type RemoveAudienceScheduleFromAudience200Response struct {
-	Data *RemoveAudienceScheduleFromAudienceOutput `json:"data,omitempty"`
+	Data *RemoveAudienceScheduleFromAudienceAlphaOutput `json:"data,omitempty"`
 }
 
 // NewRemoveAudienceScheduleFromAudience200Response instantiates a new RemoveAudienceScheduleFromAudience200Response object
@@ -41,9 +41,9 @@ func NewRemoveAudienceScheduleFromAudience200ResponseWithDefaults() *RemoveAudie
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *RemoveAudienceScheduleFromAudience200Response) GetData() RemoveAudienceScheduleFromAudienceOutput {
+func (o *RemoveAudienceScheduleFromAudience200Response) GetData() RemoveAudienceScheduleFromAudienceAlphaOutput {
 	if o == nil || IsNil(o.Data) {
-		var ret RemoveAudienceScheduleFromAudienceOutput
+		var ret RemoveAudienceScheduleFromAudienceAlphaOutput
 		return ret
 	}
 	return *o.Data
@@ -51,7 +51,7 @@ func (o *RemoveAudienceScheduleFromAudience200Response) GetData() RemoveAudience
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RemoveAudienceScheduleFromAudience200Response) GetDataOk() (*RemoveAudienceScheduleFromAudienceOutput, bool) {
+func (o *RemoveAudienceScheduleFromAudience200Response) GetDataOk() (*RemoveAudienceScheduleFromAudienceAlphaOutput, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -67,9 +67,9 @@ func (o *RemoveAudienceScheduleFromAudience200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given RemoveAudienceScheduleFromAudienceOutput and assigns it to the Data field.
+// SetData gets a reference to the given RemoveAudienceScheduleFromAudienceAlphaOutput and assigns it to the Data field.
 func (o *RemoveAudienceScheduleFromAudience200Response) SetData(
-	v RemoveAudienceScheduleFromAudienceOutput,
+	v RemoveAudienceScheduleFromAudienceAlphaOutput,
 ) {
 	o.Data = &v
 }

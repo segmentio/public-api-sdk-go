@@ -23,7 +23,7 @@ Method | HTTP request | Description
 
 ## Operation: AddAudienceScheduleToAudience
 
-> AddAudienceScheduleToAudience200Response AddAudienceScheduleToAudience(ctx, spaceId, id).AddAudienceScheduleToAudienceInput(addAudienceScheduleToAudienceInput).Execute()
+> AddAudienceScheduleToAudience200Response AddAudienceScheduleToAudience(ctx, spaceId, id).AddAudienceScheduleToAudienceAlphaInput(addAudienceScheduleToAudienceAlphaInput).Execute()
 
 Add Audience Schedule to Audience
 
@@ -44,13 +44,13 @@ import (
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
     id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
-    addAudienceScheduleToAudienceInput := *api.NewAddAudienceScheduleToAudienceInput("Strategy_example", "TODO") // AddAudienceScheduleToAudienceInput | 
+    addAudienceScheduleToAudienceAlphaInput := *api.NewAddAudienceScheduleToAudienceAlphaInput("Strategy_example", "TODO") // AddAudienceScheduleToAudienceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.AddAudienceScheduleToAudience(ctx, spaceId, id).AddAudienceScheduleToAudienceInput(addAudienceScheduleToAudienceInput).Execute()
+    resp, r, err := apiClient.AudiencesAPI.AddAudienceScheduleToAudience(ctx, spaceId, id).AddAudienceScheduleToAudienceAlphaInput(addAudienceScheduleToAudienceAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.AddAudienceScheduleToAudience``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **addAudienceScheduleToAudienceInput** | [**AddAudienceScheduleToAudienceInput**](AddAudienceScheduleToAudienceInput.md) |  | 
+ **addAudienceScheduleToAudienceAlphaInput** | [**AddAudienceScheduleToAudienceAlphaInput**](AddAudienceScheduleToAudienceAlphaInput.md) |  | 
 
 ### Return type
 
@@ -96,8 +96,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json, application/vnd.segment.v1+json, application/vnd.segment.v1alpha+json
-- **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1alpha+json
+- **Content-Type**: application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -586,7 +586,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -754,7 +754,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1003,7 +1003,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -1095,7 +1095,7 @@ Name | Type | Description  | Notes
 
 ## Operation: UpdateAudienceScheduleForAudience
 
-> UpdateAudienceScheduleForAudience200Response UpdateAudienceScheduleForAudience(ctx, spaceId, id, scheduleId).UpdateAudienceScheduleForAudienceInput(updateAudienceScheduleForAudienceInput).Execute()
+> UpdateAudienceScheduleForAudience200Response UpdateAudienceScheduleForAudience(ctx, spaceId, id, scheduleId).UpdateAudienceScheduleForAudienceAlphaInput(updateAudienceScheduleForAudienceAlphaInput).Execute()
 
 Update Audience Schedule for Audience
 
@@ -1117,13 +1117,13 @@ func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
     id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
     scheduleId := "sch_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
-    updateAudienceScheduleForAudienceInput := *api.NewUpdateAudienceScheduleForAudienceInput("Strategy_example", "TODO") // UpdateAudienceScheduleForAudienceInput | 
+    updateAudienceScheduleForAudienceAlphaInput := *api.NewUpdateAudienceScheduleForAudienceAlphaInput("Strategy_example", "TODO") // UpdateAudienceScheduleForAudienceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.UpdateAudienceScheduleForAudience(ctx, spaceId, id, scheduleId).UpdateAudienceScheduleForAudienceInput(updateAudienceScheduleForAudienceInput).Execute()
+    resp, r, err := apiClient.AudiencesAPI.UpdateAudienceScheduleForAudience(ctx, spaceId, id, scheduleId).UpdateAudienceScheduleForAudienceAlphaInput(updateAudienceScheduleForAudienceAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.UpdateAudienceScheduleForAudience``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1159,7 +1159,7 @@ Name | Type | Description  | Notes
 
 
 
- **updateAudienceScheduleForAudienceInput** | [**UpdateAudienceScheduleForAudienceInput**](UpdateAudienceScheduleForAudienceInput.md) |  | 
+ **updateAudienceScheduleForAudienceAlphaInput** | [**UpdateAudienceScheduleForAudienceAlphaInput**](UpdateAudienceScheduleForAudienceAlphaInput.md) |  | 
 
 ### Return type
 
@@ -1171,8 +1171,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json, application/vnd.segment.v1+json, application/vnd.segment.v1alpha+json
-- **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1alpha+json
+- **Content-Type**: application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
