@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 70.0.0
+API version: 71.0.0
 Contact: friends@segment.com
 */
 
@@ -20,7 +20,7 @@ var _ MappedNullable = &ForceExecuteAudienceRun200Response{}
 
 // ForceExecuteAudienceRun200Response struct for ForceExecuteAudienceRun200Response
 type ForceExecuteAudienceRun200Response struct {
-	Data *ForceExecuteAudienceRunAlphaOutput `json:"data,omitempty"`
+	Data *ForceExecuteAudienceRunOutput `json:"data,omitempty"`
 }
 
 // NewForceExecuteAudienceRun200Response instantiates a new ForceExecuteAudienceRun200Response object
@@ -41,9 +41,9 @@ func NewForceExecuteAudienceRun200ResponseWithDefaults() *ForceExecuteAudienceRu
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *ForceExecuteAudienceRun200Response) GetData() ForceExecuteAudienceRunAlphaOutput {
+func (o *ForceExecuteAudienceRun200Response) GetData() ForceExecuteAudienceRunOutput {
 	if o == nil || IsNil(o.Data) {
-		var ret ForceExecuteAudienceRunAlphaOutput
+		var ret ForceExecuteAudienceRunOutput
 		return ret
 	}
 	return *o.Data
@@ -51,7 +51,7 @@ func (o *ForceExecuteAudienceRun200Response) GetData() ForceExecuteAudienceRunAl
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ForceExecuteAudienceRun200Response) GetDataOk() (*ForceExecuteAudienceRunAlphaOutput, bool) {
+func (o *ForceExecuteAudienceRun200Response) GetDataOk() (*ForceExecuteAudienceRunOutput, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *ForceExecuteAudienceRun200Response) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given ForceExecuteAudienceRunAlphaOutput and assigns it to the Data field.
-func (o *ForceExecuteAudienceRun200Response) SetData(v ForceExecuteAudienceRunAlphaOutput) {
+// SetData gets a reference to the given ForceExecuteAudienceRunOutput and assigns it to the Data field.
+func (o *ForceExecuteAudienceRun200Response) SetData(v ForceExecuteAudienceRunOutput) {
 	o.Data = &v
 }
 
