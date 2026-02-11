@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 69.0.0
+API version: 70.0.0
 Contact: friends@segment.com
 */
 
@@ -24,17 +24,17 @@ import (
 type AudiencesAPIService service
 
 type ApiAddAudienceScheduleToAudienceRequest struct {
-	ctx                                     context.Context
-	ApiService                              *AudiencesAPIService
-	spaceId                                 string
-	id                                      string
-	addAudienceScheduleToAudienceAlphaInput *AddAudienceScheduleToAudienceAlphaInput
+	ctx                                context.Context
+	ApiService                         *AudiencesAPIService
+	spaceId                            string
+	id                                 string
+	addAudienceScheduleToAudienceInput *AddAudienceScheduleToAudienceInput
 }
 
-func (r ApiAddAudienceScheduleToAudienceRequest) AddAudienceScheduleToAudienceAlphaInput(
-	addAudienceScheduleToAudienceAlphaInput AddAudienceScheduleToAudienceAlphaInput,
+func (r ApiAddAudienceScheduleToAudienceRequest) AddAudienceScheduleToAudienceInput(
+	addAudienceScheduleToAudienceInput AddAudienceScheduleToAudienceInput,
 ) ApiAddAudienceScheduleToAudienceRequest {
-	r.addAudienceScheduleToAudienceAlphaInput = &addAudienceScheduleToAudienceAlphaInput
+	r.addAudienceScheduleToAudienceInput = &addAudienceScheduleToAudienceInput
 	return r
 }
 
@@ -48,8 +48,6 @@ AddAudienceScheduleToAudience Add Audience Schedule to Audience
 The ability to configure the run schedule for an Audience is limited to Linked Audiences (audienceType = LINKED).
 
 Note that if a Linked Audience remains disabled for 90 days Segment will delete the associated schedule and a new schedule will need to be created.
-
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
@@ -111,14 +109,18 @@ func (a *AudiencesAPIService) AddAudienceScheduleToAudienceExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.addAudienceScheduleToAudienceAlphaInput == nil {
+	if r.addAudienceScheduleToAudienceInput == nil {
 		return localVarReturnValue, nil, reportError(
-			"addAudienceScheduleToAudienceAlphaInput is required and must be specified",
+			"addAudienceScheduleToAudienceInput is required and must be specified",
 		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/json",
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -128,8 +130,9 @@ func (a *AudiencesAPIService) AddAudienceScheduleToAudienceExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
-		"application/vnd.segment.v1alpha+json",
+		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1alpha+json",
 	}
 
 	// set Accept header
@@ -138,7 +141,7 @@ func (a *AudiencesAPIService) AddAudienceScheduleToAudienceExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.addAudienceScheduleToAudienceAlphaInput
+	localVarPostBody = r.addAudienceScheduleToAudienceInput
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,
@@ -1179,8 +1182,6 @@ GetAudienceScheduleFromSpaceAndAudience Get Audience Schedule from Space And Aud
 
 Returns the schedule for the given audience and scheduleId.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
-
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1260,8 +1261,9 @@ func (a *AudiencesAPIService) GetAudienceScheduleFromSpaceAndAudienceExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
-		"application/vnd.segment.v1alpha+json",
+		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1alpha+json",
 	}
 
 	// set Accept header
@@ -1584,8 +1586,6 @@ ListAudienceSchedulesFromSpaceAndAudience List Audience Schedules from Space And
 
 Returns the list of schedules for the given audience.
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
-
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1656,8 +1656,9 @@ func (a *AudiencesAPIService) ListAudienceSchedulesFromSpaceAndAudienceExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
-		"application/vnd.segment.v1alpha+json",
+		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1alpha+json",
 	}
 
 	// set Accept header
@@ -2150,8 +2151,6 @@ RemoveAudienceScheduleFromAudience Remove Audience Schedule from Audience
 
 Deletes an audience schedule for a Linked Audience (audienceType = LINKED).
 
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
-
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
 The rate limit for this endpoint is 50 requests per minute, which is lower than the default due to access pattern restrictions. Once reached, this endpoint will respond with the 429 HTTP status code with headers indicating the limit parameters. See [Rate Limiting](/#tag/Rate-Limits) for more information.
@@ -2233,8 +2232,9 @@ func (a *AudiencesAPIService) RemoveAudienceScheduleFromAudienceExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
-		"application/vnd.segment.v1alpha+json",
+		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1alpha+json",
 	}
 
 	// set Accept header
@@ -2531,18 +2531,18 @@ func (a *AudiencesAPIService) UpdateAudienceForSpaceExecute(
 }
 
 type ApiUpdateAudienceScheduleForAudienceRequest struct {
-	ctx                                         context.Context
-	ApiService                                  *AudiencesAPIService
-	spaceId                                     string
-	id                                          string
-	scheduleId                                  string
-	updateAudienceScheduleForAudienceAlphaInput *UpdateAudienceScheduleForAudienceAlphaInput
+	ctx                                    context.Context
+	ApiService                             *AudiencesAPIService
+	spaceId                                string
+	id                                     string
+	scheduleId                             string
+	updateAudienceScheduleForAudienceInput *UpdateAudienceScheduleForAudienceInput
 }
 
-func (r ApiUpdateAudienceScheduleForAudienceRequest) UpdateAudienceScheduleForAudienceAlphaInput(
-	updateAudienceScheduleForAudienceAlphaInput UpdateAudienceScheduleForAudienceAlphaInput,
+func (r ApiUpdateAudienceScheduleForAudienceRequest) UpdateAudienceScheduleForAudienceInput(
+	updateAudienceScheduleForAudienceInput UpdateAudienceScheduleForAudienceInput,
 ) ApiUpdateAudienceScheduleForAudienceRequest {
-	r.updateAudienceScheduleForAudienceAlphaInput = &updateAudienceScheduleForAudienceAlphaInput
+	r.updateAudienceScheduleForAudienceInput = &updateAudienceScheduleForAudienceInput
 	return r
 }
 
@@ -2554,8 +2554,6 @@ func (r ApiUpdateAudienceScheduleForAudienceRequest) Execute() (*UpdateAudienceS
 UpdateAudienceScheduleForAudience Update Audience Schedule for Audience
 
 Updates an audience schedule for a Linked Audience (audienceType = LINKED).
-
-• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
@@ -2626,14 +2624,18 @@ func (a *AudiencesAPIService) UpdateAudienceScheduleForAudienceExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.updateAudienceScheduleForAudienceAlphaInput == nil {
+	if r.updateAudienceScheduleForAudienceInput == nil {
 		return localVarReturnValue, nil, reportError(
-			"updateAudienceScheduleForAudienceAlphaInput is required and must be specified",
+			"updateAudienceScheduleForAudienceInput is required and must be specified",
 		)
 	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json"}
+	localVarHTTPContentTypes := []string{
+		"application/json",
+		"application/vnd.segment.v1+json",
+		"application/vnd.segment.v1alpha+json",
+	}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -2643,8 +2645,9 @@ func (a *AudiencesAPIService) UpdateAudienceScheduleForAudienceExecute(
 
 	// to determine the Accept header
 	localVarHTTPHeaderAccepts := []string{
-		"application/vnd.segment.v1alpha+json",
+		"application/vnd.segment.v1+json",
 		"application/json",
+		"application/vnd.segment.v1alpha+json",
 	}
 
 	// set Accept header
@@ -2653,7 +2656,7 @@ func (a *AudiencesAPIService) UpdateAudienceScheduleForAudienceExecute(
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.updateAudienceScheduleForAudienceAlphaInput
+	localVarPostBody = r.updateAudienceScheduleForAudienceInput
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,
