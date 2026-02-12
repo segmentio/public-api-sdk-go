@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 71.0.0
+API version: 72.0.0
 Contact: friends@segment.com
 */
 
@@ -1285,6 +1285,197 @@ func (a *ActivationsAPIService) RemoveActivationFromAudienceExecute(
 		localVarPath,
 		"{"+"id"+"}",
 		url.PathEscape(parameterValueToString(r.id, "id")),
+		-1,
+	)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiRemoveDestinationFromAudienceRequest struct {
+	ctx           context.Context
+	ApiService    *ActivationsAPIService
+	spaceId       string
+	audienceId    string
+	destinationId string
+}
+
+func (r ApiRemoveDestinationFromAudienceRequest) Execute() (*RemoveDestinationFromAudience200Response, *http.Response, error) {
+	return r.ApiService.RemoveDestinationFromAudienceExecute(r)
+}
+
+/*
+RemoveDestinationFromAudience Remove Destination from Audience
+
+Removes a Destination from an Audience. If there are activations associated with the Destination, the request will return a 409 Conflict error.
+
+• This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
+
+• When called, this endpoint may generate the `Destination Removed from Audience` event in the [audit trail](/tag/Audit-Trail).
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param spaceId
+	@param audienceId
+	@param destinationId
+	@return ApiRemoveDestinationFromAudienceRequest
+*/
+func (a *ActivationsAPIService) RemoveDestinationFromAudience(
+	ctx context.Context,
+	spaceId string,
+	audienceId string,
+	destinationId string,
+) ApiRemoveDestinationFromAudienceRequest {
+	return ApiRemoveDestinationFromAudienceRequest{
+		ApiService:    a,
+		ctx:           ctx,
+		spaceId:       spaceId,
+		audienceId:    audienceId,
+		destinationId: destinationId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return RemoveDestinationFromAudience200Response
+func (a *ActivationsAPIService) RemoveDestinationFromAudienceExecute(
+	r ApiRemoveDestinationFromAudienceRequest,
+) (*RemoveDestinationFromAudience200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *RemoveDestinationFromAudience200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"ActivationsAPIService.RemoveDestinationFromAudience",
+	)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/spaces/{spaceId}/audiences/{audienceId}/destination-connections/{destinationId}"
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"spaceId"+"}",
+		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		-1,
+	)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"audienceId"+"}",
+		url.PathEscape(parameterValueToString(r.audienceId, "audienceId")),
+		-1,
+	)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"destinationId"+"}",
+		url.PathEscape(parameterValueToString(r.destinationId, "destinationId")),
 		-1,
 	)
 
