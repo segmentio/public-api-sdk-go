@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 71.0.0
+API version: 72.0.0
 Contact: friends@segment.com
 */
 
@@ -38,7 +38,7 @@ type AudienceSummaryWithAudienceTypeAndLookback struct {
 	// Enabled/disabled status for the audience.
 	Enabled    bool                       `json:"enabled"`
 	Definition NullableAudienceDefinition `json:"definition"`
-	// Status for the audience.  Possible values: Backfilling, Computing, Failed, Live, Awaiting Destinations, Disabled.
+	// Status for the audience.  Possible values: Backfilling, Computing, Disabled, Error, Failed, Live, Locked, Not Computing, Preparing, Awaiting Destinations.
 	Status *string `json:"status,omitempty"`
 	// User id who created the audience.
 	CreatedBy string `json:"createdBy"`
