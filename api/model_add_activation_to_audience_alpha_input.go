@@ -20,11 +20,11 @@ var _ MappedNullable = &AddActivationToAudienceAlphaInput{}
 
 // AddActivationToAudienceAlphaInput Input to create an activation.
 type AddActivationToAudienceAlphaInput struct {
-	// Whether the event emitter should be created in an enabled state. Will trigger an audience run if enabled.
+	// Determines whether an activation is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
-	// Whether to perform a resync after creation of the activation.
+	// Determines whether to perform a full resync upon creation. If true, the entire audience is resent to the Destination from scratch. If false, only future changes will be synced.
 	PerformResync bool `json:"performResync"`
-	// Type of activation trigger.
+	// Determines when an event is sent to the Destination.   Possible values: Audience Entered: Sends an event when a profile or entity enters the audience. Audience Exited: Sends an event when a profile or entity exits the audience. Audience Membership Changed: Sends an event for both entries and exits. This does not apply to entities.  Note that events are sent for the profile, unless the audience is a Linked Audience. In that case, events are sent for the target entity defined for that audience.
 	ActivationType string `json:"activationType"`
 	// Name of the activation.
 	ActivationName     string                                `json:"activationName"`
