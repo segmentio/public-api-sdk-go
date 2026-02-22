@@ -46,7 +46,7 @@ func (r ApiAddActivationToAudienceRequest) Execute() (*AddActivationToAudience20
 /*
 AddActivationToAudience Add Activation to Audience
 
-Creates Activation.
+Defines how audience data is sent to a Destination. This step enables the data sync. You must establish a connection (Add Destination to Audience) for this audience before an Activation can be created.
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 
@@ -253,7 +253,9 @@ func (r ApiAddDestinationToAudienceRequest) Execute() (*AddDestinationToAudience
 /*
 AddDestinationToAudience Add Destination to Audience
 
-Adds a Destination to an Audience.
+Establishes a connection between an audience and a Destination. To start syncing data, you must create an Activation for the connection created here.
+
+Note that the Destination must be added to Engage through the Engage Settings page within the App before creating the connection through the API.
 
 • This endpoint is in **Alpha** testing.  Please submit any feedback by sending an email to friends@segment.com.
 

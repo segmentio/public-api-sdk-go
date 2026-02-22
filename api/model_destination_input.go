@@ -20,9 +20,9 @@ var _ MappedNullable = &DestinationInput{}
 
 // DestinationInput The Destination Input Object.
 type DestinationInput struct {
-	// The Destination instance id.
+	// The Destination id. Use the List Destinations endpoint to look up available ids.
 	Id string `json:"id"`
-	// Type of Destination to add to the audience.
+	// The category of the Destination.  Possible values: destination, warehouse.
 	Type string `json:"type"`
 }
 

@@ -23,7 +23,7 @@ type PersonalizationInput struct {
 	Profile Profile `json:"profile"`
 	// Entities V2 Object.
 	Entities []PersonalizationInputEntity `json:"entities,omitempty"`
-	// Sync entity property changes back to Segment. Only applicable if activationType is \"Audience Membership Changed\".
+	// Sync entity property changes to the Destination. Only applicable if activationType is \"Audience Membership Changed\".
 	SyncEntityPropertyChanges *bool `json:"syncEntityPropertyChanges,omitempty"`
 }
 

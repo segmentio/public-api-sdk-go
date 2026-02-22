@@ -20,7 +20,7 @@ var _ MappedNullable = &DestinationSubscriptionConfiguration{}
 
 // DestinationSubscriptionConfiguration Destination Subscription Configuration.
 type DestinationSubscriptionConfiguration struct {
-	// The action id to instantiate.
+	// The id for the action that Segment should perform on the Destination.
 	ActionId string `json:"actionId"`
 	// Represents settings used to configure an action subscription.
 	Settings map[string]interface{} `json:"settings,omitempty"`
