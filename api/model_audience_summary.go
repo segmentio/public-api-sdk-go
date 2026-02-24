@@ -33,7 +33,7 @@ type AudienceSummary struct {
 	// Enabled/disabled status for the audience.
 	Enabled    bool                       `json:"enabled"`
 	Definition NullableAudienceDefinition `json:"definition"`
-	// Status for the audience.  Possible values: Backfilling, Computing, Failed, Live, Awaiting Destinations, Disabled.
+	// Status for the audience.  Possible values: Backfilling, Computing, Disabled, Error, Failed, Live, Locked, Not Computing, Preparing, Awaiting Destinations.
 	Status *string `json:"status,omitempty"`
 	// User id who created the audience.
 	CreatedBy string `json:"createdBy"`
