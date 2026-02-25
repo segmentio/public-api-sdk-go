@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**RemoveActivationFromAudience**](ActivationsAPI.md#RemoveActivationFromAudience) | **Delete** /spaces/{spaceId}/audiences/{audienceId}/activations/{id} | Remove Activation from Audience
 [**RemoveDestinationFromAudience**](ActivationsAPI.md#RemoveDestinationFromAudience) | **Delete** /spaces/{spaceId}/audiences/{audienceId}/destination-connections/{destinationId} | Remove Destination from Audience
 [**UpdateActivationForAudience**](ActivationsAPI.md#UpdateActivationForAudience) | **Patch** /spaces/{spaceId}/audiences/{audienceId}/activations/{id} | Update Activation for Audience
+[**UpdateDestinationForAudience**](ActivationsAPI.md#UpdateDestinationForAudience) | **Patch** /spaces/{spaceId}/audiences/{audienceId}/destination-connections/{destinationId} | Update Destination for Audience
 
 
 
@@ -759,6 +760,92 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UpdateActivationForAudience200Response**](UpdateActivationForAudience200Response.md)
+
+### Authorization
+
+[token](../README.md#token)
+
+### HTTP request headers
+
+- **Content-Type**: application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Operation: UpdateDestinationForAudience
+
+> UpdateDestinationForAudience200Response UpdateDestinationForAudience(ctx, spaceId, audienceId, destinationId).UpdateDestinationForAudienceAlphaInput(updateDestinationForAudienceAlphaInput).Execute()
+
+Update Destination for Audience
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    api "github.com/segmentio/public-api-sdk-go"
+)
+
+func main() {
+    spaceId := "spa_9aQ1Lj62S4bomZKLF4DPqW" // string | 
+    audienceId := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
+    destinationId := "ii_123456789" // string | 
+    updateDestinationForAudienceAlphaInput := *api.NewUpdateDestinationForAudienceAlphaInput() // UpdateDestinationForAudienceAlphaInput | 
+
+    configuration := api.NewConfiguration()
+    apiClient := api.NewAPIClient(configuration)
+    token := "<BEARER_TOKEN>"
+    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
+    resp, r, err := apiClient.ActivationsAPI.UpdateDestinationForAudience(ctx, spaceId, audienceId, destinationId).UpdateDestinationForAudienceAlphaInput(updateDestinationForAudienceAlphaInput).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ActivationsAPI.UpdateDestinationForAudience``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+        responseErrors := api.UnwrapFullErrors(err)
+        if responseErrors != nil {
+            for _, responseError := range responseErrors.Errors {
+                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
+            }
+        }
+    }
+    // response from `UpdateDestinationForAudience`: UpdateDestinationForAudience200Response
+    fmt.Fprintf(os.Stdout, "Response from `ActivationsAPI.UpdateDestinationForAudience`: %v\n", resp.GetData())
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**spaceId** | **string** |  | 
+**audienceId** | **string** |  | 
+**destinationId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateDestinationForAudienceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+ **updateDestinationForAudienceAlphaInput** | [**UpdateDestinationForAudienceAlphaInput**](UpdateDestinationForAudienceAlphaInput.md) |  | 
+
+### Return type
+
+[**UpdateDestinationForAudience200Response**](UpdateDestinationForAudience200Response.md)
 
 ### Authorization
 
