@@ -24,6 +24,8 @@ type IDSyncConfigurationInput struct {
 	ExternalId string `json:"externalId"`
 	// The rule for selecting which identifiers to sync from a profile.  Possible values: first: Syncs only the oldest recorded value. last: Syncs only the most recently updated value. all: Syncs every value found on the profile (sends multiple events).
 	Strategy string `json:"strategy"`
+	// Optional destination-specific identifier to map to (for example, \"Email_Address_c\").
+	MapTo *string `json:"mapTo,omitempty"`
 }
 
 // NewIDSyncConfigurationInput instantiates a new IDSyncConfigurationInput object
@@ -93,6 +95,38 @@ func (o *IDSyncConfigurationInput) SetStrategy(v string) {
 	o.Strategy = v
 }
 
+// GetMapTo returns the MapTo field value if set, zero value otherwise.
+func (o *IDSyncConfigurationInput) GetMapTo() string {
+	if o == nil || IsNil(o.MapTo) {
+		var ret string
+		return ret
+	}
+	return *o.MapTo
+}
+
+// GetMapToOk returns a tuple with the MapTo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IDSyncConfigurationInput) GetMapToOk() (*string, bool) {
+	if o == nil || IsNil(o.MapTo) {
+		return nil, false
+	}
+	return o.MapTo, true
+}
+
+// HasMapTo returns a boolean if a field has been set.
+func (o *IDSyncConfigurationInput) HasMapTo() bool {
+	if o != nil && !IsNil(o.MapTo) {
+		return true
+	}
+
+	return false
+}
+
+// SetMapTo gets a reference to the given string and assigns it to the MapTo field.
+func (o *IDSyncConfigurationInput) SetMapTo(v string) {
+	o.MapTo = &v
+}
+
 func (o IDSyncConfigurationInput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -105,6 +139,9 @@ func (o IDSyncConfigurationInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["externalId"] = o.ExternalId
 	toSerialize["strategy"] = o.Strategy
+	if !IsNil(o.MapTo) {
+		toSerialize["mapTo"] = o.MapTo
+	}
 	return toSerialize, nil
 }
 
