@@ -7,7 +7,6 @@ Method | HTTP request | Description
 [**CreateCloudSourceRegulation**](DeletionAndSuppressionAPI.md#CreateCloudSourceRegulation) | **Post** /regulations/cloudsources/{sourceId} | Create Cloud Source Regulation
 [**CreateSourceRegulation**](DeletionAndSuppressionAPI.md#CreateSourceRegulation) | **Post** /regulations/sources/{sourceId} | Create Source Regulation
 [**CreateWorkspaceRegulation**](DeletionAndSuppressionAPI.md#CreateWorkspaceRegulation) | **Post** /regulations | Create Workspace Regulation
-[**DeleteRegulation**](DeletionAndSuppressionAPI.md#DeleteRegulation) | **Delete** /regulations/{regulateId} | Delete Regulation
 [**GetRegulation**](DeletionAndSuppressionAPI.md#GetRegulation) | **Get** /regulations/{regulateId} | Get Regulation
 [**ListRegulationsFromSource**](DeletionAndSuppressionAPI.md#ListRegulationsFromSource) | **Get** /regulations/sources/{sourceId} | List Regulations from Source
 [**ListSuppressions**](DeletionAndSuppressionAPI.md#ListSuppressions) | **Get** /suppressions | List Suppressions
@@ -242,84 +241,6 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json, application/vnd.segment.v1+json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
-- **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## Operation: DeleteRegulation
-
-> DeleteRegulation200Response DeleteRegulation(ctx, regulateId).Execute()
-
-Delete Regulation
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    api "github.com/segmentio/public-api-sdk-go"
-)
-
-func main() {
-    regulateId := "1qJkfE1tpwvQcklImGksLN629wn" // string | 
-
-    configuration := api.NewConfiguration()
-    apiClient := api.NewAPIClient(configuration)
-    token := "<BEARER_TOKEN>"
-    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.DeletionAndSuppressionAPI.DeleteRegulation(ctx, regulateId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DeletionAndSuppressionAPI.DeleteRegulation``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-        responseErrors := api.UnwrapFullErrors(err)
-        if responseErrors != nil {
-            for _, responseError := range responseErrors.Errors {
-                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
-            }
-        }
-    }
-    // response from `DeleteRegulation`: DeleteRegulation200Response
-    fmt.Fprintf(os.Stdout, "Response from `DeletionAndSuppressionAPI.DeleteRegulation`: %v\n", resp.GetData())
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**regulateId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteRegulationRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**DeleteRegulation200Response**](DeleteRegulation200Response.md)
-
-### Authorization
-
-[token](../README.md#token)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
 - **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
