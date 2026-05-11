@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 73.0.1
+API version: 73.0.0
 Contact: friends@segment.com
 */
 
@@ -24,12 +24,10 @@ type AddActivationToAudienceAlphaInput struct {
 	Enabled *bool `json:"enabled,omitempty"`
 	// Determines whether to perform a full resync upon creation. If true, the entire audience is resent to the Destination from scratch. If false, only future changes will be synced.
 	PerformResync bool `json:"performResync"`
-	// Determines when an event is sent to the Destination.  Possible values: Audience Entered: Sends an event when a profile or entity enters the audience. Audience Exited: Sends an event when a profile or entity exits the audience. Audience Membership Changed: Sends an event for both entries and exits. This does not apply to entities.  Note that events are sent for the profile, unless the audience is a Linked Audience. In that case, events are sent for the target entity defined for that audience.
+	// Determines when an event is sent to the Destination.   Possible values: Audience Entered: Sends an event when a profile or entity enters the audience. Audience Exited: Sends an event when a profile or entity exits the audience. Audience Membership Changed: Sends an event for both entries and exits. This does not apply to entities.  Note that events are sent for the profile, unless the audience is a Linked Audience. In that case, events are sent for the target entity defined for that audience.
 	ActivationType string `json:"activationType"`
-	// Activation name. For Warehouse Destinations, this is used as the table name.
-	ActivationName string `json:"activationName"`
-	// Optional human-readable label for the activation. Only supported for Warehouse Destinations. When omitted, the activationName is used as the label.
-	DisplayName        *string                               `json:"displayName,omitempty"`
+	// Name of the activation.
+	ActivationName     string                                `json:"activationName"`
 	Personalization    PersonalizationInput                  `json:"personalization"`
 	DestinationMapping *DestinationSubscriptionConfiguration `json:"destinationMapping,omitempty"`
 }
@@ -164,38 +162,6 @@ func (o *AddActivationToAudienceAlphaInput) SetActivationName(v string) {
 	o.ActivationName = v
 }
 
-// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
-func (o *AddActivationToAudienceAlphaInput) GetDisplayName() string {
-	if o == nil || IsNil(o.DisplayName) {
-		var ret string
-		return ret
-	}
-	return *o.DisplayName
-}
-
-// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *AddActivationToAudienceAlphaInput) GetDisplayNameOk() (*string, bool) {
-	if o == nil || IsNil(o.DisplayName) {
-		return nil, false
-	}
-	return o.DisplayName, true
-}
-
-// HasDisplayName returns a boolean if a field has been set.
-func (o *AddActivationToAudienceAlphaInput) HasDisplayName() bool {
-	if o != nil && !IsNil(o.DisplayName) {
-		return true
-	}
-
-	return false
-}
-
-// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
-func (o *AddActivationToAudienceAlphaInput) SetDisplayName(v string) {
-	o.DisplayName = &v
-}
-
 // GetPersonalization returns the Personalization field value
 func (o *AddActivationToAudienceAlphaInput) GetPersonalization() PersonalizationInput {
 	if o == nil {
@@ -270,9 +236,6 @@ func (o AddActivationToAudienceAlphaInput) ToMap() (map[string]interface{}, erro
 	toSerialize["performResync"] = o.PerformResync
 	toSerialize["activationType"] = o.ActivationType
 	toSerialize["activationName"] = o.ActivationName
-	if !IsNil(o.DisplayName) {
-		toSerialize["displayName"] = o.DisplayName
-	}
 	toSerialize["personalization"] = o.Personalization
 	if !IsNil(o.DestinationMapping) {
 		toSerialize["destinationMapping"] = o.DestinationMapping

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 73.0.1
+API version: 73.0.0
 Contact: friends@segment.com
 */
 
@@ -32,12 +32,10 @@ type ActivationOutput struct {
 	AudienceId string `json:"audienceId"`
 	// The connection id.
 	ConnectionId string `json:"connectionId"`
-	// Determines when an event is sent to the Destination.  Possible values: Audience Entered: Sends an event when a profile or entity enters the audience. Audience Exited: Sends an event when a profile or entity exits the audience. Audience Membership Changed: Sends an event for both entries and exits. This does not apply to entities.  Note that events are sent for the profile, unless the audience is a Linked Audience. In that case, events are sent for the target entity defined for that audience.
+	// Determines when an event is sent to the Destination.   Possible values: Audience Entered: Sends an event when a profile or entity enters the audience. Audience Exited: Sends an event when a profile or entity exits the audience. Audience Membership Changed: Sends an event for both entries and exits. This does not apply to entities.  Note that events are sent for the profile, unless the audience is a Linked Audience. In that case, events are sent for the target entity defined for that audience.
 	ActivationType string `json:"activationType"`
-	// Activation name. For Warehouse Destinations, this is the table name.
-	ActivationName string `json:"activationName"`
-	// Human-readable label for the activation. Only present for Warehouse Destinations that have a display name configured. When null, the activationName serves as the label.
-	DisplayName        NullableString                        `json:"displayName,omitempty"`
+	// Name of the activation.
+	ActivationName     string                                `json:"activationName"`
 	Personalization    PersonalizationInput                  `json:"personalization"`
 	DestinationMapping *DestinationSubscriptionConfiguration `json:"destinationMapping,omitempty"`
 	// Indicates if a full resync is currently pending or in progress.
@@ -272,49 +270,6 @@ func (o *ActivationOutput) SetActivationName(v string) {
 	o.ActivationName = v
 }
 
-// GetDisplayName returns the DisplayName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ActivationOutput) GetDisplayName() string {
-	if o == nil || IsNil(o.DisplayName.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.DisplayName.Get()
-}
-
-// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ActivationOutput) GetDisplayNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.DisplayName.Get(), o.DisplayName.IsSet()
-}
-
-// HasDisplayName returns a boolean if a field has been set.
-func (o *ActivationOutput) HasDisplayName() bool {
-	if o != nil && o.DisplayName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDisplayName gets a reference to the given NullableString and assigns it to the DisplayName field.
-func (o *ActivationOutput) SetDisplayName(v string) {
-	o.DisplayName.Set(&v)
-}
-
-// SetDisplayNameNil sets the value for DisplayName to be an explicit nil
-func (o *ActivationOutput) SetDisplayNameNil() {
-	o.DisplayName.Set(nil)
-}
-
-// UnsetDisplayName ensures that no value is present for DisplayName, not even an explicit nil
-func (o *ActivationOutput) UnsetDisplayName() {
-	o.DisplayName.Unset()
-}
-
 // GetPersonalization returns the Personalization field value
 func (o *ActivationOutput) GetPersonalization() PersonalizationInput {
 	if o == nil {
@@ -421,9 +376,6 @@ func (o ActivationOutput) ToMap() (map[string]interface{}, error) {
 	toSerialize["connectionId"] = o.ConnectionId
 	toSerialize["activationType"] = o.ActivationType
 	toSerialize["activationName"] = o.ActivationName
-	if o.DisplayName.IsSet() {
-		toSerialize["displayName"] = o.DisplayName.Get()
-	}
 	toSerialize["personalization"] = o.Personalization
 	if !IsNil(o.DestinationMapping) {
 		toSerialize["destinationMapping"] = o.DestinationMapping

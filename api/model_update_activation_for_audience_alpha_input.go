@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 73.0.1
+API version: 73.0.0
 Contact: friends@segment.com
 */
 
@@ -22,10 +22,8 @@ var _ MappedNullable = &UpdateActivationForAudienceAlphaInput{}
 type UpdateActivationForAudienceAlphaInput struct {
 	// Determines whether an activation is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
-	// Activation name. For Warehouse Destinations, this is used as the table name.
-	ActivationName *string `json:"activationName,omitempty"`
-	// Optional human-readable label for the activation. Only supported for Warehouse Destinations. When omitted, the activationName is used as the label.
-	DisplayName        *string                               `json:"displayName,omitempty"`
+	// Activation name.
+	ActivationName     *string                               `json:"activationName,omitempty"`
 	Personalization    *PersonalizationInput                 `json:"personalization,omitempty"`
 	DestinationMapping *DestinationSubscriptionConfiguration `json:"destinationMapping,omitempty"`
 	// Determines whether to perform a full resync after the update. If true, the entire audience is resent to the Destination using the updated configuration. If false, the update applies only to future syncs.
@@ -111,38 +109,6 @@ func (o *UpdateActivationForAudienceAlphaInput) HasActivationName() bool {
 // SetActivationName gets a reference to the given string and assigns it to the ActivationName field.
 func (o *UpdateActivationForAudienceAlphaInput) SetActivationName(v string) {
 	o.ActivationName = &v
-}
-
-// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
-func (o *UpdateActivationForAudienceAlphaInput) GetDisplayName() string {
-	if o == nil || IsNil(o.DisplayName) {
-		var ret string
-		return ret
-	}
-	return *o.DisplayName
-}
-
-// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateActivationForAudienceAlphaInput) GetDisplayNameOk() (*string, bool) {
-	if o == nil || IsNil(o.DisplayName) {
-		return nil, false
-	}
-	return o.DisplayName, true
-}
-
-// HasDisplayName returns a boolean if a field has been set.
-func (o *UpdateActivationForAudienceAlphaInput) HasDisplayName() bool {
-	if o != nil && !IsNil(o.DisplayName) {
-		return true
-	}
-
-	return false
-}
-
-// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
-func (o *UpdateActivationForAudienceAlphaInput) SetDisplayName(v string) {
-	o.DisplayName = &v
 }
 
 // GetPersonalization returns the Personalization field value if set, zero value otherwise.
@@ -258,9 +224,6 @@ func (o UpdateActivationForAudienceAlphaInput) ToMap() (map[string]interface{}, 
 	}
 	if !IsNil(o.ActivationName) {
 		toSerialize["activationName"] = o.ActivationName
-	}
-	if !IsNil(o.DisplayName) {
-		toSerialize["displayName"] = o.DisplayName
 	}
 	if !IsNil(o.Personalization) {
 		toSerialize["personalization"] = o.Personalization
