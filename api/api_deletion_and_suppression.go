@@ -251,8 +251,6 @@ Creates a Source-scoped regulation.
 
 	Please Note: Suppression rules at the Workspace level take precedence over those at the Source level. If a user has been suppressed at the Workspace level, any attempt to un-suppress at the Source level is not supported and the processing of the request will fail in Segment
 
-• When called, this endpoint may generate the `Source Regulation Created` event in the [audit trail](/tag/Audit-Trail).
-
 Config API omitted fields:
 - `attributes`,
 - `userAgent`
@@ -449,8 +447,6 @@ func (r ApiCreateWorkspaceRegulationRequest) Execute() (*CreateWorkspaceRegulati
 CreateWorkspaceRegulation Create Workspace Regulation
 
 Creates a Workspace-scoped regulation.
-
-• When called, this endpoint may generate the `Workspace Regulation Created` event in the [audit trail](/tag/Audit-Trail).
 
 Config API omitted fields:
 - `attributes`,
