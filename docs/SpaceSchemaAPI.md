@@ -471,7 +471,7 @@ func main() {
     spaceId := "spaceId" // string | 
     eventName := "Order Completed" // string | 
     propertyName := "revenue" // string | 
-    propertyType := "property" // string | The property type.  This parameter exists in alpha.
+    propertyType := api.EventPropertyType("CONTEXT") // EventPropertyType | The property type.  This parameter exists in alpha.
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
@@ -513,7 +513,7 @@ Name | Type | Description  | Notes
 
 
 
- **propertyType** | **string** | The property type.  This parameter exists in alpha. | 
+ **propertyType** | [**EventPropertyType**](EventPropertyType.md) | The property type.  This parameter exists in alpha. | 
 
 ### Return type
 

@@ -1098,12 +1098,12 @@ type ApiListSampleValuesFromEventPropertyRequest struct {
 	spaceId      string
 	eventName    string
 	propertyName string
-	propertyType *string
+	propertyType *EventPropertyType
 }
 
 // The property type.  This parameter exists in alpha.
 func (r ApiListSampleValuesFromEventPropertyRequest) PropertyType(
-	propertyType string,
+	propertyType EventPropertyType,
 ) ApiListSampleValuesFromEventPropertyRequest {
 	r.propertyType = &propertyType
 	return r
