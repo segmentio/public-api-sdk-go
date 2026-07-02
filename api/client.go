@@ -83,6 +83,8 @@ type APIClient struct {
 
 	IAMUsersAPI *IAMUsersAPIService
 
+	JourneysAPI *JourneysAPIService
+
 	LabelsAPI *LabelsAPIService
 
 	LivePluginsAPI *LivePluginsAPIService
@@ -147,6 +149,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.IAMGroupsAPI = (*IAMGroupsAPIService)(&c.common)
 	c.IAMRolesAPI = (*IAMRolesAPIService)(&c.common)
 	c.IAMUsersAPI = (*IAMUsersAPIService)(&c.common)
+	c.JourneysAPI = (*JourneysAPIService)(&c.common)
 	c.LabelsAPI = (*LabelsAPIService)(&c.common)
 	c.LivePluginsAPI = (*LivePluginsAPIService)(&c.common)
 	c.MonthlyTrackedUsersAPI = (*MonthlyTrackedUsersAPIService)(&c.common)
