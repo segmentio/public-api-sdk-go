@@ -1557,7 +1557,8 @@ Returns a list of Traits for a Space.
 
 	<ul style="margin: 0; padding-left: 20px; font-size: 13px;">
 	  <li style="margin-bottom: 6px;"><strong>Forward-only pagination</strong>: this endpoint does not support backward traversal. The <code>pagination.previous</code> field is always absent; use <code>pagination.next</code> to advance through pages.</li>
-	  <li style="margin-bottom: 6px;"><strong>Deduplication guarantee</strong>: when sorting by <code>lastSeenAt</code>, results are fully deduplicated for Spaces with up to 2,500 traits. For Spaces with more than 2,500 traits, duplicate trait entries may appear across pages due to an internal pagination tradeoff. Sorting by <code>trait</code> is not affected.</li>
+	  <li style="margin-bottom: 6px;"><strong>Approximate total count</strong>: <code>pagination.totalEntries</code> is an upper bound that decreases as you paginate — the final page reflects the exact deduplicated count.</li>
+	  <li style="margin-bottom: 6px;"><strong>Duplicate entries</strong>: when sorting by <code>lastSeenAt</code>, duplicate trait entries may appear across pages for Spaces with more than 2,500 traits. Sorting by <code>trait</code> is not affected.</li>
 	</ul>
 
 </div>
