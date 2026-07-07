@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 73.0.0
+API version: 73.0.1
 Contact: friends@segment.com
 */
 
@@ -18,13 +18,13 @@ import (
 // checks if the AddActivationToAudienceAlphaInput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AddActivationToAudienceAlphaInput{}
 
-// AddActivationToAudienceAlphaInput Input to create an activation.
+// AddActivationToAudienceAlphaInput struct for AddActivationToAudienceAlphaInput
 type AddActivationToAudienceAlphaInput struct {
 	// Determines whether an activation is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
 	// Determines whether to perform a full resync upon creation. If true, the entire audience is resent to the Destination from scratch. If false, only future changes will be synced.
 	PerformResync bool `json:"performResync"`
-	// Determines when an event is sent to the Destination.  Possible values: Audience Entered: Sends an event when a profile or entity enters the audience. Audience Exited: Sends an event when a profile or entity exits the audience. Audience Membership Changed: Sends an event for both entries and exits. This does not apply to entities.  Note that events are sent for the profile, unless the audience is a Linked Audience. In that case, events are sent for the target entity defined for that audience.
+	// Determines when an event is sent to the Destination.  Possible values: Audience Entered: Sends an event when a profile or entity enters the audience. Audience Exited: Sends an event when a profile or entity exits the audience. Audience Membership Changed: Sends an event for both entries and exits. This does not apply to entities. Entity Added: Sends an event when an entity is added to the audience. Entity Removed: Sends an event when an entity is removed from the audience.  Note that events are sent for the profile, unless the audience is a Linked Audience. In that case, events are sent for the target entity defined for that audience.
 	ActivationType string `json:"activationType"`
 	// Activation name. For Warehouse Destinations, this is used as the table name.
 	ActivationName string `json:"activationName"`
