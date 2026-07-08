@@ -18,16 +18,16 @@ import (
 // checks if the CreateJourneyAlphaOutput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateJourneyAlphaOutput{}
 
-// CreateJourneyAlphaOutput Output from create journey.
+// CreateJourneyAlphaOutput Output from create event-triggered journey.
 type CreateJourneyAlphaOutput struct {
-	Journey JourneySummary `json:"journey"`
+	Journey EventTriggeredJourneySummary `json:"journey"`
 }
 
 // NewCreateJourneyAlphaOutput instantiates a new CreateJourneyAlphaOutput object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateJourneyAlphaOutput(journey JourneySummary) *CreateJourneyAlphaOutput {
+func NewCreateJourneyAlphaOutput(journey EventTriggeredJourneySummary) *CreateJourneyAlphaOutput {
 	this := CreateJourneyAlphaOutput{}
 	this.Journey = journey
 	return &this
@@ -42,9 +42,9 @@ func NewCreateJourneyAlphaOutputWithDefaults() *CreateJourneyAlphaOutput {
 }
 
 // GetJourney returns the Journey field value
-func (o *CreateJourneyAlphaOutput) GetJourney() JourneySummary {
+func (o *CreateJourneyAlphaOutput) GetJourney() EventTriggeredJourneySummary {
 	if o == nil {
-		var ret JourneySummary
+		var ret EventTriggeredJourneySummary
 		return ret
 	}
 
@@ -53,7 +53,7 @@ func (o *CreateJourneyAlphaOutput) GetJourney() JourneySummary {
 
 // GetJourneyOk returns a tuple with the Journey field value
 // and a boolean to check if the value has been set.
-func (o *CreateJourneyAlphaOutput) GetJourneyOk() (*JourneySummary, bool) {
+func (o *CreateJourneyAlphaOutput) GetJourneyOk() (*EventTriggeredJourneySummary, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -61,7 +61,7 @@ func (o *CreateJourneyAlphaOutput) GetJourneyOk() (*JourneySummary, bool) {
 }
 
 // SetJourney sets field value
-func (o *CreateJourneyAlphaOutput) SetJourney(v JourneySummary) {
+func (o *CreateJourneyAlphaOutput) SetJourney(v EventTriggeredJourneySummary) {
 	o.Journey = v
 }
 

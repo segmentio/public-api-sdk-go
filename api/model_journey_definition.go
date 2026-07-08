@@ -18,7 +18,7 @@ import (
 // checks if the JourneyDefinition type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &JourneyDefinition{}
 
-// JourneyDefinition The XState-format definition of a journey. Passed through to personas-service as-is.
+// JourneyDefinition The XState-format definition of an event-triggered journey. Passed through to personas-service as-is.
 type JourneyDefinition struct {
 	// The key of the initial state.
 	Initial string `json:"initial"`

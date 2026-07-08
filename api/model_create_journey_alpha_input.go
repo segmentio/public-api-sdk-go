@@ -18,7 +18,7 @@ import (
 // checks if the CreateJourneyAlphaInput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreateJourneyAlphaInput{}
 
-// CreateJourneyAlphaInput Input to create a journey.
+// CreateJourneyAlphaInput Input to create an event-triggered journey.
 type CreateJourneyAlphaInput struct {
 	// Display name for the journey.
 	Name string `json:"name"`
