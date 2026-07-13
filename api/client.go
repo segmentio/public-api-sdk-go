@@ -61,6 +61,8 @@ type APIClient struct {
 
 	ComputedTraitsAPI *ComputedTraitsAPIService
 
+	CredentialsAPI *CredentialsAPIService
+
 	CustomerInsightsAPI *CustomerInsightsAPIService
 
 	DbtAPI *DbtAPIService
@@ -138,6 +140,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AuditTrailAPI = (*AuditTrailAPIService)(&c.common)
 	c.CatalogAPI = (*CatalogAPIService)(&c.common)
 	c.ComputedTraitsAPI = (*ComputedTraitsAPIService)(&c.common)
+	c.CredentialsAPI = (*CredentialsAPIService)(&c.common)
 	c.CustomerInsightsAPI = (*CustomerInsightsAPIService)(&c.common)
 	c.DbtAPI = (*DbtAPIService)(&c.common)
 	c.DeletionAndSuppressionAPI = (*DeletionAndSuppressionAPIService)(&c.common)
