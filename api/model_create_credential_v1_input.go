@@ -22,7 +22,7 @@ var _ MappedNullable = &CreateCredentialV1Input{}
 type CreateCredentialV1Input struct {
 	// A human-readable name for this Credential.
 	Name string `json:"name"`
-	// A key-value object that contains type-specific settings for a Credential, plus a required `type` discriminator (e.g. `Snowflake`, `Redshift`) that determines which fields are expected.
+	// A key-value object that contains type-specific settings for a Credential, plus a required `type` discriminator (for example `Snowflake`, `Redshift`) that determines which fields are expected.
 	Settings map[string]interface{} `json:"settings"`
 }
 

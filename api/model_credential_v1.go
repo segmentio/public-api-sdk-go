@@ -18,7 +18,7 @@ import (
 // checks if the CredentialV1 type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CredentialV1{}
 
-// CredentialV1 Defines a reusable Credential that can be used to connect one or more Warehouses to a data warehouse.
+// CredentialV1 Defines a reusable Credential that can be used to connect one or more Warehouses to a data Warehouse.
 type CredentialV1 struct {
 	// The id of the Credential.
 	Id string `json:"id"`
@@ -26,7 +26,7 @@ type CredentialV1 struct {
 	WorkspaceId string `json:"workspaceId"`
 	// An optional human-readable name for this Credential.
 	Name string `json:"name"`
-	// A key-value object that contains type-specific settings for a Credential, plus a required `type` discriminator (e.g. `Snowflake`, `Redshift`) that determines which fields are expected.
+	// A key-value object that contains type-specific settings for a Credential, plus a required `type` discriminator (for example `Snowflake`, `Redshift`) that determines which fields are expected.
 	Settings map[string]interface{} `json:"settings"`
 	// The time this Credential was created.
 	CreatedAt string `json:"createdAt"`
