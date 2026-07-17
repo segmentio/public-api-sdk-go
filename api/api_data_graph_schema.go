@@ -20,12 +20,12 @@ import (
 	"strings"
 )
 
-// SpaceSchemaAPIService SpaceSchemaAPI service
-type SpaceSchemaAPIService service
+// DataGraphSchemaAPIService DataGraphSchemaAPI service
+type DataGraphSchemaAPIService service
 
 type ApiListEntityPathsRequest struct {
 	ctx        context.Context
-	ApiService *SpaceSchemaAPIService
+	ApiService *DataGraphSchemaAPIService
 	spaceId    string
 	pagination *PaginationInput
 	search     *string
@@ -62,7 +62,7 @@ The rate limit for this endpoint is 25 requests per minute, which is lower than 
 	@param spaceId
 	@return ApiListEntityPathsRequest
 */
-func (a *SpaceSchemaAPIService) ListEntityPaths(
+func (a *DataGraphSchemaAPIService) ListEntityPaths(
 	ctx context.Context,
 	spaceId string,
 ) ApiListEntityPathsRequest {
@@ -76,7 +76,7 @@ func (a *SpaceSchemaAPIService) ListEntityPaths(
 // Execute executes the request
 //
 //	@return ListEntityPaths200Response
-func (a *SpaceSchemaAPIService) ListEntityPathsExecute(
+func (a *DataGraphSchemaAPIService) ListEntityPathsExecute(
 	r ApiListEntityPathsRequest,
 ) (*ListEntityPaths200Response, *http.Response, error) {
 	var (
@@ -88,7 +88,7 @@ func (a *SpaceSchemaAPIService) ListEntityPathsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SpaceSchemaAPIService.ListEntityPaths",
+		"DataGraphSchemaAPIService.ListEntityPaths",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -216,7 +216,7 @@ func (a *SpaceSchemaAPIService) ListEntityPathsExecute(
 
 type ApiListEventsRequest struct {
 	ctx        context.Context
-	ApiService *SpaceSchemaAPIService
+	ApiService *DataGraphSchemaAPIService
 	spaceId    string
 	pagination *PaginationInput
 	sortBy     *string
@@ -265,7 +265,7 @@ The rate limit for this endpoint is 25 requests per minute, which is lower than 
 	@param spaceId
 	@return ApiListEventsRequest
 */
-func (a *SpaceSchemaAPIService) ListEvents(
+func (a *DataGraphSchemaAPIService) ListEvents(
 	ctx context.Context,
 	spaceId string,
 ) ApiListEventsRequest {
@@ -279,7 +279,7 @@ func (a *SpaceSchemaAPIService) ListEvents(
 // Execute executes the request
 //
 //	@return ListEvents200Response
-func (a *SpaceSchemaAPIService) ListEventsExecute(
+func (a *DataGraphSchemaAPIService) ListEventsExecute(
 	r ApiListEventsRequest,
 ) (*ListEvents200Response, *http.Response, error) {
 	var (
@@ -291,7 +291,7 @@ func (a *SpaceSchemaAPIService) ListEventsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SpaceSchemaAPIService.ListEvents",
+		"DataGraphSchemaAPIService.ListEvents",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -425,7 +425,7 @@ func (a *SpaceSchemaAPIService) ListEventsExecute(
 
 type ApiListPropertiesFromEntityRequest struct {
 	ctx                 context.Context
-	ApiService          *SpaceSchemaAPIService
+	ApiService          *DataGraphSchemaAPIService
 	spaceId             string
 	entitySlug          string
 	pagination          *PaginationInput
@@ -483,7 +483,7 @@ The rate limit for this endpoint is 25 requests per minute, which is lower than 
 	@param entitySlug
 	@return ApiListPropertiesFromEntityRequest
 */
-func (a *SpaceSchemaAPIService) ListPropertiesFromEntity(
+func (a *DataGraphSchemaAPIService) ListPropertiesFromEntity(
 	ctx context.Context,
 	spaceId string,
 	entitySlug string,
@@ -499,7 +499,7 @@ func (a *SpaceSchemaAPIService) ListPropertiesFromEntity(
 // Execute executes the request
 //
 //	@return ListPropertiesFromEntity200Response
-func (a *SpaceSchemaAPIService) ListPropertiesFromEntityExecute(
+func (a *DataGraphSchemaAPIService) ListPropertiesFromEntityExecute(
 	r ApiListPropertiesFromEntityRequest,
 ) (*ListPropertiesFromEntity200Response, *http.Response, error) {
 	var (
@@ -511,7 +511,7 @@ func (a *SpaceSchemaAPIService) ListPropertiesFromEntityExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SpaceSchemaAPIService.ListPropertiesFromEntity",
+		"DataGraphSchemaAPIService.ListPropertiesFromEntity",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -653,7 +653,7 @@ func (a *SpaceSchemaAPIService) ListPropertiesFromEntityExecute(
 
 type ApiListPropertiesFromEventRequest struct {
 	ctx                 context.Context
-	ApiService          *SpaceSchemaAPIService
+	ApiService          *DataGraphSchemaAPIService
 	spaceId             string
 	eventName           string
 	pagination          *PaginationInput
@@ -726,7 +726,7 @@ The rate limit for this endpoint is 25 requests per minute, which is lower than 
 	@param eventName
 	@return ApiListPropertiesFromEventRequest
 */
-func (a *SpaceSchemaAPIService) ListPropertiesFromEvent(
+func (a *DataGraphSchemaAPIService) ListPropertiesFromEvent(
 	ctx context.Context,
 	spaceId string,
 	eventName string,
@@ -742,7 +742,7 @@ func (a *SpaceSchemaAPIService) ListPropertiesFromEvent(
 // Execute executes the request
 //
 //	@return ListPropertiesFromEvent200Response
-func (a *SpaceSchemaAPIService) ListPropertiesFromEventExecute(
+func (a *DataGraphSchemaAPIService) ListPropertiesFromEventExecute(
 	r ApiListPropertiesFromEventRequest,
 ) (*ListPropertiesFromEvent200Response, *http.Response, error) {
 	var (
@@ -754,7 +754,7 @@ func (a *SpaceSchemaAPIService) ListPropertiesFromEventExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SpaceSchemaAPIService.ListPropertiesFromEvent",
+		"DataGraphSchemaAPIService.ListPropertiesFromEvent",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -905,7 +905,7 @@ func (a *SpaceSchemaAPIService) ListPropertiesFromEventExecute(
 
 type ApiListSampleValuesFromEntityPropertyRequest struct {
 	ctx          context.Context
-	ApiService   *SpaceSchemaAPIService
+	ApiService   *DataGraphSchemaAPIService
 	spaceId      string
 	entitySlug   string
 	propertyName string
@@ -930,7 +930,7 @@ The rate limit for this endpoint is 25 requests per minute, which is lower than 
 	@param propertyName
 	@return ApiListSampleValuesFromEntityPropertyRequest
 */
-func (a *SpaceSchemaAPIService) ListSampleValuesFromEntityProperty(
+func (a *DataGraphSchemaAPIService) ListSampleValuesFromEntityProperty(
 	ctx context.Context,
 	spaceId string,
 	entitySlug string,
@@ -948,7 +948,7 @@ func (a *SpaceSchemaAPIService) ListSampleValuesFromEntityProperty(
 // Execute executes the request
 //
 //	@return ListSampleValuesFromEntityProperty200Response
-func (a *SpaceSchemaAPIService) ListSampleValuesFromEntityPropertyExecute(
+func (a *DataGraphSchemaAPIService) ListSampleValuesFromEntityPropertyExecute(
 	r ApiListSampleValuesFromEntityPropertyRequest,
 ) (*ListSampleValuesFromEntityProperty200Response, *http.Response, error) {
 	var (
@@ -960,7 +960,7 @@ func (a *SpaceSchemaAPIService) ListSampleValuesFromEntityPropertyExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SpaceSchemaAPIService.ListSampleValuesFromEntityProperty",
+		"DataGraphSchemaAPIService.ListSampleValuesFromEntityProperty",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1094,7 +1094,7 @@ func (a *SpaceSchemaAPIService) ListSampleValuesFromEntityPropertyExecute(
 
 type ApiListSampleValuesFromEventPropertyRequest struct {
 	ctx          context.Context
-	ApiService   *SpaceSchemaAPIService
+	ApiService   *DataGraphSchemaAPIService
 	spaceId      string
 	eventName    string
 	propertyName string
@@ -1128,7 +1128,7 @@ The rate limit for this endpoint is 25 requests per minute, which is lower than 
 	@param propertyName
 	@return ApiListSampleValuesFromEventPropertyRequest
 */
-func (a *SpaceSchemaAPIService) ListSampleValuesFromEventProperty(
+func (a *DataGraphSchemaAPIService) ListSampleValuesFromEventProperty(
 	ctx context.Context,
 	spaceId string,
 	eventName string,
@@ -1146,7 +1146,7 @@ func (a *SpaceSchemaAPIService) ListSampleValuesFromEventProperty(
 // Execute executes the request
 //
 //	@return ListSampleValuesFromEventProperty200Response
-func (a *SpaceSchemaAPIService) ListSampleValuesFromEventPropertyExecute(
+func (a *DataGraphSchemaAPIService) ListSampleValuesFromEventPropertyExecute(
 	r ApiListSampleValuesFromEventPropertyRequest,
 ) (*ListSampleValuesFromEventProperty200Response, *http.Response, error) {
 	var (
@@ -1158,7 +1158,7 @@ func (a *SpaceSchemaAPIService) ListSampleValuesFromEventPropertyExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SpaceSchemaAPIService.ListSampleValuesFromEventProperty",
+		"DataGraphSchemaAPIService.ListSampleValuesFromEventProperty",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1298,7 +1298,7 @@ func (a *SpaceSchemaAPIService) ListSampleValuesFromEventPropertyExecute(
 
 type ApiListSampleValuesFromTraitRequest struct {
 	ctx        context.Context
-	ApiService *SpaceSchemaAPIService
+	ApiService *DataGraphSchemaAPIService
 	spaceId    string
 	traitKey   string
 	collection *string
@@ -1330,7 +1330,7 @@ The rate limit for this endpoint is 25 requests per minute, which is lower than 
 	@param traitKey
 	@return ApiListSampleValuesFromTraitRequest
 */
-func (a *SpaceSchemaAPIService) ListSampleValuesFromTrait(
+func (a *DataGraphSchemaAPIService) ListSampleValuesFromTrait(
 	ctx context.Context,
 	spaceId string,
 	traitKey string,
@@ -1346,7 +1346,7 @@ func (a *SpaceSchemaAPIService) ListSampleValuesFromTrait(
 // Execute executes the request
 //
 //	@return ListSampleValuesFromTrait200Response
-func (a *SpaceSchemaAPIService) ListSampleValuesFromTraitExecute(
+func (a *DataGraphSchemaAPIService) ListSampleValuesFromTraitExecute(
 	r ApiListSampleValuesFromTraitRequest,
 ) (*ListSampleValuesFromTrait200Response, *http.Response, error) {
 	var (
@@ -1358,7 +1358,7 @@ func (a *SpaceSchemaAPIService) ListSampleValuesFromTraitExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SpaceSchemaAPIService.ListSampleValuesFromTrait",
+		"DataGraphSchemaAPIService.ListSampleValuesFromTrait",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
@@ -1489,7 +1489,7 @@ func (a *SpaceSchemaAPIService) ListSampleValuesFromTraitExecute(
 
 type ApiListTraitsRequest struct {
 	ctx                 context.Context
-	ApiService          *SpaceSchemaAPIService
+	ApiService          *DataGraphSchemaAPIService
 	spaceId             string
 	pagination          *PaginationInput
 	sortBy              *string
@@ -1569,7 +1569,7 @@ The rate limit for this endpoint is 25 requests per minute, which is lower than 
 	@param spaceId
 	@return ApiListTraitsRequest
 */
-func (a *SpaceSchemaAPIService) ListTraits(
+func (a *DataGraphSchemaAPIService) ListTraits(
 	ctx context.Context,
 	spaceId string,
 ) ApiListTraitsRequest {
@@ -1583,7 +1583,7 @@ func (a *SpaceSchemaAPIService) ListTraits(
 // Execute executes the request
 //
 //	@return ListTraits200Response
-func (a *SpaceSchemaAPIService) ListTraitsExecute(
+func (a *DataGraphSchemaAPIService) ListTraitsExecute(
 	r ApiListTraitsRequest,
 ) (*ListTraits200Response, *http.Response, error) {
 	var (
@@ -1595,7 +1595,7 @@ func (a *SpaceSchemaAPIService) ListTraitsExecute(
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(
 		r.ctx,
-		"SpaceSchemaAPIService.ListTraits",
+		"DataGraphSchemaAPIService.ListTraits",
 	)
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}

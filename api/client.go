@@ -65,6 +65,8 @@ type APIClient struct {
 
 	CustomerInsightsAPI *CustomerInsightsAPIService
 
+	DataGraphSchemaAPI *DataGraphSchemaAPIService
+
 	DbtAPI *DbtAPIService
 
 	DeletionAndSuppressionAPI *DeletionAndSuppressionAPIService
@@ -103,8 +105,6 @@ type APIClient struct {
 
 	SpaceFiltersAPI *SpaceFiltersAPIService
 
-	SpaceSchemaAPI *SpaceSchemaAPIService
-
 	SpacesAPI *SpacesAPIService
 
 	TestingAPI *TestingAPIService
@@ -142,6 +142,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ComputedTraitsAPI = (*ComputedTraitsAPIService)(&c.common)
 	c.CredentialsAPI = (*CredentialsAPIService)(&c.common)
 	c.CustomerInsightsAPI = (*CustomerInsightsAPIService)(&c.common)
+	c.DataGraphSchemaAPI = (*DataGraphSchemaAPIService)(&c.common)
 	c.DbtAPI = (*DbtAPIService)(&c.common)
 	c.DeletionAndSuppressionAPI = (*DeletionAndSuppressionAPIService)(&c.common)
 	c.DeliveryOverviewAPI = (*DeliveryOverviewAPIService)(&c.common)
@@ -161,7 +162,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.SelectiveSyncAPI = (*SelectiveSyncAPIService)(&c.common)
 	c.SourcesAPI = (*SourcesAPIService)(&c.common)
 	c.SpaceFiltersAPI = (*SpaceFiltersAPIService)(&c.common)
-	c.SpaceSchemaAPI = (*SpaceSchemaAPIService)(&c.common)
 	c.SpacesAPI = (*SpacesAPIService)(&c.common)
 	c.TestingAPI = (*TestingAPIService)(&c.common)
 	c.TrackingPlansAPI = (*TrackingPlansAPIService)(&c.common)
