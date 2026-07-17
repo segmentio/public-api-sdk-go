@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 73.0.4
+API version: 73.0.3
 Contact: friends@segment.com
 */
 
@@ -251,6 +251,8 @@ Creates a Source-scoped regulation.
 
 	Please Note: Suppression rules at the Workspace level take precedence over those at the Source level. If a user has been suppressed at the Workspace level, any attempt to un-suppress at the Source level is not supported and the processing of the request will fail in Segment
 
+• When called, this endpoint may generate the `Source Regulation Created` event in the [audit trail](/tag/Audit-Trail).
+
 Config API omitted fields:
 - `attributes`,
 - `userAgent`
@@ -447,6 +449,8 @@ func (r ApiCreateWorkspaceRegulationRequest) Execute() (*CreateWorkspaceRegulati
 CreateWorkspaceRegulation Create Workspace Regulation
 
 Creates a Workspace-scoped regulation.
+
+• When called, this endpoint may generate the `Workspace Regulation Created` event in the [audit trail](/tag/Audit-Trail).
 
 Config API omitted fields:
 - `attributes`,

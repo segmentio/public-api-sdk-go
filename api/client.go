@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 73.0.4
+API version: 73.0.3
 Contact: friends@segment.com
 */
 
@@ -41,7 +41,7 @@ var (
 	queryDescape    = strings.NewReplacer("%5B", "[", "%5D", "]")
 )
 
-// APIClient manages communication with the Segment Public API API v73.0.4
+// APIClient manages communication with the Segment Public API API v73.0.3
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -61,11 +61,7 @@ type APIClient struct {
 
 	ComputedTraitsAPI *ComputedTraitsAPIService
 
-	CredentialsAPI *CredentialsAPIService
-
 	CustomerInsightsAPI *CustomerInsightsAPIService
-
-	DataGraphSchemaAPI *DataGraphSchemaAPIService
 
 	DbtAPI *DbtAPIService
 
@@ -87,8 +83,6 @@ type APIClient struct {
 
 	IAMUsersAPI *IAMUsersAPIService
 
-	JourneysAPI *JourneysAPIService
-
 	LabelsAPI *LabelsAPIService
 
 	LivePluginsAPI *LivePluginsAPIService
@@ -104,6 +98,8 @@ type APIClient struct {
 	SourcesAPI *SourcesAPIService
 
 	SpaceFiltersAPI *SpaceFiltersAPIService
+
+	SpaceSchemaAPI *SpaceSchemaAPIService
 
 	SpacesAPI *SpacesAPIService
 
@@ -140,9 +136,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.AuditTrailAPI = (*AuditTrailAPIService)(&c.common)
 	c.CatalogAPI = (*CatalogAPIService)(&c.common)
 	c.ComputedTraitsAPI = (*ComputedTraitsAPIService)(&c.common)
-	c.CredentialsAPI = (*CredentialsAPIService)(&c.common)
 	c.CustomerInsightsAPI = (*CustomerInsightsAPIService)(&c.common)
-	c.DataGraphSchemaAPI = (*DataGraphSchemaAPIService)(&c.common)
 	c.DbtAPI = (*DbtAPIService)(&c.common)
 	c.DeletionAndSuppressionAPI = (*DeletionAndSuppressionAPIService)(&c.common)
 	c.DeliveryOverviewAPI = (*DeliveryOverviewAPIService)(&c.common)
@@ -153,7 +147,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.IAMGroupsAPI = (*IAMGroupsAPIService)(&c.common)
 	c.IAMRolesAPI = (*IAMRolesAPIService)(&c.common)
 	c.IAMUsersAPI = (*IAMUsersAPIService)(&c.common)
-	c.JourneysAPI = (*JourneysAPIService)(&c.common)
 	c.LabelsAPI = (*LabelsAPIService)(&c.common)
 	c.LivePluginsAPI = (*LivePluginsAPIService)(&c.common)
 	c.MonthlyTrackedUsersAPI = (*MonthlyTrackedUsersAPIService)(&c.common)
@@ -162,6 +155,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.SelectiveSyncAPI = (*SelectiveSyncAPIService)(&c.common)
 	c.SourcesAPI = (*SourcesAPIService)(&c.common)
 	c.SpaceFiltersAPI = (*SpaceFiltersAPIService)(&c.common)
+	c.SpaceSchemaAPI = (*SpaceSchemaAPIService)(&c.common)
 	c.SpacesAPI = (*SpacesAPIService)(&c.common)
 	c.TestingAPI = (*TestingAPIService)(&c.common)
 	c.TrackingPlansAPI = (*TrackingPlansAPIService)(&c.common)
