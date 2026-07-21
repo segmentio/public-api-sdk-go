@@ -1,17 +1,17 @@
-# \SpaceSchemaAPI
+# \SpaceSchemaAPIAPI
 
 All URIs are relative to *https://api.segmentapis.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListEntityPaths**](SpaceSchemaAPI.md#ListEntityPaths) | **Get** /spaces/{spaceId}/entity-paths | List Entity Paths
-[**ListEvents**](SpaceSchemaAPI.md#ListEvents) | **Get** /spaces/{spaceId}/events | List Events
-[**ListPropertiesFromEntity**](SpaceSchemaAPI.md#ListPropertiesFromEntity) | **Get** /spaces/{spaceId}/entities/{entitySlug}/properties | List Properties from Entity
-[**ListPropertiesFromEvent**](SpaceSchemaAPI.md#ListPropertiesFromEvent) | **Get** /spaces/{spaceId}/events/{eventName}/properties | List Properties from Event
-[**ListSampleValuesFromEntityProperty**](SpaceSchemaAPI.md#ListSampleValuesFromEntityProperty) | **Get** /spaces/{spaceId}/entities/{entitySlug}/properties/{propertyName}/sample-values | List Sample Values from Entity Property
-[**ListSampleValuesFromEventProperty**](SpaceSchemaAPI.md#ListSampleValuesFromEventProperty) | **Get** /spaces/{spaceId}/events/{eventName}/properties/{propertyName}/sample-values | List Sample Values from Event Property
-[**ListSampleValuesFromTrait**](SpaceSchemaAPI.md#ListSampleValuesFromTrait) | **Get** /spaces/{spaceId}/traits/{traitKey}/sample-values | List Sample Values from Trait
-[**ListTraits**](SpaceSchemaAPI.md#ListTraits) | **Get** /spaces/{spaceId}/traits | List Traits
+[**ListEntityPaths**](SpaceSchemaAPIAPI.md#ListEntityPaths) | **Get** /spaces/{spaceId}/entity-paths | List Entity Paths
+[**ListEvents**](SpaceSchemaAPIAPI.md#ListEvents) | **Get** /spaces/{spaceId}/events | List Events
+[**ListPropertiesFromEntity**](SpaceSchemaAPIAPI.md#ListPropertiesFromEntity) | **Get** /spaces/{spaceId}/entities/{entitySlug}/properties | List Properties from Entity
+[**ListPropertiesFromEvent**](SpaceSchemaAPIAPI.md#ListPropertiesFromEvent) | **Get** /spaces/{spaceId}/events/{eventName}/properties | List Properties from Event
+[**ListSampleValuesFromEntityProperty**](SpaceSchemaAPIAPI.md#ListSampleValuesFromEntityProperty) | **Get** /spaces/{spaceId}/entities/{entitySlug}/properties/{propertyName}/sample-values | List Sample Values from Entity Property
+[**ListSampleValuesFromEventProperty**](SpaceSchemaAPIAPI.md#ListSampleValuesFromEventProperty) | **Get** /spaces/{spaceId}/events/{eventName}/properties/{propertyName}/sample-values | List Sample Values from Event Property
+[**ListSampleValuesFromTrait**](SpaceSchemaAPIAPI.md#ListSampleValuesFromTrait) | **Get** /spaces/{spaceId}/traits/{traitKey}/sample-values | List Sample Values from Trait
+[**ListTraits**](SpaceSchemaAPIAPI.md#ListTraits) | **Get** /spaces/{spaceId}/traits | List Traits
 
 
 
@@ -44,9 +44,9 @@ func main() {
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SpaceSchemaAPI.ListEntityPaths(ctx, spaceId).Pagination(pagination).Search(search).Execute()
+    resp, r, err := apiClient.SpaceSchemaAPIAPI.ListEntityPaths(ctx, spaceId).Pagination(pagination).Search(search).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpaceSchemaAPI.ListEntityPaths``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SpaceSchemaAPIAPI.ListEntityPaths``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -56,7 +56,7 @@ func main() {
         }
     }
     // response from `ListEntityPaths`: ListEntityPaths200Response
-    fmt.Fprintf(os.Stdout, "Response from `SpaceSchemaAPI.ListEntityPaths`: %v\n", resp.GetData())
+    fmt.Fprintf(os.Stdout, "Response from `SpaceSchemaAPIAPI.ListEntityPaths`: %v\n", resp.GetData())
 }
 ```
 
@@ -128,9 +128,9 @@ func main() {
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SpaceSchemaAPI.ListEvents(ctx, spaceId).Pagination(pagination).SortBy(sortBy).SortDir(sortDir).Search(search).Execute()
+    resp, r, err := apiClient.SpaceSchemaAPIAPI.ListEvents(ctx, spaceId).Pagination(pagination).SortBy(sortBy).SortDir(sortDir).Search(search).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpaceSchemaAPI.ListEvents``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SpaceSchemaAPIAPI.ListEvents``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -140,7 +140,7 @@ func main() {
         }
     }
     // response from `ListEvents`: ListEvents200Response
-    fmt.Fprintf(os.Stdout, "Response from `SpaceSchemaAPI.ListEvents`: %v\n", resp.GetData())
+    fmt.Fprintf(os.Stdout, "Response from `SpaceSchemaAPIAPI.ListEvents`: %v\n", resp.GetData())
 }
 ```
 
@@ -214,9 +214,9 @@ func main() {
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SpaceSchemaAPI.ListPropertiesFromEntity(ctx, spaceId, entitySlug).Pagination(pagination).IncludeSampleValues(includeSampleValues).SamplesCount(samplesCount).Execute()
+    resp, r, err := apiClient.SpaceSchemaAPIAPI.ListPropertiesFromEntity(ctx, spaceId, entitySlug).Pagination(pagination).IncludeSampleValues(includeSampleValues).SamplesCount(samplesCount).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpaceSchemaAPI.ListPropertiesFromEntity``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SpaceSchemaAPIAPI.ListPropertiesFromEntity``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -226,7 +226,7 @@ func main() {
         }
     }
     // response from `ListPropertiesFromEntity`: ListPropertiesFromEntity200Response
-    fmt.Fprintf(os.Stdout, "Response from `SpaceSchemaAPI.ListPropertiesFromEntity`: %v\n", resp.GetData())
+    fmt.Fprintf(os.Stdout, "Response from `SpaceSchemaAPIAPI.ListPropertiesFromEntity`: %v\n", resp.GetData())
 }
 ```
 
@@ -304,9 +304,9 @@ func main() {
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SpaceSchemaAPI.ListPropertiesFromEvent(ctx, spaceId, eventName).Pagination(pagination).SortBy(sortBy).SortDir(sortDir).Search(search).IncludeSampleValues(includeSampleValues).SamplesCount(samplesCount).Execute()
+    resp, r, err := apiClient.SpaceSchemaAPIAPI.ListPropertiesFromEvent(ctx, spaceId, eventName).Pagination(pagination).SortBy(sortBy).SortDir(sortDir).Search(search).IncludeSampleValues(includeSampleValues).SamplesCount(samplesCount).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpaceSchemaAPI.ListPropertiesFromEvent``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SpaceSchemaAPIAPI.ListPropertiesFromEvent``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -316,7 +316,7 @@ func main() {
         }
     }
     // response from `ListPropertiesFromEvent`: ListPropertiesFromEvent200Response
-    fmt.Fprintf(os.Stdout, "Response from `SpaceSchemaAPI.ListPropertiesFromEvent`: %v\n", resp.GetData())
+    fmt.Fprintf(os.Stdout, "Response from `SpaceSchemaAPIAPI.ListPropertiesFromEvent`: %v\n", resp.GetData())
 }
 ```
 
@@ -392,9 +392,9 @@ func main() {
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SpaceSchemaAPI.ListSampleValuesFromEntityProperty(ctx, spaceId, entitySlug, propertyName).Execute()
+    resp, r, err := apiClient.SpaceSchemaAPIAPI.ListSampleValuesFromEntityProperty(ctx, spaceId, entitySlug, propertyName).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpaceSchemaAPI.ListSampleValuesFromEntityProperty``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SpaceSchemaAPIAPI.ListSampleValuesFromEntityProperty``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -404,7 +404,7 @@ func main() {
         }
     }
     // response from `ListSampleValuesFromEntityProperty`: ListSampleValuesFromEntityProperty200Response
-    fmt.Fprintf(os.Stdout, "Response from `SpaceSchemaAPI.ListSampleValuesFromEntityProperty`: %v\n", resp.GetData())
+    fmt.Fprintf(os.Stdout, "Response from `SpaceSchemaAPIAPI.ListSampleValuesFromEntityProperty`: %v\n", resp.GetData())
 }
 ```
 
@@ -477,9 +477,9 @@ func main() {
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SpaceSchemaAPI.ListSampleValuesFromEventProperty(ctx, spaceId, eventName, propertyName).PropertyType(propertyType).Execute()
+    resp, r, err := apiClient.SpaceSchemaAPIAPI.ListSampleValuesFromEventProperty(ctx, spaceId, eventName, propertyName).PropertyType(propertyType).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpaceSchemaAPI.ListSampleValuesFromEventProperty``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SpaceSchemaAPIAPI.ListSampleValuesFromEventProperty``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -489,7 +489,7 @@ func main() {
         }
     }
     // response from `ListSampleValuesFromEventProperty`: ListSampleValuesFromEventProperty200Response
-    fmt.Fprintf(os.Stdout, "Response from `SpaceSchemaAPI.ListSampleValuesFromEventProperty`: %v\n", resp.GetData())
+    fmt.Fprintf(os.Stdout, "Response from `SpaceSchemaAPIAPI.ListSampleValuesFromEventProperty`: %v\n", resp.GetData())
 }
 ```
 
@@ -562,9 +562,9 @@ func main() {
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SpaceSchemaAPI.ListSampleValuesFromTrait(ctx, spaceId, traitKey).Collection(collection).Execute()
+    resp, r, err := apiClient.SpaceSchemaAPIAPI.ListSampleValuesFromTrait(ctx, spaceId, traitKey).Collection(collection).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpaceSchemaAPI.ListSampleValuesFromTrait``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SpaceSchemaAPIAPI.ListSampleValuesFromTrait``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -574,7 +574,7 @@ func main() {
         }
     }
     // response from `ListSampleValuesFromTrait`: ListSampleValuesFromTrait200Response
-    fmt.Fprintf(os.Stdout, "Response from `SpaceSchemaAPI.ListSampleValuesFromTrait`: %v\n", resp.GetData())
+    fmt.Fprintf(os.Stdout, "Response from `SpaceSchemaAPIAPI.ListSampleValuesFromTrait`: %v\n", resp.GetData())
 }
 ```
 
@@ -650,9 +650,9 @@ func main() {
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.SpaceSchemaAPI.ListTraits(ctx, spaceId).Pagination(pagination).SortBy(sortBy).SortDir(sortDir).Search(search).Collection(collection).IncludeSampleValues(includeSampleValues).SamplesCount(samplesCount).Execute()
+    resp, r, err := apiClient.SpaceSchemaAPIAPI.ListTraits(ctx, spaceId).Pagination(pagination).SortBy(sortBy).SortDir(sortDir).Search(search).Collection(collection).IncludeSampleValues(includeSampleValues).SamplesCount(samplesCount).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SpaceSchemaAPI.ListTraits``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SpaceSchemaAPIAPI.ListTraits``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
         responseErrors := api.UnwrapFullErrors(err)
         if responseErrors != nil {
@@ -662,7 +662,7 @@ func main() {
         }
     }
     // response from `ListTraits`: ListTraits200Response
-    fmt.Fprintf(os.Stdout, "Response from `SpaceSchemaAPI.ListTraits`: %v\n", resp.GetData())
+    fmt.Fprintf(os.Stdout, "Response from `SpaceSchemaAPIAPI.ListTraits`: %v\n", resp.GetData())
 }
 ```
 

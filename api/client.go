@@ -103,7 +103,7 @@ type APIClient struct {
 
 	SpaceFiltersAPI *SpaceFiltersAPIService
 
-	SpaceSchemaAPI *SpaceSchemaAPIService
+	SpaceSchemaAPIAPI *SpaceSchemaAPIAPIService
 
 	SpacesAPI *SpacesAPIService
 
@@ -161,7 +161,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.SelectiveSyncAPI = (*SelectiveSyncAPIService)(&c.common)
 	c.SourcesAPI = (*SourcesAPIService)(&c.common)
 	c.SpaceFiltersAPI = (*SpaceFiltersAPIService)(&c.common)
-	c.SpaceSchemaAPI = (*SpaceSchemaAPIService)(&c.common)
+	c.SpaceSchemaAPIAPI = (*SpaceSchemaAPIAPIService)(&c.common)
 	c.SpacesAPI = (*SpacesAPIService)(&c.common)
 	c.TestingAPI = (*TestingAPIService)(&c.common)
 	c.TrackingPlansAPI = (*TrackingPlansAPIService)(&c.common)
