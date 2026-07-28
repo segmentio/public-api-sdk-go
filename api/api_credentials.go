@@ -45,8 +45,20 @@ CreateCredential Create Credential
 
 Creates a new Credential.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateCredentialRequest
+This endpoint requires the user to have at least the following permission(s):
+
+  - Workspace Owner
+
+  - Warehouse Admin
+
+  - Source Admin
+
+  - Entities Admin
+
+  - Unify and Engage Admin
+
+    @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @return ApiCreateCredentialRequest
 */
 func (a *CredentialsAPIService) CreateCredential(ctx context.Context) ApiCreateCredentialRequest {
 	return ApiCreateCredentialRequest{
@@ -203,9 +215,13 @@ DeleteCredential Delete Credential
 
 Deletes an existing Credential. Fails if the Credential is still in use by a Warehouse or Source.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param credentialId
-	@return ApiDeleteCredentialRequest
+This endpoint requires the user to have at least the following permission(s):
+
+  - Workspace Owner
+
+    @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @param credentialId
+    @return ApiDeleteCredentialRequest
 */
 func (a *CredentialsAPIService) DeleteCredential(
 	ctx context.Context,
@@ -365,9 +381,21 @@ GetCredential Get Credential
 
 Returns a Credential by its id.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param credentialId
-	@return ApiGetCredentialRequest
+This endpoint requires the user to have at least the following permission(s):
+
+  - Workspace Owner
+
+  - Warehouse Admin
+
+  - Source Admin
+
+  - Entities Admin
+
+  - Unify and Engage Admin
+
+    @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @param credentialId
+    @return ApiGetCredentialRequest
 */
 func (a *CredentialsAPIService) GetCredential(
 	ctx context.Context,
@@ -545,9 +573,21 @@ ListCredentialConsumers List Credential Consumers
 
 Returns the Warehouses and Sources that use a Credential.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param credentialId
-	@return ApiListCredentialConsumersRequest
+This endpoint requires the user to have at least the following permission(s):
+
+  - Workspace Owner
+
+  - Warehouse Admin
+
+  - Source Admin
+
+  - Entities Admin
+
+  - Unify and Engage Admin
+
+    @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @param credentialId
+    @return ApiListCredentialConsumersRequest
 */
 func (a *CredentialsAPIService) ListCredentialConsumers(
 	ctx context.Context,
@@ -731,8 +771,20 @@ ListCredentials List Credentials
 
 Returns a list of Credentials.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiListCredentialsRequest
+This endpoint requires the user to have at least the following permission(s):
+
+  - Workspace Owner
+
+  - Warehouse Admin
+
+  - Source Admin
+
+  - Entities Admin
+
+  - Unify and Engage Admin
+
+    @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @return ApiListCredentialsRequest
 */
 func (a *CredentialsAPIService) ListCredentials(ctx context.Context) ApiListCredentialsRequest {
 	return ApiListCredentialsRequest{
@@ -893,9 +945,13 @@ UpdateCredential Update Credential
 
 Updates an existing Credential. All Warehouses using this Credential are affected immediately.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param credentialId
-	@return ApiUpdateCredentialRequest
+This endpoint requires the user to have at least the following permission(s):
+
+  - Workspace Owner
+
+    @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @param credentialId
+    @return ApiUpdateCredentialRequest
 */
 func (a *CredentialsAPIService) UpdateCredential(
 	ctx context.Context,
