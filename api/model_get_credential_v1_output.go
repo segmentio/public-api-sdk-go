@@ -21,8 +21,6 @@ var _ MappedNullable = &GetCredentialV1Output{}
 // GetCredentialV1Output Returns a Credential.
 type GetCredentialV1Output struct {
 	Credential CredentialV1 `json:"credential"`
-	// The list of setting names (in this Credential's public `settings` shape) that cannot be changed after creation, if any.
-	DisabledFields []string `json:"disabledFields,omitempty"`
 }
 
 // NewGetCredentialV1Output instantiates a new GetCredentialV1Output object
@@ -67,38 +65,6 @@ func (o *GetCredentialV1Output) SetCredential(v CredentialV1) {
 	o.Credential = v
 }
 
-// GetDisabledFields returns the DisabledFields field value if set, zero value otherwise.
-func (o *GetCredentialV1Output) GetDisabledFields() []string {
-	if o == nil || IsNil(o.DisabledFields) {
-		var ret []string
-		return ret
-	}
-	return o.DisabledFields
-}
-
-// GetDisabledFieldsOk returns a tuple with the DisabledFields field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetCredentialV1Output) GetDisabledFieldsOk() ([]string, bool) {
-	if o == nil || IsNil(o.DisabledFields) {
-		return nil, false
-	}
-	return o.DisabledFields, true
-}
-
-// HasDisabledFields returns a boolean if a field has been set.
-func (o *GetCredentialV1Output) HasDisabledFields() bool {
-	if o != nil && !IsNil(o.DisabledFields) {
-		return true
-	}
-
-	return false
-}
-
-// SetDisabledFields gets a reference to the given []string and assigns it to the DisabledFields field.
-func (o *GetCredentialV1Output) SetDisabledFields(v []string) {
-	o.DisabledFields = v
-}
-
 func (o GetCredentialV1Output) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -110,9 +76,6 @@ func (o GetCredentialV1Output) MarshalJSON() ([]byte, error) {
 func (o GetCredentialV1Output) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["credential"] = o.Credential
-	if !IsNil(o.DisabledFields) {
-		toSerialize["disabledFields"] = o.DisabledFields
-	}
 	return toSerialize, nil
 }
 
