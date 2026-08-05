@@ -45,6 +45,8 @@ CreateCredential Create Credential
 
 Creates a new Credential.
 
+• When called, this endpoint may generate the `Warehouse Credential Created` event in the [audit trail](/tag/Audit-Trail).
+
 This endpoint requires the user to have at least the following permission(s):
 
   - Workspace Owner
@@ -213,7 +215,9 @@ func (r ApiDeleteCredentialRequest) Execute() (*DeleteCredential200Response, *ht
 /*
 DeleteCredential Delete Credential
 
-Deletes an existing Credential. Fails if the Credential is still in use by a Warehouse or Source.
+Deletes an existing Credential. Fails with a `409 Conflict` if the Credential is still in use by a Warehouse or Source (including a disabled one). This check isn't atomic with the delete — a Warehouse or Source that attaches to this Credential in between would be orphaned rather than blocking the delete.
+
+• When called, this endpoint may generate the `Warehouse Credential Deleted` event in the [audit trail](/tag/Audit-Trail).
 
 This endpoint requires the user to have at least the following permission(s):
 
@@ -944,6 +948,8 @@ func (r ApiUpdateCredentialRequest) Execute() (*UpdateCredential200Response, *ht
 UpdateCredential Update Credential
 
 Updates an existing Credential. All Warehouses using this Credential are affected immediately.
+
+• When called, this endpoint may generate the `Warehouse Credential Modified` event in the [audit trail](/tag/Audit-Trail).
 
 This endpoint requires the user to have at least the following permission(s):
 

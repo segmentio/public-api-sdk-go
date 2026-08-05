@@ -18,7 +18,7 @@ import (
 // checks if the ListCredentialConsumersV1Output type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ListCredentialConsumersV1Output{}
 
-// ListCredentialConsumersV1Output Returns the Warehouses and Sources that consume a Credential, each paginated independently.
+// ListCredentialConsumersV1Output Returns the Warehouses and Sources that consume a Credential. The two lists are paginated independently, so a caller can page through one without affecting the other.
 type ListCredentialConsumersV1Output struct {
 	// The Warehouses that use this Credential.
 	Warehouses           []WarehouseV1    `json:"warehouses"`
