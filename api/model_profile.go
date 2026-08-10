@@ -18,10 +18,12 @@ import (
 // checks if the Profile type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Profile{}
 
-// Profile Profile Object.
+// Profile The profile traits included in the event sent to the Destination. Applies to both Classic and Linked Audiences. For a Classic audience this is the only form of personalization available, whereas a Linked Audience can also personalize on entities.
 type Profile struct {
-	Properties []string           `json:"properties"`
-	Mapping    *map[string]string `json:"mapping,omitempty"`
+	// The profile traits to include in the event sent to the Destination.
+	Properties []string `json:"properties"`
+	// Maps a profile trait to the name it should be sent under. Each key is a trait, and each value is the name used in the event.
+	Mapping *map[string]string `json:"mapping,omitempty"`
 }
 
 // NewProfile instantiates a new Profile object

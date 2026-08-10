@@ -18,7 +18,7 @@ import (
 // checks if the AddActivationToAudienceAlphaInput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &AddActivationToAudienceAlphaInput{}
 
-// AddActivationToAudienceAlphaInput struct for AddActivationToAudienceAlphaInput
+// AddActivationToAudienceAlphaInput Input to create an activation.
 type AddActivationToAudienceAlphaInput struct {
 	// Determines whether an activation is enabled.
 	Enabled *bool `json:"enabled,omitempty"`

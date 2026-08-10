@@ -21,7 +21,7 @@ var _ MappedNullable = &PersonalizationInput{}
 // PersonalizationInput The Personalization Input Object.
 type PersonalizationInput struct {
 	Profile Profile `json:"profile"`
-	// Entities V2 Object.
+	// The entities, and the properties of each entity, to include in the event sent to the Destination. Only applicable to Linked Audiences. Providing entities for a Classic audience returns a 400 error, as Classic audiences support profile properties only.
 	Entities []PersonalizationInputEntity `json:"entities,omitempty"`
 	// Sync entity property changes to the Destination. Only applicable if activationType is \"Audience Membership Changed\".
 	SyncEntityPropertyChanges *bool `json:"syncEntityPropertyChanges,omitempty"`

@@ -22,7 +22,7 @@ var _ MappedNullable = &UpdateActivationForAudienceAlphaInput{}
 type UpdateActivationForAudienceAlphaInput struct {
 	// Determines whether an activation is enabled.
 	Enabled *bool `json:"enabled,omitempty"`
-	// Activation name. For Warehouse Destinations, this is used as the table name.
+	// Activation name. For Warehouse Destinations, this is used as the table name. Omit this field to leave the name unchanged. An empty string is ignored rather than applied.
 	ActivationName *string `json:"activationName,omitempty"`
 	// Optional human-readable label for the activation. Only supported for Warehouse Destinations. Send null to clear. When omitted, the activationName is used as the label.
 	DisplayName        NullableString                        `json:"displayName,omitempty"`

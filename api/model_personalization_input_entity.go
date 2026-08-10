@@ -20,6 +20,7 @@ var _ MappedNullable = &PersonalizationInputEntity{}
 
 // PersonalizationInputEntity The Personalization Input Entity.
 type PersonalizationInputEntity struct {
+	// The entity properties to include in the event sent to the Destination.
 	Properties []string `json:"properties"`
 	// The relationship slug for the entity.
 	RelationshipSlug string `json:"relationshipSlug"`
