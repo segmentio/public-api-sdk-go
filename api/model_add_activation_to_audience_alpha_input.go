@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 73.2.0
+API version: 73.3.0
 Contact: friends@segment.com
 */
 
@@ -30,7 +30,7 @@ type AddActivationToAudienceAlphaInput struct {
 	ActivationName string `json:"activationName"`
 	// Optional human-readable label for the activation. Only supported for Warehouse Destinations. When omitted, the activationName is used as the label.
 	DisplayName        *string                               `json:"displayName,omitempty"`
-	Personalization    PersonalizationInput                  `json:"personalization"`
+	Personalization    *PersonalizationInput                 `json:"personalization,omitempty"`
 	DestinationMapping *DestinationSubscriptionConfiguration `json:"destinationMapping,omitempty"`
 }
 
@@ -42,13 +42,11 @@ func NewAddActivationToAudienceAlphaInput(
 	performResync bool,
 	activationType string,
 	activationName string,
-	personalization PersonalizationInput,
 ) *AddActivationToAudienceAlphaInput {
 	this := AddActivationToAudienceAlphaInput{}
 	this.PerformResync = performResync
 	this.ActivationType = activationType
 	this.ActivationName = activationName
-	this.Personalization = personalization
 	return &this
 }
 
@@ -196,28 +194,36 @@ func (o *AddActivationToAudienceAlphaInput) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
-// GetPersonalization returns the Personalization field value
+// GetPersonalization returns the Personalization field value if set, zero value otherwise.
 func (o *AddActivationToAudienceAlphaInput) GetPersonalization() PersonalizationInput {
-	if o == nil {
+	if o == nil || IsNil(o.Personalization) {
 		var ret PersonalizationInput
 		return ret
 	}
-
-	return o.Personalization
+	return *o.Personalization
 }
 
-// GetPersonalizationOk returns a tuple with the Personalization field value
+// GetPersonalizationOk returns a tuple with the Personalization field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *AddActivationToAudienceAlphaInput) GetPersonalizationOk() (*PersonalizationInput, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Personalization) {
 		return nil, false
 	}
-	return &o.Personalization, true
+	return o.Personalization, true
 }
 
-// SetPersonalization sets field value
+// HasPersonalization returns a boolean if a field has been set.
+func (o *AddActivationToAudienceAlphaInput) HasPersonalization() bool {
+	if o != nil && !IsNil(o.Personalization) {
+		return true
+	}
+
+	return false
+}
+
+// SetPersonalization gets a reference to the given PersonalizationInput and assigns it to the Personalization field.
 func (o *AddActivationToAudienceAlphaInput) SetPersonalization(v PersonalizationInput) {
-	o.Personalization = v
+	o.Personalization = &v
 }
 
 // GetDestinationMapping returns the DestinationMapping field value if set, zero value otherwise.
@@ -273,7 +279,9 @@ func (o AddActivationToAudienceAlphaInput) ToMap() (map[string]interface{}, erro
 	if !IsNil(o.DisplayName) {
 		toSerialize["displayName"] = o.DisplayName
 	}
-	toSerialize["personalization"] = o.Personalization
+	if !IsNil(o.Personalization) {
+		toSerialize["personalization"] = o.Personalization
+	}
 	if !IsNil(o.DestinationMapping) {
 		toSerialize["destinationMapping"] = o.DestinationMapping
 	}

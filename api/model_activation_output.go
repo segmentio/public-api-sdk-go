@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 73.2.0
+API version: 73.3.0
 Contact: friends@segment.com
 */
 
@@ -38,7 +38,7 @@ type ActivationOutput struct {
 	ActivationName string `json:"activationName"`
 	// Human-readable label for the activation. Only present for Warehouse Destinations that have a display name configured. When null, the activationName serves as the label.
 	DisplayName        NullableString                        `json:"displayName,omitempty"`
-	Personalization    PersonalizationInput                  `json:"personalization"`
+	Personalization    PersonalizationOutput                 `json:"personalization"`
 	DestinationMapping *DestinationSubscriptionConfiguration `json:"destinationMapping,omitempty"`
 	// Indicates if a full resync is currently pending or in progress.
 	PerformResync *bool `json:"performResync,omitempty"`
@@ -57,7 +57,7 @@ func NewActivationOutput(
 	connectionId string,
 	activationType string,
 	activationName string,
-	personalization PersonalizationInput,
+	personalization PersonalizationOutput,
 ) *ActivationOutput {
 	this := ActivationOutput{}
 	this.Id = id
@@ -316,9 +316,9 @@ func (o *ActivationOutput) UnsetDisplayName() {
 }
 
 // GetPersonalization returns the Personalization field value
-func (o *ActivationOutput) GetPersonalization() PersonalizationInput {
+func (o *ActivationOutput) GetPersonalization() PersonalizationOutput {
 	if o == nil {
-		var ret PersonalizationInput
+		var ret PersonalizationOutput
 		return ret
 	}
 
@@ -327,7 +327,7 @@ func (o *ActivationOutput) GetPersonalization() PersonalizationInput {
 
 // GetPersonalizationOk returns a tuple with the Personalization field value
 // and a boolean to check if the value has been set.
-func (o *ActivationOutput) GetPersonalizationOk() (*PersonalizationInput, bool) {
+func (o *ActivationOutput) GetPersonalizationOk() (*PersonalizationOutput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -335,7 +335,7 @@ func (o *ActivationOutput) GetPersonalizationOk() (*PersonalizationInput, bool) 
 }
 
 // SetPersonalization sets field value
-func (o *ActivationOutput) SetPersonalization(v PersonalizationInput) {
+func (o *ActivationOutput) SetPersonalization(v PersonalizationOutput) {
 	o.Personalization = v
 }
 

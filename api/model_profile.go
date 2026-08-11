@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 73.2.0
+API version: 73.3.0
 Contact: friends@segment.com
 */
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &Profile{}
 // Profile The profile traits included in the event sent to the Destination. Applies to both Classic and Linked Audiences. For a Classic audience this is the only form of personalization available, whereas a Linked Audience can also personalize on entities.
 type Profile struct {
 	// The profile traits to include in the event sent to the Destination.
-	Properties []string `json:"properties"`
+	Properties []string `json:"properties,omitempty"`
 	// Maps a profile trait to the name it should be sent under. Each key is a trait, and each value is the name used in the event.
 	Mapping *map[string]string `json:"mapping,omitempty"`
 }
@@ -30,9 +30,8 @@ type Profile struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProfile(properties []string) *Profile {
+func NewProfile() *Profile {
 	this := Profile{}
-	this.Properties = properties
 	return &this
 }
 
@@ -44,26 +43,34 @@ func NewProfileWithDefaults() *Profile {
 	return &this
 }
 
-// GetProperties returns the Properties field value
+// GetProperties returns the Properties field value if set, zero value otherwise.
 func (o *Profile) GetProperties() []string {
-	if o == nil {
+	if o == nil || IsNil(o.Properties) {
 		var ret []string
 		return ret
 	}
-
 	return o.Properties
 }
 
-// GetPropertiesOk returns a tuple with the Properties field value
+// GetPropertiesOk returns a tuple with the Properties field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Profile) GetPropertiesOk() ([]string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Properties) {
 		return nil, false
 	}
 	return o.Properties, true
 }
 
-// SetProperties sets field value
+// HasProperties returns a boolean if a field has been set.
+func (o *Profile) HasProperties() bool {
+	if o != nil && !IsNil(o.Properties) {
+		return true
+	}
+
+	return false
+}
+
+// SetProperties gets a reference to the given []string and assigns it to the Properties field.
 func (o *Profile) SetProperties(v []string) {
 	o.Properties = v
 }
@@ -110,7 +117,9 @@ func (o Profile) MarshalJSON() ([]byte, error) {
 
 func (o Profile) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["properties"] = o.Properties
+	if !IsNil(o.Properties) {
+		toSerialize["properties"] = o.Properties
+	}
 	if !IsNil(o.Mapping) {
 		toSerialize["mapping"] = o.Mapping
 	}

@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 73.2.0
+API version: 73.3.0
 Contact: friends@segment.com
 */
 
@@ -20,7 +20,7 @@ var _ MappedNullable = &PersonalizationInput{}
 
 // PersonalizationInput The Personalization Input Object.
 type PersonalizationInput struct {
-	Profile Profile `json:"profile"`
+	Profile *Profile `json:"profile,omitempty"`
 	// The entities, and the properties of each entity, to include in the event sent to the Destination. Only applicable to Linked Audiences. Providing entities for a Classic audience returns a 400 error, as Classic audiences support profile properties only.
 	Entities []PersonalizationInputEntity `json:"entities,omitempty"`
 	// Sync entity property changes to the Destination. Only applicable if activationType is \"Audience Membership Changed\".
@@ -31,9 +31,8 @@ type PersonalizationInput struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPersonalizationInput(profile Profile) *PersonalizationInput {
+func NewPersonalizationInput() *PersonalizationInput {
 	this := PersonalizationInput{}
-	this.Profile = profile
 	return &this
 }
 
@@ -45,28 +44,36 @@ func NewPersonalizationInputWithDefaults() *PersonalizationInput {
 	return &this
 }
 
-// GetProfile returns the Profile field value
+// GetProfile returns the Profile field value if set, zero value otherwise.
 func (o *PersonalizationInput) GetProfile() Profile {
-	if o == nil {
+	if o == nil || IsNil(o.Profile) {
 		var ret Profile
 		return ret
 	}
-
-	return o.Profile
+	return *o.Profile
 }
 
-// GetProfileOk returns a tuple with the Profile field value
+// GetProfileOk returns a tuple with the Profile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PersonalizationInput) GetProfileOk() (*Profile, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Profile) {
 		return nil, false
 	}
-	return &o.Profile, true
+	return o.Profile, true
 }
 
-// SetProfile sets field value
+// HasProfile returns a boolean if a field has been set.
+func (o *PersonalizationInput) HasProfile() bool {
+	if o != nil && !IsNil(o.Profile) {
+		return true
+	}
+
+	return false
+}
+
+// SetProfile gets a reference to the given Profile and assigns it to the Profile field.
 func (o *PersonalizationInput) SetProfile(v Profile) {
-	o.Profile = v
+	o.Profile = &v
 }
 
 // GetEntities returns the Entities field value if set, zero value otherwise.
@@ -143,7 +150,9 @@ func (o PersonalizationInput) MarshalJSON() ([]byte, error) {
 
 func (o PersonalizationInput) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["profile"] = o.Profile
+	if !IsNil(o.Profile) {
+		toSerialize["profile"] = o.Profile
+	}
 	if !IsNil(o.Entities) {
 		toSerialize["entities"] = o.Entities
 	}
