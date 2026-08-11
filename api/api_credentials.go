@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 73.1.0
+API version: 73.1.1
 Contact: friends@segment.com
 */
 
@@ -45,8 +45,22 @@ CreateCredential Create Credential
 
 Creates a new Credential.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateCredentialRequest
+• When called, this endpoint may generate the `Warehouse Credential Created` event in the [audit trail](/tag/Audit-Trail).
+
+This endpoint requires the user to have at least the following permission(s):
+
+  - Workspace Owner
+
+  - Warehouse Admin
+
+  - Source Admin
+
+  - Entities Admin
+
+  - Unify and Engage Admin
+
+    @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @return ApiCreateCredentialRequest
 */
 func (a *CredentialsAPIService) CreateCredential(ctx context.Context) ApiCreateCredentialRequest {
 	return ApiCreateCredentialRequest{
@@ -188,6 +202,730 @@ func (a *CredentialsAPIService) CreateCredentialExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiDeleteCredentialRequest struct {
+	ctx          context.Context
+	ApiService   *CredentialsAPIService
+	credentialId string
+}
+
+func (r ApiDeleteCredentialRequest) Execute() (*DeleteCredential200Response, *http.Response, error) {
+	return r.ApiService.DeleteCredentialExecute(r)
+}
+
+/*
+DeleteCredential Delete Credential
+
+Deletes an existing Credential. Fails with a `409 Conflict` if the Credential is still in use by a Warehouse or Source (including a disabled one). This check isn't atomic with the delete — a Warehouse or Source that attaches to this Credential in between would be orphaned rather than blocking the delete.
+
+• When called, this endpoint may generate the `Warehouse Credential Deleted` event in the [audit trail](/tag/Audit-Trail).
+
+This endpoint requires the user to have at least the following permission(s):
+
+  - Workspace Owner
+
+    @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @param credentialId
+    @return ApiDeleteCredentialRequest
+*/
+func (a *CredentialsAPIService) DeleteCredential(
+	ctx context.Context,
+	credentialId string,
+) ApiDeleteCredentialRequest {
+	return ApiDeleteCredentialRequest{
+		ApiService:   a,
+		ctx:          ctx,
+		credentialId: credentialId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return DeleteCredential200Response
+func (a *CredentialsAPIService) DeleteCredentialExecute(
+	r ApiDeleteCredentialRequest,
+) (*DeleteCredential200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodDelete
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteCredential200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"CredentialsAPIService.DeleteCredential",
+	)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/credentials/{credentialId}"
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"credentialId"+"}",
+		url.PathEscape(parameterValueToString(r.credentialId, "credentialId")),
+		-1,
+	)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetCredentialRequest struct {
+	ctx          context.Context
+	ApiService   *CredentialsAPIService
+	credentialId string
+}
+
+func (r ApiGetCredentialRequest) Execute() (*GetCredential200Response, *http.Response, error) {
+	return r.ApiService.GetCredentialExecute(r)
+}
+
+/*
+GetCredential Get Credential
+
+Returns a Credential by its id.
+
+This endpoint requires the user to have at least the following permission(s):
+
+  - Workspace Owner
+
+  - Warehouse Admin
+
+  - Source Admin
+
+  - Entities Admin
+
+  - Unify and Engage Admin
+
+    @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @param credentialId
+    @return ApiGetCredentialRequest
+*/
+func (a *CredentialsAPIService) GetCredential(
+	ctx context.Context,
+	credentialId string,
+) ApiGetCredentialRequest {
+	return ApiGetCredentialRequest{
+		ApiService:   a,
+		ctx:          ctx,
+		credentialId: credentialId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetCredential200Response
+func (a *CredentialsAPIService) GetCredentialExecute(
+	r ApiGetCredentialRequest,
+) (*GetCredential200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCredential200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"CredentialsAPIService.GetCredential",
+	)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/credentials/{credentialId}"
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"credentialId"+"}",
+		url.PathEscape(parameterValueToString(r.credentialId, "credentialId")),
+		-1,
+	)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListCredentialConsumersRequest struct {
+	ctx                  context.Context
+	ApiService           *CredentialsAPIService
+	credentialId         string
+	warehousesPagination *PaginationInput
+	sourcesPagination    *PaginationInput
+}
+
+// Defines the pagination parameters for the list of Warehouses.  This parameter exists in v1.
+func (r ApiListCredentialConsumersRequest) WarehousesPagination(
+	warehousesPagination PaginationInput,
+) ApiListCredentialConsumersRequest {
+	r.warehousesPagination = &warehousesPagination
+	return r
+}
+
+// Defines the pagination parameters for the list of Sources.  This parameter exists in v1.
+func (r ApiListCredentialConsumersRequest) SourcesPagination(
+	sourcesPagination PaginationInput,
+) ApiListCredentialConsumersRequest {
+	r.sourcesPagination = &sourcesPagination
+	return r
+}
+
+func (r ApiListCredentialConsumersRequest) Execute() (*ListCredentialConsumers200Response, *http.Response, error) {
+	return r.ApiService.ListCredentialConsumersExecute(r)
+}
+
+/*
+ListCredentialConsumers List Credential Consumers
+
+Returns the Warehouses and Sources that use a Credential.
+
+This endpoint requires the user to have at least the following permission(s):
+
+  - Workspace Owner
+
+  - Warehouse Admin
+
+  - Source Admin
+
+  - Entities Admin
+
+  - Unify and Engage Admin
+
+    @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @param credentialId
+    @return ApiListCredentialConsumersRequest
+*/
+func (a *CredentialsAPIService) ListCredentialConsumers(
+	ctx context.Context,
+	credentialId string,
+) ApiListCredentialConsumersRequest {
+	return ApiListCredentialConsumersRequest{
+		ApiService:   a,
+		ctx:          ctx,
+		credentialId: credentialId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ListCredentialConsumers200Response
+func (a *CredentialsAPIService) ListCredentialConsumersExecute(
+	r ApiListCredentialConsumersRequest,
+) (*ListCredentialConsumers200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListCredentialConsumers200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"CredentialsAPIService.ListCredentialConsumers",
+	)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/credentials/{credentialId}/consumers"
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"credentialId"+"}",
+		url.PathEscape(parameterValueToString(r.credentialId, "credentialId")),
+		-1,
+	)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.warehousesPagination != nil {
+		parameterAddToHeaderOrQuery(
+			localVarQueryParams,
+			"warehousesPagination",
+			r.warehousesPagination,
+			"",
+		)
+	}
+	if r.sourcesPagination != nil {
+		parameterAddToHeaderOrQuery(
+			localVarQueryParams,
+			"sourcesPagination",
+			r.sourcesPagination,
+			"",
+		)
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiListCredentialsRequest struct {
+	ctx        context.Context
+	ApiService *CredentialsAPIService
+	pagination *PaginationInput
+}
+
+// Defines the pagination parameters.  This parameter exists in v1.
+func (r ApiListCredentialsRequest) Pagination(
+	pagination PaginationInput,
+) ApiListCredentialsRequest {
+	r.pagination = &pagination
+	return r
+}
+
+func (r ApiListCredentialsRequest) Execute() (*ListCredentials200Response, *http.Response, error) {
+	return r.ApiService.ListCredentialsExecute(r)
+}
+
+/*
+ListCredentials List Credentials
+
+Returns a list of Credentials.
+
+This endpoint requires the user to have at least the following permission(s):
+
+  - Workspace Owner
+
+  - Warehouse Admin
+
+  - Source Admin
+
+  - Entities Admin
+
+  - Unify and Engage Admin
+
+    @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @return ApiListCredentialsRequest
+*/
+func (a *CredentialsAPIService) ListCredentials(ctx context.Context) ApiListCredentialsRequest {
+	return ApiListCredentialsRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+// Execute executes the request
+//
+//	@return ListCredentials200Response
+func (a *CredentialsAPIService) ListCredentialsExecute(
+	r ApiListCredentialsRequest,
+) (*ListCredentials200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ListCredentials200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"CredentialsAPIService.ListCredentials",
+	)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/credentials"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.pagination != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pagination", r.pagination, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.segment.v1+json", "application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUpdateCredentialRequest struct {
 	ctx                     context.Context
 	ApiService              *CredentialsAPIService
@@ -211,9 +949,15 @@ UpdateCredential Update Credential
 
 Updates an existing Credential. All Warehouses using this Credential are affected immediately.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param credentialId
-	@return ApiUpdateCredentialRequest
+• When called, this endpoint may generate the `Warehouse Credential Modified` event in the [audit trail](/tag/Audit-Trail).
+
+This endpoint requires the user to have at least the following permission(s):
+
+  - Workspace Owner
+
+    @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+    @param credentialId
+    @return ApiUpdateCredentialRequest
 */
 func (a *CredentialsAPIService) UpdateCredential(
 	ctx context.Context,
