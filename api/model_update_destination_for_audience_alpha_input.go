@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 73.1.1
+API version: 73.2.0
 Contact: friends@segment.com
 */
 
@@ -18,11 +18,11 @@ import (
 // checks if the UpdateDestinationForAudienceAlphaInput type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateDestinationForAudienceAlphaInput{}
 
-// UpdateDestinationForAudienceAlphaInput Input to Update a Destination for an Audience.
+// UpdateDestinationForAudienceAlphaInput Input to Update a Destination for an Audience. At least one of idSyncConfiguration or connectionSettings must be supplied, otherwise the request returns a 400 error.
 type UpdateDestinationForAudienceAlphaInput struct {
-	// Identifier sync configuration - array of external IDs to sync with their strategies. Maximum 5 items allowed.
+	// Identifier sync configuration - array of external IDs to sync with their strategies. Maximum 5 items allowed. The supplied array replaces the entire stored configuration, so include every external id that should remain. Omitting mapTo on an entry clears any value stored for it. An empty array is treated the same as omitting the field and leaves the stored configuration unchanged.
 	IdSyncConfiguration []IDSyncConfigurationInput `json:"idSyncConfiguration,omitempty"`
-	// The settings that a Destination requires to create audiences on a third-party platform.
+	// The settings that a Destination requires to create audiences on a third-party platform. The supplied object replaces the stored settings outright, so include every setting that should remain. Settings that are omitted are removed. An empty object is treated the same as omitting the field and leaves the stored settings unchanged.
 	ConnectionSettings interface{} `json:"connectionSettings,omitempty"`
 }
 

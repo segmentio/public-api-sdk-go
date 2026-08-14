@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 73.1.1
+API version: 73.2.0
 Contact: friends@segment.com
 */
 
@@ -32,13 +32,13 @@ type ActivationOutput struct {
 	AudienceId string `json:"audienceId"`
 	// The connection id.
 	ConnectionId string `json:"connectionId"`
-	// Determines when an event is sent to the Destination.  Possible values: Audience Entered: Sends an event when a profile or entity enters the audience. Audience Exited: Sends an event when a profile or entity exits the audience. Audience Membership Changed: Sends an event for both entries and exits. This does not apply to entities.  Note that events are sent for the profile, unless the audience is a Linked Audience. In that case, events are sent for the target entity defined for that audience.
+	// Determines when an event is sent to the Destination.  Possible values: Audience Entered: Sends an event when a profile enters the audience. Audience Exited: Sends an event when a profile exits the audience. Audience Membership Changed: Sends an event for both profile entries and profile exits. Entity Added: Sends an event when an entity enters the audience. Entity Removed: Sends an event when an entity exits the audience.
 	ActivationType string `json:"activationType"`
 	// Activation name. For Warehouse Destinations, this is the table name.
 	ActivationName string `json:"activationName"`
 	// Human-readable label for the activation. Only present for Warehouse Destinations that have a display name configured. When null, the activationName serves as the label.
 	DisplayName        NullableString                        `json:"displayName,omitempty"`
-	Personalization    PersonalizationInput                  `json:"personalization"`
+	Personalization    PersonalizationOutput                 `json:"personalization"`
 	DestinationMapping *DestinationSubscriptionConfiguration `json:"destinationMapping,omitempty"`
 	// Indicates if a full resync is currently pending or in progress.
 	PerformResync *bool `json:"performResync,omitempty"`
@@ -57,7 +57,7 @@ func NewActivationOutput(
 	connectionId string,
 	activationType string,
 	activationName string,
-	personalization PersonalizationInput,
+	personalization PersonalizationOutput,
 ) *ActivationOutput {
 	this := ActivationOutput{}
 	this.Id = id
@@ -316,9 +316,9 @@ func (o *ActivationOutput) UnsetDisplayName() {
 }
 
 // GetPersonalization returns the Personalization field value
-func (o *ActivationOutput) GetPersonalization() PersonalizationInput {
+func (o *ActivationOutput) GetPersonalization() PersonalizationOutput {
 	if o == nil {
-		var ret PersonalizationInput
+		var ret PersonalizationOutput
 		return ret
 	}
 
@@ -327,7 +327,7 @@ func (o *ActivationOutput) GetPersonalization() PersonalizationInput {
 
 // GetPersonalizationOk returns a tuple with the Personalization field value
 // and a boolean to check if the value has been set.
-func (o *ActivationOutput) GetPersonalizationOk() (*PersonalizationInput, bool) {
+func (o *ActivationOutput) GetPersonalizationOk() (*PersonalizationOutput, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -335,7 +335,7 @@ func (o *ActivationOutput) GetPersonalizationOk() (*PersonalizationInput, bool) 
 }
 
 // SetPersonalization sets field value
-func (o *ActivationOutput) SetPersonalization(v PersonalizationInput) {
+func (o *ActivationOutput) SetPersonalization(v PersonalizationOutput) {
 	o.Personalization = v
 }
 

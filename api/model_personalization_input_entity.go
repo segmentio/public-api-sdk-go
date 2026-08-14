@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 73.1.1
+API version: 73.2.0
 Contact: friends@segment.com
 */
 
@@ -20,6 +20,7 @@ var _ MappedNullable = &PersonalizationInputEntity{}
 
 // PersonalizationInputEntity The Personalization Input Entity.
 type PersonalizationInputEntity struct {
+	// The entity properties to include in the event sent to the Destination.
 	Properties []string `json:"properties"`
 	// The relationship slug for the entity.
 	RelationshipSlug string `json:"relationshipSlug"`
