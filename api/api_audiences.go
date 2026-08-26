@@ -417,6 +417,183 @@ func (a *AudiencesAPIService) CreateAudienceExecute(
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiCreateAudienceCsvExportForAudienceRequest struct {
+	ctx        context.Context
+	ApiService *AudiencesAPIService
+	spaceId    string
+	id         string
+}
+
+func (r ApiCreateAudienceCsvExportForAudienceRequest) Execute() (*CreateAudienceCsvExportForAudience200Response, *http.Response, error) {
+	return r.ApiService.CreateAudienceCsvExportForAudienceExecute(r)
+}
+
+/*
+CreateAudienceCsvExportForAudience Create Audience Csv Export for Audience
+
+Starts a CSV export of an Audience's membership. The export runs asynchronously: this returns immediately with an export id, and does not return the CSV itself. Poll `getAudienceCsvExportFromSpaceAndAudience` with that id for status and download URLs.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param spaceId
+	@param id
+	@return ApiCreateAudienceCsvExportForAudienceRequest
+*/
+func (a *AudiencesAPIService) CreateAudienceCsvExportForAudience(
+	ctx context.Context,
+	spaceId string,
+	id string,
+) ApiCreateAudienceCsvExportForAudienceRequest {
+	return ApiCreateAudienceCsvExportForAudienceRequest{
+		ApiService: a,
+		ctx:        ctx,
+		spaceId:    spaceId,
+		id:         id,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CreateAudienceCsvExportForAudience200Response
+func (a *AudiencesAPIService) CreateAudienceCsvExportForAudienceExecute(
+	r ApiCreateAudienceCsvExportForAudienceRequest,
+) (*CreateAudienceCsvExportForAudience200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateAudienceCsvExportForAudience200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"AudiencesAPIService.CreateAudienceCsvExportForAudience",
+	)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/spaces/{spaceId}/audiences/{id}/csv-exports"
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"spaceId"+"}",
+		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		-1,
+	)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"id"+"}",
+		url.PathEscape(parameterValueToString(r.id, "id")),
+		-1,
+	)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
+	}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiCreateAudiencePreviewRequest struct {
 	ctx                        context.Context
 	ApiService                 *AudiencesAPIService
@@ -893,6 +1070,193 @@ func (a *AudiencesAPIService) GetAudienceExecute(
 		"application/json",
 		"application/vnd.segment.v1beta+json",
 		"application/vnd.segment.v1alpha+json",
+	}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(
+		r.ctx,
+		localVarPath,
+		localVarHTTPMethod,
+		localVarPostBody,
+		localVarHeaderParams,
+		localVarQueryParams,
+		localVarFormParams,
+		formFiles,
+	)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v RequestErrorEnvelope
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(
+		&localVarReturnValue,
+		localVarBody,
+		localVarHTTPResponse.Header.Get("Content-Type"),
+	)
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetAudienceCsvExportFromSpaceAndAudienceRequest struct {
+	ctx        context.Context
+	ApiService *AudiencesAPIService
+	spaceId    string
+	id         string
+	exportId   string
+}
+
+func (r ApiGetAudienceCsvExportFromSpaceAndAudienceRequest) Execute() (*GetAudienceCsvExportFromSpaceAndAudience200Response, *http.Response, error) {
+	return r.ApiService.GetAudienceCsvExportFromSpaceAndAudienceExecute(r)
+}
+
+/*
+GetAudienceCsvExportFromSpaceAndAudience Get Audience Csv Export from Space And Audience
+
+Returns the status of an Audience CSV export. While the export is running, `status` is IN_PROGRESS and no URLs are returned. Once `status` is SUCCESS, `urls` contains presigned download links created when the export completed. Repeated polling returns the same links.
+
+• In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param spaceId
+	@param id
+	@param exportId
+	@return ApiGetAudienceCsvExportFromSpaceAndAudienceRequest
+*/
+func (a *AudiencesAPIService) GetAudienceCsvExportFromSpaceAndAudience(
+	ctx context.Context,
+	spaceId string,
+	id string,
+	exportId string,
+) ApiGetAudienceCsvExportFromSpaceAndAudienceRequest {
+	return ApiGetAudienceCsvExportFromSpaceAndAudienceRequest{
+		ApiService: a,
+		ctx:        ctx,
+		spaceId:    spaceId,
+		id:         id,
+		exportId:   exportId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetAudienceCsvExportFromSpaceAndAudience200Response
+func (a *AudiencesAPIService) GetAudienceCsvExportFromSpaceAndAudienceExecute(
+	r ApiGetAudienceCsvExportFromSpaceAndAudienceRequest,
+) (*GetAudienceCsvExportFromSpaceAndAudience200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetAudienceCsvExportFromSpaceAndAudience200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(
+		r.ctx,
+		"AudiencesAPIService.GetAudienceCsvExportFromSpaceAndAudience",
+	)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/spaces/{spaceId}/audiences/{id}/csv-exports/{exportId}"
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"spaceId"+"}",
+		url.PathEscape(parameterValueToString(r.spaceId, "spaceId")),
+		-1,
+	)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"id"+"}",
+		url.PathEscape(parameterValueToString(r.id, "id")),
+		-1,
+	)
+	localVarPath = strings.Replace(
+		localVarPath,
+		"{"+"exportId"+"}",
+		url.PathEscape(parameterValueToString(r.exportId, "exportId")),
+		-1,
+	)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{
+		"application/vnd.segment.v1alpha+json",
+		"application/json",
 	}
 
 	// set Accept header

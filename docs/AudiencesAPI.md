@@ -6,9 +6,11 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddAudienceScheduleToAudience**](AudiencesAPI.md#AddAudienceScheduleToAudience) | **Post** /spaces/{spaceId}/audiences/{id}/schedules | Add Audience Schedule to Audience
 [**CreateAudience**](AudiencesAPI.md#CreateAudience) | **Post** /spaces/{spaceId}/audiences | Create Audience
+[**CreateAudienceCsvExportForAudience**](AudiencesAPI.md#CreateAudienceCsvExportForAudience) | **Post** /spaces/{spaceId}/audiences/{id}/csv-exports | Create Audience Csv Export for Audience
 [**CreateAudiencePreview**](AudiencesAPI.md#CreateAudiencePreview) | **Post** /spaces/{spaceId}/audiences/previews | Create Audience Preview
 [**ForceExecuteAudienceRun**](AudiencesAPI.md#ForceExecuteAudienceRun) | **Post** /spaces/{spaceId}/audiences/{audienceId}/runs | Force Execute Audience Run
 [**GetAudience**](AudiencesAPI.md#GetAudience) | **Get** /spaces/{spaceId}/audiences/{id} | Get Audience
+[**GetAudienceCsvExportFromSpaceAndAudience**](AudiencesAPI.md#GetAudienceCsvExportFromSpaceAndAudience) | **Get** /spaces/{spaceId}/audiences/{id}/csv-exports/{exportId} | Get Audience Csv Export from Space And Audience
 [**GetAudiencePreview**](AudiencesAPI.md#GetAudiencePreview) | **Get** /spaces/{spaceId}/audiences/previews/{id} | Get Audience Preview
 [**GetAudienceScheduleFromSpaceAndAudience**](AudiencesAPI.md#GetAudienceScheduleFromSpaceAndAudience) | **Get** /spaces/{spaceId}/audiences/{id}/schedules/{scheduleId} | Get Audience Schedule from Space And Audience
 [**ListAudienceConsumersFromSpaceAndAudience**](AudiencesAPI.md#ListAudienceConsumersFromSpaceAndAudience) | **Get** /spaces/{spaceId}/audiences/{id}/audience-references | List Audience Consumers from Space And Audience
@@ -178,6 +180,87 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json, application/vnd.segment.v1+json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
 - **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Operation: CreateAudienceCsvExportForAudience
+
+> CreateAudienceCsvExportForAudience200Response CreateAudienceCsvExportForAudience(ctx, spaceId, id).Execute()
+
+Create Audience Csv Export for Audience
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    api "github.com/segmentio/public-api-sdk-go"
+)
+
+func main() {
+    spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
+    id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
+
+    configuration := api.NewConfiguration()
+    apiClient := api.NewAPIClient(configuration)
+    token := "<BEARER_TOKEN>"
+    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
+    resp, r, err := apiClient.AudiencesAPI.CreateAudienceCsvExportForAudience(ctx, spaceId, id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.CreateAudienceCsvExportForAudience``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+        responseErrors := api.UnwrapFullErrors(err)
+        if responseErrors != nil {
+            for _, responseError := range responseErrors.Errors {
+                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
+            }
+        }
+    }
+    // response from `CreateAudienceCsvExportForAudience`: CreateAudienceCsvExportForAudience200Response
+    fmt.Fprintf(os.Stdout, "Response from `AudiencesAPI.CreateAudienceCsvExportForAudience`: %v\n", resp.GetData())
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**spaceId** | **string** |  | 
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateAudienceCsvExportForAudienceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**CreateAudienceCsvExportForAudience200Response**](CreateAudienceCsvExportForAudience200Response.md)
+
+### Authorization
+
+[token](../README.md#token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -422,6 +505,90 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: application/vnd.segment.v1+json, application/json, application/vnd.segment.v1beta+json, application/vnd.segment.v1alpha+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Operation: GetAudienceCsvExportFromSpaceAndAudience
+
+> GetAudienceCsvExportFromSpaceAndAudience200Response GetAudienceCsvExportFromSpaceAndAudience(ctx, spaceId, id, exportId).Execute()
+
+Get Audience Csv Export from Space And Audience
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    api "github.com/segmentio/public-api-sdk-go"
+)
+
+func main() {
+    spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
+    id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
+    exportId := "csv_export_123" // string | 
+
+    configuration := api.NewConfiguration()
+    apiClient := api.NewAPIClient(configuration)
+    token := "<BEARER_TOKEN>"
+    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
+    resp, r, err := apiClient.AudiencesAPI.GetAudienceCsvExportFromSpaceAndAudience(ctx, spaceId, id, exportId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.GetAudienceCsvExportFromSpaceAndAudience``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+        responseErrors := api.UnwrapFullErrors(err)
+        if responseErrors != nil {
+            for _, responseError := range responseErrors.Errors {
+                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
+            }
+        }
+    }
+    // response from `GetAudienceCsvExportFromSpaceAndAudience`: GetAudienceCsvExportFromSpaceAndAudience200Response
+    fmt.Fprintf(os.Stdout, "Response from `AudiencesAPI.GetAudienceCsvExportFromSpaceAndAudience`: %v\n", resp.GetData())
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**spaceId** | **string** |  | 
+**id** | **string** |  | 
+**exportId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetAudienceCsvExportFromSpaceAndAudienceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+
+### Return type
+
+[**GetAudienceCsvExportFromSpaceAndAudience200Response**](GetAudienceCsvExportFromSpaceAndAudience200Response.md)
+
+### Authorization
+
+[token](../README.md#token)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
