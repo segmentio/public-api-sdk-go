@@ -22,7 +22,7 @@ var _ MappedNullable = &Profile1{}
 type Profile1 struct {
 	// The profile traits included in the event sent to the Destination.
 	Properties []string `json:"properties"`
-	// Maps a profile trait to the name it should be sent under. Each key is a trait, and each value is the name used in the event.
+	// Maps destination fields to profile traits. Each key is the destination field, and each value is the source trait: `{ destinationField: sourceTrait }`.
 	Mapping *map[string]string `json:"mapping,omitempty"`
 }
 

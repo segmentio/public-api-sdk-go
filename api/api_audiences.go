@@ -24,10 +24,18 @@ import (
 type AudiencesAPIService service
 
 type ApiAddAudienceCsvExportToAudienceRequest struct {
-	ctx        context.Context
-	ApiService *AudiencesAPIService
-	spaceId    string
-	id         string
+	ctx                                      context.Context
+	ApiService                               *AudiencesAPIService
+	spaceId                                  string
+	id                                       string
+	addAudienceCsvExportToAudienceAlphaInput *AddAudienceCsvExportToAudienceAlphaInput
+}
+
+func (r ApiAddAudienceCsvExportToAudienceRequest) AddAudienceCsvExportToAudienceAlphaInput(
+	addAudienceCsvExportToAudienceAlphaInput AddAudienceCsvExportToAudienceAlphaInput,
+) ApiAddAudienceCsvExportToAudienceRequest {
+	r.addAudienceCsvExportToAudienceAlphaInput = &addAudienceCsvExportToAudienceAlphaInput
+	return r
 }
 
 func (r ApiAddAudienceCsvExportToAudienceRequest) Execute() (*AddAudienceCsvExportToAudience200Response, *http.Response, error) {
@@ -37,7 +45,7 @@ func (r ApiAddAudienceCsvExportToAudienceRequest) Execute() (*AddAudienceCsvExpo
 /*
 AddAudienceCsvExportToAudience Add Audience Csv Export to Audience
 
-Starts a CSV export of an Audience's membership. The export runs asynchronously: this returns immediately with an export id, and does not return the CSV itself. Poll `getAudienceCsvExportFromSpaceAndAudience` with that id for status and download URLs.
+Starts a CSV export of an Audience's membership. Optional personalization selections add profile traits and Linked Audience entity properties to the export; this endpoint accepts property selections, not raw Liquid or another template language. Entity selections are initially supported only for Linked Audiences. Omitting personalization preserves the default export behavior. The export runs asynchronously: this returns immediately with an export id, and does not return the CSV itself. Poll `getAudienceCsvExportFromSpaceAndAudience` with that id for status and download URLs.
 
 • In order to successfully call this endpoint, the specified Workspace needs to have the Audience feature enabled. Please reach out to your customer success manager for more information.
 
@@ -97,9 +105,14 @@ func (a *AudiencesAPIService) AddAudienceCsvExportToAudienceExecute(
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.addAudienceCsvExportToAudienceAlphaInput == nil {
+		return localVarReturnValue, nil, reportError(
+			"addAudienceCsvExportToAudienceAlphaInput is required and must be specified",
+		)
+	}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/vnd.segment.v1alpha+json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -118,6 +131,8 @@ func (a *AudiencesAPIService) AddAudienceCsvExportToAudienceExecute(
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.addAudienceCsvExportToAudienceAlphaInput
 	req, err := a.client.prepareRequest(
 		r.ctx,
 		localVarPath,

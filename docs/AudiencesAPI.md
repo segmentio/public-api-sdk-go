@@ -25,7 +25,7 @@ Method | HTTP request | Description
 
 ## Operation: AddAudienceCsvExportToAudience
 
-> AddAudienceCsvExportToAudience200Response AddAudienceCsvExportToAudience(ctx, spaceId, id).Execute()
+> AddAudienceCsvExportToAudience200Response AddAudienceCsvExportToAudience(ctx, spaceId, id).AddAudienceCsvExportToAudienceAlphaInput(addAudienceCsvExportToAudienceAlphaInput).Execute()
 
 Add Audience Csv Export to Audience
 
@@ -46,12 +46,13 @@ import (
 func main() {
     spaceId := "9aQ1Lj62S4bomZKLF4DPqW" // string | 
     id := "aud_0ujsszwN8NRY24YaXiTIE2VWDTS" // string | 
+    addAudienceCsvExportToAudienceAlphaInput := *api.NewAddAudienceCsvExportToAudienceAlphaInput() // AddAudienceCsvExportToAudienceAlphaInput | 
 
     configuration := api.NewConfiguration()
     apiClient := api.NewAPIClient(configuration)
     token := "<BEARER_TOKEN>"
     ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
-    resp, r, err := apiClient.AudiencesAPI.AddAudienceCsvExportToAudience(ctx, spaceId, id).Execute()
+    resp, r, err := apiClient.AudiencesAPI.AddAudienceCsvExportToAudience(ctx, spaceId, id).AddAudienceCsvExportToAudienceAlphaInput(addAudienceCsvExportToAudienceAlphaInput).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AudiencesAPI.AddAudienceCsvExportToAudience``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -85,6 +86,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
+ **addAudienceCsvExportToAudienceAlphaInput** | [**AddAudienceCsvExportToAudienceAlphaInput**](AddAudienceCsvExportToAudienceAlphaInput.md) |  | 
 
 ### Return type
 
@@ -96,7 +98,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/vnd.segment.v1alpha+json
 - **Accept**: application/vnd.segment.v1alpha+json, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
