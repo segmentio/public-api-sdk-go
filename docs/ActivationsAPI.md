@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddActivationToAudience**](ActivationsAPI.md#AddActivationToAudience) | **Post** /spaces/{spaceId}/audiences/{audienceId}/destination-connections/{connectionId}/activations | Add Activation to Audience
 [**AddDestinationToAudience**](ActivationsAPI.md#AddDestinationToAudience) | **Post** /spaces/{spaceId}/audiences/{audienceId}/destination-connections | Add Destination to Audience
+[**BatchQueryActivationsForSpace**](ActivationsAPI.md#BatchQueryActivationsForSpace) | **Post** /spaces/{spaceId}/activations/batch | Batch Query Activations for Space
 [**GetActivationFromAudience**](ActivationsAPI.md#GetActivationFromAudience) | **Get** /spaces/{spaceId}/audiences/{audienceId}/activations/{id} | Get Activation from Audience
 [**ListActivationsFromAudience**](ActivationsAPI.md#ListActivationsFromAudience) | **Get** /spaces/{spaceId}/audiences/{audienceId}/activations | List Activations from Audience
 [**ListDestinationsFromAudience**](ActivationsAPI.md#ListDestinationsFromAudience) | **Get** /spaces/{spaceId}/audiences/{audienceId}/destination-connections | List Destinations from Audience
@@ -171,6 +172,86 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AddDestinationToAudience200Response**](AddDestinationToAudience200Response.md)
+
+### Authorization
+
+[token](../README.md#token)
+
+### HTTP request headers
+
+- **Content-Type**: application/vnd.segment.v1alpha+json
+- **Accept**: application/vnd.segment.v1alpha+json, application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Operation: BatchQueryActivationsForSpace
+
+> BatchQueryActivationsForSpace200Response BatchQueryActivationsForSpace(ctx, spaceId).BatchQueryActivationsForSpaceAlphaInput(batchQueryActivationsForSpaceAlphaInput).Execute()
+
+Batch Query Activations for Space
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    api "github.com/segmentio/public-api-sdk-go"
+)
+
+func main() {
+    spaceId := "spa_9aQ1Lj62S4bomZKLF4DPqW" // string | 
+    batchQueryActivationsForSpaceAlphaInput := *api.NewBatchQueryActivationsForSpaceAlphaInput() // BatchQueryActivationsForSpaceAlphaInput | 
+
+    configuration := api.NewConfiguration()
+    apiClient := api.NewAPIClient(configuration)
+    token := "<BEARER_TOKEN>"
+    ctx := context.WithValue(context.Background(), api.ContextAccessToken, token)
+    resp, r, err := apiClient.ActivationsAPI.BatchQueryActivationsForSpace(ctx, spaceId).BatchQueryActivationsForSpaceAlphaInput(batchQueryActivationsForSpaceAlphaInput).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ActivationsAPI.BatchQueryActivationsForSpace``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+        responseErrors := api.UnwrapFullErrors(err)
+        if responseErrors != nil {
+            for _, responseError := range responseErrors.Errors {
+                fmt.Fprintf(os.Stderr, "Full error message: %v\n", *responseError.Message)
+            }
+        }
+    }
+    // response from `BatchQueryActivationsForSpace`: BatchQueryActivationsForSpace200Response
+    fmt.Fprintf(os.Stdout, "Response from `ActivationsAPI.BatchQueryActivationsForSpace`: %v\n", resp.GetData())
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**spaceId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiBatchQueryActivationsForSpaceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **batchQueryActivationsForSpaceAlphaInput** | [**BatchQueryActivationsForSpaceAlphaInput**](BatchQueryActivationsForSpaceAlphaInput.md) |  | 
+
+### Return type
+
+[**BatchQueryActivationsForSpace200Response**](BatchQueryActivationsForSpace200Response.md)
 
 ### Authorization
 
