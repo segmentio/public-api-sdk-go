@@ -3,7 +3,7 @@ Segment Public API
 
 The Segment Public API helps you manage your Segment Workspaces and its resources. You can use the API to perform CRUD (create, read, update, delete) operations at no extra charge. This includes working with resources such as Sources, Destinations, Warehouses, Tracking Plans, and the Segment Destinations and Sources Catalogs.  All CRUD endpoints in the API follow REST conventions and use standard HTTP methods. Different URL endpoints represent different resources in a Workspace.  See the next sections for more information on how to use the Segment Public API.
 
-API version: 74.0.1
+API version: 74.1.0
 Contact: friends@segment.com
 */
 
@@ -42,6 +42,10 @@ type ActivationOutput struct {
 	DestinationMapping *DestinationSubscriptionConfiguration `json:"destinationMapping,omitempty"`
 	// Indicates if a full resync is currently pending or in progress.
 	PerformResync *bool `json:"performResync,omitempty"`
+	// When the activation was created, as an ISO-8601 string.
+	CreatedAt string `json:"createdAt"`
+	// When the activation was last updated, as an ISO-8601 string. Advances on every update, including changes to only the personalization or destinationMapping.
+	UpdatedAt string `json:"updatedAt"`
 }
 
 // NewActivationOutput instantiates a new ActivationOutput object
@@ -58,6 +62,8 @@ func NewActivationOutput(
 	activationType string,
 	activationName string,
 	personalization PersonalizationOutput,
+	createdAt string,
+	updatedAt string,
 ) *ActivationOutput {
 	this := ActivationOutput{}
 	this.Id = id
@@ -69,6 +75,8 @@ func NewActivationOutput(
 	this.ActivationType = activationType
 	this.ActivationName = activationName
 	this.Personalization = personalization
+	this.CreatedAt = createdAt
+	this.UpdatedAt = updatedAt
 	return &this
 }
 
@@ -403,6 +411,54 @@ func (o *ActivationOutput) SetPerformResync(v bool) {
 	o.PerformResync = &v
 }
 
+// GetCreatedAt returns the CreatedAt field value
+func (o *ActivationOutput) GetCreatedAt() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
+// and a boolean to check if the value has been set.
+func (o *ActivationOutput) GetCreatedAtOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CreatedAt, true
+}
+
+// SetCreatedAt sets field value
+func (o *ActivationOutput) SetCreatedAt(v string) {
+	o.CreatedAt = v
+}
+
+// GetUpdatedAt returns the UpdatedAt field value
+func (o *ActivationOutput) GetUpdatedAt() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
+// and a boolean to check if the value has been set.
+func (o *ActivationOutput) GetUpdatedAtOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.UpdatedAt, true
+}
+
+// SetUpdatedAt sets field value
+func (o *ActivationOutput) SetUpdatedAt(v string) {
+	o.UpdatedAt = v
+}
+
 func (o ActivationOutput) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -431,6 +487,8 @@ func (o ActivationOutput) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PerformResync) {
 		toSerialize["performResync"] = o.PerformResync
 	}
+	toSerialize["createdAt"] = o.CreatedAt
+	toSerialize["updatedAt"] = o.UpdatedAt
 	return toSerialize, nil
 }
 
